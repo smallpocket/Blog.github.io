@@ -248,6 +248,8 @@
 
     
 
+  <a href="https://github.com/smallpocket" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
 
     <main id="main" class="main">
       <div class="main-inner">
@@ -373,89 +375,31 @@
 
       
           
-            <h1 id="代码骨架"><a href="#代码骨架" class="headerlink" title="代码骨架"></a>代码骨架</h1><p><img src="assets/image.png__thumbnail" alt="img"></p>
-<ul>
-<li><h1 id="iface"><a href="#iface" class="headerlink" title="iface"></a>iface</h1></li>
-</ul>
-<p>定义接口iface</p>
-<ul>
-<li>响应返回的类要用RpcResult包装</li>
-</ul>
-<p>请求的接口的字段类req</p>
-<p>请求返回的类res</p>
-<h1 id="app"><a href="#app" class="headerlink" title="app"></a>app</h1><p>在该层实现iface层的接口</p>
-<p>将请求转换为命令，handle处理command</p>
-<p>若是app抛出的face异常就抛出face的异常，若是domain的异常就抛出domain的异常</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在DDD设计思想中，Application层主要职责为组装domain层各个组件及基础设施层的公共组件，完成具体的业务服务。Application层可以理解为粘合各个组件的胶水，使得零散的组件组合在一起提供完整的业务服务。在复杂的业务场景下，一个业务case通常需要多个domain实体参与进来，所以Application的粘合效用正好有了用武之地。</p>
-<p>Application层主要由：service、assembler组成，下面分别对其做讲解。</p>
-<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h3 id="service是组件粘合剂"><a href="#service是组件粘合剂" class="headerlink" title="service是组件粘合剂"></a>service是组件粘合剂</h3><p>这里的Service区别于domain层的domain service，是应用服务。它是组件的粘合剂，组合domain层的各个组件和 infrastructure层的持久化组件、消息组件等等，完成具体的业务逻辑，提供完整的业务服务。</p>
-<p>通过不断的实践，我们发现：通过DDD实现业务服务时，检验业务模型的质量的一个标准便是 —— service方法中不要有if/else。如果存在if/else，要么就是系统用例存在耦合，要么就是业务模型不够友好，导致部分业务逻辑泄漏到service了。</p>
-<p>通常意义上，一个业务case在service层便会对应一个service方法，这样确保case实现的独立性。拿社区服务中的“帖子”模块来讲，我们有如下几个明显的case：发帖（posting）、删帖（deletePost）、查询帖子详情（queryPostDetail），这些case在service层都对应独立的业务方法。</p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>对于较为复杂的case：查询帖子列表，可能需要根据不同的tag过滤帖子，或者查询不同类型的帖子，或者查询热门帖子，这个时候应当用一个service方法实现呢？还是多个呢？</p>
-<p>考虑这个问题，主要从这两方面入手：domain的一致性，数据存储的一致性；如果两个一致性都满足，那么我们可以在一个业务方法中完成，否则就要在独立的业务方法中完成。</p>
-<p>例如：根据帖子运营标签查询帖子 和 查询全部帖子列表 这两个case我们可以放到一个service方法中实现，因为前一个case只是在后一个case的基础上加了一个过滤条件，这个过滤条件完全可以交给dao层的sql where条件处理掉，除此之外，domain和repository都完全一样；</p>
-<p>而“查询热门帖子” 这个case就不能和上面的两个case共用一个service方法了，因为热门帖子列表的数据源并不在数据库中，而是存在于缓存中，因此repository的取数逻辑存在很大差异，如果共用一个service方法，势必要在service层出现if/else判定，这是不友好的。</p>
-<h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3><p><img src="../%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/assets/849051-20170924221557337-1213380350.png" alt="img"></p>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostServiceImpl</span> <span class="keyword">implements</span> <span class="title">PostService</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IPostRepository postRepository;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PostAssembler postAssembler;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PostingRespBody <span class="title">posting</span><span class="params">(RequestDto&lt;PostingReqBody&gt; requestDto)</span> <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line">        PostingReqBody postingReqBody = requestDto.getBody();</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         *NOTE： 请求参数校验交给了validation，这里无需校验userId和postId是否为空</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        String userId = postingReqBody.getUserId();</span><br><span class="line">        String title = postingReqBody.getTitle();</span><br><span class="line">        String sourceContent = postingReqBody.getSourceContent();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> userIdInLong = Long.valueOf(userId);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 组装domain model entity</span></span><br><span class="line"><span class="comment">         * NOTE：这里的PostAuthor不需要从repository重载，原因在于：deletePost场景需要用户登录后才能操作，</span></span><br><span class="line"><span class="comment">         *         在进入service之前，已经在controller层完成了用户身份鉴权，故到达这里的userId肯定是合法的用户</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        PostAuthor postAuthor = <span class="keyword">new</span> PostAuthor(userIdInLong);</span><br><span class="line">        Post post = postAuthor.posting(title, sourceContent);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * NOTE：使用repository将model entity 写入存储</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        postRepository.save(post);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * NOTE：使用postAssembler将Post model组装成dto返回。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">return</span> postAssembler.assemblePostingRespBody(post);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DeletePostRespBody <span class="title">delete</span><span class="params">(RequestDto&lt;DeletePostReqBody&gt; requestDto)</span> <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line">        DeletePostReqBody deletePostReqBody = requestDto.getBody();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         *NOTE： 请求参数校验交给了validation，这里无需校验userId和postId是否为空</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        String userId = deletePostReqBody.getUserId();</span><br><span class="line">        String postId = deletePostReqBody.getPostId();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> userIdInLong = Long.valueOf(userId);</span><br><span class="line">        <span class="keyword">long</span> postIdInLong = Long.valueOf(postId);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 组装domain model entity</span></span><br><span class="line"><span class="comment">         * NOTE：这里的PostAuthor不需要从repository重载，原因在于：deletePost场景需要用户登录后才能操作，</span></span><br><span class="line"><span class="comment">         *         在进入service之前，已经在controller层完成了用户身份鉴权，故到达这里的userId肯定是合法的用户</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        PostAuthor postAuthor = <span class="keyword">new</span> PostAuthor(userIdInLong);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 从repository中重载domain model entity</span></span><br><span class="line"><span class="comment">         * 借此判断该postId是否真的存在帖子</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Post post = postRepository.query(postIdInLong);</span><br><span class="line">        </span><br><span class="line">        postAuthor.deletePost(post);</span><br><span class="line">        </span><br><span class="line">        postRepository.delete(post);        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> QueryPostDetailRespBody <span class="title">queryPostDetail</span><span class="params">(RequestDto&lt;QueryPostDetailReqBody&gt; requestDto)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line">        QueryPostDetailReqBody queryPostDetailReqBody = requestDto.getBody();</span><br><span class="line">        </span><br><span class="line">        String readerId = queryPostDetailReqBody.getReaderId();</span><br><span class="line">        String postId = queryPostDetailReqBody.getPostId();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> readerIdInLong = Long.valueOf(readerId);</span><br><span class="line">        <span class="keyword">long</span> postIdInLong = Long.valueOf(postId);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//TODO 可能有一些权限校验，比如：判定该读者是否有查看作者帖子的权限等。这里暂且不展开讨论。</span></span><br><span class="line">        PostReader postReader = <span class="keyword">new</span> PostReader(readerIdInLong);</span><br><span class="line">        </span><br><span class="line">        Post post = postRepository.query(postIdInLong);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * <span class="doctag">NOTE:</span> 使用postAssembler将domain层的model组装成dto，组装过程：</span></span><br><span class="line"><span class="comment">         *         1、完成类型转换、数据格式化；</span></span><br><span class="line"><span class="comment">         *         2、将多个model组合成一个dto，一并返回。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">return</span> postAssembler.assembleQueryPostDetailRespBody(post);</span><br><span class="line">    &#125;    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>
+              代码骨架
 
-<h2 id="Assembler"><a href="#Assembler" class="headerlink" title="Assembler"></a>Assembler</h2><h3 id="Assembler是组装器"><a href="#Assembler是组装器" class="headerlink" title="Assembler是组装器"></a>Assembler是组装器</h3><p>Assembler是组装器，负责完成domain model对象到dto的转换，组装职责包括：</p>
-<ol>
-<li>完成类型转换、数据格式化；如日志格式化，状态enum装换为前端认识的string；</li>
-<li>将多个domain领域对象组装为需要的dto对象，比如查询帖子列表，需要从Post（帖子）领域对象中获取帖子的详情，还需要从User（用户）领域对象中获取用户的社交信息（昵称、简介、头像等）；</li>
-<li>将domain领域对象属性裁剪并组装为dto；某些场景下，可能并不需要所有domain领域对象的属性，比如User领域对象的password属性属于隐私相关属性，在“查询用户信息”case中不需要返回，需要裁剪掉。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Post模块的组装器，完成domain model对象到dto的转换，组装职责包括：</span></span><br><span class="line"><span class="comment"> *         1、完成类型转换、数据格式化；如日志格式化，状态enum装换为前端认识的string；</span></span><br><span class="line"><span class="comment"> *         2、将多个model组合成一个dto，一并返回。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">TODO:</span> 不太好的地方每个assemble方法都需要先判断入参对象是否为空。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> daoqidelv</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@createdate</span> 2017年9月24日</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostAssembler</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String POSTING_TIME_STRING_DATE_FORMAT = <span class="string">"yyyy-MM-dd hh:mm:ss"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ApplicationUtil applicationUtil;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> PostingRespBody <span class="title">assemblePostingRespBody</span><span class="params">(Post post)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(post == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        PostingRespBody postingRespBody = <span class="keyword">new</span> PostingRespBody();</span><br><span class="line">        postingRespBody.setPostId(String.valueOf(post.getId()));</span><br><span class="line">        <span class="keyword">return</span> postingRespBody;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> QueryPostDetailRespBody <span class="title">assembleQueryPostDetailRespBody</span><span class="params">(Post post)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * <span class="doctag">NOTE:</span> 判定入参post是否为null</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span>(post == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        QueryPostDetailRespBody queryPostDetailRespBody = <span class="keyword">new</span> QueryPostDetailRespBody();</span><br><span class="line">        queryPostDetailRespBody.setAuthorId(String.valueOf(post.getAuthorId())); <span class="comment">//完成类型转换</span></span><br><span class="line">        queryPostDetailRespBody.setPostId(String.valueOf(post.getId()));<span class="comment">//完成类型转换</span></span><br><span class="line">        queryPostDetailRespBody.setPostingTime(</span><br><span class="line">                applicationUtil.convertTimestampToString(post.getPostingTime(), POSTING_TIME_STRING_DATE_FORMAT));<span class="comment">//完成日期格式化</span></span><br><span class="line">        queryPostDetailRespBody.setSourceContent(post.getSourceContent());</span><br><span class="line">        queryPostDetailRespBody.setTitle(post.getTitle());</span><br><span class="line">        <span class="keyword">return</span> queryPostDetailRespBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+iface
 
-<h3 id="类图-1"><a href="#类图-1" class="headerlink" title="类图"></a>类图</h3><p><img src="../%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/assets/849051-20170924221557337-1213380350-1562289754641.png" alt="img"></p>
-<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostAssembler</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String POSTING_TIME_STRING_DATE_FORMAT = <span class="string">"yyyy-MM-dd hh:mm:ss"</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> ApplicationUtil applicationUtil;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> PostingRespBody <span class="title">assemblePostingRespBody</span><span class="params">(Post post)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(post == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		PostingRespBody postingRespBody = <span class="keyword">new</span> PostingRespBody();</span><br><span class="line">		postingRespBody.setPostId(String.valueOf(post.getId()));</span><br><span class="line">		<span class="keyword">return</span> postingRespBody;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> QueryPostDetailRespBody <span class="title">assembleQueryPostDetailRespBody</span><span class="params">(Post post)</span> </span>&#123;</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">NOTE:</span> 判定入参post是否为null</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">if</span>(post == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		QueryPostDetailRespBody queryPostDetailRespBody = <span class="keyword">new</span> QueryPostDetailRespBody();</span><br><span class="line">		<span class="comment">//完成类型转换</span></span><br><span class="line">		queryPostDetailRespBody.setAuthorId(String.valueOf(post.getAuthorId())); </span><br><span class="line">		<span class="comment">//完成类型转换</span></span><br><span class="line">		queryPostDetailRespBody.setPostId(String.valueOf(post.getId()));</span><br><span class="line">		<span class="comment">//完成日期格式化</span></span><br><span class="line">		queryPostDetailRespBody.setPostingTime(</span><br><span class="line">				applicationUtil.convertTimestampToString(post.getPostingTime(), POSTING_TIME_STRING_DATE_FORMAT));</span><br><span class="line">		queryPostDetailRespBody.setSourceContent(post.getSourceContent());</span><br><span class="line">		queryPostDetailRespBody.setTitle(post.getTitle());</span><br><span class="line">		<span class="keyword">return</span> queryPostDetailRespBody;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+定义接口iface
 
-<h1 id="jooq"><a href="#jooq" class="headerlink" title="jooq"></a>jooq</h1><p>查官网</p>
-<p>申请 VPN</p>
-<p>jooq的模块pom文件</p>
-<p>将表名配置在pom文件中</p>
-<p>user:power_rent</p>
-<p>includes是表名</p>
-<p>mvn命令，前提是表已经创建了的</p>
-<p>jdbc的token是不一致，需要申请</p>
-<h1 id="domain"><a href="#domain" class="headerlink" title="domain"></a>domain</h1><p>domain层是具体的业务领域层，是发生业务变化最为频繁的地方，是业务系统最核心的一层，是DDD关注的焦点和难点。这一层包含了如下一些domain object：entity、value object、domain event、domain service、factory、repository等。DDD实践的难点其实就在于如何识别这些object。</p>
-<h2 id="entity"><a href="#entity" class="headerlink" title="entity"></a>entity</h2><p>领域实体是domain的核心成员。domain entity具有如下三个特征：</p>
-<ul>
-<li><strong>唯一业务标识</strong></li>
-<li><strong>持有自己的业务属性和业务行为</strong></li>
-<li><strong>属性可变，有着自己的生命周期</strong></li>
-</ul>
-<p>在社区这一业务领域中，‘帖子’就是一个业务实体，它需要有一个唯一性业务标识表征，拥有这个业务实体相关的业务属性（作者、标题、内容等）和业务行为（关联话题、删帖等），同时他的状态和内容可以不断发生变化。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Post</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 帖子id</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id; <span class="comment">//1、‘帖子’实体有唯一业务标识</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *帖子作者</span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> authorId;    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子标题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String title;<span class="comment">//2、‘帖子’实体拥有自己的业务属性</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子源内容</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String sourceContent;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发帖时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Timestamp postingTime;    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子状态</span></span><br><span class="line"><span class="comment">     * NOTE：使用enum实现，限定status的字典值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> com.dqdl.community.domain.model.post.PostStatus</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> PostStatus status;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子作者</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> PostAuthor postAuthor;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子加入的话题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Set&lt;TopicPost&gt; topics = <span class="keyword">new</span> HashSet&lt;TopicPost&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Post</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.postingTime = <span class="keyword">new</span> Timestamp(System.currentTimeMillis());        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Post</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setId(id);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Post</span><span class="params">(<span class="keyword">long</span> authorId, String title, String sourceContent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>();</span><br><span class="line">        <span class="keyword">this</span>.setAuthorId(authorId);</span><br><span class="line">        <span class="keyword">this</span>.setTitle(title);</span><br><span class="line">        <span class="keyword">this</span>.setSourceContent(sourceContent);</span><br><span class="line">        <span class="keyword">this</span>.setPostAuthor(<span class="keyword">new</span> PostAuthor(authorId));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除帖子</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setStatus(PostStatus.HAS_DELETED);<span class="comment">//3、帖子的状态可以改变</span></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将帖子关联话题 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> topicIds 话题集合</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">joinTopics</span><span class="params">(String topicIds)</span> <span class="keyword">throws</span> BusinessException</span>&#123;<span class="comment">//2、‘帖子’实体拥有自己的业务行为</span></span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isEmpty(topicIds)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String[] topicIdArray = topicIds.split(CommonConstants.COMMA);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;topicIdArray.length; i++) &#123;</span><br><span class="line">            TopicPost topicPost = <span class="keyword">new</span> TopicPost(Long.valueOf(topicIdArray[i]), <span class="keyword">this</span>.getId());</span><br><span class="line">            <span class="keyword">this</span>.topics.add(topicPost);</span><br><span class="line">            <span class="keyword">if</span>(topicSize() &gt; MAX_JOINED_TOPICS_NUM) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(ReturnCode.ONE_POST_MOST_JOIN_INTO_FIVE_TOPICS);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//......</span></span><br></pre></td></tr></table></figure>
+响应返回的类要用RpcResult包装
 
-<h2 id="value-obj-区别于entity"><a href="#value-obj-区别于entity" class="headerlink" title="value obj(区别于entity)"></a>value obj(区别于entity)</h2><p>领域值对象。value object是相对于domain entity来讲的，对照起来value object有如下特征：</p>
-<ul>
-<li><strong>可以有唯一业务标识</strong>    <em>【区别于domain entity】</em></li>
-<li><strong>持有自己的业务属性和业务行为</strong> <em>【同domain entity】</em></li>
-<li><strong>一旦定义，他是不可变的，它通常是短暂的</strong>，这和java中的值对象（基本类型和String类型）类似 <em>【区别于domain entity】</em></li>
-</ul>
-<p>比如社区业务领域中，‘帖子的置顶信息’可以理解为是一个值对象，不需要为这一值对象定义独立的业务唯一性标识，直接使用‘帖子id‘便可表征，同时，它只有’置顶状态‘和’置顶位置‘，一旦其中一个属性需要发生变化，则重建值对象并赋值给’帖子‘实体的引用，不会对领域带来任何负面影响。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 帖子置顶消息，value object</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> daoqidelv</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@createdate</span> 2017年10月10日</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostTopInfo</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> postId;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 置顶标志。true -- 置顶， false -- 不置顶。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isTop;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 置顶位置，当isTop == true时，该字段有意义。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> topIndex;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PostTopInfo</span><span class="params">(<span class="keyword">long</span> postId, <span class="keyword">boolean</span> isTop, <span class="keyword">int</span> topIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setPostId(postId);</span><br><span class="line">        <span class="keyword">this</span>.setTop(isTop);</span><br><span class="line">        <span class="keyword">this</span>.setTopIndex(topIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getPostId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> postId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPostId</span><span class="params">(<span class="keyword">long</span> postId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.postId = postId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isTop;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTop</span><span class="params">(<span class="keyword">boolean</span> isTop)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isTop = isTop;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTopIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> topIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTopIndex</span><span class="params">(<span class="keyword">int</span> topIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.topIndex = topIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="service"><a href="#service" class="headerlink" title="service"></a>service</h2><p>领域服务。区别于应用服务，他属于业务领域层。可以认为，如果某种行为无法归类给任何实体/值对象，则就为这些行为建立相应的领域服务即可。传统意义上的util static方法中，涉及到业务逻辑的部分，都可以考虑归入domain service。</p>
-<p>比如：‘社区’这一业务领域中的‘内容过滤’这一模块，便是领域服务，他不只属于Post实体，还会被用于评论（Comment）实体中，故我们将他独立成domain service。</p>
-<p>即涉及到两个及以上的entity时，就可以将其归类为service</p>
-<h2 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h2><p>领域对象工厂。用于复杂领域对象的创建/重建。重建是指通过respostory加载持久化对象后，重建领域对象。</p>
-<h2 id="repository"><a href="#repository" class="headerlink" title="repository"></a>repository</h2><p>仓库。我们将仓库的接口定义归类在domain层，因为他和domain entity联系紧密。仓库接口定义了和基础实施的持久化层交互契约，完成领域对应的增删改查操作。domain层的repository只是定义契约的接口，实际实现仍然由infrastructure完成。</p>
-<p>仓库的实际实现根据不同的存储介质而不同，可以是redis、oracle、mongodb等。具体仓库的实现会讲给infrastructure层完成，我们会在下一篇blog中详细阐述repository的实现。</p>
-<p>对于repository的接口定义，建议规范接口名命名，比如：查询都叫着query等等，减小沟通成本。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPostRepository</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function">Post <span class="title">query</span><span class="params">(<span class="keyword">long</span> postId)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">save</span><span class="params">(Post post)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(Post post)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="domain-event"><a href="#domain-event" class="headerlink" title="domain-event"></a>domain-event</h1><p>领域事件。领域中产生的一些消息事件，可以在性能和解耦层面得到好处。我们通常借助于消息中间件，通过事件通知/订阅的方式落地。</p>
-<p>在‘社区’业务领域中，‘发帖’之后，会同时为帖子作者生成一个‘发帖动态’，这个‘生成发帖动态’场景并不同步完成，而是通过领域事件发布异步完成。‘发帖’创建Post实体后，发布一个‘发帖动态’领域事件（PostingDynamic），‘动态’（Dynamic）相关服务消费该领域事件，并生成Dynamic实体。</p>
-<h1 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h1><h2 id="查询式和命令式接口使用的domain需要分离"><a href="#查询式和命令式接口使用的domain需要分离" class="headerlink" title="查询式和命令式接口使用的domain需要分离"></a>查询式和命令式接口使用的domain需要分离</h2><p>查询式接口domain应当简化，甚至于去掉。通常查询接口的实现逻辑为：入参校验、鉴权、从Repository中获取数据、拼凑不同的数据、数据转换、返回数据。理论上，不应当存在过多的业务逻辑。所以可以淡化domain层。如果仍然按照：entity –&gt; model –&gt;dto的转换路径，实际model的作用没有，反而带来了代码复杂度，不值得。</p>
-<p>命令式接口，除去查询式接口的逻辑，还有部分业务相关的，比如“关注”这一业务逻辑，较为复杂，需要收口到domain。</p>
-<p>因此，建议如下处理方式：</p>
-<p>查询式和命令式接口使用的domain需要分离设计，查询式接口使用的domain可以淡化。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+请求的接口的字段类req
+请求返回的类res
+app在该层实现iface层的接口
+将请求转换为命令，handle处理command
+若是app抛出的face异常就抛出face的异常，若是domain的异常就抛出
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/04/系统架构/领域驱动设计：骨架/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -565,20 +509,21 @@
 
       
           
-            <h1 id="依赖反转"><a href="#依赖反转" class="headerlink" title="依赖反转"></a>依赖反转</h1><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>为什么要将依赖反转，因为当存在依赖时，被依赖的模块<strong>A</strong>会先进行编译，而依赖的模块<strong>B</strong>会在A编译后才能进行编译。</p>
-<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>软件设计存在抽象层与是实现层之分，一般情况下，抽象依赖于实现。</p>
-<p>但是抽象层稳定，实现层容易变化，抽象层应该有较实现层更高的复用性，它就应该我们设计和考量的核心与重点，而不是具体的实现，这样一来，要求我将依赖关系反转过来，即实现应该依赖于我们的抽象，这样的设计才是灵活和易于扩展的。</p>
-<p>因此出现依赖反转的概念，即面向接口编程的。接口不提供任何的实现，可以真正意义上进行抽象层的工作。</p>
-<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>当进行依赖反转时，编程的可能情形是：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IService</span></span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ServiceImpl</span> <span class="keyword">implements</span> <span class="title">IService</span></span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">// do something......</span></span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Component</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span>  IService service＝<span class="keyword">new</span> ServiceImpl(); <span class="comment">//这里是基于接口进行编程，但却在构造时与具体的实现发生了耦合</span></span><br><span class="line">	<span class="comment">//后继方法中会使用该service</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在此的问题是，当实例化service时，必须要使用到实现类</p>
-<h3 id="依赖注入的实现"><a href="#依赖注入的实现" class="headerlink" title="依赖注入的实现"></a>依赖注入的实现</h3><p>运用spring的依赖注入会完美地解决“抽象在创建时刻对实现产生依赖”的问题，在我们代码里，抽象将永远不需要再被指向他的具体实现了，这个过程会放到sping 的配制文件里，使用依赖注入的方式完成</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://blog.csdn.net/bluishglc/article/details/1680293" target="_blank" rel="noopener">关于依赖反转（基于接口编程）和依赖注入的一个小问题的领悟</a></li>
-</ol>
-
+            <p>
+              依赖反转依赖为什么要将依赖反转，因为当存在依赖时，被依赖的模块A会先进行编译，而依赖的模块B会在A编译后才能进行编译。
+定义软件设计存在抽象层与是实现层之分，一般情况下，抽象依赖于实现。
+但是抽象层稳定，实现层容易变化，抽象层应该有较实现层更高的复用性，它就应该我们设计和考量的核心与重点，而不是具体
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/04/系统架构/系统设计：依赖反转与依赖注入/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -698,21 +643,24 @@
 
       
           
-            <h1 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h1><ul>
-<li>Eric Evans        Domain-Driven Design: Tackling Complexity in the Heart of Software”一书（中文名字《领域驱动设计–软件核心复杂性应对之道 》，清华大学出版社出版）<ul>
-<li>偏向于理论</li>
-</ul>
-</li>
-<li>Vaughn Vernon的《实现领域驱动设计》、<ul>
-<li>偏向于实践</li>
-</ul>
-</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li>一个博客：<a href="https://www.cnblogs.com/daoqidelv/p/7492322.html" target="_blank" rel="noopener">【DDD】使用领域驱动设计思想实现业务系统</a></li>
-</ol>
+            <p>
+              书籍
+Eric Evans        Domain-Driven Design: Tackling Complexity in the Heart of Software”一书（中文名字《领域驱动设计–软件核心复杂性应对之道 》，清华大学出版社出版）
+偏向于理论
 
+
+Vaughn Vernon的
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/03/系统架构/领域驱动设计：StudyResources/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -965,25 +913,26 @@
 
       
           
-            <h1 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h1><h3 id="thrift"><a href="#thrift" class="headerlink" title="thrift"></a>thrift</h3><ul>
-<li><a href="http://blog.csdn.net/column/details/thrift.html" target="_blank" rel="noopener">http://blog.csdn.net/column/details/thrift.html</a></li>
-</ul>
-<h3 id="dubbo"><a href="#dubbo" class="headerlink" title="dubbo"></a>dubbo</h3><ul>
-<li><a href="http://blog.csdn.net/u010311445/article/category/2745121" target="_blank" rel="noopener">http://blog.csdn.net/u010311445/article/category/2745121</a></li>
-</ul>
-<h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><ul>
-<li><a href="http://microservices.io/patterns/index.html" target="_blank" rel="noopener">http://microservices.io/patterns/index.html</a></li>
-</ul>
-<h1 id="分布式原理"><a href="#分布式原理" class="headerlink" title="分布式原理"></a>分布式原理</h1><h3 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h3><ul>
-<li>分布式系统原理介绍（百度 刘杰 文档）</li>
-<li>大型分布式网站架构设计与实践</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><h1 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h1></li>
-<li></li>
-</ol>
+            <p>
+              RPCthrift
+http://blog.csdn.net/column/details/thrift.html
 
+dubbo
+http://blog.csdn.net/u010311445/article/category/2745121
+
+微服务
+http://microservices.io
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/02/系统架构/架构：StudyResources/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1103,70 +1052,25 @@
 
       
           
-            <h1 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h1><h3 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h3><h3 id="输入检测"><a href="#输入检测" class="headerlink" title="输入检测"></a>输入检测</h3><h1 id="代码设计"><a href="#代码设计" class="headerlink" title="代码设计"></a>代码设计</h1><p>对于coder，面对问题会直觉使用计算机可以理解地逻辑来描述和表达待解决的问题和具体的求解过程。</p>
-<p>但是这样的程序只能满足当前的需求，程序不容易维护，不容易扩展，不容易复用。</p>
-<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><ul>
-<li>业务逻辑与界面逻辑的分离</li>
-</ul>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><ul>
-<li>当系统当中的操作需要增加或者修改，而这些操作拥有一个共性，那么就可以增加一个接口或者父类。在内部定义好操作，在子类当中进行实现<ul>
-<li>当新的操作加入进来，只需要继承即可。当旧的操作需要改变，只需要修改对应的子类即可</li>
-<li>例如计算薪资的问题</li>
-</ul>
-</li>
-</ul>
-<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><ul>
-<li>工厂模式</li>
-</ul>
-<h3 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h3><ul>
-<li>面向对象的编程，并不是类越多越好，类的划分是为了封装，但分类的基础是抽象，<strong>具有系统属性和功能的对象的抽象集合才是类</strong></li>
-</ul>
-<h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><p>以活字印刷为例。</p>
-<ul>
-<li>可维护：要改，只需要改要改之字</li>
-<li>可复用：活字的模板并非用完就无用，可以在之后的印刷重复使用</li>
-<li>可扩展：若要加字，只需另刻字</li>
-<li>灵活性好：若字要竖排，则移动活字即可。</li>
-</ul>
-<h3 id="可维护"><a href="#可维护" class="headerlink" title="可维护"></a>可维护</h3><h3 id="易扩展"><a href="#易扩展" class="headerlink" title="易扩展"></a>易扩展</h3><h3 id="易复用"><a href="#易复用" class="headerlink" title="易复用"></a>易复用</h3><h3 id="灵活性好"><a href="#灵活性好" class="headerlink" title="灵活性好"></a>灵活性好</h3><h2 id="类设计技巧"><a href="#类设计技巧" class="headerlink" title="类设计技巧"></a>类设计技巧</h2><ol>
-<li>一定要保证数据私有</li>
-</ol>
-<p>这是最重要的；绝对不要破坏封装性。有时候，需要编写一个访问器方法或更改器方法，但是最好还是保持实例域的私有性。很多惨痛的经验告诉我们，数据的表示形式很可能会改变，但它们的使用方式却不会经常发生变化。当数据保持私有时，它们的表示形式的变化不会对类的使用者产生影响，即使出现 bug 也易于检测。  </p>
-<ol start="2">
-<li>一定要对数据初始化  </li>
-</ol>
-<p>Java 不对局部变量进行初始化，但是会对对象的实例域进行初始化。最好不要依赖于系统的默认值 ， 而是应该显式地初始化所有的数据，具体的初始化方式可以是提供默认值，也可以是在所有构造器中设置默认值。  </p>
-<ol start="3">
-<li>不要在类中使用过多的基本类型  </li>
-</ol>
-<p>就是说，用其他的类代替多个相关的基本类型的使用。这样会使类更加易于理解且易于修改。例如，用一个称为Address的新的类替换一个Customer类中以下的实例域：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> String street ;</span><br><span class="line"><span class="keyword">private</span> String city ;</span><br><span class="line"><span class="keyword">private</span> String state ;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> zip ;</span><br></pre></td></tr></table></figure>
+            <p>
+              代码规范命名规范输入检测代码设计对于coder，面对问题会直觉使用计算机可以理解地逻辑来描述和表达待解决的问题和具体的求解过程。
+但是这样的程序只能满足当前的需求，程序不容易维护，不容易扩展，不容易复用。
+面向对象封装
+业务逻辑与界面逻辑的分离
 
-<p>这样，可以很容易处理地址的变化，例如，需要增加对国际地址的处理。</p>
-<ol start="4">
-<li>不是所有的域都需要独立的域访问器和域更改器</li>
-</ol>
-<p>或许，需要获得或设置雇员的薪金。 而一旦构造了雇员对象，就应该禁止更改雇用日期，并且在对象中，常常包含一些不希望别人获得或设置的实例域，例如，在Address类中，存放州缩写的数组。</p>
-<ol start="5">
-<li>将职责过多的类进行分解</li>
-</ol>
-<p>这样说似乎有点含糊不清，究竟多少算是“过多”？每个人的看法不同。但是，如果明显地可以将一个复杂的类分解成两个更为简单的类，就应该将其分解（但另一方面，也不要走极端。设计10个类，每个类只有一个方法，显然有些矫枉过正了）</p>
-<ol start="6">
-<li>类名和方法名要能够体现它们的职责</li>
-</ol>
-<p>与变量应该有一个能够反映其含义的名字一样，类也应该如此</p>
-<ol start="7">
-<li>优先使用不可变的类</li>
-</ol>
-<p>LocalDate类以及java.time包中的其他类是不可变的—没有方法能修改对象的状态。类似 plusDays 的方法并不是更改对象，而是返回状态已修改的新对象</p>
-<p>更改对象的问题在于，如果多个线程试图同时更新一个对象，就会发生并发更改。其结果是不可预料的。如果类是不可变的，就可以安全地在多个线程间共享其对象。</p>
-<p>因此，要尽可能让类是不可变的，这是一个很好的想法。对于表示值的类，如一个字符串或一个时间点，这尤其容易。计算会生成新值，而不是更新原来的值。</p>
-<p>当然，并不是所有类都应当是不可变的。如果员工加薪时让raiseSalary方法返回一个新的Employee对象，这会很奇怪。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+继承
+当系统当中的操作需要增加或者修改，而这些操作拥
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/01/Java/代码设计/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1276,85 +1180,24 @@
 
       
           
-            <h1 id="租房途径"><a href="#租房途径" class="headerlink" title="租房途径"></a>租房途径</h1><h1 id="房屋"><a href="#房屋" class="headerlink" title="房屋"></a>房屋</h1><h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p>确认合同前再次确认房屋设施情况并进行拍照留存，还可以列举详细的清单并附在合同之后。</p>
-<ul>
-<li>房屋状态<ul>
-<li>卧室<ul>
-<li>隔音情况、是否有刺鼻气味（甲醛）、门窗、桌椅等设施是否有损毁，房屋的清洁状况。</li>
-<li>如果你是与男女朋友/闺蜜/兄弟等合租，可以考虑租住带有独卫的主卧，会给生活带来相对大的便利，在一定程度上提高生活质量，避免合租矛盾。</li>
-<li>观察房屋有没有毛病，如裂缝等，留证照片</li>
-</ul>
-</li>
-<li>厨卫<ul>
-<li>厨房/卫生间的大小是否合适，是否通风，采光是否良好</li>
-<li>燃气设施/热水器等是否有老化现象，是否可用，是否存在安全隐患</li>
-<li>马桶是否好用，冲水是否流畅（一言难尽）。厕所是否干净，不干净的千万别租，以后会被恶心死，特指合租</li>
-<li>热水器是否好用</li>
-</ul>
-</li>
-<li>房屋设施<ul>
-<li>水管、门锁、电器、通风等设备的情况是否存在安全隐患，签订合同之前和房东一起确认房屋内家具设施的情况，如有损坏能否进行更换。以及确定入住之后能否换锁。</li>
-<li>热水器，冰箱，燃气，衣柜，桌椅，门锁，床，空调，路由器，洗衣机等生活必须设施是否齐全。是否可以“拎包入住”。如果是合租，哪些设施是公用，哪些设施是私用等。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>室友<ul>
-<li>尽量向房东/中介方租房管家了解本户已经入住的室友的相关信息。了解信息包括但不限于：已有几间房出租，每间房租客人数，合租室友性别分布，合租室友职业等。</li>
-<li>户型不过三</li>
-<li>不带孩子、老人长辈、</li>
-</ul>
-</li>
-<li>周边<ul>
-<li>通勤时间，公交是否方便或到就近的地铁站需要多久； </li>
-<li>周围是否有工地，如果周围有工地、装修，十有八九会非常影响休息，建议不选； </li>
-<li>周边的治安状况，如小区是否有门禁及物业安保值守，人口是否相对密集； </li>
-<li>周边设施是否齐全或方便，重点可以留意一下附近的超市、吃饭、药房、社区医疗状况和医院。 </li>
-<li>其他个性化要求。</li>
-</ul>
-</li>
-</ul>
-<h2 id="合同"><a href="#合同" class="headerlink" title="合同"></a>合同</h2><p><img src="assets/v2-4931a6f500e7443461001b9817926632_hd.jpg" alt="img"></p>
-<h3 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h3><ul>
-<li>由于租房合同一般会在看房后立即签订，因此请准备好：<strong>身份证和租金</strong>。</li>
-<li>鉴于目前甲醛超标问题严重，可以携带<strong>甲醛测试器</strong>实地看房。</li>
-</ul>
-<h3 id="合同-1"><a href="#合同-1" class="headerlink" title="合同"></a>合同</h3><p>1.要和房东当面签，一定要当面签！有些租客嫌麻烦，让对方拍照房本和身份证，结果对方P一张图，最后被骗。<strong>千万不要相信对方工作忙，没有空见面签约的说辞，谨防受骗。</strong></p>
-<p>2.<strong>合同签订对象是个人还是公司</strong>，现在有些公司代理了房子，然后随意改装，抬高价格，或者最后以各种理由不退押金，到时候发现自己吃了亏却无力反击。</p>
-<p>3.<strong>签的合同是否是银行贷款合同，</strong>有些平台会和租户签银行贷款合同，让租户用支付宝操作，这样租户没有及时交租就会影响个人征信，所以签约时一定要看清楚，问清楚，千万不要随便点击！</p>
-<p>4.房东信息要明确，房主姓名、身份证号、手机号等，这里注意一定要是拥有房子的产权的人，不要和二房东签了合同还不自知。</p>
-<p>5.明确清楚租期内退房是否需要赔付，能否转租，押金是否给退。有些房东在你住进去的时候，会说想走随时可以走，但是他不会告诉你后半句<strong>“押金是一分不退的”</strong>。不要等到要走的那一刻才发现不退押金哇，小吉是吃过这个亏的。</p>
-<p>6.需要租客支付的费用有哪些，房租、水电、管理费、网费、押金，是否还有其他费用，需要确认清楚并分项列出。</p>
-<p>7.是否可以对房屋进行改造，可以改造的程度明确清楚。</p>
-<p>8.目前家中的物品有哪些，在合同上面写明，小心走的时候，房东要你赔根本不存在的XXX。有必要的话，就拍照留证据。小吉还碰到过租房换家私的，当时没能拍照，只能吃哑巴亏！</p>
-<p>9.家私发生损坏，由谁负责，明确清楚。</p>
-<p>10.记录水电表的数字，确认宽带和水电是否有欠费。</p>
-<p>11.请务必把合同一字不漏，认真查看，<strong>小心文字陷阱</strong>，可以先在百度上看看租房合同模板。</p>
-<p>12.凡是能想到的一切有关自身利益的问题，请都在合同上面明确清楚，不要听信房东说的，“行情都是这样”，“没问题的”等等之类的话。到时候他翻脸不认人，哭的可是你。</p>
-<p>13.最最最重要的一点：<strong>永远不要相信房东！</strong>虽说做人的原则是诚信，但是小吉发现这个在社会上不成。大把人为了钱做着违背原则的事情，无理由克扣押金、涨租，反正房子不愁租，要租房的是我们，我们又能怎么样呢。</p>
-<h3 id="签约"><a href="#签约" class="headerlink" title="签约"></a>签约</h3><ul>
-<li>出租人的基本信息，包括出租人的房屋权属证明原件、产权证（使用证）、身份证号、联系方式（如通过中介也可以添加中介人的联系方式）等，确认是否是原始房东，而其中<strong>请务必注意房产证上的房东信息是否与合同上的相符。</strong>如果是房东的亲戚来代理房东进行出租，则务必留意是否有授权委托书并签订出租委托合同；转租则应该在房东或代理人的见证下签订合同，注意合同的终止日期不应超过原租赁合同的终止日期。 <ul>
-<li>防止假身份证</li>
-<li>审查合同主体是否合格，即出租人与承租人是否具备相应条件，租赁客体，即房屋是否为法律、法规允许出租的房屋。需要房屋租赁许可证</li>
-</ul>
-</li>
-<li>明确租赁期限，租金标准、支付时间以及支付方式（月付、季付、年付），是否有押金，并能够提供租金收据，这关系到你能住多久。另外合同里应注意确认押金退还的方式。 </li>
-<li>明确租客是否可以转租，因为一些情况有可能你会要换地方住而租赁期限没到，而如果进行擅自转租房东是有权利扣押金且收回房子的，这种情况下如果不允许转租则违约费用是多少；以及如果出租人逾期交房或出租人擅自提前收回房屋，约定支付的违约金是多少。 </li>
-<li>明确租赁期间房租是否可以涨价。 </li>
-<li>确定租金、押金、<strong>水电费（可能是商用电）</strong>、煤气费、物业费、电视费、网费等金额细项（如应该平摊还是代缴，其中物业费如果在合同内并无缴费的具体要求，则出租人无权要求承租人支付物业费），明确费用交付渠道，并将具体费用写入合同。这里是为了确保在入住前上一位租客已结清相关费用。 </li>
-<li>明确损坏设施赔偿的细则，如在人为损坏、非人为损坏、自然损耗等场景下是否需要赔偿以及赔偿的细则。 <ul>
-<li>明确房屋内部的东西与新旧情况，清点设施确实正确运行。房屋维修费用等作出约定</li>
-</ul>
-</li>
-<li>对模糊的细节一定注意问清并落实到纸面，如“退房时没有打扫干净要扣押金”中，“干净”应该是什么程度，并注意保留记录录音和租房前的房屋照片。 </li>
-<li>拍照存档。包括但不限于房屋设施情况细节、租房合同、补充协议以及水表电表数额，注意签合同之前要重新与房东清点家具和电器等设施。 </li>
-<li>补充说明，如对住房情况不满意，应提前与房东或中介沟通好，决定退房时应提前至少半个月向房东提出，避免浪费双方的时间以及损害自己的信用。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              租房途径房屋基本信息确认合同前再次确认房屋设施情况并进行拍照留存，还可以列举详细的清单并附在合同之后。
 
+房屋状态
+卧室
+隔音情况、是否有刺鼻气味（甲醛）、门窗、桌椅等设施是否有损毁，房屋的清洁状况。
+如果你是与男女朋友/闺蜜/兄弟等合租，可以考虑租住带有独卫的主卧，会给生活带来相对大的便利，在一定
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/28/personal/租房篇/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1474,161 +1317,34 @@
 
       
           
-            <h1 id="Linux发展史"><a href="#Linux发展史" class="headerlink" title="Linux发展史"></a>Linux发展史</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
-<li><p>内核版本：内核官网（<a href="http://www.kernel.org）" target="_blank" rel="noopener">www.kernel.org）</a></p>
-</li>
-<li><p>外核版本</p>
-<ul>
-<li>在内核基础上做出改进，即发行版本。</li>
-</ul>
-</li>
-</ul>
-<h3 id="发行版本"><a href="#发行版本" class="headerlink" title="发行版本"></a>发行版本</h3><ul>
-<li>redhat：它有一部分收费的售后功能</li>
-<li>Centos：是完全免费的，并且与redhat一致</li>
-<li>fediro：个人版</li>
-<li>Ubuntu：图形界面更优秀</li>
-<li>debian：</li>
-</ul>
-<p>Linux应用领域</p>
-<h1 id="开源软件"><a href="#开源软件" class="headerlink" title="开源软件"></a>开源软件</h1><p>开源软件，即获得程序的源代码，而不是编译后的二进制文件</p>
-<ul>
-<li>使用的自由：绝大多数开源软件免费</li>
-<li>研究的自由：可以获得软件源代码</li>
-<li>散步及改良的自由：可以自由传播、改良甚至销售</li>
-</ul>
-<p>在Linux当中，以服务器端的角度看，Linux当中有更多的开源软件，有着更高质量的软件</p>
-<ul>
-<li>Apache：网站服务搭建软件</li>
-<li>Nginx：占用服务器资源更少，支持更高的并发</li>
-<li>MySQL</li>
-<li>php</li>
-<li>Samba</li>
-<li>mongoDB</li>
-<li>python</li>
-<li>Ruby</li>
-<li>Sphinx等</li>
-</ul>
-<h1 id="Linux应用领域"><a href="#Linux应用领域" class="headerlink" title="Linux应用领域"></a>Linux应用领域</h1><h3 id="基于Linux的企业服务器"><a href="#基于Linux的企业服务器" class="headerlink" title="基于Linux的企业服务器"></a>基于Linux的企业服务器</h3><p><a href="http://www.netcraft.com" target="_blank" rel="noopener">www.netcraft.com</a></p>
-<h3 id="嵌入式应用"><a href="#嵌入式应用" class="headerlink" title="嵌入式应用"></a>嵌入式应用</h3><h1 id="XShell"><a href="#XShell" class="headerlink" title="XShell"></a>XShell</h1><p>ctrl l清屏</p>
-<h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><p>tab键会对Linux命令进行补全。</p>
-<p>两下tab会以该命令开头的所有命令打印出</p>
-<h2 id="命令基本格式"><a href="#命令基本格式" class="headerlink" title="命令基本格式"></a>命令基本格式</h2><p>命令提示符</p>
-<p>[root@localhost ~]#</p>
-<ul>
-<li>root：当前登录用户</li>
-<li>localhost：主机名</li>
-<li>~：当前所在目录<ul>
-<li>用户登录的家目录。root用户在/root</li>
-<li>普通用户在/home/user1/</li>
-</ul>
-</li>
-<li>#（$）：超级（普通）用户的提示符</li>
-</ul>
-<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>命令 [选项] [参数]</p>
-<p>注意：</p>
-<ul>
-<li>个别命令使用不遵循此格式。</li>
-<li>当有多个选项时，可以写在一起</li>
-<li>简化选项与完整选项<ul>
-<li>-a在一些目录当中等于–all</li>
-</ul>
-</li>
-</ul>
-<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h3><p>显示当前所在目录：print working directory</p>
-<h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>查询目录中的内容。ls [选项] [文件或目录]</p>
-<p>选项</p>
-<ul>
-<li><p>-a 显示所有文件，包括隐藏文件</p>
-</li>
-<li><p>-l 显示详细属性</p>
-<ul>
-<li><p>第一列代表权限。默认为10位 -rw-r–r–。</p>
-<ul>
-<li>第一位：文件类型（- 文件 d 目录 I 软链接文件，即快捷方式）</li>
-<li>2-4件：文件的所有者，u。r：读，w：写，x：执行。</li>
-<li>5-7位：文件的所属组，g。相同用户相同权限的人放到一组。</li>
-<li>8-10位：其他人，o，不能使用。</li>
-</ul>
-</li>
-<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rwxr-xr-x  1 root root      347472 Jun 29  2017 xfs_copy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>1 代表引用该文件的次数</p>
-</li>
-<li><p>347472是字节</p>
-</li>
-<li><p>Jun 29  2017代表最后修改的时间</p>
-</li>
-</ul>
-</li>
-<li><p>-d 查看目录属性</p>
-</li>
-<li><p>-h 人性化显示文件大小</p>
-</li>
-<li><p>-i 显示inode</p>
-</li>
-</ul>
-<h2 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h2><p><strong><em>目录处理命令</em></strong></p>
-<h3 id="mkdir建立目录"><a href="#mkdir建立目录" class="headerlink" title="mkdir建立目录"></a>mkdir建立目录</h3><p>建立目录：mkdir -p [目录名]</p>
-<ul>
-<li>-p 递归创建</li>
-<li>英文名 make directory</li>
-</ul>
-<h3 id="cd切换目录"><a href="#cd切换目录" class="headerlink" title="cd切换目录"></a>cd切换目录</h3><p>切换目录：cd [目录]change directory</p>
-<ul>
-<li>cd ~ 回到家目录</li>
-<li>cd - 进入上次所在目录</li>
-<li>cd .. 进入上级目录</li>
-<li>cd . 进入当前目录</li>
-</ul>
-<p>相对路径进行查找 cd ../usr/local</p>
-<p>绝对路径：要从根目录进行制定，cd /etc/</p>
-<h3 id="rmdir删除空白目录"><a href="#rmdir删除空白目录" class="headerlink" title="rmdir删除空白目录"></a>rmdir删除空白目录</h3><p>只能删除空白目录：remove empty directory</p>
-<h3 id="rm-删除文件"><a href="#rm-删除文件" class="headerlink" title="rm 删除文件"></a>rm 删除文件</h3><p>删除文件或目录：rm [选项] [文件或目录]：remove</p>
-<ul>
-<li>-r：删除目录</li>
-<li>-f：强制执行 false</li>
-</ul>
-<h3 id="cp-复制命令"><a href="#cp-复制命令" class="headerlink" title="cp 复制命令"></a>cp 复制命令</h3><p>cp [选项] [原文件或目录] [目标目录]：复制命令copy</p>
-<ul>
-<li>-r 复制目录</li>
-<li>-p 连带文件属性复制</li>
-<li>-d 若源文件是链接文件，则复制链接属性</li>
-<li>-a 相当于-pdr</li>
-</ul>
-<h3 id="mv-移动"><a href="#mv-移动" class="headerlink" title="mv 移动"></a>mv 移动</h3><p>mv [源文件或目录] [目标目录]。剪切或改名命令：move</p>
-<p><strong><em>文件处理命令</em></strong></p>
-<h3 id="链接命令ln"><a href="#链接命令ln" class="headerlink" title="链接命令ln"></a>链接命令ln</h3><p>ln</p>
-<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><h2 id="压缩命令"><a href="#压缩命令" class="headerlink" title="压缩命令"></a>压缩命令</h2><h2 id="关机命令"><a href="#关机命令" class="headerlink" title="关机命令"></a>关机命令</h2><h2 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h2><h1 id="Linux常见目录作用"><a href="#Linux常见目录作用" class="headerlink" title="Linux常见目录作用"></a>Linux常见目录作用</h1><ul>
-<li>/：根目录</li>
-<li>/bin，是命令保存目录，任何用户都可以执行<ul>
-<li>/user/bin</li>
-</ul>
-</li>
-<li>/sbin，是保存系统命令目录，只有root用户可以执行<ul>
-<li>/user/sbin</li>
-</ul>
-</li>
-<li>/boot，启动目录，启动相关文件</li>
-<li>/dev，设备文件保存目录，保存特殊文件</li>
-<li>/etc，配置文件保存目录，</li>
-<li>/home，普通用户的家目录</li>
-<li>/lib，系统库保存目录</li>
-<li>/mnt，系统挂载目录</li>
-<li>/media，挂载目录</li>
-<li>/root，超级用户家目录</li>
-<li>/misc，挂载目录</li>
-<li>/proc，直接写入内存的，不可以直接操作</li>
-<li>/tmp，临时目录</li>
-<li>/sys，保存的是内存的过载点，不可以直接操作</li>
-<li>/user，系统软件资源目录</li>
-<li>/var，系统相关文档内容</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              Linux发展史分类
+内核版本：内核官网（www.kernel.org）
 
+外核版本
+
+在内核基础上做出改进，即发行版本。
+
+
+
+发行版本
+redhat：它有一部分收费的售后功能
+Centos：是完全免费的，并且与redhat一致
+fediro：个人版
+Ubuntu：图形界面更优秀
+debian：
+
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/27/服务器/Linux：概述/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1748,44 +1464,36 @@
 
       
           
-            <p>两大协议（不止两种）</p>
-<ul>
-<li>RPC协议/Dubbo协议：同构项目，犹如本地调用一般</li>
-<li>Http的Rest Api：通用（不要求同构，比如可以是多种语言）项目</li>
-</ul>
-<h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><p><img src="assets/Dubbo%E5%86%85%E9%83%A8%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="Dubbo内部架构图"></p>
-<p>4个核心组件</p>
-<ul>
-<li>生产者</li>
-<li>消费者</li>
-<li>监控器</li>
-<li>注册中心</li>
-</ul>
-<p><img src="assets/1561212522124.png" alt="1561212522124"></p>
-<p>核心配置文件</p>
-<ul>
-<li>spring-dubbo.xml<ul>
-<li>注解发布的dubbo服务所在包</li>
-<li>配置支持的两种调用方式对应的协议</li>
-<li>消费服务配置</li>
-</ul>
-</li>
-<li>dubbo.yml<ul>
-<li>配置两大协议对应的端口等信息</li>
-</ul>
-</li>
-</ul>
-<p>相关技术点</p>
-<ul>
-<li>服务拆分。商品服务、用户商城服务、订单服务、支付服务</li>
-<li>服务解耦：明确职责、服务调度、网络通信</li>
-<li>服务管理：统一注册中心配置管理（发布注册、订阅调度）</li>
-</ul>
-<h1 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              两大协议（不止两种）
 
+RPC协议/Dubbo协议：同构项目，犹如本地调用一般
+Http的Rest Api：通用（不要求同构，比如可以是多种语言）项目
+
+Dubbo
+4个核心组件
+
+生产者
+消费者
+监控器
+注册中心
+
+
+核心配置文件
+
+spring-dubbo.xml
+注解发布的dubbo服务所在包
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/22/Java/框架/Dubbo：/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1920,19 +1628,27 @@
 
       
           
-            <h1 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h1><blockquote>
-<p>分布式系统是一个硬件或软件组件分布在不同的网络计算机上，彼此间仅仅通过消息传递进行通信和协调的系统</p>
-</blockquote>
-<ul>
-<li>很多台计算机组成一个整体，一个整体一致对外并且处理同一请求</li>
-<li>内部的每台计算机都可以相互通信（rest/rpc）</li>
-<li>客户端到服务端的一次请求到响应结束会历经多台计算机</li>
-</ul>
-<h3 id="分布式系统的瓶颈"><a href="#分布式系统的瓶颈" class="headerlink" title="分布式系统的瓶颈"></a>分布式系统的瓶颈</h3><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              分布式系统
+分布式系统是一个硬件或软件组件分布在不同的网络计算机上，彼此间仅仅通过消息传递进行通信和协调的系统
 
+
+很多台计算机组成一个整体，一个整体一致对外并且处理同一请求
+内部的每台计算机都可以相互通信（rest/rpc）
+客户端到服务端的一次请求到响应结束会历经多台计算机
+
+分布式系统的瓶颈参
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/22/系统架构/架构：分布式架构/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>

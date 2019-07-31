@@ -248,6 +248,8 @@
 
     
 
+  <a href="https://github.com/smallpocket" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
 
     <main id="main" class="main">
       <div class="main-inner">
@@ -373,48 +375,21 @@
 
       
           
-            <h1 id="多处理机系统"><a href="#多处理机系统" class="headerlink" title="多处理机系统"></a>多处理机系统</h1><p>人们对更强计算力的追求促进着计算机的发展，而所有的一切都需要更多的<strong>CPU周期</strong>（又称机器周期，CPU周期定义为从内存读取一条指令字的最短时间。一个指令周期常由若干CPU周期构成。</p>
-<p><strong><em>时钟解决方案</em></strong></p>
-<p>过去的解决方案是使时钟走得更快，而现在遇到了对时钟速度的限制，即电子信号的速度不可能超过光速，这个速度在铜线或光纤中约为20cm/ns，意味着10GHZ的时钟信号的传送距离不会超过2cm，对于1THZ的时钟，传送距离不足100um，这在一个时钟周期内正好让信号从一端到另一端并返回。</p>
-<p>而让计算机变小是可能的，但是散热却是不可能的。因此从1MHZ到1GHZ需要更好的芯片工艺，而1GHZ到1THZ需要完全不同的方法</p>
-<p><strong><em>并行计算机</em></strong></p>
-<p>大规模使用并行计算机，每个CPU都以正常的速度运行，但是整体上会有比单个CPU强大的多的计算能力。高强度的数据处理中经常采用高度并行计算机。</p>
-<p>互联网的发展使得将全世界的计算机连接起来变得方便快捷也促使了并行计算机的使用。</p>
-<p><img src="assets/1563695889828.png" alt="1563695889828"></p>
-<p>对上图的三个模型进行简单介绍：</p>
-<ul>
-<li>在电子（光学）部件间的所有通信，归根结底是在它们之间发送消息–良好定义的协议，其差别在于所涉及的时间范围、距离范围和逻辑组织。以<strong>共享存储器多处理机</strong>为例，系统中有2到1000个CPU通过一个共享存储器通信，每个CPU可同样访问存储器，使用LOAD和Stroe读写单个的字，访问一个存储器字需要1-10ns。<ul>
-<li>模型较为简略，但是实现并不简单，通常涉及底层大量的消息传递</li>
-</ul>
-</li>
-<li>许多CPU-存储器通过某种高速互联网连接在一起，称为<strong>消息传递多计算机</strong>，每个存储器局部对应一个CPU，且只能被该CPU访问，CPU通过互联发送多字消息通信，存在良好连接时，一条短消息可以在10-50us发出。<ul>
-<li>其比前一个模型容易构建，但是编程困难，是紧密耦合系统</li>
-</ul>
-</li>
-<li>所有计算机通过一个广域网连接起来，如因特网，构成一个分布式系统，每台计算机有自己的存储器，通过消息传递进行通信<ul>
-<li>本模型使用了完整的计算机而且消息传递通常需要10-100ms，是一种松散耦合系统</li>
-</ul>
-</li>
-</ul>
-<p>三者的通信延迟有3个数量级的差别</p>
-<h1 id="多处理机"><a href="#多处理机" class="headerlink" title="多处理机"></a>多处理机</h1><blockquote>
-<p>共享存储器多处理机：两个或更多的CPU全部共享访问一个公用的RAM，运行在任何一个CPU上的程序都看到一个普通的虚拟地址空间</p>
-</blockquote>
-<p>性质：</p>
-<ul>
-<li>CPU可以对存储器的某个字写入某个值，然后读回该字，并得到一个不同的值（因为另一个CPU改写了它）。在进行恰当的组织后，这种性质是CPU间通信的基础，一个CPU写入，另一个CPU读取</li>
-<li>在进程同步、资源管理以及调度方面也有一些独特的性质。</li>
-</ul>
-<h2 id="多处理机硬件"><a href="#多处理机硬件" class="headerlink" title="多处理机硬件"></a>多处理机硬件</h2><p>所有的多处理机都具有每个CPU可以访问全部存储器的性质，还有一些多处理机拥有其他的性质。</p>
-<ul>
-<li>UMA：统一存储器访问，读出每个存储器字的速度是一样快的</li>
-<li>NUMA：非一致存储器访问，没有上面的性质</li>
-</ul>
-<h3 id="基于总线的UMA多处理机体系结构"><a href="#基于总线的UMA多处理机体系结构" class="headerlink" title="基于总线的UMA多处理机体系结构"></a>基于总线的UMA多处理机体系结构</h3><h3 id="使用交叉开关的UMA多处理机"><a href="#使用交叉开关的UMA多处理机" class="headerlink" title="使用交叉开关的UMA多处理机"></a>使用交叉开关的UMA多处理机</h3><h3 id="使用多级交换网络的UMA多处理机"><a href="#使用多级交换网络的UMA多处理机" class="headerlink" title="使用多级交换网络的UMA多处理机"></a>使用多级交换网络的UMA多处理机</h3><h3 id="NUMA多处理机"><a href="#NUMA多处理机" class="headerlink" title="NUMA多处理机"></a>NUMA多处理机</h3><h3 id="多核芯片"><a href="#多核芯片" class="headerlink" title="多核芯片"></a>多核芯片</h3><h3 id="众核芯片"><a href="#众核芯片" class="headerlink" title="众核芯片"></a>众核芯片</h3><h3 id="异构多核"><a href="#异构多核" class="headerlink" title="异构多核"></a>异构多核</h3><h3 id="在多核上编程"><a href="#在多核上编程" class="headerlink" title="在多核上编程"></a>在多核上编程</h3><h2 id="多处理机操作系统类型"><a href="#多处理机操作系统类型" class="headerlink" title="多处理机操作系统类型"></a>多处理机操作系统类型</h2><h2 id="多处理机同步"><a href="#多处理机同步" class="headerlink" title="多处理机同步"></a>多处理机同步</h2><h2 id="多处理机调度"><a href="#多处理机调度" class="headerlink" title="多处理机调度"></a>多处理机调度</h2><h1 id="多计算机"><a href="#多计算机" class="headerlink" title="多计算机"></a>多计算机</h1><h2 id="多计算机硬件"><a href="#多计算机硬件" class="headerlink" title="多计算机硬件"></a>多计算机硬件</h2><h2 id="低层通信软件"><a href="#低层通信软件" class="headerlink" title="低层通信软件"></a>低层通信软件</h2><h2 id="用户层通信软件"><a href="#用户层通信软件" class="headerlink" title="用户层通信软件"></a>用户层通信软件</h2><h2 id="远程过程调用"><a href="#远程过程调用" class="headerlink" title="远程过程调用"></a>远程过程调用</h2><h2 id="分布式共享存储器"><a href="#分布式共享存储器" class="headerlink" title="分布式共享存储器"></a>分布式共享存储器</h2><h2 id="多计算机调度"><a href="#多计算机调度" class="headerlink" title="多计算机调度"></a>多计算机调度</h2><h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><h1 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h1><h2 id="网络硬件"><a href="#网络硬件" class="headerlink" title="网络硬件"></a>网络硬件</h2><h2 id="网络服务和协议"><a href="#网络服务和协议" class="headerlink" title="网络服务和协议"></a>网络服务和协议</h2><h2 id="基于对象的中间件"><a href="#基于对象的中间件" class="headerlink" title="基于对象的中间件"></a>基于对象的中间件</h2><h2 id="基于协作的中间件"><a href="#基于协作的中间件" class="headerlink" title="基于协作的中间件"></a>基于协作的中间件</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+            <p>
+              多处理机系统人们对更强计算力的追求促进着计算机的发展，而所有的一切都需要更多的CPU周期（又称机器周期，CPU周期定义为从内存读取一条指令字的最短时间。一个指令周期常由若干CPU周期构成。
+时钟解决方案
+过去的解决方案是使时钟走得更快，而现在遇到了对时钟速度的限制，即电子信号的速度不可能超过光速，这
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/17/OS/现代操作系统：多处理机系统/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -520,11 +495,22 @@
 
       
           
-            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              参考
 
+
+
+              
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/17/OS/现代操作系统：虚拟化与云/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -630,11 +616,22 @@
 
       
           
-            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              参考
 
+
+
+              
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/17/OS/现代操作系统：死锁/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -740,11 +737,22 @@
 
       
           
-            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              参考
 
+
+
+              
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/17/OS/现代操作系统：I-O/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -879,247 +887,21 @@
 
       
           
-            <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>操作系统最核心的概念是进程，是对正在运行程序的一个抽象。</p>
-<p>现代计算机经常会在同一时间做许多事情。例如当系统启动时，会秘密启动很多线程，例如启动一个进程用来等待邮件、启动一个防病毒进程周期性检查等。这些进程的活动都需要管理，因此一个支持多进程的多道程序系统在这里十分必要。</p>
-<p>在多道程序设计系统中，CPU由一个进程快速切换至另一个进程，使各个进程各运行几十或几百毫秒。即在某一个瞬间CPU只能运行一个进程，但在1S内可以运行多个进程，因此产生了并行的错觉，即<strong>伪并行</strong>。而<strong>多处理器系统</strong>有多个CPU共享一个物理内存的真正硬件并行，而由于人们难以对多个并行活动进行跟踪，因此设计了描述并行的概念模型（顺序进程）使得并行容易处理</p>
-<h2 id="进程模型"><a href="#进程模型" class="headerlink" title="进程模型"></a>进程模型</h2><p>进程模型中，计算机上所有可运行的软件，被组织成若干顺序进程（进程）,一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值。</p>
-<p>一个进程是某种类型的一个活动，它有程序、输入、输出以及状态。单个处理器可以被若干进程共享，它使用某种调度算法决定何时停止一个进程的工作，并转而为另一个进程提供服务。</p>
-<p>而若是一个程序运行了两遍，他们依然是两个进程，OS使得他们共享代码，只是一个副本放在内存当中，但其他的并不一样。</p>
-<p><strong>在本部分只考虑一个CPU的模型</strong>，即每个时间点只能运行一个进程。</p>
-<p><strong><em>多道程序系统设计</em></strong></p>
-<p>考虑多道程序系统设计，4个程序被抽象为4个各自拥有自己控制流程（每个程序自己的逻辑程序计数器）的进程，并且每个程序都独立运行。</p>
-<p>而实际上只有一个物理程序计数器，当每个程序运行时，逻辑程序计数器被装入实际的程序计数器中，当该程序执行结束，物理程序寄存器被保存在内存中该进程的逻辑程序计数器中。从时间上可见，所有进程都运行了，但每个时间点只有一个进程运行。</p>
-<p><img src="assets/1563412629413.png" alt="1563412629413"></p>
-<p><strong><em>进程执行时序上的无序性</em></strong></p>
-<p>由于CPU在各个进程间来回快速的切换，因此每个进程执行其运算的速度并不确定，当同一进程再次运行时，其运算速度通常也不可再现，即对进程编程时不能对时序做任何想当然的假想。</p>
-<p>考虑一个IO进程，用流式磁带机恢复备份的文件，它执行一个10000次的空循环以等待磁带机到达正常速度，但是CPU决定在空循环时切换到其他进程，则IO进程可能在第一条记录通过磁头后还未运行</p>
-<p>因此当一个进程具有此类严格的时序要求时，必须采取特殊的措施以保证他们在这段时间一定发生。</p>
-<h2 id="进程的创建"><a href="#进程的创建" class="headerlink" title="进程的创建"></a>进程的创建</h2><p>四种主要事件会导致进程的创建</p>
-<ul>
-<li>系统初始化</li>
-<li>正在运行的程序执行了创建进程的系统调用</li>
-<li>用户请求创建一个新进程</li>
-<li>一个批处理作业的初始化</li>
-</ul>
-<p><strong><em>系统初始化</em></strong></p>
-<p>启动OS通常会创建若干进程。有前台进程，即同用户交互的进程。其余是后台进程，与特定用户无关但有专门的功能，如一个接收电子邮件的后台进程，大多数时间在睡眠但在电子邮件到达时被唤醒。停留在后台诸如电子邮件等进程称为<strong>守护进程</strong></p>
-<p><strong><em>正在运行的程序执行了创建进程的系统调用</em></strong></p>
-<p>一个正在运行的进程经常发出系统调用以便创建一个或多个新进程协助其工作。例如如果有大量的数据要通过网络调取并进行顺序处理，那么创建一个进程取数据并把数据放入公共缓冲区中，让第二个进程取走并处理速度会更快一些</p>
-<p><strong><em>一个批处理作业的初始化</em></strong></p>
-<p>用户提交批处理作业，OS认为有资源可以运行另一个作业时，创建一个新的进程，并运行其输入队列中的下一个作业。</p>
-<h3 id="OS进行进程创建"><a href="#OS进行进程创建" class="headerlink" title="OS进行进程创建"></a>OS进行进程创建</h3><p>从技术上看，新进程都是由一个已经存在的进程执行了一个用户创建进程的系统调用而实现的。这个进程的工作是执行一个用来创建进程的系统调用，这个系统调用通知OS创建一个新进程，并且直接或间接指定在该进程中运行的程序。</p>
-<p>进程创建后，父进程与子进程拥有各自不同的地址空间，若其中某个进程在其地址空间修改了一个字，则这个修改对其他进程是不可见的。某些UNIX的实现使得程序正文在两者间共享，但是它不可修改。或者子进程共享父进程的内存，但这种情况下内存通过<strong>写时复制</strong>共享，一旦想修改内存，这块内存首先被明确地复制，确保修改在自己的地址空间中。即可写的内存不可共享</p>
-<p>进程是有可能共享打开的文件等资源的。</p>
-<h2 id="进程的终止"><a href="#进程的终止" class="headerlink" title="进程的终止"></a>进程的终止</h2><p>进程的终止通常是由以下条件</p>
-<ul>
-<li>正常退出（自愿）、出错退出（自愿）</li>
-<li>严重错误（非自愿）、被其他进程杀死（非自愿）</li>
-</ul>
-<h2 id="进程的层次结构"><a href="#进程的层次结构" class="headerlink" title="进程的层次结构"></a>进程的层次结构</h2><p>某些系统当中，当进程创建了另一个进程后，父进程和子进程就以某种形式继续保持关联，子进程自身可以创建更多的进程，组成一个进程的层次结构。</p>
-<p>UNIX当中，进程和它所有子进程共同组成一个进程组，当用户从键盘发出一个信号，该信号被送给当前与键盘相关的进程组中的所有成员，每个进程可以分别捕获该信号，忽略该信号或采取默认的动作等。</p>
-<h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>尽管每个进程是一个独立的实体，有其自己的程序计数器和内部状态，但是进程间经常需要相互作用，一个进程的输出结果可能作为另一个进程的输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat c1 c2 c3 |grep tree</span><br></pre></td></tr></table></figure>
-
-<p>第一个进程运行cat，将三个文件连接并输出，第二个进程运行grep，从输入中选择包含tree的行，根据两个进程的相对速度（两个程序的相对复杂度和各自分配到的CPU时间）可能发生这种情况，grep已经准备就绪，但输入未完成，则必须阻塞grep直到输入到来。</p>
-<h3 id="状态模型"><a href="#状态模型" class="headerlink" title="状态模型"></a>状态模型</h3><ul>
-<li>当一个进程在逻辑上不能继续运行就会被阻塞，例如正在等待可以使用的输入。进程挂起是由于程序自身的固有原因</li>
-<li>概念上能够运行的进程被迫停止，因为OS调度另一个进程占用了CPU。程序挂起是由于系统技术上的原因，没有足够的CPU</li>
-</ul>
-<p>进程的状态</p>
-<ul>
-<li>运行态：该时刻进程实际占用CPU</li>
-<li>就绪态：可运行，但因为其他进程正在运行而暂停</li>
-<li>阻塞：除非某种外部事件发生，否则进程不能运行<ul>
-<li>等待中断等</li>
-</ul>
-</li>
-</ul>
-<p><img src="assets/1563416025565.png" alt="1563416025565"></p>
-<p>OS的最底层是调度程序，在它上面有许多进程，所有关于中断处理、启动进程和停止进程的细节都被隐藏在调度程序中。不过很少有真实的系统是以这样的理想方式构造的。</p>
-<p><img src="assets/1563416197043.png" alt="1563416197043"></p>
-<h2 id="进程的实现"><a href="#进程的实现" class="headerlink" title="进程的实现"></a>进程的实现</h2><p>为了实现进程模型，OS维护一张表格，即<strong>进程表</strong>，每个进程占用一个进程表项（<strong>进程控制块</strong>），表内包含了进程状态的重要信息，包括程序计数器、堆栈指针、内存分配状况、打开的文件的状态、账号和调度信息，以及其他在进程由运行态转换到就绪态或阻塞态时必须保存的信息，从而保证该进程随后能再次启动，就像从未被中断过一样。</p>
-<p><img src="assets/1563416995282.png" alt="1563416995282"></p>
-<h3 id="单个CPU实现伪并行"><a href="#单个CPU实现伪并行" class="headerlink" title="单个CPU实现伪并行"></a>单个CPU实现伪并行</h3><p>与每一个IO类关联的是一个称作<strong>中断向量</strong>的位置（靠近内存底部的固定区域），包含中断服务程序的入口地址，假设当一个磁盘中断发生时，用户进程3正在运行，则中断硬件将程序计数器、程序状态字、寄存器压入堆栈，随后计算机跳转到中断向量所指示的地址。这些是硬件的操作，随后是软件，特别是中断服务例程就接管剩余工作。</p>
-<p>中断发生后OS最底层的工作步骤</p>
-<p><img src="assets/1563417443767.png" alt="1563417443767"></p>
-<h2 id="多道程序设计模型"><a href="#多道程序设计模型" class="headerlink" title="多道程序设计模型"></a>多道程序设计模型</h2><h3 id="CPU利用率（吞吐量）"><a href="#CPU利用率（吞吐量）" class="headerlink" title="CPU利用率（吞吐量）"></a>CPU利用率（吞吐量）</h3><p>多道程序设计可以提高CPU的利用率，如果进程用于计算的平均时间是进程在内存中停留时间的20%，并且内存中同时有5个进程， 则CPU会一直满负载运行。但是这个模型过于乐观，并且假设了进程不会同时等待IO</p>
-<p>更好的模型是从概率角度看CPU利用率，假设一个进程等待IO操作的时间与停留在内存的时间比为p，在内存中同时有n个进程，则n个进程都在等待IO的概率为p^n，则有<br>$$<br>CPU利用率=1-p^n<br>$$<br>则有</p>
-<p><img src="assets/1563417721385.png" alt="1563417721385"></p>
-<p>该模型只是描述了一个大致的状况，假设所有n个进程是独立的，即5个进程中，3个运行两个等待是完全可以接受的，但在单CPU中，不能同时运行3个进程，因此当CPU忙时，已就绪的进程也必须等待CPU，因而进程并不独立。</p>
-<p>更精确的模型则应该以排队论构建，然而原有模型依然很有效。</p>
-<p><strong>计算模式</strong>：当计算机有8G内存，OS占用2GB，用户程序占用2GB，则内存空间允许3个程序同时驻留在内存中，若80%时间用于IO等待，则CPU利用率约为1-0.8^3，即大约49%；若增加8GB的内存，则可以允许7道程序设计，CPU利用率提高到1-0.8^7，即79%，扩大8GB内存提高了30%的吞吐量</p>
-<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>经常存在在同一个地址空间中准并行运行多个控制线程的情形，这些线程就像分离的进程（共享地址空间除外）</p>
-<h2 id="线程的使用"><a href="#线程的使用" class="headerlink" title="线程的使用"></a>线程的使用</h2><h3 id="使用线程的原因："><a href="#使用线程的原因：" class="headerlink" title="使用线程的原因："></a>使用线程的原因：</h3><ul>
-<li>在许多应用当中同时发生着多种活动，其中某些活动随着时间的推移会被阻塞。通过将这些应用程序分解成准并行运行的多个顺序线程，程序设计模型将会变得很简单。</li>
-<li>多进程可以共享同一个地址空间与所有可用数据的能力，对某些应用是必须的。</li>
-<li>线程比起进程更加轻量级，因此比进程更容易创建、撤销，在许多OS当中，创建一个线程比创建一个进程快10-100倍</li>
-<li>从性能方面考量，若多个CPU都是CPU密集型的，那么并不能获得性能上的增强，但如果存在大量的计算与大量的IO，多个线程允许这些活动重叠进行，加快应用程序的执行速度</li>
-<li>在多CPU系统中，线程使得实现了真正的并行</li>
-</ul>
-<p><strong><em>多线程应用举例</em></strong></p>
-<p>以WEB服务器为例，对页面的请求发给服务器，而所请求的页面发回给客户机。而组织Web服务器的方式如下所示</p>
-<p><img src="assets/1563586908865.png" alt="1563586908865"></p>
-<p>一个分派线程负责从网络中读入工作请求，检查请求后挑选一个空转的工作线程，提交该请求。通常是在    每个线程所分配有的某个专门字中写入一个消息指针，接着分派线程唤醒睡眠的工作线程，从阻塞转为就绪</p>
-<p>若没有多线程，则只能是线程进行循环等待请求，若是在请求到来的时候，工作线程正在任务中，则无法处理新的请求</p>
-<p><strong><em>多线程解决方案</em></strong></p>
-<p>多线程使得顺序进程的思想保留了下来。有关的进程可以用一个输入线程、处理线程、输出线程构造，输入线程将数据读入到输入缓冲区，处理线程从输入缓冲区读取数据，并把结果放到输出缓冲区，输出线程将结果写入到磁盘中，这种模式下，三个线程可以同时进行。</p>
-<h2 id="经典线程模型"><a href="#经典线程模型" class="headerlink" title="经典线程模型"></a>经典线程模型</h2><p><strong><em>进程模型</em></strong></p>
-<p>进程模型基于两种独立的概念：资源分组处理和执行。有时将这两种概念分开会更好，即引入了线程这一概念。</p>
-<ul>
-<li>理解进程的一个角度是：用某种方法把相关的资源集中在一起。进程有存放程序正文和数据以及其他资源的地址空间。包括打开的文件、子进程、即将发生的定时器、信号处理程序、账号信息等</li>
-<li>另一个角度是：进程拥有一个执行的线程，在线程中有一个程序计数器，用来记录接着要执行哪一条指令，线程拥有寄存器，用来保存线程当前的工作变量，拥有堆栈用来记录执行历史。</li>
-<li>进程用于将资源集中到一起，而进程则是在CPU上被调度执行的实体</li>
-</ul>
-<p><strong><em>线程模型</em></strong></p>
-<p>线程的出现在进程模型的基础上增加了一项内容，即在同一个进程的基础上允许彼此之间有较大独立性的多个线程执行。</p>
-<p>当多线程进程在单CPU系统上运行时，线程轮流运行，CPU在线程间快速切换，系统制造了线程并行运行的假象，好似它们在一个比实际CPU慢一些的CPU上同时运行。</p>
-<p><img src="assets/1563610808251.png" alt="1563610808251"></p>
-<p>进程中的不同线程不像不同进程间那样存在很大的独立性，所有线程都有完全一样的地址空间，意味着他们也共享相同的全局变量,因此一个线程可以读、写甚至清除另一个线程的堆栈。即线程之间是没有保护的。</p>
-<p><img src="assets/1563606959067.png" alt="1563606959067"></p>
-<p>线程拥有它自己的堆栈，供各个被调用了但是还要从中返回的过程使用，该栈帧中存放着相应过程的局部变量以及过程调用完之后使用的返回地址。该栈帧是每个线程执行过程的过程历史，由于每个线程通常会调用不同的过程，从而有不同的执行历史，因此他们需要有自己的堆栈。</p>
-<h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p>与传统进程一样，线程可以处于若干种状态中的一个：运行、就绪或终止。并且其状态转换与进程也是一致的</p>
-<h3 id="线程调用"><a href="#线程调用" class="headerlink" title="线程调用"></a>线程调用</h3><ul>
-<li>通常线程有能力去创建另一个线程，即thread_cretate</li>
-<li>线程可以调用一个库函数thread_exit退出</li>
-<li>线程可以等待一个特定的线程退出，thread_join，在某些线程系统中，它会使得线程阻塞调用线程直到那个特定线程退出</li>
-<li>允许线程放弃CPU，thread_yield从而让另一个线程运行</li>
-</ul>
-<h2 id="线程实现"><a href="#线程实现" class="headerlink" title="线程实现"></a>线程实现</h2><p>线程的实现有3种方式，包括内核态、用户态、混合实现</p>
-<h3 id="在用户空间实现线程"><a href="#在用户空间实现线程" class="headerlink" title="在用户空间实现线程"></a>在用户空间实现线程</h3><p>当在用户态实现线程，则内核对线程一无所知，内核来看的时候，就是一个单线程进程。具体实现是将整个的线程包放在用户态中</p>
-<ul>
-<li>线程可以在不支持多线程的OS上实现，</li>
-</ul>
-<h3 id="在内核态实现线程"><a href="#在内核态实现线程" class="headerlink" title="在内核态实现线程"></a>在内核态实现线程</h3><h3 id="混合实现"><a href="#混合实现" class="headerlink" title="混合实现"></a>混合实现</h3><h2 id="调度程序激活机制"><a href="#调度程序激活机制" class="headerlink" title="调度程序激活机制"></a>调度程序激活机制</h2><p>内核态的线程在一些关键优点上优于用户级线程，但是速度略慢，因此设计了调度程序激活工作，其目标是模拟内核线程的功能，但是为线程包提供通常在用户空间中才能实现的更好的性能和更大的灵活性。</p>
-<h2 id="弹出式线程"><a href="#弹出式线程" class="headerlink" title="弹出式线程"></a>弹出式线程</h2><p>分布式系统经常使用线程，一个例子是如何处理到来的消息，例如服务请求。传统的方式是将进程或线程阻塞在一个receive系统调用上，等待消息到来，当消息到达时，系统调用接收消息，并打开消息检查内容然后处理。</p>
-<p>另一种方式是一个消息的到来导致系统创建一个处理该消息的线程，该线程称为<strong>弹出式线程</strong>，其好处是线程相当新，即没有必须存储的寄存器、堆栈等，每一个线程彼此间完全一样，因此有可能快速创建线程，使用该方式使得消息到达与处理开始间的时间非常短。</p>
-<ul>
-<li>在内核中运行弹出式线程通常比在用户空间中容易且快捷，而且内核空间的弹出式线程可以很容易地访问所有的IO设备等，在处理中断时比较有用</li>
-<li>出错的内核线程会比出错的用户线程导致更大的损害。</li>
-</ul>
-<h2 id="使单线程代码多线程化"><a href="#使单线程代码多线程化" class="headerlink" title="使单线程代码多线程化"></a>使单线程代码多线程化</h2><p>将原有的单线程代码改写为多线程需要比直接写多线程程序更高的技巧</p>
-<ul>
-<li>代码角度。单线程的代码如同进程一样，通常包含多个进程、局部变量、全局变量和过程函数<ul>
-<li>其中的局部变量和参数不会引起问题。</li>
-<li>全局变量：对线程而言是全局变量，并不是对整个程序也是全局的，许多变量之所以是全局的，是因为线程中的许多过程都用到它，但是其他线程在逻辑上和这些变量无关<ul>
-<li>案例：考虑一个对象当中的errno变量，当进程进行系统调用失败时，错误码会放入errno中，线程1执行系统调用确定是否允许访问某个文件，OS将返回值放入errno，而此时线程1使用完CPU时间，切换到线程2，线程2执行一个系统调用并写入errno，因此之前的errno值丢失，随后线程1由于errno值不正常会执行错误的操作</li>
-<li><img src="assets/1563613403700.png" alt="1563613403700"></li>
-<li>解决方案：全面禁止全局变量。或为每个线程赋予私有的全局变量。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><p>进程经常需要与其他进程通信，如在一个shell管道中，第一个进程的输出必须传送给第二个进程，沿着管道传递下去。因此进程间需要通信。进程通信IPC需要解决三个问题</p>
-<ul>
-<li>一个进程如何把信息传递给另一个</li>
-<li>确保两个或更多的进程在关键活动中不会出现交叉</li>
-<li>与正确的顺序相关，若进程A产生数据，而进程B消费数据，则进程B需要等待进程A</li>
-</ul>
-<p>而这些问题对于线程同样适用。</p>
-<h2 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h2><p>在OS当中，协作的进程可能共享一些彼此都能读取的公用存储区。例如脱机打印程序，一个进程需要打印一个文件时，将文件名放在一个脱机目录中，另一个进程周期性检查是否有文件需要打印，若有则将该文件从目录下删除。</p>
-<p><strong><em>具体案例</em></strong></p>
-<p>则<strong>假设</strong>打印机目录有多个槽位，其编号为0，1，2…等，每个槽位存放一个文件名，假设有两个共享变量：out指向下一个要打印的文件、in指向目录中下一个空闲槽位。</p>
-<p>则在该情境下，考虑进程A1与进程A2都要将一个文件排队打印，则可能会出现以下情况，进程A1读取得到in=7，并将其存到临时变量index当中，而此时发生时钟中断，CPU切换到进程A2，A2读取in得到in=7，同样存到局部变量index=7，而这两个index分属于不同的进程。此刻两个进程都认为下一个可用位为7.</p>
-<p>进程A2将文件存到槽位7当中，并更新in=8，离开，当CPU切换回A1时，则检查自己的局部变量index=7，与是将新的文件存到槽位7，并刷新in=8。在该情况下，丢失了一个需要打印的文件，然而打印机进程发现不了任何问题。</p>
-<blockquote>
-<p>竞争条件：两个或多个进程读写某些共享数据，而最后的结果取决于进程运行的精确时序。</p>
-</blockquote>
-<p>竞争条件导致大多数的测试运行结果都很好，但是在极少数的情况下会出现一些无法解释的现象，而多核增长带来的并行使得竞争条件越来越普遍</p>
-<h2 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h2><p>如何避免竞争条件？凡是涉及到共享内存、共享文件以及共享任何资源的情况都会引发类似错误。</p>
-<p>解决竞争条件，即需要找出某种途径阻止多个进程同时读写共享的数据，即需要做到<strong>互斥</strong>，以某种手段确保当一个进程在使用一个共享变量或文件时，其他进程不能做同样的操作。</p>
-<h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><p>以抽象的角度进行描述即：一个进程的一部分时间可能会访问共享内存或文件，我们将对共享内存进行访问的程序片段称为<strong>临界区</strong>，若能适当地安排，使得两个进程不可能同时位于临时区内，就能避免竞争条件。</p>
-<p><strong><em>解决竞争条件</em></strong></p>
-<p>对于一个好的解决方案，需要满足以下4个条件</p>
-<ul>
-<li>任何两个进程不能同时处于临界区</li>
-<li>不应对CPU的速度和数量做任何假设</li>
-<li>临界区外运行的进程不得阻塞其他进程</li>
-<li>不得使进程无限期等待进入临界区</li>
-</ul>
-<p><img src="assets/1563623076077.png" alt="1563623076077"></p>
-<p>考虑多种实现互斥的方案，当一个进程在临界区中，这些方案都可以使得进程将不会进入临界区</p>
-<h3 id="忙等待的互斥"><a href="#忙等待的互斥" class="headerlink" title="忙等待的互斥"></a>忙等待的互斥</h3><p>忙等待的互斥本质上是当一个进程想进入临界区时，先检测是否允许进入，若不允许则该进程原地等待直到允许为止。</p>
-<p>并且倘若进程A优先级高于进程B，若调度规则规定进程A就绪就可运行。则假设当进程B处于临界区时，进程A准备就绪，因此进程B不会被调度，则进程A将永远忙等待下去</p>
-<h4 id="屏蔽中断"><a href="#屏蔽中断" class="headerlink" title="屏蔽中断"></a>屏蔽中断</h4><p>屏蔽中断：屏蔽包括时间中断等中断，CPU只有在发生时钟中断或其他中断时才会进行进程切换</p>
-<p>在单处理器系统中，最简单的方法是让每个进程在钢管进入临界区后立即屏蔽所有中断，并在就要离开前再打开中断。这样CPU就不会切换到其他进程，此时进程就不担心其他进程的进入</p>
-<p><strong>缺陷</strong></p>
-<ul>
-<li>将屏蔽中断的权力交给用户并不明智，若一个进程屏蔽中断后并不打开，则整个系统可能会终止。</li>
-<li>如果系统是多处理器，则屏蔽中断仅仅对当前CPU有效，其他CPU依然可以访问共享内存</li>
-<li>对内核而言，当它在更新变量或列表的几条指令期间屏蔽中断是有效地，当就绪进程队列等数据状态不一致时发生中断，则导致竞争条件</li>
-</ul>
-<h4 id="锁变量"><a href="#锁变量" class="headerlink" title="锁变量"></a>锁变量</h4><p>寻找软件解决方案，设想有一个共享锁变量，初始值为0，当一个进程想进入临界区，则首先测试这把锁，如果锁的值为0，则设置其值为1并进入临界区。如果锁的值已经为1，则等待其值变为0</p>
-<p>但是该方案依然会导致竞争条件，即在读取值为0，并且恰好在它将值设置为1前，另一个进程被调度，则会导致两个进程进入临界区</p>
-<h4 id="严格轮换法"><a href="#严格轮换法" class="headerlink" title="严格轮换法"></a>严格轮换法</h4><p>设置一个整形变量，用于记录轮到哪个进程进入临界区，并检查或更新共享内存，连续测试一个变量值直到某个值出现为止，称为<strong>忙等待</strong>。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">while</span>(turn!=<span class="number">0</span>);</span><br><span class="line">    critical_region();</span><br><span class="line">  	turn=<span class="number">1</span>;</span><br><span class="line">    noncritical_region();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这种方式浪费CPU时间，通常应当避免，只有在有理由认为等待时间是非常短的情形下才使用忙等待。用于忙等待的锁称为<strong>自旋锁</strong>。当进程0试图进入临界区时，可能当前OS将turn=1，而此时进程1并没有占用临界区，是对资源的浪费。</p>
-<p>而这种方法违反了之前的条件3，即进程被一个临界区外的进程阻挡。</p>
-<h4 id="Peterson解法"><a href="#Peterson解法" class="headerlink" title="Peterson解法"></a>Peterson解法</h4><p>将锁变量与警告变量的思想结合，提出不需要严格轮换的软件互斥算法</p>
-<p><img src="assets/1563668524785.png" alt="1563668524785"></p>
-<ul>
-<li>起始时，没有任何进程在临界区中，进程0调用enter_region，设置数组元素与turn=0标识希望进入临界区</li>
-<li>若进程1现在调用enter_region，进程1将在此处挂起直到interest=false。即进程0退出</li>
-<li>当两个进程同时调用enter_region，则由于前一个写入turn被刷新，则只有后一个才可以进入临界区</li>
-</ul>
-<h4 id="TSL指令"><a href="#TSL指令" class="headerlink" title="TSL指令"></a>TSL指令</h4><p>由硬件支持的解决方案，TSL指令即test and set lock</p>
-<p>将一个内存字读取到寄存器中，然后在该内存地址上存一个非零值，读与写操作保证是不可分割的，即该指令结束前其他处理器均不允许访问该内存字，执行TSL的CPU将锁住内存总线，以禁止其他CPU在本指令结束前访问内存</p>
-<p><strong>XCHG指令</strong>：是可替代TSL的指令，原子性地交换两个位置的内容。</p>
-<h3 id="睡眠和唤醒"><a href="#睡眠和唤醒" class="headerlink" title="睡眠和唤醒"></a>睡眠和唤醒</h3><p>考虑几条进程间的通信原语：</p>
-<ul>
-<li>sleep：将引起调用进程阻塞的系统调用，即将挂起，直到另外一个进程将其唤醒</li>
-<li>wakeup调用有一个参数，即要被唤醒的进程。</li>
-</ul>
-<p><strong><em>生产者-消费者问题</em></strong></p>
-<p>考虑存在一个生产者与消费者的情形</p>
-<p>当缓冲区已满，且生产者还想向其中放入一个新的数据项的情况，即让生产者睡眠，直到消费者从缓冲区取出一个或多个数据项再唤醒生产者。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100</span></span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> item;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        item = produce_item();</span><br><span class="line">        <span class="keyword">if</span>(count == N)&#123;</span><br><span class="line">            sleep();</span><br><span class="line">        &#125;</span><br><span class="line">        insert_item();</span><br><span class="line">        count = count + <span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">if</span>(count == <span class="number">1</span>)&#123;</span><br><span class="line">            wakeup(consumer);</span><br><span class="line">        &#125;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>则在该方法中其实会存在竞争条件，生产者与消费者都要去检查count的值，并且对count访问没有限制。</p>
-<ul>
-<li>若缓冲区为空，消费者刚刚读取count==0，此时调度程序决定暂停消费者运行生产者。</li>
-<li>生产者向缓冲区加入一个数据项，count=1，推断刚刚count==0，因此消费者一定在睡眠，于是发出wakeup</li>
-<li>调度程序切换到消费者，消费者检查之前读到的值为0，即判定睡眠。</li>
-<li>因此在整个过程中，wakeup信号丢失，于是最后生产者会填满缓冲区，导致两个进程永远睡眠</li>
-</ul>
-<p>弥补手段：增加修改规则，加上一个唤醒等待位，当一个wakeup发送给一个清醒的进程时，将该位置置为1，当进程要睡眠时，如果该唤醒等待位为1，则清除该位，保持清醒。</p>
-<p><strong>但是如果进程更多的时候，该方法无法根本上解决问题。</strong></p>
-<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p>使用一个整形变量来累计唤醒次数。一个信号量取值可以为0（没有保存下来的唤醒操作）或者为正值（有一个或多个唤醒操作），信号量的操作有：</p>
-<ul>
-<li>down与up均为不可分割的原子操作，即检查数值、修改变量值、可能发生的睡眠操作都是不可分割的。保证一旦一个信号量操作开始，则在该操作完成或阻塞前其他进程均不允许访问该信号量。<ul>
-<li>其实现是在几条指令间屏蔽中断</li>
-<li>当有多个CPU时，每个信号量应有一个锁变量保护，通过TSL或XCHG确保同一时刻只有1个CPU可以操作</li>
-</ul>
-</li>
-<li>down：检查其值是否大于0，若大于0则减1，即用掉一个保存的唤醒信号并继续。若值为0，则进程将睡眠。</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100	<span class="comment">//缓冲区的槽位</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> semaphore;	<span class="comment">//定义信号量数据类型</span></span><br><span class="line">semaphone mutex = <span class="number">1</span>;	<span class="comment">//控制对临界区的访问</span></span><br><span class="line">semaphone empty = N;	<span class="comment">//缓冲区的空槽数目</span></span><br><span class="line">semaphone full = <span class="number">0</span>;	<span class="comment">//缓冲区的满槽数目</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;	<span class="comment">//</span></span><br><span class="line">    <span class="keyword">int</span> item;	<span class="comment">//</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;	<span class="comment">//</span></span><br><span class="line">        item = produce_item();	<span class="comment">//产生数据</span></span><br><span class="line">        down(&amp;empty);	<span class="comment">//将空槽数目减一</span></span><br><span class="line">        down(&amp;mutex);	<span class="comment">//进入临界区</span></span><br><span class="line">        insert_item(item);	<span class="comment">//将新增数据放到缓冲区</span></span><br><span class="line">        up(&amp;mutex);	<span class="comment">//离开临界区</span></span><br><span class="line">        up(&amp;full);	<span class="comment">//将满槽数目+！</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>信号量可以用于实现<strong>同步</strong>，保证某种事件顺序发生或不发生。</p>
-<h4 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h4><ul>
-<li>对信号量操作的次序要非常谨慎<ul>
-<li>若两个down的操作交换顺序，则让mutex的值先-1，若缓冲区完全满了，则生产者将阻塞。当消费者访问缓冲区，则由于mutex值为0，消费者阻塞，因此产生死锁。</li>
-</ul>
-</li>
-</ul>
-<h3 id="互斥量"><a href="#互斥量" class="headerlink" title="互斥量"></a>互斥量</h3><p>若是不需要信号量的计数能力，则可以使用其简化版本：互斥量。互斥量仅仅适用于管理共享资源或一小段代码。</p>
-<p>互斥量是一个处于两态之一的变量：解锁与加锁。当互斥量已经加锁，则调用线程阻塞，直到在临界区中的线程完成解锁，若多个线程被阻塞在该互斥量上，将随机选择一个线程允许其获得锁。</p>
-<p><strong><em>具体实现</em></strong></p>
-<h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><p>为了编写正确的程序，提出了一种高级同步原语，即管程。一个管程是一个由过程、变量、数据结构等组成的一个集合，他们组成一个特殊的模块或软件包。进程可以在任何需要的时候调用管程中的过程，但他们不能在管程之外声明的过程中直接访问管程内的数据结构。</p>
-<p>任一时刻管程内只有一个活跃进程，使得管程有效地互斥。当一个进程调用管程过程时，该过程的前几条指令将检查管程中是否有其他活跃进程，若有则进程挂起，直到另一个进程离开管程时将其唤醒。</p>
-<h3 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h3><p>消息传递的方法使用两条原语：send与receive，它们像信号量，是系统调用而不是语言成分。send向一个给定目标发送一条消息，后一个调用从一个给定的源接收一条消息，若没有消息可用，则接收者可能堵塞直到一条消息到达。</p>
-<p><strong><em>消息传递系统设计的要点</em></strong></p>
-<p>对于消息传递，特别是位于网络中不同机器上的通信进程的情况，消息可能被网络丢失，为防止消息丢失：接收方与发送方需要达成一致：一旦接收到消息，接收方马上回送一条特殊的确认，如果发送方在一段时间间隔内未收到确认，则重发消息</p>
-<p>但是若消息被正确接收，而返回的确认消息丢失，则会导致接收方收到两条同样的消息。因此区分新的消息与重发的消息很重要，一般解决方案是嵌入一个连续的序号来解决问题。</p>
-<p>消息系统还需要解决进程命名问题，即send指向的进程必须没有二义性，身份认证也是需要的，即客户确认是与真正的服务器通信而不是冒充者</p>
-<p><strong><em>用消息传递解决生产者-消费者问题</em></strong></p>
-<h3 id="屏障"><a href="#屏障" class="headerlink" title="屏障"></a>屏障</h3><p>屏障是用于进程组而不是双进程的生产者-消费者情形，有些应用划分了若干阶段，并规定除非所有的进程都就绪着手下一个阶段，否则任何进程都不能进入下一个阶段。</p>
-<p>通过在每个阶段的结尾安置屏障来实现该行为，当进程到达屏障时，就会被屏障阻拦直到所有进程都到达屏障为止。</p>
-<h2 id="避免锁-读-复制-更新"><a href="#避免锁-读-复制-更新" class="headerlink" title="避免锁 读-复制-更新"></a>避免锁 读-复制-更新</h2><h1 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h1><h2 id="调度简介"><a href="#调度简介" class="headerlink" title="调度简介"></a>调度简介</h2><h2 id="批处理系统中的调度"><a href="#批处理系统中的调度" class="headerlink" title="批处理系统中的调度"></a>批处理系统中的调度</h2><h2 id="交互式系统的调度"><a href="#交互式系统的调度" class="headerlink" title="交互式系统的调度"></a>交互式系统的调度</h2><h2 id="实时系统中的调度"><a href="#实时系统中的调度" class="headerlink" title="实时系统中的调度"></a>实时系统中的调度</h2><h2 id="策略和机制"><a href="#策略和机制" class="headerlink" title="策略和机制"></a>策略和机制</h2><h2 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h2><h1 id="经典IPC问题"><a href="#经典IPC问题" class="headerlink" title="经典IPC问题"></a>经典IPC问题</h1><h2 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h2><h2 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者-写者问题"></a>读者-写者问题</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+            <p>
+              进程操作系统最核心的概念是进程，是对正在运行程序的一个抽象。
+现代计算机经常会在同一时间做许多事情。例如当系统启动时，会秘密启动很多线程，例如启动一个进程用来等待邮件、启动一个防病毒进程周期性检查等。这些进程的活动都需要管理，因此一个支持多进程的多道程序系统在这里十分必要。
+在多道程序设计系统中，C
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/17/OS/现代操作系统：进程与线程/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1225,11 +1007,22 @@
 
       
           
-            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              参考
 
+
+
+              
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/17/OS/现代操作系统：内存管理/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1335,11 +1128,22 @@
 
       
           
-            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              参考
 
+
+
+              
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/14/Java/设计模式/设计模式：享元模式/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1474,26 +1278,29 @@
 
       
           
-            <h1 id="Bridge"><a href="#Bridge" class="headerlink" title="Bridge"></a>Bridge</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><ul>
-<li>当一个抽象可能有多个实现时，通常使用继承进行协调。抽象类定义对该接口的抽象，而具体的子类用不同的方式加以实现。<ul>
-<li>但是此方法不够灵活，继承机制将抽象部分与实现部分固定在一起，</li>
-</ul>
-</li>
-</ul>
-<h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><ul>
-<li>将抽象部分与它的实现部分分离，使他们都可以独立变化</li>
-</ul>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
-<li>不希望在抽象和它的实现部分间有一个固定的绑定关系。可能是因为在程序运行时刻实现部分应可以被选择或切换</li>
-<li>类的抽象以及它的实现都应该可以通过生成子类的方法进行扩充。这时Bridge模式使你可以对不同的抽象接口和实现部分进行组合，并分别对他们进行扩充</li>
-<li>对一个抽象的实现部分的修改应该对客户不产生影响，即客户的代码不必重新编译</li>
-<li>你想在多个对象间共享实现（可能使用引用计数），但同时要求客户不知道这一点</li>
-</ul>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><h1 id="协作"><a href="#协作" class="headerlink" title="协作"></a>协作</h1><h2 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h2><h2 id="协作-1"><a href="#协作-1" class="headerlink" title="协作"></a>协作</h2><h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><h2 id="需要权衡"><a href="#需要权衡" class="headerlink" title="需要权衡"></a>需要权衡</h2><h2 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h2><h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><h1 id="相关模式"><a href="#相关模式" class="headerlink" title="相关模式"></a>相关模式</h1><h1 id="框架中的设计模式"><a href="#框架中的设计模式" class="headerlink" title="框架中的设计模式"></a>框架中的设计模式</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              Bridge提出问题
+当一个抽象可能有多个实现时，通常使用继承进行协调。抽象类定义对该接口的抽象，而具体的子类用不同的方式加以实现。
+但是此方法不够灵活，继承机制将抽象部分与实现部分固定在一起，
 
+
+
+为什么要用（作用）
+将抽象部分与它的实现部分分离，使他们都可以独立变化
+
+应用适用性
+不希望在抽象
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/14/Java/设计模式/设计模式：桥接模式/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1599,11 +1406,22 @@
 
       
           
-            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              参考
 
+
+
+              
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/14/Java/设计模式/设计模式：中介者模式/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1709,11 +1527,22 @@
 
       
           
-            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              参考
 
+
+
+              
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/14/Java/设计模式/设计模式：备忘录模式/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>

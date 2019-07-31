@@ -248,6 +248,8 @@
 
     
 
+  <a href="https://github.com/smallpocket" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
 
     <main id="main" class="main">
       <div class="main-inner">
@@ -373,121 +375,27 @@
 
       
           
-            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战</p>
-<ul>
-<li>上下文切换的问题</li>
-<li>死锁的问题</li>
-<li>受限于硬件和软件的资源限制问题</li>
-</ul>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><img src="assets/162a01b71ebc4842" alt="思维导图"></p>
-<h1 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h1><p><strong>单核处理器实现多线程执行代码：</strong></p>
-<p>CPU通过给每个线程分配CPU时间片来实现这个机制。时间片是CPU分配给各个线程的时间，因为时间片非常短，所以CPU通过不停地切换线程执行，让我们感觉多个线程是同时执行的，时间片一般是几十毫秒（ms）。</p>
-<p><strong>上下文切换概念</strong></p>
-<p>CPU通过时间片分配算法来循环执行任务，当前任务执行一个时间片后会切换到下一个任务。但是，在切换前会保存上一个任务的状态，以便下次切换回这个任务时，可以再加载这个任务的状态。所以任务从保存到再加载的过程就是一次上下文切换。</p>
-<p><strong>损耗</strong>：保存上一个任务状态、再加载下一个任务状态所消耗的时间</p>
-<h3 id="多线程未必很快"><a href="#多线程未必很快" class="headerlink" title="多线程未必很快"></a>多线程未必很快</h3><p>并发编程的目的就是为了能提高程序的执行效率提高程序运行速度，但是并发编程并不总是能提高程序运行速度的，而且并发编程可能会遇到很多问题，比如：内存泄漏、上下文切换、死锁还有受限于硬件和软件的资源闲置问题。</p>
-<p>多线程就是几乎同时执行多个线程（一个处理器在某一个时间点上永远都只能是一个线程！即使这个处理器是多核的，除非有多个处理器才能实现多个线程同时运行）。CPU通过给每个线程分配CPU时间片来实现伪同时运行，因为CPU时间片一般很短很短，所以给人一种同时运行的感觉。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcurrencyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 执行次数 */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> count = <span class="number">10000l</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">//并发计算</span></span><br><span class="line">    concurrency();</span><br><span class="line">    <span class="comment">//单线程计算</span></span><br><span class="line">    serial();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">concurrency</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">                a += <span class="number">5</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    thread.start();</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        b--;</span><br><span class="line">    &#125;</span><br><span class="line">    thread.join();</span><br><span class="line">    <span class="keyword">long</span> time = System.currentTimeMillis() - start;</span><br><span class="line">    System.out.println(<span class="string">"concurrency :"</span> + time + <span class="string">"ms,b="</span> + b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">serial</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        a += <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        b--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> time = System.currentTimeMillis() - start;</span><br><span class="line">    System.out.println(<span class="string">"serial:"</span> + time + <span class="string">"ms,b="</span> + b + <span class="string">",a="</span> + a);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>
+              问题并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战
 
-<p><img src="assets/1554968889175.png" alt="1554968889175"></p>
-<h3 id="测试上下文切换"><a href="#测试上下文切换" class="headerlink" title="测试上下文切换"></a>测试上下文切换</h3><ul>
-<li>使用Lmbench3（性能分析工具）可以测量上下文切换的<strong>时长。</strong></li>
-<li>使用vmstat可以测量上下文切换的<strong>次数。</strong><ul>
-<li>一般一秒1000多次</li>
-</ul>
-</li>
-</ul>
-<h3 id="如何减少上下文切换"><a href="#如何减少上下文切换" class="headerlink" title="如何减少上下文切换"></a>如何减少上下文切换</h3><p>上下文切换又分为2种：让步式上下文切换和抢占式上下文切换。前者是指执行线程主动释放CPU，与锁竞争严重程度成正比，可通过减少锁竞争和使用CAS算法来避免；后者是指线程因分配的时间片用尽而被迫放弃CPU或者被其他优先级更高的线程所抢占，一般由于线程数大于CPU可用核心数引起，可通过适当减少线程数和使用协程来避免。</p>
-<p><strong>方法</strong></p>
-<ul>
-<li>无锁并发编程<ul>
-<li>避免使用锁，如将数据ID按照HASH算法取模分段，不同线程处理不同段的数据</li>
-</ul>
-</li>
-<li>CAS算法</li>
-<li>使用最少线程<ul>
-<li>避免创造太多的线程，使得大量线程处于等待</li>
-</ul>
-</li>
-<li>使用协程<ul>
-<li>单线程当中实现多任务的调度，并在单个线程里维持多个任务的切换</li>
-</ul>
-</li>
-</ul>
-<h4 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h4><p>通过减少大量waiting线程来减少上下文切换</p>
-<p><img src="assets/1554969302239.png" alt="1554969302239"></p>
-<p><img src="assets/1554969314949.png" alt="1554969314949"></p>
-<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p><strong>死锁示例</strong></p>
-<p>A、B锁互相等待</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** A锁 */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String A = <span class="string">"A"</span>;</span><br><span class="line">    <span class="comment">/** B锁 */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String B = <span class="string">"B"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> DeadLockDemo().deadLock();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">deadLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (A) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">synchronized</span> (B) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"1"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (B) &#123;</span><br><span class="line">                    <span class="keyword">synchronized</span> (A) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"2"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+上下文切换的问题
+死锁的问题
+受限于硬件和软件的资源限制问题
 
-<h3 id="出现的场景"><a href="#出现的场景" class="headerlink" title="出现的场景"></a>出现的场景</h3><ul>
-<li>t1拿到锁之后，因为一些异常情况没有释放锁（死循环）。</li>
-<li>t1拿到一个数据库锁，释放锁的时候抛出了异常，没释放掉。</li>
-</ul>
-<h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><p>利用dump线程查看到底哪个线程出现了问题，可见是42行、31行出现死锁</p>
-<p><img src="assets/1554969499806.png" alt="1554969499806"></p>
-<h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p>常见方法：</p>
-<ul>
-<li>避免一个线程同时获取多个锁。</li>
-<li>避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源。</li>
-<li>尝试使用定时锁，使用lock.tryLock（timeout）来替代使用内部锁机制。</li>
-<li>对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会出现解锁失败的情况。</li>
-</ul>
-<h1 id="资源限制"><a href="#资源限制" class="headerlink" title="资源限制"></a>资源限制</h1><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>资源限制是指在进行并发编程时，程序的执行速度受限于计算机硬件资源或软件资源。所以在进行并发编程时，要考虑这些资源的限制。</p>
-<ul>
-<li>服务器的带宽只有2Mb/s，某个资源的下载速度是1Mb/s每秒，系统启动10个线程下载资源，下载速度不会变成10Mb/s</li>
-<li>硬件资源限制有带宽的上传/下载速度、硬盘读写速度和CPU的处理速度。</li>
-<li>软件资源限制有数据库的连接数和socket连接数等。</li>
-</ul>
-<h3 id="引发的问题"><a href="#引发的问题" class="headerlink" title="引发的问题"></a>引发的问题</h3><p>本来是并发编程，但由于资源限制，导致并行退化为串行。在此情况下，由于上下文切换与资源调度，导致执行速度更慢。</p>
-<p>在并发编程中，将代码执行速度加快的原则是将代码中串行执行的部分变成并发执行，但是如果将某段串行的代码并发执行，因为受限于资源，仍然在串行执行，这时候程序不仅不会加快执行，反而会更慢，因为增加了上下文切换和资源调度的时间。例如，之前看到一段程序使用多线程在办公网并发地下载和处理数据时，导致CPU利用率达到100%，几个小时都不能运行完成任务，后来修改成单线程，一个小时就执行完成了。</p>
-<h3 id="解决资源限制"><a href="#解决资源限制" class="headerlink" title="解决资源限制"></a>解决资源限制</h3><ul>
-<li>对于硬件资源限制，可以考虑使用集群并行执行程序。既然单机的资源有限制，那么就让程序在多机上运行。比如使用ODPS、Hadoop或者自己搭建服务器集群，不同的机器处理不同的数据。可以通过“数据ID%机器数”，计算得到一个机器编号，然后由对应编号的机器处理这笔数据。</li>
-<li>对于软件资源限制，可以考虑使用资源池将资源复用。比如使用连接池将数据库和Socket连接复用，或者在调用对方webservice接口获取数据时，只建立一个连接。</li>
-</ul>
-<h3 id="在资源限制情况下进行并发编程"><a href="#在资源限制情况下进行并发编程" class="headerlink" title="在资源限制情况下进行并发编程"></a>在资源限制情况下进行并发编程</h3><p>如何在资源限制的情况下，让程序执行得更快呢？</p>
-<ul>
-<li>方法就是，根据不同的资源限制调整程序的并发度<ul>
-<li>比如下载文件程序依赖于两个资源——带宽和硬盘读写速度。</li>
-<li>有数据库操作时，涉及数据库连接数，如果SQL语句执行非常快，而线程的数量比数据库连接数大很多，则某些线程会被阻塞，等待数据库连接。</li>
-</ul>
-</li>
-</ul>
-<h1 id="并发编程模型的两个关键问题"><a href="#并发编程模型的两个关键问题" class="headerlink" title="并发编程模型的两个关键问题"></a>并发编程模型的两个关键问题</h1><ol>
-<li>线程间如何通信。通信指线程间以何种机制交换信息</li>
-<li>线程间如何同步</li>
-</ol>
-<p>在命令式编程中，线程通信机制有两种：</p>
-<ul>
-<li>共享内存。<ul>
-<li>线程间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信</li>
-<li>同步是显式进行的，程序员必须显式指定某个方法或某段代码需要在线程间互斥执行</li>
-</ul>
-</li>
-<li>消息传递。<ul>
-<li>线程间没有公共状态，必须通过发送消息来显式进行通信</li>
-<li>同步是隐式进行的，消息的发送必须在消息的接受前</li>
-</ul>
-</li>
-</ul>
-<p><strong>Java并发采用的是共享内存模型</strong></p>
-<p>Java线程间通信总是隐式进行，整个通信过程对程序员完全透明</p>
-<h1 id="多线程开发良好的实践"><a href="#多线程开发良好的实践" class="headerlink" title="多线程开发良好的实践"></a>多线程开发良好的实践</h1><ul>
-<li>给线程起个有意义的名字，这样可以方便找 Bug。</li>
-<li>缩小同步范围，从而减少锁争用。例如对于 synchronized，应该尽量使用同步块而不是同步方法。</li>
-<li>多用同步工具少用 wait() 和 notify()。首先，CountDownLatch, CyclicBarrier, Semaphore 和 Exchanger 这些同步类简化了编码操作，而用 wait() 和 notify() 很难实现复杂控制流；其次，这些同步类是由最好的企业编写和维护，在后续的 JDK 中还会不断优化和完善。</li>
-<li>使用 BlockingQueue 实现生产者消费者问题。</li>
-<li>多用并发集合少用同步集合，例如应该使用 ConcurrentHashMap 而不是 Hashtable。</li>
-<li>使用本地变量和不可变类来保证线程安全。</li>
-<li>使用线程池而不是直接创建线程，这是因为创建线程代价很高，线程池可以有效地利用有限的线程来启动任务。</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>建议多使用JDK并发包提供的并发容器和工具类来解决并发问题，因为这些类都已经通过了充分的测试和优化，均可解决了本章提到的几个挑战。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://blog.csdn.net/qq_34337272/article/details/79844051" target="_blank" rel="noopener">Java多线程学习（七）并发编程中一些问题</a></li>
-</ol>
-
+概述
+上下文切换单核处理器实现多线程执行代码：
+CPU通过给每个线程分配
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/11/Java/base/Java并发：并发编程的挑战/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -612,240 +520,21 @@
 
       
           
-            <h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><p>实现主机到主机的通信服务，在每一台路由器与主机上都有一个网络层部分</p>
-<p>三个重要组件：IP协议、路由选择、ICMP协议（报告数据报中的差错和对某些网络层的请求做响应的设施）</p>
-<p><strong>分组交换机</strong>：一台通用的分组交换设备，根据分组首部字段的值，从输入链路接口到输出链路接口转移分组。基于链路层字段做转发决定的为链路层交换机，其他的叫路由器，基于网络层字段做转发决定。</p>
-<h2 id="网络层功能与服务"><a href="#网络层功能与服务" class="headerlink" title="网络层功能与服务"></a>网络层功能与服务</h2><p>功能：转发、路由选择、连接建立（要求从源到目的地沿着所选择的路径彼此握手）</p>
-<p>网络服务模型：定义了分组在发送与接收端之间端到端的运输特性。</p>
-<p>网络层（ATM CBR,ATM ABR等提供恒定比特率与可用比特率的服务）可以提供某些特定服务，但是因特网的网络层只提供尽力而为的服务</p>
-<ul>
-<li>确保交付</li>
-<li>具有时延上限的确保交付</li>
-<li>有序分组交付</li>
-<li>确保最小带宽</li>
-<li>确保最大时延抖动</li>
-<li>安全性服务</li>
-</ul>
-<h3 id="虚电路与数据报网络"><a href="#虚电路与数据报网络" class="headerlink" title="虚电路与数据报网络"></a>虚电路与数据报网络</h3><p>在当下的计算机网络体系结构当中，只提供两种服务之一，而不同时提供两种服务</p>
-<p><strong>虚电路网络</strong>：</p>
-<p>仅在网络层提供连接服务的计算机网络。使用在ATM、帧中断的体系结构中</p>
-<p>组成：</p>
-<ul>
-<li>源和目的主机间的路径</li>
-<li>VC号，沿着该路径每段链路的一个号码</li>
-<li>沿着该路径的每台路由器中的转发表表项</li>
-</ul>
-<p>过程：</p>
-<ul>
-<li>虚电路建立</li>
-<li>数据传输</li>
-<li>虚电路拆除</li>
-</ul>
-<p><strong>数据报网络</strong>：</p>
-<p>仅在网络层提供无连接服务的计算机网络。</p>
-<p>因为因特网对网络层有最小限度的需求，使得互联网使用不同的链路层技术更加容易，而且具有不同的传输速率。并且使得web等服务可以在互联网上很快地部署</p>
-<p>每当一个端系统要发送分组，就为该分组加上目的端系统的地址，然后将分组推入网络当中。</p>
-<h2 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h2><p><strong>转发</strong>：分组在单一的路由器由一条入链路到一条出链路的传送</p>
-<p>转发表：每台路由器有一张转发表，通过检查分组首部字段的值来转发分组，利用值在转发表查询索引。其值由路由选择算法插入</p>
-<p>转发表当中不可能对每一个地址都存放一个表项，因此使用了<strong>前缀匹配</strong>，即将目的地址的比特与转发表的前缀进行匹配，如果前缀匹配成功，则转发向对应的端口，如果有多个匹配，则转发向最长前缀所对应的端口（<strong>最长前缀匹配原则</strong>），如果没有匹配则转发向其他端口</p>
-<h3 id="路由器的结构"><a href="#路由器的结构" class="headerlink" title="路由器的结构"></a>路由器的结构</h3><p>路由器从功能上可以划分为：路由选择和分组转发。（硬件实现，速度更快）</p>
-<p>分组转发结构由三个部分组成：交换结构、一组输入端口和一组输出端口。类似于高速公路的收费站</p>
-<p>因为路由器可能在同一时间处理数量巨大的流，因此设计尽量简单，并且采用数据报网络层，使用一种流水线和固定长度的首部（IPv6），取消分片（IPv6），和提供唯一的尽力而为服务</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/c3369072-c740-43b0-b276-202bd1d3960d.jpg" alt="c3369072-c740-43b0-b276-202bd1d3960d.jpg"></p>
-<p>输入端口：查询转发表，找到对应的输出端口</p>
-<p>交换结构：将分组转换到对应的输出端口</p>
-<p>路由选择处理机：执行路由选择协议，维护路由选择表与连接的链路状态信息，并计算转发表，执行网络管理功能</p>
-<p><strong>排队：</strong>输入与输出端口的序列，如果排队过长将耗尽路由器的缓存空间，出现丢包。</p>
-<h3 id="路由器分组转发流程"><a href="#路由器分组转发流程" class="headerlink" title="路由器分组转发流程"></a>路由器分组转发流程</h3><ul>
-<li>从数据报的首部提取目的主机的 IP 地址 D，得到目的网络地址 N。</li>
-<li>若 N 就是与此路由器直接相连的某个网络地址，则进行直接交付；</li>
-<li>若路由表中有目的地址为 D 的特定主机路由，则把数据报传送给表中所指明的下一跳路由器；</li>
-<li>若路由表中有到达网络 N 的路由，则把数据报传送给路由表中所指明的下一跳路由器；</li>
-<li>若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器；</li>
-<li>报告转发分组出错。</li>
-</ul>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/1ab49e39-012b-4383-8284-26570987e3c4.jpg" alt="1ab49e39-012b-4383-8284-26570987e3c4.jpg"></p>
-<h3 id="路由选择协议"><a href="#路由选择协议" class="headerlink" title="路由选择协议"></a>路由选择协议</h3><p>路由选择协议都是自适应的，能随着网络通信量和拓扑结构的变化而自适应地进行调整。</p>
-<p>互联网可以划分为许多较小的自治系统 AS，一个 AS 可以使用一种和别的 AS 不同的路由选择协议。</p>
-<p>可以把路由选择协议划分为两大类：</p>
-<ul>
-<li>自治系统内部的路由选择：RIP 和 OSPF</li>
-<li>自治系统间的路由选择：BGP</li>
-</ul>
-<h4 id="1-内部网关协议-RIP"><a href="#1-内部网关协议-RIP" class="headerlink" title="1. 内部网关协议 RIP"></a>1. 内部网关协议 RIP</h4><p>RIP 是一种基于距离向量的路由选择协议。距离是指跳数，直接相连的路由器跳数为 1。跳数最多为 15，超过 15 表示不可达。</p>
-<p>RIP 按固定的时间间隔仅和相邻路由器交换自己的路由表，经过若干次交换之后，所有路由器最终会知道到达本自治系统中任何一个网络的最短距离和下一跳路由器地址。</p>
-<p>距离向量算法：</p>
-<ul>
-<li>对地址为 X 的相邻路由器发来的 RIP 报文，先修改报文中的所有项目，把下一跳字段中的地址改为 X，并把所有的距离字段加 1；</li>
-<li>对修改后的 RIP 报文中的每一个项目，进行以下步骤：</li>
-<li>若原来的路由表中没有目的网络 N，则把该项目添加到路由表中；</li>
-<li>否则：若下一跳路由器地址是 X，则把收到的项目替换原来路由表中的项目；否则：若收到的项目中的距离 d 小于路由表中的距离，则进行更新（例如原始路由表项为 Net2, 5, P，新表项为 Net2, 4, X，则更新）；否则什么也不做。</li>
-<li>若 3 分钟还没有收到相邻路由器的更新路由表，则把该相邻路由器标为不可达，即把距离置为 16。</li>
-</ul>
-<p>RIP 协议实现简单，开销小。但是 RIP 能使用的最大距离为 15，限制了网络的规模。并且当网络出现故障时，要经过比较长的时间才能将此消息传送到所有路由器。</p>
-<h4 id="2-内部网关协议-OSPF"><a href="#2-内部网关协议-OSPF" class="headerlink" title="2. 内部网关协议 OSPF"></a>2. 内部网关协议 OSPF</h4><p>开放最短路径优先 OSPF，是为了克服 RIP 的缺点而开发出来的。</p>
-<p>开放表示 OSPF 不受某一家厂商控制，而是公开发表的；最短路径优先表示使用了 Dijkstra 提出的最短路径算法 SPF。</p>
-<p>OSPF 具有以下特点：</p>
-<ul>
-<li>向本自治系统中的所有路由器发送信息，这种方法是洪泛法。</li>
-<li>发送的信息就是与相邻路由器的链路状态，链路状态包括与哪些路由器相连以及链路的度量，度量用费用、距离、时延、带宽等来表示。</li>
-<li>只有当链路状态发生变化时，路由器才会发送信息。</li>
-</ul>
-<p>所有路由器都具有全网的拓扑结构图，并且是一致的。相比于 RIP，OSPF 的更新过程收敛的很快。</p>
-<h4 id="3-外部网关协议-BGP"><a href="#3-外部网关协议-BGP" class="headerlink" title="3. 外部网关协议 BGP"></a>3. 外部网关协议 BGP</h4><p>BGP（Border Gateway Protocol，边界网关协议）</p>
-<p>AS 之间的路由选择很困难，主要是由于：</p>
-<ul>
-<li>互联网规模很大；</li>
-<li>各个 AS 内部使用不同的路由选择协议，无法准确定义路径的度量；</li>
-<li>AS 之间的路由选择必须考虑有关的策略，比如有些 AS 不愿意让其它 AS 经过。</li>
-</ul>
-<p>BGP 只能寻找一条比较好的路由，而不是最佳路由。</p>
-<p>每个 AS 都必须配置 BGP 发言人，通过在两个相邻 BGP 发言人之间建立 TCP 连接来交换路由信息。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/9cd0ae20-4fb5-4017-a000-f7d3a0eb3529.png" alt="9cd0ae20-4fb5-4017-a000-f7d3a0eb3529.png"></p>
-<h1 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h1><p>​    IP的服务模型是尽力而为地交付服务，即尽最大的努力，不确保报文段的交付，不保证报文段的按序交付，不保证报文段中数据的完整性。即IP是不可靠的服务。</p>
-<p>​    IPv4、IPv6</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>因为网络层是整个互联网的核心，因此应当让网络层尽可能简单。网络层向上只提供简单灵活的、无连接的、尽最大努力交互的数据报服务。</p>
-<p>使用 IP 协议，可以把异构的物理网络连接起来，使得在网络层看起来好像是一个统一的网络。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/e3b53605-0c10-4a7e-be02-a9064778f8a5.png" alt="img"></p>
-<p>与 IP 协议配套使用的还有三个协议：</p>
-<ul>
-<li>地址解析协议 ARP（Address Resolution Protocol）</li>
-<li>网际控制报文协议 ICMP（Internet Control Message Protocol）</li>
-<li>网际组管理协议 IGMP（Internet Group Management Protocol）</li>
-</ul>
-<h3 id="IP-数据报格式"><a href="#IP-数据报格式" class="headerlink" title="IP 数据报格式"></a>IP 数据报格式</h3><p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/85c05fb1-5546-4c50-9221-21f231cdc8c5.jpg" alt="85c05fb1-5546-4c50-9221-21f231cdc8c5.jpg"></p>
-<ul>
-<li><strong>版本</strong> : 有 4（IPv4）和 6（IPv6）两个值；</li>
-<li><strong>首部长度</strong> : 占 4 位，因此最大值为 15。值为 1 表示的是 1 个 32 位字的长度，也就是 4 字节。因为首部固定长度为 20 字节，因此该值最小为 5。如果可选字段的长度不是 4 字节的整数倍，就用尾部的填充部分来填充。</li>
-<li><strong>区分服务</strong> : 用来获得更好的服务，一般情况下不使用。</li>
-<li><strong>总长度</strong> : 包括首部长度和数据部分长度。</li>
-<li><strong>生存时间</strong> ：TTL，它的存在是为了防止无法交付的数据报在互联网中不断兜圈子。以路由器跳数为单位，当 TTL 为 0 时就丢弃数据报。</li>
-<li><strong>协议</strong> ：指出携带的数据应该上交给哪个协议进行处理，例如 ICMP、TCP、UDP 等。</li>
-<li><strong>首部检验和</strong> ：因为数据报每经过一个路由器，都要重新计算检验和，因此检验和不包含数据部分可以减少计算的工作量。</li>
-<li><strong>标识</strong> : 在数据报长度过长从而发生分片的情况下，相同数据报的不同分片具有相同的标识符。</li>
-<li><strong>片偏移</strong> : 和标识符一起，用于发生分片的情况。片偏移的单位为 8 字节。</li>
-</ul>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/23ba890e-e11c-45e2-a20c-64d217f83430.png" alt="23ba890e-e11c-45e2-a20c-64d217f83430.png"></p>
-<p>IP数据报分片</p>
-<p>当链路层帧能承载的最大数据量（最大传送单元MTU）小于IP数据报长度，将数据报中的数据分片，然后用单独的链路层帧封装（在端系统重新组装，路由器不会组装），分片需要在全部接受（依据标识，标志与片偏移量进行分辨，最后一片的标识比特为0，其余为1）后才能进行组装为原本的数据，因此有时候会被用于dos攻击。</p>
-<h3 id="IP-地址编址方式"><a href="#IP-地址编址方式" class="headerlink" title="IP 地址编址方式"></a>IP 地址编址方式</h3><p>IPv4</p>
-<p>在因特网的每台主机与路由器的每个接口都必须有唯一IP地址（NAT后接口除外）</p>
-<p>在该图当中，IP地址左侧3个数字相同，即左侧24位比特的值是相同的。这4个接口（3主机+路由）也通过一个不包含路由器的网络互联起来，如以太网LAN等。互联这三个主机接口与1个路由器接口的网路构成1个子网，IP编址为这个子网分配一个地址，223.1.1.0/24，/24即子网掩码，指示最左侧的24字节定义了子网地址。</p>
-<p>任何要连接到该子网的主机都要求其地址为223.1.1.xxx</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/1550739910291.png" alt="1550739910291"></p>
-<p>因特网的地址分配策略称为无类别域间路由选择CIDR，a.b.c.d/x，x的最高比特构成了IP地址的网络部分，也是该网络地址的前缀​</p>
-<p>IP 地址的编址方式经历了三个历史阶段：</p>
-<ul>
-<li>分类</li>
-<li>子网划分</li>
-<li>无分类</li>
-</ul>
-<h4 id="1-分类"><a href="#1-分类" class="headerlink" title="1.分类"></a>1.分类</h4><p>由两部分组成，网络号和主机号，其中不同分类具有不同的网络号长度，并且是固定的。</p>
-<p>IP 地址 ::= {&lt; 网络号 &gt;, &lt; 主机号 &gt;}</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/cbf50eb8-22b4-4528-a2e7-d187143d57f7.png" alt="cbf50eb8-22b4-4528-a2e7-d187143d57f7.png"></p>
-<h4 id="2-子网划分"><a href="#2-子网划分" class="headerlink" title="2. 子网划分"></a>2. 子网划分</h4><p>通过在主机号字段中拿一部分作为子网号，把两级 IP 地址划分为三级 IP 地址。</p>
-<p>IP 地址 ::= {&lt; 网络号 &gt;, &lt; 子网号 &gt;, &lt; 主机号 &gt;}</p>
-<p>要使用子网，必须配置子网掩码。一个 B 类地址的默认子网掩码为 255.255.0.0，如果 B 类地址的子网占两个比特，那么子网掩码为 11111111 11111111 11000000 00000000，也就是 255.255.192.0。</p>
-<p>注意，外部网络看不到子网的存在。</p>
-<h4 id="3-无分类"><a href="#3-无分类" class="headerlink" title="3. 无分类"></a>3. 无分类</h4><p>无分类编址 CIDR 消除了传统 A 类、B 类和 C 类地址以及划分子网的概念，使用网络前缀和主机号来对 IP 地址进行编码，网络前缀的长度可以根据需要变化。</p>
-<p>IP 地址 ::= {&lt; 网络前缀号 &gt;, &lt; 主机号 &gt;}</p>
-<p>CIDR 的记法上采用在 IP 地址后面加上网络前缀长度的方法，例如 128.14.35.7/20 表示前 20 位为网络前缀。</p>
-<p>CIDR 的地址掩码可以继续称为子网掩码，子网掩码首 1 长度为网络前缀的长度。</p>
-<p>一个 CIDR 地址块中有很多地址，一个 CIDR 表示的网络就可以表示原来的很多个网络，并且在路由表中只需要一个路由就可以代替原来的多个路由，减少了路由表项的数量。把这种通过使用网络前缀来减少路由表项的方式称为路由聚合，也称为 <strong>构成超网</strong> 。</p>
-<p>在路由表中的项目由“网络前缀”和“下一跳地址”组成，在查找时可能会得到不止一个匹配结果，应当采用最长前缀匹配来确定应该匹配哪一个。</p>
-<h3 id="DHCP获取地址P239-230"><a href="#DHCP获取地址P239-230" class="headerlink" title="DHCP获取地址P239  230"></a>DHCP获取地址P239  230</h3><h3 id="地址解析协议-ARP"><a href="#地址解析协议-ARP" class="headerlink" title="地址解析协议 ARP"></a>地址解析协议 ARP</h3><p>网络层实现主机之间的通信，而链路层实现具体每段链路之间的通信。因此在通信过程中，IP 数据报的源地址和目的地址始终不变，而 MAC 地址随着链路的改变而改变。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/66192382-558b-4b05-a35d-ac4a2b1a9811.jpg" alt="66192382-558b-4b05-a35d-ac4a2b1a9811.jpg"></p>
-<p>ARP 实现由 IP 地址得到 MAC 地址。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/b9d79a5a-e7af-499b-b989-f10483e71b8b.jpg" alt="b9d79a5a-e7af-499b-b989-f10483e71b8b.jpg"></p>
-<p>每个主机都有一个 ARP 高速缓存，里面有本局域网上的各主机和路由器的 IP 地址到 MAC 地址的映射表。</p>
-<p>如果主机 A 知道主机 B 的 IP 地址，但是 ARP 高速缓存中没有该 IP 地址到 MAC 地址的映射，此时主机 A 通过广播的方式发送 ARP 请求分组，主机 B 收到该请求后会发送 ARP 响应分组给主机 A 告知其 MAC 地址，随后主机 A 向其高速缓存中写入主机 B 的 IP 地址到 MAC 地址的映射。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/8006a450-6c2f-498c-a928-c927f758b1d0.png" alt="8006a450-6c2f-498c-a928-c927f758b1d0.png"></p>
-<h2 id="路由选择"><a href="#路由选择" class="headerlink" title="路由选择"></a>路由选择</h2><p><strong>路由选择</strong>：涉及一个网络的所有路由器，它们经由路由选择协议共同交互，以决定分组从源到目的地节点所采用的路径。计算路径的算法为路由选择算法</p>
-<h3 id="​广播路由选择："><a href="#​广播路由选择：" class="headerlink" title="​广播路由选择："></a>​广播路由选择：</h3><p>网络层提供了从一种源节点到网络中其他节点交付分组的服务</p>
-<p>通过N次单播来实现，但是效率低下（在链路上拥挤，可以通过在网络上的节点复制来解决），并且需要知道广播到达的目的地址</p>
-<p>无控制<strong>洪泛</strong>方法，源节点向其所有的邻居发送分组副本，当某节点接受一个分组副本，则复制向该节点邻居继续发送。但是会产生广播风暴，无休止的进行分组复制</p>
-<p>受控洪泛：避免广播风暴，明智选择何时洪泛分组</p>
-<ul>
-<li>序号控制洪泛：源节点将其地址以及广播序号放入广播分组，每个节点维护它已经收到、复制、和转发的源地址和每个广播分组的序号列表</li>
-<li>反向路径转发：当路由器收到具有给定定源地址的广播分组时，仅当分组到达的链路正好是位于它自己的返回其源的最短单播路径上，才向所有出链路传输。否则丢弃。<ul>
-<li>RPF只需要知道在它到发送方的单播最短路径的下一个邻居，仅依这个邻居的身份决定是否发送</li>
-<li><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/1550742740113.png" alt="1550742740113"></li>
-</ul>
-</li>
-<li>生成树广播，以上方法避免了广播风暴，但是没有避免冗余广播分组的传输。<ul>
-<li>首先对网络节点构成一颗最小生成树，向所有属于该生成树的所有邻居转发分组</li>
-<li><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/1550742886175.png" alt="1550742886175"></li>
-</ul>
-</li>
-</ul>
-<h3 id="​多播路由选择："><a href="#​多播路由选择：" class="headerlink" title="​多播路由选择："></a>​多播路由选择：</h3><p>​    使单个源节点能够向其他网络节点的一个子集发送分组的副本。与广播交给所有节点不同。适用于：软件更新、交互游戏、直播等</p>
-<ul>
-<li>怎样标识多播分组的接收方</li>
-<li>怎样为发送到这些接收方的分组编址</li>
-</ul>
-<p>由于目的地很多，因此分组无法携带所有接收方的IP地址。因此在因特网中对多播数据报使用<strong>间接地址</strong>编址。即用一个标识标识一组接收方。因特网中表示一组接收方的单一标识就是一个D类多播分组，与一个D类地址相关联的接收方小组称为一个<strong>多播组</strong>。多播组与主机的IP地址是完全独立的。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/1551167375999.png" alt="1551167375999"></p>
-<ul>
-<li>一个多播组如何形成，如何终结？如何选择组地址</li>
-<li>新主机如何加入某个组，任何主机都能加入一个组吗，组成员资格是否会限制，如果限制，由谁限制</li>
-<li>一个组成员是否知道其他组成员的地址，相互如何交互，以向所有组成员交付一个多播数据报。</li>
-</ul>
-<p>上述问题均与<strong>IGMP（因特网组管理协议</strong>有关）</p>
-<h4 id="IGMP协议"><a href="#IGMP协议" class="headerlink" title="IGMP协议"></a>IGMP协议</h4><p>IGMP协议运行在一台主机与其<strong>直接</strong>相连的路由器中间，IGMP为主机提供了手段，让它通知与其相连的路由器：在本机上运行的一个应用程序想加入一个特定的多播组。即IGMP的交互范围限制在主机与其直接相连的路由器之间。</p>
-<p>三种报文类型，IGMP报文也是封装在一个IP数据报当中，IP协议号为2</p>
-<ul>
-<li>member_query</li>
-<li>member_report</li>
-<li>level_group</li>
-</ul>
-<h4 id="多播路由选择算法"><a href="#多播路由选择算法" class="headerlink" title="多播路由选择算法"></a>多播路由选择算法</h4><p>协调因特网的多播路由器，以便多播数据报能够路由到最终目的地。</p>
-<p>在该例子当中，C、D不需要接受多播组流量。多播路由的目标是发现一颗链路的树，连接了所有具有属于该多播组的相连主机的路由器</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/1551168574236.png" alt="1551168574236"></p>
-<p>多播路由选择树的建立</p>
-<ul>
-<li>单一的组共享树来为组中所有发送方分发流量。</li>
-<li>为每个独立的发送方构建一颗特定源的路由选择器。</li>
-</ul>
-<p><strong>路由选择协议</strong></p>
-<ul>
-<li>距离向量多播路由选择协议（第一个）</li>
-</ul>
-<ul>
-<li>协议无关的多播路由选择协议（使用最广泛）</li>
-</ul>
-<h2 id="网际控制报文协议-ICMP"><a href="#网际控制报文协议-ICMP" class="headerlink" title="网际控制报文协议 ICMP"></a>网际控制报文协议 ICMP</h2><p>​    ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。它封装在 IP 数据报中，但是不属于高层协议，从体系结构上讲，ICMP（类UDP，TCP）位于IP之上。</p>
-<p>​    报告数据报中的差错（目的网络不可达等）和对某些网络层的请求做响应的设施，ICMP被主机和路由器用来彼此沟通网络层的信息。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/e3124763-f75e-46c3-ba82-341e6c98d862.jpg" alt="e3124763-f75e-46c3-ba82-341e6c98d862.jpg"></p>
-<p>ICMP 报文分为差错报告报文和询问报文。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/aa29cc88-7256-4399-8c7f-3cf4a6489559.png" alt="aa29cc88-7256-4399-8c7f-3cf4a6489559.png"></p>
-<h3 id="1-Ping"><a href="#1-Ping" class="headerlink" title="1. Ping"></a>1. Ping</h3><p>Ping 是 ICMP 的一个重要应用，主要用来测试两台主机之间的连通性。</p>
-<p>Ping 的原理是通过向目的主机发送 ICMP Echo 请求报文，目的主机收到之后会发送 Echo 回答报文。Ping 会根据时间和成功响应的次数估算出数据包往返时间以及丢包率。</p>
-<h3 id="2-Traceroute"><a href="#2-Traceroute" class="headerlink" title="2. Traceroute"></a>2. Traceroute</h3><p>Traceroute 是 ICMP 的另一个应用，用来跟踪一个分组从源点到终点的路径。</p>
-<p>Traceroute 发送的 IP 数据报封装的是无法交付的 UDP 用户数据报，并由目的主机发送终点不可达差错报告报文。</p>
-<ul>
-<li>源主机向目的主机发送一连串的 IP 数据报。第一个数据报 P1 的生存时间 TTL 设置为 1，当 P1 到达路径上的第一个路由器 R1 时，R1 收下它并把 TTL 减 1，此时 TTL 等于 0，R1 就把 P1 丢弃，并向源主机发送一个 ICMP 时间超过差错报告报文；</li>
-<li>源主机接着发送第二个数据报 P2，并把 TTL 设置为 2。P2 先到达 R1，R1 收下后把 TTL 减 1 再转发给 R2，R2 收下后也把 TTL 减 1，由于此时 TTL 等于 0，R2 就丢弃 P2，并向源主机发送一个 ICMP 时间超过差错报文。</li>
-<li>不断执行这样的步骤，直到最后一个数据报刚刚到达目的主机，主机不转发数据报，也不把 TTL 值减 1。但是因为数据报封装的是无法交付的 UDP，因此目的主机要向源主机发送 ICMP 终点不可达差错报告报文。</li>
-<li>之后源主机知道了到达目的主机所经过的路由器 IP 地址以及到达每个路由器的往返时间。</li>
-</ul>
-<h2 id="虚拟专用网-VPN"><a href="#虚拟专用网-VPN" class="headerlink" title="虚拟专用网 VPN"></a>虚拟专用网 VPN</h2><p>由于 IP 地址的紧缺，一个机构能申请到的 IP 地址数往往远小于本机构所拥有的主机数。并且一个机构并不需要把所有的主机接入到外部的互联网中，机构内的计算机可以使用仅在本机构有效的 IP 地址（专用地址）。</p>
-<p>有三个专用地址块：</p>
-<ul>
-<li>10.0.0.0 ~ 10.255.255.255</li>
-<li>172.16.0.0 ~ 172.31.255.255</li>
-<li>192.168.0.0 ~ 192.168.255.255</li>
-</ul>
-<p>VPN 使用公用的互联网作为本机构各专用网之间的通信载体。专用指机构内的主机只与本机构内的其它主机通信；虚拟指好像是，而实际上并不是，它有经过公用的互联网。</p>
-<p>下图中，场所 A 和 B 的通信经过互联网，如果场所 A 的主机 X 要和另一个场所 B 的主机 Y 通信，IP 数据报的源地址是 10.1.0.1，目的地址是 10.2.0.3。数据报先发送到与互联网相连的路由器 R1，R1 对内部数据进行加密，然后重新加上数据报的首部，源地址是路由器 R1 的全球地址 125.1.2.3，目的地址是路由器 R2 的全球地址 194.4.5.6。路由器 R2 收到数据报后将数据部分进行解密，恢复原来的数据报，此时目的地址为 10.2.0.3，就交付给 Y。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/1556770b-8c01-4681-af10-46f1df69202c.jpg" alt="1556770b-8c01-4681-af10-46f1df69202c.jpg"></p>
-<h2 id="网络地址转换-NAT"><a href="#网络地址转换-NAT" class="headerlink" title="网络地址转换 NAT"></a>网络地址转换 NAT</h2><p>专用网内部的主机使用本地 IP 地址又想和互联网上的主机通信时，可以使用 NAT 来将本地 IP 转换为全球 IP。</p>
-<p>在以前，NAT 将本地 IP 和全球 IP 一一对应，这种方式下拥有 n 个全球 IP 地址的专用网内最多只可以同时有 n 台主机接入互联网。为了更有效地利用全球 IP 地址，现在常用的 NAT 转换表把传输层的端口号也用上了，使得多个专用网内部的主机共用一个全球 IP 地址。使用端口号的 NAT 也叫做网络地址与端口转换 NAPT。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/2719067e-b299-4639-9065-bed6729dbf0b.png" alt="2719067e-b299-4639-9065-bed6729dbf0b.png"></p>
-<h2 id="IPv6-P238-247"><a href="#IPv6-P238-247" class="headerlink" title="IPv6 P238 247"></a>IPv6 P238 247</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+            <p>
+              网络层实现主机到主机的通信服务，在每一台路由器与主机上都有一个网络层部分
+三个重要组件：IP协议、路由选择、ICMP协议（报告数据报中的差错和对某些网络层的请求做响应的设施）
+分组交换机：一台通用的分组交换设备，根据分组首部字段的值，从输入链路接口到输出链路接口转移分组。基于链路层字段做转发决定的为
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/08/计算机网络/计算机网络：网络层/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -970,176 +659,25 @@
 
       
           
-            <h1 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h1><p>目的</p>
-<ul>
-<li>两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信</li>
-<li>控制运输层实体的传输速率以避免网络拥塞，或从拥塞中恢复</li>
-</ul>
-<p><strong>运输层与网络层的关系</strong></p>
-<p>网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘</p>
-<p>网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节，使应用程序看起来像是在两个传输层实体之间有一条端到端的逻辑通信信道。</p>
-<h2 id="服务模型"><a href="#服务模型" class="headerlink" title="服务模型"></a>服务模型</h2><p>最基本的责任是将两个端系统间IP的交付服务扩展到运行在端系统上的两个进程的交付服务，被称为是运输层的<strong>多路复用与多路分解</strong></p>
-<h3 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h3><p>进程拥有一个或多个套接字socket，相当于从网络向进程传递数据和进程向网络传递信息的门户，运输层与进程通信，是运输层将数据传递给socket。</p>
-<p>多路分解：将运输层报文段中的数据交付到正确的套接字的工作。运输层检查达运输层的报文，标识出接收套接字，将报文段定向到该套接字。</p>
-<p>多路复用：在源主机从不同的套接字收集数据块，并未每个数据块装上首部信息，生成报文段传递到网络层。</p>
-<p>分解与复用依据：源IP，源端口，目的IP，目的端口</p>
-<p>UDP套接字：目的IP,目的端口。但是报文依然有着源IP与端口，两个不同源的报文会被定向到同一进程</p>
-<p>TCP：源IP，源端口，目的IP，目的端口。两个不同源的报文会被定向到<strong>不同</strong>进程</p>
-<h1 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h1><p>​<strong>提供的运输层服务</strong></p>
-<p>最低限度的运输层服务</p>
-<ul>
-<li>检查报文段首部差错字段而提供完整性检查</li>
-<li>数据交付</li>
-</ul>
-<p>即 用户数据报协议</p>
-<blockquote>
-<ol>
-<li>属于 传输层通信协议</li>
-<li>基于<code>UDP</code>的应用层协议有 <code>TFTP</code>、<code>SNMP</code> 与 <code>DNS</code></li>
-</ol>
-</blockquote>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
-<li>UDP 是无连接的；</li>
-<li>UDP 使用尽最大努力交付，即不保证可靠交付，因此主机不需要维持复杂的链接状态（这里面有许多参数），因此可以支持更多的用户；</li>
-<li>UDP 是面向报文的；（对于应用程序传下来的报文不合并也不拆分，只是添加 UDP 首部）<ul>
-<li>因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小。UDP对应用层交下来的报文，既不合并，也不拆分，而是保留这些报文的边界。这也就是说，应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。</li>
-</ul>
-</li>
-<li>UDP 没有拥塞控制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如 直播，实时视频会议等）；</li>
-<li>UDP 支持一对一、一对多、多对一和多对多的交互通信；</li>
-<li>UDP 的首部开销小，只有8个字节，比TCP的20个字节的首部要短。</li>
-</ul>
-<h2 id="为什么使用UDP"><a href="#为什么使用UDP" class="headerlink" title="为什么使用UDP"></a>为什么使用UDP</h2><ol>
-<li>UDP关于何时、发送什么数据控制更为精细。UDP的效率更高，速度更快。而TCP还有拥堵</li>
-<li>UDP不引入连接握手，不引入时延</li>
-</ol>
-<h2 id="UDP-首部格式"><a href="#UDP-首部格式" class="headerlink" title="UDP 首部格式"></a>UDP 首部格式</h2><p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg" alt="d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg"></p>
-<p>首部字段只有 8 个字节，包括源端口、目的端口、长度、检验和。12 字节的伪首部是为了计算检验和临时添加的。</p>
-<p>UDP<strong>的差错检验</strong></p>
-<p>​    由UDP检验和提供，即对报文段的所有16位比特字的和进行反码运算，求和时候遇到的溢出进行回卷，即结果。在接受方的正确结果应该是1111111111111111，如果有一个0，则出现了差错。</p>
-<p>​    设计原因：端到端原则，某种功能必须基于端到端实现，在低级别设置功能可能是冗余的甚至完全没有价值的。即使网络中间进行了检测，但依然无法确保链路与路由器内存的可靠性。</p>
-<h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p>即 传输控制协议</p>
-<blockquote>
-<ol>
-<li>属于 传输层通信协议</li>
-<li>基于<code>TCP</code>的应用层协议有<code>HTTP</code>、<code>SMTP</code>、<code>FTP</code>、<code>Telnet</code> 和 <code>POP3</code></li>
-</ol>
-</blockquote>
-<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
-<li>TCP 是面向连接的。（就好像打电话一样，通话前需要先拨号建立连接，通话结束后要挂机释放连接）；</li>
-<li>每一条 TCP 连接只能有两个端点，每一条TCP连接只能是点对点的（一对一）；</li>
-<li>TCP 提供可靠交付的服务。通过TCP连接传送的数据，无差错、不丢失、不重复、并且按序到达；</li>
-<li>TCP 提供全双工通信。TCP 允许通信双方的应用进程在任何时候都能发送数据。TCP 连接的两端都设有发送缓存和接收缓存，用来临时存放双方通信的数据；</li>
-<li>面向字节流。TCP 中的“流”（Stream）指的是流入进程或从进程流出的字节序列。“面向字节流”的含义是：虽然应用程序和 TCP 的交互是一次一个数据块（大小不等），但 TCP 把应用程序交下来的数据仅仅看成是一连串的无结构的字节流。<ul>
-<li>TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送。如果应用程序一次只发送一个字节，TCP也可以等待积累有足够多的字节后再构成报文段发送出去。</li>
-</ul>
-</li>
-</ul>
-<p>进程将数据发送到缓存当中，TCP在方便时候取出缓存数据发送</p>
-<h3 id="TCP-首部格式"><a href="#TCP-首部格式" class="headerlink" title="TCP 首部格式"></a>TCP 首部格式</h3><p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/55dc4e84-573d-4c13-a765-52ed1dd251f9.png" alt="55dc4e84-573d-4c13-a765-52ed1dd251f9.png"></p>
-<ul>
-<li><strong>序号</strong> ：用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。</li>
-<li><strong>确认号</strong> ：期望收到的下一个报文段的序号。例如 B 正确收到 A 发送来的一个报文段，序号为 501，携带的数据长度为 200 字节，因此 B 期望下一个报文段的序号为 701，B 发送给 A 的确认报文段中确认号就为 701。</li>
-<li><strong>数据偏移</strong> ：指的是数据部分距离报文段起始处的偏移量，实际上指的是首部的长度。</li>
-<li><strong>确认 ACK</strong> ：当 ACK=1 时确认号字段有效，否则无效。TCP 规定，在连接建立后所有传送的报文段都必须把 ACK 置 1。</li>
-<li><strong>同步 SYN</strong> ：在连接建立时用来同步序号。当 SYN=1，ACK=0 时表示这是一个连接请求报文段。若对方同意建立连接，则响应报文中 SYN=1，ACK=1。</li>
-<li><strong>终止 FIN</strong> ：用来释放一个连接，当 FIN=1 时，表示此报文段的发送方的数据已发送完毕，并要求释放连接。</li>
-<li><strong>窗口</strong> ：窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。</li>
-</ul>
-<h3 id="TCP-的三次握手"><a href="#TCP-的三次握手" class="headerlink" title="TCP 的三次握手"></a>TCP 的三次握手</h3><p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/1553268055581.png" alt="1553268055581"></p>
-<p>假设 A 为客户端，B 为服务器端。</p>
-<ul>
-<li>首先 B 处于 LISTEN（监听）状态，等待客户的连接请求。</li>
-<li>A 向 B 发送连接请求报文，SYN=1，ACK=0，选择一个初始的序号seq= x。</li>
-<li>B 收到连接请求报文，如果同意建立连接，则向 A 发送连接确认报文，SYN=1，ACK=1，确认号为 x+1，同时也选择一个初始的序号 y。</li>
-<li>A 收到 B 的连接确认报文后，还要向 B 发出确认，确认号为 y+1，序号为 x+1。</li>
-<li>B 收到 A 的确认后，连接建立。</li>
-</ul>
-<p><strong>三次握手的原因</strong></p>
-<p>第三次握手是为了防止失效的连接请求到达服务器，让服务器错误打开连接。</p>
-<p>客户端发送的连接请求如果在网络中滞留，那么就会隔很长一段时间才能收到服务器端发回的连接确认。客户端等待一个超时重传时间之后，就会重新请求连接。但是这个滞留的连接请求最后还是会到达服务器，如果不进行三次握手，那么服务器就会打开两个连接。如果有第三次握手，客户端会忽略服务器之后发送的对滞留连接请求的连接确认，不进行第三次握手，因此就不会再次打开连接。</p>
-<p><strong>为什么要传回 SYN</strong></p>
-<p>接收端传回发送端所发送的 SYN 是为了告诉发送端，我接收到的信息确实就是你所发送的信号了。</p>
-<p><strong>传了 SYN,为啥还要传 ACK</strong></p>
-<p>双方通信无误必须是两者互相发送信息都无误。传了 SYN，证明发送方到接收方的通道没有问题，但是接收方到发送方的通道还需要 ACK 信号来进行验证。</p>
-<p><strong>握手的核心目的</strong></p>
-<p>握手的核心目的是告知对方seq，对方回复ack（收到的seq+包的大小），这样发送端就知道有没有丢包了。</p>
-<h3 id="TCP-的四次挥手"><a href="#TCP-的四次挥手" class="headerlink" title="TCP 的四次挥手"></a>TCP 的四次挥手</h3><p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/f87afe72-c2df-4c12-ac03-9b8d581a8af8.jpg" alt="img"></p>
-<p>以下描述不讨论序号和确认号，因为序号和确认号的规则比较简单。并且不讨论 ACK，因为 ACK 在连接建立之后都为 1。</p>
-<ul>
-<li>A 发送连接释放报文，FIN=1。</li>
-<li>B 收到之后发出确认，此时 TCP 属于半关闭状态，B 能向 A 发送数据但是 A 不能向 B 发送数据。</li>
-<li>当 B 不再需要连接时，发送连接释放报文，FIN=1。</li>
-<li>A 收到后发出确认，进入 TIME-WAIT 状态，等待 2 MSL（最大报文存活时间）后释放连接。</li>
-<li>B 收到 A 的确认后释放连接。</li>
-</ul>
-<p><strong>四次挥手的原因</strong></p>
-<p>客户端发送了 FIN 连接释放报文之后，服务器收到了这个报文，就进入了 CLOSE-WAIT 状态。这个状态是为了让服务器端发送还未传送完毕的数据，传送完毕之后，服务器会发送 FIN 连接释放报文。</p>
-<p>因此，如果没有还未传送完的数据，syn+fin一起发送，那就三次了</p>
-<p><strong>TIME_WAIT</strong></p>
-<p>客户端接收到服务器端的 FIN 报文后进入此状态，此时并不是直接进入 CLOSED 状态，还需要等待一个时间计时器设置的时间 2MSL。这么做有两个理由：</p>
-<ul>
-<li>确保最后一个确认报文能够到达。如果 B 没收到 A 发送来的确认报文，那么就会重新发送连接释放请求报文，A 等待一段时间就是为了处理这种情况的发生。</li>
-<li>等待一段时间是为了让本连接持续时间内所产生的所有报文都从网络中消失，使得下一个新的连接不会出现旧的连接请求报文。</li>
-</ul>
-<h3 id="TCP-可靠传输"><a href="#TCP-可靠传输" class="headerlink" title="TCP 可靠传输"></a>TCP 可靠传输</h3><p>包含确认、定时器、重传、序号机制来保证可靠传输</p>
-<p>底层通信是一个不靠谱的点对点通信</p>
-<p>TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文段在超时时间内没有收到确认，那么就重传这个报文段。</p>
-<p>一个报文段从发送再到接收到确认所经过的时间称为往返时间 RTT，加权平均往返时间 RTTs 计算如下：</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/gif.gif" alt="img"></p>
-<p>其中，0 ≤ α ＜ 1，RTTs 随着 α 的增加更容易受到 RTT 的影响。</p>
-<p>超时时间 RTO 应该略大于 RTTs，TCP 使用的超时时间计算如下：</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/gif-1553268291860.gif" alt="img"></p>
-<p>其中 RTTd 为偏差的加权平均值。</p>
-<h4 id="TCP协议如何来保证传输的可靠性"><a href="#TCP协议如何来保证传输的可靠性" class="headerlink" title="TCP协议如何来保证传输的可靠性"></a>TCP协议如何来保证传输的可靠性</h4><p>TCP提供一种面向连接的、可靠的字节流服务。其中，面向连接意味着两个使用TCP的应用（通常是一个客户和一个服务器）在彼此交换数据之前必须先建立一个TCP连接。在一个TCP连接中，仅有两方进行彼此通信；而字节流服务意味着两个应用程序通过TCP链接交换8bit字节构成的字节流，TCP不在字节流中插入记录标识符。</p>
-<p>对于可靠性，TCP通过以下方式进行保证：</p>
-<ul>
-<li>数据包校验：目的是检测数据在传输过程中的任何变化，若校验出包有错，则丢弃报文段并且不给出响应，这时TCP发送数据端超时后会重发数据；</li>
-<li>对失序数据包重排序：既然TCP报文段作为IP数据报来传输，而IP数据报的到达可能会失序，因此TCP报文段的到达也可能会失序。TCP将对失序数据进行重新排序，然后才交给应用层；对于失序且缺失前面序号的数据，TCP将问题交给编程人员，可以保留（对于带宽而言更有效），也可以丢弃</li>
-<li>丢弃重复数据：对于重复数据，能够丢弃重复数据；</li>
-<li>应答机制：当TCP收到发自TCP连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几分之一秒；</li>
-<li>超时重发：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段；</li>
-<li>流量控制：TCP连接的每一方都有固定大小的缓冲空间。TCP的接收端只允许另一端发送接收端缓冲区所能接纳的数据，这可以防止较快主机致使较慢主机的缓冲区溢出，这就是流量控制。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li>
-<li>累积确认：在收到失序的报文段，返回确认号字段为第一个失序号</li>
-</ul>
-<h3 id="TCP-流量控制"><a href="#TCP-流量控制" class="headerlink" title="TCP 流量控制"></a>TCP 流量控制</h3><p>流量控制是为了控制发送方发送速率，保证接收方来得及接收。</p>
-<p>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，提示接受方还有多少可用的缓存空间，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。</p>
-<h3 id="TCP-滑动窗口"><a href="#TCP-滑动窗口" class="headerlink" title="TCP 滑动窗口"></a>TCP 滑动窗口</h3><p>窗口是缓存的一部分，用来暂时存放字节流。发送方和接收方各有一个窗口，接收方通过 TCP 报文段中的窗口字段告诉发送方自己的窗口大小，发送方根据这个值和其它信息设置自己的窗口大小。</p>
-<p>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。 </p>
-<p>接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为 {31, 34, 35}，其中 {31} 按序到达，而 {34, 35} 就不是，因此只对字节 31 进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/a3253deb-8d21-40a1-aae4-7d178e4aa319.jpg" alt="img"></p>
-<h3 id="TCP-拥塞控制"><a href="#TCP-拥塞控制" class="headerlink" title="TCP 拥塞控制"></a>TCP 拥塞控制</h3><p>如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接收，而拥塞控制是为了降低整个网络的拥塞程度。</p>
-<p>拥塞状态：链路容量有限，在较高的拥堵下，排队时延将呈现指数上升，并且可能陷入无限排队，爆掉缓存，吞吐量接近0</p>
-<p>路由器可以向发送方提供关于网络中拥塞状态的显式反馈信息（ATM ABR）</p>
-<p>UDP连接（恒定速率，不会降速）与web的并行TCP连接会使得网络拥塞，对于其他连接不公平</p>
-<p><strong>判断拥塞的原则</strong></p>
-<p>一个丢失的报文段意味着拥塞</p>
-<p>一个确认报文段指示网络正在接受，即可增加速率</p>
-<p>带宽探测，给定ACK指示无拥塞，丢包则指示有拥塞</p>
-<p><img src="assets/51e2ed95-65b8-4ae9-8af3-65602d452a25-1553268328299.jpg" alt="img"></p>
-<p>TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、快重传、快恢复。</p>
-<p>发送方需要维护一个叫做拥塞窗口（cwnd，对一个TCP发送方能向网络中发送流量的速率做了限制）的状态变量，注意拥塞窗口与发送方窗口的区别：拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口。</p>
-<p>为了便于讨论，做如下假设：</p>
-<ul>
-<li>接收方有足够大的接收缓存，因此不会发生流量控制；</li>
-<li>虽然 TCP 的窗口基于字节，但是这里设窗口的大小单位为报文段。</li>
-</ul>
-<p><img src="assets/910f613f-514f-4534-87dd-9b4699d59d31.png" alt="img"></p>
-<h5 id="1-慢开始与拥塞避免（必然）"><a href="#1-慢开始与拥塞避免（必然）" class="headerlink" title="1. 慢开始与拥塞避免（必然）"></a>1. 慢开始与拥塞避免（必然）</h5><p>发送的最初执行慢开始，令 cwnd = 1，发送方只能发送 1 个报文段；当收到确认后，将 cwnd 加倍，因此之后发送方能够发送的报文段数量为：2、4、8 …</p>
-<p>注意到慢开始每个轮次都将 cwnd 加倍，这样会让 cwnd 增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能性也就更高。设置一个慢开始门限 ssthresh，当 cwnd &gt;= ssthresh 时，进入拥塞避免，每个轮次只将 cwnd 加 1。</p>
-<p>如果出现了超时，则令 ssthresh = cwnd / 2，然后重新执行慢开始。</p>
-<p>平均吞吐量：0.75W/RTT</p>
-<h5 id="2-快重传与快恢复（推荐部分）"><a href="#2-快重传与快恢复（推荐部分）" class="headerlink" title="2. 快重传与快恢复（推荐部分）"></a>2. 快重传与快恢复（推荐部分）</h5><p>在接收方，要求每次接收到报文段都应该对最后一个已收到的有序报文段进行确认。例如已经接收到 M1 和 M2，此时收到 M4，应当发送对 M2 的确认。</p>
-<p>在发送方，如果收到三个重复确认，那么可以知道下一个报文段丢失，此时执行快重传，立即重传下一个报文段。例如收到三个 M2，则 M3 丢失，立即重传 M3。</p>
-<p>在这种情况下，只是丢失个别报文段，而不是网络拥塞。因此执行快恢复，令 ssthresh = cwnd / 2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。</p>
-<p>慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。</p>
-<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/f61b5419-c94a-4df1-8d4d-aed9ae8cc6d5.png" alt="img"></p>
-<p># </p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
+            <p>
+              运输层目的
 
+两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信
+控制运输层实体的传输速率以避免网络拥塞，或从拥塞中恢复
+
+运输层与网络层的关系
+网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/08/计算机网络/计算机网络：运输层/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1274,142 +812,24 @@
 
       
           
-            <h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><ul>
-<li>将类的接口转换为想要的接口，以便实现不同的接口。两个对象因为接口不兼容而不能一起工作，这时需要第三方适配。</li>
-<li>适配器：我拥有一个三角插头，而只有一个二角的插座，则我需要一个适配器，让我能够重新充电</li>
-</ul>
-<h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><ul>
-<li>将一个类的接口转换为客户希望的另外一个接口，Adapter模式使得原本由于接口不兼容而不能一起工作的类可以一起工作。</li>
-<li>为复用而设计的工具箱类不能够被复用的原因仅仅是因为它的接口与专业应用领域所需要的接口不匹配。</li>
-</ul>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
-<li>你想使用一个已经存在的类，而它的接口不符合你的需求</li>
-<li>你想创建一个可以复用的类，该类可以与其他不想关的类或不可预见的类（即那些接口可能不一定兼容的类）协同工作</li>
-<li>（仅适用于对象Adapter）你想使用一些已经存在的子类，但是不可能对每一个都进行子类化以匹配他们的接口。对象适配器可以适配它的父类接口（<strong>什么意思</strong>）</li>
-</ul>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><ul>
-<li>已有一个软件系统，希望能够与新厂商类库搭配，但是新厂商的接口不同于旧厂的接口<ul>
-<li>写一个类，将新厂商的接口转换为期望的接口</li>
-</ul>
-</li>
-<li>一个应用可能会具有一些类具有不同的接口，并且这些接口互不兼容，像TextView这样已经存在并且不相关的类如何协同工作呢？<ul>
-<li>即是我们得到了源代码，修改textView意义也不大，因为不应该仅仅为了实现一个应用，工具箱就不得不采用一些与特定领域相关的接口</li>
-<li>因此我们可以定义一个新的类，进行适配接口，从而实现最终目标</li>
-</ul>
-</li>
-</ul>
-<h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>适配器模式将一个类的接口转换成客户期望的另一个接口，让原本接口不兼容的类可以合作无间。</p>
-<p>作为适配器，它还可以提供原系统接口所没有的功能，在原接口的基础上进行拓展</p>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h3 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h3><ul>
-<li>如果需要实现一个很大的目标接口，要有很多的工作要做<ul>
-<li>实现一个适配器所需要进行的工作与目标接口的大小成正比</li>
-<li>但如果不适用适配器，则需要花更多的力气进行改写工作。即复用了现存的类。</li>
-</ul>
-</li>
-<li>客户端通过适配器可以透明地调用目标接口。</li>
-<li>将目标类和适配者类解耦，解决了目标类和适配者类接口不一致的问题。</li>
-<li>一个适配器可以封装一个或多个类</li>
-</ul>
-<h2 id="协作"><a href="#协作" class="headerlink" title="协作"></a>协作</h2><h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><ul>
-<li>Client。与符合target接口的对象协同</li>
-<li>Target。是客户需要使用的接口，定义客户使用的与特定领域相关的接口</li>
-<li>Adapter。是对Target接口的实现，并且它将原有接口Adaptee转换到了所需要的接口Target</li>
-<li>Adaptee。系统当中原有的功能接口，这个接口需要被适配</li>
-</ul>
-<h3 id="协作-1"><a href="#协作-1" class="headerlink" title="协作"></a>协作</h3><p>Client在Adapter实例上调用一些操作，接着适配器调用Adapter的操作实现这个请求</p>
-<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><h3 id="考虑Adapter的匹配程度"><a href="#考虑Adapter的匹配程度" class="headerlink" title="考虑Adapter的匹配程度"></a>考虑Adapter的匹配程度</h3><p>对Adaptee的接口与Target接口进行匹配的工作量各个Adapter可能不一样。可能是从简单的接口转换到支持完全不同的操作集合，其取决于Target接口与Adaptee接口的相似程度。</p>
-<h3 id="可插入的Adapter"><a href="#可插入的Adapter" class="headerlink" title="可插入的Adapter"></a>可插入的Adapter</h3><p> 当其他的类使用一个类时，如果所需要的假定条件越少，这个类就更具可复用性。如果将接口匹配构建一个类，就不需要假定对其他的类可见的是相同的一个接口。即接口匹配使得我们可以将自己的类加入到一些现有的系统中去，而这些系统对这个类的接口可能会有不同</p>
-<h3 id="使用双向适配器提供透明操作"><a href="#使用双向适配器提供透明操作" class="headerlink" title="使用双向适配器提供透明操作"></a>使用双向适配器提供透明操作</h3><p>适配器并不对所有的客户都透明；被<strong>适配的对象不再兼容Adaptee的接口</strong>，因此并不是所有Adaptee对象都可以被使用的地方它都可以使用。<strong>即</strong>客户可以使用Adaptee对象的接口，但是Adaptee不能使用Target的接口</p>
-<p>双向适配器提供了这样的透明性。<strong>在两个不同的客户需要用不同的方式查看同一个对象时</strong>，尤其有用</p>
-<h1 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h1><h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>使<strong>多重继承</strong>对一个接口与另外一个接口进行匹配</p>
-<p><img src="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1555665102661.png" alt="1555665102661"></p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><ul>
-<li>用一个具体的Adapter类对Adaptee和Target进行匹配。结果是当我们想要匹配一个类以及它所有子类时，类Adapter不能胜任</li>
-<li>Adapter可以重定义Adaptee的部分行为，因为是它的一个子类</li>
-<li>仅仅引入了一个对象，并不需要额外的指针以间接得到adaptee</li>
-</ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><ul>
-<li><p>继承原有接口进行扩展</p>
-</li>
-<li><p>客户通过目标接口调用适配器的方法对适配器发出请求</p>
-</li>
-<li><p>适配器使用被适配接口把请求转换为被适配者的一个或多个调用接口</p>
-</li>
-<li><p>客户接受到调用的结果，但并未察觉到这一切是适配器再起转换作用</p>
-</li>
-</ul>
-<h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><p>首先是Target接口，该接口有一个方法是request方法。但是有一个类Adaptee已经实现了request方法，因此可以去复用该方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>
+              适配器模式提出问题
+将类的接口转换为想要的接口，以便实现不同的接口。两个对象因为接口不兼容而不能一起工作，这时需要第三方适配。
+适配器：我拥有一个三角插头，而只有一个二角的插座，则我需要一个适配器，让我能够重新充电
 
-<p>类Adaptee实现了Tagret类所希望实现的内容，但是Adaptee是没有实现Target接口的，因此Target无法做复用。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">specificRequest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"适配者中的业务代码被调用！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因此，这两个接口并不匹配。需要进行适配操作，即产生了Adapter。类适配器继承自Adaptee因此可以调用它的Adaptee方法。而同时也实现了Target接口，因此Target也可以使用request方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassAdapter</span> <span class="keyword">extends</span> <span class="title">Adaptee</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        specificRequest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>让Target进行调用，即让Target引用ClassAdapter，此时调用request时，也调用了specificRequest方法，因此实现了复用，即实现了适配器Adapter。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassAdapterTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"类适配器模式测试："</span>);</span><br><span class="line">        Target target = <span class="keyword">new</span> ClassAdapter();</span><br><span class="line">        target.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h1><h2 id="结构-1"><a href="#结构-1" class="headerlink" title="结构"></a>结构</h2><p>依赖于对象<strong>组合</strong></p>
-<p><img src="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1563087069455.png" alt="1563087069455"></p>
-<h2 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h2><ul>
-<li>允许一个Adapter与多个Adaptee——即本身以及它的所有子类同时工作。Adapter也可以一次给所有的Adaptee添加功能</li>
-<li>使得重定义Adaptee的行为比较困难，需要生成Adaptee的子类并且使得Adapter引用这个子类而不是Adaptee本身。</li>
-</ul>
-<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><h3 id="实现步骤-1"><a href="#实现步骤-1" class="headerlink" title="实现步骤"></a>实现步骤</h3><ul>
-<li>将原有接口的实例作为组成部分，进行组合</li>
-</ul>
-<h3 id="示例1-1"><a href="#示例1-1" class="headerlink" title="示例1"></a>示例1</h3><p>在对象适配器当中更多的是依赖于组合实现适配器。因此在该适配器当中有一个Adaptee成员，而初始化操作即为它分配一个Adaptee</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObjectAdapter</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Adaptee adaptee;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ObjectAdapter</span><span class="params">(Adaptee adaptee)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.adaptee = adaptee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        adaptee.specificRequest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>进行对象适配器的测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObjectAdapterTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"对象适配器模式测试："</span>);</span><br><span class="line">        Adaptee adaptee = <span class="keyword">new</span> Adaptee();</span><br><span class="line">        Target target = <span class="keyword">new</span> ObjectAdapter(adaptee);</span><br><span class="line">        target.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><p>鸭子与火鸡：</p>
-<p><strong>Duck</strong></p>
-<p>是作为系统当中原有的的功能接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Duck</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MallerdDuck</span> <span class="keyword">implements</span> <span class="title">Duck</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Quack"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Flying"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Turkey</strong></p>
-<p>是系统当中新生的需求和实体</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Turkey</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">gobble</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WildTurkey</span> <span class="keyword">implements</span> <span class="title">Turkey</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">gobble</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Gobble"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Fly short time"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>适配器</strong></p>
-<p>新生的需求需要使用到原有的系统设计的功能，却接口不统一。通过适配器实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实现了Duck接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TurkeyAdapter</span> <span class="keyword">implements</span> <span class="title">Duck</span> </span>&#123;</span><br><span class="line">    <span class="comment">//内部还是turkey</span></span><br><span class="line">    Turkey turkey;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TurkeyAdapter</span><span class="params">(Turkey turkey)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.turkey = turkey;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//以turkey的方法转换到Duck的方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        turkey.gobble();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        turkey.fly();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="双向适配器"><a href="#双向适配器" class="headerlink" title="双向适配器"></a>双向适配器</h1><h2 id="结构-2"><a href="#结构-2" class="headerlink" title="结构"></a>结构</h2><h2 id="效果-2"><a href="#效果-2" class="headerlink" title="效果"></a>效果</h2><h2 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h2><h3 id="实现步骤-2"><a href="#实现步骤-2" class="headerlink" title="实现步骤"></a>实现步骤</h3><h3 id="示例1-2"><a href="#示例1-2" class="headerlink" title="示例1"></a>示例1</h3><p>target接口，即客户</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TwoWayTarget</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>adaptee接口，即被适配者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TwoWayAdaptee</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">specificRequest</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>构建双向适配器，即适配器实现Target接口与Adaptee接口。因此被适配者与客户都可以去引用该适配器</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TwoWayAdapter</span> <span class="keyword">implements</span> <span class="title">TwoWayTarget</span>, <span class="title">TwoWayAdaptee</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> TwoWayTarget target;</span><br><span class="line">    <span class="keyword">private</span> TwoWayAdaptee adaptee;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TwoWayAdapter</span><span class="params">(TwoWayTarget target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TwoWayAdapter</span><span class="params">(TwoWayAdaptee adaptee)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.adaptee = adaptee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        adaptee.specificRequest();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">specificRequest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        target.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>进行测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoWayAdapterTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目标通过双向适配器访问适配者："</span>);</span><br><span class="line">        TwoWayAdaptee adaptee = <span class="keyword">new</span> AdapteeRealize();</span><br><span class="line">        TwoWayTarget target = <span class="keyword">new</span> TwoWayAdapter(adaptee);</span><br><span class="line">        target.request();</span><br><span class="line">        System.out.println(<span class="string">"适配者通过双向适配器访问目标："</span>);</span><br><span class="line">        target = <span class="keyword">new</span> TargetRealize();</span><br><span class="line">        adaptee = <span class="keyword">new</span> TwoWayAdapter(target);</span><br><span class="line">        adaptee.specificRequest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="相关模式"><a href="#相关模式" class="headerlink" title="相关模式"></a>相关模式</h1><ul>
-<li>Bridge的结构与对象适配器类似，但是Bridge模式的出发点不同。Bridge目的是将接口部分与实现部分分离，从而对它们可以较为容易也相对独立的加以改变。而Adapter意味着改变一个已有对象的接口</li>
-<li>Decorator模式增强了其他对象的功能而同时又不改变它的接口。因此Decorator对应用程序的透明性比适配器好。结果是Decorator支持递归组合，而纯粹使用适配器无法实现</li>
-<li>Proxy在不改变它的接口的条件下，为另一个对象定义了一个代理</li>
-</ul>
-<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><ul>
-<li>在工作的时候，其实很多接口因为版本迭代原因都会出现各种各样的版本，因为新接口、功能迁移，很有可能出现说新接口不兼容旧的接口，而新旧都有各自的引用，重构是十分困难的。<ul>
-<li>使用适配器模式，你可以在不改变它的实现情况下，进行兼容扩展</li>
-</ul>
-</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+为什么要用（作用）
+将一个类的接口转换为客户希望的另外一个接口，Adapter模式
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/07/Java/设计模式/设计模式：适配器模式/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1544,116 +964,21 @@
 
       
           
-            <h1 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><ul>
-<li>有许多种方法可以将对象堆起来成为一个集合。客户想要遍历的时候，如果让客户看到集合的实现，就有些不优雅。</li>
-<li>针对不同的需要，可能需要以不同的方式遍历整个列表，即使可以预见到所需要的遍历操作，也不希望列表（指集合对象）的接口中充斥着各种不同遍历的操作。有时可能需要在同一个列表上同时进行多个遍历。<ul>
-<li>例如可能需要进行过滤列表迭代器，只访问那些满足特定过滤约束条件的元素。</li>
-</ul>
-</li>
-</ul>
-<h3 id="问题案例"><a href="#问题案例" class="headerlink" title="问题案例"></a>问题案例</h3><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>迭代器模式将对列表的访问和遍历从列表对象中分离出来并放入一个<strong>迭代器</strong>对象中，迭代器定义了一个访问该列表元素的接口，迭代器对象负责跟踪当前的元素，即它知道哪些元素已经遍历过了。</p>
-<h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
-<li>让客户遍历对象，而又无法窥视存储对象的方式。</li>
-<li>支持对集合对象的多种遍历方式</li>
-<li>为遍历不同的集合结构提供一个统一的接口（支持多态迭代）</li>
-</ul>
-<h3 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h3><ul>
-<li>当有一个ArrayList和一个数组要合并，但是数组对象、ArrayList有很多依赖它的对象和方法。因此不能简单地将数组转换为ArrayList。如果转换，则需要更改它本身的实现<ul>
-<li>此时，对他们<strong>遍历</strong>就需要写两个循环</li>
-<li>对于不同的集合，遍历是变化的部分，则将变化的部分封装起来。即<strong>迭代器</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><blockquote>
-<p>迭代器模式：迭代器模式提供一种方法顺序访问一集合对象中的各个元素，而又不暴露其内部的表示</p>
-</blockquote>
-<p><img src="assets/1563361042968.png" alt="1563361042968"></p>
-<p>在实例化列表迭代器前，必须提供待遍历的列表，一旦有了该列表迭代器的实例就可以顺序地访问该列表的各个元素。</p>
-<p>将遍历机制与列表对象分离可以让我们定义不同的迭代器来实现不同的遍历策略，而不需要在列表接口中列举它们。</p>
-<p>迭代器是与集合<strong>耦合</strong>在一起的，而且客户对象必须知道遍历的是一个列表而不是其他集合结构。则最好能够有一种办法使得不需要改变客户代码即可改变该集合类，则通过将迭代器的概念推广到<strong>多态迭代器</strong>来达到目标。</p>
-<p>因此我们需要定义一个抽象类AbstrcatList，提供操作列表的公共接口，也需要一个抽象的迭代器类Iterator，然后为每个不同的列表实现定义具体的Iterator子类，此时迭代机制就与具体的集合类无关了。</p>
-<p><img src="assets/1563363965380.png" alt="1563363965380"></p>
-<p>迭代器的类方案确定后，就是如何创建迭代器，既然使代码不依赖于具体的列表子类，则不能仅仅简单地实例化一个特定的类，而需要让列表对象负责创建相应的迭代器，需要列表对象提供CreateIterator的操作。</p>
-<p>创建迭代器是一个Factory Method的例子，用它来使得一个客户可以向一个列表对象请求合适的迭代器。</p>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h2 id="协作"><a href="#协作" class="headerlink" title="协作"></a>协作</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="assets/1555743128206.png" alt="1555743128206"></p>
-<p><img src="assets/1555743292853.png" alt="1555743292853"></p>
-<p><img src="assets/1563364193922.png" alt="1563364193922"></p>
-<h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><ul>
-<li>Iterator：迭代器，定义访问和遍历元素的接口</li>
-<li>ConcreteIterator：具体迭代器。<ul>
-<li>实现迭代器接口，集合遍历时跟踪当前位置</li>
-</ul>
-</li>
-<li>Aggregate：集合，定义创建相应迭代器对象的接口</li>
-<li>ConcreteIterator：具体集合，实现相应迭代器接口，该操作返回一个ConcreteIterator的适当实例</li>
-</ul>
-<h3 id="协作-1"><a href="#协作-1" class="headerlink" title="协作"></a>协作</h3><ul>
-<li>类关系<ul>
-<li>见<strong>参与者</strong></li>
-</ul>
-</li>
-<li>逻辑关系<ul>
-<li>ConcreIterator跟踪集合中的当前对象，并能够计算出待遍历的后继对象</li>
-</ul>
-</li>
-</ul>
-<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><ul>
-<li>谁控制该迭代</li>
-<li>谁定义遍历算法</li>
-<li>迭代器的健壮程度</li>
-</ul>
-<h1 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h1><h2 id="结构-1"><a href="#结构-1" class="headerlink" title="结构"></a>结构</h2><h2 id="效果（优缺）"><a href="#效果（优缺）" class="headerlink" title="效果（优缺）"></a>效果（优缺）</h2><ul>
-<li>支持以不同的方式遍历一个集合<ul>
-<li>复杂的集合可用多种方式进行遍历，如代码生成和语义检查要遍历语法分析树，代码生成可以按中序或者前序来遍历语法分析树。迭代器模式使得改变遍历算法变得很容易，仅需要用一个不同的迭代器实例即可。</li>
-</ul>
-</li>
-<li>简化了集合的接口<ul>
-<li>有了迭代器的遍历接口，集合本身就不再需要类似的遍历接口了，即简化了集合的接口</li>
-</ul>
-</li>
-<li>在同一个集合上可以有多个遍历<ul>
-<li>每个迭代器保持它自己的遍历状态，因此可以同时进行多个遍历</li>
-</ul>
-</li>
-<li>附加的迭代器操作<ul>
-<li>可以为迭代器做一些增强性的功能，例如previous操作等</li>
-</ul>
-</li>
-<li>用于复合对象的迭代器<ul>
-<li>在Composite模式中的那些递归聚合结构上，外部迭代器可能难以实现，因为在该结构中不同对象处于嵌套集合的多个不同层次。因此一个外部迭代器为跟踪当前对象必须存储一条纵贯该Composite的路径</li>
-<li>有时使用一个内部迭代器更容易一些，仅需要递归调用自己即可，隐式将路径存储在调用栈当中，无需显式维护当前对象位置</li>
-</ul>
-</li>
-<li>空迭代器<ul>
-<li>是退化的迭代器，有助于处理边界条件。根据定义一个空迭代器总是已经完成了遍历，即永远是True</li>
-</ul>
-</li>
-</ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><p>依赖于一个名为迭代器的接口</p>
-<h3 id="案例1-1"><a href="#案例1-1" class="headerlink" title="案例1"></a>案例1</h3><p><strong>迭代器接口</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span></span>&#123;</span><br><span class="line">	<span class="comment">//判断是否还有更多的元素</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">//返回下一个元素</span></span><br><span class="line">    <span class="function">Object <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>数组实现迭代器</strong></p>
-<ul>
-<li>实现接口方法</li>
-<li>实现迭代器</li>
-<li>让对象实现返回迭代器的方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//迭代器的实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MenuIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">    MenuItem[] items;</span><br><span class="line">    <span class="comment">//标记目前遍历到达的位置</span></span><br><span class="line">    <span class="keyword">int</span> position;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MenuIterator</span><span class="params">(MenuItem[] menuItem)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.items = menuItem;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (position &gt;= items.length || items[position] == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        MenuItem menuItem = items[position];</span><br><span class="line">        position++;</span><br><span class="line">        <span class="keyword">return</span> menuItem;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对象返回迭代器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DinerMenu</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_ITEMS = <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">int</span> numberOfItems = <span class="number">0</span>;</span><br><span class="line">    MenuItem[] menuItems;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回迭代器接口，客户只需要使用迭代器遍历即可</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Iterator <span class="title">createIterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MenuIterator(menuItems);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="相关模式"><a href="#相关模式" class="headerlink" title="相关模式"></a>相关模式</h1><ul>
-<li><strong>Composite</strong>：迭代器常被应用到像符合这样的递归结构上</li>
-<li><strong>Factory Method</strong>：多态迭代器靠Factory Method来实例适当的迭代器子类</li>
-<li><strong>Memento</strong>:常与迭代器模式一起使用，迭代器使用一个memento来捕获一个迭代的状态，迭代器在其内部存储memento</li>
-</ul>
-<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><p>### </p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+            <p>
+              迭代器模式提出问题
+有许多种方法可以将对象堆起来成为一个集合。客户想要遍历的时候，如果让客户看到集合的实现，就有些不优雅。
+针对不同的需要，可能需要以不同的方式遍历整个列表，即使可以预见到所需要的遍历操作，也不希望列表（指集合对象）的接口中充斥着各种不同遍历的操作。有时可能需要在同一个列表上同时进行
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/07/Java/设计模式/设计模式：迭代器模式/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1778,13 +1103,19 @@
 
       
           
-            <h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">charAt</span><span class="params">(<span class="keyword">int</span> index)</span></span>;<span class="comment">//返回指定索引处的 char 值。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span></span>;<span class="comment">//把这个字符串和另一个对象比较。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(String anotherString)</span></span>;<span class="comment">//按字典顺序比较两个字符串。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compareToIgnoreCase</span><span class="params">(String str)</span></span>;<span class="comment">//按字典顺序比较两个字符串，不考虑大小写。</span></span><br><span class="line"><span class="function">String <span class="title">concat</span><span class="params">(String str)</span></span>;<span class="comment">//将指定字符串连接到此字符串的结尾。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">contentEquals</span><span class="params">(StringBuffer sb)</span></span>;<span class="comment">//当且仅当字符串与指定的StringBuffer有相同顺序的字符时候返回真。</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">copyValueOf</span><span class="params">(<span class="keyword">char</span>[] data)</span></span>;<span class="comment">//返回指定数组中表示该字符序列的 String。</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">copyValueOf</span><span class="params">(<span class="keyword">char</span>[] data, <span class="keyword">int</span> offset, <span class="keyword">int</span> count)</span></span>;<span class="comment">//返回指定数组中表示该字符序列的 String。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">endsWith</span><span class="params">(String suffix)</span></span>;<span class="comment">//测试此字符串是否以指定的后缀结束。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span></span>;<span class="comment">//将此字符串与指定的对象比较。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">equalsIgnoreCase</span><span class="params">(String anotherString)</span></span>;<span class="comment">//将此 String 与另一个 String 比较，不考虑大小写。</span></span><br><span class="line"><span class="keyword">byte</span>[] getBytes();<span class="comment">//使用平台的默认字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中。</span></span><br><span class="line"><span class="keyword">byte</span>[] getBytes(String charsetName);<span class="comment">//使用指定的字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getChars</span><span class="params">(<span class="keyword">int</span> srcBegin, <span class="keyword">int</span> srcEnd, <span class="keyword">char</span>[] dst, <span class="keyword">int</span> dstBegin)</span></span>;<span class="comment">//将字符从此字符串复制到目标字符数组。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;<span class="comment">//返回此字符串的哈希码。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(<span class="keyword">int</span> ch)</span></span>;<span class="comment">//返回指定字符在此字符串中第一次出现处的索引。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(<span class="keyword">int</span> ch, <span class="keyword">int</span> fromIndex)</span></span>;<span class="comment">//返回在此字符串中第一次出现指定字符处的索引，从指定的索引开始搜索。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(String str)</span></span>;<span class="comment">//返回指定子字符串在此字符串中第一次出现处的索引。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(String str, <span class="keyword">int</span> fromIndex)</span></span>;<span class="comment">//返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始。</span></span><br><span class="line"><span class="function">String <span class="title">intern</span><span class="params">()</span></span>;<span class="comment">//返回字符串对象的规范化表示形式。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastIndexOf</span><span class="params">(<span class="keyword">int</span> ch)</span></span>;<span class="comment">//返回指定字符在此字符串中最后一次出现处的索引。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastIndexOf</span><span class="params">(<span class="keyword">int</span> ch, <span class="keyword">int</span> fromIndex)</span></span>;<span class="comment">//返回指定字符在此字符串中最后一次出现处的索引，从指定的索引处开始进行反向搜索。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastIndexOf</span><span class="params">(String str)</span></span>;<span class="comment">//返回指定子字符串在此字符串中最右边出现处的索引。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastIndexOf</span><span class="params">(String str, <span class="keyword">int</span> fromIndex)</span></span>;<span class="comment">//返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span>;<span class="comment">//返回此字符串的长度。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(String regex)</span></span>;<span class="comment">//告知此字符串是否匹配给定的正则表达式。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">regionMatches</span><span class="params">(<span class="keyword">boolean</span> ignoreCase, <span class="keyword">int</span> toffset, String other, <span class="keyword">int</span> ooffset, <span class="keyword">int</span> len)</span></span>;<span class="comment">//测试两个字符串区域是否相等。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">regionMatches</span><span class="params">(<span class="keyword">int</span> toffset, String other, <span class="keyword">int</span> ooffset, <span class="keyword">int</span> len)</span></span>;<span class="comment">//测试两个字符串区域是否相等。</span></span><br><span class="line"><span class="function">String <span class="title">replace</span><span class="params">(<span class="keyword">char</span> oldChar, <span class="keyword">char</span> newChar)</span></span>;<span class="comment">//返回一个新的字符串，它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的。</span></span><br><span class="line"><span class="function">String <span class="title">replaceAll</span><span class="params">(String regex, String replacement)</span></span>;<span class="comment">//使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串。</span></span><br><span class="line"><span class="function">String <span class="title">replaceFirst</span><span class="params">(String regex, String replacement)</span></span>;<span class="comment">//使用给定的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。</span></span><br><span class="line">String[] split(String regex);<span class="comment">//根据给定正则表达式的匹配拆分此字符串。</span></span><br><span class="line">String[] split(String regex, <span class="keyword">int</span> limit);<span class="comment">//根据匹配给定的正则表达式来拆分此字符串。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String prefix)</span></span>;<span class="comment">//测试此字符串是否以指定的前缀开始。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String prefix, <span class="keyword">int</span> toffset)</span></span>;<span class="comment">//测试此字符串从指定索引开始的子字符串是否以指定前缀开始。</span></span><br><span class="line"><span class="function">CharSequence <span class="title">subSequence</span><span class="params">(<span class="keyword">int</span> beginIndex, <span class="keyword">int</span> endIndex)</span></span>;<span class="comment">//返回一个新的字符序列，它是此序列的一个子序列。</span></span><br><span class="line"><span class="function">String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex)</span></span>;<span class="comment">//返回一个新的字符串，它是此字符串的一个子字符串。</span></span><br><span class="line"><span class="function">String <span class="title">substring</span><span class="params">(<span class="keyword">int</span> beginIndex, <span class="keyword">int</span> endIndex)</span></span>;<span class="comment">//返回一个新字符串，它是此字符串的一个子字符串。</span></span><br><span class="line"><span class="keyword">char</span>[] toCharArray();<span class="comment">//将此字符串转换为一个新的字符数组。</span></span><br><span class="line"><span class="function">String <span class="title">toLowerCase</span><span class="params">()</span></span>;<span class="comment">//使用默认语言环境的规则将此 String 中的所有字符都转换为小写。</span></span><br><span class="line"><span class="function">String <span class="title">toLowerCase</span><span class="params">(Locale locale)</span></span>;<span class="comment">//使用给定 Locale 的规则将此 String 中的所有字符都转换为小写。</span></span><br><span class="line"><span class="function">String <span class="title">toString</span><span class="params">()</span></span>;<span class="comment">//返回此对象本身（它已经是一个字符串！）。</span></span><br><span class="line"><span class="function">String <span class="title">toUpperCase</span><span class="params">()</span></span>;<span class="comment">//使用默认语言环境的规则将此 String 中的所有字符都转换为大写。</span></span><br><span class="line"><span class="function">String <span class="title">toUpperCase</span><span class="params">(Locale locale)</span></span>;<span class="comment">//使用给定 Locale 的规则将此 String 中的所有字符都转换为大写。</span></span><br><span class="line"><span class="function">String <span class="title">trim</span><span class="params">()</span></span>;<span class="comment">//返回字符串的副本，忽略前导空白和尾部空白。</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(primitive data type x)</span></span>;<span class="comment">//返回给定data type类型x参数的字符串表示形式。</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+            <p>
+              Stringchar charAt(int index);//返回指定索引处的 char 值。int compareTo(Object o);//把这个字符串和另一个对象比较。int compareTo(String anotherString);//按字典顺序比较两个字符串。int compare
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/03/Java/base/JavaBase：基础数据类型/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1919,94 +1250,22 @@
 
       
           
-            <h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><p>I/O ? 或者输入/输出 ? </p>
-<ul>
-<li>指的是计算机与外部世界或者一个程序与计算机的其余部分的之间的接口。它对于任何计算机系统都非常关键，因而所有 I/O 的主体实际上是内置在操作系统中的。</li>
-<li>针对不同的操作对象，可以划分为磁盘I/O模型，网络I/O模型，内存映射I/O, Direct I/O、数据库I/O等，只要具有输入输出类型的交互系统都可以认为是I/O系统，也可以说I/O是整个操作系统数据交换与人机交互的通道，这个概念与选用的开发语言没有关系，是一个通用的概念。</li>
-</ul>
-<p>传统流IO的好处是使用简单，将底层的机制都抽象成流，但缺点就是性能不足。而且IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 以socket.read()为例子： 传统的BIO里面socket.read()，如果TCP RecvBuffer里没有数据，函数会一直阻塞，直到收到数据，返回读到的数据。</p>
-<p>在如今的系统中I/O却拥有很重要的位置，现在系统都有可能处理大量文件，大量数据库操作，而这些操作都依赖于系统的I/O性能，也就造成了现在系统的瓶颈往往都是由于I/O性能造成的。因此，为了解决磁盘I/O性能慢的问题，系统架构中添加了缓存来提高响应速度；或者有些高端服务器从硬件级入手，使用了固态硬盘（SSD）来替换传统机械硬盘；在大数据方面，Spark越来越多的承担了实时性计算任务，而传统的Hadoop体系则大多应用在了离线计算与大量数据存储的场景，这也是由于磁盘I/O性能远不如内存I/O性能而造成的格局（Spark更多的使用了内存，而MapReduece更多的使用了磁盘）。因此，<em>一个系统的优化空间，往往都在低效率的I/O环节上</em>，很少看到一个系统CPU、内存的性能是其整个系统的瓶颈。</p>
-<p><strong>Java</strong></p>
-<p>单独的程序一般是让系统为它们完成大部分的工作。 在 Java 编程中，直到最近一直使用 流 的方式完成 I/O。所有 I/O 都被视为单个的字节的移动，通过一个称为 Stream 的对象一次移动一个字节。流 I/O 用于与外部世界接触。它也在内部使用，用于将对象转换为字节，然后再转换回对象。 </p>
-<p>Java在I/O上也一直在做持续的优化，从JDK 1.4开始便引入了NIO模型，大大的提高了以往BIO模型下的操作效率。</p>
-<h2 id="IO分类"><a href="#IO分类" class="headerlink" title="IO分类"></a>IO分类</h2><ul>
-<li><p>BIO （Blocking I/O）：同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成。这里使用那个经典的烧开水例子，这里假设一个烧开水的场景，有一排水壶在烧开水，BIO的工作模式就是， 叫一个线程停留在一个水壶那，直到这个水壶烧开，才去处理下一个水壶。但是实际上线程在等待水壶烧开的时间段什么都没有做。</p>
-</li>
-<li><p>NIO （New I/O）：同时支持阻塞与非阻塞模式，但这里我们以其同步非阻塞I/O模式来说明，那么什么叫做同步非阻塞？如果还拿烧开水来说，NIO的做法是叫一个线程不断的轮询每个水壶的状态，看看是否有水壶的状态发生了改变，从而进行下一步的操作。</p>
-</li>
-<li><p>AIO （ Asynchronous I/O）：异步非阻塞I/O模型。异步非阻塞与同步非阻塞的区别在哪里？异步非阻塞无需一个线程去轮询所有IO操作的状态改变，在相应的状态改变后，系统会通知对应的线程来处理。对应到烧开水中就是，为每个水壶上面装了一个开关，水烧开之后，水壶会自动通知我水烧开了。</p>
-</li>
-</ul>
-<h2 id="IO调用步骤"><a href="#IO调用步骤" class="headerlink" title="IO调用步骤"></a>IO调用步骤</h2><p>进程中的IO调用步骤大致可以分为以下四步： </p>
-<ol>
-<li>进程向操作系统请求数据 ;</li>
-<li>操作系统把外部数据加载到内核的缓冲区中; </li>
-<li>操作系统把内核的缓冲区拷贝到进程的缓冲区 ;</li>
-<li>进程获得数据完成自己的功能 ;</li>
-</ol>
-<p>当操作系统在把外部数据放到进程缓冲区的这段时间（即上述的第二，三步），如果应用进程是挂起等待的，那么就是同步IO，反之，就是异步IO，也就是AIO 。</p>
-<h1 id="BIO-同步阻塞"><a href="#BIO-同步阻塞" class="headerlink" title="BIO 同步阻塞"></a>BIO 同步阻塞</h1><p>这是最基本与简单的I/O操作方式，其根本特性是做完一件事再去做另一件事，一件事一定要等前一件事做完，这很符合程序员传统的顺序来开发思想，因此BIO模型程序开发起来较为简单，易于把握。</p>
-<p>但是BIO如果需要同时做很多事情（例如同时读很多文件，处理很多tcp请求等），就需要系统创建很多线程来完成对应的工作，<strong>因为BIO模型下一个线程同时只能做一个工作</strong>，如果线程在执行过程中依赖于需要等待的资源，那么该线程会长期处于阻塞状态，我们知道在整个操作系统中，线程是系统执行的基本单位，<strong>在BIO模型下的线程阻塞就会导致系统线程的切换，从而对整个系统性能造成一定的影响。</strong></p>
-<p>当然如果我们只需要创建少量可控的线程，那么采用BIO模型也是很好的选择，但如果在需要考虑高并发的web或者tcp服务器中采用BIO模型就无法应对了，<strong>如果系统开辟成千上万的线程，那么CPU的执行时机都会浪费在线程的切换中，使得线程的执行效率大大降低。</strong>此外，关于线程这里说一句题外话，在系统开发中线程的生命周期一定要准确控制，在需要一定规模并发的情形下，尽量使用线程池来确保线程创建数目在一个合理的范围之内，切莫编写线程数量创建上限的代码。</p>
-<h1 id="NIO-同步非阻塞"><a href="#NIO-同步非阻塞" class="headerlink" title="NIO 同步非阻塞"></a>NIO 同步非阻塞</h1><p>NIO本身是基于事件驱动的思想来实现的，其目的就是解决BIO的大并发问题，在BIO模型中，如果需要并发处理多个I/O请求，那就需要多线程来支持.</p>
-<p>NIO使用了多路复用器机制，以socket使用来说，多路复用器通过不断轮询各个连接的状态，只有在socket有流可读或者可写时，应用程序才需要去处理它，在线程的使用上，就不需要一个连接就必须使用一个处理线程了，而是只是有效请求时（确实需要进行I/O处理时），才会使用一个线程去处理，这样就避免了BIO模型下大量线程处于阻塞等待状态的情景。</p>
-<h2 id="为什么要使用-NIO"><a href="#为什么要使用-NIO" class="headerlink" title="为什么要使用 NIO?"></a>为什么要使用 NIO?</h2><p>NIO 的创建目的是为了让 Java 程序员可以实现高速 I/O 而无需编写自定义的本机代码。NIO 将最耗时的 I/O 操作(即填充和提取缓冲区)转移回操作系统，因而可以极大地提高速度。</p>
-<p>NIO：非阻塞IO，当没有数据进行IO读取的时候，对于单线程，进程将会堵塞，所有的请求处理中止。为避免这样的问题，使用了NIO的方案，复杂且容易出问题</p>
-<h2 id="流与块的比较"><a href="#流与块的比较" class="headerlink" title="流与块的比较"></a>流与块的比较</h2><p>原来的 I/O 库(在 java.io.*中) 与 NIO 最重要的区别是数据打包和传输的方式。正如前面提到的，原来的 I/O 以流的方式处理数据，而 NIO 以块的方式处理数据。 </p>
-<ul>
-<li>面向流的 I/O 系统一次一个字节地处理数据。一个输入流产生一个字节的数据，一个输出流消费一个字节的数据。为流式数据创建过滤器非常容易。链接几个过滤器，以便每个过滤器只负责单个复杂处理机制的一部分，这样也是相对简单的。</li>
-<li>不利的一面是，面向流的 I/O 通常相当慢。 一个 面向块 的 I/O 系统以块的形式处理数据。每一个操作都在一步中产生或者消费一个数据块。</li>
-<li>按块处理数据比按(流式的)字节处理数据要快得多。但是面向块的 I/O 缺少一些面向流的 I/O 所具有的优雅性和简单性。</li>
-</ul>
-<h2 id="NIO的buffer机制"><a href="#NIO的buffer机制" class="headerlink" title="NIO的buffer机制"></a>NIO的buffer机制</h2><p>NIO性能的优势就来源于缓冲的机制，不管是读或者写都需要以块的形式写入到缓冲区中。NIO实际上让我们对IO的操作更接近于操作系统的实际过程。</p>
-<p> 所有的系统I/O都分为两个阶段：等待就绪和操作。</p>
-<p>举例来说，读函数，分为等待系统可读和真正的读；同理，写函数分为等待网卡可以写和真正的写。 以socket为例： 先从应用层获取数据到内核的缓冲区，然后再从内核的缓冲区复制到进程的缓冲区。所以实际上底层的机制也是不断利用缓冲区来读写数据的。即使传统IO抽象成了从流直接读取数据，但本质上也依然是利用缓冲区来读取和写入数据。 所以，为了更好的理解nio，我们就需要知道IO的底层机制，这样对我们将来理解channel和buffer就打下了基础。这里简单提一下，我们可以把bufffer就理解为内核缓冲区，所以不论读写，自然都要经过这个区域，读的话，先从设备读取数据到内核，再读到进程缓冲区，写的话，先从进程缓冲区写到内核，再从内核写回设备。</p>
-<h2 id="NIO的非阻塞机制"><a href="#NIO的非阻塞机制" class="headerlink" title="NIO的非阻塞机制"></a>NIO的非阻塞机制</h2><p>NIO抽象出了新的通道（Channel）作为输入输出的通道，并且提供了缓存（Buffer）的支持</p>
-<ul>
-<li>在进行读操作时<ul>
-<li>需要使用Buffer分配空间</li>
-<li>然后将数据从Channel中读入Buffer中</li>
-</ul>
-</li>
-<li>对于Channel的写操作<ul>
-<li>也需要现将数据写入Buffer</li>
-<li>然后将Buffer写入Channel中。</li>
-</ul>
-</li>
-</ul>
-<p>NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p>
-<h2 id="NIO的优势："><a href="#NIO的优势：" class="headerlink" title="NIO的优势："></a>NIO的优势：</h2><ul>
-<li>非阻塞</li>
-<li>buffer机制</li>
-<li>流替代块</li>
-</ul>
-<h1 id="Java-NIO编程"><a href="#Java-NIO编程" class="headerlink" title="Java NIO编程"></a>Java NIO编程</h1><p>如下是NIO方式进行文件拷贝操作的示例，见下图：</p>
-<p><img src="assets/44c93e93d6fd642815a539369a1bc228" alt="img"></p>
-<p>通过比较New IO的使用方式我们可以发现，新的IO操作不再面向 Stream来进行操作了，改为了通道Channel，并且使用了更加灵活的缓存区类Buffer，Buffer只是缓存区定义接口， 根据需要，我们可以选择对应类型的缓存区实现类。在java NIO编程中，我们需要理解以下3个对象Channel、Buffer和Selector。</p>
-<ul>
-<li><strong>Channel</strong></li>
-</ul>
-<p>首先说一下Channel，国内大多翻译成“通道”。Channel和IO中的Stream(流)是差不多一个等级的。只不过Stream是单向的，譬如：InputStream, OutputStream。而Channel是双向的，既可以用来进行读操作，又可以用来进行写操作，NIO中的Channel的主要实现有：FileChannel、DatagramChannel、SocketChannel、ServerSocketChannel；通过看名字就可以猜出个所以然来：分别可以对应文件IO、UDP和TCP（Server和Client）。</p>
-<ul>
-<li><strong>Buffer</strong></li>
-</ul>
-<p>NIO中的关键Buffer实现有：ByteBuffer、CharBuffer、DoubleBuffer、 FloatBuffer、IntBuffer、 LongBuffer,、ShortBuffer，分别对应基本数据类型: byte、char、double、 float、int、 long、 short。当然NIO中还有MappedByteBuffer, HeapByteBuffer, DirectByteBuffer等这里先不具体陈述其用法细节。</p>
-<p>说一下 DirectByteBuffer 与 HeapByteBuffer 的区别？</p>
-<p>它们 ByteBuffer 分配内存的两种方式。HeapByteBuffer 顾名思义其内存空间在 JVM 的 heap（堆）上分配，可以看做是 jdk 对于 byte[] 数组的封装；而 DirectByteBuffer 则直接利用了系统接口进行内存申请，其内存分配在c heap 中，这样就减少了内存之间的拷贝操作，如此一来，在使用 DirectByteBuffer 时，系统就可以直接从内存将数据写入到 Channel 中，而无需进行 Java 堆的内存申请，复制等操作，提高了性能。既然如此，为什么不直接使用 DirectByteBuffer，还要来个 HeapByteBuffer？原因在于， DirectByteBuffer 是通过full gc来回收内存的，DirectByteBuffer会自己检测情况而调用 system.gc()，但是如果参数中使用了 DisableExplicitGC 那么就无法回收该快内存了，-XX:+DisableExplicitGC标志自动将 System.gc() 调用转换成一个空操作，就是应用中调用 System.gc() 会变成一个空操作，那么如果设置了就需要我们手动来回收内存了，所以DirectByteBuffer使用起来相对于完全托管于 java 内存管理的Heap ByteBuffer 来说更复杂一些，如果用不好可能会引起OOM。Direct ByteBuffer 的内存大小受 -XX:MaxDirectMemorySize JVM 参数控制（默认大小64M），在 DirectByteBuffer 申请内存空间达到该设置大小后，会触发 Full GC。</p>
-<ul>
-<li><strong>Selector</strong></li>
-</ul>
-<p>Selector 是NIO相对于BIO实现多路复用的基础，Selector 运行单线程处理多个 Channel，如果你的应用打开了多个通道，但每个连接的流量都很低，使用 Selector 就会很方便。例如在一个聊天服务器中。要使用 Selector , 得向 Selector 注册 Channel，然后调用它的 select() 方法。这个方法会一直阻塞到某个注册的通道有事件就绪。一旦这个方法返回，线程就可以处理这些事件，事件的例子有如新的连接进来、数据接收等。</p>
-<p>这里我们再来看一个NIO模型下的TCP服务器的实现，我们可以看到Selector 正是NIO模型下 TCP Server 实现IO复用的关键，请仔细理解下段代码while循环中的逻辑，见下图：</p>
-<p><img src="assets/46ea294c619f83564eaa2962d0267ae3" alt="img"></p>
-<h1 id="AIO-异步非阻塞"><a href="#AIO-异步非阻塞" class="headerlink" title="AIO 异步非阻塞"></a>AIO 异步非阻塞</h1><p>Java AIO就是Java作为对异步IO提供支持的NIO.2 ，Java NIO2 (JSR 203)定义了更多的 New I/O APIs， 提案2003提出，直到2011年才发布， 最终在JDK 7中才实现。JSR 203除了提供更多的文件系统操作API(包括可插拔的自定义的文件系统)， 还提供了对socket和文件的异步 I/O操作。 同时实现了JSR-51提案中的socket channel全部功能,包括对绑定， option配置的支持以及多播multicast的实现。</p>
-<p>从编程模式上来看AIO相对于NIO的区别在于，NIO需要使用者线程不停的轮询IO对象，来确定是否有数据准备好可以读了，而AIO则是在数据准备好之后，才会通知数据使用者，这样使用者就不需要不停地轮询了。当然AIO的异步特性并不是Java实现的伪异步，而是使用了系统底层API的支持，在Unix系统下，采用了epoll IO模型，而windows便是使用了IOCP模型。关于Java AIO，本篇只做一个抛砖引玉的介绍，如果你在实际工作中用到了，那么可以参考Netty在高并发下使用AIO的相关技术。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>IO实质上与线程没有太多的关系，但是不同的IO模型改变了应用程序使用线程的方式，NIO与AIO的出现解决了很多BIO无法解决的并发问题，当然任何技术抛开适用场景都是耍流氓，复杂的技术往往是为了解决简单技术无法解决的问题而设计的，在系统开发中能用常规技术解决的问题，绝不用复杂技术，否则大大增加系统代码的维护难度，学习IT技术不是为了炫技，而是要实实在在解决问题。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://juejin.im/entry/598da7d16fb9a03c42431ed3" target="_blank" rel="noopener">以Java的视角来聊聊BIO、NIO与AIO的区别？</a></li>
-</ol>
+            <p>
+              IOI/O ? 或者输入/输出 ? 
 
+指的是计算机与外部世界或者一个程序与计算机的其余部分的之间的接口。它对于任何计算机系统都非常关键，因而所有 I/O 的主体实际上是内置在操作系统中的。
+针对不同的操作对象，可以划分为磁盘I/O模型，网络I/O模型，内存映射I/O, Direct I/O、数据库
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/01/OS/计算机操作系统：IO/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -2141,782 +1400,25 @@
 
       
           
-            <h1 id="MySQL体系结构和存储引擎"><a href="#MySQL体系结构和存储引擎" class="headerlink" title="MySQL体系结构和存储引擎"></a>MySQL体系结构和存储引擎</h1><p>尽管各平台在底层实现方面都各有不同，但是MySQL基本上能保证在各平台上的物理体系结构的一致性</p>
-<h2 id="定义数据库和实例"><a href="#定义数据库和实例" class="headerlink" title="定义数据库和实例"></a>定义数据库和实例</h2><ul>
-<li><p>数据库</p>
-<ul>
-<li>物理操作系统文件或其他形式文件类型的集合。</li>
-<li>在MySQL数据库中，文件可以是frm、MYD、MYI等结尾的文件。</li>
-<li>NDB引擎时，可能是存放于内存当中的文件。</li>
-<li>是文件的集合，是依照某种数据模型组织起来并存放于二级存储器中的数据集合。</li>
-</ul>
-</li>
-<li><p>实例</p>
-<ul>
-<li>MySQL数据库由后台线程以及一个共享内存区组成。可以被运行的后台线程所共享。</li>
-<li>是真正用于操作数据库文件的。</li>
-<li>是程序，是位于用户与OS间的一层数据管理软件，程序只有通过实例才能和数据库打交道</li>
-</ul>
-</li>
-</ul>
-<p>MySQL是一个<strong>单进程多线程架构的数据库</strong>。</p>
-<h2 id="MySQL体系结构"><a href="#MySQL体系结构" class="headerlink" title="MySQL体系结构"></a>MySQL体系结构</h2><p><img src="assets/1554105660683.png" alt="1554105660683"></p>
-<p>MySQL组成</p>
-<ul>
-<li><p>连接池组件</p>
-</li>
-<li><p>管理服务和工具组件</p>
-</li>
-<li><p>SQL接口组件</p>
-</li>
-<li><p>查询分析器组件</p>
-</li>
-<li><p>优化器组件</p>
-</li>
-<li><p>缓冲组件</p>
-</li>
-<li><p><strong>插件式存储引擎</strong></p>
-<p>基于表而不是数据库</p>
-</li>
-<li><p>物理文件</p>
-</li>
-</ul>
-<h2 id="MySQL存储引擎"><a href="#MySQL存储引擎" class="headerlink" title="MySQL存储引擎"></a>MySQL存储引擎</h2><p>用户应该根据具体的应用选择合适的存储引擎</p>
-<h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><ul>
-<li>支持事务，设计目标主要面向在线事务处理的应用</li>
-<li>特点<ul>
-<li>行锁设计</li>
-<li>支持外键，并支持类似于Oracle的非锁定读，即默认读取操作不会产生锁</li>
-</ul>
-</li>
-<li>通过使用多版本并发控制（MVCC）来获得高并发性，并实现了SQL标准的4种隔离级别<ul>
-<li>默认为Repeatable read</li>
-<li>使用一种被称为next-keylocking的策略避免幻读</li>
-</ul>
-</li>
-<li>提供插入缓冲、二次写、自适应哈希索引、预读等高性能功能</li>
-<li>InnoDB存储引擎将数据放在一个逻辑的表空间，这个表空间像一个黑盒一样由InnoDB管理，可以将表单独存放到一个独立的idb文件中</li>
-</ul>
-<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><ul>
-<li>不支持事务、表锁设计</li>
-<li>支持全文索引</li>
-<li>主要面向一些OLAP数据库应用。适合报表查询系统</li>
-<li>只缓存索引文件，不缓冲数据文件</li>
-<li>锁的粒度为表级</li>
-<li>相对简单，在效率上更优，小型应用更为适合</li>
-<li>表是保存成文件形式，在跨平台的数据转移中会省去不少麻烦</li>
-</ul>
-<h3 id="NDB"><a href="#NDB" class="headerlink" title="NDB"></a>NDB</h3><ul>
-<li>一个集群存储引擎。结构为share nothing的集群架构，能够提供更高的可用性</li>
-<li>特点<ul>
-<li>数据全部放在内存中，因此主键查找速度极快</li>
-<li>可通过添加NDB数据存储结点，线性提高数据库性能</li>
-<li>从MySQL5.1开始，可以将非索引数据放在磁盘上。</li>
-</ul>
-</li>
-<li>缺陷<ul>
-<li>NDB存储引擎的连接操作是在MySQL数据库层完成的，而不是存储引擎层。因此复杂的连接操作需要巨大的网络开销，查询速度很慢</li>
-</ul>
-</li>
-</ul>
-<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><ul>
-<li>适用于存储临时数据的临时表，以及数据仓库中的维度表</li>
-<li>特点<ul>
-<li>将表中数据放在内存中，如果数据库重启或崩溃，表中数据都将消失。</li>
-<li>默认使用哈希索引</li>
-<li>速度非常快。</li>
-<li>只支持表锁，并发性能较差，不支持TEXT和BLOB列类型。存储变长字段时是按照定常字段的方式进行，会浪费内存。</li>
-</ul>
-</li>
-<li>当作为临时表存放中间结果集，如果中间结果集大于Memory存储引擎表的容量设置，或含有TEXT列类型，则会转换为MyISAM存储引擎</li>
-</ul>
-<h3 id="Archive"><a href="#Archive" class="headerlink" title="Archive"></a>Archive</h3><ul>
-<li>只支持Insert和select操作</li>
-<li>从MySQL5.1支持索引</li>
-<li>适合存储归档数据，如日志。使用zlib算法将数据行压缩存储，压缩比一般可达到1：10。</li>
-<li>使用行锁实现高并发的插入操作，但本身不是事务安全的，设计目标是提供高速的插入和压缩功能</li>
-</ul>
-<h3 id="Federated"><a href="#Federated" class="headerlink" title="Federated"></a>Federated</h3><ul>
-<li>不存放数据，只是指向一台远程MySQL数据库服务器上的表</li>
-</ul>
-<h3 id="Maria"><a href="#Maria" class="headerlink" title="Maria"></a>Maria</h3><ul>
-<li>新开发的引擎，设计目标是取代原有的MyISAM，从而成为MySQL的默认存储引擎</li>
-<li>支持缓存数据和索引文件</li>
-<li>应用行锁设计，提供MVCC功能，支持事务和非事务安全的选项，以及更好地blob字符类型的处理性能</li>
-</ul>
-<h2 id="连接MySQL"><a href="#连接MySQL" class="headerlink" title="连接MySQL"></a>连接MySQL</h2><p>管道、命名管道、命名字、TCP/IP套接字、UNIX域套接字</p>
-<h1 id="InnoDB存储引擎"><a href="#InnoDB存储引擎" class="headerlink" title="InnoDB存储引擎"></a>InnoDB存储引擎</h1><p>是事务安全的存储引擎</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
-<li>第一个完整支持ACID事务的存储引擎<ul>
-<li>原子性（atomicity，或称不可分割性）。一个事务（transaction）中的所有操作，或者全部完成，或者全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。即，事务不可分割、不可约简。</li>
-<li>一致性（consistency）。在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设<strong>约束</strong>、<strong>触发器</strong>、<strong>级联回滚</strong>等。</li>
-<li>隔离性（isolation，又称独立性）。数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括<strong>读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）</strong>。</li>
-<li>持久性（durability）。事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li>
-</ul>
-</li>
-<li>特点<ul>
-<li>行锁设计、支持MVCC、支持外键、提供一致性非锁定读</li>
-</ul>
-</li>
-<li>被设计用来最有效地以及使用内存和CPU</li>
-</ul>
-<h2 id="InnoDB体系架构"><a href="#InnoDB体系架构" class="headerlink" title="InnoDB体系架构"></a>InnoDB体系架构</h2><p><img src="assets/1554108833485.png" alt="1554108833485"></p>
-<p>InnoDB存储引擎有多个内存块，可以认为他们组成一个大内存池，负责：</p>
-<ul>
-<li>维护所有进程、线程需要访问的多个内部数据结构</li>
-<li>缓存磁盘上的数据，方便快速地读取，同时在对磁盘文件的数据修改前在这里缓存</li>
-<li>重做日志缓冲</li>
-<li>。。。</li>
-</ul>
-<h3 id="后台线程"><a href="#后台线程" class="headerlink" title="后台线程"></a>后台线程</h3><p>负责</p>
-<ul>
-<li>刷新内存池中的数据，保证缓冲池中的内存缓存的是最近的数据</li>
-<li>将已经修改的数据文件刷新到磁盘文件</li>
-<li>保证数据库在发生异常的情况下InnoDB能恢复到正常允许状态</li>
-</ul>
-<ol>
-<li><p>MasterThread</p>
-<p>负责将缓冲池中的数据异步刷新到磁盘，保证数据一致性，包括脏页的刷新、合并插入缓冲、UNDO页的回收</p>
-</li>
-<li><p>IO Thread</p>
-<p>InnoDB大量使用AIO处理写请求，可以极大提高数据库的性能</p>
-<p>负责将IO请求的回调处理。</p>
-<p>Linux下有4个，为write、read、insert buffer、log IO thread</p>
-<p>Windows可以自行设定，write与read增大到了4个，通过参数innodb_read(write)_io_threads设定</p>
-</li>
-<li><p>Purge Thread</p>
-<p>事务提交后，其使用的undolog可能不再需要，使用该线程回收已经使用并分配的undo页</p>
-</li>
-<li><p>Page Cleaner Thread</p>
-<p>将之前版本中脏页的刷新操作放入到单独的线程。</p>
-</li>
-</ol>
-<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><p>InnoDB存储引擎基于磁盘存储的，并将其中的记录按照页的方式进行管理。即可认为是基于磁盘的数据库系统。</p>
-<p>考虑CPU与磁盘速度，则使用缓冲池技术提高数据库整体性能。缓冲池是一块内存区域，通过内存的速度来弥补磁盘的速度较慢</p>
-<ul>
-<li><p>数据库读取页的操作</p>
-<ul>
-<li>首先将从磁盘读到的页存放到缓冲池中。</li>
-<li>下一次读取相同的页，判断该页是否在缓冲池中。若在，则该页被命中，直接读取。否则读取磁盘。</li>
-</ul>
-</li>
-<li><p>数据库页修改操作</p>
-<ul>
-<li>首先修改在缓冲池中的页，再以一定频率刷新到磁盘（Checkpoint机制）。</li>
-</ul>
-</li>
-</ul>
-<p>缓冲池大小配置：innodb_buffer_pool_size。</p>
-<p><em>数据页类型</em></p>
-<p>缓冲池当中的数据页类型有：索引页、数据页、undo页、插入缓冲、自适应哈希索引、InnoDB存储的锁信息、数据字典信息等。</p>
-<p><em>多缓冲池</em></p>
-<p>InnoDB 1.0.x后允许有多个缓冲池实例。每个页根据哈希值平均分配到不同的缓冲池实例中。</p>
-<p>减少了数据库内部的资源竞争，增加数据库的并发处理能力</p>
-<p>配置：innodb_buffer_pool_instances</p>
-<h3 id="LRU-List、Free-List和Flush-List"><a href="#LRU-List、Free-List和Flush-List" class="headerlink" title="LRU List、Free List和Flush List"></a>LRU List、Free List和Flush List</h3><p>对缓冲池这么大的内存区域进行管理。</p>
-<h3 id="重做日志缓冲"><a href="#重做日志缓冲" class="headerlink" title="重做日志缓冲"></a>重做日志缓冲</h3><p>InnoDB存储引擎的内存区域除了有缓冲池，还有重做日志缓冲。</p>
-<p>首先将重做日志信息放入到该缓冲区，然后按一定频率将其刷新到重做日志文件。</p>
-<ul>
-<li>在事务开始之后逐步写入重做日志文件，而不一定是事务提交才写入重做日志缓存，</li>
-<li>记录的是物理数据页面的修改的信息</li>
-</ul>
-<h3 id="额外的内存池"><a href="#额外的内存池" class="headerlink" title="额外的内存池"></a>额外的内存池</h3><p>在InnoDB存储引擎中，对内存的管理是通过一种称为<strong>内存堆的方式</strong>进行的。</p>
-<p>在对一些数据结构本身的内存进行分配时，需要从额外的内存池中进行申请，当该区域的内存不够时，会从缓冲池中进行申请</p>
-<h2 id="Checkpoint技术"><a href="#Checkpoint技术" class="headerlink" title="Checkpoint技术"></a>Checkpoint技术</h2><p>页的操作首先是在缓冲池中完成的。如果一条DML语句，则此时页是脏的，缓冲池中的页版本比磁盘当中新，数据库需要将新版本的页刷新到磁盘。</p>
-<ul>
-<li>倘若每次一个页发生变化，就刷新到磁盘，则开销极大。</li>
-<li>倘若在刷新到磁盘的过程中，服务器宕机，则数据无法恢复。</li>
-</ul>
-<p>为了避免数据丢失问题，普遍采用<strong>Write Ahead Log策略</strong></p>
-<ul>
-<li>当事务提交时，先写重做日志，再修改页</li>
-<li>当宕机导致数据丢失时，通过重做日志来完成数据的恢复</li>
-<li>是否不需要将缓冲池中页刷新到磁盘。<ul>
-<li>缓冲池无法缓存数据库所有的数据</li>
-<li>重做日志无法无限增大，即使可以，运维难度大、成本高</li>
-<li>日志文件太大，恢复数据库需要时间太久</li>
-</ul>
-</li>
-</ul>
-<p><strong>Checkpoint技术</strong></p>
-<p>解决的问题：</p>
-<ul>
-<li>缩短数据库的恢复时间。只需对checkpoint后的重做日志进行恢复</li>
-<li>缓冲池不够用时，将脏页刷新到磁盘。采用LRU算法溢出页面，如果为脏页则强制执行checkpoint，刷新页面</li>
-<li>重做日志不可用时，刷新脏页。数据库对重做日志进行循环使用，覆盖重用</li>
-</ul>
-<p>Checkpoint发生的时间、条件以及脏页的选择等都非常复杂。Innodb中有两种Checkpoint</p>
-<ul>
-<li>Sharp Checkpoint。<ul>
-<li>默认的工作方式，发生在数据库关闭时，将所有的脏页都刷新回磁盘</li>
-<li>若数据库运行时页使用该技术，则数据库可用性会受到很大限制</li>
-</ul>
-</li>
-<li>Fuzzy Checkpoint。<ul>
-<li>只刷新一部分脏页，而不是刷新所有脏页回磁盘</li>
-</ul>
-</li>
-</ul>
-<p><em>Fuzzy Checkpoint</em></p>
-<p>InnoDB存储引擎中可能发生的几种请求的Fuzzy Checkpoint</p>
-<ul>
-<li>Master Thread Checkpoint。每s或每10s刷新，是异步操作</li>
-<li>FLUSH_LRU_LIST Checkpoint。为保证LRU列表有100个空闲页可用。若没有，则移除尾端页，若这些页有脏页，则需要进行Checkpoint</li>
-<li>Async/Sync Flush Checkpoint。为了保证重做日志的循环使用的可用性。重做日志文件不可用的情况下（写满了），需要强制将一些页刷新会磁盘。</li>
-<li>Dirty Page too much Checkpoint。脏页数量太多，目的是为了保证缓冲池当中有足够可用的页。</li>
-</ul>
-<h2 id="Master-Thread工作方式"><a href="#Master-Thread工作方式" class="headerlink" title="Master Thread工作方式"></a>Master Thread工作方式</h2><h2 id="InnoDB关键特性"><a href="#InnoDB关键特性" class="headerlink" title="InnoDB关键特性"></a>InnoDB关键特性</h2><h3 id="插入缓冲"><a href="#插入缓冲" class="headerlink" title="插入缓冲"></a>插入缓冲</h3><p>Insert Buffer与数据页一样，都是物理页的一个组成部分</p>
-<p>在InnoDB存储引擎中，主键是行唯一标识符。</p>
-<p>通常应用程序中行记录的插入顺序是按照主键递增的顺序进行插入的。因此插入<strong>聚集索引</strong>一般是顺序的，不需要磁盘的随机读取。</p>
-<p>对于主键自增长的列，在页当中，行记录是按照聚集索引的值进行顺序存放的，一般不需要随机读取另一个页中的记录，因此对于此类插入操作，速度非常快。</p>
-<blockquote>
-<p>并不是所有的主键插入都是顺序的，若主键类为UUID这样，那么插入和辅助索引一样，同样随机</p>
-</blockquote>
-<p>一张表上同样有多个非聚集的辅助索引，则此时会产生非聚集且不是唯一的索引</p>
-<ul>
-<li>进行插入操作时，数据页的存放还是按主键进行顺序存放</li>
-<li>对于非聚集索引叶子结点的插入不再是顺序的了，需要离散地访问非聚集索引的页，由于随机读取的存在而导致了插入操作性能下降</li>
-<li>B+树的特性决定了非聚集索引插入的离散性</li>
-</ul>
-<p><strong><em>Insert Buffer</em></strong></p>
-<p>对于非聚集索引的插入或更新操作，不是每一次直接插入到索引页当中</p>
-<ul>
-<li>判断插入的非聚集索引页是否在缓冲池内，若在，直接插入</li>
-<li>若不在，则先放入一个Insert Buffer对象中，假装已经插入到叶子结点</li>
-<li>以一定频率和情况进行Insert Buffer和辅助索引页子节点的合并操作。将多次插入合并到一次操作（因为在一个索引页当中）</li>
-</ul>
-<p>需要满足的条件</p>
-<ul>
-<li>索引是辅助索引。</li>
-<li>索引不唯一。插入缓冲时，数据库不查找索引页判断记录的唯一性</li>
-</ul>
-<p><strong>缺陷</strong></p>
-<p>宕机时，可能有很多Insert Buffer没有合并，导致恢复需要较长时间</p>
-<p><strong>内部实现</strong></p>
-<p>Insert Buffer的数据结构是B+树，在当前版本全局一颗Insert Buffer B+树</p>
-<ul>
-<li>负责对所有的表的辅助索引进行Insert Buffer。</li>
-<li>存放在共享表空间，默认是idbata1中。<ul>
-<li>试图通过独立表空间idb文件恢复表数据，往往导致Check table失败，因为辅助索引还在Insert Buffer中</li>
-<li>通过idb恢复后，还需要进行repair table进行重建辅助索引</li>
-</ul>
-</li>
-</ul>
-<p>B+树非叶子结点存放的是查询的search key键值</p>
-<p><img src="assets/1554113635740.png" alt="1554113635740"></p>
-<p>当一个辅助索引要插入到页，且页不在缓冲池，则需要先构造一个search key，并插入到叶子结点当中。</p>
-<p><img src="assets/1554113750574.png" alt="1554113750574"></p>
-<p><img src="assets/1554113839689.png" alt="1554113839689"></p>
-<p><strong><em>Change Buffer</em></strong></p>
-<p>Insert Buffer的升级。对DML操作都进行缓冲，即Insert Buffer、Delete Buffer、Purge buffer</p>
-<p>对一条记录进行update操作</p>
-<ul>
-<li>将记录标记为已删除，Delete Buffer</li>
-<li>真正将记录删除，Purge buffer</li>
-</ul>
-<p><strong><em>Merge Insert Buffer</em></strong></p>
-<p>合并辅助索引可能发生在以下几种情况</p>
-<ul>
-<li>辅助索引页被读取到缓冲池时</li>
-<li>Insert Buffer Bitmap页追踪到该辅助索引页已经没有可用空间时<ul>
-<li>至少需要有1/32页的空间</li>
-</ul>
-</li>
-<li>Master Thread<ul>
-<li>每s或每10s进行一次操作，不同之处在于每次进行merge的页数量不同</li>
-</ul>
-</li>
-</ul>
-<h3 id="两次写"><a href="#两次写" class="headerlink" title="两次写"></a>两次写</h3><p>提供<strong>数据页的可靠性</strong></p>
-<p>部分写失效：当服务器宕机，可能InnoDB存储引擎正在写入某个页到表中，但只写了一部分就宕机。</p>
-<p>面对部分写失效，重做日志可能没有效果</p>
-<ul>
-<li>重做日志中记录的是对页的物理操作，如偏移量800，写’aaaa’记录，如果页本身发生损坏，则进行重做无意义。</li>
-<li>在应用重做日志前，用户需要一个页的副本，当写入失效发生时，写通过页的副本来还原该页，再进行重做，即doublewrite</li>
-</ul>
-<p><strong>doublewrite</strong></p>
-<p><img src="assets/1554120134521.png" alt="1554120134521"></p>
-<p>在对缓冲池的脏页进行刷新时</p>
-<ul>
-<li>并不直接写磁盘，而是通过memcpy函数将脏页先赋值到内存的doublewrite buffer</li>
-<li>通过doublewrite buffer分两次，每次1MB顺序写入共享表空间的物理磁盘。double write页是连续的，顺序写，开销小</li>
-<li>调用fsync函数，同步磁盘，避免缓冲写带来的问题。表空间是不连续的，写入是离散的</li>
-</ul>
-<h3 id="自适应哈希索引"><a href="#自适应哈希索引" class="headerlink" title="自适应哈希索引"></a>自适应哈希索引</h3><p>在生产环境下B+树的高度一般为3-4层。</p>
-<p>自适应哈希索引（AHI）：InnoDB存储引擎会监控对表上各索引页的查询，如果观察到建立哈希索引可以带来速度提升，则建立哈希索引。</p>
-<ul>
-<li>AHI通过缓冲池的B+树页构造，速度很快，而且不需要对整张表构建哈希索引。</li>
-<li>会自动根据访问的频率和模式来自动为某些热点页建立哈希索引</li>
-<li>要求对这个页的连续访问模式必须是一样的，如where a= ？与where a=? and b=?是两种访问模式</li>
-<li>以该模式访问了100次，<strong>或</strong>，页通过该模式访问了N次，N=页中记录/16</li>
-</ul>
-<h3 id="异步IO（AIO）"><a href="#异步IO（AIO）" class="headerlink" title="异步IO（AIO）"></a>异步IO（AIO）</h3><p>提高磁盘操作性能</p>
-<p>Sync IO：与AIO对应，每进行一次IO操作，需要等待此次操作结束才能继续接下来的操作</p>
-<h3 id="刷新临近页"><a href="#刷新临近页" class="headerlink" title="刷新临近页"></a>刷新临近页</h3><p>当刷新一个脏页时，InnoDB存储引擎会检测该页所在区的所有页，如果是脏页，那么一起进行刷新。通过AIO可以将多个IO写入操作合并为1个操作。</p>
-<p>存在的问题</p>
-<ul>
-<li>是不是可能将不怎么脏的页进行了写入，而该页又很快变成了脏页</li>
-<li>固态硬盘有较高的IOPS，是否还需要这个特性</li>
-<li>因此提供参数来控制是否启用该特性</li>
-</ul>
-<h1 id="索引与算法"><a href="#索引与算法" class="headerlink" title="索引与算法"></a>索引与算法</h1><p>如果知道数据的使用，则一开始就应该在需要处添加索引</p>
-<h2 id="InnoDB存储引擎索引概述"><a href="#InnoDB存储引擎索引概述" class="headerlink" title="InnoDB存储引擎索引概述"></a>InnoDB存储引擎索引概述</h2><ul>
-<li>B+树索引（传统意义上的索引）<ul>
-<li>不能找到一个给定键值的具体行，能找到的只是被查找数据行所在的页。</li>
-<li>然后数据库将页读入到内存，在内存中进行查找，最后得到所要查找的数据</li>
-</ul>
-</li>
-<li>全文索引</li>
-<li>哈希索引（自适应的，不能人为干预）</li>
-</ul>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><strong><em>特点</em></strong></p>
-<ul>
-<li>可以加快数据库的检索速度</li>
-<li>降低数据库插入、修改、删除等维护的速度</li>
-<li>只能创建在表上，不能创建到视图上</li>
-<li>既可以直接创建又可以间接创建</li>
-<li>可以优化隐藏中使用索引</li>
-<li>使用查询处理器执行SQL语句，在一个在表上，一次只能使用一个索引</li>
-</ul>
-<p><strong><em>优点</em></strong></p>
-<ul>
-<li>创建唯一性索引，保证数据库表中每一行数据的唯一性</li>
-<li>大大加快数据的检索速度，这是创建索引的最主要原因</li>
-<li>加速数据库表间连接，特别是在实现数据的参考完整性方面特别有意义</li>
-<li>在使用分组和排序子句进行数据检索时，同样可以显著减少查询中分组和排序的时间</li>
-<li>通过使用索引，可以在查询中使用优化隐藏器，提高系统的性能</li>
-</ul>
-<p><strong><em>缺点</em></strong></p>
-<ul>
-<li>创建索引和维护索引需要时间，随着数据量的增加而增加</li>
-<li>索引需要占用物理空间，除了数据表占用数据空间外，每一个索引需要占用一定的物理空间，如果建立聚簇索引，需要的空间更大</li>
-<li>当队表中数据进行增加、删除和修改时，索引也需要维护，降低数据维护的速度</li>
-</ul>
-<p><strong><em>分类</em></strong></p>
-<ul>
-<li>直接创建索引和间接创建索引</li>
-<li>普通索引与唯一性索引</li>
-<li>单个索引和复合索引</li>
-<li>聚簇索引和非聚簇索引</li>
-</ul>
-<p><strong><em>索引失效</em></strong></p>
-<ul>
-<li>如果条件中有Or，即使其中有条件带索引也不会使用</li>
-<li>对于多列索引，不是使用的第一部分，则不会使用索引</li>
-<li>like查询时以%开头</li>
-<li>如果列类型是字符串，那一定要在条件中使用引号引起来，否则不会使用索引</li>
-<li>如果MySQL估计全表扫描比索引块，则不使用索引</li>
-</ul>
-<p><strong><em>什么情况下适合建立索引</em></strong></p>
-<ul>
-<li>在经常出现关键字order by、group by、distinct后面的字段，建立索引</li>
-<li>在union等集合操作的结果集字段上，建立索引</li>
-<li>为经常用作查询选择的字段，建立索引</li>
-<li>在经常用作表连接的属性上，建立索引</li>
-<li>考虑使用索引覆盖，对数据很少被更新的表，如果用户经常只查询其中的几个字段，可以考虑在这几个字段上建立索引，从而将表的扫描改变为索引的扫描</li>
-</ul>
-<h2 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h2><p>B+树索引可以分为聚集索引和辅助索引。</p>
-<p>聚集索引与辅助索引不同的是，叶子节点存放的是否是一整行的信息</p>
-<h3 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h3><p>InnoDB存储引擎表是索引组织表，即表中数据按照主键顺序存放。</p>
-<p>聚集索引就是按照每张表的主键构造一颗B+树，同时叶子节点中存放的即为整张表的行记录数据，也将聚集索引的叶子节点称为数据页。</p>
-<p>数据页上存放的是完整的每行的记录，在非数据页的索引页中，存放的仅仅是键值以及指向数据页的偏移量，不是一个完整的行记录。</p>
-<ul>
-<li>对于主键的排序查找和范围查找非常快<ul>
-<li>叶子节点的数据就是用户查询的数据，若需要表最后的10位用户，由于是索引是双向链表，则用户可以快速地找到最后一个数据页</li>
-<li>对于范围查询，通过叶子节点的上层中间节点就可以得到页的范围，然后直接读取数据页即可</li>
-</ul>
-</li>
-</ul>
-<h3 id="辅助索引"><a href="#辅助索引" class="headerlink" title="辅助索引"></a>辅助索引</h3><p>叶子节点不包含行记录的全部数据，除了包含键值外，还包含一个书签（告诉InnoDB可以在哪里找到与索引对应的行数据）</p>
-<ul>
-<li>若辅助索引与聚集索引的高度均为3，则一共需要6次IO以得到最终的数据页</li>
-</ul>
-<h3 id="B-树索引的分裂"><a href="#B-树索引的分裂" class="headerlink" title="B+树索引的分裂"></a>B+树索引的分裂</h3><p>与一般B+树的分裂不同，需要涉及到<strong>并发</strong></p>
-<p>当自增的主键插入时，如</p>
-<p>1，2，3，4，5（中间值），6，7，8，9</p>
-<p>此时插入10需要分裂，则：</p>
-<ul>
-<li>1，2，3，4</li>
-<li>5（大于等于键值的在右），6，7，8，9，10</li>
-</ul>
-<p>因为自增，则P1这个页不会再插入，从而导致浪费</p>
-<p>InnoDB存储引擎的Page Header有以下几个部分用来保存插入的顺序信息</p>
-<ul>
-<li>Page_Last_Insert</li>
-<li>Page_Direction</li>
-<li>Page_N_Direction</li>
-</ul>
-<p>通过这些决定向左还是向右进行分裂，同时决定将分裂点记录为哪一个</p>
-<ul>
-<li>若插入是随机的，则取中间记录分裂</li>
-<li>若往同一方向进行插入的记录数量为5，并且目前已经<strong>定位</strong>到的记录之后还有3条记录。<ul>
-<li>则分裂点的记录为定位到的记录后的第三条记录</li>
-<li>否则分裂点记录就是待插入的记录（自增插入中普遍存在）</li>
-<li>定位：在插入时，首先需要定位，定位到的记录为待插入记录的前一条记录</li>
-</ul>
-</li>
-</ul>
-<h3 id="B-树索引的管理"><a href="#B-树索引的管理" class="headerlink" title="B+树索引的管理"></a>B+树索引的管理</h3><h2 id="Cardinality值"><a href="#Cardinality值" class="headerlink" title="Cardinality值"></a>Cardinality值</h2><h3 id="什么是Cardinality"><a href="#什么是Cardinality" class="headerlink" title="什么是Cardinality"></a>什么是Cardinality</h3><p>低选择性：对于性别字段、类型字段、地区字段，他们可选择的范围很小</p>
-<p>高选择性：某个字段的取值范围很广，几乎没有重复。这时使用B+树索引才是最合适的</p>
-<p>通过Show Index结果中的列Cardinality来观察索引是否高选择性。</p>
-<p>Cardinality：表示索引中不重复记录数量的预估值，Cardinality/n_rows_in_table应尽可能接近1，如果非常小，则需要考虑是否还必要创建这个索引。</p>
-<h3 id="InnobDB存储引擎的Cardinality统计"><a href="#InnobDB存储引擎的Cardinality统计" class="headerlink" title="InnobDB存储引擎的Cardinality统计"></a>InnobDB存储引擎的Cardinality统计</h3><p>数据库对于Cardinality的统计是通过采样的方法完成。</p>
-<p>Cardinality统计信息的更新发生在两个操作中：insert与update</p>
-<p>更新Cardinality信息的策略为：</p>
-<ul>
-<li>表中1/16的数据已经发生变化</li>
-<li>stat_modified_counter（某一行数据频繁地变化，每变化一次+1）&gt;2000000000</li>
-</ul>
-<p>采样的过程，默认对8个叶子结点采用：</p>
-<ul>
-<li>取得B+树索引中叶子结点的数量，记为A</li>
-<li><strong>随机</strong>取得B+树索引中的8个叶子结点。统计每个页不同记录的个数，记为P1，P2，P8</li>
-<li>根据采样信息给出Cardinality的预估值，即SUM（P）*A/8</li>
-</ul>
-<h2 id="B-树索引的使用"><a href="#B-树索引的使用" class="headerlink" title="B+树索引的使用"></a>B+树索引的使用</h2><p>不同应用中B+树索引的使用</p>
-<p>联合索引</p>
-<p>覆盖索引</p>
-<p>优化器旋转不使用索引的情况</p>
-<p>索引提示</p>
-<p>Multi-Range-Read优化</p>
-<p>ICP优化</p>
-<h2 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h2><p>哈希表</p>
-<p>InnoDB哈希算法</p>
-<p>自适应哈希索引</p>
-<h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><p><em>概述</em></p>
-<p>全文检索是将存储于数据库中的整本书或整篇文章中的任意内容信息查找处理的技术。</p>
-<p>InnoDB 1.2.x开始，支持全文检索，支持MyISAM的全部功能，以及一些其他特性。</p>
-<p><em>倒排索引</em></p>
-<p>全文检索通常使用倒排索引实现。在辅助表中存储了单词与单词自身在一个或多个文档中所在位置之间的映射。通常使用关联数组实现，有两种表现形式：</p>
-<ul>
-<li>inverted file index，表现为｛单词，单词所在文档的ID｝</li>
-<li>full inverted index，表现为｛单词，（单词所在文档的ID，在文档的具体位置）｝</li>
-</ul>
-<p><em>InnoDB全文检索</em></p>
-<p>使用full inverted index，将（单词所在文档的ID，在文档的具体位置）视为一个ilist</p>
-<p>在InnoDB存储引擎中，为了提高全文检索的并行性能，共有6张辅助表，每张表根据word的Latin编码进行分区。</p>
-<p>辅助表是持久的表，存放于磁盘上。</p>
-<p>为了提高全文索引性能，使用了FTS Index Cache（全文检索索引缓存）。是一个红黑树结构，根据（word,ilist）排序</p>
-<p><em>全文检索</em></p>
-<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>讨论InnoDB如何实现事务的隔离性的。</p>
-<ul>
-<li>最大程度地利用数据库的并发访问</li>
-<li>确保每个用户能以一致的方式读取和修改数据</li>
-</ul>
-<p>将介绍InnoDB存储引擎对表中的数据的锁定，同时分析InnoDB存储引擎会以怎样的粒度锁定数据。</p>
-<p>人们认为行级锁的一个神话：人们认为行级锁总会增加开销。实际上，只有当实现本身会增加开销时，行级锁才会增加开销。InnoDB存储引擎不需要锁升级，因为一个锁和多个锁的开销是相同的。</p>
-<h2 id="什么是锁"><a href="#什么是锁" class="headerlink" title="什么是锁"></a>什么是锁</h2><p>锁机制用于管理对共享资源的并发访问。</p>
-<p>InnoDB存储引擎在行级别上对表数据上锁，页会在数据库内部其他多个地方使用锁，从而允许对多种不同资源提供并发访问。如缓冲池的LRU列表。</p>
-<p>InnoDB锁提供：</p>
-<ul>
-<li>一致性的非锁定读</li>
-<li>行级锁支持，且行级锁没有额外开销，同时得到并发性和一致性</li>
-</ul>
-<h2 id="lock与latch"><a href="#lock与latch" class="headerlink" title="lock与latch"></a>lock与latch</h2><p>lock与latch都被称为锁，但具有截然不同的含义</p>
-<ul>
-<li>latch称为轻量级锁，要求锁定的时间必须非常短。若持续时间长，则性能会非常差<ul>
-<li>分为mutex互斥量和rwlock读写锁</li>
-<li>保证并发线程操作临界资源的正确性，并没有死锁检测机制</li>
-</ul>
-</li>
-<li>lock的对象是事务，用来锁定的是数据库中的对象，如表、页、行<ul>
-<li>lock的对象仅在commit或rollback后释放</li>
-<li>存在死锁机制</li>
-</ul>
-</li>
-</ul>
-<h2 id="InnoDB存储引擎中的锁"><a href="#InnoDB存储引擎中的锁" class="headerlink" title="InnoDB存储引擎中的锁"></a>InnoDB存储引擎中的锁</h2><h3 id="锁的类型"><a href="#锁的类型" class="headerlink" title="锁的类型"></a>锁的类型</h3><p>InnoDB存储引擎实现了两种标准的<strong>行级锁</strong></p>
-<ul>
-<li>共享锁S LOCK，允许事务读一行数据</li>
-<li>排他锁X LOCK，允许事务删除或更新一行数据</li>
-</ul>
-<p>兼容性</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>X</th>
-<th>S</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>X</td>
-<td>不兼容</td>
-<td>不兼容</td>
-</tr>
-<tr>
-<td>S</td>
-<td>不兼容</td>
-<td>兼容</td>
-</tr>
-</tbody></table>
-<p>InnoDB存储引擎支持<strong>多粒度锁定</strong>，允许事务在行级上的锁和表级上的锁同时存在。为了支持在不同粒度上进行加锁操作，支持一种额外的锁方式：<strong>意向锁</strong></p>
-<p>意向锁：将锁定的对象分为多个层次，意味着事务希望在更细粒度上加锁。</p>
-<p><img src="assets/1554133817951.png" alt="1554133817951"></p>
-<ul>
-<li>如果希望对<strong>记录</strong>上锁，则分别需要对数据库、表、页上意向锁IX，最后对记录上X锁。</li>
-<li>若其中任一个部分导致等待，那么该操作需要等待粗粒度锁的完成<ul>
-<li>如有事务在表1进行了S锁，则由于需要IX锁不兼容，需要等待</li>
-</ul>
-</li>
-</ul>
-<p>InnoDB存储引擎支持的<strong>意向锁是表级别的锁</strong></p>
-<ol>
-<li>意向共享锁，事务想获得一张表中某几行的共享锁</li>
-<li>意向排他锁，事务想获得一张表中某几行的排他锁</li>
-<li><img src="assets/1554134045205.png" alt="1554134045205"></li>
-</ol>
-<h3 id="一致性非锁定读"><a href="#一致性非锁定读" class="headerlink" title="一致性非锁定读"></a>一致性非锁定读</h3><p>InnoDB存储引擎通过多版本控制（MVCC，多版本并发控制）的方式读取当前执行时间数据库中行的数据。</p>
-<ul>
-<li>如果读取的行正在执行DEL或update操作，这时读取操作不会因此去等待行上锁的释放，而是会去读行的一个快照数据。<ul>
-<li>快照数据是指该行的之前版本的数据。该实现是通过undo段来完成。undo用来在事务中回滚数据</li>
-<li>快照数据本身没有额外的开销，并不需要上锁，因为没有事务需要对历史的数据进行修改</li>
-</ul>
-</li>
-</ul>
-<p><img src="assets/1554134231937.png" alt="1554134231937"></p>
-<p>非锁定读：不需要等待访问的行上X锁的释放。</p>
-<p>因此非锁定读机制极大地提高了数据库并发性。</p>
-<ul>
-<li>是默认的读取方式</li>
-<li>在不同事务隔离级别下读取方式不同。</li>
-<li>即使都是使用非锁定的一致性读，对快照数据的定义也各不相同</li>
-</ul>
-<p>在已提交读和可重复读下，采用非锁定的一致性读。但是快照数据的定义不同</p>
-<ul>
-<li>已提交读下，总是读取被锁定行最新一份快照数据<ul>
-<li>在事务开始后，有其他的事务对该行数据进行了修改并commit，则会出现对一个数据的读取，两次结果不一致</li>
-<li>因为每次会读取最新一份快照</li>
-</ul>
-</li>
-<li>可重复读下，总是读取<strong>事务开始时</strong>的行数据版本。<ul>
-<li>即只要事务开始了，在该次事务当中，对同一个数据的读取，永远不会改变</li>
-</ul>
-</li>
-</ul>
-<h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h4><p>从上图6-4可以看到，快照数据是当前行数据的历史版本，因此可能存在多个版本，即存在不止一个快照数据。由此带来的并发控制称为多版本并发控制（MVCC）</p>
-<h3 id="一致性锁定读"><a href="#一致性锁定读" class="headerlink" title="一致性锁定读"></a>一致性锁定读</h3><p>在某些情况下，用户需要显式地对数据库读取操作进行加锁以保证数据逻辑的一致性。</p>
-<p>InnoDB存储引擎对于Select语句支持两种一致性锁定读操作</p>
-<ul>
-<li>select … for update<ul>
-<li>对读取的行记录加一个X锁，其他事务不能对已经锁定的行加任何锁</li>
-</ul>
-</li>
-<li>select … lock in share mode<ul>
-<li>对读取的行记录加一个S锁，其他事务可以加S锁</li>
-</ul>
-</li>
-</ul>
-<h3 id="自增长与锁"><a href="#自增长与锁" class="headerlink" title="自增长与锁"></a>自增长与锁</h3><h3 id="外键和锁"><a href="#外键和锁" class="headerlink" title="外键和锁"></a>外键和锁</h3><p>对于一个外键列，如果没有显式地对这个列加索引，InnoDB存储引擎会自动对其加一个索引，因为可以避免表锁。</p>
-<p>对于外键值的插入和更新</p>
-<ul>
-<li>首先向父表查询，并使用select … lock in share mode，以防止数据不一致的问题。</li>
-</ul>
-<h2 id="锁的算法"><a href="#锁的算法" class="headerlink" title="锁的算法"></a>锁的算法</h2><h3 id="行锁的三种算法"><a href="#行锁的三种算法" class="headerlink" title="行锁的三种算法"></a>行锁的三种算法</h3><ul>
-<li>Record Lock：单个行记录上的锁<ul>
-<li>Read Committed下采用</li>
-<li>会锁住索引记录（而不是行数据），如果没有索引，则会使用隐式的主键来进行锁定</li>
-</ul>
-</li>
-<li>Gap Lock：间隙锁，锁定一个范围，但不包含记录本身<ul>
-<li>作用是阻止多个事务将记录插入到同一范围内，会导致Phantom Problem问题的产生<ul>
-<li>如果对于辅助索引b，会话A锁定了b=3的记录</li>
-<li>若没有gap Lock锁定(3,6)，则用户可以插入索引b=3的记录</li>
-<li>此时会话A再次查询时，会返回不同的记录</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Next-Key Lock：Gap Lock+Record Lock，锁定一个范围，并锁定记录本身<ul>
-<li>Repeadtable Read采用</li>
-<li>如果一个索引有10，11，13，20</li>
-<li>则该索引可能被Next-Key锁定的区间为(-无穷，10]，(10,11]，(11,13]，(13,20]，(20,+无穷）</li>
-<li>当查询的索引含有唯一属性（主键），则优化为Record Lock，如主键</li>
-<li>对于辅助索引，会对包含该键值的上下两个区间上锁，上区间加next-key lock，下区间加gap lock<ul>
-<li>如11，则上区间(10,11]，下区间(11,13)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>InnoDB存储引擎的锁算法的一些规则如下所示</p>
-<ul>
-<li>在不通过索引条件查询时，InnoDB 会锁定表中的所有记录。所以，如果考虑性能，WHERE语句中的条件查询的字段都应该加上索引。</li>
-<li>InnoDB通过索引来实现行锁，而不是通过锁住记录。因此，当操作的两条不同记录拥有相同的索引时，也会因为行锁被锁而发生等待。</li>
-<li>由于InnoDB的索引机制，数据库操作使用了主键索引，InnoDB会锁住主键索引；使用非主键索引时，InnoDB会先锁住非主键索引，再锁定主键索引。</li>
-<li>当查询的索引是唯一索引(不存在两个数据行具有完全相同的键值)时，InnoDB存储引擎会将Next-Key Lock降级为Record Lock，即只锁住索引本身，而不是范围。</li>
-<li>InnoDB对于辅助索引有特殊的处理，不仅会锁住辅助索引值所在的范围，还会将其下一键值加上Gap LOCK。</li>
-<li>InnoDB使用Next-Key Lock机制来避免Phantom Problem（幻读问题）。</li>
-</ul>
-<h3 id="解决Phantom-Problem幻像问题"><a href="#解决Phantom-Problem幻像问题" class="headerlink" title="解决Phantom Problem幻像问题"></a>解决Phantom Problem幻像问题</h3><p>InnoDB存储引擎使用Next-Key Lock避免幻像问题</p>
-<p>Phantom Problem幻像问题：同一个事务下，连续执行两次同样的SQL语句可能导致不同的结果，第二次的SQL语句可能会返回之前不存在的行。</p>
-<h2 id="锁问题"><a href="#锁问题" class="headerlink" title="锁问题"></a>锁问题</h2><p>锁提高了并发，但会带来潜在的问题</p>
-<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>脏读即读取到了脏数据，存在的级别为Read Uncommitted</p>
-<ul>
-<li><p>脏数据：事务对缓冲池中行记录的修改，并且还没有被提交</p>
-<ul>
-<li>如果读到了脏数据，即一个事务读取到另一个事务未提交的数据，违反了数据库的隔离性</li>
-</ul>
-</li>
-<li><p>脏页：在缓冲池已经被修改的页，但还没有刷新到磁盘中</p>
-<ul>
-<li>由于内存与磁盘的一步造成，不影响数据的一致性，并且最终会到达一致性</li>
-</ul>
-</li>
-</ul>
-<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>在一个事务内多次读取同一数据集合，在这个事务还没有结束时，另外一个事务也访问该同一数据集合，并做了一些DML操作。因此在第一个事务中的两次读数据间，由于第二个事务的修改，第一个事务两次读取到的数据可能不一样。</p>
-<p>与脏读的区别：</p>
-<ul>
-<li>脏读读到未提交的数据，不可重复读读取到已经提交的数据</li>
-<li>不可重复读违反了数据库事务一致性的要求</li>
-</ul>
-<p>由于读取到的是已经提交的数据，一般而言不会带来很大问题，因此一些数据库允许该现象</p>
-<h3 id="丢失更新"><a href="#丢失更新" class="headerlink" title="丢失更新"></a>丢失更新</h3><p>一个事务的更新操作会被另一个事务的更新操作所覆盖，导致数据的不一致</p>
-<ul>
-<li>事务T1将行记录r更新为v1，但是事务T1未提交</li>
-<li>同时，事务T2将行记录r更新为v2，事务T2未提交</li>
-<li>事务T1提交</li>
-<li>事务T2提交</li>
-</ul>
-<p>在任何隔离级别下都不会发生</p>
-<p>但可能出现另一个问题</p>
-<ul>
-<li>事务T1查询一行数据，放入本地内存，显示给一个用户U1</li>
-<li>同时，事务T2查询该记录，显式给用户U2</li>
-<li>U1修改这行记录，更新并提交</li>
-<li>U2修改这行记录，更新并提交</li>
-<li>银行转账场景下回出现问题</li>
-</ul>
-<h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>由于不同锁间的兼容性关系，在有些时刻一个事务中的锁需要等待另一个事务中的锁释放它占用的资源</p>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h2 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h2><p>锁升级是指将当前锁的粒度降低。</p>
-<p>将一个表的1000行锁升级为一个页锁</p>
-<p>升级保护了系统资源，防止系统使用太多内存来维护锁，一定程度上提高了效率</p>
-<p>InnoDB存储引擎不会有锁升级。因为根据页进行加锁，并采用<strong>位图方式</strong>，开销很小</p>
-<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务指的是满足 ACID 特性的一组操作，可以通过 Commit 提交一个事务，也可以使用 Rollback 进行回滚。</p>
-<p>主要关注事务的原子性概念</p>
-<p>ACID：</p>
-<ul>
-<li>原子性（atomicity，或称不可分割性）。一个事务（transaction）中的所有操作，或者全部完成，或者全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。即，事务不可分割、不可约简。</li>
-<li>一致性（consistency）。在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设<strong>约束</strong>、<strong>触发器</strong>、<strong>级联回滚</strong>等。</li>
-<li>隔离性（isolation，又称独立性）。数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括<strong>读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）</strong>。</li>
-<li>持久性（durability）。事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。<ul>
-<li>使用重复日志来保证持久性</li>
-</ul>
-</li>
-</ul>
-<p>这几个特性不是一种平级关系：</p>
-<ul>
-<li>只有满足一致性，事务的执行结果才是正确的。</li>
-<li>在无并发的情况下，事务串行执行，隔离性一定能够满足。此时只要能满足原子性，就一定能满足一致性。</li>
-<li>在并发的情况下，多个事务并行执行，事务不仅要满足原子性，还需要满足隔离性，才能满足一致性。</li>
-<li>事务满足持久化是为了能应对数据库崩溃的情况。</li>
-</ul>
-<p><img src="assets/417bc315-4409-48c6-83e0-59e8d405429e.jpg" alt="img"></p>
-<h2 id="AUTOCOMMIT"><a href="#AUTOCOMMIT" class="headerlink" title="AUTOCOMMIT"></a>AUTOCOMMIT</h2><p>MySQL 默认采用自动提交模式。也就是说，如果不显式使用<code>START TRANSACTION</code>语句来开始一个事务，那么每个查询都会被当做一个事务自动提交。</p>
-<h2 id="认识事务"><a href="#认识事务" class="headerlink" title="认识事务"></a>认识事务</h2><p><strong>分类</strong></p>
-<p>从事务理论的角度来说，可以将事务分为以下几种类型</p>
-<ul>
-<li>扁平</li>
-</ul>
-<h2 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h2><table>
-<thead>
-<tr>
-<th>隔离级别</th>
-<th>脏读</th>
-<th>不可重复读</th>
-<th>幻读</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>未提交读 Read uncommitted</td>
-<td>可能</td>
-<td>可能</td>
-<td>可能</td>
-</tr>
-<tr>
-<td>已提交读 Read committed</td>
-<td></td>
-<td>可能</td>
-<td>可能</td>
-</tr>
-<tr>
-<td>可重复读 Repeatable read</td>
-<td>不可能</td>
-<td>不可能</td>
-<td>可能</td>
-</tr>
-<tr>
-<td>可串行化Serializable</td>
-<td>不可能</td>
-<td>不可能</td>
-<td>不可能</td>
-</tr>
-</tbody></table>
-<ul>
-<li>未提交读(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据</li>
-<li>提交读(Read Committed)：只能读取到已经提交的数据。Oracle等多数数据库默认都是该级别 (不重复读)<ul>
-<li>脏读：即读取到了脏数据</li>
-<li>脏数据：事务对缓冲池中行记录的修改，并且还没有被提交<ul>
-<li>如果读到了脏数据，即一个事务读取到另一个事务未提交的数据，违反了数据库的隔离性</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>可重复读(Repeated Read)：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻象读<ul>
-<li>不可重复读：读取到其他事务已经提交的数据<ul>
-<li>在一个事务内多次读取同一数据集合，在这个事务还没有结束时，另外一个事务也访问该同一数据集合，并做了一些DML操作。因此在第一个事务中的两次读数据间，由于第二个事务的修改，第一个事务两次读取到的数据可能不一样。</li>
-<li>不可重复读违反了数据库事务一致性的要</li>
-<li>由于读取到的是已经提交的数据，一般而言不会带来很大问题，因此一些数据库允许该现象</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞<ul>
-<li>幻读：不可重复读的一种特殊场景<ul>
-<li>幻读是指当事务不是独立执行时发生的一种现象。</li>
-<li>事务A读取与搜索条件相匹配的若干行。事务B以插入或删除行等方式来修改事务A的结果集，然后再提交。</li>
-<li>幻读是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，比如这种修改涉及到表中的“全部数据行”。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入“一行新数据”。那么，以后就会发生操作第一个事务的用户发现表中还存在没有修改的数据行，就好象发生了幻觉一样.一般解决幻读的方法是增加范围锁RangeS，锁定检索范围为只读，这样就避免了幻读。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>默认的隔离级别：可重复读Repeated Read。采用Next-KeyLock算法避免锁的产生。</p>
-<p>同时使用隔离级别的开销基本一致。因此即使使用未提交读也不会得到性能的大幅提升</p>
-<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><h2 id="MySQL数据库分布式事务"><a href="#MySQL数据库分布式事务" class="headerlink" title="MySQL数据库分布式事务"></a>MySQL数据库分布式事务</h2><p>InnoDB存储引擎提供了对XA事务的支持，并通过XA事务来支持对分布式事务的实现。</p>
-<ul>
-<li>分布式事务：允许多个独立的事务资源参与到一个全局的事务中。</li>
-<li>事务资源：通常是关系型数据库系统，页可以是其他类型的资源。</li>
-<li>全局事务要求在其中的所有参与的事务要么都提交，要么都回滚。</li>
-</ul>
-<p>实现分布式事务，InnoDB存储引擎的事务隔离级别必须为Serializable</p>
-<p>XA事务允许不同数据库键的分布式事务，如MySQL、oracle数据库，只要参与全局事务中的每个节点都支持XA事务。</p>
-<p>XA事务由一个或多个资源管理器、一个事务管理器以及一个应用程序组成。</p>
-<ul>
-<li>资源管理器：提供访问事务资源的方法，通常一个数据库就是一个资源管理器</li>
-<li>事务管理器：协调参与全局事务中的各个事务，需要和参与全局事务的所有资源管理器进行通信</li>
-<li>应用程序：定义事务的边界，指定全局事务中的操作。</li>
-</ul>
-<p><em>分布式事务的实现</em></p>
-<ul>
-<li>采用两段式提交的方式</li>
-<li>第一阶段：所有参与全局事务的节点都开始准备，告诉事务管理器它们准备好提交了</li>
-<li>第二阶段：事务管理器告诉资源管理器执行ROLLBACK或COMMIT。</li>
-<li>与本地事务不同的是，分布式事务要多一次prepare工作，待收到所有节点的同意信息后，再进行commit或者rollback</li>
-</ul>
-<h3 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h3><p>Java的JTA可以很好的支持MySQL的分布式事务</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyXid</span> <span class="keyword">implements</span> <span class="title">Xid</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> formatId;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">byte</span> gtrid[];</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">byte</span> bqual[];</span><br><span class="line">    <span class="comment">//get方法</span></span><br><span class="line">    <span class="comment">//构造器</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XaDemo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MysqlXADataSource <span class="title">getDataSource</span><span class="params">(String connStr, String user, String pwd)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"> </span><br><span class="line">            MysqlXADataSource ds = <span class="keyword">new</span> MysqlXADataSource();</span><br><span class="line">            ds.setUrl(connStr);</span><br><span class="line">            ds.setUser(user);</span><br><span class="line">            ds.setPassword(pwd);</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">return</span> ds;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arg)</span> </span>&#123;</span><br><span class="line">        String connStr1 = <span class="string">"jdbc:mysql://192.168.0.1:3306/test"</span>;</span><br><span class="line">        String connStr2 = <span class="string">"jdbc:mysql://192.168.0.2:3306/test"</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//从不同数据库获取数据库数据源</span></span><br><span class="line">            MysqlXADataSource ds1 = getDataSource(connStr1, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line">            MysqlXADataSource ds2 = getDataSource(connStr2, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//数据库1获取连接</span></span><br><span class="line">            XAConnection xaConnection1 = ds1.getXAConnection();</span><br><span class="line">            XAResource xaResource1 = xaConnection1.getXAResource();</span><br><span class="line">            Connection connection1 = xaConnection1.getConnection();</span><br><span class="line">            Statement statement1 = connection1.createStatement();</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//数据库2获取连接</span></span><br><span class="line">            XAConnection xaConnection2 = ds2.getXAConnection();</span><br><span class="line">            XAResource xaResource2 = xaConnection2.getXAResource();</span><br><span class="line">            Connection connection2 = xaConnection2.getConnection();</span><br><span class="line">            Statement statement2 = connection2.createStatement();</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//创建事务分支的xid</span></span><br><span class="line">            Xid xid1 = <span class="keyword">new</span> MysqlXid(<span class="keyword">new</span> <span class="keyword">byte</span>[] &#123; <span class="number">0x01</span> &#125;, <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123; <span class="number">0x02</span> &#125;, <span class="number">100</span>);</span><br><span class="line">            Xid xid2 = <span class="keyword">new</span> MysqlXid(<span class="keyword">new</span> <span class="keyword">byte</span>[] &#123; <span class="number">0x011</span> &#125;, <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123; <span class="number">0x012</span> &#125;, <span class="number">100</span>);</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//事务分支1关联分支事务sql语句</span></span><br><span class="line">                xaResource1.start(xid1, XAResource.TMNOFLAGS);</span><br><span class="line">                <span class="keyword">int</span> update1Result = statement1.executeUpdate(<span class="string">"update account_from set money=money - 50 where id=1"</span>);</span><br><span class="line">                xaResource1.end(xid1, XAResource.TMSUCCESS);</span><br><span class="line"> </span><br><span class="line">                <span class="comment">//事务分支2关联分支事务sql语句</span></span><br><span class="line">                xaResource2.start(xid2, XAResource.TMNOFLAGS);</span><br><span class="line">                <span class="keyword">int</span> update2Result = statement2.executeUpdate(<span class="string">"update account_to set money= money + 50 where id=1"</span>);</span><br><span class="line">                xaResource2.end(xid2, XAResource.TMSUCCESS);</span><br><span class="line"> </span><br><span class="line">                <span class="comment">// 两阶段提交协议第一阶段</span></span><br><span class="line">                <span class="keyword">int</span> ret1 = xaResource1.prepare(xid1);</span><br><span class="line">                <span class="keyword">int</span> ret2 = xaResource2.prepare(xid2);</span><br><span class="line"> </span><br><span class="line">                <span class="comment">// 两阶段提交协议第二阶段</span></span><br><span class="line">                <span class="keyword">if</span> (XAResource.XA_OK == ret1 &amp;&amp; XAResource.XA_OK == ret2) &#123;</span><br><span class="line">                    xaResource1.commit(xid1, <span class="keyword">false</span>);</span><br><span class="line">                    xaResource2.commit(xid2, <span class="keyword">false</span>);</span><br><span class="line"> </span><br><span class="line">                    System.out.println(<span class="string">"reslut1:"</span> + update1Result + <span class="string">", result2:"</span> + update2Result);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>
+              MySQL体系结构和存储引擎尽管各平台在底层实现方面都各有不同，但是MySQL基本上能保证在各平台上的物理体系结构的一致性
+定义数据库和实例
+数据库
 
-<h3 id="内部XA事务"><a href="#内部XA事务" class="headerlink" title="内部XA事务"></a>内部XA事务</h3><ul>
-<li>之前的分布式事务时外部事务，即资源管理器是MySQL数据库本身</li>
-<li>另一种分布式事务在存储引擎与插件间，或者存在于存储引擎与存储引擎间，称为内部XA事务。</li>
-</ul>
-<p>常见的为binlog与InnoDB存储引擎间。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+物理操作系统文件或其他形式文件类型的集合。
+在MySQL数据库中，文件可以是frm、MYD、MYI等结尾的文件。
+NDB引擎时，可能是存放于内存当中
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/01/数据库/MySQL：/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -3051,82 +1553,25 @@
 
       
           
-            <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><ul>
-<li>有些对象其实我们只需要一个。如果制造出多个，就会导致许多问题的产生。<ul>
-<li>如线程池、缓存、对话框、处理偏好设置和注册表的对象、日志对象，充当打印机、显卡设备的驱动程序的对象</li>
-</ul>
-</li>
-<li>使用全局变量存在缺陷<ul>
-<li>如果使用全局变量，则必须在程序一开始就创建好对象。如果对象非常消耗资源，而程序在这次执行中又没有使用到它，则形成浪费</li>
-</ul>
-</li>
-</ul>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><blockquote>
-<p>单例模式：确保一个类只有一个实例，并提供一个全局访问点</p>
-</blockquote>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
-<li>当类只能有一个实例，而且客户可以从一个众所周知的访问点访问它</li>
-<li>当这个唯一实例应该是通过子类化可扩展的，并且客户应该无需更改代码就能使用一个扩展的实例</li>
-</ul>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h2 id="协作"><a href="#协作" class="headerlink" title="协作"></a>协作</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="assets/1564056712943.png" alt="1564056712943"></p>
-<h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><h3 id="协作-1"><a href="#协作-1" class="headerlink" title="协作"></a>协作</h3><ul>
-<li>类关系</li>
-<li>逻辑关系</li>
-</ul>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><ul>
-<li>对唯一实例的受控访问。因为Singleton类封装它的唯一实例，所以可以严格控制客户怎样以及何时访问它</li>
-<li>缩小名空间。Singleton是对全局变量的一种改进，避免了那些存储唯一实例的全局变量污染名空间</li>
-<li>允许对操作和表示的精化。Singleton可以有子类，而且用这个扩展类的</li>
-<li>允许可变数目的实例</li>
-<li>比类操作更为灵活</li>
-</ul>
-<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h3><ul>
-<li>为什么全局变量比单例差<ul>
-<li>急切实例化VS延迟实例化</li>
-<li>全局变量可以提供全局访问，但是不能保证只有一个实例。而且全局变量指向很多小对象会造成命名空间的污染。</li>
-</ul>
-</li>
-<li>为什么不创建一个类，把所有的方法和变量定义为静态，将类当做一个单例<ul>
-<li>如果类自给自足，而且不依赖于复杂的初始化，那么OK的</li>
-<li>但静态初始化的控制权是在Java手上，并且当很多类牵扯其中时，就可能有一些与初始化次序有关的bug</li>
-</ul>
-</li>
-</ul>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h4><h5 id="线程不安全法"><a href="#线程不安全法" class="headerlink" title="线程不安全法"></a>线程不安全法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 懒汉模式</span></span><br><span class="line"><span class="comment"> * 单例实例在第一次使用时候进行创建</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@NotRecommend</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonExample1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//私有的构造函数</span></span><br><span class="line">    <span class="comment">//即其他途径无法创建这个类的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonExample1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//包含对资源的处理等等</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//单例对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonExample1 instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态的工厂方法</span></span><br><span class="line">    <span class="comment">//public</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonExample1 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//多线程环境很容易出现问题</span></span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            instance = <span class="keyword">new</span> SingletonExample1();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>
+              单例模式提出问题
+有些对象其实我们只需要一个。如果制造出多个，就会导致许多问题的产生。
+如线程池、缓存、对话框、处理偏好设置和注册表的对象、日志对象，充当打印机、显卡设备的驱动程序的对象
 
-<p><strong>双重检测机制</strong>(线程不安全)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 懒汉模式 --&gt; 双重同步锁单例模式</span></span><br><span class="line"><span class="comment"> * 单例实例在第一次使用时候进行创建</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@NotRecommend</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonExample4</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//私有的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonExample4</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1.memory = allocate() 分配对象的内存空间</span></span><br><span class="line">    <span class="comment">// 2.ctorInstance() 初始化对象</span></span><br><span class="line">    <span class="comment">// 3. instance = memory 设置instance 指向刚分配的内存</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//JVM和CPU优化，发生了指令重排</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1.memory = allocate() 分配对象的内存空间</span></span><br><span class="line">    <span class="comment">// 3. instance = memory 设置instance 指向刚分配的内存</span></span><br><span class="line">    <span class="comment">// 2.ctorInstance() 初始化对象</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//在第三步的时候,instance!=null</span></span><br><span class="line">    <span class="comment">//而此时在指令重排下,另一个线程就会获得一个没有初始化对象的引用,并将其返回</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//单例对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonExample4 instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态的工厂方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> SingletonExample4 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123; <span class="comment">//双重检测机制          //B</span></span><br><span class="line">            <span class="keyword">synchronized</span> (SingletonExample4.class)&#123; <span class="comment">//同步锁</span></span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> SingletonExample4(); <span class="comment">//A - 3</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="线程安全法"><a href="#线程安全法" class="headerlink" title="线程安全法"></a>线程安全法</h5><p>不推荐法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonExample3</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//私有的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonExample3</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//单例对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonExample3 instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态的工厂方法</span></span><br><span class="line">    <span class="comment">//synchronized限制,而存在性能开销</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SingletonExample3 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            instance = <span class="keyword">new</span> SingletonExample3();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>双重同步锁</strong></p>
-<p>基于volatile</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 懒汉模式 --&gt; 双重同步锁单例模式</span></span><br><span class="line"><span class="comment"> * 单例实例在第一次使用时候进行创建</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonExample5</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//私有的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonExample5</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1.memory = allocate() 分配对象的内存空间</span></span><br><span class="line">    <span class="comment">// 2.ctorInstance() 初始化对象</span></span><br><span class="line">    <span class="comment">// 3. instance = memory 设置instance 指向刚分配的内存</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//单例对象 volatitle+ 双重检测机制 -&gt; 禁止指令重排序</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> SingletonExample5 instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态的工厂方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> SingletonExample5 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123; <span class="comment">//双重检测机制          //B</span></span><br><span class="line">            <span class="keyword">synchronized</span> (SingletonExample5.class)&#123; <span class="comment">//同步锁</span></span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> SingletonExample5(); <span class="comment">//A - 3</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h4><p>通过静态域实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 饿汉模式</span></span><br><span class="line"><span class="comment"> * 单例实例在装载使用时候进行创建</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonExample2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//私有的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonExample2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//如果构造方法中存在过多的功能,则在加载时会过慢,存在性能问题</span></span><br><span class="line">        <span class="comment">//只进行资源加载而没有实际调用,则会导致资源浪费</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//单例对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonExample2 instance = <span class="keyword">new</span> SingletonExample2();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态的工厂方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> SingletonExample2 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过静态块实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonExample6</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//私有的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonExample6</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="comment">//静态资源是顺序执行的</span></span><br><span class="line">    <span class="comment">//单例对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonExample6 instance = <span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">//必须写在后面,如果写在前面,则会被上一句赋值为null</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        instance = <span class="keyword">new</span> SingletonExample6();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态的工厂方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> SingletonExample6 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(getInstance().hashCode());</span><br><span class="line">        System.out.println(getInstance().hashCode());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="枚举模式"><a href="#枚举模式" class="headerlink" title="枚举模式"></a>枚举模式</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 枚举模式：最安全</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="meta">@Recommend</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonExample7</span> </span>&#123;</span><br><span class="line">    <span class="comment">//私有的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonExample7</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonExample7 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//在实际使用的时候才会初始化</span></span><br><span class="line">        <span class="keyword">return</span> Singleton.INSTANCE.getSingleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">enum</span> Singleton&#123;</span><br><span class="line">        INSTANCE;</span><br><span class="line">        <span class="keyword">private</span> SingletonExample7 singleton;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//JVM保证这个方法绝对只调用一次</span></span><br><span class="line">        Singleton()&#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> SingletonExample7();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> SingletonExample7 <span class="title">getSingleton</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> singleton;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><h4 id="与其他的区别"><a href="#与其他的区别" class="headerlink" title="与其他的区别"></a>与其他的区别</h4><h2 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h2><h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><ul>
-<li>为什么不直接使用synchronized同步getInstance()，简单有效<ul>
-<li>因为同步一个方法可能导致程序的执行效率下降100倍，如果这个getInstance()在一个频繁运行的地方，那性能将很差了。</li>
-</ul>
-</li>
-<li>两个类加载器有机会各自创建自己的单例<ul>
-<li>自行指定类加载器，指定同一个类加载器</li>
-</ul>
-</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
-</ol>
-
+使用全局变量存在缺陷
+如果使用全局变量，则必须在程序一开始就创建好对象。如果对象非常消耗资源，而程序在这次执
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/31/Java/设计模式/设计模式：单例模式/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -3261,346 +1706,19 @@
 
       
           
-            <h1 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h1><p>简而言之，微服务架构风格这种开发方法，是以开发一组小型服务的方式来开发一个独立的应用系统的。其中每个小型服务都运行在自己的进程中，并经常采用HTTP资源API这样轻量的机制来相互通信。这些服务围绕业务功能进行构建，并能通过全自动的部署机制来进行独立部署。这些微服务可以使用不同的语言来编写，并且可以使用不同的数据存储技术。对这些微服务我们仅做最低限度的集中管理。</p>
-<h2 id="为什么需要微服务架构"><a href="#为什么需要微服务架构" class="headerlink" title="为什么需要微服务架构"></a>为什么需要微服务架构</h2><p>“微服务”架构是近期软件应用领域非常热门的概念。让我们先来看看传统IT架构面临的一些问题：</p>
-<ul>
-<li>使用传统的整体式架构(Monolithic Architecture)应用开发系统，如CRM、ERP等大型应用，随着新需求的不断增加，企业更新和修复大型整体式应用变得越来越困难；</li>
-<li>随着移动互联网的发展，企业被迫将其应用迁移至现代化UI界面架构以便能兼容移动设备，这要求企业能实现应用功能的快速上线；</li>
-<li>许多企业在SOA投资中得到的回报有限，SOA可以通过标准化服务接口实现能力的重用，但对于快速变化的需求，受到整体式应用的限制，有时候显得力不从心；</li>
-<li>随着应用云化的日益普及，生于云端的应用具有与传统IT不同的技术基因和开发运维模式。</li>
-</ul>
-<p>此外，从技术方面看，云计算及互联网公司大量开源轻量级技术不停涌现并日渐成熟：</p>
-<ul>
-<li>互联网/内联网/网络更加成熟；</li>
-<li>轻量级运行时技术的出现(node.js, WAS Liberty等)；</li>
-<li>新的方法与工具(Agile, DevOps, TDD, CI, XP, Puppet, Chef…)；</li>
-<li>新的轻量级协议(RESTful API接口, 轻量级消息机制)；</li>
-<li>简化的基础设施：操作系统虚拟化(hypervisors), 容器化(e.g. Docker), 基础设施即服务 (IaaS), 工作负载虚拟化(Kubernetes,Spark…)等；</li>
-<li>服务平台化(PaaS)： 云服务平台上具有自动缩放、工作负载管理、SLA 管理、消息机制、缓存、构建管理等各种按需使用的服务；</li>
-<li>新的可替代数据持久化模型：如NoSQL, MapReduce, BASE, CQRS等；</li>
-<li>标准化代码管理：如Github等。</li>
-</ul>
-<p>这一切都催生了新的架构设计风格 – 微服务架构的出现。</p>
-<h2 id="什么是微服务-1"><a href="#什么是微服务-1" class="headerlink" title="什么是微服务"></a>什么是微服务</h2><p>什么是微服务</p>
-<p>微服务是一种架构风格，一个大型复杂软件应用由一个或多个微服务组成。系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。在所有情况下，每个任务代表着一个小的业务能力。</p>
-<p>微服务的概念源于2014年3月Martin Fowler所写的一篇文章<a href="http://martinfowler.com/articles/microservices.html" target="_blank" rel="noopener">Microservices</a>。</p>
-<p>尽管“微服务”这种架构风格没有精确的定义，但其具有一些共同的特性，如围绕业务能力组织服务、自动化部署、智能端点、对语言及数据的“去集中化”控制等等。</p>
-<p>微服务架构的思考是从与整体应用对比而产生的。</p>
-<p><img src="assets/1554016337227.png" alt="1554016337227"></p>
-<p>其中，对应用组件封装的方式是整体架构与微服务架构的主要差异，微服务架构将相关联的业务逻辑及数据放在一起形成独立的边界，其目的是能在不影响其他应用组件(微服务)的情况下更快地交付并推出市场。</p>
-<p><img src="assets/1554016379244.png" alt="1554016379244"></p>
-<h3 id="微服务架构的一些通用特性"><a href="#微服务架构的一些通用特性" class="headerlink" title="微服务架构的一些通用特性"></a>微服务架构的一些通用特性</h3><p>根据MartinFowler的分析，微服务架构有以下的一些通用特性，但并非所有微服务架构应用都必须具备所有这些特性：</p>
-<ol>
-<li>每个微服务可以独立运行在自己的进程里。通过服务实现应用的组件化(Componentizationvia Services)：微服务架构中将组件定义为可被独立替换和升级的软件单元，在应用架构设计中通过将整体应用切分成可独立部署及升级的微服务方式进行组件化设计。</li>
-<li>一系列独立运行的微服务共同构建起整个系统</li>
-<li>围绕业务能力组织服务(Organizedaround Business Capabilities)，每个服务为独立的业务开发，一个服务只关注<strong>一个功能</strong>。如订单管理、用户管理<ul>
-<li>：微服务架构采取以业务能力为出发点组织服务的策略，因此微服务团队的组织结构必须是跨功能的（如：既管应用，也管数据库）、强搭配的DevOps开发运维一体化团队，通常这些团队不会太大（如：亚马逊的“Two pizzateam”- 不超过12人）。</li>
-</ul>
-</li>
-<li>微服务间通过一些轻量级的通信机制进行通信，如通过rest api</li>
-<li>可以使用不同的语言和数据存储技术</li>
-<li>全自动的部署机制</li>
-</ol>
-<p><img src="assets/1554016420725.png" alt="1554016420725"></p>
-<ol>
-<li>产品而非项目模式(Productsnot Projects)：传统的应用模式是一个团队以项目模式开发完整的应用，开发完成后就交付给运维团队负责维护；微服务架构则倡导一个团队应该如开发产品般负责一个“微服务”完整的生命周期，倡导“谁开发，谁运营”的开发运维一体化方法。</li>
-<li>智能端点与管道扁平化(Smartendpoints and dumb pipes)：微服务架构主张将组件间通讯的相关业务逻辑/智能放在组件端点侧而非放在通讯组件中，通讯机制或组件应该尽量简单及松耦合。RESTful HTTP协议和仅提供消息路由功能的轻量级异步机制是微服务架构中最常用的通讯机制。</li>
-<li>“去中心化”治理(DecentralizedGovernance)：整体式应用往往倾向于采用单一技术平台，微服务架构则鼓励使用合适的工具完成各自的任务，每个微服务可以考虑选用最佳工具完成(如不同的编程语言)。微服务的技术标准倾向于寻找其他开发者已成功验证解决类似问题的技术。</li>
-<li>“去中心化”数据管理(DecentralizedData Management)：微服务架构倡导采用多样性持久化(PolyglotPersistence)的方法，让每个微服务管理其自有数据库，并允许不同微服务采用不同的数据持久化技术。</li>
-<li>基础设施自动化(InfrastructureAutomation)：云化及自动化部署等技术极大地降低了微服务构建、部署和运维的难度，通过应用持续集成和持续交付等方法有助于达到加速推出市场的目的。</li>
-<li>故障处理设计(Designfor failure)：微服务架构所带来的一个后果是必须考虑每个服务的失败容错机制。因此，微服务非常重视建立架构及业务相关指标的实时监控和日志机制。</li>
-<li>演进式的设计(EvolutionaryDesign)：微服务应用更注重快速更新，因此系统的计会随时间不断变化及演进。微服务的设计受业务功能的生命周期等因素影响。如某应用是整体式应用，但逐渐朝微应用架构方向演进，整体式应用仍是核心，但新功能将使用应用所提供的API构建。再如在某微服务应用中，可替代性模块化设计的基本原则，在实施后发现某两个微服务经常必须同时更新，则这很可能意味着应将其合并为一个微服务。</li>
-</ol>
-<h3 id="微服务的一些常见误解"><a href="#微服务的一些常见误解" class="headerlink" title="微服务的一些常见误解"></a>微服务的一些常见误解</h3><p><img src="assets/1554016443609.png" alt="1554016443609"></p>
-<p>关于一些比较概念的澄清：</p>
-<ol>
-<li>在同一范畴内比较才有意义：<ul>
-<li><strong>微服务架构 vs. SOA</strong> – 两者都是架构风格范畴，但其关注领域与涉及范围不同。SOA更关注企业规模范围，微服务架构则更关注应用规模范围。</li>
-<li><strong>微服务组件 vs. 服务组件</strong> – 两者都是描述业务功能的具体实现，其区别在于粒度不同，此外还有在可管理性、灵活性上的差异。</li>
-</ul>
-</li>
-<li>概念混淆的不恰当比较<ul>
-<li><strong>微服务 vs. SOA – 不恰当的比较</strong>。微服务是组件范畴，而SOA是一种架构设计风格。因此应该比较的是微服务架构与SOA。</li>
-<li><strong>微服务 vs. API – 不恰当的比较</strong>。 API是接口，是业务功能暴露的一种机制。微服务架构是用于实施业务功能的组件架构。因此直接比较它们是没有意义的。</li>
-<li><strong>微服务 vs. 服务– 不恰当的比较</strong>。“服务”在不同的场景下有不同的含义，需要进一步澄清其描述的语境，是指服务实施、服务暴露、服务定义还是其他？微服务亦是如此，需要有特定语境才可判断比较是否有意义。</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><strong>微服务架构与SOA架构的比较</strong></li>
-</ul>
-<p><img src="assets/1554016464813.png" alt="1554016464813"></p>
-<ul>
-<li><strong>一个简单的微服务应用例子：航班预订应用</strong></li>
-</ul>
-<p><img src="assets/1554016487735.png" alt="1554016487735"></p>
-<p>将航班预订应用划分为预订航班、时间表查询、计算票价、分配座位、管理奖励、更新客户、调整库存七个微服务实施。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="哪些应用会从微服务收益-？"><a href="#哪些应用会从微服务收益-？" class="headerlink" title="哪些应用会从微服务收益 ？"></a>哪些应用会从微服务收益 ？</h3><ol>
-<li><strong>记录型系统(System of Record)</strong>将从微服务方法中获益最多。例如可将大型应用按相对独立的业务功能分解成若干个微服务实现。</li>
-<li><strong>交互型系统(System of Engagement)</strong>也将受益于微服务方法，例如渠道应用可以应用“后端服务前端”的模式实现。</li>
-<li><strong>分析型系统(System of Insight)</strong>则可能对微服务受益不多。其他架构模式如管道及过滤模式可能更适用于分析型系统。</li>
-</ol>
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="优缺："><a href="#优缺：" class="headerlink" title="优缺："></a>优缺：</h3><p><strong><em>优点</em></strong></p>
-<ol>
-<li>每个服务都比较简单，只关注于一个业务功能。易于开发与维护</li>
-<li>微服务架构方式是松耦合的，可以提供更高的灵活性。</li>
-<li>技术栈不受限制。微服务可通过最佳及最合适的不同的编程语言与工具进行开发，能够做到有的放矢地解决针对性问题。</li>
-<li>每个微服务可由不同团队独立开发，互不影响，加快推出市场的速度。</li>
-<li>微服务架构是持续交付(CD)的巨大推动力，允许在频繁发布不同服务的同时保持系统其他部分的可用性和稳定性。</li>
-<li>单个微服务启动较快</li>
-<li>局部修改容易部署。只需要重新部署这个服务。</li>
-<li>可以针对不同类型的业务，如IO密集型，CPU密集型进行定向的增强</li>
-</ol>
-<p><strong><em>缺点</em></strong>：</p>
-<p> 微服务的一些想法在实践上是好的，但当整体实现时也会呈现出其复杂性。</p>
-<ol>
-<li><strong>运维开销及成本增加</strong>：整体应用可能只需部署至一小片应用服务区集群，而微服务架构可能变成需要构建/测试/部署/运行数十个独立的服务，并可能需要支持多种语言和环境。这导致一个整体式系统如果由20个微服务组成，可能需要40~60个进程。</li>
-<li><strong>必须有坚实的DevOps开发运维一体化技能</strong>：开发人员需要熟知运维与投产环境，开发人员也需要掌握必要的数据存储技术如NoSQL，具有较强DevOps技能的人员比较稀缺，会带来招聘人才方面的挑战。</li>
-<li><strong>隐式接口及接口匹配问题</strong>：把系统分为多个协作组件后会产生新的接口，这意味着简单的交叉变化可能需要改变许多组件，并需协调一起发布。在实际环境中，一个新品发布可能被迫同时发布大量服务，由于集成点的大量增加，微服务架构会有更高的发布风险。</li>
-<li><strong>代码重复</strong>：某些底层功能需要被多个服务所用，为了避免将“同步耦合引入到系统中”，有时需要向不同服务添加一些代码，这就会导致代码重复。</li>
-<li><strong>分布式系统的复杂性</strong>：作为一种分布式系统，微服务引入了复杂性和其他若干问题，例如<em>网络延迟、容错性、消息序列化、不可靠的网络、异步机制、版本化、差异化的工作负载</em>等，开发人员需要考虑以上的分布式系统问题。</li>
-<li><strong>异步机制</strong>：微服务往往使用异步编程、消息与并行机制，如果应用存在跨微服务的事务性处理，其实现机制会变得复杂化。</li>
-<li><strong>可测性的挑战</strong>：在动态环境下服务间的交互会产生非常微妙的行为，难以可视化及全面测试。经典微服务往往不太重视测试，更多的是通过监控发现生产环境的异常，进而快速回滚或采取其他必要的行动。但对于特别在意风险规避监管或投产环境错误会产生显著影响的场景下需要特别注意。</li>
-</ol>
-<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><ol>
-<li>服务自治原则<ul>
-<li>每个微服务必须具备独立的业务能力、依赖于运行环境</li>
-</ul>
-</li>
-<li>单一职责原则</li>
-<li>轻量级通信原则</li>
-<li>接口明确原则<ul>
-<li>每个服务的对外接口都应该明确，并尽量保持不变</li>
-</ul>
-</li>
-</ol>
-<h2 id="关于微服务架构的取舍"><a href="#关于微服务架构的取舍" class="headerlink" title="关于微服务架构的取舍"></a>关于微服务架构的取舍</h2><ol>
-<li>在合适的项目，合适的团队，采用微服务架构收益会大于成本。</li>
-<li>微服务架构有很多吸引人的地方，但在拥抱微服务之前，也需要认清它所带来的挑战。</li>
-<li>需要避免为了“微服务”而“微服务”。</li>
-<li>微服务架构引入策略 – 对传统企业而言，开始时可以考虑引入部分合适的微服务架构原则对已有系统进行改造或新建微服务应用，逐步探索及积累微服务架构经验，而非全盘实施微服务架构。</li>
-</ol>
-<h1 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><strong><em>简单的微服务架构</em></strong></p>
-<p><img src="assets/1561194714392.png" alt="1561194714392"></p>
-<p>基础框架/组件</p>
-<ul>
-<li>服务注册发现<ul>
-<li>后台内部的服务信息交流</li>
-</ul>
-</li>
-<li>服务网关。是连接内外的大门<ul>
-<li>将服务暴露给前端。涉及到服务的前端路由</li>
-<li>对外屏蔽内部的细节</li>
-<li>可以将web的请求反向路由到内部某个微服务中</li>
-<li>限流与容错，监控与日志。所有的请求都要经过网关</li>
-<li>可以对web请求进行控制。是判断微服务做的好不好的<strong>关键</strong></li>
-</ul>
-</li>
-<li>后端通用服务（中间层服务）<ul>
-<li>启动时将信息注册到注册表</li>
-</ul>
-</li>
-<li>前端服务（边缘服务）<ul>
-<li>查询注册表，发现调用后端服务。主要做对后端服务必要的聚合和裁剪，后暴露给外部不同的设备</li>
-<li>聚合：对多个API调用逻辑进行聚合，从而减少客户端的请求数。如客户端要请求两个接口，请求客户的个人信息、请求收货地址。前端服务将这两个接口聚合起来，只需要调用一个接口即可</li>
-<li>裁剪：根据不同的需求返回不同的数据。如果PC端获取数据，尽量详细一些，手机端的话，就信息少 一些。</li>
-</ul>
-</li>
-</ul>
-<h3 id="实现手段"><a href="#实现手段" class="headerlink" title="实现手段"></a>实现手段</h3><ul>
-<li>阿里系<ul>
-<li>Dubbo</li>
-<li>Zookeeper</li>
-<li>Spring MVC与Spring Boot</li>
-</ul>
-</li>
-<li>Spring Cloud<ul>
-<li></li>
-</ul>
-</li>
-</ul>
-<h2 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h2><h3 id="创建调用关系的微服务"><a href="#创建调用关系的微服务" class="headerlink" title="创建调用关系的微服务"></a>创建调用关系的微服务</h3><p>创建存在调用关系的微服务，调用关系如下</p>
-<p><img src="assets/1560864793965.png" alt="1560864793965"></p>
-<p>服务消费者：调用别的微服务</p>
-<p>服务提供者：提供API的微服务</p>
-<h3 id="使用Eureka实现服务注册与发现"><a href="#使用Eureka实现服务注册与发现" class="headerlink" title="使用Eureka实现服务注册与发现"></a>使用Eureka实现服务注册与发现</h3><p><img src="assets/1560867160549.png" alt="1560867160549"></p>
-<p>服务发现组件：包含服务注册表（核心组件）</p>
-<p>服务注册表：存放服务的IP和端口。</p>
-<p>心跳机制：每间隔一段时间向服务发现组件renew，保证服务没有死掉。如果服务没有发送renew，则在服务发现组件中将其踢掉。</p>
-<h2 id="客户端负载均衡"><a href="#客户端负载均衡" class="headerlink" title="客户端负载均衡"></a>客户端负载均衡</h2><p>ribbon客户端的负载均衡器。</p>
-<p>与服务器端的负载均衡的区别</p>
-<ul>
-<li>客户端的负载均衡，去知道服务提供者有几个实例，提供负载均衡的方案</li>
-<li>服务器端的负载均衡，在服务注册侧做负载均衡</li>
-</ul>
-<p>ribbon原理：</p>
-<ul>
-<li>在eureka查询当前可用的提供者结点。获得提供者的IP、端口等的列表。</li>
-<li>进行负载均衡算法，命中某个结点</li>
-</ul>
-<h2 id="声明式的HTTP-Client-Feign"><a href="#声明式的HTTP-Client-Feign" class="headerlink" title="声明式的HTTP Client Feign"></a>声明式的HTTP Client Feign</h2><h2 id="微服务容错"><a href="#微服务容错" class="headerlink" title="微服务容错"></a>微服务容错</h2><h3 id="雪崩效应"><a href="#雪崩效应" class="headerlink" title="雪崩效应"></a>雪崩效应</h3><p>C-&gt;D-&gt;A，当A宕机，则C调用B的服务，B调用A的服务的线程会堵塞，导致C调用B的服务的线程也会阻塞。最后整个系统宕机</p>
-<p><img src="assets/1560867178619.png" alt="1560867178619"></p>
-<h3 id="实现容错的方案"><a href="#实现容错的方案" class="headerlink" title="实现容错的方案"></a>实现容错的方案</h3><ul>
-<li><p>为请求设置超时</p>
-<ul>
-<li>一般一个远程调用一般在几十毫秒就可以得到响应了，如果依赖的服务不可用，则时间就会很长。</li>
-<li>而一个请求对应一个线程，如果响应太慢，则线程无法释放，因此为每个请求设置超时，使得资源尽快释放</li>
-</ul>
-</li>
-<li><p>使用断路器</p>
-<ul>
-<li>当依赖的服务有大量超时，再让新的请求进行访问就没有太大的意义。如果超时间内有大量的请求在时间内都得不到响应，则往往意味着异常。就没有必要让更多的请求访问这个依赖</li>
-<li>此时使用断路器避免资源浪费。断路器实现快速失败，如果在一段时间内侦测到许多类似错误，就会强迫之后的多个调用快速失败，不再请求所依赖的服务。</li>
-</ul>
-<p>断路器状态图：</p>
-<p><img src="assets/1560867760541.png" alt="1560867760541"></p>
-</li>
-</ul>
-<p>半开状态：当断路器打开一段时间，断路器猜测，失败的服务是否已经修好，则让一小部分流量通过，如果结果达到预期值，即服务已经被修复，则关闭断路器，否则继续打开断路器。</p>
-<h2 id="API网关"><a href="#API网关" class="headerlink" title="API网关"></a>API网关</h2><h2 id="统一配置中心"><a href="#统一配置中心" class="headerlink" title="统一配置中心"></a>统一配置中心</h2><h1 id="融入微服务的企业集成架构"><a href="#融入微服务的企业集成架构" class="headerlink" title="融入微服务的企业集成架构"></a>融入微服务的企业集成架构</h1><p>将介绍融入微服务的企业集成架构的演进，并描述交互式系统的微服务模式及相关技术决策，然后给出了一个具体的微服务架构业务应用的例子。</p>
-<h2 id="交互型系统与记录型系统"><a href="#交互型系统与记录型系统" class="headerlink" title="交互型系统与记录型系统"></a>交互型系统与记录型系统</h2><p>随着移动互联网的快速发展，企业除了需要提供传统核心IT系统能力之外，还需提供客户与合作伙伴友好型的以交互为重点的创新及交互式系统。这两类系统的特性与禀赋完全不同，因此企业IT的支撑迈入了双速IT时代。</p>
-<p><img src="assets/640.webp" alt="img"></p>
-<p>企业微服务架构的引入主要集中在以下两类系统：</p>
-<ul>
-<li><strong><em>记录型系统</em></strong>：是指传统的应用系统，对应用所关注领域的信息进行增删改查作为应用的核心能力。如CRM、ERP、OA等系统。记录型系统使用的往往是一些传统的经典IT技术构建，往往更难改变，其集成难度也较高。</li>
-<li><strong>交互型系统</strong>：是指以与用户交互为主要目的而开发的应用系统。如各种移动应用、微信、微博等等。交互型系统更多地会采用现代的各种新技术语言及运行时部署，具体高度的敏捷性，通过简单的现代化连接即可实现集成。</li>
-</ul>
-<h2 id="融入微服务的企业集成架构-1"><a href="#融入微服务的企业集成架构-1" class="headerlink" title="融入微服务的企业集成架构"></a>融入微服务的企业集成架构</h2><p>不同的企业背景应该采用不同的微服务架构引入策略：</p>
-<ul>
-<li><strong>对大型的成熟企业而言</strong>，由于本身已有大量在建的企业IT系统，因此决定了微服务架构仅是其多种应用架构风格之一，大型企业在服务总线与能力开放网关的集成架构下，可以首先从交互型系统入手引入基于微服务架构的应用，逐步积累面向微服务的开发运维经验。另外，对于部分新建的记录型系统，也可以考虑采用微服务架构进行构建，并通过服务总线等SOA集成技术实现与企业遗留系统的信息交互。</li>
-</ul>
-<p><img src="assets/640.webp" alt="img"></p>
-<ul>
-<li><strong>对于初创企业而言</strong>，由于其没有任何历史包袱，因此可以考虑将企业范围的整体架构以(微)服务架构为基础进行搭建。</li>
-</ul>
-<p><img src="assets/640.webp" alt="img"></p>
-<ul>
-<li>大型成熟企业在企业集成架构及<strong>不同应用(整体式应用与微服务应用)架构风格中使用的技术及中间件也各有不同</strong>。例如：在整体式应用中往往更强调应用的交易完整性、安全性、数据的一致性等高标准特性，而微服务应用则更强调系统功能的快速上线。因此，这导致了这两类系统所偏好的技术及中间件产品会有差异。下图是在一个企业集成架构中，不同应用及集成所对应的IBM软件产品的示例：</li>
-</ul>
-<p><img src="assets/640.webp" alt="img"></p>
-<ol>
-<li>整体式应用使用WAS ND集群化企业级应用服务器和DB2数据库。</li>
-<li>微服务应用使用轻量级的WAS Liberty、Node.js，以及NoSQL数据库。</li>
-<li>甚至可以考虑将其部署至公有云PaaS平台(如IBM Bluemix)上以充分利用PaaS平台上众多的服务能力。</li>
-<li>集成组件使用企业级的IBM Integration Bus服务总线以及API Connect能力开放网关解决方案。</li>
-</ol>
-<ul>
-<li><p>在<strong>系统云化方面</strong>，整体式应用与微服务应用也具有不同的偏好。因此，未来的企业必然朝着混合型部署架构演进：</p>
-</li>
-<li><p>企业级<strong>整体式应用部署偏好于系统专用资源模式</strong>，也可根据各个应用特性评估是否<strong>可迁移至企业**</strong>私有云**之上以实现企业IT资源优化部署。</p>
-</li>
-<li><p><strong>微服务应用则偏好于生于云端的PaaS平台</strong>，使其可方便地使用各种就绪的底层服务，并采用多样化的编程语言和持久化技术。</p>
-</li>
-</ul>
-<h2 id="交互式系统的微服务模式"><a href="#交互式系统的微服务模式" class="headerlink" title="交互式系统的微服务模式"></a><strong>交互式系统的微服务模式</strong></h2><p>交互式系统微服务模式包括多渠道交互层与业务逻辑层：</p>
-<ol>
-<li><p><strong>多渠道交互层</strong>通常采用“后端服务前端”的设计模式。</p>
-<p><img src="assets/640.webp" alt="img"></p>
-</li>
-<li><p><strong>业务逻辑层</strong>则采用微服务架构，通过垂直服务而非水平分层实现对不同业务功能的解耦。</p>
-<p><img src="assets/640.webp" alt="img">      </p>
-</li>
-<li><p>各业务服务<strong>微服务的依赖关系</strong>是微服务架构设计的一个考虑重点，一个业务服务可以委托给其他业务服务，但需尽量避免循环依赖。需要注意的是每个微服务仍然实现了一个完整的任务，而不是传统的水平分层模式。</p>
-</li>
-</ol>
-<p><img src="assets/640.webp" alt="img"></p>
-<h2 id="交互式系统微服务架构应用的技术决策"><a href="#交互式系统微服务架构应用的技术决策" class="headerlink" title="交互式系统微服务架构应用的技术决策"></a><strong>交互式系统微服务架构应用的技术决策</strong></h2><p> 1、编程语言的考虑：</p>
-<ol>
-<li><strong>Java</strong>：鉴于Java有广大的受众以及其商业软件的企业级保障能力，以及在市场上能够非常容易找到优秀的开发人员，并且Java已开始加速增加最新和最现代的语言特性如Lambda等，<strong>Java仍然是实现**</strong>业务逻辑层<strong>**的不二之选</strong>。其他语言技术虽然层出不穷，各有优点，但并没出现新的统治级编程语言。</li>
-<li><strong>Node.js</strong>：在<strong>交互层</strong>，Node.js是JavaScript服务端的解决方案，结合其他技术组成的<strong>MEAN全堆栈javascript开发框架</strong>（<strong>M</strong>ongo DB – 简单的NoSQL数据库，使用JSON风格存储文档；<strong>E</strong>xpressJS – 是一个Web应用框架，提供有帮助的组件和模块帮助建立一个网站应用； <strong>A</strong>ngularJS – 是一个前端MVC框架；<strong>N</strong>ode.js -是一个并发异步事件驱动的Javascript服务器后端开发平台。），使<strong>Node.js正成为REST服务实施和构建交互式系统方面实上的解决方案</strong>。</li>
-</ol>
-<p><img src="assets/640.webp" alt="img"></p>
-<p> 2、多样性持久化考虑：使用合适的NoSQL技术存储持久化数据。</p>
-<p><img src="assets/640-1554016588043.webp" alt="img"></p>
-<p><strong>交互式系统基于PaaS云端部署方式</strong>：随着PaaS云技术的日益成熟，企业可以考虑将交互式系统部署于云端，以充分利用PaaS平台上的各种服务。可将应用的Web/移动层迁移到云端，交互模型存储到云端，将记录型系统能力以API形式开放出来实现与交互式系统的连接。</p>
-<p><img src="assets/640-1554016588062.webp" alt="img"></p>
-<h2 id="交互式系统微服务架构例子"><a href="#交互式系统微服务架构例子" class="headerlink" title="交互式系统微服务架构例子"></a><strong>交互式系统微服务架构例子</strong></h2><ul>
-<li>航班预订应用微服务架构设计</li>
-</ul>
-<p><img src="assets/640-1554016588067.webp" alt="img"></p>
-<ul>
-<li><p>航班预订应用采用多样化技术满足不同的业务技术特性。</p>
-<p> <img src="assets/640-1554016588075.webp" alt="img"></p>
-</li>
-</ul>
-<p>以上内容介绍了融入微服务的企业集成架构的演进，并描述交互式系统微服务模式及相关技术决策，然后给出了一个具体微服务架构业务应用的例子。</p>
-<h1 id="微服务重构应用及IBM解决方案"><a href="#微服务重构应用及IBM解决方案" class="headerlink" title="微服务重构应用及IBM解决方案"></a>微服务重构应用及IBM解决方案</h1><p>将介绍已有IT应用如何进行微服务重构的转型，以及IBM微服务相关解决方案的介绍。</p>
-<h2 id="微服务转型"><a href="#微服务转型" class="headerlink" title="微服务转型"></a><strong>微服务转型</strong></h2><p>采用微服务架构意味着以更复杂的运维环境为代价，实现更高速的应用交付及更快推出市场。因此企业需要在更快的交付与更复杂的运维之间进行权衡。</p>
-<p><img src="assets/640-1554016624741.webp" alt="img"></p>
-<p>大部分企业都有大量遗留的应用系统，因此对需要更快更好地满足业务需求成为迫切任务时，大部分情况下企业不会全新构建一个完整的应用，通常情况下是企业对<strong>已有应用进行重构</strong>或希望能尽量<strong>重用已有代码</strong>。</p>
-<p>向微服务架构演进通常包括以下几个阶段：</p>
-<p>1.传统的SOA服务化改造；</p>
-<p>\2. 开始引入某些微服务原则，进行针对性重构，如“一个任务一个服务”；</p>
-<p>\3. 引入整套完整的微服务原则；</p>
-<p>\4. 实现微服务的规模化 – 添加服务发现、服务缩放能力等增强特性。</p>
-<p>并非所有应用都需要完成上述的各个阶段，一个基本原则是重构解决针对性业务问题，需要避免为了“微服务”而“微服务”化。</p>
-<p>需要注意的是并非所有应用都可以转变为微服务架构:</p>
-<ul>
-<li><strong>部分系统无法重构为微服务架构：</strong>例如非常老旧又缺乏维护的系统，对此类系统可以采用“如果应用无法被打破，就不要试图解决它”的策略，其中SOA资产重用化应该是更佳的解决方案。</li>
-<li><strong>原有应用无法改变数据存储方式：</strong>对这种情况，需要考虑如果数据仍然保持烟囱式或集中式存储，那对应用进行微服务化是否具有业务价值；需要考虑切分数据库是否会导致事务性保障的缺失并进而影响系统的稳定性；同时也可以考虑应用能否采用如BASE、CQRS等模式解决数据的一致性问题。</li>
-<li><strong>原有系统如何融入微服务架构：</strong>在原有系统中剥离部分功能并重构为微服务时，如何实现微服务与原有系统在高可用性上的隔离，如果原有系统与微服务的扩展性不匹配又如何处理？这些问题也许要在进行微服务重构前考虑清楚。</li>
-</ul>
-<h2 id="微服务重构"><a href="#微服务重构" class="headerlink" title="微服务重构"></a><strong>微服务重构</strong></h2><p>在<strong>重构应用</strong>方面，可通过以下方法梳理微服务：(1)每个REST服务是一个潜在的微服务；(2)每个SOAP web服务或EJB是一个潜在的微服务,特别是无状态的session bean,需要将面向功能的接口重新设计为面向资产的接口，并使接口转变为RESTful形式；(3)使用领域驱动设计(domain-driven design)发现企业资产，这些资产可能是微服务。</p>
-<p>在<strong>重构数据</strong>方面，需要考虑以下几个方面：</p>
-<ol>
-<li><strong>寻找与其他数据关联不大的数据孤岛</strong>，检查系统的实体-关系图；如果有与其他数据断开的数据，就是一个潜在的数据重构点；</li>
-<li><strong>数据表非规范化</strong>，对高规范化数据库中非规范化一些数据表以将数据重组为更大的逻辑块，其目的是增加数据冗余度使其更容易被打破；</li>
-<li><strong>反向批数据更新</strong>，对数据重构时需要考虑数据重构失败时可批量地将新数据反向导回旧的数据模式；</li>
-<li><strong>使用主数据管理</strong>，对被广泛使用的数据实体组成一个单一的一致性视图，并开发相应的微服务与主数据一起工作；</li>
-<li>在SQL数据库中<strong>寻找存储在BLOB(二进制大对象)字段</strong>类型中的代码，转而将这些对象存储在NoSQL数据库中，例如以键值(Key-value)存储方式存储；</li>
-<li>寻找活跃的记录模式，与其他无关的Flat对象，使用文档模式数据库进行存储，例如Cloudant或Mongo等。</li>
-</ol>
-<p>微服务重构后还需要<strong>重新打包应用</strong>，包括：</p>
-<ol>
-<li>分割应用的EAR文件<strong>并打包成独立的WAR文件；</strong></li>
-<li><strong>应用“</strong>一个容器一个服务<strong>”，分别部署每个WAR文件至其自有的WebSphereLiberty实例运行时或Docker容器中；</strong></li>
-<li>分别构建、部署和管理**,为每个WAR文件使用独立的DevOps管线,每个WAR文件独立伸缩和管理。</li>
-</ol>
-<p><img src="assets/640-1554016624753.webp" alt="img"></p>
-<h2 id="微服务IBM解决方案"><a href="#微服务IBM解决方案" class="headerlink" title="微服务IBM解决方案"></a><strong>微服务IBM解决方案</strong></h2><ul>
-<li><strong>API Connect -</strong> <strong>创建、运行、管理及保护API能力开放和微服务应用的企业级平台。</strong></li>
-</ul>
-<p>企业为了加速应用开发以满足不断增长的需求，需要开放内部的业务和数据能力并吸引合作伙伴及开发者基于其能力快速创新，IBM API Connect为企业提供了一个统一完整的API能力开放平台解决方案，实现API的创建、运行、管理、安全保证和微服务运行环境以满足企业参与API经济的需求。</p>
-<p>IBM API Connect平台为数字化应用提供基础能力：</p>
-<ol>
-<li><p>创建微服务并将为其提供对外的API接口；</p>
-</li>
-<li><p>管理、控制及保护REST和SOAP API；</p>
-</li>
-<li><p>为企业内外的应用开发者提供自服务的API门户；</p>
-</li>
-<li><p>将API接口发布到多个开发者门户；</p>
-</li>
-<li><p>分析API用量和性能指标。</p>
-<p><img src="assets/640-1554016624758.webp" alt="img"></p>
-</li>
-</ol>
-<ul>
-<li><strong>WAS Liberty+WXS -</strong> <strong>基于OSGi内核，高模块化，高动态性的轻量级WebSphere应用服务器，以及具备企业级高可用性的缓存服务，助力快速交付的微服务应用</strong></li>
-</ul>
-<p>微服务应用要求与各微服务有独立的运行环境，因此传统的应用服务器容器显得过于笨重，因此企业需要使用轻量级的应用服务器容器，但同时还需要考虑完善的技术服务支持。</p>
-<p>IBM WAS Liberty是IBM开发的基于Java的<strong>轻量级WebSphere应用服务器</strong>，既满足了创新型应用轻量级的要求，又为企业提供了有效的商业技术支持，避免企业由于使用开源软件而有可能出现的技术支持风险。</p>
-<p> <img src="assets/640-1554016624765.webp" alt="img"><br> <img src="assets/640-1554016624777.webp" alt="img"><br> <img src="assets/640-1554016624789.webp" alt="img"></p>
-<p>   WXS(WebSphere eXtreme Scale)则提供高性能、可扩展的<strong>高速缓存框架和网格技术</strong>，通过多样化数据存储加速微服务应用访问效率。</p>
-<p><img src="assets/640-1554016624814.webp" alt="img"></p>
-<ul>
-<li><strong>PureApp+ICO+UCD**</strong>组成的混合云框架为企业提供私有云自动化部署的完整解决方案**</li>
-</ul>
-<p>微服务应用需要IT基础设施提供多种自动化能力以实现应用的快速上线和自动伸缩。<strong>IBM UrbanCode Deploy、IBM CloudOrchestrator和IBM PureApplication</strong>是三种可供企业客户组合搭配提供包括<strong>企业自动化部署加速应用持续交付、企业私有云自动化弹性伸缩环境和软硬一体化的私有云解决方案</strong>。</p>
-<p><img src="assets/640-1554016624801.webp" alt="img"></p>
-<ul>
-<li><strong>IBM Bluemix</strong> <strong>创新应用开发平台</strong></li>
-</ul>
-<p>微服务架构提倡使用<strong>多样化的编程语言</strong>和<strong>多样化的存储</strong>，以<strong>最适合的技术</strong>解决业务需求并实现<strong>快速上线</strong>和<strong>自动伸缩</strong>。IBM Bluemix平台能够很好地满足此类需求。</p>
-<p>Bluemix 是一个基于开放标准和云的平台，可以用于<strong>应用的快速构建、运行及管理</strong>。Bluemix 由<strong>三大关键的开放计算技术</strong>支撑：<strong>Cloud Foundry, Docker, 以及 OpenStack</strong>。在其上进行了大量服务（目前超过100多种，并且服务数量还在不断增长）的扩展，健壮的 DevOps 工具，集成能力，以及无缝的开发人员体验。</p>
-<p><img src="assets/640-1554016624830.webp" alt="img"></p>
-<p>Bluemix四大核心能力提升创新应用交付速度和价值：(1)Bluemix提供一体化运行环境，保证创新应用<strong>秒级上线</strong>；(2) Bluemix提供百余种流行的服务模块，构建应用<strong>简单快速</strong>;(3) Bluemix提供高效管理手段DevOps，保证应用<strong>强健稳定</strong>;(4) Bluemix可以放在本地，又可以无缝连接其公有云，具有<strong>多种部署模式</strong>，让企业具有更大的灵活性，形成<strong>更大的创新生态圈</strong>。</p>
-<p><img src="assets/640-1554016624844.webp" alt="img"></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://www.ibm.com/developerworks/community/blogs/3302cc3b-074e-44da-90b1-5055f1dc0d9c/entry/%E8%A7%A3%E6%9E%90%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84_%E4%B8%80_%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1?lang=en" target="_blank" rel="noopener">解析微服务架构(一)：什么是微服务</a></li>
-</ol>
-
+            <p>
+              什么是微服务简而言之，微服务架构风格这种开发方法，是以开发一组小型服务的方式来开发一个独立的应用系统的。其中每个小型服务都运行在自己的进程中，并经常采用HTTP资源API这样轻量的机制来相互通信。这些服务围绕业务功能进行构建，并能通过全自动的部署机制来进行独立部署。这些微服务可以使用不同的语言来编写
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/31/系统架构/架构：微服务/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>

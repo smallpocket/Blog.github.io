@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copiar',
-      copy_success: 'Copiado',
-      copy_failure: 'Copiar falló'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -132,7 +132,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Cambiar a barra de navegación">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -152,7 +152,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -163,7 +163,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
         
@@ -185,7 +185,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -196,7 +196,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -207,10 +207,40 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Calendario</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
     </ul>
+    <div class="site-search">
+      
+  <div class="algolia-popup popup search-popup">
+  <div class="algolia-search">
+    <div class="algolia-search-input-icon">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="algolia-search-input" id="algolia-search-input"></div>
+  </div>
+
+  <div class="algolia-results">
+    <div id="algolia-stats"></div>
+    <div id="algolia-hits"></div>
+    <div id="algolia-pagination" class="algolia-pagination"></div>
+  </div>
+
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+
+
+
+    </div>
 </nav>
 
 </div>
@@ -263,14 +293,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-03-02 16:01:24" itemprop="dateCreated datePublished" datetime="2019-03-02T16:01:24+08:00">2019-03-02</time>
+              <time title="Erstellt: 2019-03-02 16:01:24" itemprop="dateCreated datePublished" datetime="2019-03-02T16:01:24+08:00">2019-03-02</time>
             </span>
           
             
@@ -281,9 +311,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-04-08 14:58:00" itemprop="dateModified" datetime="2019-04-08T14:58:00+08:00">2019-04-08</time>
+                <time title="Geändert am: 2019-04-08 14:58:00" itemprop="dateModified" datetime="2019-04-08T14:58:00+08:00">2019-04-08</time>
               </span>
             
           
@@ -292,7 +322,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span>
@@ -309,7 +339,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -322,7 +352,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/02/OS/计算机操作系统：虚拟内存/#comments" itemprop="discussionUrl">
@@ -865,14 +895,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-03-01 15:42:55" itemprop="dateCreated datePublished" datetime="2019-03-01T15:42:55+08:00">2019-03-01</time>
+              <time title="Erstellt: 2019-03-01 15:42:55" itemprop="dateCreated datePublished" datetime="2019-03-01T15:42:55+08:00">2019-03-01</time>
             </span>
           
             
@@ -883,9 +913,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 15:46:43" itemprop="dateModified" datetime="2019-07-31T15:46:43+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 15:46:43" itemprop="dateModified" datetime="2019-07-31T15:46:43+08:00">2019-07-31</time>
               </span>
             
           
@@ -894,7 +924,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -911,7 +941,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -924,7 +954,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/01/Java/base/java并发：线程安全/#comments" itemprop="discussionUrl">
@@ -1484,14 +1514,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-03-01 10:47:13" itemprop="dateCreated datePublished" datetime="2019-03-01T10:47:13+08:00">2019-03-01</time>
+              <time title="Erstellt: 2019-03-01 10:47:13" itemprop="dateCreated datePublished" datetime="2019-03-01T10:47:13+08:00">2019-03-01</time>
             </span>
           
 
@@ -1501,7 +1531,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1514,7 +1544,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/01/Java/base/JVM：程序优化/#comments" itemprop="discussionUrl">
@@ -1594,14 +1624,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-03-01 10:46:32" itemprop="dateCreated datePublished" datetime="2019-03-01T10:46:32+08:00">2019-03-01</time>
+              <time title="Erstellt: 2019-03-01 10:46:32" itemprop="dateCreated datePublished" datetime="2019-03-01T10:46:32+08:00">2019-03-01</time>
             </span>
           
             
@@ -1612,9 +1642,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 10:02:10" itemprop="dateModified" datetime="2019-07-31T10:02:10+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 10:02:10" itemprop="dateModified" datetime="2019-07-31T10:02:10+08:00">2019-07-31</time>
               </span>
             
           
@@ -1623,7 +1653,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -1640,7 +1670,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1653,7 +1683,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/01/Java/base/JVM：类文件与类加载/#comments" itemprop="discussionUrl">
@@ -2034,14 +2064,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-03-01 10:45:57" itemprop="dateCreated datePublished" datetime="2019-03-01T10:45:57+08:00">2019-03-01</time>
+              <time title="Erstellt: 2019-03-01 10:45:57" itemprop="dateCreated datePublished" datetime="2019-03-01T10:45:57+08:00">2019-03-01</time>
             </span>
           
             
@@ -2052,9 +2082,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-30 18:20:34" itemprop="dateModified" datetime="2019-07-30T18:20:34+08:00">2019-07-30</time>
+                <time title="Geändert am: 2019-07-30 18:20:34" itemprop="dateModified" datetime="2019-07-30T18:20:34+08:00">2019-07-30</time>
               </span>
             
           
@@ -2063,7 +2093,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -2080,7 +2110,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -2093,7 +2123,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/01/Java/base/JVM：调优/#comments" itemprop="discussionUrl">
@@ -2307,14 +2337,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-03-01 10:45:42" itemprop="dateCreated datePublished" datetime="2019-03-01T10:45:42+08:00">2019-03-01</time>
+              <time title="Erstellt: 2019-03-01 10:45:42" itemprop="dateCreated datePublished" datetime="2019-03-01T10:45:42+08:00">2019-03-01</time>
             </span>
           
             
@@ -2325,9 +2355,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-30 21:18:01" itemprop="dateModified" datetime="2019-07-30T21:18:01+08:00">2019-07-30</time>
+                <time title="Geändert am: 2019-07-30 21:18:01" itemprop="dateModified" datetime="2019-07-30T21:18:01+08:00">2019-07-30</time>
               </span>
             
           
@@ -2336,7 +2366,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -2353,7 +2383,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -2366,7 +2396,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/01/Java/base/JVM：内存管理/#comments" itemprop="discussionUrl">
@@ -2907,14 +2937,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-03-01 10:45:05" itemprop="dateCreated datePublished" datetime="2019-03-01T10:45:05+08:00">2019-03-01</time>
+              <time title="Erstellt: 2019-03-01 10:45:05" itemprop="dateCreated datePublished" datetime="2019-03-01T10:45:05+08:00">2019-03-01</time>
             </span>
           
             
@@ -2925,9 +2955,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-29 23:14:26" itemprop="dateModified" datetime="2019-07-29T23:14:26+08:00">2019-07-29</time>
+                <time title="Geändert am: 2019-07-29 23:14:26" itemprop="dateModified" datetime="2019-07-29T23:14:26+08:00">2019-07-29</time>
               </span>
             
           
@@ -2936,7 +2966,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -2953,7 +2983,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -2966,7 +2996,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/01/Java/base/JVM：概述/#comments" itemprop="discussionUrl">
@@ -2991,7 +3021,7 @@
           
             <div class="post-button text-center">
               <a class="btn" href="/2019/03/01/Java/base/JVM：概述/">
-                Leer más &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -3050,14 +3080,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-28 20:08:24" itemprop="dateCreated datePublished" datetime="2019-02-28T20:08:24+08:00">2019-02-28</time>
+              <time title="Erstellt: 2019-02-28 20:08:24" itemprop="dateCreated datePublished" datetime="2019-02-28T20:08:24+08:00">2019-02-28</time>
             </span>
           
             
@@ -3068,9 +3098,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 10:41:29" itemprop="dateModified" datetime="2019-07-31T10:41:29+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 10:41:29" itemprop="dateModified" datetime="2019-07-31T10:41:29+08:00">2019-07-31</time>
               </span>
             
           
@@ -3081,7 +3111,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -3094,7 +3124,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/28/Java/base/java并发：线程调度-协作/#comments" itemprop="discussionUrl">
@@ -3174,14 +3204,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-28 20:08:11" itemprop="dateCreated datePublished" datetime="2019-02-28T20:08:11+08:00">2019-02-28</time>
+              <time title="Erstellt: 2019-02-28 20:08:11" itemprop="dateCreated datePublished" datetime="2019-02-28T20:08:11+08:00">2019-02-28</time>
             </span>
           
             
@@ -3192,9 +3222,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 10:47:34" itemprop="dateModified" datetime="2019-07-31T10:47:34+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 10:47:34" itemprop="dateModified" datetime="2019-07-31T10:47:34+08:00">2019-07-31</time>
               </span>
             
           
@@ -3203,7 +3233,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -3220,7 +3250,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -3233,7 +3263,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/28/Java/base/java并发：JUC/#comments" itemprop="discussionUrl">
@@ -3532,14 +3562,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-28 19:46:22 / Modificado por: 19:49:24" itemprop="dateCreated datePublished" datetime="2019-02-28T19:46:22+08:00">2019-02-28</time>
+              <time title="Erstellt: 2019-02-28 19:46:22 / Geändert am: 19:49:24" itemprop="dateCreated datePublished" datetime="2019-02-28T19:46:22+08:00">2019-02-28</time>
             </span>
           
             
@@ -3553,7 +3583,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -3566,7 +3596,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/28/Java/框架/SpringBoot：注解/#comments" itemprop="discussionUrl">
@@ -3617,7 +3647,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="Página anterior"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="Página siguiente"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="Vorherige Seite"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="Nächste Seite"></i></a>
   </nav>
 
 
@@ -3654,7 +3684,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">219</span>
-          <span class="site-state-item-name">entradas</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -3705,7 +3735,7 @@
           
         
         <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">categorías</span>
+        <span class="site-state-item-name">Kategorien</span>
         
       </div>
     
@@ -3790,7 +3820,7 @@
           
         
         <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -3817,9 +3847,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -3952,6 +3982,14 @@
 
 
 
+
+
+  
+<link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+<script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+
+
+<script src="/js/algolia-search.js?v=7.2.0"></script>
 
 
 

@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copiar',
-      copy_success: 'Copiado',
-      copy_failure: 'Copiar falló'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -132,7 +132,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Cambiar a barra de navegación">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -152,7 +152,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -163,7 +163,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
         
@@ -185,7 +185,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -196,7 +196,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -207,10 +207,40 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Calendario</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
     </ul>
+    <div class="site-search">
+      
+  <div class="algolia-popup popup search-popup">
+  <div class="algolia-search">
+    <div class="algolia-search-input-icon">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="algolia-search-input" id="algolia-search-input"></div>
+  </div>
+
+  <div class="algolia-results">
+    <div id="algolia-stats"></div>
+    <div id="algolia-hits"></div>
+    <div id="algolia-pagination" class="algolia-pagination"></div>
+  </div>
+
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+
+
+
+    </div>
 </nav>
 
 </div>
@@ -263,14 +293,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-12 16:03:26" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:26+08:00">2019-02-12</time>
+              <time title="Erstellt: 2019-02-12 16:03:26" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:26+08:00">2019-02-12</time>
             </span>
           
             
@@ -281,9 +311,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-03-17 16:39:05" itemprop="dateModified" datetime="2019-03-17T16:39:05+08:00">2019-03-17</time>
+                <time title="Geändert am: 2019-03-17 16:39:05" itemprop="dateModified" datetime="2019-03-17T16:39:05+08:00">2019-03-17</time>
               </span>
             
           
@@ -294,7 +324,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -307,7 +337,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/12/面试/面经：字节跳动/#comments" itemprop="discussionUrl">
@@ -332,7 +362,7 @@
           
             <div class="post-button text-center">
               <a class="btn" href="/2019/02/12/面试/面经：字节跳动/">
-                Leer más &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -391,14 +421,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-12 16:03:14" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:14+08:00">2019-02-12</time>
+              <time title="Erstellt: 2019-02-12 16:03:14" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:14+08:00">2019-02-12</time>
             </span>
           
             
@@ -409,9 +439,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-02-14 20:56:28" itemprop="dateModified" datetime="2019-02-14T20:56:28+08:00">2019-02-14</time>
+                <time title="Geändert am: 2019-02-14 20:56:28" itemprop="dateModified" datetime="2019-02-14T20:56:28+08:00">2019-02-14</time>
               </span>
             
           
@@ -422,7 +452,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -435,7 +465,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/12/面试/面试问题：多线程/#comments" itemprop="discussionUrl">
@@ -517,14 +547,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-12 16:03:09" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:09+08:00">2019-02-12</time>
+              <time title="Erstellt: 2019-02-12 16:03:09" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:09+08:00">2019-02-12</time>
             </span>
           
             
@@ -535,9 +565,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-02-14 22:53:40" itemprop="dateModified" datetime="2019-02-14T22:53:40+08:00">2019-02-14</time>
+                <time title="Geändert am: 2019-02-14 22:53:40" itemprop="dateModified" datetime="2019-02-14T22:53:40+08:00">2019-02-14</time>
               </span>
             
           
@@ -548,7 +578,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -561,7 +591,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/12/面试/面试准备：数据库/#comments" itemprop="discussionUrl">
@@ -858,14 +888,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-12 16:03:04" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:04+08:00">2019-02-12</time>
+              <time title="Erstellt: 2019-02-12 16:03:04" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:04+08:00">2019-02-12</time>
             </span>
           
             
@@ -876,9 +906,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-02-13 23:02:02" itemprop="dateModified" datetime="2019-02-13T23:02:02+08:00">2019-02-13</time>
+                <time title="Geändert am: 2019-02-13 23:02:02" itemprop="dateModified" datetime="2019-02-13T23:02:02+08:00">2019-02-13</time>
               </span>
             
           
@@ -889,7 +919,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -902,7 +932,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/12/面试/面试准备：操作系统/#comments" itemprop="discussionUrl">
@@ -1159,14 +1189,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-12 16:03:01" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:01+08:00">2019-02-12</time>
+              <time title="Erstellt: 2019-02-12 16:03:01" itemprop="dateCreated datePublished" datetime="2019-02-12T16:03:01+08:00">2019-02-12</time>
             </span>
           
             
@@ -1177,9 +1207,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-04-17 12:14:24" itemprop="dateModified" datetime="2019-04-17T12:14:24+08:00">2019-04-17</time>
+                <time title="Geändert am: 2019-04-17 12:14:24" itemprop="dateModified" datetime="2019-04-17T12:14:24+08:00">2019-04-17</time>
               </span>
             
           
@@ -1190,7 +1220,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1203,7 +1233,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/12/面试/面试准备：计算机网络/#comments" itemprop="discussionUrl">
@@ -1689,14 +1719,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-11 19:14:52" itemprop="dateCreated datePublished" datetime="2019-02-11T19:14:52+08:00">2019-02-11</time>
+              <time title="Erstellt: 2019-02-11 19:14:52" itemprop="dateCreated datePublished" datetime="2019-02-11T19:14:52+08:00">2019-02-11</time>
             </span>
           
             
@@ -1707,9 +1737,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-03-22 20:47:48" itemprop="dateModified" datetime="2019-03-22T20:47:48+08:00">2019-03-22</time>
+                <time title="Geändert am: 2019-03-22 20:47:48" itemprop="dateModified" datetime="2019-03-22T20:47:48+08:00">2019-03-22</time>
               </span>
             
           
@@ -1720,7 +1750,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1733,7 +1763,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/11/算法/算法：面试准备/#comments" itemprop="discussionUrl">
@@ -1881,14 +1911,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-11 19:14:40 / Modificado por: 21:42:18" itemprop="dateCreated datePublished" datetime="2019-02-11T19:14:40+08:00">2019-02-11</time>
+              <time title="Erstellt: 2019-02-11 19:14:40 / Geändert am: 21:42:18" itemprop="dateCreated datePublished" datetime="2019-02-11T19:14:40+08:00">2019-02-11</time>
             </span>
           
             
@@ -1902,7 +1932,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1915,7 +1945,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/11/算法/五大常用算法之五：分支限界法/#comments" itemprop="discussionUrl">
@@ -2011,14 +2041,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-11 19:14:34 / Modificado por: 21:43:42" itemprop="dateCreated datePublished" datetime="2019-02-11T19:14:34+08:00">2019-02-11</time>
+              <time title="Erstellt: 2019-02-11 19:14:34 / Geändert am: 21:43:42" itemprop="dateCreated datePublished" datetime="2019-02-11T19:14:34+08:00">2019-02-11</time>
             </span>
           
             
@@ -2032,7 +2062,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -2045,7 +2075,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/11/算法/五大常用算法之四：回溯法/#comments" itemprop="discussionUrl">
@@ -2152,14 +2182,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-11 19:14:20 / Modificado por: 19:32:59" itemprop="dateCreated datePublished" datetime="2019-02-11T19:14:20+08:00">2019-02-11</time>
+              <time title="Erstellt: 2019-02-11 19:14:20 / Geändert am: 19:32:59" itemprop="dateCreated datePublished" datetime="2019-02-11T19:14:20+08:00">2019-02-11</time>
             </span>
           
             
@@ -2173,7 +2203,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -2186,7 +2216,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/11/算法/五大常用算法之三：贪心算法/#comments" itemprop="discussionUrl">
@@ -2279,14 +2309,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2019-02-11 19:13:57 / Modificado por: 19:36:59" itemprop="dateCreated datePublished" datetime="2019-02-11T19:13:57+08:00">2019-02-11</time>
+              <time title="Erstellt: 2019-02-11 19:13:57 / Geändert am: 19:36:59" itemprop="dateCreated datePublished" datetime="2019-02-11T19:13:57+08:00">2019-02-11</time>
             </span>
           
             
@@ -2300,7 +2330,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -2313,7 +2343,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/11/算法/五大常用算法之二：动态规划算法/#comments" itemprop="discussionUrl">
@@ -2397,7 +2427,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="Página anterior"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="Página siguiente"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="Vorherige Seite"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="Nächste Seite"></i></a>
   </nav>
 
 
@@ -2434,7 +2464,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">219</span>
-          <span class="site-state-item-name">entradas</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -2485,7 +2515,7 @@
           
         
         <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">categorías</span>
+        <span class="site-state-item-name">Kategorien</span>
         
       </div>
     
@@ -2570,7 +2600,7 @@
           
         
         <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -2597,9 +2627,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -2732,6 +2762,14 @@
 
 
 
+
+
+  
+<link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+<script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+
+
+<script src="/js/algolia-search.js?v=7.2.0"></script>
 
 
 

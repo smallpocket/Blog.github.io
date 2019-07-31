@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copiar',
-      copy_success: 'Copiado',
-      copy_failure: 'Copiar falló'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -132,7 +132,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Cambiar a barra de navegación">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -152,7 +152,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -163,7 +163,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -174,7 +174,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
         
@@ -185,7 +185,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -196,7 +196,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -207,10 +207,40 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Calendario</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
     </ul>
+    <div class="site-search">
+      
+  <div class="algolia-popup popup search-popup">
+  <div class="algolia-search">
+    <div class="algolia-search-input-icon">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="algolia-search-input" id="algolia-search-input"></div>
+  </div>
+
+  <div class="algolia-results">
+    <div id="algolia-stats"></div>
+    <div id="algolia-hits"></div>
+    <div id="algolia-pagination" class="algolia-pagination"></div>
+  </div>
+
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+
+
+
+    </div>
 </nav>
 
 </div>
@@ -263,14 +293,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-09-23 00:01:47" itemprop="dateCreated datePublished" datetime="2018-09-23T00:01:47+08:00">2018-09-23</time>
+              <time title="Erstellt: 2018-09-23 00:01:47" itemprop="dateCreated datePublished" datetime="2018-09-23T00:01:47+08:00">2018-09-23</time>
             </span>
           
             
@@ -281,9 +311,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2018-09-26 14:43:49" itemprop="dateModified" datetime="2018-09-26T14:43:49+08:00">2018-09-26</time>
+                <time title="Geändert am: 2018-09-26 14:43:49" itemprop="dateModified" datetime="2018-09-26T14:43:49+08:00">2018-09-26</time>
               </span>
             
           
@@ -294,7 +324,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -307,7 +337,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/09/23/Java/框架/service心得/#comments" itemprop="discussionUrl">
@@ -390,14 +420,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-09-23 00:00:44" itemprop="dateCreated datePublished" datetime="2018-09-23T00:00:44+08:00">2018-09-23</time>
+              <time title="Erstellt: 2018-09-23 00:00:44" itemprop="dateCreated datePublished" datetime="2018-09-23T00:00:44+08:00">2018-09-23</time>
             </span>
           
             
@@ -408,9 +438,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2018-09-25 17:11:00" itemprop="dateModified" datetime="2018-09-25T17:11:00+08:00">2018-09-25</time>
+                <time title="Geändert am: 2018-09-25 17:11:00" itemprop="dateModified" datetime="2018-09-25T17:11:00+08:00">2018-09-25</time>
               </span>
             
           
@@ -421,7 +451,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -434,7 +464,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/09/23/Java/框架/Dao/#comments" itemprop="discussionUrl">
@@ -549,14 +579,14 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-09-22 19:45:59" itemprop="dateCreated datePublished" datetime="2018-09-22T19:45:59+08:00">2018-09-22</time>
+              <time title="Erstellt: 2018-09-22 19:45:59" itemprop="dateCreated datePublished" datetime="2018-09-22T19:45:59+08:00">2018-09-22</time>
             </span>
           
             
@@ -567,9 +597,9 @@ password: 123456</code></pre><p>  jpa:</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-05-10 14:44:32" itemprop="dateModified" datetime="2019-05-10T14:44:32+08:00">2019-05-10</time>
+                <time title="Geändert am: 2019-05-10 14:44:32" itemprop="dateModified" datetime="2019-05-10T14:44:32+08:00">2019-05-10</time>
               </span>
             
           
@@ -578,7 +608,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/springBoot/" itemprop="url" rel="index"><span itemprop="name">springBoot</span></a></span>
@@ -595,7 +625,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -608,7 +638,7 @@ password: 123456</code></pre><p>  jpa:</p>
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/09/22/Java/框架/springBoot（1）：启动/#comments" itemprop="discussionUrl">
@@ -633,7 +663,7 @@ password: 123456</code></pre><p>  jpa:</p>
           
             <div class="post-button text-center">
               <a class="btn" href="/2018/09/22/Java/框架/springBoot（1）：启动/">
-                Leer más &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -692,14 +722,14 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-04-19 14:11:32" itemprop="dateCreated datePublished" datetime="2018-04-19T14:11:32+08:00">2018-04-19</time>
+              <time title="Erstellt: 2018-04-19 14:11:32" itemprop="dateCreated datePublished" datetime="2018-04-19T14:11:32+08:00">2018-04-19</time>
             </span>
           
             
@@ -710,9 +740,9 @@ password: 123456</code></pre><p>  jpa:</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 09:30:36" itemprop="dateModified" datetime="2019-07-31T09:30:36+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 09:30:36" itemprop="dateModified" datetime="2019-07-31T09:30:36+08:00">2019-07-31</time>
               </span>
             
           
@@ -721,7 +751,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -738,7 +768,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -751,7 +781,7 @@ password: 123456</code></pre><p>  jpa:</p>
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/04/19/Java/框架/nutz/环境搭建/#comments" itemprop="discussionUrl">
@@ -776,7 +806,7 @@ password: 123456</code></pre><p>  jpa:</p>
           
             <div class="post-button text-center">
               <a class="btn" href="/2018/04/19/Java/框架/nutz/环境搭建/">
-                Leer más &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -835,14 +865,14 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-04-19 08:22:29" itemprop="dateCreated datePublished" datetime="2018-04-19T08:22:29+08:00">2018-04-19</time>
+              <time title="Erstellt: 2018-04-19 08:22:29" itemprop="dateCreated datePublished" datetime="2018-04-19T08:22:29+08:00">2018-04-19</time>
             </span>
           
             
@@ -853,9 +883,9 @@ password: 123456</code></pre><p>  jpa:</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-04-08 23:00:57" itemprop="dateModified" datetime="2019-04-08T23:00:57+08:00">2019-04-08</time>
+                <time title="Geändert am: 2019-04-08 23:00:57" itemprop="dateModified" datetime="2019-04-08T23:00:57+08:00">2019-04-08</time>
               </span>
             
           
@@ -864,7 +894,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/博客/" itemprop="url" rel="index"><span itemprop="name">博客</span></a></span>
@@ -881,7 +911,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -894,7 +924,7 @@ password: 123456</code></pre><p>  jpa:</p>
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/04/19/博客建站/Hexo搭建/#comments" itemprop="discussionUrl">
@@ -919,7 +949,7 @@ password: 123456</code></pre><p>  jpa:</p>
           
             <div class="post-button text-center">
               <a class="btn" href="/2018/04/19/博客建站/Hexo搭建/">
-                Leer más &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -978,14 +1008,14 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-04-18 09:38:32" itemprop="dateCreated datePublished" datetime="2018-04-18T09:38:32+08:00">2018-04-18</time>
+              <time title="Erstellt: 2018-04-18 09:38:32" itemprop="dateCreated datePublished" datetime="2018-04-18T09:38:32+08:00">2018-04-18</time>
             </span>
           
             
@@ -996,9 +1026,9 @@ password: 123456</code></pre><p>  jpa:</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 09:28:37" itemprop="dateModified" datetime="2019-07-31T09:28:37+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 09:28:37" itemprop="dateModified" datetime="2019-07-31T09:28:37+08:00">2019-07-31</time>
               </span>
             
           
@@ -1007,7 +1037,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -1024,7 +1054,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1037,7 +1067,7 @@ password: 123456</code></pre><p>  jpa:</p>
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/04/18/Java/框架/nutz/NutzLog/#comments" itemprop="discussionUrl">
@@ -1238,14 +1268,14 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-04-11 09:38:32" itemprop="dateCreated datePublished" datetime="2018-04-11T09:38:32+08:00">2018-04-11</time>
+              <time title="Erstellt: 2018-04-11 09:38:32" itemprop="dateCreated datePublished" datetime="2018-04-11T09:38:32+08:00">2018-04-11</time>
             </span>
           
             
@@ -1256,9 +1286,9 @@ password: 123456</code></pre><p>  jpa:</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 09:28:02" itemprop="dateModified" datetime="2019-07-31T09:28:02+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 09:28:02" itemprop="dateModified" datetime="2019-07-31T09:28:02+08:00">2019-07-31</time>
               </span>
             
           
@@ -1267,7 +1297,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -1284,7 +1314,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1297,7 +1327,7 @@ password: 123456</code></pre><p>  jpa:</p>
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/04/11/Java/框架/nutz/Jar包引入/#comments" itemprop="discussionUrl">
@@ -1548,14 +1578,14 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-04-06 14:11:32" itemprop="dateCreated datePublished" datetime="2018-04-06T14:11:32+08:00">2018-04-06</time>
+              <time title="Erstellt: 2018-04-06 14:11:32" itemprop="dateCreated datePublished" datetime="2018-04-06T14:11:32+08:00">2018-04-06</time>
             </span>
           
             
@@ -1566,9 +1596,9 @@ password: 123456</code></pre><p>  jpa:</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 09:31:00" itemprop="dateModified" datetime="2019-07-31T09:31:00+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 09:31:00" itemprop="dateModified" datetime="2019-07-31T09:31:00+08:00">2019-07-31</time>
               </span>
             
           
@@ -1577,7 +1607,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -1594,7 +1624,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1607,7 +1637,7 @@ password: 123456</code></pre><p>  jpa:</p>
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/04/06/Java/框架/nutz/增删改查/#comments" itemprop="discussionUrl">
@@ -1632,7 +1662,7 @@ password: 123456</code></pre><p>  jpa:</p>
           
             <div class="post-button text-center">
               <a class="btn" href="/2018/04/06/Java/框架/nutz/增删改查/">
-                Leer más &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -1691,14 +1721,14 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Publicado el</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Creado por: 2018-04-06 14:11:32" itemprop="dateCreated datePublished" datetime="2018-04-06T14:11:32+08:00">2018-04-06</time>
+              <time title="Erstellt: 2018-04-06 14:11:32" itemprop="dateCreated datePublished" datetime="2018-04-06T14:11:32+08:00">2018-04-06</time>
             </span>
           
             
@@ -1709,9 +1739,9 @@ password: 123456</code></pre><p>  jpa:</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Editado el</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modificado por: 2019-07-31 09:29:39" itemprop="dateModified" datetime="2019-07-31T09:29:39+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-07-31 09:29:39" itemprop="dateModified" datetime="2019-07-31T09:29:39+08:00">2019-07-31</time>
               </span>
             
           
@@ -1720,7 +1750,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">En</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -1737,7 +1767,7 @@ password: 123456</code></pre><p>  jpa:</p>
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Visitas: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -1750,7 +1780,7 @@ password: 123456</code></pre><p>  jpa:</p>
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comentarios: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2018/04/06/Java/框架/nutz/登陆注册/#comments" itemprop="discussionUrl">
@@ -1775,7 +1805,7 @@ password: 123456</code></pre><p>  jpa:</p>
           
             <div class="post-button text-center">
               <a class="btn" href="/2018/04/06/Java/框架/nutz/登陆注册/">
-                Leer más &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -1802,7 +1832,7 @@ password: 123456</code></pre><p>  jpa:</p>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="Página anterior"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="Vorherige Seite"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span>
   </nav>
 
 
@@ -1839,7 +1869,7 @@ password: 123456</code></pre><p>  jpa:</p>
           <a href="/archives/">
         
           <span class="site-state-item-count">219</span>
-          <span class="site-state-item-name">entradas</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -1890,7 +1920,7 @@ password: 123456</code></pre><p>  jpa:</p>
           
         
         <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">categorías</span>
+        <span class="site-state-item-name">Kategorien</span>
         
       </div>
     
@@ -1975,7 +2005,7 @@ password: 123456</code></pre><p>  jpa:</p>
           
         
         <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -2002,9 +2032,9 @@ password: 123456</code></pre><p>  jpa:</p>
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -2137,6 +2167,14 @@ password: 123456</code></pre><p>  jpa:</p>
 
 
 
+
+
+  
+<link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+<script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+
+
+<script src="/js/algolia-search.js?v=7.2.0"></script>
 
 
 

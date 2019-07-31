@@ -4,109 +4,58 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang>
-<head><meta name="generator" content="Hexo 3.9.0">
+<html class="theme-next gemini use-motion" lang="">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '6.4.1',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
     fancybox: false,
-    fastclick: false,
+    mediumzoom: false,
     lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    pangu: false,
     algolia: {
-      applicationID: '',
+      applicationID: 'OZTK1BY156',
       apiKey: '',
-      indexName: '',
+      indexName: 'BlogIndex',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copiar',
+      copy_success: 'Copiado',
+      copy_failure: 'Copiar falló'
     }
   };
 </script>
-
-
-  
-
-
-
 
   <meta name="description" content="To be awesome">
 <meta property="og:type" content="website">
@@ -118,17 +67,10 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="To be awesome">
-
-
-
-
-
-
   <link rel="canonical" href="http://yoursite.com/page/7/">
 
 
-
-<script type="text/javascript" id="page.configurations">
+<script id="page.configurations">
   CONFIG.page = {
     sidebar: "",
   };
@@ -142,43 +84,30 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
 
 
   <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
 
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
   </style>
 </noscript>
 
@@ -186,19 +115,12 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+  <div class="site-meta">
 
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
@@ -207,11 +129,10 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Cambiar a barra de navegación">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -222,102 +143,75 @@
 
 
 <nav class="site-nav">
-  
     <ul id="menu" class="menu">
-      
         
         
         
           
           <li class="menu-item menu-item-home">
-    <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-    <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-about">
-    <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-tags">
-    <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-categories">
-    <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-schedule">
-    <a href="/schedule/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Calendario</a>
+
   </li>
-
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
-        </li>
-      
     </ul>
-  
-
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
 </nav>
-
-
-
-  
-
-
 
 </div>
     </header>
@@ -328,30 +222,19 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/系统架构/领域驱动设计：骨架/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/21/服务器/Linux：StudyResources/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -362,73 +245,1248 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/04/系统架构/领域驱动设计：骨架/" itemprop="url">
-                  领域驱动设计：骨架
-                </a>
+                
+                <a href="/2019/06/21/服务器/Linux：StudyResources/" class="post-title-link" itemprop="url">Linux：StudyResources</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-04 09:38:31" itemprop="dateCreated datePublished" datetime="2019-07-04T09:38:31+08:00">2019-07-04</time>
+              <time title="Creado por: 2019-06-21 10:32:38" itemprop="dateCreated datePublished" datetime="2019-06-21T10:32:38+08:00">2019-06-21</time>
+            </span>
+          
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Modified: 2019-07-05 09:25:43" itemprop="dateModified" datetime="2019-07-05T09:25:43+08:00">2019-07-05</time>
-              
+                <time title="Modificado por: 2019-06-27 17:04:13" itemprop="dateModified" datetime="2019-06-27T17:04:13+08:00">2019-06-27</time>
+              </span>
             
-          </span>
+          
 
           
-            <span class="post-category">
+            <span id="/2019/06/21/服务器/Linux：StudyResources/" class="post-meta-item leancloud_visitors" data-flag-title="Linux：StudyResources">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-              <span class="post-meta-divider">|</span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/21/服务器/Linux：StudyResources/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/21/服务器/Linux：StudyResources/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h1 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h1><h3 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h3><h3 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h3><h1 id="Linux学习方法"><a href="#Linux学习方法" class="headerlink" title="Linux学习方法"></a>Linux学习方法</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/系统架构/SpringCloud：/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/18/系统架构/SpringCloud：/" class="post-title-link" itemprop="url">SpringCloud：</a>
+              
             
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-06-18 18:05:30" itemprop="dateCreated datePublished" datetime="2019-06-18T18:05:30+08:00">2019-06-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-06-22 15:59:44" itemprop="dateModified" datetime="2019-06-22T15:59:44+08:00">2019-06-22</time>
+              </span>
+            
+          
+
+          
+            <span id="/2019/06/18/系统架构/SpringCloud：/" class="post-meta-item leancloud_visitors" data-flag-title="SpringCloud：">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/18/系统架构/SpringCloud：/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/18/系统架构/SpringCloud：/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><ul>
+<li>Eureka。负责服务发现相关<ul>
+<li>Eureka Server</li>
+<li>Eureka Client</li>
+<li>Eureka高可用</li>
+<li>服务发现机制</li>
+</ul>
+</li>
+<li>Config。负责统一配置中心<ul>
+<li>Config Server</li>
+<li>Config Client</li>
+<li>Spring Cloud Bus（结合RabbitMQ）实现自动刷新</li>
+</ul>
+</li>
+<li>Ribbon。服务通信<ul>
+<li>RestTemplate</li>
+<li>Feign</li>
+<li>Ribbon源码</li>
+</ul>
+</li>
+<li>Zuul。Api<ul>
+<li>动态路由</li>
+<li>校验</li>
+</ul>
+</li>
+<li>Hystrix<ul>
+<li>熔断机制。</li>
+</ul>
+</li>
+<li>容器编排Docker和Rancher</li>
+<li>服务追踪Spring Cloud Sleuth和zipkin</li>
+</ul>
+<h1 id="服务注册与发现"><a href="#服务注册与发现" class="headerlink" title="服务注册与发现"></a>服务注册与发现</h1><h1 id="客户端负载均衡"><a href="#客户端负载均衡" class="headerlink" title="客户端负载均衡"></a>客户端负载均衡</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/系统架构/架构：单体架构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/18/系统架构/架构：单体架构/" class="post-title-link" itemprop="url">架构：单体架构</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-06-18 16:29:55" itemprop="dateCreated datePublished" datetime="2019-06-18T16:29:55+08:00">2019-06-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-06-22 17:02:42" itemprop="dateModified" datetime="2019-06-22T17:02:42+08:00">2019-06-22</time>
+              </span>
+            
+          
+
+          
+            <span id="/2019/06/18/系统架构/架构：单体架构/" class="post-meta-item leancloud_visitors" data-flag-title="架构：单体架构">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/18/系统架构/架构：单体架构/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/18/系统架构/架构：单体架构/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h1 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h1><p>​​<img src="assets/1560847670168.png" alt="1560847670168"></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>一个归档包（如war格式）包含了应用所有功能的应用程序，我们通常称为单体应用。</p>
+<p>架构单体应用的方法论，我们称之微单体应用架构</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h3><p><strong><em>优点</em></strong>：</p>
+<ul>
+<li>部署简单</li>
+<li>容易测试。不需要外部的依赖，直接就可以启动整个系统</li>
+</ul>
+<p><strong><em>缺点</em></strong>：</p>
+<ul>
+<li>非常臃肿。修改一个模块需要发布整个应用。并且每次发布可能会遇到不同的问题。</li>
+<li>复杂性高<ul>
+<li>对于一个百万行级别的单体应用为例，整个项目包含的模块非常多，模块的边界模糊，依赖关系不清晰，代码质量参差不齐，混乱地堆砌在一起</li>
+<li>整个项目非常复杂，每次修改代码都要心惊胆战，甚至添加一个简单的功能或修改一个bug都会造成隐含的缺陷。因为应用程序的其他模块可能会以意料之外的方式使用它</li>
+</ul>
+</li>
+<li>技术债务<ul>
+<li>随着时间的推移、需求变更和人员更迭，会逐渐形成应用程序的技术债务，并且越积越多。“不坏不修”的问题会很严重。</li>
+</ul>
+</li>
+<li>部署频率低<ul>
+<li>随着代码的增多，构建和部署的时间也会增加。在单体应用中，每次功能的变更或缺陷的修复都会导致我们需要重新部署整个应用。</li>
+<li>全面部署耗时长，影响范围大、 风险高，使得单体应用项目上线部署的频率低，会使得在两次发布间有大量的功能交替和缺陷修复，出错频率高</li>
+</ul>
+</li>
+<li>扩展能力受限<ul>
+<li>单体应用只能作为一个整体扩展，无法结合业务模块的特点进行伸缩。如IO密集型、CPU密集型</li>
+</ul>
+</li>
+<li>阻碍技术创新。<ul>
+<li>要求团队每个成员使用相同的开发语言和框架。难以引入新的框架</li>
+</ul>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/算法/算法：/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/17/算法/算法：/" class="post-title-link" itemprop="url">算法：</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-06-17 15:46:13" itemprop="dateCreated datePublished" datetime="2019-06-17T15:46:13+08:00">2019-06-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-06-18 15:23:23" itemprop="dateModified" datetime="2019-06-18T15:23:23+08:00">2019-06-18</time>
+              </span>
+            
+          
+
+          
+            <span id="/2019/06/17/算法/算法：/" class="post-meta-item leancloud_visitors" data-flag-title="算法：">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/17/算法/算法：/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/17/算法/算法：/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>常数时间的操作：一个操作如果和数据量没有关系，每次都是固定时间内完成的操作。</p>
+<p>时间复杂度为一个算法流程中，常数操作数量的指标。常用O来表示。</p>
+<ul>
+<li>在常数操作数量的表达式中，只要高阶项，不要低阶项</li>
+<li>也不要高阶项的系数</li>
+<li>剩下的部分如果记为f(N)，则时间复杂度为O(f(N))<ul>
+<li>如果存在两个变量，在不知道两个变量的样本量的大小时，需要将两个变量留下，如O（MlogM）+O(M+N)</li>
+</ul>
+</li>
+<li>当由于数据情况不一致，而复杂度不同，则依靠最差时间复杂度估计。</li>
+</ul>
+<p>评价一个算法流程的好坏，先看时间复杂度的指标，然后再分析不同数据样本下的实际运行时间(指标一致)，即常数项时间</p>
+<h2 id="对数器"><a href="#对数器" class="headerlink" title="对数器"></a>对数器</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>在online上没有题目，自己验证算法是否正确</li>
+<li>在笔试的时候，小样本测试过了。面对大样本报错，找出错误的位置。<ul>
+<li>验证贪心策略的正确与否</li>
+</ul>
+</li>
+</ul>
+<h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><ul>
+<li>一个随机样本生成器</li>
+<li>正确的方法r与最好的方法b</li>
+<li>判断两个方法是否正确的方法equals</li>
+<li>打印出错特殊case的方法print</li>
+</ul>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>有一个想要测试的方法b</li>
+<li>实现一个绝对正确但是复杂度不好的方法r<ol>
+<li>时间复杂度差的算法很暴力，容易写出。因此绝对正确的算法是可以写出的。</li>
+<li>但是在笔试的时候是过不了的。因此需要算法a</li>
+<li>若方法b不是绝对正确，则在对比的过程中迭代方法修改</li>
+</ol>
+</li>
+<li>实现随机样本产生器</li>
+<li>实现比对的方法</li>
+<li>把方法a和方法b比对多次来验证方法a是否正确</li>
+<li>如果一个样本使得比对出错，打印样本分析哪个方法出错</li>
+<li>当样本数量很多时比对测试依然正确，则可以确定方法a已经正确</li>
+</ol>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h2 id="递归的本质"><a href="#递归的本质" class="headerlink" title="递归的本质"></a>递归的本质</h2><p>一种分治的思想？</p>
+<p>递归行为是一种系统压栈，所以任何递归问题都可以改成非递归，改为人工压栈即可。</p>
+<h3 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>master公式T(N)=a*T(N/b)+O(N^d)</p>
+<ul>
+<li>log(b,a)&gt;d-&gt;复杂度为O(N^log(b,a))</li>
+<li>log(b,a)==d-&gt;复杂度为O(N^d*logN)</li>
+<li>log(b,a)<d->复杂度为O(N^d)</d-></li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/16/StudyResources/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/16/StudyResources/" class="post-title-link" itemprop="url">StudyResources</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-06-16 21:52:39" itemprop="dateCreated datePublished" datetime="2019-06-16T21:52:39+08:00">2019-06-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-31 15:52:26" itemprop="dateModified" datetime="2019-07-31T15:52:26+08:00">2019-07-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Base/" itemprop="url" rel="index"><span itemprop="name">Base</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/06/16/StudyResources/" class="post-meta-item leancloud_visitors" data-flag-title="StudyResources">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/16/StudyResources/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/16/StudyResources/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><p>Java性能优化权威指南</p>
+<ul>
+<li>第三章</li>
+<li>第四章</li>
+</ul>
+<p>入门</p>
+<p>基础</p>
+<p>进阶</p>
+<p>参考</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/16/StudyMethod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/16/StudyMethod/" class="post-title-link" itemprop="url">StudyMethod</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-06-16 18:33:07" itemprop="dateCreated datePublished" datetime="2019-06-16T18:33:07+08:00">2019-06-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-31 15:52:58" itemprop="dateModified" datetime="2019-07-31T15:52:58+08:00">2019-07-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Base/" itemprop="url" rel="index"><span itemprop="name">Base</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/06/16/StudyMethod/" class="post-meta-item leancloud_visitors" data-flag-title="StudyMethod">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/16/StudyMethod/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/16/StudyMethod/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <ul>
+<li>寻找与学习相关的资源，并作用个简介，记录到StudyResources</li>
+<li>找课程视频做了解，并同时找书看。</li>
+<li>写博客，记录学习其中原理，并再次实践，重温书内容</li>
+</ul>
+<h1 id="Java求职经验分享"><a href="#Java求职经验分享" class="headerlink" title="Java求职经验分享"></a>Java求职经验分享</h1><p>规划：一二线大厂更关注基础知识：<strong>数据结构与算法、计算机网络与操作系统</strong></p>
+<p>其他公司：语言与框架的实践能力。</p>
+<h3 id="Java理论"><a href="#Java理论" class="headerlink" title="Java理论"></a>Java理论</h3><ul>
+<li><p>语言基础</p>
+<ul>
+<li>Java编程思想、Effective Java</li>
+<li>深入理解Java虚拟机、Java并发编程实战</li>
+<li>源码分析</li>
+</ul>
+</li>
+<li><p>设计模式</p>
+<ul>
+<li>结合Java类库当中的实现，或者是Spring当中的实现</li>
+</ul>
+</li>
+<li><p>框架与中间件</p>
+<ul>
+<li>Spring，精通Spring4.x、Spring揭秘（对于IOC与AOP比较好）</li>
+<li>缓存与消息队列。<ul>
+<li>Redis实战、Redis设计与实现。</li>
+<li>RabbitMQ实战指南</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据库</p>
+<ul>
+<li>MySQL必知必回。刷题</li>
+<li>数据库系统概念，MySQL技术内幕、高性能MySQL。Innob、索引、锁、事务、性能优化</li>
+</ul>
+</li>
+<li><p>数据结构与算法</p>
+</li>
+<li><p>计算机网络</p>
+<ul>
+<li>TcpIP、HTTP、socket</li>
+<li>计算机网络自顶向下、TCPIP详解、图解HTTP</li>
+<li>socket了解IO多路复用（UNIX网络编程）</li>
+</ul>
+</li>
+<li><p>OS</p>
+<ul>
+<li>进程线程、死锁、内存管理</li>
+<li>现代操作系统、深入理解操作系统</li>
+<li>LINUX</li>
+</ul>
+</li>
+<li><p>系统设计</p>
+<ul>
+<li>问题：设计网站架构</li>
+<li>大型网站架构</li>
+<li>分布式，从Paxos到Zookeeper、大规模分布式存储系统、微服务</li>
+</ul>
+</li>
+</ul>
+<h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><p>考察主要目的</p>
+<ul>
+<li>对业务的理解程度</li>
+<li>对热门技术的掌握程度</li>
+</ul>
+<p>项目的着力点</p>
+<ul>
+<li>从业务角度分析项目的难点</li>
+<li>多用热门技术解决问题，缓存、集群、消息队列</li>
+<li>从业务角度分析，说清楚这么做有什么用、为什么不用其他方法</li>
+<li>建议做高并发项目</li>
+</ul>
+<p>建议</p>
+<ul>
+<li>部署到云服务器上，有访问地址</li>
+<li>开源到GitHub，写好项目文档</li>
+</ul>
+<h1 id="求职经验"><a href="#求职经验" class="headerlink" title="求职经验"></a>求职经验</h1><h3 id="网申渠道"><a href="#网申渠道" class="headerlink" title="网申渠道"></a>网申渠道</h3><ul>
+<li>公司的校招官网。公众号</li>
+<li>第三方招聘网站收集信息，之后去看官网</li>
+</ul>
+<h3 id="简历"><a href="#简历" class="headerlink" title="简历"></a>简历</h3><p>简历相当于向公司推销自己的工具，要展现自己能为公司带来的价值。</p>
+<ul>
+<li>技能的匹配程度。技术栈</li>
+<li>能力证明。工作实习、项目中解决的问题等</li>
+</ul>
+<h3 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h3><ul>
+<li>笔试问题应试偏强。</li>
+<li>面试题目偏向实际问题。</li>
+<li>面试比笔试更为重要，笔试是面试的入场券，但是笔试过线就可以参加面试，占用的比例较低</li>
+<li>要是简历非常出色就会被面试官看重</li>
+<li>若查出作弊就GG，因为这个资料库是共享的</li>
+</ul>
+<h3 id="技术面"><a href="#技术面" class="headerlink" title="技术面"></a>技术面</h3><ul>
+<li>考察理论知识掌握与学习能力、分析解决问题的能力</li>
+<li>面试是交流，在交流中将面试官引入到熟悉的领域，并体现自己的能力</li>
+</ul>
+<p><strong><em>提问</em></strong></p>
+<ul>
+<li>理论知识掌握情况<ul>
+<li>深度。除了回答标准答案后，还需要结合场景分析使用什么，</li>
+<li>广度，不一定非常熟悉全部的，但是要了解他们的基本原理</li>
+<li>回答问题<ul>
+<li>为什么存在(解决了什么问题)</li>
+<li>基本原理</li>
+<li>使用场景</li>
+<li>和其他相比有什么不同</li>
+<li>结构化表达，避免回答零散<ul>
+<li>先列出核心的知识点，不做出过多的引申。最后再拓展</li>
+</ul>
+</li>
+<li>进行引导，</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>编码能力<ul>
+<li>边界情况</li>
+<li>测试用例。正常用例，空，，输入错误等</li>
+</ul>
+</li>
+<li>分析解决问题能力<ul>
+<li>看对理论知识是否有深入的理解</li>
+<li>对没有遇到过的问题会怎么分析去解决</li>
+<li>在遇到一个问题时，最怕没有在搞清楚问题的情况下就解决问题。需要将问题问清楚。没有思路要和面试官多交流。避免逃避问题</li>
+<li>最喜欢问项目当中遇到的问题</li>
+</ul>
+</li>
+<li>学习能力</li>
+<li>团队协作能力</li>
+<li>交流表达能力<ul>
+<li>自我介绍中突出自己的亮点，引导到自己的优势</li>
+<li>项目经理自己联系表达几个问题<ul>
+<li>介绍自己的项目（用了什么技术）</li>
+<li>遇到什么难题</li>
+<li>项目有什么亮点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>加入意愿</li>
+</ul>
+<h3 id="向面试官提问"><a href="#向面试官提问" class="headerlink" title="向面试官提问"></a>向面试官提问</h3><p>主要目的是对企业和部门有更深入的了解</p>
+<ul>
+<li>部门的业务和技术栈</li>
+<li>技术难点怎么解决</li>
+<li>公司吸引您的地方有哪些</li>
+</ul>
+<p>先去官网渠道收集一些信息。我了解到你们使用了XX技术，这个技术XXX，你们如何处理XXX问题的、</p>
+<p><strong><em>了解面试表现</em></strong></p>
+<ul>
+<li>向面试官征求学习建议。会做出一些点评，哪些不足，哪些得到肯定。</li>
+</ul>
+<h3 id="牛客网的Java面试题库"><a href="#牛客网的Java面试题库" class="headerlink" title="牛客网的Java面试题库"></a>牛客网的Java面试题库</h3><p><a href="https://www.nowcoder.com/tutoril/94" target="_blank" rel="noopener">https://www.nowcoder.com/tutoril/94</a></p>
+<h3 id="HR面"><a href="#HR面" class="headerlink" title="HR面"></a>HR面</h3><p><img src="assets/1562420336179.png" alt="1562420336179"></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/16/版本控制/Maven/Maven：Start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/16/版本控制/Maven/Maven：Start/" class="post-title-link" itemprop="url">Sin título</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-06-16 12:52:09" itemprop="dateCreated datePublished" datetime="2019-06-16T12:52:09+08:00">2019-06-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-14 18:53:08" itemprop="dateModified" datetime="2019-07-14T18:53:08+08:00">2019-07-14</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本控制/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/06/16/版本控制/Maven/Maven：Start/" class="post-meta-item leancloud_visitors" data-flag-title="">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/16/版本控制/Maven/Maven：Start/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/16/版本控制/Maven/Maven：Start/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Maven
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/16/版本控制/Maven/Maven：Start/">
+                Leer más &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/系统架构/系统设计：UML建模/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/11/系统架构/系统设计：UML建模/" class="post-title-link" itemprop="url">系统设计：UML建模</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-06-11 13:11:50" itemprop="dateCreated datePublished" datetime="2019-06-11T13:11:50+08:00">2019-06-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-23 20:19:09" itemprop="dateModified" datetime="2019-07-23T20:19:09+08:00">2019-07-23</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
@@ -440,21 +1498,37 @@
           
 
           
+            <span id="/2019/06/11/系统架构/系统设计：UML建模/" class="post-meta-item leancloud_visitors" data-flag-title="系统设计：UML建模">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/11/系统架构/系统设计：UML建模/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/11/系统架构/系统设计：UML建模/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -462,59 +1536,83 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          代码骨架
+            <h1 id="UML静态建模"><a href="#UML静态建模" class="headerlink" title="UML静态建模"></a>UML静态建模</h1><p>静态建模定义了系统中重要对象的属性和操作以及这些对象间的相互关系。主要包括类图、对象图、包图、构件图、部署图。</p>
+<h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><h3 id="泛化关系"><a href="#泛化关系" class="headerlink" title="泛化关系"></a>泛化关系</h3><p>用来描述继承关系，在 Java 中使用 extends 关键字。</p>
+<p><img src="assets/c0874e0a-dba3-467e-9c86-dd9313e0843e.jpg" alt="img"></p>
+<h3 id="实现关系"><a href="#实现关系" class="headerlink" title="实现关系"></a>实现关系</h3><ul>
+<li>用来实现一个接口，在 Java 中使用 implements 关键字。或者可以说是接口的一个实现</li>
+</ul>
+<p><img src="assets/83d466bd-946b-4430-854a-cf7b0696d4c8.jpg" alt="img"></p>
+<h3 id="关联与直接关联"><a href="#关联与直接关联" class="headerlink" title="关联与直接关联"></a>关联与直接关联</h3><p>表示不同类对象之间有关联，这是一种静态关系，与运行过程的状态无关，在最开始就可以确定。因此也可以用 1 对 1、多对 1、多对多这种关联关系来表示。比如学生和学校就是一种关联关系，一个学校可以有很多学生，但是一个学生只属于一个学校，因此这是一种多对一的关系，在运行开始之前就可以确定。</p>
+<ul>
+<li>关联是一种拥有的关系, 它使一个类知道另一个类的属性和方法；<ul>
+<li>例如企鹅与气候，企鹅是需要知道气候的变化，需要了解气候规律的。即一个类知道另一个类</li>
+</ul>
+</li>
+<li>关联暗示了依赖。关联类通常作为一个类成员变量存在</li>
+<li>关联用来表示无法用聚合和组合表示的关系。如学生与老师的关系</li>
+</ul>
+<p>双向关联有两个箭头或者没有箭头。而单向关联有一个箭头，表示关联的方向</p>
+<p><img src="assets/a3e4dc62-0da5-4d22-94f2-140078281812.jpg" alt="img"></p>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>和关联关系不同的是，依赖关系是在运行过程中起作用的，是一种使用的关系,  即一个类的实现需要另一个类的协助, 所以要尽量不使用双向的互相依赖。A 类和 B 类是依赖关系主要有三种形式：</p>
+<ul>
+<li>A 类是 B类方法的局部变量；</li>
+<li>A 类是 B 类方法当中的一个参数；</li>
+<li>A 类向 B 类发送消息，从而影响 B 类发生变化。</li>
+</ul>
+<p><img src="assets/379444c9-f1d1-45cd-b7aa-b0c18427d388.jpg" alt="img"></p>
+<ul>
+<li>依赖通常体现为调用一个其他所依赖类的方法</li>
+<li>在代码中往往体现为依赖类作为函数参数或者局部临时变量。举例：人依赖车（<strong>在逻辑上他们就是依赖的，如同人与空气一般</strong>）</li>
+</ul>
+<p>依赖(Dependency)关系是一种使用关系，特定事物的改变有可能会影响到使用该事物的其他事物，在需要表示一个事物使用另一个事物时使用依赖关系。大多数情况下，依赖关系体现在某个类的方法使用另一个类的对象作为参数。在UML中，依赖关系用带箭头的虚线表示，由依赖的一方指向被依赖的一方。例如：驾驶员开车，在Driver类的drive()方法中将Car类型的对象car作为一个参数传递，以便在drive()方法中能够调用car的move()方法，且驾驶员的drive()方法依赖车的move()方法，因此类Driver依赖类Car，如图1所示：</p>
+<p><img src="../%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/assets/20121123111.jpg" alt="img"></p>
+<p>图1 依赖关系实例</p>
+<p>在系统实施阶段，依赖关系通常通过三种方式来实现，第一种也是最常用的一种方式是如图1所示的将一个类的对象作为另一个类中方法的参数，第二种方式是在一个类的方法中将另一个类的对象作为其局部变量，第三种方式是在一个类的方法中调用另一个类的静态方法。图1对应的Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Driver</span> </span>&#123; 	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">(Car car)</span> </span>&#123; 		</span><br><span class="line">        car.move(); 	</span><br><span class="line">    &#125;     </span><br><span class="line">…… &#125;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123; 	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">move</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...... 	</span><br><span class="line">    &#125;     </span><br><span class="line">…… &#125;  `</span><br></pre></td></tr></table></figure>
 
-iface
+<h3 id="聚合与组合"><a href="#聚合与组合" class="headerlink" title="聚合与组合"></a>聚合与组合</h3><p>聚合：是整体与部分的关系, 且部分可以离开整体而单独存在. 如车和轮胎是整体和部分的关系, 轮胎离开车仍然可以存在.</p>
+<p><img src="assets/a0ce43b7-afa8-4397-a96e-5c12a070f2ae.jpg" alt="img"></p>
+<ul>
+<li>成员可独立。班级与学生</li>
+</ul>
+<p>聚合(Aggregation)关系表示整体与部分的关系。在聚合关系中，成员对象是整体对象的一部分，但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。例如：汽车发动机(Engine)是汽车(Car)的组成部分，但是汽车发动机可以独立存在，因此，汽车和发动机是聚合关系，如图6所示：</p>
+<p><img src="assets/2012112319.jpg" alt="img"></p>
+<p>在代码实现聚合关系时，成员对象通常作为构造方法、Setter方法或业务方法的参数注入到整体对象中，图6对应的Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123; 	<span class="keyword">private</span> Engine engine;      <span class="comment">//构造注入 	public Car(Engine engine) &#123; 		this.engine = engine; 	&#125;          //设值注入 public void setEngine(Engine engine) &#123;     this.engine = engine; &#125; …… &#125;  public class Engine &#123; 	…… &#125; `</span></span><br></pre></td></tr></table></figure>
 
-定义接口iface
+<p><strong>组合</strong>：是整体与部分的关系, 但部分不能离开整体而单独存在. 如公司和部门是整体和部分的关系, 没有公司就不存在部门.</p>
+<p><img src="assets/6a88a398-c494-41f5-bb62-9f7fb811df7c.jpg" alt="img"></p>
+<ul>
+<li>成员不可独立。汽车与引擎（必须依赖于整体才有意义）</li>
+</ul>
+<p>组合(Composition)关系也表示类之间整体和部分的关系，但是在组合关系中整体对象可以控制成员对象的生命周期，一旦整体对象不存在，成员对象也将不存在，成员对象与整体对象之间具有同生共死的关系。在UML中，组合关系用带实心菱形的直线表示。例如：人的头(Head)与嘴巴(Mouth)，嘴巴是头的组成部分之一，而且如果头没了，嘴巴也就没了，因此头和嘴巴是组合关系，如图7所示：</p>
+<p><img src="assets/20121123110.jpg" alt="img"></p>
+<p>在代码实现组合关系时，通常在整体类的构造方法中直接实例化成员类，图7对应的Java代码片段如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Head</span> </span>&#123; 	<span class="keyword">private</span> Mouth mouth;  	<span class="function"><span class="keyword">public</span> <span class="title">Head</span><span class="params">()</span> </span>&#123; 		mouth = <span class="keyword">new</span> Mouth(); <span class="comment">//实例化成员类 	&#125; …… &#125;  public class Mouth &#123; 	…… &#125; `</span></span><br></pre></td></tr></table></figure>
 
-响应返回的类要用RpcResult包装
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><p><strong>泛化 = 实现 &gt; 组合 &gt; 聚合 &gt; 关联 &gt; 依赖</strong></p>
+<p><img src="assets/85ffc9034b489a2fcc51ce7e332d03ba.png" alt="image.png"></p>
+<p>下面围绕类Library类分析下这个图，首先library通过组合方式关联到了Catalog类目类，这说明类目不能独立存在要依赖图书馆存在，所以这里没有使用聚合而使用了组合。另外library通过聚合关联到了Book Item 类和Account账号类，这说明图书馆是有0个或者多个图书和账户组成，这里使用聚合而不是用组合是因为书和账号可以独立于图书馆存在，比如我有学号账号，但是图书馆里面不是必然有你的账号。</p>
+<p>下面围绕Catalog分析，类目通过双向关联关联到bookitem，说明一个类目里面可能会有0个或者多个书籍，一个书籍对应着一个类目。另外类目有通过realization实现了search类和manage类的接口，让类目有搜索和管理功能。Search类搜索时候会依赖Patron类图书捐赠人的姓名地址或者Libraian类图书管理员的姓名地址，职位。 图书管理类时候会依赖图书管理员类的信息。</p>
+<p>而Patron图书捐赠人有可能是一个学生，学生有自己的账号，所以patron类会聚合到Account.<br>bookItem类通过泛化继承Book中书的共性部分信息。有通过关联关联到了account,说明一个账户只能接到0本和最多12本书，最多可以预定3本书。</p>
+<p>最后Book类双向关联到Author类，数目一个作者至少写了1本书（严格说应该是0），一本书至少有一个作者编写，<br>Account账户类有依赖一个AccountState的枚举值的类用来存放账号状态。</p>
+<h1 id="设计模式–类图"><a href="#设计模式–类图" class="headerlink" title="设计模式–类图"></a>设计模式–类图</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
 
-请求的接口的字段类req
-请求返回的类res
-app在该层实现iface层的接口
-将请求转换为命令，handle处理command
-若是app抛出的face异常就抛出face的异常，若是domain的异常就抛出
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/04/系统架构/领域驱动设计：骨架/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -522,24 +1620,15 @@ app在该层实现iface层的接口
   
   </article>
 
-
     
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/系统架构/系统设计：依赖反转与依赖注入/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/04/Java/设计模式/设计模式：复合模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -550,387 +1639,57 @@ app在该层实现iface层的接口
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/04/系统架构/系统设计：依赖反转与依赖注入/" itemprop="url">
-                  系统设计：依赖反转与依赖注入
-                </a>
+                
+                <a href="/2019/06/04/Java/设计模式/设计模式：复合模式/" class="post-title-link" itemprop="url">设计模式：复合模式</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-04 09:20:52 / Modified: 09:35:40" itemprop="dateCreated datePublished" datetime="2019-07-04T09:20:52+08:00">2019-07-04</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
+              <time title="Creado por: 2019-06-04 15:51:59" itemprop="dateCreated datePublished" datetime="2019-06-04T15:51:59+08:00">2019-06-04</time>
+            </span>
           
             
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          依赖反转依赖为什么要将依赖反转，因为当存在依赖时，被依赖的模块A会先进行编译，而依赖的模块B会在A编译后才能进行编译。
-定义软件设计存在抽象层与是实现层之分，一般情况下，抽象依赖于实现。
-但是抽象层稳定，实现层容易变化，抽象层应该有较实现层更高的复用性，它就应该我们设计和考量的核心与重点，而不是具体
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/04/系统架构/系统设计：依赖反转与依赖注入/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：StudyResources/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/03/系统架构/领域驱动设计：StudyResources/" itemprop="url">
-                  领域驱动设计：StudyResources
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
 
             
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-03 15:10:46" itemprop="dateCreated datePublished" datetime="2019-07-03T15:10:46+08:00">2019-07-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Modified: 2019-07-04 23:54:31" itemprop="dateModified" datetime="2019-07-04T23:54:31+08:00">2019-07-04</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          书籍
-Eric Evans        Domain-Driven Design: Tackling Complexity in the Heart of Software”一书（中文名字《领域驱动设计–软件核心复杂性应对之道 》，清华大学出版社出版）
-偏向于理论
-
-
-Vaughn Vernon的
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/03/系统架构/领域驱动设计：StudyResources/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/03/系统架构/领域驱动设计：理论/" itemprop="url">
-                  领域驱动设计
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <time title="Modificado por: 2019-06-11 09:33:26" itemprop="dateModified" datetime="2019-06-11T09:33:26+08:00">2019-06-11</time>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-03 15:00:51" itemprop="dateCreated datePublished" datetime="2019-07-03T15:00:51+08:00">2019-07-03</time>
             
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-10 08:37:18" itemprop="dateModified" datetime="2019-07-10T08:37:18+08:00">2019-07-10</time>
-              
-            
-          </span>
-
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">En</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
@@ -939,21 +1698,37 @@ Vaughn Vernon的
           
 
           
+            <span id="/2019/06/04/Java/设计模式/设计模式：复合模式/" class="post-meta-item leancloud_visitors" data-flag-title="设计模式：复合模式">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/06/04/Java/设计模式/设计模式：复合模式/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/06/04/Java/设计模式/设计模式：复合模式/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -961,45 +1736,38 @@ Vaughn Vernon的
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          
+            <h1 id="复合模式"><a href="#复合模式" class="headerlink" title="复合模式"></a>复合模式</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>模式通常被一起使用，并被组合在同一个设计解决方案中。</p>
+<p>复合模式在一个解决方案中结合两个或多个模式，以解决一般或重复发生的问题，如MVC。它与一群模式携手合作并不相同</p>
+<h3 id="分类，各个分类是什么"><a href="#分类，各个分类是什么" class="headerlink" title="分类，各个分类是什么"></a>分类，各个分类是什么</h3><ul>
+<li>MVC</li>
+</ul>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h3><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><h4 id="与其他的区别"><a href="#与其他的区别" class="headerlink" title="与其他的区别"></a>与其他的区别</h4><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>模型–视图-控制器</p>
+<ul>
+<li>模型：持有所有的数据、状态和程序逻辑。模型没有注意到视图和控制器，虽然它提供了操纵和检索状态的接口，并发送状态改变通知给观察者。</li>
+<li>视图：用来呈现模型，通常直接从模型中取得它所需要显式的状态与数据</li>
+<li>控制器：取得用户的输入并解读其对模型的意思、</li>
+</ul>
+<h3 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h3><ul>
+<li>模型：观察者模式。当状态改变时，使用观察者模式，让模型完全独立于视图和控制器。一个模型可以使用不同的视图，甚至可以同时使用多个视图</li>
+<li>视图：组合模式。</li>
+<li>控制器：策略模式。视图是一个对象，可以被调整使用不同的策略，控制器提供了策略。策略模式让视图与模型间关系解耦</li>
+</ul>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
 
-      
-        
-          来自于Eric Evans的书
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/03/系统架构/领域驱动设计：理论/">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -1007,24 +1775,15 @@ Vaughn Vernon的
   
   </article>
 
-
     
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/系统架构/架构：StudyResources/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/Java/项目/物联网平台/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -1035,915 +1794,67 @@ Vaughn Vernon的
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/02/系统架构/架构：StudyResources/" itemprop="url">
-                  架构：StudyResources
-                </a>
+                
+                <a href="/2019/05/29/Java/项目/物联网平台/" class="post-title-link" itemprop="url">物联网平台</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-02 23:27:34 / Modified: 23:28:17" itemprop="dateCreated datePublished" datetime="2019-07-02T23:27:34+08:00">2019-07-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          RPCthrift
-http://blog.csdn.net/column/details/thrift.html
-
-dubbo
-http://blog.csdn.net/u010311445/article/category/2745121
-
-微服务
-http://microservices.io
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/02/系统架构/架构：StudyResources/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/01/Java/代码设计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/01/Java/代码设计/" itemprop="url">
-                  代码设计
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-01 22:15:16" itemprop="dateCreated datePublished" datetime="2019-07-01T22:15:16+08:00">2019-07-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-02 08:23:13" itemprop="dateModified" datetime="2019-07-02T08:23:13+08:00">2019-07-02</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          代码规范命名规范输入检测代码设计对于coder，面对问题会直觉使用计算机可以理解地逻辑来描述和表达待解决的问题和具体的求解过程。
-但是这样的程序只能满足当前的需求，程序不容易维护，不容易扩展，不容易复用。
-面向对象封装
-业务逻辑与界面逻辑的分离
-
-继承
-当系统当中的操作需要增加或者修改，而这些操作拥
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/01/Java/代码设计/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/personal/租房篇/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/28/personal/租房篇/" itemprop="url">
-                  租房篇
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-28 15:43:50 / Modified: 23:15:07" itemprop="dateCreated datePublished" datetime="2019-06-28T15:43:50+08:00">2019-06-28</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          租房途径房屋基本信息确认合同前再次确认房屋设施情况并进行拍照留存，还可以列举详细的清单并附在合同之后。
-
-房屋状态
-卧室
-隔音情况、是否有刺鼻气味（甲醛）、门窗、桌椅等设施是否有损毁，房屋的清洁状况。
-如果你是与男女朋友/闺蜜/兄弟等合租，可以考虑租住带有独卫的主卧，会给生活带来相对大的便利，在一定
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/28/personal/租房篇/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/服务器/Linux：概述/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/27/服务器/Linux：概述/" itemprop="url">
-                  Linux：概述
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-27 16:55:47" itemprop="dateCreated datePublished" datetime="2019-06-27T16:55:47+08:00">2019-06-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-21 12:24:45" itemprop="dateModified" datetime="2019-07-21T12:24:45+08:00">2019-07-21</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Linux发展史分类
-内核版本：内核官网（www.kernel.org）
-
-外核版本
-
-在内核基础上做出改进，即发行版本。
-
-
-
-发行版本
-redhat：它有一部分收费的售后功能
-Centos：是完全免费的，并且与redhat一致
-fediro：个人版
-Ubuntu：图形界面更优秀
-debian：
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/27/服务器/Linux：概述/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/Java/框架/Dubbo：/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/22/Java/框架/Dubbo：/" itemprop="url">
-                  Dubbo：
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-22 20:00:12" itemprop="dateCreated datePublished" datetime="2019-06-22T20:00:12+08:00">2019-06-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-23 16:01:54" itemprop="dateModified" datetime="2019-06-23T16:01:54+08:00">2019-06-23</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          两大协议（不止两种）
-
-RPC协议/Dubbo协议：同构项目，犹如本地调用一般
-Http的Rest Api：通用（不要求同构，比如可以是多种语言）项目
-
-Dubbo
-4个核心组件
-
-生产者
-消费者
-监控器
-注册中心
-
-
-核心配置文件
-
-spring-dubbo.xml
-注解发布的dubbo服务所在包
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/22/Java/框架/Dubbo：/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/系统架构/架构：分布式架构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/22/系统架构/架构：分布式架构/" itemprop="url">
-                  架构：分布式架构
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-22 17:05:36" itemprop="dateCreated datePublished" datetime="2019-06-22T17:05:36+08:00">2019-06-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-24 09:14:37" itemprop="dateModified" datetime="2019-07-24T09:14:37+08:00">2019-07-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
-
-                
-                
-              
+              <time title="Creado por: 2019-05-29 14:24:32" itemprop="dateCreated datePublished" datetime="2019-05-29T14:24:32+08:00">2019-05-29</time>
             </span>
           
 
           
+            <span id="/2019/05/29/Java/项目/物联网平台/" class="post-meta-item leancloud_visitors" data-flag-title="物联网平台">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/05/29/Java/项目/物联网平台/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/05/29/Java/项目/物联网平台/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -1951,78 +1862,42 @@ spring-dubbo.xml
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          分布式系统
-分布式系统是一个硬件或软件组件分布在不同的网络计算机上，彼此间仅仅通过消息传递进行通信和协调的系统
+            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
 
-
-很多台计算机组成一个整体，一个整体一致对外并且处理同一请求
-内部的每台计算机都可以相互通信（rest/rpc）
-客户端到服务端的一次请求到响应结束会历经多台计算机
-
-分布式系统的瓶颈参
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/22/系统架构/架构：分布式架构/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
   
   
   </article>
-
 
     
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Página anterior"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Página siguiente"></i></a>
   </nav>
-
 
 
           </div>
           
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -2034,239 +1909,190 @@ spring-dubbo.xml
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
+
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
-            
-              <p class="site-author-name" itemprop="name">Heper</p>
-              <p class="site-description motion-element" itemprop="description">To be awesome</p>
-          </div>
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-name">entradas</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categorías</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
 
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">227</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">19</span>
-                    <span class="site-state-item-name">categories</span>
-                  
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">34</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
-                  
-                </span>
-              
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
-            
-          
-          
 
         </div>
-      </section>
-
-      
-
-      
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
-
-  
-
-  
 </div>
-
-
-  
-
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
-
-
-
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
-
-
-
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -2280,43 +2106,40 @@ spring-dubbo.xml
         
       </div>
     </footer>
-
-    
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
-        
       </div>
-    
 
     
-	
-    
 
-    
   </div>
 
   
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
 
-
-
-
-
-
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
+  
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
 
 
-
-
-
-
+  
 
 
 
@@ -2329,401 +2152,67 @@ spring-dubbo.xml
 
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
+  <script>
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
       });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
     }
+    
 
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+                'X-LC-Key': 'uTVcNIWdMCGpicrhTKygpKXi',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
+          
+        });
     });
   </script>
 
@@ -2731,41 +2220,49 @@ spring-dubbo.xml
 
 
 
-  
 
-  
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
 <script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+    appKey: 'uTVcNIWdMCGpicrhTKygpKXi',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
 </script>
 
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

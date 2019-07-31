@@ -4,145 +4,90 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang>
-<head><meta name="generator" content="Hexo 3.9.0">
+<html class="theme-next gemini use-motion" lang="">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '6.4.1',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
     fancybox: false,
-    fastclick: false,
+    mediumzoom: false,
     lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    pangu: false,
     algolia: {
-      applicationID: '',
+      applicationID: 'OZTK1BY156',
       apiKey: '',
-      indexName: '',
+      indexName: 'BlogIndex',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copiar',
+      copy_success: 'Copiado',
+      copy_failure: 'Copiar falló'
     }
   };
 </script>
 
-
-  
-
-
-
-
-  <meta name="description" content="JMM基础并发编程模型的两个关键问题 线程间如何通信。通信指线程间以何种机制交换信息 线程间如何同步  在命令式编程中，线程通信机制有两种：  共享内存。 线程间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信 同步是显式进行的，程序员必须显式指定某个方法或某段代码需要在线程间互斥执行   消息传递。 线程间没有公共状态，必须通过发送消息来显式进行通信 同步是隐式进行的，消息的发送必须在消">
+  <meta name="description" content="JMM基础内存模型：在特定的操作协议(应该时指缓存一致性协议把)下，对特定内存或高速缓存进行读写访问地过程抽象 Java内存模型(JMM)试图屏蔽各种硬件和OS间的内存访问差异，以实现Java程序在各种平台下都能达到一致的内存访问效果。 Java内存模型是围绕着在并发过程中如何处理原子性、可见性和有序性而建立的 JMMJMM规范了java虚拟机与计算机内存如何协同工作，规定了一个线程如何和何时能看">
 <meta name="keywords" content="并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发：JMM">
 <meta property="og:url" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JMM基础并发编程模型的两个关键问题 线程间如何通信。通信指线程间以何种机制交换信息 线程间如何同步  在命令式编程中，线程通信机制有两种：  共享内存。 线程间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信 同步是显式进行的，程序员必须显式指定某个方法或某段代码需要在线程间互斥执行   消息传递。 线程间没有公共状态，必须通过发送消息来显式进行通信 同步是隐式进行的，消息的发送必须在消">
+<meta property="og:description" content="JMM基础内存模型：在特定的操作协议(应该时指缓存一致性协议把)下，对特定内存或高速缓存进行读写访问地过程抽象 Java内存模型(JMM)试图屏蔽各种硬件和OS间的内存访问差异，以实现Java程序在各种平台下都能达到一致的内存访问效果。 Java内存模型是围绕着在并发过程中如何处理原子性、可见性和有序性而建立的 JMMJMM规范了java虚拟机与计算机内存如何协同工作，规定了一个线程如何和何时能看">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551253396237.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551253669203.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551253796357.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555057714237.png">
+<meta property="og:image" content="d:/ABlog/source/_posts/Java/base/assets/1551254279492.png">
+<meta property="og:image" content="d:/ABlog/source/_posts/Java/base/assets/1555058673645.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/874b3ff7-7c5c-4e7a-b8ab-a82a3e038d20.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/8996a537-7c4a-4ec8-a3b7-7ef1798eae26.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/942f33c9-8ad9-4987-836f-007de4c21de0.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/6270c216-7ec0-4db7-94de-0003bce37cd2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/233f8d89-31d7-413f-9c02-042f19c46ba1.png">
+<meta property="og:image" content="d:/ABlog/source/_posts/Java/base/assets/1555057714237.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555058346281.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555058415256.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555058476394.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551254279492.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555058673645.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555329507304.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555329646304.png">
-<meta property="og:updated_time" content="2019-04-28T15:24:14.610Z">
+<meta property="og:updated_time" content="2019-07-31T07:16:16.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：JMM">
-<meta name="twitter:description" content="JMM基础并发编程模型的两个关键问题 线程间如何通信。通信指线程间以何种机制交换信息 线程间如何同步  在命令式编程中，线程通信机制有两种：  共享内存。 线程间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信 同步是显式进行的，程序员必须显式指定某个方法或某段代码需要在线程间互斥执行   消息传递。 线程间没有公共状态，必须通过发送消息来显式进行通信 同步是隐式进行的，消息的发送必须在消">
+<meta name="twitter:description" content="JMM基础内存模型：在特定的操作协议(应该时指缓存一致性协议把)下，对特定内存或高速缓存进行读写访问地过程抽象 Java内存模型(JMM)试图屏蔽各种硬件和OS间的内存访问差异，以实现Java程序在各种平台下都能达到一致的内存访问效果。 Java内存模型是围绕着在并发过程中如何处理原子性、可见性和有序性而建立的 JMMJMM规范了java虚拟机与计算机内存如何协同工作，规定了一个线程如何和何时能看">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551253396237.png">
-
-
-
-
-
-
   <link rel="canonical" href="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/">
 
 
-
-<script type="text/javascript" id="page.configurations">
+<script id="page.configurations">
   CONFIG.page = {
     sidebar: "",
   };
@@ -156,43 +101,30 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
 
 
   <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
 
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
   </style>
 </noscript>
 
@@ -200,18 +132,12 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
 
-  
-  
-    
-  
-
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+  <div class="site-meta">
 
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
@@ -220,11 +146,10 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Cambiar a barra de navegación">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -235,102 +160,75 @@
 
 
 <nav class="site-nav">
-  
     <ul id="menu" class="menu">
-      
         
         
         
           
           <li class="menu-item menu-item-home">
-    <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-    <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-about">
-    <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-tags">
-    <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-categories">
-    <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-schedule">
-    <a href="/schedule/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Calendario</a>
+
   </li>
-
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
-        </li>
-      
     </ul>
-  
-
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
 </nav>
-
-
-
-  
-
-
 
 </div>
     </header>
@@ -341,23 +239,13 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
@@ -375,69 +263,52 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">Java并发：JMM
+          <h1 class="post-title" itemprop="name headline">Java并发：JMM
+
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-04-11 21:50:21" itemprop="dateCreated datePublished" datetime="2019-04-11T21:50:21+08:00">2019-04-11</time>
+              <time title="Creado por: 2019-04-11 21:50:21" itemprop="dateCreated datePublished" datetime="2019-04-11T21:50:21+08:00">2019-04-11</time>
+            </span>
+          
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Modified: 2019-04-28 23:24:14" itemprop="dateModified" datetime="2019-04-28T23:24:14+08:00">2019-04-28</time>
-              
+                <time title="Modificado por: 2019-07-31 15:16:16" itemprop="dateModified" datetime="2019-07-31T15:16:16+08:00">2019-07-31</time>
+              </span>
             
-          </span>
-
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">En</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -449,31 +320,37 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/04/11/Java/base/Java并发：JMM/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/04/11/Java/base/Java并发：JMM/" itemprop="commentsCount"></span>
-                </a>
+            <span id="/2019/04/11/Java/base/Java并发：JMM/" class="post-meta-item leancloud_visitors" data-flag-title="Java并发：JMM">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
               </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/04/11/Java/base/Java并发：JMM/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/11/Java/base/Java并发：JMM/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -481,45 +358,93 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <h1 id="JMM基础"><a href="#JMM基础" class="headerlink" title="JMM基础"></a>JMM基础</h1><h2 id="并发编程模型的两个关键问题"><a href="#并发编程模型的两个关键问题" class="headerlink" title="并发编程模型的两个关键问题"></a>并发编程模型的两个关键问题</h2><ol>
-<li>线程间如何通信。通信指线程间以何种机制交换信息</li>
-<li>线程间如何同步</li>
-</ol>
-<p>在命令式编程中，线程通信机制有两种：</p>
-<ul>
-<li>共享内存。<ul>
-<li>线程间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信</li>
-<li>同步是显式进行的，程序员必须显式指定某个方法或某段代码需要在线程间互斥执行</li>
-</ul>
-</li>
-<li>消息传递。<ul>
-<li>线程间没有公共状态，必须通过发送消息来显式进行通信</li>
-<li>同步是隐式进行的，消息的发送必须在消息的接受前</li>
-</ul>
-</li>
-</ul>
-<p><strong>Java并发采用的是共享内存模型</strong></p>
-<p>Java线程间通信总是隐式进行，整个通信过程对程序员完全透明</p>
-<h2 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h2><p>为了屏蔽各种硬件与操作系统的内存访问差异，以实现java程序在各种系统下都能并发。</p>
-<p>JMM规范了java虚拟机与计算机内存如何协同工作，规定了一个线程如何和何时能看到其他线程修改过的共享变量的值，以及在必须时如何同步地访问共享变量</p>
-<h3 id="JMM结构"><a href="#JMM结构" class="headerlink" title="JMM结构"></a>JMM结构</h3><p>堆：运行时的数据区，由垃圾回收负责，动态分配内存。由于运行时动态分配，存取速度慢</p>
-<p>栈：存取速度快，数据可共享。存在栈当中的数据大小与生存期必须确定。</p>
-<p>当线程中对对象的引用，引用了在堆上的对象，调用了对象的方法，访问了对象的数据，这个时候他们拥有的是对象成员变量的私有<strong>拷贝</strong></p>
+        <h1 id="JMM基础"><a href="#JMM基础" class="headerlink" title="JMM基础"></a>JMM基础</h1><p>内存模型：在特定的操作协议(应该时指缓存一致性协议把)下，对特定内存或高速缓存进行读写访问地过程抽象</p>
+<p>Java内存模型(<strong>JMM</strong>)试图屏蔽各种硬件和OS间的内存访问差异，以实现Java程序在各种平台下都能达到一致的内存访问效果。</p>
+<p>Java内存模型是围绕着在并发过程中如何处理<strong>原子性</strong>、<strong>可见性</strong>和<strong>有序性</strong>而建立的</p>
+<h2 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h2><p>JMM规范了java虚拟机与计算机内存如何协同工作，规定了一个线程如何和何时能看到其他线程修改过的共享变量的值，以及在必须时如何同步地访问共享变量</p>
+<p>在JMM中，<strong>堆区域</strong>是线程间会共享的数据(<strong>实例字段、静态字段、构成数组对象的元素等</strong>)，Java内存模型的主要目标时定义程序中各个变量的访问规则，即在虚拟机中将变量存储到内存和从内存中取出变量这样的底层细节。</p>
+<p>并且为了获得较好的执行性能，JMM<strong>没有限制执行引擎使用CPU的特定寄存器或缓存</strong>来和主内存进行交互，也<strong>没有限制即时编译器进行调整代码执行顺序</strong>这类优化措施</p>
+<h3 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h3><p>JMM当中，所有变量都必须存储在主内存当中，每条线程还有自己的工作内存，线程中的工作内存保存了被该线程使用到的变量的<strong>主内存副本拷贝</strong>。当线程中对对象的引用，引用了在堆上的对象，调用了对象的方法，访问了对象的数据，这个时候他们拥有的是对象成员变量的私有拷贝。</p>
+<p>而线程对变量的所有修改都必须在工作内存中进行，不能直接读写主内存中的变量，不同的线程间也无法直接访问对方工作内存中的变量，即线程间的变量值传递均需要通过主内存来完成。</p>
+<p><strong><em>Java内存区域的堆栈</em></strong></p>
+<p>工作内存、主内存与Java堆栈不是一个层次的<strong>内存划分</strong>，即它们没有直接关联。</p>
+<p>若非要对应的话，则主内存主要对应与Java堆内的对象实例数据部分，而工作内存主要对应虚拟机栈内的部分区域。</p>
 <p><img src="assets/1551253396237.png" alt="1551253396237"></p>
-<p><strong>CPU寄存器</strong></p>
-<p>CPU registers，访问缓存的速度最快，其次是高速缓存</p>
+<p><strong>CPU寄存器</strong>CPU registers，访问缓存的速度最快，其次是高速缓存。它们都属于<strong>线程的本地内存</strong></p>
 <p><img src="assets/1551253669203.png" alt="1551253669203"></p>
 <p><img src="assets/1551253796357.png" alt="1551253796357"></p>
-<h2 id="JMM的抽象结构"><a href="#JMM的抽象结构" class="headerlink" title="JMM的抽象结构"></a>JMM的抽象结构</h2><ul>
+<h3 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h3><p>关于主内存与工作内存间的具体交互协议，即一个变量如何从主内存拷贝到工作内存、如何从工作内存同步回主内存之类的实现细节。</p>
+<p>Java内存模型定义了8种操作，并且虚拟机实现时必须保证每一种操作都是原子的，不可再分的(long和double的load、store、read、write在某些平台上允许例外)</p>
+<ul>
+<li>lock锁定：作用于主内存的变量，把一个变量标识为一条线程独占状态</li>
+<li>unlock解锁：作用于主内存的变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定</li>
+<li>read读取：作用于主内存的变量，把一个变量值从主内存传输到线程的工作内存中，以便随后load动作使用</li>
+<li>load载入：作用于工作内存的变量，把read操作从主内存得到的变量值放入工作内存的<strong>变量副本</strong>中</li>
+<li>use使用：作用于工作内存的变量，把工作内存的一个变量值传递给<strong>执行引擎</strong>（线程）</li>
+<li>assign赋值：作用于工作内存的变量，把一个从执行引擎接收到的值赋值给工作内存的变量</li>
+<li>store存储：作用于工作内存的变量，把工作内存的一个变量的值传递到主内存中，以便随后的write操作</li>
+<li>write写入：作用于主内存的变量，把store操作从工作内存中一个变量的值传送到主内存的变量中</li>
+</ul>
+<p><img src="D:/ABlog/source/_posts/Java/base/assets/1551254279492.png" alt="1551254279492"></p>
+<p>而具体操作间的顺序是有一定的规则的，较为简单的即happens-before原则判断</p>
+<p><strong><em>同步规则</em></strong></p>
+<ul>
+<li>不允许read、load与store、write操作单一出现，但是不必连续执行，中间可以插入其他指令</li>
+<li>不允许一个线程丢弃掉它最近的assign操作，必须将变化同步给主内存</li>
+<li>不允许一个线程无原因地（没有assign操作）将数据同步给主内存。</li>
+<li>一个新的变量只能从主内存中诞生，不允许在工作内存直接使用一个未初始化（load或assign）的变量，即在use与store前，必须先assign</li>
+<li>一个变量在同一时刻只允许一个线程进行lock，lock可以被同一线程执行多次。</li>
+<li>如果一个变量执行了lock操作，将清空工作内存中次变量的值，在执行引擎使用这个变量前需要重新load或assign操作初始化变量</li>
+<li>如果一个变量没有lock，则不允许unlock操作，也不能unlock其他线程lock的变量</li>
+<li>对变量unlock前，必须先将变量同步到主内存</li>
+</ul>
+<p><strong><em>long和double型变量的特殊规则</em></strong></p>
+<p>对于64位数据类型，允许虚拟机将没有被volatile修饰的64位数据的读写操作划分位两次32位的操作来进行，允许虚拟机实现选择可以不保证64位数据类型的load、store、read、write这4个操作的原子性。即long和double的<strong>非原子性协定</strong></p>
+<p>如果多个线程共享一个未声明为volatile的long或double类型的变量并且同时进行读取和修改，那么线程可能读到一个既非原值也非其他线程修改值的代表了半个变量的数值（<strong>商用JVM不会出现</strong>，因为虚拟机选择将其实现了原子操作）。</p>
+<h3 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h3><p>JDK5开始，Java使用新的JSR-133内存模型，JSR-133使用happens-before的概念来阐述操作之间的内存可见性</p>
+<p>如果两个操作的执行次序无法从happens before推导出来，<strong>则JVM可以对它进行随意的重排序。</strong></p>
+<p><strong>概述</strong></p>
+<p>在JMM中，<strong>如果一个操作执行的结果需要对另一个操作可见</strong>，那么这两个操作之间<strong>必须要存在</strong>happens-before关系。这里提到的两个操作既可以是在一个线程之内，也可以是在不同线程之间。</p>
+<p><img src="D:/ABlog/source/_posts/Java/base/assets/1555058673645.png" alt="1555058673645"></p>
+<p><strong>happens-before规则</strong></p>
+<ul>
+<li><strong>程序次序规则</strong>：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作<ul>
+<li>虽然由于指令重排序，即使先行发生也可能再时间上后发生，但是在一个线程中无法感知到这一点，因此并没有关系</li>
+<li>衡量并发安全问题时不要受到时间顺序的干扰，一切以先行发生原则为准。</li>
+</ul>
+</li>
+</ul>
+<p><img src="assets/874b3ff7-7c5c-4e7a-b8ab-a82a3e038d20.png" alt="img"></p>
+<ul>
+<li><strong>锁定操作</strong>：一个unlock操作先行发生于后面对同一个锁的lock操作</li>
+</ul>
+<p><img src="assets/8996a537-7c4a-4ec8-a3b7-7ef1798eae26.png" alt="img"></p>
+<ul>
+<li><strong>volatile变量规则</strong>：对一个变量的写操作先行发生于后面对于这个变量的读操作</li>
+</ul>
+<p><img src="assets/942f33c9-8ad9-4987-836f-007de4c21de0.png" alt="img"></p>
+<ul>
+<li><strong>传递规则</strong>；如果操作A先行发生于操作B，而操作B又先行发生于操作C，则操作A先行发生于操作C</li>
+<li>线程启动规则：Thread对象的start（）方法先行发生于此线程的每一个动作</li>
+</ul>
+<p><img src="assets/6270c216-7ec0-4db7-94de-0003bce37cd2.png" alt="img"></p>
+<ul>
+<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
+<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测</li>
+</ul>
+<p><img src="assets/233f8d89-31d7-413f-9c02-042f19c46ba1.png" alt="img"></p>
+<ul>
+<li>对象终结规则：一个对象的初始化完成先行发生于它的finalize（）方法的开始</li>
+</ul>
+<p><strong>优点</strong></p>
+<p>happens-before规则避免Java程序员为了理解JMM提供的内存可见性保证而去学习复杂的重排序规则以及这些规则的具体实现方法</p>
+<h3 id="JMM的抽象结构"><a href="#JMM的抽象结构" class="headerlink" title="JMM的抽象结构"></a>JMM的抽象结构</h3><ul>
 <li>Java中，所有实例域、静态域和数组元素都存放在堆内存中，堆内存在线程间共享。即共享变量</li>
 <li>局部变量和异常处理器参数不会在线程间共享，不会有内存可见性问题，不受内存模型影响。</li>
 </ul>
 <p>Java线程间通信由JMM控制，JMM决定一个线程对共享变量的写入何时对另一个线程可见。JMM定义了线程和主内存间的抽象关系。</p>
 <p>JMM通过控制主内存与每个线程的本地内存间的交互，为程序员提供内存可见性保证。</p>
-<h2 id="从源代码到指令序列的重排序"><a href="#从源代码到指令序列的重排序" class="headerlink" title="从源代码到指令序列的重排序"></a>从源代码到指令序列的重排序</h2><p>在执行程序时，为了提高性能，编译器和处理器常常会对指令做重排序。重排序分3种类型。</p>
+<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><h3 id="从源代码到指令序列的重排序"><a href="#从源代码到指令序列的重排序" class="headerlink" title="从源代码到指令序列的重排序"></a>从源代码到指令序列的重排序</h3><p>在执行程序时，为了提高性能，编译器和处理器常常会对指令做重排序。重排序分3种类型。</p>
 <ul>
 <li>编译器重排序：编译器优化的重排序。编译器在不改变单线程程序语义的前提下，可以重新安排语句的执行顺序。</li>
 <li>处理器重排序：<ul>
@@ -529,7 +454,7 @@
 </li>
 </ul>
 <p>对于Java源代码到最终执行的指令序列，会经历三种重排序，可能导致内存可见性问题：</p>
-<p><img src="assets/1555057714237.png" alt="1555057714237"></p>
+<p><img src="D:/ABlog/source/_posts/Java/base/assets/1555057714237.png" alt="1555057714237"></p>
 <p>JMM属于语言级别的内存模型，确保在不同的编译器和处理器平台上，通过禁止特定类型的编译器重排序和处理器重排序，保证一致性的内存可见性。</p>
 <ul>
 <li>对于编译器，JMM的编译器重排序规则会禁止<strong>特定类型</strong>的编译器重排序</li>
@@ -545,7 +470,8 @@
 <p><img src="assets/1555058346281.png" alt="1555058346281"></p>
 <p>现代处理器都会允许对写-读操作重排序</p>
 <p><img src="assets/1555058415256.png" alt="1555058415256"></p>
-<h3 id="内存屏障指令"><a href="#内存屏障指令" class="headerlink" title="内存屏障指令"></a>内存屏障指令</h3><p>为了保证内存可见性，Java编译器在生成指令序列的适当位置会插入内存屏障指令来禁止特定类型的处理器重排序</p>
+<h3 id="内存屏障指令"><a href="#内存屏障指令" class="headerlink" title="内存屏障指令"></a>内存屏障指令</h3><p>对于只有一个CPU访问内存时，并不需要内存屏障。但是如果有两个或更多个CPU访问同一块内存，并且其中有一个正在观测另一个，就需要内存屏障保证一致性。</p>
+<p>为了保证内存可见性，Java编译器在生成指令序列的适当位置会插入内存屏障指令来禁止特定类型的处理器重排序</p>
 <p><img src="assets/1555058476394.png" alt="1555058476394"></p>
 <ul>
 <li>StoreLoad Barriers<ul>
@@ -554,60 +480,22 @@
 </ul>
 </li>
 </ul>
-<h2 id="同步八种操作"><a href="#同步八种操作" class="headerlink" title="同步八种操作"></a>同步八种操作</h2><ul>
-<li>lock锁定：作用于主内存的变量，把一个变量标识为一条线程独占状态</li>
-<li>unlock解锁：作用于主内存的变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定</li>
-<li>read读取：作用于主内存的变量，把一个变量值从主内存传输到线程的工作内存中，以便随后load动作使用</li>
-<li>load载入：作用于工作内存的变量，把read操作从主内存得到的变量值放入工作内存的<strong>变量副本</strong>中</li>
-<li>use使用：作用于工作内存的变量，把工作内存的一个变量值传递给<strong>执行引擎</strong>（线程）</li>
-<li>assign赋值：作用于工作内存的变量，把一个从执行引擎接收到的值赋值给工作内存的变量</li>
-<li>store存储：作用于工作内存的变量，把工作内存的一个变量的值传递到主内存中，以便随后的write操作</li>
-<li>write写入：作用于主内存的变量，把store操作从工作内存中一个变量的值传送到主内存的变量中</li>
-</ul>
-<p><img src="assets/1551254279492.png" alt="1551254279492"></p>
-<h2 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h2><p>JDK5开始，Java使用新的JSR-133内存模型，JSR-133使用happens-before的概念来阐述操作之间的内存可见性</p>
-<p><strong>概述</strong></p>
-<p>在JMM中，<strong>如果一个操作执行的结果需要对另一个操作可见</strong>，那么这两个操作之间<strong>必须要存在</strong>happens-before关系。这里提到的两个操作既可以是在一个线程之内，也可以是在不同线程之间。</p>
-<p><img src="assets/1555058673645.png" alt="1555058673645"></p>
-<p><strong>happens-before规则</strong></p>
+<h2 id="三个特性"><a href="#三个特性" class="headerlink" title="三个特性"></a>三个特性</h2><h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p><strong>数据类型级别</strong>：Java内存模型直接保证的原子性变量操作包括read、load、assign、use、store、write。大致可以认为基本数据类型的访问读写时具备原子性的。</p>
+<p><strong>synchronized</strong>：若应用场景需要一个更大范围的原子性保证，则提供了lock和unlock来满足这种需求，虽然虚拟机未将lock、unlock操作开放给用户使用，但提供了更高层次的<strong>字节码指令</strong><code>monitorenter</code>和<code>monitorexit</code>来隐式使用这两个操作，而反映到Java代码中即<code>synchronized</code>，即<code>synchronized</code>块间操作具备原子性</p>
+<h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>可见性是指当一个线程修改了共享变量的值，其他线程能够立即得知这个修改。</p>
+<p>JMM是提供在变量修改后将新值同步回主内存，在变量读取前从主内存刷新变量值这种依赖主内存作为传递媒介的方式实现可见性的。</p>
 <ul>
-<li><strong>程序次序规则</strong>：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作</li>
-<li><strong>锁定操作</strong>：一个unlock操作先行发生于后面对同一个锁的lock操作</li>
-<li><strong>volatile变量规则</strong>：对一个变量的写操作先行发生于后面对于这个变量的读操作</li>
-<li><strong>传递规则</strong>；如果操作A先行发生于操作B，而操作B又先行发生于操作C，则操作A先行发生于操作C</li>
-<li>线程启动规则：Thread对象的start（）方法先行发生于此线程的每一个动作</li>
-<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
-<li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测</li>
-<li>对象终结规则：一个对象的初始化完成先行发生于它的finalize（）方法的开始</li>
+<li>volatile的特殊规则保证了新值能够立即同步到主内存，并且每次使用前立即从主内存刷新</li>
+<li>synchronized是由“对一个变量执行unlock操作前，必须先把此变量同步回主内存中”这条规则获得的</li>
+<li>final字段在构造器中一旦初始化完成，并且构造器没有将this引用传递出去(this引用逃逸可能让其他线程访问到初始化了一半的对象)，那再其他线程中就能看到final字段的值。</li>
 </ul>
-<p><strong>优点</strong></p>
-<p>happens-before规则避免Java程序员为了理解JMM提供的内存可见性保证而去学习复杂的重排序规则以及这些规则的具体实现方法</p>
-<h1 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h1><p>重排序是指编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段。</p>
-<h2 id="数据依赖性"><a href="#数据依赖性" class="headerlink" title="数据依赖性"></a>数据依赖性</h2><p>数据依赖性：如果两个操作访问同一个变量，且这两个操作中有一个为写操作，此时这两个操作间就存在数据依赖性。（只考虑单个处理器中执行的指令序列和单个线程中执行的操作）</p>
-<p>分类：</p>
+<h3 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h3><p><strong>线程内表现为串行的语义</strong>：如果在本线程内观察，所有的操作都是有序的。</p>
+<p><strong>指令重排序与工作内存与主内存同步延迟</strong>：如果在一个线程中观察另一个线程，所有操作都是无序的。</p>
+<p>Java提供volatile与synchronized保证线程间操作的有序性</p>
 <ul>
-<li>写后读。<code>a=1;b=a;</code></li>
-<li>写后写。<code>a=1;a=2;</code></li>
-<li>读后写。<code>a=b;b=1;</code></li>
+<li>volatile本身禁止指令重排序的语义</li>
+<li>synchronized是由“一个变量在同一个时刻只允许一条线程对其进行lock操作”这条规则获得的。这决定了持有同一个锁的两个同步块只能串行进入。</li>
 </ul>
-<p>在数据依赖性下，只要重排序两个操作的执行顺序，程序的执行结果就会改变。</p>
-<h2 id="as-if-serial语义"><a href="#as-if-serial语义" class="headerlink" title="as-if-serial语义"></a>as-if-serial语义</h2><p>as-if-serial语义指：不管怎么重排序，单线程程序的执行结果不能被改变。编译器、runtime和处理器必须遵守as-if-serial语义。</p>
-<p>为了遵守as-if-serial语义，编译器和处理器不会对存在数据依赖关系的操作做重排序，因为这种重排序会改变执行结果。但如果操作间不存在数据依赖关系，则这些操作可能被重排序。</p>
-<p>as-if-serial语义将单线程保护了起来，编译器、runtime、处理器共同为单线程程序员创造了一个幻觉，即单线程程序是按照程序的顺序来执行的。因此单线程程序员无需担心重排序、内存可见性问题。</p>
-<h2 id="程序顺序规则"><a href="#程序顺序规则" class="headerlink" title="程序顺序规则"></a>程序顺序规则</h2><p>对于代码段</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> pi=<span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">double</span> r=<span class="number">1.0</span>;</span><br><span class="line"><span class="keyword">double</span> area=pi*r*r;</span><br></pre></td></tr></table></figure>
-
-<p>根据程序顺序规则，则有</p>
-<p>A happens-before B、B happens-before C、A happens-before C</p>
-<ul>
-<li>但是在实际操作中，B可以排在A之前执行<ul>
-<li>这里的A结果不需要对B可见，因此这种重排序并不非法，JMM允许这种重排序。</li>
-</ul>
-</li>
-<li>A happens-before B，JMM仅仅要求前一个操作执行的结果对后又改操作可见，且前一个操作按顺序排在第二个操作之前。</li>
-</ul>
-<p>软件技术和硬件技术有一个共同的目标：在不改变程序执行结果的前提下，尽可能提高并行度。</p>
-<h2 id="重排序对多线程的影响"><a href="#重排序对多线程的影响" class="headerlink" title="重排序对多线程的影响"></a>重排序对多线程的影响</h2><p>但在多线程程序中，对存在控制依赖的操作重排序，可能会改变程序的执行结果。</p>
 <h1 id="顺序一致性"><a href="#顺序一致性" class="headerlink" title="顺序一致性"></a>顺序一致性</h1><p>顺序一致性内存模型是一个理论参考模型，在设计的时候，处理器的内存模型和编程语言的内存模型都会以顺序一致性内存模型作为参照。</p>
 <h2 id="数据竞争与顺序一致性"><a href="#数据竞争与顺序一致性" class="headerlink" title="数据竞争与顺序一致性"></a>数据竞争与顺序一致性</h2><p>当程序未正确同步时，就可能存在数据竞争。</p>
 <p>数据竞争：在一个线程中写一个变量，在另一个线程中读一个编程，而且写和读没有通过同步来排序。</p>
@@ -636,122 +524,25 @@
 <li>虽然线程A在临界区做了重排序，但由于监视器互斥执行的特性。线程B无法观察到线程A在临界区内的重排序。这种重排序既提高了执行效率，又没有改变程序的执行结果。</li>
 </ul>
 <h2 id="未同步程序的执行特性"><a href="#未同步程序的执行特性" class="headerlink" title="未同步程序的执行特性"></a>未同步程序的执行特性</h2><p>对于未同步或未正确同步的多线程程序，JMM只提供最小安全性：线程执行时读取到的值，要么是之前某个线程写入的值，要么是默认值（0，Null，False），JMM保证线程读操作读取到的值不会无中生有（Out Of Thin Air）的冒出来。为了实现最小安全性，JVM在堆上分配对象时，首先会对内存空间进行清零，然后才会在上面分配对象（JVM内部会同步这两个操作）。因此，在已清零的内存空间（Pre-zeroed Memory）分配对象时，域的默认初始化已经完成了。</p>
-<h1 id="volatile的内存语义"><a href="#volatile的内存语义" class="headerlink" title="volatile的内存语义"></a>volatile的内存语义</h1><p>当声明共享变量为volatile后，对这个变量的读/写将会很特别。</p>
-<h2 id="volatile的特性"><a href="#volatile的特性" class="headerlink" title="volatile的特性"></a>volatile的特性</h2><p>理解volatile特性的一个好方法是把对volatile变量的单个读/写，看成是使用同一个锁对这些单个读/写操作做了同步。</p>
-<p>示例代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VolatileFeaturesExample</span> </span>&#123;</span><br><span class="line">	<span class="keyword">volatile</span> <span class="keyword">long</span> vl = <span class="number">0L</span>; <span class="comment">// 使用volatile声明64位的long型变量</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">long</span> l)</span> </span>&#123;</span><br><span class="line">		vl = l; <span class="comment">// 单个volatile变量的写</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAndIncrement</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		vl++; <span class="comment">// 复合（多个）volatile变量的读/写</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> vl; <span class="comment">// 单个volatile变量的读</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>假设有多个线程分别调用上面程序的3个方法，这个程序在语义上和下面程序等价。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VolatileFeaturesExample</span> </span>&#123;</span><br><span class="line">	<span class="keyword">long</span> vl = <span class="number">0L</span>; <span class="comment">// 64位的long型普通变量</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">long</span> l)</span> </span>&#123; <span class="comment">// 对单个的普通变量的写用同一个锁同步</span></span><br><span class="line">		vl = l;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAndIncrement</span> <span class="params">()</span> </span>&#123; <span class="comment">// 普通方法调用</span></span><br><span class="line">		<span class="keyword">long</span> temp = get(); <span class="comment">// 调用已同步的读方法</span></span><br><span class="line">		temp += <span class="number">1L</span>; <span class="comment">// 普通写操作</span></span><br><span class="line">		set(temp); <span class="comment">// 调用已同步的写方法</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">long</span> <span class="title">get</span><span class="params">()</span> </span>&#123; <span class="comment">// 对单个的普通变量的读用同一个锁同步</span></span><br><span class="line">		<span class="keyword">return</span> vl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>volatile变量特性：</p>
-<ul>
-<li>可见性：对一个volatile变量的读，总是能看到（任意线程）对这个volatile变量最后的写入。</li>
-<li>原子性：对任意单个volatile变量的读/写具有原子性，但类似于volatile++这种复合操作不具有原子性。</li>
-</ul>
-<h2 id="volatile写-读建立的happens-before关系"><a href="#volatile写-读建立的happens-before关系" class="headerlink" title="volatile写-读建立的happens-before关系"></a>volatile写-读建立的happens-before关系</h2><p>volatile对线程的内存可见性的影响比volatile自身的特性更为重要。</p>
-<p>JDK5开始，volatile变量的写-读可以实现线程间的通信。</p>
-<p>从内存语义的角度来说</p>
-<ul>
-<li>volatile的写-读与锁的释放-获取有相同的内存效果。</li>
-<li>volatile写和锁的释放有相同的内存语义。</li>
-<li>volatile读与锁的获取有相同的内存语义。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VolatileExample</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">volatile</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		a = <span class="number">1</span>;　　　　　<span class="comment">// 1</span></span><br><span class="line">		flag = <span class="keyword">true</span>;　　　<span class="comment">// 2</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (flag) &#123;　　　　<span class="comment">// 3</span></span><br><span class="line">			<span class="keyword">int</span> i = a;　　<span class="comment">// 4</span></span><br><span class="line">			……</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当线程A执行writer()，线程B执行reader()，则根据happens-before</p>
-<ul>
-<li>根据程序次序规则，1 before 2,3 before 4</li>
-<li>根据volatile规则，2 before 3</li>
-<li>根据传递性规则，<strong>1 before 4</strong></li>
-</ul>
-<p>即这里A线程写一个volatile变量后，B线程读同一个volatile变量。</p>
-<p>A线程在写volatile变量之前所有可见的共享变量，在B线程读同一个volatile变量后，<strong>将立即变得对B线程可见</strong>。</p>
-<h2 id="volatile写-读的内存语义"><a href="#volatile写-读的内存语义" class="headerlink" title="volatile写-读的内存语义"></a>volatile写-读的内存语义</h2><p><strong>volatile写</strong>内存语义：当写一个volatile变量时，JMM会把该线程对应的本地内存中的共享变量值刷新到主内存。</p>
-<p><strong>volatile读</strong>的内存语义：当读一个volatile变量时，JMM会把该线程对应的本地内存置为无效。线程接下来将从主内存中读取共享变量。</p>
-<p>图为线程B读同一个volatile变量后，共享变量的状态示意图。</p>
-<p><img src="assets/1555329507304.png" alt="1555329507304"></p>
-<p><strong>总结</strong></p>
-<ul>
-<li>线程A写一个volatile变量，实质上是线程A向接下来将要读这个volatile变量的某个线程发出了（其对共享变量所做修改的）消息。</li>
-<li>线程B读一个volatile变量，实质上是线程B接收了之前某个线程发出的（在写这个volatile变量之前对共享变量所做修改的）消息。</li>
-<li>线程A写一个volatile变量，随后线程B读这个volatile变量，这个过程实质上是线程A通过主内存向线程B发送消息。</li>
-</ul>
-<h2 id="volatile内存语义的实现"><a href="#volatile内存语义的实现" class="headerlink" title="volatile内存语义的实现"></a>volatile内存语义的实现</h2><p>JMM如何实现volatile写/读的内存语义。</p>
-<p>为实现volatile，JMM限制编译器重排序与处理器重排序</p>
-<p>volatile重排序规则表：</p>
-<p><img src="assets/1555329646304.png" alt="1555329646304"></p>
-<ul>
-<li><p>第三行最后一个单元格的意思是：在程序中，当第一个操作为普通变量的读或写时，如果第二个操作为volatile写，则编译器不能重排序这两个操作。</p>
-</li>
-<li><p>当第二个操作是volatile写时，不管第一个操作是什么，都不能重排序。这个规则确保volatile写之前的操作不会被编译器重排序到volatile写之后。</p>
-</li>
-<li><p>当第一个操作是volatile读时，不管第二个操作是什么，都不能重排序。这个规则确保volatile读之后的操作不会被编译器重排序到volatile读之前。</p>
-</li>
-<li><p>当第一个操作是volatile写，第二个操作是volatile读时，不能重排序。</p>
-</li>
-</ul>
-<h3 id="JMM实现"><a href="#JMM实现" class="headerlink" title="JMM实现"></a>JMM实现</h3><p>编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎不可能。为此，JMM采取保守策略。下面是基于保守策略的JMM内存屏障插入策略。</p>
-<ul>
-<li>在每个volatile写操作的前面插入一个StoreStore屏障。</li>
-<li>在每个volatile写操作的后面插入一个StoreLoad屏障。</li>
-<li>在每个volatile读操作的后面插入一个LoadLoad屏障。</li>
-<li>在每个volatile读操作的后面插入一个LoadStore屏障。</li>
-</ul>
-<p>上述内存屏障插入策略非常保守，但它可以保证在任意处理器平台，任意的程序中都能得到正确的volatile内存语义。</p>
-<h2 id="JSR-133为什么要增强volatile的内存语义"><a href="#JSR-133为什么要增强volatile的内存语义" class="headerlink" title="JSR-133为什么要增强volatile的内存语义"></a>JSR-133为什么要增强volatile的内存语义</h2><p>在JSR-133之前的旧Java内存模型中，虽然不允许volatile变量之间重排序，但旧的Java内<br>存模型允许volatile变量与普通变量重排序。</p>
-<p>为了提供一种比锁更轻量级的线程之间通信的机制，JSR-133专家组决定增强volatile的内存语义：严格<br>限制编译器和处理器对volatile变量与普通变量的重排序，确保volatile的写-读和锁的释放-获取具有相同的内存语义。</p>
-<h1 id="锁的内存语义"><a href="#锁的内存语义" class="headerlink" title="锁的内存语义"></a>锁的内存语义</h1><p>锁可以让临界区互斥执行。</p>
-<h2 id="锁的释放-获取建立的happens-before"><a href="#锁的释放-获取建立的happens-before" class="headerlink" title="锁的释放-获取建立的happens-before"></a>锁的释放-获取建立的happens-before</h2><h1 id="final域的内存语义"><a href="#final域的内存语义" class="headerlink" title="final域的内存语义"></a>final域的内存语义</h1><h1 id="happens-before-1"><a href="#happens-before-1" class="headerlink" title="happens-before"></a>happens-before</h1><h1 id="双重检查锁定与延迟初始化"><a href="#双重检查锁定与延迟初始化" class="headerlink" title="双重检查锁定与延迟初始化"></a>双重检查锁定与延迟初始化</h1><h1 id="JMM综述"><a href="#JMM综述" class="headerlink" title="JMM综述"></a>JMM综述</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<h1 id="final域的内存语义"><a href="#final域的内存语义" class="headerlink" title="final域的内存语义"></a>final域的内存语义</h1><h1 id="happens-before-1"><a href="#happens-before-1" class="headerlink" title="happens-before"></a>happens-before</h1><h1 id="双重检查锁定与延迟初始化"><a href="#双重检查锁定与延迟初始化" class="headerlink" title="双重检查锁定与延迟初始化"></a>双重检查锁定与延迟初始化</h1><h1 id="JMM综述"><a href="#JMM综述" class="headerlink" title="JMM综述"></a>JMM综述</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
-      
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
-    
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author:  </strong>Heper</li>
-  <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/" title="Java并发：JMM">http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
-</ul>
-
-      </div>
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
           
+        
+        <div class="post-tags">
             <a href="/tags/并发编程/" rel="tag"># 并发编程</a>
           
         </div>
-      
-
-      
-      
-      
-
-      
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-            
               <a href="/2019/04/11/系统架构/架构：大型网站架构演化/" rel="next" title="架构：大型网站架构演化">
                 <i class="fa fa-chevron-left"></i> 架构：大型网站架构演化
               </a>
@@ -761,17 +552,12 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/11/Java/base/Java并发（0）：目录/" rel="prev" title="Java并发：目录">
+              <a href="/2019/04/11/Java/base/Java并发：目录/" rel="prev" title="Java并发：目录">
                 Java并发：目录 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
         </div>
-      
-
-      
-      
     </footer>
   </div>
   
@@ -779,26 +565,17 @@
   
   </article>
 
-
   </div>
 
 
           </div>
           
-
+    
+    <div class="comments" id="comments"></div>
   
-    <div class="comments" id="comments">
-      
-        <div id="gitment-container"></div>
-      
-    </div>
-
-  
-
 
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -810,264 +587,216 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
-
-      
-
-      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Tabla de contenidos
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Inicio
           </li>
         </ul>
       
 
-      <section class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
+
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
-            
-              <p class="site-author-name" itemprop="name">Heper</p>
-              <p class="site-description motion-element" itemprop="description">To be awesome</p>
-          </div>
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-name">entradas</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categorías</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
 
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">227</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">19</span>
-                    <span class="site-state-item-name">categories</span>
-                  
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">34</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
-                  
-                </span>
-              
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
-            
-          
-          
 
         </div>
-      </section>
-
-      
+      </div>
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
 
             
-              
+            
+            
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM基础"><span class="nav-number">1.</span> <span class="nav-text">JMM基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程模型的两个关键问题"><span class="nav-number">1.1.</span> <span class="nav-text">并发编程模型的两个关键问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JMM"><span class="nav-number">1.2.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">JMM结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JMM的抽象结构"><span class="nav-number">1.3.</span> <span class="nav-text">JMM的抽象结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从源代码到指令序列的重排序"><span class="nav-number">1.4.</span> <span class="nav-text">从源代码到指令序列的重排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程模型的分类"><span class="nav-number">1.5.</span> <span class="nav-text">并发编程模型的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存屏障指令"><span class="nav-number">1.5.1.</span> <span class="nav-text">内存屏障指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步八种操作"><span class="nav-number">1.6.</span> <span class="nav-text">同步八种操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#happens-before"><span class="nav-number">1.7.</span> <span class="nav-text">happens-before</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重排序"><span class="nav-number">2.</span> <span class="nav-text">重排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据依赖性"><span class="nav-number">2.1.</span> <span class="nav-text">数据依赖性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#as-if-serial语义"><span class="nav-number">2.2.</span> <span class="nav-text">as-if-serial语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序顺序规则"><span class="nav-number">2.3.</span> <span class="nav-text">程序顺序规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重排序对多线程的影响"><span class="nav-number">2.4.</span> <span class="nav-text">重排序对多线程的影响</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#顺序一致性"><span class="nav-number">3.</span> <span class="nav-text">顺序一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据竞争与顺序一致性"><span class="nav-number">3.1.</span> <span class="nav-text">数据竞争与顺序一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序一致性内存模型"><span class="nav-number">3.2.</span> <span class="nav-text">顺序一致性内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步程序的顺序一致性效果"><span class="nav-number">3.3.</span> <span class="nav-text">同步程序的顺序一致性效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未同步程序的执行特性"><span class="nav-number">3.4.</span> <span class="nav-text">未同步程序的执行特性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile的内存语义"><span class="nav-number">4.</span> <span class="nav-text">volatile的内存语义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile的特性"><span class="nav-number">4.1.</span> <span class="nav-text">volatile的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile写-读建立的happens-before关系"><span class="nav-number">4.2.</span> <span class="nav-text">volatile写-读建立的happens-before关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile写-读的内存语义"><span class="nav-number">4.3.</span> <span class="nav-text">volatile写-读的内存语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile内存语义的实现"><span class="nav-number">4.4.</span> <span class="nav-text">volatile内存语义的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM实现"><span class="nav-number">4.4.1.</span> <span class="nav-text">JMM实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSR-133为什么要增强volatile的内存语义"><span class="nav-number">4.5.</span> <span class="nav-text">JSR-133为什么要增强volatile的内存语义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁的内存语义"><span class="nav-number">5.</span> <span class="nav-text">锁的内存语义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的释放-获取建立的happens-before"><span class="nav-number">5.1.</span> <span class="nav-text">锁的释放-获取建立的happens-before</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#final域的内存语义"><span class="nav-number">6.</span> <span class="nav-text">final域的内存语义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#happens-before-1"><span class="nav-number">7.</span> <span class="nav-text">happens-before</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双重检查锁定与延迟初始化"><span class="nav-number">8.</span> <span class="nav-text">双重检查锁定与延迟初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM综述"><span class="nav-number">9.</span> <span class="nav-text">JMM综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM基础"><span class="nav-number">1.</span> <span class="nav-text">JMM基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JMM"><span class="nav-number">1.1.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存间交互操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">内存间交互操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#happens-before"><span class="nav-number">1.1.3.</span> <span class="nav-text">happens-before</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM的抽象结构"><span class="nav-number">1.1.4.</span> <span class="nav-text">JMM的抽象结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU"><span class="nav-number">1.2.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从源代码到指令序列的重排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">从源代码到指令序列的重排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程模型的分类"><span class="nav-number">1.3.</span> <span class="nav-text">并发编程模型的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存屏障指令"><span class="nav-number">1.3.1.</span> <span class="nav-text">内存屏障指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个特性"><span class="nav-number">1.4.</span> <span class="nav-text">三个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性"><span class="nav-number">1.4.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">1.4.2.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性"><span class="nav-number">1.4.3.</span> <span class="nav-text">有序性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#顺序一致性"><span class="nav-number">2.</span> <span class="nav-text">顺序一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据竞争与顺序一致性"><span class="nav-number">2.1.</span> <span class="nav-text">数据竞争与顺序一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序一致性内存模型"><span class="nav-number">2.2.</span> <span class="nav-text">顺序一致性内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步程序的顺序一致性效果"><span class="nav-number">2.3.</span> <span class="nav-text">同步程序的顺序一致性效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未同步程序的执行特性"><span class="nav-number">2.4.</span> <span class="nav-text">未同步程序的执行特性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#final域的内存语义"><span class="nav-number">3.</span> <span class="nav-text">final域的内存语义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#happens-before-1"><span class="nav-number">4.</span> <span class="nav-text">happens-before</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双重检查锁定与延迟初始化"><span class="nav-number">5.</span> <span class="nav-text">双重检查锁定与延迟初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM综述"><span class="nav-number">6.</span> <span class="nav-text">JMM综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
-        </section>
+        </div>
       <!--/noindex-->
-      
-
       
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
-
-  
-
-  
 </div>
-
-
-  
-
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
-
-
-
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
-
-
-
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -1081,43 +810,44 @@
         
       </div>
     </footer>
-
-    
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
-        
       </div>
-    
 
     
-	
-    
 
-    
   </div>
 
   
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
 
-
-
-
-
-
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
 
 
-
+  
 
 
 
@@ -1130,429 +860,61 @@
 
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
+  <script>
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.location.pathname,
-            owner: 'smallpocket',
-            repo: 'Blog',
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
             
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
             
-            oauth: {
-            
-            
-                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
-            
-                client_id: 'a5dc6afe65772e33c437'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      renderGitment();
-      
-      </script>
-    
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
               })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
+            
+              .fail(function ({ responseJSON }) {
+                console.log(`Failed to save Visitor num, with error message: ${responseJSON.error}`);
               })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
           } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
           }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
     }
+    
 
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+                'X-LC-Key': 'uTVcNIWdMCGpicrhTKygpKXi',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+            if (localhost.test(document.URL)) return;
+            addCount(Counter);
+          
+        });
     });
   </script>
 
@@ -1560,41 +922,49 @@
 
 
 
-  
 
-  
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
 <script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+    appKey: 'uTVcNIWdMCGpicrhTKygpKXi',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
 </script>
 
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

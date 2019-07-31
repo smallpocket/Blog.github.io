@@ -4,109 +4,58 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang>
-<head><meta name="generator" content="Hexo 3.9.0">
+<html class="theme-next gemini use-motion" lang="">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '6.4.1',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
     fancybox: false,
-    fastclick: false,
+    mediumzoom: false,
     lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    pangu: false,
     algolia: {
-      applicationID: '',
+      applicationID: 'OZTK1BY156',
       apiKey: '',
-      indexName: '',
+      indexName: 'BlogIndex',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copiar',
+      copy_success: 'Copiado',
+      copy_failure: 'Copiar falló'
     }
   };
 </script>
-
-
-  
-
-
-
 
   <meta name="description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
 <meta name="keywords" content="JVM">
@@ -125,23 +74,16 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564485753438.png">
 <meta property="og:image" content="d:%5CBlog%5Csource_posts%5CJava%5Cbase%5Cassets%5C1564485766278.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564488177169.png">
-<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1552378339303.png">
-<meta property="og:updated_time" content="2019-07-30T12:06:02.304Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/assets%5C1564537447891.png">
+<meta property="og:updated_time" content="2019-07-31T02:02:10.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM（4）：类文件与类加载">
 <meta name="twitter:description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564483003687.png">
-
-
-
-
-
-
   <link rel="canonical" href="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/">
 
 
-
-<script type="text/javascript" id="page.configurations">
+<script id="page.configurations">
   CONFIG.page = {
     sidebar: "",
   };
@@ -155,43 +97,30 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
 
 
   <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
 
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
   </style>
 </noscript>
 
@@ -199,18 +128,12 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
 
-  
-  
-    
-  
-
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+  <div class="site-meta">
 
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
@@ -219,11 +142,10 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Cambiar a barra de navegación">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -234,102 +156,75 @@
 
 
 <nav class="site-nav">
-  
     <ul id="menu" class="menu">
-      
         
         
         
           
           <li class="menu-item menu-item-home">
-    <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-    <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-about">
-    <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-tags">
-    <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-categories">
-    <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-schedule">
-    <a href="/schedule/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Calendario</a>
+
   </li>
-
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
-        </li>
-      
     </ul>
-  
-
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
 </nav>
-
-
-
-  
-
-
 
 </div>
     </header>
@@ -340,23 +235,13 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
@@ -374,69 +259,52 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">JVM（4）：类文件与类加载
+          <h1 class="post-title" itemprop="name headline">JVM（4）：类文件与类加载
+
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-03-01 10:46:32" itemprop="dateCreated datePublished" datetime="2019-03-01T10:46:32+08:00">2019-03-01</time>
+              <time title="Creado por: 2019-03-01 10:46:32" itemprop="dateCreated datePublished" datetime="2019-03-01T10:46:32+08:00">2019-03-01</time>
+            </span>
+          
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Modified: 2019-07-30 20:06:02" itemprop="dateModified" datetime="2019-07-30T20:06:02+08:00">2019-07-30</time>
-              
+                <time title="Modificado por: 2019-07-31 10:02:10" itemprop="dateModified" datetime="2019-07-31T10:02:10+08:00">2019-07-31</time>
+              </span>
             
-          </span>
-
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">En</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -448,39 +316,42 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/01/Java/base/JVM：类文件与类加载/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/03/01/Java/base/JVM：类文件与类加载/" itemprop="commentsCount"></span>
-                </a>
+            <span id="/2019/03/01/Java/base/JVM：类文件与类加载/" class="post-meta-item leancloud_visitors" data-flag-title="JVM（4）：类文件与类加载">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
               </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/03/01/Java/base/JVM：类文件与类加载/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/03/01/Java/base/JVM：类文件与类加载/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h1 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h1><p>.class文件，类文件，字节码文件。</p>
@@ -643,7 +514,7 @@
 <li>读取途径<ul>
 <li>从ZIP包读取，成为日后JAR格式的基础</li>
 <li>从网络中获取，如applet</li>
-<li>运行时计算生成，动态代理技术，java.lang.reflect.Proxy</li>
+<li>运行时计算生成，动态代理技术，java.lang.reflect.Proxy，为特定接口生成形式为<code>*$Proxy</code>的代理类的二进制字节流</li>
 <li>由其他文件生成，如JSP，由JSP文件生成Class类</li>
 <li>从数据库中读取等</li>
 </ul>
@@ -660,21 +531,21 @@
 </li>
 </ul>
 </li>
-<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</li>
+<li>加载结束后，虚拟机外部的二进制字节流就按照虚拟机要求的格式存储在方法区中。之后将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</li>
 <li>在内存（堆）中生成一个代表这个类的Java.lang.Class对象，作为方法区这个类的各种数据的访问入口</li>
 </ul>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>连接截短的第一步，为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身安全</p>
-<p><strong>文件格式验证</strong></p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>连接阶段的第一步，为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身安全。严重阶段的工作量在虚拟机的类加载子系统中占了相当大的一部分。</p>
+<p><strong><em>文件格式验证</em></strong></p>
 <p>验证字节流是否符合Class文件格式的规范，并能够被当前JVM处理</p>
 <ul>
 <li>是否以魔数开头</li>
 <li>主次版本号是否在当前虚拟机处理范围内</li>
 <li>常量池的常量是否有不被支持的常量类型</li>
 <li>指向常量的各种索引值是否有指向不存在的常量或不符合类型的常量</li>
-<li>文件中各个部分已经文件本身是否有被删除或附加的其他信息</li>
+<li>文件中各个部分已经文件本身是否有被删除或附加的其他信息。<strong>等等</strong></li>
 </ul>
-<p>只有该阶段直接操作字节流，其他三个验证阶段都是基于方法区的存储结构进行的</p>
-<p><strong>元数据验证</strong></p>
+<p>只有该阶段直接操作字节流，并且只有通过文件格式验证后，字节流才会进入内存的方法区。其他三个验证阶段都是基于方法区的存储结构进行的。</p>
+<p><strong><em>元数据验证</em></strong></p>
 <p>对字节码描述的信息进行语义分析，以保证其描述的信息符合Java语言规范</p>
 <ul>
 <li>这个类是否有父类</li>
@@ -682,14 +553,14 @@
 <li>如果这个类不是抽象类，是否实现了父类或接口中要求的所有方法</li>
 <li>类中的字段、方法是否与父类矛盾</li>
 </ul>
-<p><strong>字节码验证</strong></p>
+<p><strong><em>字节码验证</em></strong></p>
 <p>目的是通过数据流和控制流分析，确定程序语义是合法的，符合逻辑的。</p>
 <p>对类的方法体进行校验分析，保证方法在运行时不会做出危害虚拟机安全的事件</p>
 <ul>
 <li>保证方法体中的类型转换时有效，不会出现对象赋值给与它无关的数据类型</li>
 <li>保证跳转指令不会跳转到方法体以外的字节码指令上</li>
 </ul>
-<p><strong>符号引用验证</strong></p>
+<p><strong><em>符号引用验证</em></strong></p>
 <p>发生在虚拟机将符号引用转化为直接引用的时候，这个转化在解析阶段发生</p>
 <p>对类自身以外的信息进行匹配性校验。</p>
 <ul>
@@ -697,31 +568,41 @@
 <li>符号引用中的类、字段、方法的访问性是否可以被当前类访问</li>
 </ul>
 <p>确保解析动作能够正常执行</p>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>正式为类变量（static的）分配内存并设置类遍历初始值（0值）的阶段，这些变量使用的内存都将在方法区中进行分配。</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>正式为类变量（static的）分配内存并设置类遍历初始值（0值）的阶段，这些变量使用的内存都将在<strong>方法区</strong>中进行分配。而实例变量将在对象实例化时随着对象一起分配在Java堆中。</p>
+<p>如果类变量是final的，则初始化的时候即被赋值为final的那个值，如果不是的话，则会在初始化的时候进行静态赋值，即准备阶段后值依然为0。</p>
 <h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>虚拟机将常量池内的符号引用替换为直接引用的过程。</p>
 <ul>
 <li>符号引用：以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。以字面量形式定义在Class文件中。</li>
-<li>直接引用：直接指向目标的指针、相对偏移量或一个能够间接定位到目标的句柄。</li>
-<li>符号引用可能不存在于内存当中，直接引用一定存在内存中</li>
+<li>直接引用：直接指向目标的指针、相对偏移量或一个能够间接定位到目标的句柄。是与虚拟机实现的内存布局相关的。</li>
+<li>符号引用可能不存在于内存当中，但直接引用一定存在内存中</li>
 </ul>
-<p>对于同一个 符号引用进行多次解析是常见的，除invokedynamic指令外，虚拟机实现对第一次解析的结果进行缓存（缓存：在运行时常量池中记录直接引用，并将常量标识为已解析状态），从而避免解析重复进行。</p>
+<p>对于同一个 符号引用进行多次解析是常见的，除invokedynamic指令外，虚拟机实现对第一次解析的结果进行缓存（<strong>缓存</strong>：在运行时常量池中记录直接引用，并将常量标识为已解析状态），从而避免解析重复进行。</p>
 <p>虚拟机需要保证在同一个实体中，如果一个符号引用之前已经被成功解析过，那么后续的引用解析请求就应当一直成功。如果第一次失败了，那么其他指令对这个符号的解析请求也应该收到同样的异常</p>
 <p>invokedynamic指令用于动态语言支持，只有当实际运行到该节点，才开始解析。</p>
 <p>解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号</p>
+<p><strong><em>类或接口解析</em></strong></p>
+<p>假设当前代码所处的类为D，要将一个从未解析过的符号引用N解析为一个类或接口C的直接引用</p>
+<ul>
+<li>如果C不是一个数组类型， 虚拟机会把代表N的全限定名传递给D的类加载器去加载这个类C，加载过程中，会涉及验证等一系列相关类加载动作，如果加载过程中出现了任何异常则解析过程就宣告失败</li>
+<li>如果C是一个数组类型， 并且数组的元素类型为对象，则会按照之前的方式夹杂数组元素类型。如果是Integer则会由虚拟机生成一个代表此数组维度和元素的数组对象</li>
+<li>如果上面步骤没有任何异常，则C在虚拟机中已经成为一个有效的类或接口了，但在解析完成前还要进行符号引用验证，确认D是否具备对C的访问权限。若不具备则抛出<code>Java.lang.IllegalAccessError</code></li>
+</ul>
 <h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><ul>
-<li>初始化真正开始执行类中定义的Java程序代码。执行类构造器&lt;client&gt;（）方法的过程</li>
+<li>初始化真正开始执行类中定义的Java程序代码。执行类构造器&lt;client&gt;()方法的过程</li>
 <li>&lt;client&gt;方法由编译器收集类中所有类变量的赋值动作与静态语句块的语句合并而成，顺序由出现顺序而定。</li>
 <li>&lt;client&gt;方法与类构造函数不同，不需要显式调用父类构造器，虚拟机保证在此前，父类的&lt;client&gt;方法已经执行完毕</li>
 <li>虚拟机会保证一个类的&lt;client&gt;方法会在多线程环境正确被加锁、同步。多个线程同时初始化一个类，只有一个线程去执行该方法，其他线程阻塞</li>
 </ul>
 <h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>将类加载阶段中的“通过一个类的全限定名来获取描述此类的二进制字节流”的动作放到虚拟机外部实现，以便让程序自己决定如何获取所需要的类。实现该动作的代码模块为类加载器。</p>
-<p>类加载器（class loader）用来加载 Java 类到 Java 虚拟机中。一般来说，Java 虚拟机使用 Java 类的方式如下：Java 源程序（.java 文件）在经过 Java 编译器编译之后就被转换成 Java 字节代码（.class 文件）。类加载器负责读取 Java 字节代码，并转换成 <code>java.lang.Class</code>类的一个实例。每个这样的实例用来表示一个 Java 类。通过此实例的 <code>newInstance()</code>方法就可以创建出该类的一个对象。实际的情况可能更加复杂，比如 Java 字节代码可能是通过工具动态生成的，也可能是通过网络下载的。</p>
-<h3 id="类与类加载器"><a href="#类与类加载器" class="headerlink" title="类与类加载器"></a>类与类加载器</h3><p>类加载器用于实现类的加载动作。</p>
-<ul>
+<p>类加载器（class loader）用来加载Java类到Java虚拟机中。一般来说，Java虚拟机使用Java类的方式如下：Java 源程序（.java 文件）在经过Java编译器编译之后就被转换成Java字节代码（.class 文件）。类加载器负责读取Java字节代码，并转换成<code>java.lang.Class</code>类的一个实例。每个这样的实例用来表示一个Java类。通过此实例的<code>newInstance()</code>方法就可以创建出该类的一个对象。实际的情况可能更加复杂，比如 Java 字节代码可能是通过工具动态生成的，也可能是通过网络下载的。</p>
+<h3 id="类与类加载器"><a href="#类与类加载器" class="headerlink" title="类与类加载器"></a>类与类加载器</h3><ul>
 <li>基本职责：根据一个指定的类的名称，找到或者生成其对应的字节代码，然后从这些字节代码中定义出一个 Java 类，即 <code>java.lang.Class</code>类的一个实例。还负责加载 Java 应用所需的资源</li>
 <li>对于任意一个类，都需要由加载它的类加载器与这个类本身一同确立其在Java虚拟机中的唯一性，每一个类加载器都有一个独立的类名称空间</li>
 <li>判断两个类是否相等，只有两个类是由同一个类加载器加载的前提下才有意义</li>
-<li>相等：equalis等方法返回的结果</li>
+<li>相等：equals等方法返回的结果，如果没有考虑类加载器的影响，某些情况下可能或产生具有迷惑性的结果。<ul>
+<li>对于同一个Class，我们使用系统应用程序类加载器与自定义类加载器加载，instanceof会返回false。它们是一个类文件，但是是两个独立的类。</li>
+</ul>
+</li>
 </ul>
 <h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p>从Java虚拟机角度讲，只存在两种不同的类加载器</p>
 <ul>
@@ -730,18 +611,18 @@
 </ul>
 <p>从程序员角度讲</p>
 <ul>
-<li>启动类加载器。负责将类库加载到虚拟机内存当中，该加载器无法被Java程序直接引用。用户在编写自定义类加载器时，如果需要把加载请求委派给引导类加载器，那直接使用null代替即可</li>
+<li>启动类加载器。负责将类库(<java_home>\lib下的jar包)加载到虚拟机内存当中，该加载器无法被Java程序直接引用。用户在编写自定义类加载器时，如果需要把加载请求委派给引导类加载器，那直接使用null代替即可</java_home></li>
 <li>扩展类加载器。负责加载&lt;JAVA_HOME&gt;\lib\ext目录，或者java.ext.dirs系统变量指定的路径中所有类库，开发者可以直接使用扩展类加载器</li>
 <li>应用程序（系统）类加载器。负责加载用户类路径上指定的路径，可以直接使用这个类加载器，并且是程序中的默认加载器</li>
 </ul>
-<p><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1552378339303.png" alt="1552378339303"></p>
-<p>要求除了顶层的启动类加载器，其余的类加载器都应当有字节的父类加载器。父子关系一般不会以继承关系实现，而都是以组合关系来复用代码。</p>
-<p>工作过程：</p>
+<p><img src="assets%5C1564537447891.png" alt="1564537447891"></p>
+<p>要求除了顶层的启动类加载器，其余的类加载器都应当有自己的父类加载器。父子关系一般不会以继承关系实现，而都是以组合关系来复用代码。</p>
+<p><strong><em>工作过程</em></strong>：</p>
 <ul>
 <li>如果一个类加载器收到了类加载的请求，首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此既</li>
 <li>所有的加载请求都会传送到顶层的启动类加载器，只有父类无法完成这个加载请求，子加载器才会尝试自己去加载</li>
 </ul>
-<p>优势：</p>
+<p><strong><em>优势</em></strong>：</p>
 <ul>
 <li>Java类随着它的类加载器一起具备了一种带有优先级的层次关系。如Object类，任何一个类加载器加载这个类，都委派给了启动类加载器，因此他们都是同一个类。而如果让各个类去自行加载，那么系统会出现多个不同的object类。</li>
 <li>其次是考虑到安全因素，java核心api中定义类型不会被随意替换，假设通过网络传递一个名为java.lang.Integer的类，通过双亲委托模式传递到启动类加载器，而启动类加载器在核心Java API发现这个名字的类，发现该类已被加载，并不会重新加载网络传递的过来的java.lang.Integer，而直接返回已加载过的Integer.class，这样便可以防止核心API库被随意篡改。</li>
@@ -753,59 +634,46 @@
 <li>若父加载器为空，则默认使用启动类加载器作为父加载器</li>
 <li>如果父加载失败，抛出异常，则调用字节的findClass方法加载</li>
 </ul>
-<h3 id="破坏双亲委派模型"><a href="#破坏双亲委派模型" class="headerlink" title="破坏双亲委派模型"></a>破坏双亲委派模型</h3><h2 id="网络类加载器"><a href="#网络类加载器" class="headerlink" title="网络类加载器"></a>网络类加载器</h2><p>下面将通过一个网络类加载器来说明如何通过类加载器来实现组件的动态更新。即基本的场景是：Java 字节代码（.class）文件存放在服务器上，客户端通过网络的方式获取字节代码并执行。当有版本更新的时候，只需要替换掉服务器上保存的文件即可。通过类加载器可以比较简单的实现这种需求。</p>
+<h3 id="破坏双亲委派模型"><a href="#破坏双亲委派模型" class="headerlink" title="破坏双亲委派模型"></a>破坏双亲委派模型</h3><p><strong><em>模型缺陷</em></strong></p>
+<p>双亲委派模型是为了解决各个类加载器的基础类的统一问题，基础类之所以基础是因为它们总是作为被用户代码调用的API，但是如果基础类又要调回用户的代码该如何解决</p>
+<p>例如JNDI服务，它的代码由启动类加载器加载，但JNDI的目的是对资源进行集中管理和查找，因此需要调用由独立厂商实现并部署在应用程序的ClassPath下的JNDI接口提供者(<strong>SPI</strong>)的代码，但是启动类加载器不可能认识这些。</p>
+<p><strong>解决</strong>：引入了<strong>线程上下文类加载器</strong>，可以通过<code>java.lang.Thread</code>类的<code>setContextClassLoaser()</code>方法进行设置，如果创建线程时还未设置，则会从父线程中继承一个，如果应用程序全局没有设置，则该加载器默认就是应用程序类加载器</p>
+<p>JNDI使用线程上下文类加载器加载需要的SPI代码，即类加载器请求子类加载器去完成类加载行为。例如JDBC等都是这样实现的。</p>
+<p><strong><em>用户对程序动态性的追求而导致</em></strong></p>
+<p>例如<strong>代码热替换</strong>、<strong>模块热部署</strong>即类似计算机一样可以更新外设。</p>
+<p>OSGI模块化热部署的关键是在它自定义的类加载器机制的实现，每一个程序模块(Bundle)都有一个自己的类加载器，当需要更换一个Bundle时就将Bundle连同类加载器一起换掉以实现代码的热替换。</p>
+<p>在OSGI中类加载器不再是树状结构，而是发展为网状结构，当收到类加载请求时</p>
+<ul>
+<li>将以java.*开头的类委派给父类加载器加载</li>
+<li>否则将委派列表名单内的类委派给父类加载器加载</li>
+<li>否则将Import列表内的类委派给Export这个类的Bundle的类加载器加载</li>
+<li>否则查找当前Bundle的ClassPath，使用自己的类加载器加载</li>
+<li>否则查找类是否在自己的Fragment Bundle中，如果在，则委派给Fragment Bundle的类加载器加载</li>
+<li>否则查找Dynamic Import列表的Bundle，委派给对应Bundle的类加载器加载</li>
+<li>否则类查找失败</li>
+</ul>
+<h2 id="网络类加载器"><a href="#网络类加载器" class="headerlink" title="网络类加载器"></a>网络类加载器</h2><p>下面将通过一个网络类加载器来说明如何通过类加载器来实现组件的动态更新。即基本的场景是：Java 字节代码（.class）文件存放在服务器上，客户端通过网络的方式获取字节代码并执行。当有版本更新的时候，只需要替换掉服务器上保存的文件即可。通过类加载器可以比较简单的实现这种需求。</p>
 <p>类 <code>NetworkClassLoader</code>负责通过网络下载 Java 类字节代码并定义出 Java 类。它的实现与 <code>FileSystemClassLoader</code>类似。在通过 <code>NetworkClassLoader</code>加载了某个版本的类之后，一般有两种做法来使用它。第一种做法是使用 Java 反射 API。另外一种做法是使用接口。需要注意的是，并不能直接在客户端代码中引用从服务器上下载的类，因为客户端代码的类加载器找不到这些类。使用 Java 反射 API 可以直接调用 Java 类的方法。而使用接口的做法则是把接口的类放在客户端中，从服务器上加载实现此接口的不同版本的类。在客户端通过相同的接口来使用这些实现类。网络类加载器的具体代码见 <a href="https://www.ibm.com/developerworks/cn/java/j-lo-classloader/index.html#artdownload" target="_blank" rel="noopener">下载</a>。</p>
 <p>在介绍完如何开发自己的类加载器之后，下面说明类加载器和 Web 容器的关系。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
-      
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
-    
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author:  </strong>Heper</li>
-  <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/" title="JVM（4）：类文件与类加载">http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
-</ul>
-
-      </div>
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
           
+        
+        <div class="post-tags">
             <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
-      
-
-      
-      
-      
-
-      
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-            
               <a href="/2019/03/01/Java/base/JVM：调优/" rel="next" title="JVM：调优">
                 <i class="fa fa-chevron-left"></i> JVM：调优
               </a>
@@ -815,17 +683,12 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
               <a href="/2019/03/01/Java/base/JVM：程序优化/" rel="prev" title="JVM（5）：程序优化">
                 JVM（5）：程序优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
         </div>
-      
-
-      
-      
     </footer>
   </div>
   
@@ -833,26 +696,17 @@
   
   </article>
 
-
   </div>
 
 
           </div>
           
-
+    
+    <div class="comments" id="comments"></div>
   
-    <div class="comments" id="comments">
-      
-        <div id="gitment-container"></div>
-      
-    </div>
-
-  
-
 
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -864,213 +718,186 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
-
-      
-
-      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Tabla de contenidos
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Inicio
           </li>
         </ul>
       
 
-      <section class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
+
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
-            
-              <p class="site-author-name" itemprop="name">Heper</p>
-              <p class="site-description motion-element" itemprop="description">To be awesome</p>
-          </div>
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-name">entradas</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categorías</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
 
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">227</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">19</span>
-                    <span class="site-state-item-name">categories</span>
-                  
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">34</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
-                  
-                </span>
-              
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
-            
-          
-          
 
         </div>
-      </section>
-
-      
+      </div>
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
 
             
-              
+            
+            
             
 
             
@@ -1078,50 +905,29 @@
             
 
           </div>
-        </section>
+        </div>
       <!--/noindex-->
-      
-
       
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
-
-  
-
-  
 </div>
-
-
-  
-
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
-
-
-
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
-
-
-
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -1135,43 +941,44 @@
         
       </div>
     </footer>
-
-    
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
-        
       </div>
-    
 
     
-	
-    
 
-    
   </div>
 
   
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
 
-
-
-
-
-
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
 
 
-
+  
 
 
 
@@ -1184,429 +991,61 @@
 
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
+  <script>
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.location.pathname,
-            owner: 'smallpocket',
-            repo: 'Blog',
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
             
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
             
-            oauth: {
-            
-            
-                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
-            
-                client_id: 'a5dc6afe65772e33c437'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      renderGitment();
-      
-      </script>
-    
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
               })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
+            
+              .fail(function ({ responseJSON }) {
+                console.log(`Failed to save Visitor num, with error message: ${responseJSON.error}`);
               })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
           } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
           }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
     }
+    
 
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+                'X-LC-Key': 'uTVcNIWdMCGpicrhTKygpKXi',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+            if (localhost.test(document.URL)) return;
+            addCount(Counter);
+          
+        });
     });
   </script>
 
@@ -1614,41 +1053,49 @@
 
 
 
-  
 
-  
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
 <script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+    appKey: 'uTVcNIWdMCGpicrhTKygpKXi',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
 </script>
 
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

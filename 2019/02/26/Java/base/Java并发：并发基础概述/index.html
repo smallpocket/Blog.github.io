@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: 'OZTK1BY156',
+      apiKey: '',
+      indexName: 'BlogIndex',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copiar',
+      copy_success: 'Copiado',
+      copy_failure: 'Copiar falló'
+    }
+  };
+</script>
+
+  <meta name="description" content="并发基础">
+<meta name="keywords" content="并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java并发：并发基础概述">
+<meta property="og:url" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="并发基础">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets/adfb427d-3b21-40d7-a142-757f4ed73079.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets%5C1551250626973.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets%5C1551250713552.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets%5C1551252298293.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets%5C1550555153691.png">
+<meta property="og:updated_time" content="2019-07-31T03:11:20.331Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java并发：并发基础概述">
+<meta name="twitter:description" content="并发基础">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets/adfb427d-3b21-40d7-a142-757f4ed73079.png">
+  <link rel="canonical" href="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java并发：并发基础概述 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Cambiar a barra de navegación">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Calendario</a>
+
+  </li>
+    </ul>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">java并发：并发基础概述
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-02-26 19:59:31" itemprop="dateCreated datePublished" datetime="2019-02-26T19:59:31+08:00">2019-02-26</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-31 11:11:20" itemprop="dateModified" datetime="2019-07-31T11:11:20+08:00">2019-07-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/02/26/Java/base/Java并发：并发基础概述/" class="post-meta-item leancloud_visitors" data-flag-title="java并发：并发基础概述">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/02/26/Java/base/Java并发：并发基础概述/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/Java/base/Java并发：并发基础概述/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <div class="post-description">并发基础</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>多线程处理在OS当中几乎已经时一项必备的功能了，让计算机同时去做几件事情</p>
+<ul>
+<li>因为计算机的运算能力强大</li>
+<li>而且还因为计算机的运算速度与它的存储、通信子系统速度差距太大，大量时间花费在磁盘IO、网络通信或数据库访问上。而我们不希望将CPU大部分时间都处于等待其他资源的时间上。</li>
+<li>一个服务端提示对多个客户端提供服务是另一个更具体地并发应用场景。</li>
+</ul>
+<h2 id="并发及并发的线程安全处理："><a href="#并发及并发的线程安全处理：" class="headerlink" title="并发及并发的线程安全处理："></a>并发及并发的线程安全处理：</h2><ul>
+<li>多线程并发编程<ul>
+<li>线程安全性<ul>
+<li>原子性、可见性、有序性</li>
+<li>atomic包</li>
+<li>CAS算法</li>
+<li>synchronize与Lock、volatile、happes-before</li>
+</ul>
+</li>
+<li>安全发布对象<ul>
+<li>安全发布方法</li>
+<li>不可变对象、final关键字的使用、不可变方法</li>
+<li>线程不安全类与写法</li>
+</ul>
+</li>
+<li>线程封闭、同步容器、并发容器<ul>
+<li>堆栈封闭</li>
+<li>ThreadLocal线程封闭、JDBC的线程封闭</li>
+<li>同步容器、并发容器</li>
+<li>J.U.C</li>
+</ul>
+</li>
+<li>AQS等J.U.C组件<br>- </li>
+<li>线程调度<ul>
+<li>线程池好处</li>
+<li>new Thread弊端</li>
+<li>ThreadPoolExecutor、Executor框架接口</li>
+</ul>
+</li>
+<li>线程安全补充内容<ul>
+<li>死锁产生于预防</li>
+<li>多线程并发的最佳实践</li>
+<li>spring的线程安全</li>
+<li>hashmap与concurrentHashMap</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="并发、高并发相关概念"><a href="#并发、高并发相关概念" class="headerlink" title="并发、高并发相关概念"></a>并发、高并发相关概念</h1><p>并发：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程将交替地还如或者换出内存，线程同时存在， 每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，程序的每个线程都将分配到一个处理器核上，因此可以同时运行。</p>
+<p>高并发：通过设计保证系统能够同时并行处理很多请求</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>线程将复杂、异步的代码转换为更直接、直观的代码，线程是控制和利用多CPU系统计算能力的最简单方式</p>
+<p><strong>异步</strong>：当烧水的时候，水还在烧，这个时候水是否烧开了引起关注，在任务结束的时候发出信号，一边做其他的事情</p>
+<p>多线程将异步操作转换为了顺序，同步的代码</p>
+<h3 id="多线程的特点"><a href="#多线程的特点" class="headerlink" title="多线程的特点"></a>多线程的特点</h3><p><strong>优势：</strong></p>
+<ul>
+<li>速度：同时处理多个请求，响应快，复杂操作可以分为多个进程同时执行</li>
+<li>设计：在某些情况更简单，将异步的代码转换为顺序的代码，容易维护<ul>
+<li>在单线程上进行文件读取与处理，则必须跟踪每个文件的读取与处理状态</li>
+<li>多线程下，可以启动两个线程，每个线程只读取和处理单个文件。</li>
+</ul>
+</li>
+<li>资源利用：CPU在等待IO时可以做其他的事情<ul>
+<li>在IO时候，进程在读取文件，CPU在等待文件，因此CPU的资源浪费了，而利用多线程，可以使得在读取第二个文件的时候，处理第一个文件</li>
+</ul>
+</li>
+<li>多线程可以利用多个处理器进行计算，提高吞吐量</li>
+</ul>
+<p><strong>成本：</strong></p>
+<ul>
+<li>更复杂的设计<ul>
+<li>访问共享数据的多个线程执行的代码需要特别注意。线程交互远非简单。错误的线程同步引起的错误很难检测，重现和修复。</li>
+</ul>
+</li>
+<li>上下文切换开销<ul>
+<li>当CPU从执行一个线程切换到执行另一个线程时，CPU需要保存当前线程的本地数据，程序指针等，并加载下一个线程的本地数据，程序指针等来执行。</li>
+</ul>
+</li>
+<li>资源消耗增加<ul>
+<li>线程需要来自计算机的一些资源才能运行。除了CPU时间，线程需要一些内存来保持其本地堆栈。它还可能占用管理线程所需的操作系统内部的一些资源。</li>
+</ul>
+</li>
+</ul>
+<p><strong>风险：</strong></p>
+<ul>
+<li>安全性：多个线程共享数据可能会产生与预期不相符的结果<ul>
+<li>一个简单的next++分为三步：读取，++，写入新值。由于线程之间可能交替占有运行时，因此可能报错。它取决于运行时如何交替进行这些操作。</li>
+<li>同步机制：将方法声明为synchronized可以修正该问题</li>
+</ul>
+</li>
+<li>活跃性：某个操作无法继续执行下去，如死锁、饥饿等</li>
+<li>性能：线程过多使得CPU频繁切换（上下文切换），调度时间增多；同步机制；消耗过多内存</li>
+</ul>
+<h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p><img src="assets/adfb427d-3b21-40d7-a142-757f4ed73079.png" alt="img"></p>
+<p><strong><em>新建（New）</em></strong></p>
+<p>创建后尚未启动。</p>
+<p><strong><em>可运行（Runnable）</em></strong></p>
+<p>可能正在运行，也可能正在等待 CPU 时间片。</p>
+<p>包含了操作系统线程状态中的 Running 和 Ready。</p>
+<p><strong><em>阻塞（Blocking）</em></strong></p>
+<p>等待获取一个排它锁，如果其线程释放了锁就会结束此状态。</p>
+<p><strong><em>无限期等待（Waiting）</em></strong></p>
+<p>等待其它线程显式地唤醒，否则不会被分配 CPU 时间片。</p>
+<table>
+<thead>
+<tr>
+<th>进入方法</th>
+<th>退出方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>没有设置 Timeout 参数的 Object.wait() 方法</td>
+<td>Object.notify() / Object.notifyAll()</td>
+</tr>
+<tr>
+<td>没有设置 Timeout 参数的 Thread.join() 方法</td>
+<td>被调用的线程执行完毕</td>
+</tr>
+<tr>
+<td>LockSupport.park() 方法</td>
+<td>LockSupport.unpark(Thread)</td>
+</tr>
+</tbody></table>
+<p><strong><em>限期等待（Timed Waiting）</em></strong></p>
+<p>无需等待其它线程显式地唤醒，在一定时间之后会被系统自动唤醒。</p>
+<p>调用 Thread.sleep() 方法使线程进入限期等待状态时，常常用“使一个线程睡眠”进行描述。</p>
+<p>调用 Object.wait() 方法使线程进入限期等待或者无限期等待时，常常用“挂起一个线程”进行描述。</p>
+<p>睡眠和挂起是用来描述行为，而阻塞和等待用来描述状态。</p>
+<p>阻塞和等待的区别在于，阻塞是被动的，它是在等待获取一个排它锁。而等待是主动的，通过调用 Thread.sleep() 和 Object.wait() 等方法进入。</p>
+<table>
+<thead>
+<tr>
+<th>进入方法</th>
+<th>退出方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Thread.sleep() 方法</td>
+<td>时间结束</td>
+</tr>
+<tr>
+<td>设置了 Timeout 参数的 Object.wait() 方法</td>
+<td>时间结束 / Object.notify() / Object.notifyAll()</td>
+</tr>
+<tr>
+<td>设置了 Timeout 参数的 Thread.join() 方法</td>
+<td>时间结束 / 被调用的线程执行完毕</td>
+</tr>
+<tr>
+<td>LockSupport.parkNanos() 方法</td>
+<td>LockSupport.unpark(Thread)</td>
+</tr>
+<tr>
+<td>LockSupport.parkUntil() 方法</td>
+<td>LockSupport.unpark(Thread)</td>
+</tr>
+</tbody></table>
+<p><strong><em>死亡（Terminated）</em></strong></p>
+<p>可以是线程结束任务之后自己结束，或者产生了异常而结束。</p>
+<h1 id="硬件知识"><a href="#硬件知识" class="headerlink" title="硬件知识"></a>硬件知识</h1><h2 id="硬件的效率与一致性"><a href="#硬件的效率与一致性" class="headerlink" title="硬件的效率与一致性"></a>硬件的效率与一致性</h2><p>让计算机并发执行若干个运算任务与更充分地利用计算机处理器地效能间地因果关系，看似顺理成章，其实关系比较复杂</p>
+<p>其中一个原因是绝大多数地运算任务都不可能只靠处CPU计算就能完成，CPU至少需要与内存交互，读取运算数据、存储运算结果。而这个IO操作很难消除。</p>
+<p>由于计算机地存储设备与CPU运算速度有几个数量级地差距，很多现代OS不得不加入一层速度尽可能接近处理器运算速度的<strong>高速缓存</strong>。</p>
+<p>高速缓存很好地解决了速度矛盾，但带来了另外一个问题。即<strong>缓存一致性</strong>。每个CPU都有自己地高速缓存，而它们又共享同一主内存。则当多个CPU都涉及同一块主内存区域时，将可能导致各自地缓存数据不一致。因此出现了<strong>缓存一致性协议</strong>，包括有MESI、MSI、Synapse等。</p>
+<p>除了针对内存等，为了使得CPU内部的运算单元能够被充分利用，CPU可能会对输入代码进行<strong>乱序执行</strong>优化，CPU会在计算后将乱序执行的结果重组，保证该结果与顺序执行的结果一致，但不保证程序中每个语句的计算的先后顺序与代码中一致。</p>
+<h2 id="CPU多级缓存"><a href="#CPU多级缓存" class="headerlink" title="CPU多级缓存"></a>CPU多级缓存</h2><p>高速缓存的配置：数据的读取与存储都经过高速缓存，CPU核心与高速缓存有一条快速通道。主存与高速缓存都连接在系统总线上，并且该主线还用于与其他通信</p>
+<p><img src="assets%5C1551250626973.png" alt="1551250626973"></p>
+<p>多级缓存：一级缓存的速度与主存速度拉大。加入二级缓存、三级缓存，速度慢于1级，但是更大</p>
+<p><img src="assets%5C1551250713552.png" alt="1551250713552"></p>
+<p><strong>多级缓存的意义</strong>：</p>
+<ul>
+<li>CPU的频率太快，主存无法跟上，在处理器时钟周期内，CPU常常需要等待主存，浪费资源。缓存是为了缓解CPU与内存间速度不匹配的问题</li>
+<li>缓存无法存放CPU需要的全部数据，但是由于：<ul>
+<li>时间局部性：如果某个数据被访问，那么在不久的将来可能再次被访问</li>
+<li>空间局部性：如果某个数据被访问，那么与它相邻的数据很快也可能被访问</li>
+</ul>
+</li>
+</ul>
+<h2 id="缓存一致性-MESI协议"><a href="#缓存一致性-MESI协议" class="headerlink" title="缓存一致性(MESI协议)"></a><strong>缓存一致性(MESI协议)</strong></h2><p>利用CPU的<strong>嗅探</strong>总线实现。</p>
+<p>用于保证多个CPU 缓存之间共享数据的一致，定义了cache的四种状态</p>
+<ul>
+<li>M：被修改，该缓存只缓存在CPU的缓存中，并且被修改过，与主存数据不一致，需要在某个时间写回主存（这个时间其他CPU不能读取该数据），被写会主存当中后转换为E。</li>
+<li>E：独享，只缓存在CPU缓存中，但是没有被修改，与主存数据一致，当其他CPU读取该数据，转换为S，当修改该数据则转换为M</li>
+<li>S：共享，该缓存可能被多个CPU共享，并与主存一致，如果有一个CPU修改该缓存，则转换为M。其他CPU的缓存转换为I</li>
+<li>I：无效，</li>
+</ul>
+<p>操作：</p>
+<ul>
+<li>local read：读本地缓存数据</li>
+<li>local write：将数据写入本地缓存</li>
+<li>remote read：将主存数据读取过来</li>
+<li>remote write：将数据写入主存</li>
+</ul>
+<p><img src="assets%5C1551252298293.png" alt="1551252298293"></p>
+<p><strong>乱序执行优化</strong></p>
+<p>处理器为提高运算速度而做出违背代码原有顺序的优化。在不影响结果的情况下，代码的执行次序可能会发生变化</p>
+<p>在多核CPU中，后写入缓存的数据未必真的写入缓存。</p>
+<h1 id="并发模型"><a href="#并发模型" class="headerlink" title="并发模型"></a>并发模型</h1><h2 id="并发模型与分布式系统相似性"><a href="#并发模型与分布式系统相似性" class="headerlink" title="并发模型与分布式系统相似性"></a>并发模型与分布式系统相似性</h2><p>在并发系统中，不同的线程彼此通信。在分布式系统中，不同的进程彼此通信（可能在不同的计算机上）</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>一个顺序处理相同类型问题的程序更加简单，更少出错，容易测试。如果处理多种类型的问题， 则需要考虑优先级，时间截止等，较为复杂。</p>
+<p>因此，为每一个相同类型任务的程序提供一个线程，提供理想上的顺序，并且将域逻辑与时序调度的细节分割开，进行相互交替的操作，只有在特定的同步点进行彼此间的交互。    </p>
+<h3 id="并行工人"><a href="#并行工人" class="headerlink" title="并行工人"></a>并行工人</h3><p>​    传入的工作分配给不同的工作人员。这是一个说明并行工作者并发模型的图表：</p>
+<p><img src="assets%5C1550555153691.png" alt="1550555153691"></p>
+<p>​    在并行工作者并发模型中，委托者将传入的作业分发给不同的工作者。每个工人完成整个工作。这些工作程序并行工作，在不同的线程中运行，并且可能在不同的CPU上运行。是Java应用程序中最常用的并发模型（虽然这种情况正在发生变化）。</p>
+<h4 id="优劣"><a href="#优劣" class="headerlink" title="优劣"></a>优劣</h4><ul>
+<li>易于理解。要增加应用程序的并行化，您只需添加更多工作程序。</li>
+<li>共享可能变得复杂</li>
+</ul>
+<h1 id="并发模拟"><a href="#并发模拟" class="headerlink" title="并发模拟"></a>并发模拟</h1><ul>
+<li>postman：http请求模拟</li>
+<li>Apache bench：测试网站性能</li>
+<li>JMeter：压力测试工具</li>
+<li>代码：semaphore信号量、CountDownLatch计数器。通常与线程池共同使用</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li>java并发编程入门与高并发解决方案</li>
+<li><a href="https://github.com/youzhidakeai/concurrency" target="_blank" rel="noopener">慕课网《Java并发编程入门与高并发面试 》课程学习</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/并发编程/" rel="tag"># 并发编程</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/02/26/计算机网络/计算机网络：HTTP协议/" rel="next" title="计算机网络：HTTP协议">
+                <i class="fa fa-chevron-left"></i> 计算机网络：HTTP协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/02/28/OS/计算机操作系统（1）：基本概念/" rel="prev" title="计算机操作系统（1）：基本概念">
+                计算机操作系统（1）：基本概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Tabla de contenidos
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Inicio
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-name">entradas</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categorías</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发"><span class="nav-number">1.</span> <span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发及并发的线程安全处理："><span class="nav-number">1.2.</span> <span class="nav-text">并发及并发的线程安全处理：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发、高并发相关概念"><span class="nav-number">2.</span> <span class="nav-text">并发、高并发相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.1.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程的特点"><span class="nav-number">2.1.1.</span> <span class="nav-text">多线程的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程状态"><span class="nav-number">2.2.</span> <span class="nav-text">线程状态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件知识"><span class="nav-number">3.</span> <span class="nav-text">硬件知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件的效率与一致性"><span class="nav-number">3.1.</span> <span class="nav-text">硬件的效率与一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU多级缓存"><span class="nav-number">3.2.</span> <span class="nav-text">CPU多级缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存一致性-MESI协议"><span class="nav-number">3.3.</span> <span class="nav-text">缓存一致性(MESI协议)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发模型"><span class="nav-number">4.</span> <span class="nav-text">并发模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发模型与分布式系统相似性"><span class="nav-number">4.1.</span> <span class="nav-text">并发模型与分布式系统相似性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">4.2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并行工人"><span class="nav-number">4.2.1.</span> <span class="nav-text">并行工人</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优劣"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">优劣</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发模拟"><span class="nav-number">5.</span> <span class="nav-text">并发模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+</div>
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script>
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log(`Failed to save Visitor num, with error message: ${responseJSON.error}`);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+                'X-LC-Key': 'uTVcNIWdMCGpicrhTKygpKXi',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+            if (localhost.test(document.URL)) return;
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+    appKey: 'uTVcNIWdMCGpicrhTKygpKXi',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+</body>
+</html>

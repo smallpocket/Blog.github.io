@@ -4,109 +4,58 @@
 
 
 
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang>
-<head><meta name="generator" content="Hexo 3.9.0">
+<html class="theme-next gemini use-motion" lang="">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '6.4.1',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
     fancybox: false,
-    fastclick: false,
+    mediumzoom: false,
     lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    pangu: false,
     algolia: {
-      applicationID: '',
+      applicationID: 'OZTK1BY156',
       apiKey: '',
-      indexName: '',
+      indexName: 'BlogIndex',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copiar',
+      copy_success: 'Copiado',
+      copy_failure: 'Copiar falló'
     }
   };
 </script>
-
-
-  
-
-
-
 
   <meta name="description" content="To be awesome">
 <meta property="og:type" content="website">
@@ -118,17 +67,10 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="To be awesome">
-
-
-
-
-
-
   <link rel="canonical" href="http://yoursite.com/page/4/">
 
 
-
-<script type="text/javascript" id="page.configurations">
+<script id="page.configurations">
   CONFIG.page = {
     sidebar: "",
   };
@@ -142,43 +84,30 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
 
 
   <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
 
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
   </style>
 </noscript>
 
@@ -186,19 +115,12 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="default">
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+  <div class="site-meta">
 
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
@@ -207,11 +129,10 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Cambiar a barra de navegación">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -222,102 +143,75 @@
 
 
 <nav class="site-nav">
-  
     <ul id="menu" class="menu">
-      
         
         
         
           
           <li class="menu-item menu-item-home">
-    <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-    <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-about">
-    <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Sobre mi</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-tags">
-    <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Etiquetas</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-categories">
-    <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorías</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivo</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-schedule">
-    <a href="/schedule/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Calendario</a>
+
   </li>
-
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
-        </li>
-      
     </ul>
-  
-
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
 </nav>
-
-
-
-  
-
-
 
 </div>
     </header>
@@ -328,30 +222,19 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
             
 
-          
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/OS/现代操作系统：多处理机系统/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/Java/设计模式/设计模式：访问者模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -362,99 +245,67 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/17/OS/现代操作系统：多处理机系统/" itemprop="url">
-                  现代操作系统：多处理机系统
-                </a>
+                
+                <a href="/2019/07/14/Java/设计模式/设计模式：访问者模式/" class="post-title-link" itemprop="url">设计模式：访问者模式</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-17 23:44:04" itemprop="dateCreated datePublished" datetime="2019-07-17T23:44:04+08:00">2019-07-17</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-21 16:25:15" itemprop="dateModified" datetime="2019-07-21T16:25:15+08:00">2019-07-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span>
-
-                
-                
-              
+              <time title="Creado por: 2019-07-14 18:57:23" itemprop="dateCreated datePublished" datetime="2019-07-14T18:57:23+08:00">2019-07-14</time>
             </span>
           
 
           
+            <span id="/2019/07/14/Java/设计模式/设计模式：访问者模式/" class="post-meta-item leancloud_visitors" data-flag-title="设计模式：访问者模式">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/14/Java/设计模式/设计模式：访问者模式/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/14/Java/设计模式/设计模式：访问者模式/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -462,49 +313,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          多处理机系统人们对更强计算力的追求促进着计算机的发展，而所有的一切都需要更多的CPU周期（又称机器周期，CPU周期定义为从内存读取一条指令字的最短时间。一个指令周期常由若干CPU周期构成。
-时钟解决方案
-过去的解决方案是使时钟走得更快，而现在遇到了对时钟速度的限制，即电子信号的速度不可能超过光速，这
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/17/OS/现代操作系统：多处理机系统/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -512,24 +336,15 @@
   
   </article>
 
-
     
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/OS/现代操作系统：虚拟化与云/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/Java/设计模式/设计模式：责任链模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -540,534 +355,67 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/17/OS/现代操作系统：虚拟化与云/" itemprop="url">
-                  现代操作系统：虚拟化与云
-                </a>
+                
+                <a href="/2019/07/14/Java/设计模式/设计模式：责任链模式/" class="post-title-link" itemprop="url">设计模式：责任链模式</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-17 23:43:54" itemprop="dateCreated datePublished" datetime="2019-07-17T23:43:54+08:00">2019-07-17</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          参考
-
-
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/17/OS/现代操作系统：虚拟化与云/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/OS/现代操作系统：死锁/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/17/OS/现代操作系统：死锁/" itemprop="url">
-                  现代操作系统：死锁
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-17 23:43:45" itemprop="dateCreated datePublished" datetime="2019-07-17T23:43:45+08:00">2019-07-17</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          参考
-
-
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/17/OS/现代操作系统：死锁/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/17/OS/现代操作系统：I-O/" itemprop="url">
-                  现代操作系统：I/O
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-17 23:43:38" itemprop="dateCreated datePublished" datetime="2019-07-17T23:43:38+08:00">2019-07-17</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          参考
-
-
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/17/OS/现代操作系统：I-O/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heper">
-      <meta itemprop="description" content="To be awesome">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/17/OS/现代操作系统：进程与线程/" itemprop="url">
-                  现代操作系统：进程与线程
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-17 23:43:26" itemprop="dateCreated datePublished" datetime="2019-07-17T23:43:26+08:00">2019-07-17</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-21 12:45:22" itemprop="dateModified" datetime="2019-07-21T12:45:22+08:00">2019-07-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span>
-
-                
-                
-              
+              <time title="Creado por: 2019-07-14 18:57:17" itemprop="dateCreated datePublished" datetime="2019-07-14T18:57:17+08:00">2019-07-14</time>
             </span>
           
 
           
+            <span id="/2019/07/14/Java/设计模式/设计模式：责任链模式/" class="post-meta-item leancloud_visitors" data-flag-title="设计模式：责任链模式">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/14/Java/设计模式/设计模式：责任链模式/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/14/Java/设计模式/设计模式：责任链模式/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -1075,49 +423,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          进程操作系统最核心的概念是进程，是对正在运行程序的一个抽象。
-现代计算机经常会在同一时间做许多事情。例如当系统启动时，会秘密启动很多线程，例如启动一个进程用来等待邮件、启动一个防病毒进程周期性检查等。这些进程的活动都需要管理，因此一个支持多进程的多道程序系统在这里十分必要。
-在多道程序设计系统中，C
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/17/OS/现代操作系统：进程与线程/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -1125,24 +446,15 @@
   
   </article>
 
-
     
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/OS/现代操作系统：内存管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/Java/设计模式/设计模式：原型模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -1153,65 +465,67 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/17/OS/现代操作系统：内存管理/" itemprop="url">
-                  现代操作系统
-                </a>
+                
+                <a href="/2019/07/14/Java/设计模式/设计模式：原型模式/" class="post-title-link" itemprop="url">设计模式：原型模式</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-17 23:43:04" itemprop="dateCreated datePublished" datetime="2019-07-17T23:43:04+08:00">2019-07-17</time>
+              <time title="Creado por: 2019-07-14 18:56:16" itemprop="dateCreated datePublished" datetime="2019-07-14T18:56:16+08:00">2019-07-14</time>
+            </span>
+          
+
+          
+            <span id="/2019/07/14/Java/设计模式/设计模式：原型模式/" class="post-meta-item leancloud_visitors" data-flag-title="设计模式：原型模式">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/14/Java/设计模式/设计模式：原型模式/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/14/Java/设计模式/设计模式：原型模式/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -1219,50 +533,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          参考
-
-
+            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/17/OS/现代操作系统：内存管理/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -1270,24 +556,15 @@
   
   </article>
 
-
     
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/Java/设计模式/设计模式：享元模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/版本控制/Maven/Maven：插件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -1298,65 +575,71 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/14/Java/设计模式/设计模式：享元模式/" itemprop="url">
-                  设计模式：享元模式
-                </a>
+                
+                <a href="/2019/07/14/版本控制/Maven/Maven：插件/" class="post-title-link" itemprop="url">Maven：插件</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-14 18:58:03" itemprop="dateCreated datePublished" datetime="2019-07-14T18:58:03+08:00">2019-07-14</time>
+              <time title="Creado por: 2019-07-14 18:51:57 / Modificado por: 18:52:44" itemprop="dateCreated datePublished" datetime="2019-07-14T18:51:57+08:00">2019-07-14</time>
+            </span>
+          
             
 
-            
-          </span>
-
-          
-
-          
             
           
 
           
+            <span id="/2019/07/14/版本控制/Maven/Maven：插件/" class="post-meta-item leancloud_visitors" data-flag-title="Maven：插件">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
-
-          
-
-          
-
-          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/14/版本控制/Maven/Maven：插件/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/14/版本控制/Maven/Maven：插件/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -1364,50 +647,111 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          参考
+            <h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>build 插件，如package、install、deploy</p>
+<p>包括compile test package等都是插件</p>
+<p>versions-maven-plugin插件：version管理</p>
+<p>Maven 是一个执行插件的框架，每一个任务实际上是由插件完成的。Maven 插件通常用于： </p>
+<ul>
+<li><p>创建 jar 文件         </p>
+</li>
+<li><p>创建 war 文件          </p>
+</li>
+<li><p>编译代码文件         </p>
+</li>
+<li><p>进行代码单元测试         </p>
+</li>
+<li><p>创建项目文档         </p>
+</li>
+<li><p>创建项目报告         </p>
+<p>  一个插件通常提供了一组目标，可使用以下语法来执行： </p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn [plugin-name]:[goal-name]</span><br></pre></td></tr></table></figure>
 
+<pre><code>例如，一个 Java 项目可以使用 Maven 编译器插件来编译目标，通过运行以下命令编译 </code></pre><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn compiler:compile</span><br></pre></td></tr></table></figure>
 
+<h2 id="插件类型"><a href="#插件类型" class="headerlink" title="插件类型"></a>插件类型</h2><pre><code>Maven 提供以下两种类型插件： </code></pre><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>构建插件</td>
+<td>在生成过程中执行，并在 pom.xml 中的<build> 元素进行配置</build></td>
+</tr>
+<tr>
+<td>报告插件</td>
+<td>在网站生成期间执行，在 pom.xml 中的 <reporting> 元素进行配置</reporting></td>
+</tr>
+</tbody></table>
+<p>以下是一些常见的插件列表： </p>
+<table>
+<thead>
+<tr>
+<th>插件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clean</td>
+<td>编译后的清理目标，删除目标目录</td>
+</tr>
+<tr>
+<td>compiler</td>
+<td>编译 Java 源文件</td>
+</tr>
+<tr>
+<td>surefile</td>
+<td>运行JUnit单元测试，创建测试报告</td>
+</tr>
+<tr>
+<td>jar</td>
+<td>从当前项目构建 JAR 文件</td>
+</tr>
+<tr>
+<td>war</td>
+<td>从当前项目构建 WAR 文件</td>
+</tr>
+<tr>
+<td>javadoc</td>
+<td>产生用于该项目的 Javadoc</td>
+</tr>
+<tr>
+<td>antrun</td>
+<td>从构建所述的任何阶段运行一组 Ant 任务</td>
+</tr>
+</tbody></table>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><pre><code>我们使用 maven-antrun-plugin 插件在例子中来在控制台打印数据。现在在 C:\MVN\project 文件夹 创建一个 pom.xml 文件，内容如下：  </code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">    http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.companyname.projectgroup<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>project<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-antrun-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">id</span>&gt;</span>id.clean<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">phase</span>&gt;</span>clean<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>run<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tasks</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">echo</span>&gt;</span>clean phase<span class="tag">&lt;/<span class="name">echo</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tasks</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">execution</span>&gt;</span>     </span><br><span class="line">   <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>接下来，打开命令控制台，并转到包含 pom.xml 的文件夹并执行以下命令 mvn 命令。 </code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\MVN\project&gt;mvn clean</span><br></pre></td></tr></table></figure>
+
+<pre><code>Maven 将开始处理并显示清洁周期/阶段，如下图中输出： </code></pre><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[INFO] Scanning for projects...</span><br><span class="line">[INFO] ------------------------------------------------------------------</span><br><span class="line">[INFO] Building Unnamed - com.companyname.projectgroup:project:jar:1.0</span><br><span class="line">[INFO]    task-segment: [post-clean]</span><br><span class="line">[INFO] ------------------------------------------------------------------</span><br><span class="line">[INFO] [clean:clean &#123;execution: default-clean&#125;]</span><br><span class="line">[INFO] [antrun:run &#123;execution: id.clean&#125;]</span><br><span class="line">[INFO] Executing tasks</span><br><span class="line">     [echo] clean phase</span><br><span class="line">[INFO] Executed tasks</span><br><span class="line">[INFO] ------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESSFUL</span><br><span class="line">[INFO] ------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: &lt; 1 second</span><br><span class="line">[INFO] Finished at: Sat Jul 07 13:38:59 IST 2012</span><br><span class="line">[INFO] Final Memory: 4M/44M</span><br><span class="line">[INFO] ------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<pre><code>上面的例子说明了以下关键概念： </code></pre><ul>
+<li>插件可在 pom.xml 使用的 plugin 元素来指定；          </li>
+<li>每个插件可以有多个目标；         </li>
+<li>从插件应使用它的相位元素开始处理定义阶段。这里已经使用 clean 阶段；         </li>
+<li>可以通过将它们绑定到插件的目标来执行配置任务。这里已经绑定 echo 任务到 maven-antrun-plugin 的运行目标；         </li>
+<li>就这样，Maven将处理其余部分。如果没有可用的本地存储库，它会下载这个插件；</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/14/Java/设计模式/设计模式：享元模式/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -1415,24 +759,15 @@
   
   </article>
 
-
     
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/Java/设计模式/设计模式：桥接模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/Java/设计模式/设计模式：外观模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -1443,73 +778,44 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/14/Java/设计模式/设计模式：桥接模式/" itemprop="url">
-                  设计模式：桥接模式
-                </a>
+                
+                <a href="/2019/07/13/Java/设计模式/设计模式：外观模式/" class="post-title-link" itemprop="url">设计模式：外观模式</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-14 18:57:53" itemprop="dateCreated datePublished" datetime="2019-07-14T18:57:53+08:00">2019-07-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-26 10:33:53" itemprop="dateModified" datetime="2019-07-26T10:33:53+08:00">2019-07-26</time>
-              
-            
-          </span>
-
+              <time title="Creado por: 2019-07-13 10:32:40 / Modificado por: 10:33:09" itemprop="dateCreated datePublished" datetime="2019-07-13T10:32:40+08:00">2019-07-13</time>
+            </span>
           
-            <span class="post-category">
             
-              <span class="post-meta-divider">|</span>
+
             
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">En</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -1521,21 +827,37 @@
           
 
           
+            <span id="/2019/07/13/Java/设计模式/设计模式：外观模式/" class="post-meta-item leancloud_visitors" data-flag-title="设计模式：外观模式">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
             
-          
-
-          
-          
-
-          
-
-          
-
-          
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/13/Java/设计模式/设计模式：外观模式/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/13/Java/设计模式/设计模式：外观模式/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -1543,57 +865,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          Bridge提出问题
-当一个抽象可能有多个实现时，通常使用继承进行协调。抽象类定义对该接口的抽象，而具体的子类用不同的方式加以实现。
-但是此方法不够灵活，继承机制将抽象部分与实现部分固定在一起，
+            <h1 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><p>将一组类转换，提供一个简易接口</p>
+<h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>当面对一个场景：需要挑选一个DVD，则需要进行</p>
+<ul>
+<li>打开爆米花机、开始爆米花、调暗灯光、放下屏幕、打开投影机、输入切换道DVD、打开功放、功放切换道DVD、设置立体声、设置音量、打开DVD、播放DVD</li>
+<li>倘若关闭，还需要反向操作。非常复杂</li>
+</ul>
+<h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>外观模式是一个改变接口的新模式，改变接口的原因是为了简化接口。</p>
+<p>外观模式将一个或多个类复杂的一切隐藏在背后，只露出一个干净美好的外观。</p>
+<p><strong>定义：</strong>外观模式提供了一个统一的接口，用来访问子系统中的一群接口。外观定义了一个高层接口，让子系统更容易使用。</p>
+<h3 id="分类，各个分类是什么"><a href="#分类，各个分类是什么" class="headerlink" title="分类，各个分类是什么"></a>分类，各个分类是什么</h3><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h3><ul>
+<li>外观模式允许将客户实现从任何子系统中解耦。<ul>
+<li>当想要升级自己的家庭影院，只需要修改外观代码即可。不需要去更改底部爆米花机的实现等</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeTheaterFacade</span> </span>&#123;</span><br><span class="line">    <span class="comment">//看DVD所需要的全部组件</span></span><br><span class="line">	Amplifier amp;</span><br><span class="line">	Tuner tuner;</span><br><span class="line">	DvdPlayer dvd;</span><br><span class="line">	CdPlayer cd;</span><br><span class="line">	Projector projector;</span><br><span class="line">	TheaterLights lights;</span><br><span class="line">	Screen screen;</span><br><span class="line">	PopcornPopper popper;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">HomeTheaterFacade</span><span class="params">(Amplifier amp, </span></span></span><br><span class="line"><span class="function"><span class="params">				 Tuner tuner, </span></span></span><br><span class="line"><span class="function"><span class="params">				 DvdPlayer dvd, </span></span></span><br><span class="line"><span class="function"><span class="params">				 CdPlayer cd, </span></span></span><br><span class="line"><span class="function"><span class="params">				 Projector projector, </span></span></span><br><span class="line"><span class="function"><span class="params">				 Screen screen,</span></span></span><br><span class="line"><span class="function"><span class="params">				 TheaterLights lights,</span></span></span><br><span class="line"><span class="function"><span class="params">				 PopcornPopper popper)</span> </span>&#123;</span><br><span class="line">	 </span><br><span class="line">		<span class="keyword">this</span>.amp = amp;</span><br><span class="line">		<span class="keyword">this</span>.tuner = tuner;</span><br><span class="line">		<span class="keyword">this</span>.dvd = dvd;</span><br><span class="line">		<span class="keyword">this</span>.cd = cd;</span><br><span class="line">		<span class="keyword">this</span>.projector = projector;</span><br><span class="line">		<span class="keyword">this</span>.screen = screen;</span><br><span class="line">		<span class="keyword">this</span>.lights = lights;</span><br><span class="line">		<span class="keyword">this</span>.popper = popper;</span><br><span class="line">	&#125;</span><br><span class="line">	 <span class="comment">//将操作全部封装到外观当中</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">watchMovie</span><span class="params">(String movie)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Get ready to watch a movie..."</span>);</span><br><span class="line">		popper.on();</span><br><span class="line">		popper.pop();</span><br><span class="line">		lights.dim(<span class="number">10</span>);</span><br><span class="line">		screen.down();</span><br><span class="line">		projector.on();</span><br><span class="line">		projector.wideScreenMode();</span><br><span class="line">		amp.on();</span><br><span class="line">		amp.setDvd(dvd);</span><br><span class="line">		amp.setSurroundSound();</span><br><span class="line">		amp.setVolume(<span class="number">5</span>);</span><br><span class="line">		dvd.on();</span><br><span class="line">		dvd.play(movie);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endMovie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Shutting movie theater down..."</span>);</span><br><span class="line">		popper.off();</span><br><span class="line">		lights.on();</span><br><span class="line">		screen.up();</span><br><span class="line">		projector.off();</span><br><span class="line">		amp.off();</span><br><span class="line">		dvd.stop();</span><br><span class="line">		dvd.eject();</span><br><span class="line">		dvd.off();</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listenToCd</span><span class="params">(String cdTitle)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Get ready for an audiopile experence..."</span>);</span><br><span class="line">		lights.on();</span><br><span class="line">		amp.on();</span><br><span class="line">		amp.setVolume(<span class="number">5</span>);</span><br><span class="line">		amp.setCd(cd);</span><br><span class="line">		amp.setStereoSound();</span><br><span class="line">		cd.on();</span><br><span class="line">		cd.play(cdTitle);</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endCd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Shutting down CD..."</span>);</span><br><span class="line">		amp.off();</span><br><span class="line">		amp.setCd(cd);</span><br><span class="line">		cd.eject();</span><br><span class="line">		cd.off();</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listenToRadio</span><span class="params">(<span class="keyword">double</span> frequency)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Tuning in the airwaves..."</span>);</span><br><span class="line">		tuner.on();</span><br><span class="line">		tuner.setFrequency(frequency);</span><br><span class="line">		amp.on();</span><br><span class="line">		amp.setVolume(<span class="number">5</span>);</span><br><span class="line">		amp.setTuner(tuner);</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endRadio</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Shutting down the tuner..."</span>);</span><br><span class="line">		tuner.off();</span><br><span class="line">		amp.off();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><h4 id="与其他的区别"><a href="#与其他的区别" class="headerlink" title="与其他的区别"></a>与其他的区别</h4><p>UML类图</p>
+<p><img src="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1555666122197.png" alt="1555666122197"></p>
+<h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
 
-
-为什么要用（作用）
-将抽象部分与它的实现部分分离，使他们都可以独立变化
-
-应用适用性
-不希望在抽象
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/14/Java/设计模式/设计模式：桥接模式/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -1601,24 +907,15 @@
   
   </article>
 
-
     
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/Java/设计模式/设计模式：中介者模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -1629,65 +926,96 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/14/Java/设计模式/设计模式：中介者模式/" itemprop="url">
-                  设计模式：中介者模式
-                </a>
+                
+                <a href="/2019/07/10/Java/设计模式/设计模式：概述/" class="post-title-link" itemprop="url">设计模式：概述</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-14 18:57:38" itemprop="dateCreated datePublished" datetime="2019-07-14T18:57:38+08:00">2019-07-14</time>
-            
-
-            
-          </span>
-
-          
-
+              <time title="Creado por: 2019-07-10 20:03:31" itemprop="dateCreated datePublished" datetime="2019-07-10T20:03:31+08:00">2019-07-10</time>
+            </span>
           
             
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-29 09:52:30" itemprop="dateModified" datetime="2019-07-29T09:52:30+08:00">2019-07-29</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
+            <span id="/2019/07/10/Java/设计模式/设计模式：概述/" class="post-meta-item leancloud_visitors" data-flag-title="设计模式：概述">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
-
-          
-
-          
-
-          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/10/Java/设计模式/设计模式：概述/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/10/Java/设计模式/设计模式：概述/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -1695,50 +1023,184 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          参考
-
-
+            <h1 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h1><p>每一个模式描述了一个在周围不断重复发生的问题，以及该文件的解决方案的核心。这样呢就能一次又一次地使用该方案而不必做重复劳动。设计模式是对被用来在特定场景下解决一般设计问题的类和互相通信的对象的描述。</p>
+<p>模式的四个要素：</p>
+<ul>
+<li>模式的名称。</li>
+<li>问题。描述应该在何时使用模式。解释了设计问题和问题存在的前因后果，可能描述了特定的设计问题，包含使用模式必须满足的一系列先决条件。</li>
+<li>解决方案。描述了设计的组成部分，它们间的相互关系以及格子的职责和协作方式。</li>
+<li>效果。描述了模式应用的效果以及使用模式应该权衡的问题。包括对时间、空间的衡量，对系统灵活性、扩展性、可移植性的影响。</li>
+</ul>
+<h1 id="描述设计模式"><a href="#描述设计模式" class="headerlink" title="描述设计模式"></a>描述设计模式</h1><ul>
+<li>模式名和分类</li>
+<li><strong>意图</strong>。设计模式是做什么的；它的基本原理和意图是什么；它解决的是什么样的特定设计问题</li>
+<li>别名</li>
+<li><strong>动机</strong>。说明一个设计问题以及如何用模式中的类、对象来解决该问题的特定情境。帮助理解随后对模式更抽象的描述</li>
+<li><strong>适用性</strong>。<ul>
+<li>什么情况下可以使用该设计模式</li>
+<li>适用案例</li>
+<li>该模式可以用来改进哪些不良设计</li>
+<li>怎样识别这些情况</li>
+</ul>
+</li>
+<li>结构。</li>
+<li>参与者。设计模式中的类或对象以及他们各自的职责</li>
+<li>协作。模式的参与者怎样协作已实现他们的职责</li>
+<li><strong>效果</strong>。模式怎样支持它的目标；使用模式的效果和所需要做的权衡取舍；系统结构哪些方面可以独立改；</li>
+<li>实现。实现模式时需要知道的一些提示、技术要点以及代码示例</li>
+<li>已知应用。实际系统中发现的模式的例子，每个模式至少包括了两个不同领域的实例</li>
+<li><strong>相关模式</strong>、与这个模式紧密相关的模式有哪些，其间重要的不同之处是什么，这个模式应该与哪些其他模式一起使用</li>
+</ul>
+<h1 id="设计模式的编目"><a href="#设计模式的编目" class="headerlink" title="设计模式的编目"></a>设计模式的编目</h1><p>详见：<strong><em>设计模式：目录</em></strong></p>
+<h1 id="设计模式怎样解决设计问题"><a href="#设计模式怎样解决设计问题" class="headerlink" title="设计模式怎样解决设计问题"></a>设计模式怎样解决设计问题</h1><h2 id="寻找合适的对象"><a href="#寻找合适的对象" class="headerlink" title="寻找合适的对象"></a>寻找合适的对象</h2><p>客户请求是使对象执行操作的唯一方法，操作又是对象改变内部数据的唯一方法。对象的内部状态是被封装的，不能被直接访问，它的表示对于对象外部是不可见的。</p>
+<p>面向对象设计最困难的部分是将系统分解成对象集合，因为要考虑许多因素：封装、粒度、依赖关系、灵活性、性能、演化、复用等。它们都影响系统的分解，并且这些因素通常还是互相冲突的。</p>
+<h3 id="设计方法"><a href="#设计方法" class="headerlink" title="设计方法"></a>设计方法</h3><p>面向对象设计方法学支持很多设计方法</p>
+<ul>
+<li>可以写出一个问题描述，挑出名词、动词进而创建相应的类和操作；</li>
+<li>关注系统的协作与职责关系</li>
+<li>对现实世界进行建模，再将分析时发现的对象转化至设计中等等</li>
+</ul>
+<p>设计的许多对象来源于现实世界的分析模型，但是设计结果所得到的的类通常在现实世界中并不存在。设计模式帮助确定并不明显的抽象和描述这些抽象的对象。</p>
+<h2 id="决定对象的粒度"><a href="#决定对象的粒度" class="headerlink" title="决定对象的粒度"></a>决定对象的粒度</h2><p>对象在大小和数目上变化极大。它们能表示下自硬件，上自整个应用的任何事物，如何决定一个对象应该是什么呢？</p>
+<p>Facade描述了怎样用对象表示完整的子系统</p>
+<p>Flyweight描述了如何支持大量的最小粒度的对象</p>
+<p>visitor和command生成的对象专门负责实现对其他对象或对象组的请求</p>
+<h2 id="指定对象接口"><a href="#指定对象接口" class="headerlink" title="指定对象接口"></a>指定对象接口</h2><p>对象声明的每一个操作指定操作名、作为参数的对象和返回值，构成了操作的<strong>型构</strong>。对象操作所定义的所有操作型构的集合被称为该对象的接口。</p>
+<p>设计模式通过确定接口的主要组成成分以及经接口发送的数据类型，帮助定义接口。设计模式也指定了接口间的关系，如要求一些类具有相似的接口或对一些类的接口做了限制。</p>
+<h2 id="运用复用机制"><a href="#运用复用机制" class="headerlink" title="运用复用机制"></a>运用复用机制</h2><h3 id="继承和组合的比较"><a href="#继承和组合的比较" class="headerlink" title="继承和组合的比较"></a>继承和组合的比较</h3><p>复用最常用的技巧即继承与组合。</p>
+<ul>
+<li>继承允许根据其他类的实现来定义一个类的实现，这种通过生成子类的复用通常被称为<strong>白箱</strong>（父类的内部细节对子类可见）<strong>复用</strong><ul>
+<li>编译时静态定义，可直接使用。较方便地改变被复用的实现</li>
+<li>无法再运行时刻改变从父类继承的实现。父类至少定义了部分子类的具体表示，并且破坏了封装性。他们之间具有强依赖关系。一定程度上限制了灵活性与复用性</li>
+</ul>
+</li>
+<li>新的复杂功能通过组装或组合对象来获得，要求被组合的对象具有良好定义的接口。称为黑箱复用（内部不可见）<ul>
+<li>运行时刻动态确定。要求对象遵守彼此的接口约定，要求更仔细定义接口。通过接口访问，依赖关系较少。有助于保持每个类被封装</li>
+</ul>
+</li>
+</ul>
+<h3 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h3><p>委托是一种组合方法，<strong>使得组合具有与继承同样的复用能力。</strong>委托方式下，有两个对象参与处理一个请求，接受请求的对象将操作委托给它的<strong>代理者</strong>。</p>
+<p>即类似于子类将请求交给它的父类进行处理。在使用继承时，被继承的操作总能够引用接受请求的对象，则接受请求的对象将自己传给被委托者（<strong>代理者</strong>），使得被委托的操作可以引用接受请求的对象。</p>
+<p><strong><em>缺陷</em></strong></p>
+<ul>
+<li>动态的、高度参数化的软件比静态软件更难于理解。</li>
+<li>当委托使得设计比较简单而不是复杂时，才是更好地选择</li>
+</ul>
+<p><strong><em>设计模式</em></strong>：</p>
+<ul>
+<li>state，一个对象将请求委托给一个描述当前状态的state进行处理</li>
+<li>strategy，一个对象将一个特定的请求委托给一个描述请求执行策略的对象，一个对象只有一个状态，但对不同的请求是有很多策略</li>
+<li>visitor，对象结构的每个元素上的操作都总是被委托到visitor</li>
+</ul>
+<h2 id="关联运行时刻和编译时刻的结构"><a href="#关联运行时刻和编译时刻的结构" class="headerlink" title="关联运行时刻和编译时刻的结构"></a>关联运行时刻和编译时刻的结构</h2><p>代码结构在编译时刻就被确定下来了，它由继承关系固定的类组成。程序的运行时刻结构是由快速变化的通信对象组成。</p>
+<p> <strong>聚合</strong>意味着一个对象拥有另一个对象或对一个另对象负责，意味着聚合对象和其所有者具有相同的生命周期。<strong>关联</strong>意味着一个对象仅仅知道另一个对象，关联的对象可能请求彼此的操作，但是不为对方负责，表示较松散的耦合。</p>
+<h2 id="设计应支持变化"><a href="#设计应支持变化" class="headerlink" title="设计应支持变化"></a>设计应支持变化</h2><p>获得最大限度复用的关键在于对新需求和已有需求发生变化时的预见性，要求系统设计能够相应地改进。因此要考虑在系统的生命周期内会发生怎样的变化。</p>
+<p>设计模式可以确保系统能以特定方式变化，从而帮助避免重新设计系统，每一个设计模式允许系统结构的某个人方面的变化独立于其他方面</p>
+<h3 id="导致系统重新设计的一般原因"><a href="#导致系统重新设计的一般原因" class="headerlink" title="导致系统重新设计的一般原因"></a>导致系统重新设计的一般原因</h3><ul>
+<li><p>显式指定一个类来创建对象。</p>
+<ul>
+<li>在创建对象时指定类名将使得你受特定实现的约束而不是特定接口的约束，使得未来变化更复杂，应该间接创建对象</li>
+<li>factory、prototype</li>
+</ul>
+</li>
+<li><p>对特殊操作的依赖</p>
+<ul>
+<li>当为请求指定一个特殊的操作时，完成该请求的方式就固定下来了，为了避免将代码写死。你将可以在编译期或运行期很方便改变响应请求的方法</li>
+<li>chainof resposibility 、command</li>
+</ul>
+</li>
+<li><p>对硬件和软件平台的依赖</p>
+<ul>
+<li>外部的操作系统接口和API在不同的平台上是不同的，依赖于特定平台的软件将很难移植，因此设计系统时限制其平台相关性就很重要</li>
+<li>factory、bridge</li>
+</ul>
+</li>
+<li><p>对对象表示或实现的依赖</p>
+<ul>
+<li>知道对象怎样表示、保存、定位或实现的客户在对象发生变化时可能也需要变化。对客户隐藏这些信息能阻止连锁变化</li>
+<li>factory、bridge、memento、proxy</li>
+</ul>
+</li>
+<li><p>算法依赖</p>
+<ul>
+<li>算法在开发和复用时常常被扩展、优化、代替。依赖于某个特定算法的对象在算法发生变化时不得不变化。因此有可能发生变化的算法应该被孤立起来。</li>
+<li>Builder、Iterator、Starategy、Template Method、Visitor</li>
+</ul>
+</li>
+<li><p>紧耦合</p>
+<ul>
+<li>紧耦合的类很难独立地被复用，因为他们是相互依赖的。紧耦合产生的系统，要改变或删掉一个类必须理解    和改变其他很多类。这样系统很难维护。实现松耦合很必要</li>
+<li>factory、command、facade、mediator、observer、chain of responsibility</li>
+</ul>
+</li>
+<li><p>通过生成子类来扩展功能</p>
+<ul>
+<li>通常很难通过子类来定制对象，每一个新类都有固定的实现开销。定义子类需要对父类有深入的理解。重定义一个操作可能需要重定义其他操作，即使一个简单的扩充也不得不引入许多新的子类</li>
+<li>使用组合、委托是继承外的灵活方式。但是过多使用对象组合会使得设计难以理解。可以去定义一个子类，将它的实例和已经存在的实例进行组合来引进定制的功能</li>
+<li>bridge、chain of responsibility、composite、decorator、observer、strategy</li>
+</ul>
+</li>
+<li><p>不能方便地对类进行修改</p>
+<ul>
+<li>有时不得不改变一个难以修改的类，对于商业类库（没有源代码），或可能对类的任何修改会要求修改许多已经存在的其他子类。</li>
+<li>adapter、Decorator、Visitor</li>
+</ul>
+</li>
+</ul>
+<h1 id="如何选择设计模式"><a href="#如何选择设计模式" class="headerlink" title="如何选择设计模式"></a>如何选择设计模式</h1><h2 id="考虑设计模式是怎样解决问题的"><a href="#考虑设计模式是怎样解决问题的" class="headerlink" title="考虑设计模式是怎样解决问题的"></a>考虑设计模式是怎样解决问题的</h2><p>从上一节：设计模式怎样解决设计问题研究</p>
+<h2 id="浏览模式的意图部分"><a href="#浏览模式的意图部分" class="headerlink" title="浏览模式的意图部分"></a>浏览模式的意图部分</h2><ul>
+<li>目的准则，即模式用来完成什么工作<ul>
+<li>创建型模式与对象创建有关</li>
+<li>结构型模式处理类或对象的组合</li>
+<li>行为型模式对类或对象怎么样交互和怎样分配职责进行描述</li>
+</ul>
+</li>
+<li>范围准则，指定模式主要是用于类还是用于对象。<ul>
+<li>类模式处理类和子类间的关系，通过继承建立，是静态的，编译期确定</li>
+<li>对象模式处理对象间关系，是动态的。</li>
+<li>创建型类模式将对象的部分创建工作延迟到子类</li>
+<li>创建型对象模式将它延迟到另一个对象中</li>
+<li>结构型类模式使用继承机制来组合类</li>
+<li>结构型对象模式描述了对象的组装方式</li>
+<li>行为型类模式使用继承描述算法和控制流</li>
+<li>行为型对象模式描述一组对象怎样协作完成单个对象无法完成的任务</li>
+</ul>
+</li>
+</ul>
+<h2 id="研究模式怎样相互关联"><a href="#研究模式怎样相互关联" class="headerlink" title="研究模式怎样相互关联"></a>研究模式怎样相互关联</h2><p>研究以获得合适的模式或模式组</p>
+<p><img src="assets/1562807738415.png" alt="1562807738415"></p>
+<h2 id="研究目的相似的模式"><a href="#研究目的相似的模式" class="headerlink" title="研究目的相似的模式"></a>研究目的相似的模式</h2><p>创建型、行为型、结构型模式</p>
+<h2 id="检查重新设计的原因"><a href="#检查重新设计的原因" class="headerlink" title="检查重新设计的原因"></a>检查重新设计的原因</h2><p>从<strong>设计应当支持变化</strong>研究引起重新设计的原因，再观察问题是否与它们有关，然后再找出哪些模式可以帮助避免这些会导致重新设计的因素</p>
+<h2 id="考虑设计中哪些是可变的"><a href="#考虑设计中哪些是可变的" class="headerlink" title="考虑设计中哪些是可变的"></a>考虑设计中哪些是可变的</h2><ul>
+<li>考虑想要什么变化却又不会引起重新设计，即封装变化的概念。</li>
+<li>下表是设计模式允许独立变化的方面，改变它们而不会导致需要重新设计。</li>
+</ul>
+<p><img src="assets/1563073963354.png" alt="1563073963354"></p>
+<h1 id="怎样使用设计模式"><a href="#怎样使用设计模式" class="headerlink" title="怎样使用设计模式"></a>怎样使用设计模式</h1><ul>
+<li>大致浏览一遍模式。特别注意其适用性部分和效果部分，确定适合你的问题</li>
+<li>研究结构部分、参与者部分和协作部分。确保理解这个模式的类和对象以及它们是怎样关联的</li>
+<li>看代码示例部分。看模式代码如何具体实现</li>
+<li>选择模式参与者的名字。使他们在应用上下文当中有意义。并且将模式作为后缀是有意义的</li>
+<li>定义类。声明他们的接口，建立继承关系，定义代表数据和对象引用的实例变量</li>
+<li>定义模式中专用于应用的操作名称。</li>
+<li>实现执行模式中的责任和协作的操作。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/14/Java/设计模式/设计模式：中介者模式/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -1746,24 +1208,15 @@
   
   </article>
 
-
     
       
-
-  
-
-  
-  
-  
-
-  
 
   <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/Java/设计模式/设计模式：备忘录模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/OS/计算机操作系统：概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -1774,65 +1227,96 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Hexo">
     </span>
-
-    
       <header class="post-header">
 
         
-        
-          <h2 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/14/Java/设计模式/设计模式：备忘录模式/" itemprop="url">
-                  设计模式：备忘录模式
-                </a>
+                
+                <a href="/2019/07/10/OS/计算机操作系统：概述/" class="post-title-link" itemprop="url">计算机操作系统：概述</a>
               
             
-          </h2>
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-14 18:57:30" itemprop="dateCreated datePublished" datetime="2019-07-14T18:57:30+08:00">2019-07-14</time>
-            
-
-            
-          </span>
-
-          
-
+              <time title="Creado por: 2019-07-10 07:41:46" itemprop="dateCreated datePublished" datetime="2019-07-10T07:41:46+08:00">2019-07-10</time>
+            </span>
           
             
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-29 10:16:58" itemprop="dateModified" datetime="2019-07-29T10:16:58+08:00">2019-07-29</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
+            <span id="/2019/07/10/OS/计算机操作系统：概述/" class="post-meta-item leancloud_visitors" data-flag-title="计算机操作系统：概述">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
-
-          
-
-          
-
-          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/10/OS/计算机操作系统：概述/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/10/OS/计算机操作系统：概述/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
 
         </div>
       </header>
-    
 
     
     
@@ -1840,50 +1324,190 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        
           
-          参考
+            <h1 id="OS引论"><a href="#OS引论" class="headerlink" title="OS引论"></a>OS引论</h1><p>操作系统的任务是为用户程序提供一个更好、更简单、更清晰的计算机模型，并管理计算机的所有设备（1到多个处理器、主存、磁盘、打印机、键盘、鼠标、显示器、网络接口以及其他输入输出设备）。</p>
+<p><img src="/../OS/assets/1562715920671.png" alt></p>
+<p>多数计算机拥有两种运行模式：<strong>内核态和用户态</strong>。软件中最基础的部分为操作系统，运行在内核态，为所有其他软件提供基础的运行环境。</p>
+<p>在这个模式中，操作系统具有对所有硬件的完全访问权，可以直行机器能够运行的任何指令。而软件的其余部分运行在用户态，只使用了机器指令的一个子集，特别是与IO操作与影响机器的控制的指令，在用户态当中是禁止的。</p>
+<p>但是有时在嵌入式系统(无内核态)或<strong>解释系统（JVM，采用解释方式而不是硬件方式区分组件）</strong>当中上述区别是模糊的</p>
+<h1 id="什么是操作系统"><a href="#什么是操作系统" class="headerlink" title="什么是操作系统"></a>什么是操作系统</h1><p>操作系统比较难给出准确定义。原因有</p>
+<ul>
+<li>为应用程序提供一个资源集的清晰抽象，并管理这些硬件资源，而不仅仅是一堆硬件</li>
+<li>取决于从什么角度看待操作系统</li>
+</ul>
+<h2 id="作为扩展机器的操作系统"><a href="#作为扩展机器的操作系统" class="headerlink" title="作为扩展机器的操作系统"></a>作为扩展机器的操作系统</h2><p>把操作系统看作是向应用程序提供基本抽象的概念，是一种自顶向下的观点。</p>
+<p><strong><em>背景</em></strong></p>
+<p>在语言层面上，计算机的体系结构（指令集、存储组织、IO、总线结构）是相当原始的，并且编程很困难，尤其是对IO操作而言。硬盘接口的书籍页数超过450页，并且改动较为频繁。</p>
+<p>因此程序员使用硬盘驱动进行交互，提供接口，并且不用深入细节。驱动相对还是较为底层，因此使用又一层抽象即<strong>文件</strong>。使用该抽象程序能够创建、读写文件，而不用处理硬件实际工作中的恼人细节。</p>
+<p><strong><em>操作系统的任务</em></strong></p>
+<p>操作系统的任务是<strong>创建好的抽象</strong>，并实现和管理它所创建的抽象对象。对于真实的硬件，其设计非常复杂，操作系统的一个主要任务是<strong>隐藏硬件</strong>，呈现给程序良好、清晰、优雅、一致的抽象。</p>
+<h2 id="作为资源管理者的操作系统"><a href="#作为资源管理者的操作系统" class="headerlink" title="作为资源管理者的操作系统"></a>作为资源管理者的操作系统</h2><p>操作系统用来管理一个复杂系统的的各个部分，包含CPU、存储器、时钟、磁盘、鼠标、IO、打印机等，操作系统的任务是在相互竞争的程序中有序地控制对处理器、存储器等的分配。</p>
+<p><strong><em>并发问题</em></strong></p>
+<p>现代操作系统允许同时在内存当中运行多道程序，假设在一台计算机上运行的三个程序试图同时在同一台打印机上输出结果，那么开始几行可能是程序1的输出，后面是程序2，之后又是程序1、程序3等。即没有一个程序可以完整的进行输出，因此最终的结果将是一团糟。</p>
+<p>采用缓冲区的方式，操作系统可以将打印结果送到缓冲区当中，在程序结束后，将暂存在磁盘上的文件送到打印机输出，同时其他程序可以继续输出结果。</p>
+<p><strong><em>多用户</em></strong></p>
+<p>当计算机或网络具有多个用户时，管理和保护存储器、IO设备等需求较为强烈。用户间会互相干扰，他们共享硬件，还要共享文件、数据库等数据。因此认为数据库的主要任务是记录那个程序在使用什么资源，对资源请求进行分配，评估使用代价，并且为不同的程序和用户调解互相冲突的资源请求。</p>
+<p><strong>时间复用</strong></p>
+<p>不同的程序或用户轮流使用，操作系统控制谁应该下一个使用并且使用多长时间。</p>
+<p><strong>空间复用</strong></p>
+<p>每个客户都得到资源的一部分，在若干运行程序间分割内存，这样每一个运行程序都可以同时入驻内存。若干用户分配磁盘空间，每一个用户使用一定的磁盘块等。</p>
+<p>如此做法会引起公平、保护等问题，有赖于操作系统进行解决</p>
+<h1 id="计算机硬件简介"><a href="#计算机硬件简介" class="headerlink" title="计算机硬件简介"></a>计算机硬件简介</h1><p>简单的个人计算机可以抽象为如下图模型，CPU、内存以及IO设备都由一条系统总线连接起来并通过总线与其他设备通信。</p>
+<p><img src="/../OS/assets/1563203320169.png" alt="1563203320169"></p>
+<p>现代计算机结构更为复杂，包含多重总线等</p>
+<h2 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h2><p><strong><em>最初CPU的执行过程</em></strong></p>
+<p>首先从内存中取出指令，解码以确定其类型和操作数，之后执行，然后取值、解码并执行下一条指令。直到程序被执行完成</p>
+<p><strong><em>CPU构成</em></strong></p>
+<ul>
+<li>CPU指令集。每个CPU都有一套可执行的专门指令集，因此x86CPU不能执行ARM程序。</li>
+<li>寄存器。<ul>
+<li>保存变量与临时结果的寄存器。由于用来访问内存以得到指令或数据的时间比执行指令要花费的时间长的多，因此CPU内有一部分用来保存关键变量或临时数据的寄存器。</li>
+<li>对程序员可见的寄存器<ul>
+<li>程序计数器。保存了将要取出的下一条指令的内存地址，在指令取出后，程序计数器被更新以便指向后继的指针</li>
+<li>堆栈指针。指向内存中当前栈的顶端，该栈包含了每个执行过程的栈帧。</li>
+<li>程序状态字PSW寄存器。包含了条件码位、CPU优先级、模式（用户态或内核态）、以及各控制位。用户程序通常读入整个PSW，但是只是对很少字段写入，在系统调用和IO中PSW很重要。</li>
+</ul>
+</li>
+<li>在时间多路复用CPU中，OS会经常终止正在运行中的某程序并启动另一个程序，此时OS必须保存所有的寄存器值，并在之后该程序再次运行时，将寄存器重新装入</li>
+</ul>
+</li>
+</ul>
+<h3 id="CPU流水线模型"><a href="#CPU流水线模型" class="headerlink" title="CPU流水线模型"></a>CPU流水线模型</h3><p>为了改善性能，当代CPU具有同时取出多条指令的机制。如一个CPU可以具有单独的取值单元、解码单元和执行单元，因此当它执行指令n时，还可以对指令n+1解码，并且读取指令n+2。这样的机制称为<strong>流水线</strong>。并且其长度不仅仅只是三个阶段</p>
+<p>在大多数流水线机制当中，一旦一条指令被取进流水线当中，则必须被执行完毕，即使前一条取出的指令是条件转移（以标志位的状态或者以标志位的逻辑运算结果作为转移依据，如果满足转移条件，则转到目标地址所指示的指令执行否则继续执行下一条指令）。这使得编译器与操作系统的编写很困难，造成了软件的复杂性问题。</p>
+<h3 id="超标量CPU模型"><a href="#超标量CPU模型" class="headerlink" title="超标量CPU模型"></a>超标量CPU模型</h3><p>有多个执行单元，如一个CPU用于整形运算，一个用于浮点型，一个用于Boolean。两个或更多个指令被同时去除、解码并装入暂存缓冲区中，直至它们执行完毕，只要有一个执行单元空闲，则检查保持缓冲区是否还要可以处理的指令，若有则将指令移出并执行。</p>
+<p>这种设计使得程序的指令经常不按顺序执行，多数情况下硬件负责保证这种运算的结果与顺序执行的结果相同，但仍有复杂情况需要OS处理</p>
+<p><img src="/1563204754379.png" alt="1563204754379"></p>
+<h3 id="内核态与用户态"><a href="#内核态与用户态" class="headerlink" title="内核态与用户态"></a>内核态与用户态</h3><p>在PSW中有一个二进制位控制这两种模式。</p>
+<ul>
+<li>当在内核态运行时，CPU可以执行指令集中的每一条指令，并使用硬件的每种功能。</li>
+<li>用户程序在用户态下运行，仅允许执行整个指令集的一个子集和访问所有功能的一个子集。</li>
+</ul>
+<p>为了从OS获取服务，用户程序必须使用系统调用以陷入内核并调用OS，TRAP指令把用户态切换成内核态并启用OS，当调用完成后，将控制权返回个iyonghu程序。</p>
+<p>计算机使用陷阱（陷入内核态）而不是一条指令来执行系统调用，其他的多数陷阱是由硬件引起用于警告异常情况。如出错、index为0等。</p>
+<h3 id="多线程和多核芯片"><a href="#多线程和多核芯片" class="headerlink" title="多线程和多核芯片"></a>多线程和多核芯片</h3><p>之前仅仅是有多个功能部件，而现在出现多个控制逻辑</p>
+<p><strong><em>多线程</em></strong>允许CPU保持两个不同的线程状态，然后在纳秒级的时间尺度内来回切换。若某个进程需要从内存中读取一个字（需要多个时钟周期），则多线程CPU可以切换至另一个线程。<strong>多线程CPU不提供真正的并行处理，在一个时刻只有一个进程在运行</strong>，但进程的切换时间减少到纳秒级。</p>
+<p>多线程对于操作系统而言，每个线程都像一个单独的CPU，若是有两个双线程的CPU即像是有4个CPU一样。</p>
+<p><strong><em>多核</em></strong>CPU，即包含2个或4个完整处理器或内核的CPU芯片，每个小芯片都是一个独立的CPU</p>
+<p><img src="/../OS/assets/1563242246843.png" alt="1563242246843"></p>
+<h3 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h3><p>GPU是由成千上万个微核组成的处理器，擅长处理大量并行的简单计算，如渲染等。但他们不太能胜任串行任务，并且很难编程。</p>
+<h2 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h2><p>存储器应该极为迅速（快于执行任何指令，CPU就不会受到存储器限制）、充分大、非常便宜。但是由于无法满足该目标因此出现了分层结构</p>
+<p><img src="/../OS/assets/1563242514123.png" alt="1563242514123"></p>
+<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>寄存器的速度与CPU一样快，访问他们是没有试验的。典型的存储容量在32位CPU中为32*32，在64位CPU是64 *64，即小于1KB，程序必须在软件自行管理这些寄存器</p>
+<h3 id="高速缓存"><a href="#高速缓存" class="headerlink" title="高速缓存"></a>高速缓存</h3><p>多数由硬件控制，主存被分割成高速缓存行，典型大小为64字节，地址0-63对应高速缓存行0，64-127对应高速缓存行1，以此类推。最常用的高速缓存行放在CPU内部或非常接近CPU的高速缓存当中。</p>
+<p><strong>高速缓存命中</strong>：当某个程序在读取一个存储字时，高速缓存硬件检查所需要的高速缓存行是否在高速缓存中，如果是，则高速缓存命中。即不需要通过总线将请求送往主存。</p>
+<p><strong><em>CPU缓存</em></strong></p>
+<ul>
+<li>L1缓存，总是在CPU当中，通常用来将已解码的指令调入CPU的执行引擎，访问不存在延时</li>
+<li>L2缓存，存放近来使用过的若干兆字节的内存字。L1与L2的差别在于时序，L2访问延时1或2个时钟周期</li>
+</ul>
+<p>对于多核芯片，设计师必须确定缓存的位置。</p>
+<ul>
+<li>Intel芯片中一个L2缓存被所有CPU共享。因此Intel需要一个更复杂的缓存控制器</li>
+<li>AMD芯片中，每个核具有自己的L2缓存。因此在保持L2缓存一致性上存在困难</li>
+</ul>
+<p>分级高速缓存：将高速缓存分成二到三级，如L1与L2就是两级</p>
+<p><strong><em>缓存需要考虑</em></strong></p>
+<ul>
+<li>何时把一个新的内容放入缓存当中</li>
+<li>把新内容放在缓存的哪一行上</li>
+<li>在需要时，应该把哪个内容从缓存中移走</li>
+<li>应该把新移走的内容放在某个较大存储器的何处</li>
+</ul>
+<h3 id="主存"><a href="#主存" class="headerlink" title="主存"></a>主存</h3><p>主存即随机访问存储器（RAM），</p>
+<p>除了主存，计算机已经在使用少量的非易失性随机访问存储器（ROM，只读存储器），电源切断后，其内容也不会丢失</p>
+<h2 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h2><p>磁盘是一种机械装置，因此其随机访问数据时间大约慢了三个数量级。</p>
+<p>磁盘中有一个或多个金属片，以某个转速进行旋转。边缘处有一个机械臂悬横在盘面上，信息写在磁盘一系列的同心圆上。<strong>磁道</strong>：在任意一个给定臂的位置，每个磁头可以读取一段环形区域。<strong>柱面</strong>：把一个给定臂的位置上的所有磁道合并起来。</p>
+<p><img src="/../OS/assets/1563292000029.png" alt="1563292000029"></p>
+<p><strong><em>固态硬盘</em></strong></p>
+<p>并没有可以移动的部分，外形也不会像唱片一样，并且数据是存储在存储器（闪存）中的</p>
+<p><strong><em>虚拟内存与上下文切换</em></strong></p>
+<p>将程序放在磁盘上，将主存作为缓存的一部分，用来保存最频繁使用的部分程序。这种机制需要快速地映像内存地址。这种映像由CPU中的一个<strong>MMU（存储器管理单元）</strong>完成</p>
+<p>MMU与缓存对系统性能有重要影响，从一个程序切换到另一个程序时，有必要对来自缓存行的所有修改过的块进行写回磁盘操作，并修改MMU中的映像寄存器。这些操作的代价十分昂贵</p>
+<h2 id="IO设备"><a href="#IO设备" class="headerlink" title="IO设备"></a>IO设备</h2><p>IO设备一般包括两个部分：设备控制器与设备本身。</p>
+<p>控制器是插在电路板上的一块或一组芯片，从操作系统接收命令。对于设备的控制是非常复杂和具体的，控制器的任务是为操作系统提供一个简单的接口。</p>
+<p>IO设备的设备本身有一个相对简单的接口，接口既不能做很多工作，又已经被标准化了，如任何一个SATA磁盘控制器都可以适配任何一种的SATA磁盘。</p>
+<h3 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h3><p>操作系统看到的是对控制器的接口，因为每类设备控制器都是不同的，因此需要不同的软件进行控制。专门与控制器对话，发出命令并接收响应的软件称为设备驱动程序。</p>
+<p>为使用设备驱动程序，必须将其装入操作系统当中，它可以在核心态或用户态运行，但若是在用户态运行则必须能够以某种受控的方式访问设备。</p>
+<h3 id="输入-输出的三种方式"><a href="#输入-输出的三种方式" class="headerlink" title="输入/输出的三种方式"></a>输入/输出的三种方式</h3><p><strong><em>忙等待</em></strong></p>
+<ul>
+<li>用户程序发出一个系统调用，内核将其翻译成一个对应设备驱动程序的过程调用</li>
+<li>然后设备驱动程序启动IO并在一个连续不断的循环中检查该设备，查看该设备是否完成了工作。</li>
+<li>当IO结束后，设备驱动程序将数据送到指定的地方并返回。OS将控制权返回给调用者</li>
+<li><strong>缺陷</strong>：占据CPU，CPU需要一直轮询设备直到IO完成</li>
+</ul>
+<p><strong><em>中断通知</em></strong></p>
+<ul>
+<li>设备驱动程序启动设备，并且让该设备在操作完成时发出一个中断，设备驱动程序在此时返回。</li>
+<li>操作系统之后在需要时阻塞调用者并安排其他工作进行，当设备驱动程序检测到操作完毕时，发出一个中断通知操作完成。</li>
+</ul>
+<p><strong>示例</strong></p>
+<ul>
+<li>设备驱动程序通过写设备寄存器通知设备控制器做什么，然后设备控制器启动该设备，当设备控制器传送完毕给告知要进行读取的字节数量后</li>
+<li>使用特定的总线发信号给中断控制器芯片，如果中断控制器准备接收中断（或正忙于一个更高级的中断，或不接收）<ul>
+<li>中断经常会在非常不合适的时间发生，如在另一个中断正在运行时。因此CPU有办法关闭中断并稍后再次开启</li>
+<li>中断关闭时，任何已经发出中断的设备可以继续保持中断信号，但CPU不会中断。</li>
+<li>在关闭中断时，中断控制器将决定先处理哪一个中断，这取决于优先级</li>
+</ul>
+</li>
+<li>中断控制器在CPU芯片的一个管脚上声明</li>
+<li>中断控制器将设备的编号放到总线上，CPU读取总线，并知道哪个设备刚刚完成了操作。</li>
+</ul>
+<p><img src="/../OS/assets/1563326416941.png" alt="1563326416941"></p>
+<ul>
+<li>当CPU决定中断，程序计数器和PSW就被压入了当前堆栈。CPU切换到用户态。设备编号可以成为部分内存的一个引用，用于寻找该设备中断处理程序的地址，这部分内存称为<strong>中断向量</strong></li>
+<li>当中断处理程序开始后（中断设备），取走程序计数器和PSW并保存，查询设备状态，在中断全部完成后，返回到先前执行的用户程序中尚未执行的第一条指令、</li>
+</ul>
+<p><img src="/../OS/assets/1563326651263.png" alt="1563326651263"></p>
+<p><strong><em>直接存储器访问芯片</em></strong></p>
+<p>为IO使用直接存储器访问芯片（<strong>DMA</strong>），它可以控制在内存和某些控制器间的位流，无需持续CPU干预。CPU对DMA设置，说明需要传送的字节数、有关设备、内存地址、操作方向，启动DMA，当DMA完成后发送中断。</p>
+<h2 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h2><p>随着计算机的发展，单总线很难处理总线的交通流量，因此导致其他总线的出现，他们处理IO以及CPU到存储器的速度都更快</p>
+<p><img src="/../OS/assets/1563327260526.png" alt="1563327260526"></p>
+<p>包括有高速缓存、内存、PCIe、PCI、USB、SATA和DMI总线等。其中主要的总线是PCIe总线</p>
+<p><strong>共享总线架构</strong>、<strong>并行总线架构</strong>是PCIe之前的架构，即多个设备使用一些相同的导线传输数据，因此当多个设备需要同时发送数据时，需要仲裁器决定哪个设备使用。设备通过多条并行的导线发送s护具的每一个字，如32位数据需要32条并行导线发送</p>
+<p><strong>PCIe</strong>采用分离的端到端的链路，因此不需要仲裁。而且通过一条称为数据通路的链路传递集合了所有位的一条消息，如同网络包一样。</p>
+<p><strong>待续</strong></p>
+<h2 id="启动计算机"><a href="#启动计算机" class="headerlink" title="启动计算机"></a>启动计算机</h2><h1 id="操作系统概念"><a href="#操作系统概念" class="headerlink" title="操作系统概念"></a>操作系统概念</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程本质上是正在执行的一个程序，与每个进程相关的是地址空间（从某个最小值的存储位置到某个最大值的存储位置列表）。与进程相关的有进程<strong>地址空间</strong>，进程可以对其地址空间进行读写，该地址空间存放有可执行程序、程序的数据、堆栈。还有<strong>资源集</strong>，包括寄存器，打开文件的清单等等。即进程基本上是容纳运行一个程序所有信息的容器。</p>
+<p><strong><em>多道程序系统</em></strong></p>
+<ul>
+<li>操作系统会周期性地挂起一个进程然后启动运行另一个进程，可能原因是前一个进程已经用完分配给它的时间片。</li>
+<li>一个进程暂时被挂起后，在随后的某个时间，该进程再次启动时的状态必须与先前暂停时完全相同，即挂起时该进程的全部信息都要保存下来。<ul>
+<li>如打开的文件，与每个被打开文件有关的是指向当前位置的指针等</li>
+</ul>
+</li>
+<li>在许多OS当中，与一个进程有关的所有信息，除了该进程自身的地址空间的内容外均存放在OS的一张表中，称为<strong>进程表</strong>。</li>
+</ul>
+<p>一个（挂起的）进程包括：进程的地址空间、对应的进程表项</p>
+<h2 id="地址空间"><a href="#地址空间" class="headerlink" title="地址空间"></a>地址空间</h2><p>操作系统创建了一个地址空间的抽象，作为进程可以引用地址的集合，该地址空间与机器的物理内存解耦，可能大于（虚拟内存）物理空间。</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><h2 id="输入-输出"><a href="#输入-输出" class="headerlink" title="输入/输出"></a>输入/输出</h2><h2 id="保护"><a href="#保护" class="headerlink" title="保护"></a>保护</h2><h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><h2 id="个体重复系统发育"><a href="#个体重复系统发育" class="headerlink" title="个体重复系统发育"></a>个体重复系统发育</h2><h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p>任何单CPU系统一次只能执行一条指令，如果一个进程正在用户态运行一个用户程序，并且需要一个系统服务，则必须执行一次陷阱或系统调用指令，将控制返回给在系统调用后需要执行的指令。即类似于一个特殊的过程调用，但是系统调用是可以进入内核的</p>
+<p>考察read系统调用，如果系统调用不能执行，无论是因为无效的参数还是磁盘错误，结果都会是-1，而在全局变量errno中放入错误号，程序应该经常检查系统调用结果以了解是否出错。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read(fd,buffer,nbytes)</span><br></pre></td></tr></table></figure>
 
-
+<p>在执行read后，其具体步骤如下所示</p>
+<p><img src="/../OS/assets/1563377076693.png" alt="1563377076693"></p>
+<h2 id="用于进程管理的系统调用"><a href="#用于进程管理的系统调用" class="headerlink" title="用于进程管理的系统调用"></a>用于进程管理的系统调用</h2><h1 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h1><h2 id="单体系统"><a href="#单体系统" class="headerlink" title="单体系统"></a>单体系统</h2><p>在大多数常见的组织中，整个操作系统在内核态以单一程序的方式运行，以过程集合的方式编写，链接成一个大型可执行的二进制文件。</p>
+<h2 id="层次式系统"><a href="#层次式系统" class="headerlink" title="层次式系统"></a>层次式系统</h2><p>上层软件都是在下层软件的基础上构建的，系统分为六层。在第0层上，系统由一些连续的进程组成，编写这些进程时不需要考虑在单处理器上多进程运行的细节，即由第0层提供基本的CPU多道程序功能，以此类推</p>
+<p><img src="/../OS/assets/1563377402235.png" alt="1563377402235"></p>
+<h2 id="微内核"><a href="#微内核" class="headerlink" title="微内核"></a>微内核</h2><p>在分层方式中，设计者要确定在哪里划分内核-用户的边界。传统上所有的层都在内核中，而这样并没有必要，尽可能减少内核态中的功能会更好一些，因为内核态的错误会迅速拖累整个系统，相反可以将用户进程设置为具有较小的权限，则某个错误的后果就不会致命。</p>
+<p>微内核的思想是，为了实现高可靠性，将OS划分为小的、定义良好的模块，只有微内核（CPU中断处理、进程调度、进程通信等）运行在内核态，其他模块由于功能相对较弱作为普通的用户程序运行。<strong>因此一个错误虽然会使得程序崩溃，但不会使得系统死机</strong></p>
+<h2 id="CS模式"><a href="#CS模式" class="headerlink" title="CS模式"></a>CS模式</h2><p>微内核的略微变体，将进程划分为客户端-服务器，</p>
+<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><h2 id="外核"><a href="#外核" class="headerlink" title="外核"></a>外核</h2><p>与虚拟机克隆真实机器不同，另一种策略是对机器进行分区。即为每个用户提供整个资源的一个子集。</p>
+<p>在底层中，一种称为外核的程序在内核态运行，任务是为虚拟机分配资源，并检查使用这些资源的企图，以确保没有使用他人的资源。</p>
+<p>外核机制的优点是减少了映像层，即不需要像虚拟机将硬盘重新映射为0-xxx。只需要记录已经分配给虚拟机的相关资源即可。并且外核将多道程序与用户操作系统代码分离，而且相应负载并不重</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
 
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/14/Java/设计模式/设计模式：备忘录模式/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-
     
 
     <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
         <div class="post-eof"></div>
-      
     </footer>
   </div>
   
@@ -1891,22 +1515,775 @@
   
   </article>
 
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/版本控制/Git：操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/09/版本控制/Git：操作/" class="post-title-link" itemprop="url">Git：操作</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-07-09 13:50:01" itemprop="dateCreated datePublished" datetime="2019-07-09T13:50:01+08:00">2019-07-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-29 09:33:11" itemprop="dateModified" datetime="2019-07-29T09:33:11+08:00">2019-07-29</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本控制/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/07/09/版本控制/Git：操作/" class="post-meta-item leancloud_visitors" data-flag-title="Git：操作">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/09/版本控制/Git：操作/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/09/版本控制/Git：操作/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h1 id="Git工作流程"><a href="#Git工作流程" class="headerlink" title="Git工作流程"></a>Git工作流程</h1><p>一般工作流程如下：</p>
+<ul>
+<li>将Git的一个存储库克隆为工作副本。</li>
+<li>可以通过添加/编辑文件修改工作副本。</li>
+<li>如有必要，还可以通过让其他开发人员一起来更改/更新工作副本。</li>
+<li>在提交之前查看更改。</li>
+<li>提交更改：如果一切正常，那么将您的更改推送到存储库。</li>
+<li>提交后，如果意识到某些错误并修改错误后，则将最后一个正确的修改提交并将推送到存储库。</li>
+</ul>
+<p>下面显示的是工作流程的图示 - </p>
+<p><img src="assets/497150749_38351.png" alt="img"></p>
+<h2 id="gerrit"><a href="#gerrit" class="headerlink" title="gerrit"></a>gerrit</h2><h3 id="提交代码到Gerrit"><a href="#提交代码到Gerrit" class="headerlink" title="提交代码到Gerrit"></a>提交代码到Gerrit</h3><ol>
+<li><p>git stash。将自己的代码进行隐藏</p>
+</li>
+<li><p>git pull –rebase 拉取其他人的修改，进行合并最新的修改</p>
+</li>
+<li><p>git stash pop 将自己的代码合并进入最新的分支当中</p>
+</li>
+<li><p>若他人与自己修改了同一个文件则进行冲突解决</p>
+</li>
+<li><p>git add <file>     //需要提交的文件</file></p>
+</li>
+<li><p>git commit -m “注释”</p>
+</li>
+<li><p>git push origin HEAD:refs/for/&lt;分支名&gt;</p>
+</li>
+</ol>
+<h3 id="代码提交之后需要修改"><a href="#代码提交之后需要修改" class="headerlink" title="代码提交之后需要修改"></a>代码提交之后需要修改</h3><ol>
+<li><p>git stash</p>
+</li>
+<li><p>git pull –rebase</p>
+</li>
+<li><p>git stash pop</p>
+</li>
+<li><p>冲突解决</p>
+</li>
+<li><p>git add <file></file></p>
+</li>
+<li><p>git commit –amend</p>
+<ul>
+<li>vim操作退出</li>
+</ul>
+</li>
+<li><p>git push origin HEAD:refs/for/&lt;分支名&gt;</p>
+</li>
+<li><p>PS. 如果不使用amend会导致提交两个code review 到 gerrit上面 </p>
+</li>
+<li><p>如果提交了两次commit ，将gerrit上面的最新的一次提交abandon</p>
+</li>
+<li><p>同时本地执行 git log，git reset &lt;前一次提交的commit id&gt;</p>
+</li>
+<li><h3 id="reset之后再执行-5-开始的步骤"><a href="#reset之后再执行-5-开始的步骤" class="headerlink" title="reset之后再执行 5 开始的步骤"></a>reset之后再执行 5 开始的步骤</h3></li>
+</ol>
+<h1 id="查看更改git-log"><a href="#查看更改git-log" class="headerlink" title="查看更改git log"></a>查看更改git log</h1><p><strong><em>适用场景</em></strong></p>
+<ul>
+<li>查看git的历史提交<ul>
+<li>git log -n（查看前n条）</li>
+</ul>
+</li>
+<li>查看一次的详细提交<ul>
+<li>git show commitId</li>
+</ul>
+</li>
+</ul>
+<p>如何查看 Git 存储库的文件和提交记录，并对存储库中的文件作修改和提交。</p>
+<p>比如，我们查看提交详细信息后，需要修改代码，或添加更多的代码，或者对比提交结果。</p>
+<p>下面使用<code>git log</code>命令查看日志详细信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span></span></span><br></pre></td></tr></table></figure>
+
+<p>执行上面命令后，得到以下输出结果 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span></span></span><br><span class="line">commit be24e214620fa072efa877e1967571731c465884</span><br><span class="line">Author: your_name &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Fri Jul 7 18:58:16 2017 +0800</span><br><span class="line"></span><br><span class="line">    ？？mark</span><br><span class="line"></span><br><span class="line">commit 5eccf92e28eae94ec5fce7c687f6f92bf32a6a8d</span><br><span class="line">Author: your_name &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Fri Jul 7 18:52:06 2017 +0800</span><br><span class="line"></span><br><span class="line">    this is main.py file commit mark use -m option</span><br><span class="line"></span><br><span class="line">commit 6e5f31067466795c522b01692871f202c26ff948</span><br><span class="line">Author: your_name &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Fri Jul 7 18:42:43 2017 +0800</span><br><span class="line"></span><br><span class="line">    this is main.py file commit mark without use "-m" option</span><br><span class="line"></span><br><span class="line">commit 290342c270bc90f861ccc3d83afa920169e3b07e</span><br><span class="line">Author: Maxsu &lt;769728683@qq.com&gt;</span><br><span class="line">Date:   Fri Jul 7 16:55:12 2017 +0800</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>git show</code>命令查看某一次提交详细信息。 <code>git show</code>命令采用<strong>SHA-1</strong>提交ID作为参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git show be24e214620fa072efa877e1967571731c465884</span></span><br><span class="line">commit be24e214620fa072efa877e1967571731c465884</span><br><span class="line">Author: your_name &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Fri Jul 7 18:58:16 2017 +0800</span><br><span class="line"></span><br><span class="line">    ？？mark</span><br><span class="line"></span><br><span class="line">diff --git a/main.py b/main.py</span><br><span class="line">index 91a1389..657c8d0 100644</span><br><span class="line">--- a/main.py</span><br><span class="line">+++ b/main.py</span><br><span class="line">@@ -3,3 +3,5 @@</span><br><span class="line"></span><br><span class="line"> print ("Life is short, you need Python !")</span><br><span class="line"></span><br><span class="line">+# this is a comment line</span><br><span class="line">+</span><br></pre></td></tr></table></figure>
+
+<p>上面显示的结果中，可以看到符号 “<code>+</code>“ ，表示添加的内容。如果有 “<code>-</code>”则表示删除的内容，现在我们打开 <em>main.py</em> ，把注释行去掉并定义一个变量。修改后的 <em>main.py</em> 的内容如下所示 - </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Life is short, you need Python !"</span>)</span><br><span class="line">a = <span class="number">10</span></span><br><span class="line">b = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p>然后使用命令：<code>git stauts</code> 查看当前工作区状态 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is ahead of 'origin/master' by 3 commits.</span><br><span class="line">  (use "git push" to publish your local commits)</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   main.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br></pre></td></tr></table></figure>
+
+<p>测试代码后，通过运行<code>git diff</code>命令来回顾他的更改。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git diff</span></span><br><span class="line">diff --git a/main.py b/main.py</span><br><span class="line">index 95053b4..a4f953e 100644</span><br><span class="line">--- a/main.py</span><br><span class="line">+++ b/main.py</span><br><span class="line">@@ -4,4 +4,6 @@</span><br><span class="line"> print ("Life is short, you need Python !")</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-number = 100</span><br><span class="line">+a = 10</span><br><span class="line">+</span><br><span class="line">+b = 20</span><br></pre></td></tr></table></figure>
+
+<p>可以看到符号 “<code>+</code>“ (绿色)，表示添加的内容。如果有 “<code>-</code>”(红色)则表示删除的内容。执行的效果如下所示 - </p>
+<p><img src="assets/805110703_53359.png" alt="img"></p>
+<p>现在使用以下命令将文件：<em>main.py</em> 添加到 git 暂存区，然后提交代码完成 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git add main.py</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"define two var a &amp; b "</span></span></span><br></pre></td></tr></table></figure>
+
+<p>最近修改的代码已提交完成。</p>
+<h1 id="提交修改git-commit"><a href="#提交修改git-commit" class="headerlink" title="提交修改git commit"></a>提交修改git commit</h1><ul>
+<li>增补提交，会使用与当前提交节点相同的父节点进行一次新的提交，旧的提交将会被取消<ul>
+<li>git commit –amend </li>
+</ul>
+</li>
+</ul>
+<h2 id="合并commit"><a href="#合并commit" class="headerlink" title="合并commit"></a>合并commit</h2><ul>
+<li>要从HEAD版本呢开始合并过往的1-3条comit<ul>
+<li>git rebase -i HEAD~3(-i是指不需要合并的commit的hash值)</li>
+<li>或者是git rebase -i commitId</li>
+</ul>
+</li>
+</ul>
+<p>执行命令后会出现vim</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pick 3ca6ec3   '注释**********'</span><br><span class="line">pick 1b40566   '注释*********'</span><br><span class="line">pick 53f244a   '注释**********'</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>pick</code> 的意思是要会执行这个 commit</li>
+<li><code>squash(简写为s)</code> 的意思是这个 commit 会被合并到前一个commit，因此修改后两个的pick为s</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pick 3ca6ec3   '注释**********'</span><br><span class="line">s 1b40566   '注释*********'</span><br><span class="line">s 53f244a   '注释**********'</span><br></pre></td></tr></table></figure>
+
+<p>:wq保存退出，此时git会进行合并，并弹出提示信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a combination of 3 commits.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This is the 1st commit message:</span></span><br><span class="line">update3  </span><br><span class="line"><span class="meta">#</span><span class="bash"> This is the commit message <span class="comment">#2: </span></span></span><br><span class="line">update2  </span><br><span class="line"><span class="meta">#</span><span class="bash"> This is the commit message <span class="comment">#3: </span></span></span><br><span class="line">update1 </span><br><span class="line"><span class="meta">#</span><span class="bash"> Please enter the commit message <span class="keyword">for</span> your changes. Lines starting</span></span><br></pre></td></tr></table></figure>
+
+<p>修改我们最终需要的Commit msg。即改为,:wq保存退出</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a combination of 3 commits.</span></span><br><span class="line">合并提交的文本msg</span><br><span class="line"><span class="meta">#</span><span class="bash"> Please enter the commit message <span class="keyword">for</span> your changes. Lines starting</span></span><br></pre></td></tr></table></figure>
+
+<p>查看log则有</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commit 4a51759fae9bbd84904029473fe09f8a77f143ed</span><br><span class="line">Author: pan </span><br><span class="line">Date:   Sun Apr 22 08:54:55 2018 +0800    合并提交的文本msg</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong>：如果这个过程中有操作错误，可以使用 <code>git rebase --abort</code>来撤销修改，回到没有开始操作合并之前的状态。</p>
+<h1 id="推送操作git-push"><a href="#推送操作git-push" class="headerlink" title="推送操作git push"></a>推送操作git push</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
+
+<p>上述命令将产生以下结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br><span class="line">Username for 'http://git.oschina.net': 76972883@qq.com &lt;输入帐号&gt;</span><br><span class="line">Password for 'http://76972883@qq.com@git.oschina.net': &lt;输入登录密码&gt;</span><br><span class="line">Counting objects: 13, done.</span><br><span class="line">Delta compression using up to 4 threads.</span><br><span class="line">Compressing objects: 100% (12/12), done.</span><br><span class="line">Writing objects: 100% (12/12), 1.20 KiB | 0 bytes/s, done.</span><br><span class="line">Total 12 (delta 3), reused 0 (delta 0)</span><br><span class="line">To http://git.oschina.net/yiibai/sample.git</span><br><span class="line">   290342c..51de0f0  master -&gt; master</span><br></pre></td></tr></table></figure>
+
+<h1 id="隐藏操作Git-Stash"><a href="#隐藏操作Git-Stash" class="headerlink" title="隐藏操作Git Stash"></a>隐藏操作Git Stash</h1><h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>假设您正在为产品新的功能编写/实现代码，当正在编写代码时，突然出现软件客户端升级。这时，您必须将新编写的功能代码保留几个小时然后去处理升级的问题。在这段时间内不能提交代码，也不能丢弃您的代码更改。 所以需要一些临时等待一段时间，您可以存储部分更改，然后再提交它。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在Git中，隐藏操作将使您能够修改跟踪文件，阶段更改，并将其保存在一系列未完成的更改中，并可以随时重新应用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   main.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br></pre></td></tr></table></figure>
+
+<p>现在，要切换分支以进行客户升级，但不想提交一直在做的工作; 那么可以把当前工作的改变隐藏起来。 要将一个新的存根推到堆栈上，运行<code>git stash</code>命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git stash</span></span><br><span class="line">Saved working directory and index state WIP on master: ef07ab5 synchronized with the remote repository</span><br><span class="line">HEAD is now at ef07ab5 synchronized with the remote repository</span><br></pre></td></tr></table></figure>
+
+<p>现在，工作目录是干净的，所有更改都保存在堆栈中。 现在使用<code>git status</code>命令来查看当前工作区状态。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<p>现在，可以安全地切换分支并在其他地方工作。通过使用<code>git stash list</code>命令来查看已存在更改的列表。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git stash list</span></span><br><span class="line">stash@&#123;0&#125;: WIP on master: ef07ab5 synchronized with the remote repository</span><br></pre></td></tr></table></figure>
+
+<p>假设您已经解决了客户升级问题，想要重新开始新的功能的代码编写，查找上次没有写完成的代码，只需执行<code>git stash pop</code>命令即可从堆栈中删除更改并将其放置在当前工作目录中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status -s</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"></span><br><span class="line">[jerry@CentOS project]$ git stash pop</span><br></pre></td></tr></table></figure>
+
+<p>上述命令将产生以下结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git stash pop</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   main.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br><span class="line">Dropped refs/stash@&#123;0&#125; (e713780380632c142ed5833a9087aca883a826fa)</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   main.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，工作区中修改的文件(<code>main.py</code>)又显示了。现在我们就可以继续编写上次编写了未完成的代码。</p>
+<h1 id="修正错误"><a href="#修正错误" class="headerlink" title="修正错误"></a>修正错误</h1><h2 id="撤销暂存"><a href="#撤销暂存" class="headerlink" title="撤销暂存"></a>撤销暂存</h2><p><strong><em>适用场景</em></strong></p>
+<ul>
+<li>当我们将不想暂存的文件被git add到了索引后，想要回退取消<ul>
+<li>git reset HEAD &lt;file&gt;</li>
+</ul>
+</li>
+</ul>
+<h2 id="恢复未提交的更改git-checkout"><a href="#恢复未提交的更改git-checkout" class="headerlink" title="恢复未提交的更改git checkout"></a>恢复未提交的更改git checkout</h2><p><strong><em>适用场景</em></strong></p>
+<ul>
+<li>假设我们不小心修改（删除）了本地存储库中的一个文件，此时想撤销这些修改<ul>
+<li>为了处理这种情况，我们可以使用<code>git checkout</code>命令。可以使用此命令来还原文件的内容。</li>
+</ul>
+</li>
+</ul>
+<p>为了更好的演示，我们首先在 <code>sample/src</code> 目录下创建一个文件：<em>string.py</em> ，其代码如下所示 - </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line">var1 = <span class="string">'Hello World!'</span></span><br><span class="line">var2 = <span class="string">"Python Programming"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"var1[0]: "</span>, var1[<span class="number">0</span>])</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"var2[1:5]: "</span>, var2[<span class="number">1</span>:<span class="number">5</span>]) <span class="comment"># 切片加索引</span></span><br></pre></td></tr></table></figure>
+
+<p>并使用以下命令将此文件推送到远程存储库 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/D/worksp/sample</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git add src/</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use "git reset HEAD &lt;file&gt;..." to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   src/string.py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git add src/string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"add new file string.py"</span></span></span><br><span class="line">[master 44ea8e4] add new file string.py</span><br><span class="line"> 1 file changed, 7 insertions(+)</span><br><span class="line"> create mode 100644 src/string.py</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br><span class="line">Username for 'http://git.oschina.net': 769728683@qq.com</span><br><span class="line">Password for 'http://769728683@qq.com@git.oschina.net':</span><br><span class="line">Counting objects: 5, done.</span><br><span class="line">Delta compression using up to 4 threads.</span><br><span class="line">Compressing objects: 100% (3/3), done.</span><br><span class="line">Writing objects: 100% (4/4), 443 bytes | 0 bytes/s, done.</span><br><span class="line">Total 4 (delta 0), reused 0 (delta 0)</span><br></pre></td></tr></table></figure>
+
+<p>现在，已经将<em>string.py</em>添加到远程存储库中了。</p>
+<p>假设我们不小心/或者有心修改了本地存储库中的一个文件。但现在不想要这些修改的内容了，也就是说想要撤销修改。要处理这种情况，那么可以使用<code>git checkout</code>命令。可以使用此命令来还原文件的内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/D/worksp/sample</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   src/string.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout src/string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<p>此外，还可以使用<code>git checkout</code>命令从本地存储库获取已删除的文件。假设我们从本地存储库中删除一个文件，我们想要恢复这个文件。那么可以通过使用<code>git checkout</code>命令来实现这一点。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br><span class="line">total 1</span><br><span class="line">-rw-r--r--    1 Administ Administ       57 Jul  7 05:37 README.md</span><br><span class="line">drwxr-xr-x    1 Administ Administ        0 Jul 10 21:16 src</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> src/</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br><span class="line">total 1</span><br><span class="line">-rwxr-xr-x    1 Administ Administ      156 Jul 10 21:16 string.py</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> rm string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br><span class="line">total 0</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status -s</span></span><br><span class="line"> D string.py</span><br></pre></td></tr></table></figure>
+
+<p>Git在文件名前显示字母<code>D</code>， 这表示该文件已从本地存储库中删除。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br><span class="line">total 1</span><br><span class="line">-rwxr-xr-x    1 Administ Administ      156 Jul 10 21:24 string.py</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：可以在提交操作之前执行这些操作。</p>
+</blockquote>
+<h2 id="用Git复位移动头指针（即回滚）"><a href="#用Git复位移动头指针（即回滚）" class="headerlink" title="用Git复位移动头指针（即回滚）"></a>用Git复位移动头指针（即回滚）</h2><p><strong><em>适用场景</em></strong></p>
+<ul>
+<li>当经过更改，并且执行commit后，并且决定删除更改，回退到之前的某个commit。<ul>
+<li>git reset –hard commitId</li>
+</ul>
+</li>
+<li>当代码提交了之后发现没有提交完整，或者想要重新编辑一下提交的信息<ul>
+<li>git reset –soft HEAD^。即重置HEAD指针，但不改变文件。</li>
+</ul>
+</li>
+</ul>
+<p>经过少量更改后，可以决定删除这些更改。 <code>git reset</code>命令用于复位或恢复更改。 我们可以执行三种不同类型的复位操作。</p>
+<p>下图显示了<code>git reset</code>命令的图示。</p>
+<p><code>git reset</code>命令之前 - </p>
+<p><img src="assets/138100701_61893.png" alt="img"></p>
+<p><code>git reset</code>命令之后 - </p>
+<p><img src="assets/662100700_44490.png" alt="img"></p>
+<p><strong>—soft选项</strong></p>
+<p>每个分支都有一个<code>HEAD</code>指针，它指向最新的提交。 如果用<code>--soft</code>选项后跟提交ID的<code>Git reset</code>命令，那么它将仅重置<code>HEAD</code>指针而不会破坏任何东西。</p>
+<p><code>.git/refs/heads/master</code>文件存储<code>HEAD</code>指针的提交ID。 可使用<code>git log -1</code>命令验证它。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/D/worksp/sample</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> cat .git/refs/heads/master</span></span><br><span class="line">44ea8e47307b47c9a80b44360e09f973e79312b0</span><br></pre></td></tr></table></figure>
+
+<p>现在，查看最新前两个的提交ID，最近一次ID将与上述提交ID一致。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -2</span></span><br><span class="line">commit 44ea8e47307b47c9a80b44360e09f973e79312b0</span><br><span class="line">Author: maxsu &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Mon Jul 10 21:09:35 2017 +0800</span><br><span class="line"></span><br><span class="line">    add new file string.py</span><br><span class="line"></span><br><span class="line">commit 7d8162db36723b8523c56ad658a07808ae7fb64c</span><br><span class="line">Author: minsu &lt;minsu@yiibai.com&gt;</span><br><span class="line">Date:   Mon Jul 10 17:51:11 2017 -0700</span><br><span class="line"></span><br><span class="line">    remove/delete module.py</span><br></pre></td></tr></table></figure>
+
+<p>下面我们重置<code>HEAD</code>指针。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset -soft 7d8162db36723b8523c56ad658a07808ae7fb64c</span><br></pre></td></tr></table></figure>
+
+<p>现在，只需将HEAD指针重新设置一个位置。现在查看<code>.git/refs/heads/master</code>文件的内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> cat .git/refs/heads/master</span></span><br><span class="line">7d8162db36723b8523c56ad658a07808ae7fb64c</span><br></pre></td></tr></table></figure>
+
+<p>来自文件的提交ID已更改，现在通过查看提交消息进行验证。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -2</span></span><br><span class="line">commit 7d8162db36723b8523c56ad658a07808ae7fb64c</span><br><span class="line">Author: minsu &lt;minsu@yiibai.com&gt;</span><br><span class="line">Date:   Mon Jul 10 17:51:11 2017 -0700</span><br><span class="line"></span><br><span class="line">    remove/delete module.py</span><br><span class="line"></span><br><span class="line">commit 6bdbf8219c60d8da9ad352c23628600faaefbe13</span><br><span class="line">Author: maxsu &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Mon Jul 10 20:34:28 2017 +0800</span><br><span class="line"></span><br><span class="line">    renamed main.py to module.py</span><br></pre></td></tr></table></figure>
+
+<p><strong>mixed选项</strong></p>
+<p>使用<code>--mixed</code>选项的Git重置将从尚未提交的暂存区域还原这些更改。它仅从暂存区域恢复更改。对文件的工作副本进行的实际更改不受影响。 默认Git复位等效于执行<code>git reset - mixed</code>。</p>
+<p><strong>hard选项</strong></p>
+<p>如果使用<code>--hard</code>选项与Git重置命令，它将清除分段区域; 它会将HEAD指针重置为特定提交ID的最新提交，并删除本地文件更改。</p>
+<p>让我们查看提交ID。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/D/worksp/sample</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -1</span></span><br><span class="line">commit 7d8162db36723b8523c56ad658a07808ae7fb64c</span><br><span class="line">Author: minsu &lt;minsu@yiibai.com&gt;</span><br><span class="line">Date:   Mon Jul 10 17:51:11 2017 -0700</span><br><span class="line"></span><br><span class="line">    remove/delete module.py</span><br></pre></td></tr></table></figure>
+
+<p>通过在文件开头添加单行注释来修改文件或者往文件里添加其它代码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> head -2 src/string.py</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status -s</span></span><br><span class="line"> M src/string.py</span><br></pre></td></tr></table></figure>
+
+<p>将修改的文件添加到暂存区域，并使用<code>git status</code>命令进行验证。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git add src/string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch and 'origin/master' have diverged,</span><br><span class="line">and have 1 and 1 different commit each, respectively.</span><br><span class="line">  (use "git pull" to merge the remote branch into yours)</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use "git reset HEAD &lt;file&gt;..." to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   src/string.py</span><br></pre></td></tr></table></figure>
+
+<p>Git状态显示该文件存在于暂存区域中。 现在，重置HEAD与<code>--hard</code>选项。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard 7d8162db36723b8523c56ad658a07808ae7fb64c</span></span><br><span class="line">HEAD is now at 7d8162d remove/delete module.py</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br></pre></td></tr></table></figure>
+
+<p><code>git reset</code>命令成功，这将从分段区域还原文件，并删除对文件所做的任何本地更改。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status -s</span></span><br></pre></td></tr></table></figure>
+
+<p>Git状态显示该文件已从暂存区域还原，当前恢复到了删除 <code>moudle.py</code> 时的版本了。</p>
+<h1 id="处理冲突"><a href="#处理冲突" class="headerlink" title="处理冲突"></a>处理冲突</h1><ul>
+<li>使用idea的处理冲突工具</li>
+<li>注意自己的commit要尽量少一些，不然rebase很麻烦</li>
+<li>如果自己的commit很多，则先将自己的rebase为一个commit之后在进行拉取</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://www.yiibai.com/git/git_push_operation.html#article-start" target="_blank" rel="noopener">易百教程</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/系统架构/Dubbo：理论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/08/系统架构/Dubbo：理论/" class="post-title-link" itemprop="url">Dubbo：理论</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-07-08 19:12:16" itemprop="dateCreated datePublished" datetime="2019-07-08T19:12:16+08:00">2019-07-08</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-24 17:11:30" itemprop="dateModified" datetime="2019-07-24T17:11:30+08:00">2019-07-24</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/07/08/系统架构/Dubbo：理论/" class="post-meta-item leancloud_visitors" data-flag-title="Dubbo：理论">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/08/系统架构/Dubbo：理论/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/08/系统架构/Dubbo：理论/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p><img src="assets/dubbo-service-governance.jpg" alt="image"></p>
+<p>在大规模服务化之前，应用可能只是通过 RMI 或 Hessian 等工具，简单的暴露和引用远程服务，通过配置服务的URL地址进行调用，通过 F5 等硬件进行负载均衡。</p>
+<p><strong>当服务越来越多时，服务 URL 配置管理变得非常困难，F5 硬件负载均衡器的单点压力也越来越大。</strong> 此时需要一个服务注册中心，动态地注册和发现服务，使服务的位置透明。并通过在消费方获取服务提供方地址列表，实现软负载均衡和 Failover，降低对 F5 硬件负载均衡器的依赖，也能减少部分成本。</p>
+<p><strong>当进一步发展，服务间依赖关系变得错踪复杂，甚至分不清哪个应用要在哪个应用之前启动，架构师都不能完整的描述应用的架构关系。</strong> 这时，需要自动画出应用间的依赖关系图，以帮助架构师理清理关系。</p>
+<p><strong>接着，服务的调用量越来越大，服务的容量问题就暴露出来，这个服务需要多少机器支撑？什么时候该加机器？</strong> 为了解决这些问题，第一步，要将服务现在每天的调用量，响应时间，都统计出来，作为容量规划的参考指标。其次，要可以动态调整权重，在线上，将某台机器的权重一直加大，并在加大的过程中记录响应时间的变化，直到响应时间到达阈值，记录此时的访问量，再以此访问量乘以机器数反推总容量。</p>
+<p>以上是 Dubbo 最基本的几个需求。</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="assets/dubbo-architecture.jpg" alt="dubbo-architucture"></p>
+<h3 id="节点角色说明"><a href="#节点角色说明" class="headerlink" title="节点角色说明"></a>节点角色说明</h3><table>
+<thead>
+<tr>
+<th>节点</th>
+<th>角色说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Provider</code></td>
+<td>暴露服务的服务提供方</td>
+</tr>
+<tr>
+<td><code>Consumer</code></td>
+<td>调用远程服务的服务消费方</td>
+</tr>
+<tr>
+<td><code>Registry</code></td>
+<td>服务注册与发现的注册中心</td>
+</tr>
+<tr>
+<td><code>Monitor</code></td>
+<td>统计服务的调用次数和调用时间的监控中心</td>
+</tr>
+<tr>
+<td><code>Container</code></td>
+<td>服务运行容器</td>
+</tr>
+</tbody></table>
+<h3 id="调用关系说明"><a href="#调用关系说明" class="headerlink" title="调用关系说明"></a>调用关系说明</h3><ol>
+<li>服务容器负责启动，加载，运行服务提供者。</li>
+<li>服务提供者在启动时，向注册中心注册自己提供的服务。</li>
+<li>服务消费者在启动时，向注册中心订阅自己所需的服务。</li>
+<li>注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者。</li>
+<li>服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。</li>
+<li>服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心。</li>
+</ol>
+<p>Dubbo 架构具有以下几个特点，分别是连通性、健壮性、伸缩性、以及向未来架构的升级性。</p>
+<h3 id="连通性"><a href="#连通性" class="headerlink" title="连通性"></a>连通性</h3><ul>
+<li>注册中心负责服务地址的注册与查找，相当于目录服务，服务提供者和消费者只在启动时与注册中心交互，注册中心不转发请求，压力较小</li>
+<li>监控中心负责统计各服务调用次数，调用时间等，统计先在内存汇总后每分钟一次发送到监控中心服务器，并以报表展示</li>
+<li>服务提供者向注册中心注册其提供的服务，并汇报调用时间到监控中心，此时间不包含网络开销</li>
+<li>服务消费者向注册中心获取服务提供者地址列表，并根据负载算法直接调用提供者，同时汇报调用时间到监控中心，此时间包含网络开销</li>
+<li>注册中心，服务提供者，服务消费者三者之间均为长连接，监控中心除外</li>
+<li>注册中心通过长连接感知服务提供者的存在，服务提供者宕机，注册中心将立即推送事件通知消费者</li>
+<li>注册中心和监控中心全部宕机，不影响已运行的提供者和消费者，消费者在本地缓存了提供者列表</li>
+<li>注册中心和监控中心都是可选的，服务消费者可以直连服务提供者</li>
+</ul>
+<h3 id="健壮性"><a href="#健壮性" class="headerlink" title="健壮性"></a>健壮性</h3><ul>
+<li>监控中心宕掉不影响使用，只是丢失部分采样数据</li>
+<li>数据库宕掉后，注册中心仍能通过缓存提供服务列表查询，但不能注册新服务</li>
+<li>注册中心对等集群，任意一台宕掉后，将自动切换到另一台</li>
+<li>注册中心全部宕掉后，服务提供者和服务消费者仍能通过本地缓存通讯</li>
+<li>服务提供者无状态，任意一台宕掉后，不影响使用</li>
+<li>服务提供者全部宕掉后，服务消费者应用将无法使用，并无限次重连等待服务提供者恢复</li>
+</ul>
+<h3 id="伸缩性"><a href="#伸缩性" class="headerlink" title="伸缩性"></a>伸缩性</h3><ul>
+<li>注册中心为对等集群，可动态增加机器部署实例，所有客户端将自动发现新的注册中心</li>
+<li>服务提供者无状态，可动态增加机器部署实例，注册中心将推送新的服务提供者信息给消费者</li>
+</ul>
+<h3 id="升级性"><a href="#升级性" class="headerlink" title="升级性"></a>升级性</h3><p>当服务集群规模进一步扩大，带动IT治理结构进一步升级，需要实现动态部署，进行流动计算，现有分布式服务架构不会带来阻力。下图是未来可能的一种架构：</p>
+<p><img src="assets/dubbo-architecture-future.jpg" alt="dubbo-architucture-futures"></p>
+<h3 id="节点角色说明-1"><a href="#节点角色说明-1" class="headerlink" title="节点角色说明"></a>节点角色说明</h3><table>
+<thead>
+<tr>
+<th>节点</th>
+<th>角色说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Deployer</code></td>
+<td>自动部署服务的本地代理</td>
+</tr>
+<tr>
+<td><code>Repository</code></td>
+<td>仓库用于存储服务应用发布包</td>
+</tr>
+<tr>
+<td><code>Scheduler</code></td>
+<td>调度中心基于访问压力自动增减服务提供者</td>
+</tr>
+<tr>
+<td><code>Admin</code></td>
+<td>统一管理控制台</td>
+</tr>
+<tr>
+<td><code>Registry</code></td>
+<td>服务注册与发现的注册中心</td>
+</tr>
+<tr>
+<td><code>Monitor</code></td>
+<td>统计服务的调用次数和调用时间的监控中心</td>
+</tr>
+</tbody></table>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="http://dubbo.apache.org/zh-cn/docs/source_code_guide/dubbo-spi.html" target="_blank" rel="noopener">dubbo官方文档</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/系统架构/Dubbo：Start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/08/系统架构/Dubbo：Start/" class="post-title-link" itemprop="url">Dubbo：Start</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Publicado el</span>
+              
+
+              
+                
+              
+
+              <time title="Creado por: 2019-07-08 19:00:04" itemprop="dateCreated datePublished" datetime="2019-07-08T19:00:04+08:00">2019-07-08</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Editado el</span>
+                
+                <time title="Modificado por: 2019-07-20 17:30:31" itemprop="dateModified" datetime="2019-07-20T17:30:31+08:00">2019-07-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">En</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/07/08/系统架构/Dubbo：Start/" class="post-meta-item leancloud_visitors" data-flag-title="Dubbo：Start">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Visitas: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Comentarios: </span>
+    
+  
+    <a href="/2019/07/08/系统架构/Dubbo：Start/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/07/08/系统架构/Dubbo：Start/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h1 id="自适应拓展机制"><a href="#自适应拓展机制" class="headerlink" title="自适应拓展机制"></a>自适应拓展机制</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h1 id="服务导出"><a href="#服务导出" class="headerlink" title="服务导出"></a>服务导出</h1><h1 id="服务引入"><a href="#服务引入" class="headerlink" title="服务引入"></a>服务引入</h1><h1 id="服务字典"><a href="#服务字典" class="headerlink" title="服务字典"></a>服务字典</h1><h1 id="服务路由"><a href="#服务路由" class="headerlink" title="服务路由"></a>服务路由</h1><h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><h1 id="服务调用过程"><a href="#服务调用过程" class="headerlink" title="服务调用过程"></a>服务调用过程</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
     
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Página anterior"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Página siguiente"></i></a>
   </nav>
-
 
 
           </div>
           
 
         </div>
-        
           
   
   <div class="sidebar-toggle">
@@ -1918,239 +2295,190 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
+
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
-            
-              <p class="site-author-name" itemprop="name">Heper</p>
-              <p class="site-description motion-element" itemprop="description">To be awesome</p>
-          </div>
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-name">entradas</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categorías</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
 
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">227</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">19</span>
-                    <span class="site-state-item-name">categories</span>
-                  
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">34</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
-                  
-                </span>
-              
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
-            
-          
-          
 
         </div>
-      </section>
-
-      
-
-      
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
-
-  
-
-  
 </div>
-
-
-  
-
-
-
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
-
-
-
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
-
-
-
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -2164,43 +2492,40 @@
         
       </div>
     </footer>
-
-    
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
-        
       </div>
-    
 
     
-	
-    
 
-    
   </div>
 
   
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
 
-
-
-
-
-
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
 
 
 
+  
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
 
 
-
-
-
-
+  
 
 
 
@@ -2213,401 +2538,67 @@
 
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
+  <script>
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
       });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
     }
+    
 
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+                'X-LC-Key': 'uTVcNIWdMCGpicrhTKygpKXi',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
+          
+        });
     });
   </script>
 
@@ -2615,41 +2606,49 @@
 
 
 
-  
 
-  
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
 <script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+    appKey: 'uTVcNIWdMCGpicrhTKygpKXi',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
 </script>
 
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

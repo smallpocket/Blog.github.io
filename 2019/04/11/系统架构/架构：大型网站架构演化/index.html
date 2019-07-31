@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="概述如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。 如何让网站随应用所需灵活变动 随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。  单一应用架构当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。">
+<meta name="keywords" content="网站架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="架构：大型网站架构演化">
+<meta property="og:url" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概述如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。 如何让网站随应用所需灵活变动 随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。  单一应用架构当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1561193987325.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1554990959181.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1563719826873.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1554991453473.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049101516.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049383697.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049588729.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049722498.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049803999.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555050083322.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555050317233.png">
+<meta property="og:updated_time" content="2019-07-22T04:22:15.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="架构：大型网站架构演化">
+<meta name="twitter:description" content="概述如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。 如何让网站随应用所需灵活变动 随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。  单一应用架构当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1561193987325.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>架构：大型网站架构演化 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">架构：大型网站架构演化
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-11 20:23:19" itemprop="dateCreated datePublished" datetime="2019-04-11T20:23:19+08:00">2019-04-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-22 12:22:15" itemprop="dateModified" datetime="2019-07-22T12:22:15+08:00">2019-07-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/11/系统架构/架构：大型网站架构演化/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/04/11/系统架构/架构：大型网站架构演化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。</p>
+<p>如何让网站随应用所需灵活变动</p>
+<p>随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。</p>
+<p><img src="assets/1561193987325.png" alt="1561193987325"></p>
+<h3 id="单一应用架构"><a href="#单一应用架构" class="headerlink" title="单一应用架构"></a>单一应用架构</h3><p>当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。</p>
+<p>当用户访问量提高时</p>
+<h3 id="垂直应用架构"><a href="#垂直应用架构" class="headerlink" title="垂直应用架构"></a>垂直应用架构</h3><p>当访问量逐渐增大，单一应用增加机器带来的加速度越来越小，将应用拆成互不相干的几个应用，以提升效率。此时，用于加速前端页面开发的Web框架(MVC)是关键。</p>
+<h3 id="分布式服务架构"><a href="#分布式服务架构" class="headerlink" title="分布式服务架构"></a>分布式服务架构</h3><p>当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心，使前端应用能更快速的响应多变的市场需求。此时，用于提高业务复用及整合的分布式服务框架(RPC)是关键。</p>
+<h3 id="流动计算架构"><a href="#流动计算架构" class="headerlink" title="流动计算架构"></a>流动计算架构</h3><p>当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。此时，用于提高机器利用率的资源调度和治理中心(SOA)是关键。</p>
+<h1 id="大型网站软件系统的特点"><a href="#大型网站软件系统的特点" class="headerlink" title="大型网站软件系统的特点"></a>大型网站软件系统的特点</h1><p>与传统企业应用系统相比</p>
+<ul>
+<li>高并发、大流量<ul>
+<li>需要面对高并发用户，大流量访问</li>
+</ul>
+</li>
+<li>高可用<ul>
+<li>系统7*24小时不间断服务，大型网站的宕机事件会成为新闻焦点</li>
+</ul>
+</li>
+<li>海量数据<ul>
+<li>需要存储、管理海量数据，需要使用大量服务器</li>
+</ul>
+</li>
+<li>用户分布广泛，网络情况复杂<ul>
+<li>需要为全球用户提供服务，各地网络情况千差万别</li>
+<li>国内，各个运营商网络互通难的问题</li>
+<li>中美光缆的数次故障，需要一些对国外用户依赖大的网站考虑建立海外数据中心</li>
+</ul>
+</li>
+<li>安全环境恶劣<ul>
+<li>互联网的开放型，容易受到攻击</li>
+</ul>
+</li>
+<li>需求快速变更，发布频繁</li>
+<li>渐进式发展<ul>
+<li>从一个小网站渐进的发展过来</li>
+</ul>
+</li>
+</ul>
+<h1 id="大型网站架构演化发展历程"><a href="#大型网站架构演化发展历程" class="headerlink" title="大型网站架构演化发展历程"></a>大型网站架构演化发展历程</h1><p>任何简单的业务一旦需要处理数以P计的数据和面对数以亿计的用户，问题就会很棘手。大型网站架构主要解决这类问题</p>
+<h2 id="初始阶段的网站架构"><a href="#初始阶段的网站架构" class="headerlink" title="初始阶段的网站架构"></a>初始阶段的网站架构</h2><ul>
+<li>一台服务器即可</li>
+<li>应用程序、数据库、文件等所有资源都在一台服务器上。</li>
+</ul>
+<p><img src="assets/1554990959181.png" alt="1554990959181"></p>
+<h2 id="应用服务与数据服务分离"><a href="#应用服务与数据服务分离" class="headerlink" title="应用服务与数据服务分离"></a>应用服务与数据服务分离</h2><p><strong>问题</strong></p>
+<ul>
+<li>一台服务逐渐不能满足需求，越来越多的用户导致性能越来越差，越来越多的数据导致存储空间不足</li>
+</ul>
+<p><strong>解决方案</strong>：将数据和应用分离</p>
+<p>三台服务器：</p>
+<ul>
+<li>应用服务器：需要处理大量业务逻辑，需要更强CPU</li>
+<li>数据库服务器：快速磁盘检索和数据缓存，因此需要更快的磁盘和更大的内存</li>
+<li>文件服务器：存储大量用户上传的文件，需要更大的硬盘</li>
+</ul>
+<p><img src="assets/1563719826873.png" alt="1563719826873"></p>
+<p>不同的服务器承担不同的服务角色，网站的并发处理能力、数据存储空间得到很大改善</p>
+<h2 id="使用缓存改善网站性能"><a href="#使用缓存改善网站性能" class="headerlink" title="使用缓存改善网站性能"></a>使用缓存改善网站性能</h2><p><strong>问题</strong></p>
+<ul>
+<li>数据库压力太大导致访问延迟，进而影响整个系统的性能</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li><strong>网站的访问特点</strong>：二八定律，80%的业务访问集中在20%的数据上</li>
+<li>将频繁访问的数据缓存在内存当中</li>
+</ul>
+<p>缓存分类：</p>
+<ul>
+<li>本地缓存，缓存在应用服务器上<ul>
+<li>速度更快</li>
+<li>受内存限制，并与应用程序争夺内存</li>
+</ul>
+</li>
+<li>远程缓存，缓存在专门的分布式缓存服务器上<ul>
+<li>理论上不受内存限制</li>
+</ul>
+</li>
+</ul>
+<p><img src="assets/1554991453473.png" alt="1554991453473"></p>
+<h2 id="使用应用服务器集群改善网站的并发处理能力"><a href="#使用应用服务器集群改善网站的并发处理能力" class="headerlink" title="使用应用服务器集群改善网站的并发处理能力"></a>使用应用服务器集群改善网站的并发处理能力</h2><p><strong>问题</strong></p>
+<ul>
+<li>单一应用服务器能够处理的请求连接有限，在网站访问高峰期，应用服务器成为瓶颈</li>
+</ul>
+<p><strong>解决方案：</strong></p>
+<p>增加服务器分担压力，并可以以此方式不断提升系统性能。实现系统的可伸缩性。</p>
+<p><img src="assets/1555049101516.png" alt="1555049101516"></p>
+<p><strong>负载均衡调度服务器</strong>：将来自用户的访问请求分发到应用服务器集群的任何一台服务器中，若有更多的用户，则在集群中增加更多的服务器，使应用服务器的负载压力不再成为整个网站的瓶颈</p>
+<h2 id="数据库读写分离"><a href="#数据库读写分离" class="headerlink" title="数据库读写分离"></a>数据库读写分离</h2><p><strong>问题</strong>：</p>
+<ul>
+<li>数据库负载压力过高<ul>
+<li>即使使用缓存后，绝大部分数据访问都可以不通过数据库就能完成</li>
+<li>但依然有一部分读操作（缓存访问不命中、缓存过期）和全部的写操作需要访问数据库。会导致数据库负载压力过高</li>
+</ul>
+</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<p>配置数据库的主从关系，将一台数据库服务器上的数据更新同步到另一台服务器上，实现读写分离。</p>
+<p>应用服务器在写数据时，访问主数据库，主数据库通过主从复制将数据更新同步到从数据库，当应用服务器读数据时，就可以通过从数据库获得数据。为了便于应用程序访问读写分离后的数据库，通常使用专门的数据访问模块，使数据库读写分离对应用透明</p>
+<p><img src="assets/1555049383697.png" alt="1555049383697"></p>
+<h2 id="使用反向代理和CDN加速网站响应"><a href="#使用反向代理和CDN加速网站响应" class="headerlink" title="使用反向代理和CDN加速网站响应"></a>使用反向代理和CDN加速网站响应</h2><p><strong>问题：</strong></p>
+<ul>
+<li>复杂的网络环境，导致不同地区的用户访问网站速度差别极大</li>
+</ul>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>加快网络响应速度，提高用户体验</li>
+<li>反向代理与CDN加速<ul>
+<li>原理为：利用缓存</li>
+<li>CDN：部署在网络提供商的机房，使得用户在请求网站服务时，可以从距离自己最近的网络提供方机房获得数据</li>
+<li>反向代理：部署在网站的中心机房，当用户请求到达中心时，首先访问反向代理服务器，如果反向代理服务器缓存着用户请求的数据，就直接返回给用户</li>
+</ul>
+</li>
+<li>通过缓存数据，也减轻了后端服务器的负载压力</li>
+</ul>
+<p><img src="assets/1555049588729.png" alt="1555049588729"></p>
+<h2 id="使用分布式文件系统和分布式数据库系统"><a href="#使用分布式文件系统和分布式数据库系统" class="headerlink" title="使用分布式文件系统和分布式数据库系统"></a>使用分布式文件系统和分布式数据库系统</h2><p><strong>问题：</strong></p>
+<ul>
+<li>任何强大的单一服务器都无法满足持续增长的业务需求</li>
+<li>数据库服务器与文件服务器无法支持</li>
+</ul>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>分布式数据库与分布式文件<ul>
+<li>分布式数据库是网站数据库拆分的最后手段，只有在单表数据规模非常庞大时才使用</li>
+<li>常见手段为业务分库，不同业务的数据库部署在不同服务器上</li>
+</ul>
+</li>
+</ul>
+<p><img src="assets/1555049722498.png" alt="1555049722498"></p>
+<h2 id="使用NoSQL和搜索引擎"><a href="#使用NoSQL和搜索引擎" class="headerlink" title="使用NoSQL和搜索引擎"></a>使用NoSQL和搜索引擎</h2><p><strong>问题：</strong></p>
+<ul>
+<li>网站业务复杂，对数据存储和检索的需求越来越复杂，需要采用一些非关系数据库（NoSQL）以及非数据库查询技术（搜索）</li>
+</ul>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>NoSQL与搜索引擎都是源自互联网的技术手段，对于可伸缩的分布式特性有更好地支持</li>
+<li>应用服务器通过一个统一的数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦</li>
+</ul>
+<p><img src="assets/1555049803999.png" alt="1555049803999"></p>
+<h2 id="业务拆分"><a href="#业务拆分" class="headerlink" title="业务拆分"></a>业务拆分</h2><p><strong>问题：</strong></p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>分而治之，将整个网站业务分为不同的产品线</li>
+<li>将一个网站拆分为许多不同的应用，每个应用独立部署维护。<ul>
+<li>应用间通过超链接建立关系。</li>
+<li>也可以通过消息队列进行数据分发</li>
+<li>最多的是通过访问同一个数据存储系统来构成一个关联的完整系统</li>
+</ul>
+</li>
+</ul>
+<p><img src="assets/1555050083322.png" alt="1555050083322"></p>
+<h2 id="分布式服务"><a href="#分布式服务" class="headerlink" title="分布式服务"></a>分布式服务</h2><p><strong>问题：</strong></p>
+<ul>
+<li>随着业务拆分越来越小，存储系统越来越大，应用系统的复杂性指数级增大，部署维护越来越困难</li>
+<li>所有应用都要与数据库系统相连接，数万台服务器中，连接的数目是服务器^2，导致数据库资源不足，拒绝服务</li>
+</ul>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>将每一个应用系统需要执行的相同业务操作提取出来独立部署</li>
+<li>由这些可复用的业务连接数据库，提供公共的业务服务。</li>
+<li>应用系统只需要管理用户界面，通过分布式服务调用共用业务服务完成具体业务操作</li>
+</ul>
+<p><img src="assets/1555050317233.png" alt="1555050317233"></p>
+<h2 id="云计算平台"><a href="#云计算平台" class="headerlink" title="云计算平台"></a>云计算平台</h2><p>当大型网站架构解决了海量数据管理和高并发事务的处理，就可以将这些解决方案应用到网站自身以外的业务上，即建设云计算平台，将计算作为一种基础资源出售。</p>
+<h1 id="大型网站架构演化的价值观"><a href="#大型网站架构演化的价值观" class="headerlink" title="大型网站架构演化的价值观"></a>大型网站架构演化的价值观</h1><p>网站的价值在于它能够为用户提供什么样的价值，在于能做什么，而不是怎么做的</p>
+<p>因此在小网站上追求架构是舍本逐末的，需要做的就是为用户提供更好的服务创造价值</p>
+<p><strong>核心价值观：随网站所需灵活应对</strong></p>
+<p>核心价值是随着小型网站业务的逐步发展，慢慢演化为一个大型网站</p>
+<p><strong>驱动大型网站技术发展的主要力量：网站的业务发展</strong></p>
+<p>创新的业务发展模式对网站架构逐步提出了更高的要求，才使得创新的网站架构得以发展成熟。</p>
+<p>业务成就了技术，后努力提高技术回馈业务</p>
+<h1 id="网站架构设计的误区"><a href="#网站架构设计的误区" class="headerlink" title="网站架构设计的误区"></a>网站架构设计的误区</h1><p><strong>一味追求大公司的解决方案</strong></p>
+<p><strong>为了技术而技术</strong></p>
+<p>网站技术是为业务而存在的，除此毫无意义。</p>
+<p>在技术选型和架构设计中，脱离网站业务发展的实际，一味追求技术，会使得架构之路越走越难</p>
+<p><strong>企图用技术解决所有问题</strong></p>
+<p>12306的故障问题</p>
+<ul>
+<li>真正的问题是在于业务架构<ul>
+<li>在几亿中国人一票难求的情况下进行窗口售票模式在网上售票（0点后出售若干天后的车票）</li>
+<li>是一种促销秒杀</li>
+</ul>
+</li>
+<li>进行分时段售票、排队机制等，控制并发访问的量</li>
+</ul>
+<p>技术是解决业务问题，业务手段也可以解决业务问题</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>利用云计算资源，便可以对所需要的一切技术资源：计算、存储、网络都可以按需购买，线性伸缩</li>
+<li>因此亲身经历架构演化之路的人会越来越少。架构师更应该对这个过程深刻了解，理解成熟的网站架构技术方案的来龙去脉和历史渊源，才能在技术选型和架构决策时有的放矢，直击要害</li>
+</ul>
+<h1 id="大型网站架构模式"><a href="#大型网站架构模式" class="headerlink" title="大型网站架构模式"></a>大型网站架构模式</h1><h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>分层是最常见的一种架构模式，将系统在横向维度上切分成几个部分，每个部分负责一部分相对比较单一的职责，然后通过上层对下层的依赖和调用组成一个完整的系统。</p>
+<table>
+<thead>
+<tr>
+<th>应用层</th>
+<th>负责具体业务和视图展示，如网站首页以及搜索输入和结果展示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>服务层</td>
+<td>为应用层提供服务支持，如用户管理服务、购物车服务等</td>
+</tr>
+<tr>
+<td>数据层</td>
+<td>提供数据存储访问服务，如数据库、缓存、文件等</td>
+</tr>
+</tbody></table>
+<p>各层之间具有一定的独立性，只要维持调用接口不变，各层可以根据具体问题独立发展演化，而不需要其它层做出调整</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/" title="架构：大型网站架构演化">http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网站架构/" rel="tag"># 网站架构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/11/Java/base/Java并发：并发机制的底层原理/" rel="next" title="Java并发：并发机制的底层原理">
+                <i class="fa fa-chevron-left"></i> Java并发：并发机制的底层原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/11/Java/base/Java并发：JMM/" rel="prev" title="Java并发：JMM">
+                Java并发：JMM <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单一应用架构"><span class="nav-number">1.0.1.</span> <span class="nav-text">单一应用架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垂直应用架构"><span class="nav-number">1.0.2.</span> <span class="nav-text">垂直应用架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式服务架构"><span class="nav-number">1.0.3.</span> <span class="nav-text">分布式服务架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流动计算架构"><span class="nav-number">1.0.4.</span> <span class="nav-text">流动计算架构</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站软件系统的特点"><span class="nav-number">2.</span> <span class="nav-text">大型网站软件系统的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构演化发展历程"><span class="nav-number">3.</span> <span class="nav-text">大型网站架构演化发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始阶段的网站架构"><span class="nav-number">3.1.</span> <span class="nav-text">初始阶段的网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用服务与数据服务分离"><span class="nav-number">3.2.</span> <span class="nav-text">应用服务与数据服务分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用缓存改善网站性能"><span class="nav-number">3.3.</span> <span class="nav-text">使用缓存改善网站性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用应用服务器集群改善网站的并发处理能力"><span class="nav-number">3.4.</span> <span class="nav-text">使用应用服务器集群改善网站的并发处理能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库读写分离"><span class="nav-number">3.5.</span> <span class="nav-text">数据库读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用反向代理和CDN加速网站响应"><span class="nav-number">3.6.</span> <span class="nav-text">使用反向代理和CDN加速网站响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用分布式文件系统和分布式数据库系统"><span class="nav-number">3.7.</span> <span class="nav-text">使用分布式文件系统和分布式数据库系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用NoSQL和搜索引擎"><span class="nav-number">3.8.</span> <span class="nav-text">使用NoSQL和搜索引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#业务拆分"><span class="nav-number">3.9.</span> <span class="nav-text">业务拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式服务"><span class="nav-number">3.10.</span> <span class="nav-text">分布式服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云计算平台"><span class="nav-number">3.11.</span> <span class="nav-text">云计算平台</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构演化的价值观"><span class="nav-number">4.</span> <span class="nav-text">大型网站架构演化的价值观</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网站架构设计的误区"><span class="nav-number">5.</span> <span class="nav-text">网站架构设计的误区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构模式"><span class="nav-number">7.</span> <span class="nav-text">大型网站架构模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分层"><span class="nav-number">7.1.</span> <span class="nav-text">分层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

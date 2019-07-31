@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="枚举的创建于作用，使用枚举管理状态码">
+<meta name="keywords" content="JavaBase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java枚举类">
+<meta property="og:url" content="http://yoursite.com/2018/10/08/Java/base/JavaBase：枚举类/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="枚举的创建于作用，使用枚举管理状态码">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-25T09:44:34.362Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java枚举类">
+<meta name="twitter:description" content="枚举的创建于作用，使用枚举管理状态码">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/08/Java/base/JavaBase：枚举类/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java枚举类 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/Java/base/JavaBase：枚举类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">java枚举类
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-10-08 14:35:04" itemprop="dateCreated datePublished" datetime="2018-10-08T14:35:04+08:00">2018-10-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-25 17:44:34" itemprop="dateModified" datetime="2019-07-25T17:44:34+08:00">2019-07-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/08/Java/base/JavaBase：枚举类/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/10/08/Java/base/JavaBase：枚举类/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">枚举的创建于作用，使用枚举管理状态码</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>关键字enum可以将一组具名的值的有限集合创建为一种新的类型，而这些具名的值可以作为常规的程序组件使用。</p>
+<h3 id="分类，各个分类是什么"><a href="#分类，各个分类是什么" class="headerlink" title="分类，各个分类是什么"></a>分类，各个分类是什么</h3><h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
+<li>多路分发<ul>
+<li>如果一个系统要分析和执行数学表达式可能会声明Number.plus(Number)等，然而当声明a.plus(b)时，并不知道a或者b的确切类型，则如何让他们进行间交互。</li>
+</ul>
+</li>
+</ul>
+<h1 id="枚举特性"><a href="#枚举特性" class="headerlink" title="枚举特性"></a>枚举特性</h1><h2 id="EnumClassMethod"><a href="#EnumClassMethod" class="headerlink" title="EnumClassMethod"></a>EnumClassMethod</h2><ul>
+<li>Class.values方法，返回enum实例的数组，并且该数组中的元素的严格保持其在enum中声明时的顺序。</li>
+</ul>
+<p>可以用来遍历enum实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Shrubbery&#123; GROUND,CRWLING&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(Shrubbery s : Shrubbery.values())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Enum.valueOf(EnumClass,name)根据给定的名字返回相应的enum实例</li>
+</ul>
+<h2 id="EnumObjMethod"><a href="#EnumObjMethod" class="headerlink" title="EnumObjMethod"></a>EnumObjMethod</h2><ul>
+<li>Obj.ordinal()返回一个int值，是每个enum实例在声明时的次序，从0开始。</li>
+<li>Obj.name()，返回enum实例声明时的明智，与使用toString方法效果相同</li>
+</ul>
+<h2 id="在Enum中添加方法"><a href="#在Enum中添加方法" class="headerlink" title="在Enum中添加方法"></a>在Enum中添加方法</h2><p>Enum除了不能继承自一个enum外，基本上可以将enum看作一个常规的类，即可以向enum添加方法。</p>
+<p>若打算在枚举中定义方法，则必须在enum实例序列的最后添加一个分号。</p>
+<h2 id="switch中的enum"><a href="#switch中的enum" class="headerlink" title="switch中的enum"></a>switch中的enum</h2><p>在Java中switch一般只能使用整数，而枚举实例天生具有整数的次序，因此我们可以在switch中使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(color)&#123;</span><br><span class="line">    <span class="keyword">case</span> RED:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="多路分发"><a href="#多路分发" class="headerlink" title="多路分发"></a>多路分发</h1><p>当要处理多种交互类型时，程序可能会变得相当混乱。</p>
+<p>如果一个系统要分析和执行数学表达式可能会声明Number.plus(Number)等，然而当声明a.plus(b)时，并不知道a或者b的确切类型，则如何让他们进行间交互。</p>
+<p>Java只支持<strong>单路分发</strong>，即如果要执行的操作包含了不止一个类型未知的对象，那么Java的动态绑定机制只能处理其中一个的类型。因此我们必须自己去判定其他的类型，从而实现动态绑定。</p>
+<p>解决方法就是多路分发，例如两路分发，就必须有两个方法调用：第一个方法调用决定第一个未知类型，第二个方法决定第二个未知类型。</p>
+<h2 id="多态实现"><a href="#多态实现" class="headerlink" title="多态实现"></a>多态实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Outcome &#123; WIN, LOSE, DRAW &#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">  <span class="function">Outcome <span class="title">compete</span><span class="params">(Item it)</span></span>;</span><br><span class="line">  <span class="function">Outcome <span class="title">eval</span><span class="params">(Paper p)</span></span>;</span><br><span class="line">  <span class="function">Outcome <span class="title">eval</span><span class="params">(Scissors s)</span></span>;</span><br><span class="line">  <span class="function">Outcome <span class="title">eval</span><span class="params">(Rock r)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Paper</span> <span class="keyword">implements</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">compete</span><span class="params">(Item it)</span> </span>&#123; <span class="keyword">return</span> it.eval(<span class="keyword">this</span>); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Paper p)</span> </span>&#123; <span class="keyword">return</span> DRAW; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Scissors s)</span> </span>&#123; <span class="keyword">return</span> WIN; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Rock r)</span> </span>&#123; <span class="keyword">return</span> LOSE; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">"Paper"</span>; &#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Scissors</span> <span class="keyword">implements</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">compete</span><span class="params">(Item it)</span> </span>&#123; <span class="keyword">return</span> it.eval(<span class="keyword">this</span>); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Paper p)</span> </span>&#123; <span class="keyword">return</span> LOSE; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Scissors s)</span> </span>&#123; <span class="keyword">return</span> DRAW; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Rock r)</span> </span>&#123; <span class="keyword">return</span> WIN; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">"Scissors"</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rock</span> <span class="keyword">implements</span> <span class="title">Item</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">compete</span><span class="params">(Item it)</span> </span>&#123; <span class="keyword">return</span> it.eval(<span class="keyword">this</span>); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Paper p)</span> </span>&#123; <span class="keyword">return</span> WIN; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Scissors s)</span> </span>&#123; <span class="keyword">return</span> LOSE; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">eval</span><span class="params">(Rock r)</span> </span>&#123; <span class="keyword">return</span> DRAW; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">"Rock"</span>; &#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoShamBo1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SIZE = <span class="number">20</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Random rand = <span class="keyword">new</span> Random(<span class="number">47</span>);</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Item <span class="title">newItem</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(rand.nextInt(<span class="number">3</span>)) &#123;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0</span>: <span class="keyword">return</span> <span class="keyword">new</span> Scissors();</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">return</span> <span class="keyword">new</span> Paper();</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">return</span> <span class="keyword">new</span> Rock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">match</span><span class="params">(Item a, Item b)</span> </span>&#123;</span><br><span class="line">    System.out.println(</span><br><span class="line">      a + <span class="string">" vs. "</span> + b + <span class="string">": "</span> +  a.compete(b));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SIZE; i++)</span><br><span class="line">      match(newItem(), newItem());</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="comment">/* Output:	</span></span><br><span class="line"><span class="comment">Rock vs. Rock: DRAW</span></span><br><span class="line"><span class="comment">Paper vs. Rock: WIN</span></span><br><span class="line"><span class="comment">Paper vs. Rock: WIN</span></span><br><span class="line"><span class="comment">Paper vs. Rock: WIN</span></span><br><span class="line"><span class="comment">Scissors vs. Paper: WIN</span></span><br><span class="line"><span class="comment">Scissors vs. Scissors: DRAW</span></span><br><span class="line"><span class="comment">Scissors vs. Paper: WIN</span></span><br><span class="line"><span class="comment">Rock vs. Paper: LOSE</span></span><br><span class="line"><span class="comment">Paper vs. Paper: DRAW</span></span><br><span class="line"><span class="comment">Rock vs. Paper: LOSE</span></span><br><span class="line"><span class="comment">Paper vs. Scissors: LOSE</span></span><br><span class="line"><span class="comment">Paper vs. Scissors: LOSE</span></span><br><span class="line"><span class="comment">Rock vs. Scissors: WIN</span></span><br><span class="line"><span class="comment">Rock vs. Paper: LOSE</span></span><br><span class="line"><span class="comment">Paper vs. Rock: WIN</span></span><br><span class="line"><span class="comment">Scissors vs. Paper: WIN</span></span><br><span class="line"><span class="comment">Paper vs. Scissors: LOSE</span></span><br><span class="line"><span class="comment">Paper vs. Scissors: LOSE</span></span><br><span class="line"><span class="comment">Paper vs. Scissors: LOSE</span></span><br><span class="line"><span class="comment">Paper vs. Scissors: LOSE</span></span><br><span class="line"><span class="comment">*/</span><span class="comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一次分发是在a的compete方法当中，此时根据多态识别了a的具体类型</li>
+<li>第二次分发在调用eval方法，此时多态识别了b的类型</li>
+</ul>
+<h2 id="使用enum分发"><a href="#使用enum分发" class="headerlink" title="使用enum分发"></a>使用enum分发</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> RoShamBo2 implements Competitor&lt;RoShamBo2&gt; &#123;</span><br><span class="line">  PAPER(DRAW, LOSE, WIN),</span><br><span class="line">  SCISSORS(WIN, DRAW, LOSE),</span><br><span class="line">  ROCK(LOSE, WIN, DRAW);</span><br><span class="line">  <span class="keyword">private</span> Outcome vPAPER, vSCISSORS, vROCK;</span><br><span class="line">  RoShamBo2(Outcome paper,Outcome scissors,Outcome rock) &#123;</span><br><span class="line">    <span class="keyword">this</span>.vPAPER = paper;</span><br><span class="line">    <span class="keyword">this</span>.vSCISSORS = scissors;</span><br><span class="line">    <span class="keyword">this</span>.vROCK = rock;</span><br><span class="line">  &#125;	</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Outcome <span class="title">compete</span><span class="params">(RoShamBo2 it)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(it) &#123;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">case</span> PAPER: <span class="keyword">return</span> vPAPER;</span><br><span class="line">      <span class="keyword">case</span> SCISSORS: <span class="keyword">return</span> vSCISSORS;</span><br><span class="line">      <span class="keyword">case</span> ROCK: <span class="keyword">return</span> vROCK;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    RoShamBo.play(RoShamBo2.class, <span class="number">20</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="comment">/* Output:</span></span><br><span class="line"><span class="comment">ROCK vs. ROCK: DRAW</span></span><br><span class="line"><span class="comment">SCISSORS vs. ROCK: LOSE</span></span><br><span class="line"><span class="comment">SCISSORS vs. ROCK: LOSE</span></span><br><span class="line"><span class="comment">SCISSORS vs. ROCK: LOSE</span></span><br><span class="line"><span class="comment">PAPER vs. SCISSORS: LOSE</span></span><br><span class="line"><span class="comment">PAPER vs. PAPER: DRAW</span></span><br><span class="line"><span class="comment">PAPER vs. SCISSORS: LOSE</span></span><br><span class="line"><span class="comment">ROCK vs. SCISSORS: WIN</span></span><br><span class="line"><span class="comment">SCISSORS vs. SCISSORS: DRAW</span></span><br><span class="line"><span class="comment">ROCK vs. SCISSORS: WIN</span></span><br><span class="line"><span class="comment">SCISSORS vs. PAPER: WIN</span></span><br><span class="line"><span class="comment">SCISSORS vs. PAPER: WIN</span></span><br><span class="line"><span class="comment">ROCK vs. PAPER: LOSE</span></span><br><span class="line"><span class="comment">ROCK vs. SCISSORS: WIN</span></span><br><span class="line"><span class="comment">SCISSORS vs. ROCK: LOSE</span></span><br><span class="line"><span class="comment">PAPER vs. SCISSORS: LOSE</span></span><br><span class="line"><span class="comment">SCISSORS vs. PAPER: WIN</span></span><br><span class="line"><span class="comment">SCISSORS vs. PAPER: WIN</span></span><br><span class="line"><span class="comment">SCISSORS vs. PAPER: WIN</span></span><br><span class="line"><span class="comment">SCISSORS vs. PAPER: WIN</span></span><br><span class="line"><span class="comment">*/</span><span class="comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="如何构造一个枚举类"><a href="#如何构造一个枚举类" class="headerlink" title="如何构造一个枚举类"></a>如何构造一个枚举类</h2><ol>
+<li>新建一个Enum的类</li>
+<li>添加枚举的实例,实例的要求:</li>
+</ol>
+<ul>
+<li>名称要大写</li>
+<li>多个单词是使用下划线进行分割</li>
+<li>实例之间使用逗号分割</li>
+<li>最后实例结尾使用分号;</li>
+</ul>
+<ol start="3">
+<li>为类添加字段</li>
+<li>必须添加构造方法</li>
+<li>可选:</li>
+</ol>
+<ul>
+<li>为字段添加getter和setter</li>
+<li>为实例添加doc注释</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> SimpleEnum &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 为枚举添加注释</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TEST(<span class="string">"1"</span>),</span><br><span class="line">    ;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 枚举类需要字段和构造器两个属性,否则会出错</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    SimpleEnum(String code) &#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="枚举的作用"><a href="#枚举的作用" class="headerlink" title="枚举的作用"></a>枚举的作用</h2><h3 id="管理code或者一些常量"><a href="#管理code或者一些常量" class="headerlink" title="管理code或者一些常量"></a>管理code或者一些常量</h3><p>在实际项目当中,会遇到一些状态码的相关东西,这个使用枚举进行维护是相对便捷的</p>
+<h3 id="进行switch"><a href="#进行switch" class="headerlink" title="进行switch"></a>进行switch</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用switch和枚举类进行结合</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">degree</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SimpleEnum simpleEnum=SimpleEnum.TEST;</span><br><span class="line">    <span class="keyword">switch</span> (simpleEnum)&#123;</span><br><span class="line">        <span class="keyword">case</span> TEST:</span><br><span class="line">            System.out.println(<span class="string">"test"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">case</span> ORDER:</span><br><span class="line">            System.out.println(<span class="string">"orde"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                System.out.println(<span class="string">"ss"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2018/10/08/Java/base/JavaBase：枚举类/" title="java枚举类">http://yoursite.com/2018/10/08/Java/base/JavaBase：枚举类/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaBase/" rel="tag"># JavaBase</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/Java/框架/安全框架：shiro集成无状态JWT/" rel="next" title="shiro集成无状态JWT">
+                <i class="fa fa-chevron-left"></i> shiro集成无状态JWT
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/08/Java/设计模式/设计模式：目录/" rel="prev" title="设计模式：目录">
+                设计模式：目录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#枚举"><span class="nav-number">1.</span> <span class="nav-text">枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.2.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类，各个分类是什么"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类，各个分类是什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用（作用）"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要用（作用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.4.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#枚举特性"><span class="nav-number">2.</span> <span class="nav-text">枚举特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EnumClassMethod"><span class="nav-number">2.1.</span> <span class="nav-text">EnumClassMethod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EnumObjMethod"><span class="nav-number">2.2.</span> <span class="nav-text">EnumObjMethod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Enum中添加方法"><span class="nav-number">2.3.</span> <span class="nav-text">在Enum中添加方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#switch中的enum"><span class="nav-number">2.4.</span> <span class="nav-text">switch中的enum</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多路分发"><span class="nav-number">3.</span> <span class="nav-text">多路分发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多态实现"><span class="nav-number">3.1.</span> <span class="nav-text">多态实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用enum分发"><span class="nav-number">3.2.</span> <span class="nav-text">使用enum分发</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶"><span class="nav-number">4.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#反省总结"><span class="nav-number">4.1.</span> <span class="nav-text">反省总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础"><span class="nav-number">5.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何构造一个枚举类"><span class="nav-number">5.1.</span> <span class="nav-text">如何构造一个枚举类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">5.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举的作用"><span class="nav-number">5.3.</span> <span class="nav-text">枚举的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管理code或者一些常量"><span class="nav-number">5.3.1.</span> <span class="nav-text">管理code或者一些常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进行switch"><span class="nav-number">5.3.2.</span> <span class="nav-text">进行switch</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

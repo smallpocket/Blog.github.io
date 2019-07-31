@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="OS引论操作系统的任务是为用户程序提供一个更好、更简单、更清晰的计算机模型，并管理计算机的所有设备（1到多个处理器、主存、磁盘、打印机、键盘、鼠标、显示器、网络接口以及其他输入输出设备）。  多数计算机拥有两种运行模式：内核态和用户态。软件中最基础的部分为操作系统，运行在内核态，为所有其他软件提供基础的运行环境。 在这个模式中，操作系统具有对所有硬件的完全访问权，可以直行机器能够运行的任何指令。而">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机操作系统：概述">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/OS/计算机操作系统：概述/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="OS引论操作系统的任务是为用户程序提供一个更好、更简单、更清晰的计算机模型，并管理计算机的所有设备（1到多个处理器、主存、磁盘、打印机、键盘、鼠标、显示器、网络接口以及其他输入输出设备）。  多数计算机拥有两种运行模式：内核态和用户态。软件中最基础的部分为操作系统，运行在内核态，为所有其他软件提供基础的运行环境。 在这个模式中，操作系统具有对所有硬件的完全访问权，可以直行机器能够运行的任何指令。而">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1562715920671.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563203320169.png">
+<meta property="og:image" content="http://yoursite.com/1563204754379.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563242246843.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563242514123.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563292000029.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563326416941.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563326651263.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563327260526.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563377076693.png">
+<meta property="og:image" content="http://yoursite.com/OS/assets/1563377402235.png">
+<meta property="og:updated_time" content="2019-07-29T02:16:58.274Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机操作系统：概述">
+<meta name="twitter:description" content="OS引论操作系统的任务是为用户程序提供一个更好、更简单、更清晰的计算机模型，并管理计算机的所有设备（1到多个处理器、主存、磁盘、打印机、键盘、鼠标、显示器、网络接口以及其他输入输出设备）。  多数计算机拥有两种运行模式：内核态和用户态。软件中最基础的部分为操作系统，运行在内核态，为所有其他软件提供基础的运行环境。 在这个模式中，操作系统具有对所有硬件的完全访问权，可以直行机器能够运行的任何指令。而">
+<meta name="twitter:image" content="http://yoursite.com/OS/assets/1562715920671.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/10/OS/计算机操作系统：概述/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>计算机操作系统：概述 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/OS/计算机操作系统：概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">计算机操作系统：概述
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-10 07:41:46" itemprop="dateCreated datePublished" datetime="2019-07-10T07:41:46+08:00">2019-07-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-29 10:16:58" itemprop="dateModified" datetime="2019-07-29T10:16:58+08:00">2019-07-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/10/OS/计算机操作系统：概述/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/10/OS/计算机操作系统：概述/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="OS引论"><a href="#OS引论" class="headerlink" title="OS引论"></a>OS引论</h1><p>操作系统的任务是为用户程序提供一个更好、更简单、更清晰的计算机模型，并管理计算机的所有设备（1到多个处理器、主存、磁盘、打印机、键盘、鼠标、显示器、网络接口以及其他输入输出设备）。</p>
+<p><img src="/../OS/assets/1562715920671.png" alt></p>
+<p>多数计算机拥有两种运行模式：<strong>内核态和用户态</strong>。软件中最基础的部分为操作系统，运行在内核态，为所有其他软件提供基础的运行环境。</p>
+<p>在这个模式中，操作系统具有对所有硬件的完全访问权，可以直行机器能够运行的任何指令。而软件的其余部分运行在用户态，只使用了机器指令的一个子集，特别是与IO操作与影响机器的控制的指令，在用户态当中是禁止的。</p>
+<p>但是有时在嵌入式系统(无内核态)或<strong>解释系统（JVM，采用解释方式而不是硬件方式区分组件）</strong>当中上述区别是模糊的</p>
+<h1 id="什么是操作系统"><a href="#什么是操作系统" class="headerlink" title="什么是操作系统"></a>什么是操作系统</h1><p>操作系统比较难给出准确定义。原因有</p>
+<ul>
+<li>为应用程序提供一个资源集的清晰抽象，并管理这些硬件资源，而不仅仅是一堆硬件</li>
+<li>取决于从什么角度看待操作系统</li>
+</ul>
+<h2 id="作为扩展机器的操作系统"><a href="#作为扩展机器的操作系统" class="headerlink" title="作为扩展机器的操作系统"></a>作为扩展机器的操作系统</h2><p>把操作系统看作是向应用程序提供基本抽象的概念，是一种自顶向下的观点。</p>
+<p><strong><em>背景</em></strong></p>
+<p>在语言层面上，计算机的体系结构（指令集、存储组织、IO、总线结构）是相当原始的，并且编程很困难，尤其是对IO操作而言。硬盘接口的书籍页数超过450页，并且改动较为频繁。</p>
+<p>因此程序员使用硬盘驱动进行交互，提供接口，并且不用深入细节。驱动相对还是较为底层，因此使用又一层抽象即<strong>文件</strong>。使用该抽象程序能够创建、读写文件，而不用处理硬件实际工作中的恼人细节。</p>
+<p><strong><em>操作系统的任务</em></strong></p>
+<p>操作系统的任务是<strong>创建好的抽象</strong>，并实现和管理它所创建的抽象对象。对于真实的硬件，其设计非常复杂，操作系统的一个主要任务是<strong>隐藏硬件</strong>，呈现给程序良好、清晰、优雅、一致的抽象。</p>
+<h2 id="作为资源管理者的操作系统"><a href="#作为资源管理者的操作系统" class="headerlink" title="作为资源管理者的操作系统"></a>作为资源管理者的操作系统</h2><p>操作系统用来管理一个复杂系统的的各个部分，包含CPU、存储器、时钟、磁盘、鼠标、IO、打印机等，操作系统的任务是在相互竞争的程序中有序地控制对处理器、存储器等的分配。</p>
+<p><strong><em>并发问题</em></strong></p>
+<p>现代操作系统允许同时在内存当中运行多道程序，假设在一台计算机上运行的三个程序试图同时在同一台打印机上输出结果，那么开始几行可能是程序1的输出，后面是程序2，之后又是程序1、程序3等。即没有一个程序可以完整的进行输出，因此最终的结果将是一团糟。</p>
+<p>采用缓冲区的方式，操作系统可以将打印结果送到缓冲区当中，在程序结束后，将暂存在磁盘上的文件送到打印机输出，同时其他程序可以继续输出结果。</p>
+<p><strong><em>多用户</em></strong></p>
+<p>当计算机或网络具有多个用户时，管理和保护存储器、IO设备等需求较为强烈。用户间会互相干扰，他们共享硬件，还要共享文件、数据库等数据。因此认为数据库的主要任务是记录那个程序在使用什么资源，对资源请求进行分配，评估使用代价，并且为不同的程序和用户调解互相冲突的资源请求。</p>
+<p><strong>时间复用</strong></p>
+<p>不同的程序或用户轮流使用，操作系统控制谁应该下一个使用并且使用多长时间。</p>
+<p><strong>空间复用</strong></p>
+<p>每个客户都得到资源的一部分，在若干运行程序间分割内存，这样每一个运行程序都可以同时入驻内存。若干用户分配磁盘空间，每一个用户使用一定的磁盘块等。</p>
+<p>如此做法会引起公平、保护等问题，有赖于操作系统进行解决</p>
+<h1 id="计算机硬件简介"><a href="#计算机硬件简介" class="headerlink" title="计算机硬件简介"></a>计算机硬件简介</h1><p>简单的个人计算机可以抽象为如下图模型，CPU、内存以及IO设备都由一条系统总线连接起来并通过总线与其他设备通信。</p>
+<p><img src="/../OS/assets/1563203320169.png" alt="1563203320169"></p>
+<p>现代计算机结构更为复杂，包含多重总线等</p>
+<h2 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h2><p><strong><em>最初CPU的执行过程</em></strong></p>
+<p>首先从内存中取出指令，解码以确定其类型和操作数，之后执行，然后取值、解码并执行下一条指令。直到程序被执行完成</p>
+<p><strong><em>CPU构成</em></strong></p>
+<ul>
+<li>CPU指令集。每个CPU都有一套可执行的专门指令集，因此x86CPU不能执行ARM程序。</li>
+<li>寄存器。<ul>
+<li>保存变量与临时结果的寄存器。由于用来访问内存以得到指令或数据的时间比执行指令要花费的时间长的多，因此CPU内有一部分用来保存关键变量或临时数据的寄存器。</li>
+<li>对程序员可见的寄存器<ul>
+<li>程序计数器。保存了将要取出的下一条指令的内存地址，在指令取出后，程序计数器被更新以便指向后继的指针</li>
+<li>堆栈指针。指向内存中当前栈的顶端，该栈包含了每个执行过程的栈帧。</li>
+<li>程序状态字PSW寄存器。包含了条件码位、CPU优先级、模式（用户态或内核态）、以及各控制位。用户程序通常读入整个PSW，但是只是对很少字段写入，在系统调用和IO中PSW很重要。</li>
+</ul>
+</li>
+<li>在时间多路复用CPU中，OS会经常终止正在运行中的某程序并启动另一个程序，此时OS必须保存所有的寄存器值，并在之后该程序再次运行时，将寄存器重新装入</li>
+</ul>
+</li>
+</ul>
+<h3 id="CPU流水线模型"><a href="#CPU流水线模型" class="headerlink" title="CPU流水线模型"></a>CPU流水线模型</h3><p>为了改善性能，当代CPU具有同时取出多条指令的机制。如一个CPU可以具有单独的取值单元、解码单元和执行单元，因此当它执行指令n时，还可以对指令n+1解码，并且读取指令n+2。这样的机制称为<strong>流水线</strong>。并且其长度不仅仅只是三个阶段</p>
+<p>在大多数流水线机制当中，一旦一条指令被取进流水线当中，则必须被执行完毕，即使前一条取出的指令是条件转移（以标志位的状态或者以标志位的逻辑运算结果作为转移依据，如果满足转移条件，则转到目标地址所指示的指令执行否则继续执行下一条指令）。这使得编译器与操作系统的编写很困难，造成了软件的复杂性问题。</p>
+<h3 id="超标量CPU模型"><a href="#超标量CPU模型" class="headerlink" title="超标量CPU模型"></a>超标量CPU模型</h3><p>有多个执行单元，如一个CPU用于整形运算，一个用于浮点型，一个用于Boolean。两个或更多个指令被同时去除、解码并装入暂存缓冲区中，直至它们执行完毕，只要有一个执行单元空闲，则检查保持缓冲区是否还要可以处理的指令，若有则将指令移出并执行。</p>
+<p>这种设计使得程序的指令经常不按顺序执行，多数情况下硬件负责保证这种运算的结果与顺序执行的结果相同，但仍有复杂情况需要OS处理</p>
+<p><img src="/1563204754379.png" alt="1563204754379"></p>
+<h3 id="内核态与用户态"><a href="#内核态与用户态" class="headerlink" title="内核态与用户态"></a>内核态与用户态</h3><p>在PSW中有一个二进制位控制这两种模式。</p>
+<ul>
+<li>当在内核态运行时，CPU可以执行指令集中的每一条指令，并使用硬件的每种功能。</li>
+<li>用户程序在用户态下运行，仅允许执行整个指令集的一个子集和访问所有功能的一个子集。</li>
+</ul>
+<p>为了从OS获取服务，用户程序必须使用系统调用以陷入内核并调用OS，TRAP指令把用户态切换成内核态并启用OS，当调用完成后，将控制权返回个iyonghu程序。</p>
+<p>计算机使用陷阱（陷入内核态）而不是一条指令来执行系统调用，其他的多数陷阱是由硬件引起用于警告异常情况。如出错、index为0等。</p>
+<h3 id="多线程和多核芯片"><a href="#多线程和多核芯片" class="headerlink" title="多线程和多核芯片"></a>多线程和多核芯片</h3><p>之前仅仅是有多个功能部件，而现在出现多个控制逻辑</p>
+<p><strong><em>多线程</em></strong>允许CPU保持两个不同的线程状态，然后在纳秒级的时间尺度内来回切换。若某个进程需要从内存中读取一个字（需要多个时钟周期），则多线程CPU可以切换至另一个线程。<strong>多线程CPU不提供真正的并行处理，在一个时刻只有一个进程在运行</strong>，但进程的切换时间减少到纳秒级。</p>
+<p>多线程对于操作系统而言，每个线程都像一个单独的CPU，若是有两个双线程的CPU即像是有4个CPU一样。</p>
+<p><strong><em>多核</em></strong>CPU，即包含2个或4个完整处理器或内核的CPU芯片，每个小芯片都是一个独立的CPU</p>
+<p><img src="/../OS/assets/1563242246843.png" alt="1563242246843"></p>
+<h3 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h3><p>GPU是由成千上万个微核组成的处理器，擅长处理大量并行的简单计算，如渲染等。但他们不太能胜任串行任务，并且很难编程。</p>
+<h2 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h2><p>存储器应该极为迅速（快于执行任何指令，CPU就不会受到存储器限制）、充分大、非常便宜。但是由于无法满足该目标因此出现了分层结构</p>
+<p><img src="/../OS/assets/1563242514123.png" alt="1563242514123"></p>
+<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>寄存器的速度与CPU一样快，访问他们是没有试验的。典型的存储容量在32位CPU中为32*32，在64位CPU是64 *64，即小于1KB，程序必须在软件自行管理这些寄存器</p>
+<h3 id="高速缓存"><a href="#高速缓存" class="headerlink" title="高速缓存"></a>高速缓存</h3><p>多数由硬件控制，主存被分割成高速缓存行，典型大小为64字节，地址0-63对应高速缓存行0，64-127对应高速缓存行1，以此类推。最常用的高速缓存行放在CPU内部或非常接近CPU的高速缓存当中。</p>
+<p><strong>高速缓存命中</strong>：当某个程序在读取一个存储字时，高速缓存硬件检查所需要的高速缓存行是否在高速缓存中，如果是，则高速缓存命中。即不需要通过总线将请求送往主存。</p>
+<p><strong><em>CPU缓存</em></strong></p>
+<ul>
+<li>L1缓存，总是在CPU当中，通常用来将已解码的指令调入CPU的执行引擎，访问不存在延时</li>
+<li>L2缓存，存放近来使用过的若干兆字节的内存字。L1与L2的差别在于时序，L2访问延时1或2个时钟周期</li>
+</ul>
+<p>对于多核芯片，设计师必须确定缓存的位置。</p>
+<ul>
+<li>Intel芯片中一个L2缓存被所有CPU共享。因此Intel需要一个更复杂的缓存控制器</li>
+<li>AMD芯片中，每个核具有自己的L2缓存。因此在保持L2缓存一致性上存在困难</li>
+</ul>
+<p>分级高速缓存：将高速缓存分成二到三级，如L1与L2就是两级</p>
+<p><strong><em>缓存需要考虑</em></strong></p>
+<ul>
+<li>何时把一个新的内容放入缓存当中</li>
+<li>把新内容放在缓存的哪一行上</li>
+<li>在需要时，应该把哪个内容从缓存中移走</li>
+<li>应该把新移走的内容放在某个较大存储器的何处</li>
+</ul>
+<h3 id="主存"><a href="#主存" class="headerlink" title="主存"></a>主存</h3><p>主存即随机访问存储器（RAM），</p>
+<p>除了主存，计算机已经在使用少量的非易失性随机访问存储器（ROM，只读存储器），电源切断后，其内容也不会丢失</p>
+<h2 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h2><p>磁盘是一种机械装置，因此其随机访问数据时间大约慢了三个数量级。</p>
+<p>磁盘中有一个或多个金属片，以某个转速进行旋转。边缘处有一个机械臂悬横在盘面上，信息写在磁盘一系列的同心圆上。<strong>磁道</strong>：在任意一个给定臂的位置，每个磁头可以读取一段环形区域。<strong>柱面</strong>：把一个给定臂的位置上的所有磁道合并起来。</p>
+<p><img src="/../OS/assets/1563292000029.png" alt="1563292000029"></p>
+<p><strong><em>固态硬盘</em></strong></p>
+<p>并没有可以移动的部分，外形也不会像唱片一样，并且数据是存储在存储器（闪存）中的</p>
+<p><strong><em>虚拟内存与上下文切换</em></strong></p>
+<p>将程序放在磁盘上，将主存作为缓存的一部分，用来保存最频繁使用的部分程序。这种机制需要快速地映像内存地址。这种映像由CPU中的一个<strong>MMU（存储器管理单元）</strong>完成</p>
+<p>MMU与缓存对系统性能有重要影响，从一个程序切换到另一个程序时，有必要对来自缓存行的所有修改过的块进行写回磁盘操作，并修改MMU中的映像寄存器。这些操作的代价十分昂贵</p>
+<h2 id="IO设备"><a href="#IO设备" class="headerlink" title="IO设备"></a>IO设备</h2><p>IO设备一般包括两个部分：设备控制器与设备本身。</p>
+<p>控制器是插在电路板上的一块或一组芯片，从操作系统接收命令。对于设备的控制是非常复杂和具体的，控制器的任务是为操作系统提供一个简单的接口。</p>
+<p>IO设备的设备本身有一个相对简单的接口，接口既不能做很多工作，又已经被标准化了，如任何一个SATA磁盘控制器都可以适配任何一种的SATA磁盘。</p>
+<h3 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h3><p>操作系统看到的是对控制器的接口，因为每类设备控制器都是不同的，因此需要不同的软件进行控制。专门与控制器对话，发出命令并接收响应的软件称为设备驱动程序。</p>
+<p>为使用设备驱动程序，必须将其装入操作系统当中，它可以在核心态或用户态运行，但若是在用户态运行则必须能够以某种受控的方式访问设备。</p>
+<h3 id="输入-输出的三种方式"><a href="#输入-输出的三种方式" class="headerlink" title="输入/输出的三种方式"></a>输入/输出的三种方式</h3><p><strong><em>忙等待</em></strong></p>
+<ul>
+<li>用户程序发出一个系统调用，内核将其翻译成一个对应设备驱动程序的过程调用</li>
+<li>然后设备驱动程序启动IO并在一个连续不断的循环中检查该设备，查看该设备是否完成了工作。</li>
+<li>当IO结束后，设备驱动程序将数据送到指定的地方并返回。OS将控制权返回给调用者</li>
+<li><strong>缺陷</strong>：占据CPU，CPU需要一直轮询设备直到IO完成</li>
+</ul>
+<p><strong><em>中断通知</em></strong></p>
+<ul>
+<li>设备驱动程序启动设备，并且让该设备在操作完成时发出一个中断，设备驱动程序在此时返回。</li>
+<li>操作系统之后在需要时阻塞调用者并安排其他工作进行，当设备驱动程序检测到操作完毕时，发出一个中断通知操作完成。</li>
+</ul>
+<p><strong>示例</strong></p>
+<ul>
+<li>设备驱动程序通过写设备寄存器通知设备控制器做什么，然后设备控制器启动该设备，当设备控制器传送完毕给告知要进行读取的字节数量后</li>
+<li>使用特定的总线发信号给中断控制器芯片，如果中断控制器准备接收中断（或正忙于一个更高级的中断，或不接收）<ul>
+<li>中断经常会在非常不合适的时间发生，如在另一个中断正在运行时。因此CPU有办法关闭中断并稍后再次开启</li>
+<li>中断关闭时，任何已经发出中断的设备可以继续保持中断信号，但CPU不会中断。</li>
+<li>在关闭中断时，中断控制器将决定先处理哪一个中断，这取决于优先级</li>
+</ul>
+</li>
+<li>中断控制器在CPU芯片的一个管脚上声明</li>
+<li>中断控制器将设备的编号放到总线上，CPU读取总线，并知道哪个设备刚刚完成了操作。</li>
+</ul>
+<p><img src="/../OS/assets/1563326416941.png" alt="1563326416941"></p>
+<ul>
+<li>当CPU决定中断，程序计数器和PSW就被压入了当前堆栈。CPU切换到用户态。设备编号可以成为部分内存的一个引用，用于寻找该设备中断处理程序的地址，这部分内存称为<strong>中断向量</strong></li>
+<li>当中断处理程序开始后（中断设备），取走程序计数器和PSW并保存，查询设备状态，在中断全部完成后，返回到先前执行的用户程序中尚未执行的第一条指令、</li>
+</ul>
+<p><img src="/../OS/assets/1563326651263.png" alt="1563326651263"></p>
+<p><strong><em>直接存储器访问芯片</em></strong></p>
+<p>为IO使用直接存储器访问芯片（<strong>DMA</strong>），它可以控制在内存和某些控制器间的位流，无需持续CPU干预。CPU对DMA设置，说明需要传送的字节数、有关设备、内存地址、操作方向，启动DMA，当DMA完成后发送中断。</p>
+<h2 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h2><p>随着计算机的发展，单总线很难处理总线的交通流量，因此导致其他总线的出现，他们处理IO以及CPU到存储器的速度都更快</p>
+<p><img src="/../OS/assets/1563327260526.png" alt="1563327260526"></p>
+<p>包括有高速缓存、内存、PCIe、PCI、USB、SATA和DMI总线等。其中主要的总线是PCIe总线</p>
+<p><strong>共享总线架构</strong>、<strong>并行总线架构</strong>是PCIe之前的架构，即多个设备使用一些相同的导线传输数据，因此当多个设备需要同时发送数据时，需要仲裁器决定哪个设备使用。设备通过多条并行的导线发送s护具的每一个字，如32位数据需要32条并行导线发送</p>
+<p><strong>PCIe</strong>采用分离的端到端的链路，因此不需要仲裁。而且通过一条称为数据通路的链路传递集合了所有位的一条消息，如同网络包一样。</p>
+<p><strong>待续</strong></p>
+<h2 id="启动计算机"><a href="#启动计算机" class="headerlink" title="启动计算机"></a>启动计算机</h2><h1 id="操作系统概念"><a href="#操作系统概念" class="headerlink" title="操作系统概念"></a>操作系统概念</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程本质上是正在执行的一个程序，与每个进程相关的是地址空间（从某个最小值的存储位置到某个最大值的存储位置列表）。与进程相关的有进程<strong>地址空间</strong>，进程可以对其地址空间进行读写，该地址空间存放有可执行程序、程序的数据、堆栈。还有<strong>资源集</strong>，包括寄存器，打开文件的清单等等。即进程基本上是容纳运行一个程序所有信息的容器。</p>
+<p><strong><em>多道程序系统</em></strong></p>
+<ul>
+<li>操作系统会周期性地挂起一个进程然后启动运行另一个进程，可能原因是前一个进程已经用完分配给它的时间片。</li>
+<li>一个进程暂时被挂起后，在随后的某个时间，该进程再次启动时的状态必须与先前暂停时完全相同，即挂起时该进程的全部信息都要保存下来。<ul>
+<li>如打开的文件，与每个被打开文件有关的是指向当前位置的指针等</li>
+</ul>
+</li>
+<li>在许多OS当中，与一个进程有关的所有信息，除了该进程自身的地址空间的内容外均存放在OS的一张表中，称为<strong>进程表</strong>。</li>
+</ul>
+<p>一个（挂起的）进程包括：进程的地址空间、对应的进程表项</p>
+<h2 id="地址空间"><a href="#地址空间" class="headerlink" title="地址空间"></a>地址空间</h2><p>操作系统创建了一个地址空间的抽象，作为进程可以引用地址的集合，该地址空间与机器的物理内存解耦，可能大于（虚拟内存）物理空间。</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><h2 id="输入-输出"><a href="#输入-输出" class="headerlink" title="输入/输出"></a>输入/输出</h2><h2 id="保护"><a href="#保护" class="headerlink" title="保护"></a>保护</h2><h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><h2 id="个体重复系统发育"><a href="#个体重复系统发育" class="headerlink" title="个体重复系统发育"></a>个体重复系统发育</h2><h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p>任何单CPU系统一次只能执行一条指令，如果一个进程正在用户态运行一个用户程序，并且需要一个系统服务，则必须执行一次陷阱或系统调用指令，将控制返回给在系统调用后需要执行的指令。即类似于一个特殊的过程调用，但是系统调用是可以进入内核的</p>
+<p>考察read系统调用，如果系统调用不能执行，无论是因为无效的参数还是磁盘错误，结果都会是-1，而在全局变量errno中放入错误号，程序应该经常检查系统调用结果以了解是否出错。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read(fd,buffer,nbytes)</span><br></pre></td></tr></table></figure>
+
+<p>在执行read后，其具体步骤如下所示</p>
+<p><img src="/../OS/assets/1563377076693.png" alt="1563377076693"></p>
+<h2 id="用于进程管理的系统调用"><a href="#用于进程管理的系统调用" class="headerlink" title="用于进程管理的系统调用"></a>用于进程管理的系统调用</h2><h1 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h1><h2 id="单体系统"><a href="#单体系统" class="headerlink" title="单体系统"></a>单体系统</h2><p>在大多数常见的组织中，整个操作系统在内核态以单一程序的方式运行，以过程集合的方式编写，链接成一个大型可执行的二进制文件。</p>
+<h2 id="层次式系统"><a href="#层次式系统" class="headerlink" title="层次式系统"></a>层次式系统</h2><p>上层软件都是在下层软件的基础上构建的，系统分为六层。在第0层上，系统由一些连续的进程组成，编写这些进程时不需要考虑在单处理器上多进程运行的细节，即由第0层提供基本的CPU多道程序功能，以此类推</p>
+<p><img src="/../OS/assets/1563377402235.png" alt="1563377402235"></p>
+<h2 id="微内核"><a href="#微内核" class="headerlink" title="微内核"></a>微内核</h2><p>在分层方式中，设计者要确定在哪里划分内核-用户的边界。传统上所有的层都在内核中，而这样并没有必要，尽可能减少内核态中的功能会更好一些，因为内核态的错误会迅速拖累整个系统，相反可以将用户进程设置为具有较小的权限，则某个错误的后果就不会致命。</p>
+<p>微内核的思想是，为了实现高可靠性，将OS划分为小的、定义良好的模块，只有微内核（CPU中断处理、进程调度、进程通信等）运行在内核态，其他模块由于功能相对较弱作为普通的用户程序运行。<strong>因此一个错误虽然会使得程序崩溃，但不会使得系统死机</strong></p>
+<h2 id="CS模式"><a href="#CS模式" class="headerlink" title="CS模式"></a>CS模式</h2><p>微内核的略微变体，将进程划分为客户端-服务器，</p>
+<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><h2 id="外核"><a href="#外核" class="headerlink" title="外核"></a>外核</h2><p>与虚拟机克隆真实机器不同，另一种策略是对机器进行分区。即为每个用户提供整个资源的一个子集。</p>
+<p>在底层中，一种称为外核的程序在内核态运行，任务是为虚拟机分配资源，并检查使用这些资源的企图，以确保没有使用他人的资源。</p>
+<p>外核机制的优点是减少了映像层，即不需要像虚拟机将硬盘重新映射为0-xxx。只需要记录已经分配给虚拟机的相关资源即可。并且外核将多道程序与用户操作系统代码分离，而且相应负载并不重</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/10/OS/计算机操作系统：概述/" title="计算机操作系统：概述">http://yoursite.com/2019/07/10/OS/计算机操作系统：概述/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/09/版本控制/Git：操作/" rel="next" title="Git：操作">
+                <i class="fa fa-chevron-left"></i> Git：操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/10/Java/设计模式/设计模式：概述/" rel="prev" title="设计模式：概述">
+                设计模式：概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OS引论"><span class="nav-number">1.</span> <span class="nav-text">OS引论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是操作系统"><span class="nav-number">2.</span> <span class="nav-text">什么是操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作为扩展机器的操作系统"><span class="nav-number">2.1.</span> <span class="nav-text">作为扩展机器的操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作为资源管理者的操作系统"><span class="nav-number">2.2.</span> <span class="nav-text">作为资源管理者的操作系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机硬件简介"><span class="nav-number">3.</span> <span class="nav-text">计算机硬件简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理器"><span class="nav-number">3.1.</span> <span class="nav-text">处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU流水线模型"><span class="nav-number">3.1.1.</span> <span class="nav-text">CPU流水线模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超标量CPU模型"><span class="nav-number">3.1.2.</span> <span class="nav-text">超标量CPU模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核态与用户态"><span class="nav-number">3.1.3.</span> <span class="nav-text">内核态与用户态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程和多核芯片"><span class="nav-number">3.1.4.</span> <span class="nav-text">多线程和多核芯片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPU"><span class="nav-number">3.1.5.</span> <span class="nav-text">GPU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器"><span class="nav-number">3.2.</span> <span class="nav-text">存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器"><span class="nav-number">3.2.1.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高速缓存"><span class="nav-number">3.2.2.</span> <span class="nav-text">高速缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主存"><span class="nav-number">3.2.3.</span> <span class="nav-text">主存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘"><span class="nav-number">3.3.</span> <span class="nav-text">磁盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO设备"><span class="nav-number">3.4.</span> <span class="nav-text">IO设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设备驱动程序"><span class="nav-number">3.4.1.</span> <span class="nav-text">设备驱动程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入-输出的三种方式"><span class="nav-number">3.4.2.</span> <span class="nav-text">输入/输出的三种方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总线"><span class="nav-number">3.5.</span> <span class="nav-text">总线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动计算机"><span class="nav-number">3.6.</span> <span class="nav-text">启动计算机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统概念"><span class="nav-number">4.</span> <span class="nav-text">操作系统概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">4.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址空间"><span class="nav-number">4.2.</span> <span class="nav-text">地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">4.3.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入-输出"><span class="nav-number">4.4.</span> <span class="nav-text">输入/输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护"><span class="nav-number">4.5.</span> <span class="nav-text">保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell"><span class="nav-number">4.6.</span> <span class="nav-text">shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个体重复系统发育"><span class="nav-number">4.7.</span> <span class="nav-text">个体重复系统发育</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统调用"><span class="nav-number">5.</span> <span class="nav-text">系统调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用于进程管理的系统调用"><span class="nav-number">5.1.</span> <span class="nav-text">用于进程管理的系统调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统结构"><span class="nav-number">6.</span> <span class="nav-text">操作系统结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单体系统"><span class="nav-number">6.1.</span> <span class="nav-text">单体系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层次式系统"><span class="nav-number">6.2.</span> <span class="nav-text">层次式系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微内核"><span class="nav-number">6.3.</span> <span class="nav-text">微内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CS模式"><span class="nav-number">6.4.</span> <span class="nav-text">CS模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机"><span class="nav-number">6.5.</span> <span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外核"><span class="nav-number">6.6.</span> <span class="nav-text">外核</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

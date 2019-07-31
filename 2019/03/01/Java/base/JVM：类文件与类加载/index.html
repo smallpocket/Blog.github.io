@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM（4）：类文件与类加载">
+<meta property="og:url" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564483003687.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564484128891.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564484562491.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564484590893.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564484888567.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564485105441.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564485753438.png">
+<meta property="og:image" content="d:%5CBlog%5Csource_posts%5CJava%5Cbase%5Cassets%5C1564485766278.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564488177169.png">
+<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1552378339303.png">
+<meta property="og:updated_time" content="2019-07-30T12:06:02.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM（4）：类文件与类加载">
+<meta name="twitter:description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564483003687.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JVM（4）：类文件与类加载 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JVM（4）：类文件与类加载
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-01 10:46:32" itemprop="dateCreated datePublished" datetime="2019-03-01T10:46:32+08:00">2019-03-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-30 20:06:02" itemprop="dateModified" datetime="2019-07-30T20:06:02+08:00">2019-07-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/01/Java/base/JVM：类文件与类加载/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/03/01/Java/base/JVM：类文件与类加载/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h1><p>.class文件，类文件，字节码文件。</p>
+<p>代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。</p>
+<p>而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择</p>
+<h2 id="无关性的基石"><a href="#无关性的基石" class="headerlink" title="无关性的基石"></a>无关性的基石</h2><ul>
+<li><p>平台无关系</p>
+<ul>
+<li>许多虚拟机都可以载入和执行同一种平台无关的字节码，实现“一次编写，到处运行</li>
+<li>各种不同平台的虚拟机与所有平台都统一使用的程序存储格式–<strong>字节码</strong>，是构成平台无关系的基石</li>
+</ul>
+</li>
+<li><p>虚拟机的另一种中立特性，即语言无关性，</p>
+<ul>
+<li>其他语言也可以允许在JVM上。Java虚拟机不和任何语言绑定，只与Class文件这种特定的二进制文件格式关联</li>
+<li>Class文件包含JVM指令集和符号表以及若干其他辅助信息。基于安全，要求Class文件使用许多强制性的语法和结构化约束</li>
+<li>Java语言中的各种变量、关键字和运算符号的语义最终都是由多条字节码命令组合而成。字节码所能提供的语言描述能力比Java更强大。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Class类文件结构"><a href="#Class类文件结构" class="headerlink" title="Class类文件结构"></a>Class类文件结构</h2><p>任何一个Class文件都对应着唯一一个类或接口的定义信息，但是类或接口并不一定都得定义在文件里(譬如类或接口也可以通过类加载器直接生成)</p>
+<ul>
+<li>Class文件是一组以8字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在Class文件中，<strong>中间没有添加任何分割符</strong>，使得Class文件中存储的内容几乎全部是程序允许的必要数据，没有空隙存在</li>
+<li>当遇到需要占用8字节以上空间的数据项时，则按照高位在前的方式分割成若干个8位字节进行存储<ul>
+<li>高位在前：最高位字节在地址最低位，最低位字节在地址最高处</li>
+</ul>
+</li>
+<li>Class文件格式采用类C语言结构体的伪结构存储数据<ul>
+<li>两种数据类型：无符号数，表</li>
+<li>无符号数：基本的数据类型，描述数字、索引引用、数量值或按UTF8编码的字符串值。u1、u2、u4、u8分别代表1、2、4、8个字节的无符号数</li>
+<li>表：由多个无符号数或其他表构成的符合数据结构，习惯性以_info结尾。用于描述具有层次关系的符合结构的数据。整个Class文件本质上是一张表</li>
+</ul>
+</li>
+</ul>
+<p><img src=".%5Cassets%5C1564483003687.png" alt="1564483003687"></p>
+<h3 id="魔数与Class文件版本"><a href="#魔数与Class文件版本" class="headerlink" title="魔数与Class文件版本"></a>魔数与Class文件版本</h3><ul>
+<li>魔数magic：Class文件的头4个字节。用于确定文件是否为一个能够被虚拟机接受的Class文件<ul>
+<li>即用于身份识别，例如jpeg等在文件头都有魔数。基于安全考虑，因为扩展名可以随意改动。</li>
+</ul>
+</li>
+<li>5-8字节：Class文件的版本号，5-6字节：minor_version次版本号，7-8字节：major_version主版本号<ul>
+<li>JDK能够向下兼容，但也必须拒绝执行超过其版本号的Class文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>跟在主次版本号之后的是常量池入口。</p>
+<ul>
+<li>常量池可以理解为Class文件中的资源仓库，是Class文件结构中与其他项目关联最多的数据类型，也是占用空间最大的数据项目之一，同时是Class文件中第一个出现表数据项目</li>
+<li>常量池中的常量的数量是不固定的，因此在入口需要放置一项u2类型的数据，代表常量池容量计数值：constant_pool_count。其计数从1开始，0表达不引用任何一个常量池项目。</li>
+<li>常量池主要存放两大类常量<ul>
+<li>字面量。文本字符串、声明为Final的常量值</li>
+<li>符号引用。类和接口的全限定名、字段的名称和描述符、方法的名称和描述符</li>
+</ul>
+</li>
+</ul>
+<p>虚拟机加载Class文件会进行<strong>动态连接，并不会像C一样有连接步骤</strong>，即Class文件不会保存各个方法、字段的内存最终布局信息。因此需要通过运行期转换才能得到真正的内存入口地址。</p>
+<p>当虚拟机运行时，需要从常量池获得对应的符号引用，再在类创建时或运行时解析，翻译到具体的内存地址之中。</p>
+<p>常量池中的每个常量都是一个表，在JDK7中具有14中，其共同特点是表开始的第一位是一个u1类型标志位，戴白哦该常量属于那种常量类型。</p>
+<p><img src=".%5Cassets%5C1564484128891.png" alt="1564484128891"></p>
+<p>其中<strong>CONSTANT_Class_info</strong>类型代表一个类或接口的符号引用。</p>
+<ul>
+<li>name_index是一个索引值，指向一个CONSTANT_Utf8_info类型常量，代表了这个类或接口的全限定名。<ul>
+<li>若值为0x0002即指向常量池中的第二项常量</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u1</td>
+<td>tag</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>name_index</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p><strong>CONSTANT_Utf8_info</strong>结构如下：</p>
+<ul>
+<li>length说明该UTF-8编码的字符串长度</li>
+<li>bytes字节的连续数据是一个UTF-8缩略编码表示的字符串。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u1</td>
+<td>tag</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u2</td>
+<td>length</td>
+<td>1</td>
+</tr>
+<tr>
+<td>u1</td>
+<td>bytes</td>
+<td>length</td>
+</tr>
+</tbody></table>
+<h4 id="其它常量"><a href="#其它常量" class="headerlink" title="其它常量"></a>其它常量</h4><p>当利用javap进行分析常量池时，其中会出现一些其它的常量，例如<code>I</code>、<code>V</code>、<code>&lt;init&gt;</code>、<code>LineNumberTable</code>等，它们会被字段表、方法表、属性表引用到。用于描述一些不方便用<strong>固定字节</strong>表达的内容，例如方法的返回值是说明，有几个参数，每个参数的类型是说明等。</p>
+<p><strong>常量表常量项的结构总表</strong></p>
+<p><img src=".%5Cassets%5C1564484562491.png" alt="1564484562491"></p>
+<p><img src=".%5Cassets%5C1564484590893.png" alt="1564484590893"></p>
+<h3 id="访问地址"><a href="#访问地址" class="headerlink" title="访问地址"></a>访问地址</h3><p>位于常量池之后，紧接的两个字节代表访问标志<code>access_flags</code>，标志用于标识一些类或者接口层次的访问信息。如该Class是类还是接口，是否为public等。如果是类，是否为final。</p>
+<p><img src=".%5Cassets%5C1564484888567.png" alt="1564484888567"></p>
+<h3 id="类索引、父类索引与接口索引集合"><a href="#类索引、父类索引与接口索引集合" class="headerlink" title="类索引、父类索引与接口索引集合****"></a>类索引、父类索引与接口索引集合****</h3><p>类索引<code>this_class</code>、父类索引<code>super_class</code>：一个u2类型的数据。接口索引的集合<code>interfaces</code>：一组u2类型的数据。Class文件用于确定类的继承关系</p>
+<h3 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h3><p><code>field_info</code>用于描述接口或者类中声明的变量。字段包括类级变量以及实例级变量，但不包括在方法内部声明的局部变量。</p>
+<p><img src=".%5Cassets%5C1564485105441.png" alt="1564485105441"></p>
+<ul>
+<li><code>access_flags</code>描述字段的访问级别</li>
+<li><code>name_index</code>是对常量池的引用，描述字段的简单名称</li>
+<li><code>descriptor_index</code>描述字段和方法的描述符，描述符的作用是描述字段的数据类型、方法的参数列表(数量、类型、顺序)和返回值。</li>
+</ul>
+<h3 id="方法表集合"><a href="#方法表集合" class="headerlink" title="方法表集合"></a>方法表集合</h3><p>与字段表几乎一致。在描述了方法表之后，方法内部的代码经过编译器编译成字节码指令后，存放在<strong>方法属性表集合</strong>中一个名为<code>Code</code>属性中。</p>
+<h3 id="TODO属性表集合"><a href="#TODO属性表集合" class="headerlink" title="TODO属性表集合"></a>TODO属性表集合</h3><p>Class文件、字段表、方法表都可以携带自己的属性表集合，用于描述某些场景专有的信息。</p>
+<p>属性表集合不再要求各个属性表具有严格的顺序，并且只要不与已有属性名重复，任何人实现的编译器都可以向属性表写入自己定义的属性信息，JVM运行时会忽略其不认识的属性。</p>
+<p><img src=".%5Cassets%5C1564485753438.png" alt="1564485753438"></p>
+<p><img src="D:%5CBlog%5Csource_posts%5CJava%5Cbase%5Cassets%5C1564485766278.png" alt="1564485766278"></p>
+<h1 id="公有设计与私有实现"><a href="#公有设计与私有实现" class="headerlink" title="公有设计与私有实现"></a>公有设计与私有实现</h1><h1 id="虚拟机类加载机制"><a href="#虚拟机类加载机制" class="headerlink" title="虚拟机类加载机制"></a>虚拟机类加载机制</h1><p>如何将字节码文件加载到虚拟机当中</p>
+<p>java.lang.ClassNotFoundExcetpion类加载异常</p>
+<h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p>虚拟机如何加载Class文件？Class文件中的信息进入虚拟机后会发生什么变化</p>
+<p>类加载机制：虚拟机把描述类的数据从Class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。</p>
+<p>Java里，类型的加载、连接和初始化过程都是在程序运行期间完成的，虽然使得类加载时稍增加一些性能开销，但是为应用提供高度灵活性。这实现了Java可以动态扩展的语言特性，其天生可以动态扩展的语言特性就是依赖运行期动态加载和动态连接这个特点实现的。</p>
+<ul>
+<li>编写一个面向接口的应用程序，可以等到运行时再指定实际的实现类</li>
+<li>用户可以通过Java预定义的和自定义的类加载器，让一个本地应用程序可以在运行时从网络或其他地方加载一个二进制流作为程序代码的一部分</li>
+</ul>
+<p>这里的Class文件：一串二进制字节流</p>
+<h2 id="类加载的时机"><a href="#类加载的时机" class="headerlink" title="类加载的时机"></a>类加载的时机</h2><p>类从被加载到虚拟机内存中开始，到卸载出内存为止，整个生命周期：</p>
+<p>加载、验证、准备、解析、初始化、使用、卸载</p>
+<p><img src=".%5Cassets%5C1564488177169.png" alt="1564488177169"></p>
+<p>加载、验证、准备、初始化、卸载的顺序是确定的，依次顺序开始（只是开始，不是进行或者完成，他们中间混合交叉进行）。而解析阶段不一定，它在某些情况下可以在初始化之后再开始，以支持动态绑定</p>
+<p><strong>立即对类进行初始化的情况</strong></p>
+<p>有且只有：这5种场景中的行为称为对一个类进行主动引用，除此外，所有引用类的方式都不会触发初始化，称为被动引用。</p>
+<ul>
+<li>遇到new、getstatic、putstatic、invokestatic的字节码指令，如果类没有初始化，则需要先触发其初始化</li>
+<li>遇到java.lang.reflect包的方法对类进行反射调用时</li>
+<li>当初始化一个类，如果其父类还没有进行初始化，则先父类初始化（如果是接口，则不要求父类接口全部完成初始化，只有真正使用到父类接口时才会初始化）</li>
+<li>当虚拟机启动时，用户需要指定一个主类，先初始化主类</li>
+<li>当使用JDK7的动态语言支持时，例如一个Java.lang.invoke.MethodHandle实例最后的解析结果REF_getStatic、REF_putStatic、REF_invokeStatic的方法句柄，并且这个方法句柄所对应的类没有进行过初始化则要先进行初始化</li>
+</ul>
+<h2 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h2><h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><ul>
+<li>通过一个类的全限定名来获取定义此类的二进制字节流<ul>
+<li>读取途径<ul>
+<li>从ZIP包读取，成为日后JAR格式的基础</li>
+<li>从网络中获取，如applet</li>
+<li>运行时计算生成，动态代理技术，java.lang.reflect.Proxy</li>
+<li>由其他文件生成，如JSP，由JSP文件生成Class类</li>
+<li>从数据库中读取等</li>
+</ul>
+</li>
+<li>开发人员可控性最强（非数组类）<ul>
+<li>可以使用系统提供的引导类加载器完成，也可以由用户自定义的类加载器完成，重写一个loadClass()方法</li>
+</ul>
+</li>
+<li>数组类：由JVM直接创建，不由类加载器创建。但是内部的元素由类加载器创建。一个数组类C的创建过程：<ul>
+<li>如果数组的组件（即数组去掉一个维度的类型）是引用类型，则递归加载这个组件类型，数组C将在加载该组件类型的类加载器的类名空间上被标识</li>
+<li>如果不是引用类型，Java虚拟机将在数组C标记为与引导类加载器关联</li>
+<li>数组类的可见性与它的组件类型可见性一致，如果组件类型不是引用类型，那么数组类的可见性默认为public</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</li>
+<li>在内存（堆）中生成一个代表这个类的Java.lang.Class对象，作为方法区这个类的各种数据的访问入口</li>
+</ul>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>连接截短的第一步，为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身安全</p>
+<p><strong>文件格式验证</strong></p>
+<p>验证字节流是否符合Class文件格式的规范，并能够被当前JVM处理</p>
+<ul>
+<li>是否以魔数开头</li>
+<li>主次版本号是否在当前虚拟机处理范围内</li>
+<li>常量池的常量是否有不被支持的常量类型</li>
+<li>指向常量的各种索引值是否有指向不存在的常量或不符合类型的常量</li>
+<li>文件中各个部分已经文件本身是否有被删除或附加的其他信息</li>
+</ul>
+<p>只有该阶段直接操作字节流，其他三个验证阶段都是基于方法区的存储结构进行的</p>
+<p><strong>元数据验证</strong></p>
+<p>对字节码描述的信息进行语义分析，以保证其描述的信息符合Java语言规范</p>
+<ul>
+<li>这个类是否有父类</li>
+<li>这个类的父类是否继承了不允许被继承的类</li>
+<li>如果这个类不是抽象类，是否实现了父类或接口中要求的所有方法</li>
+<li>类中的字段、方法是否与父类矛盾</li>
+</ul>
+<p><strong>字节码验证</strong></p>
+<p>目的是通过数据流和控制流分析，确定程序语义是合法的，符合逻辑的。</p>
+<p>对类的方法体进行校验分析，保证方法在运行时不会做出危害虚拟机安全的事件</p>
+<ul>
+<li>保证方法体中的类型转换时有效，不会出现对象赋值给与它无关的数据类型</li>
+<li>保证跳转指令不会跳转到方法体以外的字节码指令上</li>
+</ul>
+<p><strong>符号引用验证</strong></p>
+<p>发生在虚拟机将符号引用转化为直接引用的时候，这个转化在解析阶段发生</p>
+<p>对类自身以外的信息进行匹配性校验。</p>
+<ul>
+<li>通过字符串描述的限定名是否能找到对应的类</li>
+<li>符号引用中的类、字段、方法的访问性是否可以被当前类访问</li>
+</ul>
+<p>确保解析动作能够正常执行</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>正式为类变量（static的）分配内存并设置类遍历初始值（0值）的阶段，这些变量使用的内存都将在方法区中进行分配。</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>虚拟机将常量池内的符号引用替换为直接引用的过程。</p>
+<ul>
+<li>符号引用：以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。以字面量形式定义在Class文件中。</li>
+<li>直接引用：直接指向目标的指针、相对偏移量或一个能够间接定位到目标的句柄。</li>
+<li>符号引用可能不存在于内存当中，直接引用一定存在内存中</li>
+</ul>
+<p>对于同一个 符号引用进行多次解析是常见的，除invokedynamic指令外，虚拟机实现对第一次解析的结果进行缓存（缓存：在运行时常量池中记录直接引用，并将常量标识为已解析状态），从而避免解析重复进行。</p>
+<p>虚拟机需要保证在同一个实体中，如果一个符号引用之前已经被成功解析过，那么后续的引用解析请求就应当一直成功。如果第一次失败了，那么其他指令对这个符号的解析请求也应该收到同样的异常</p>
+<p>invokedynamic指令用于动态语言支持，只有当实际运行到该节点，才开始解析。</p>
+<p>解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><ul>
+<li>初始化真正开始执行类中定义的Java程序代码。执行类构造器&lt;client&gt;（）方法的过程</li>
+<li>&lt;client&gt;方法由编译器收集类中所有类变量的赋值动作与静态语句块的语句合并而成，顺序由出现顺序而定。</li>
+<li>&lt;client&gt;方法与类构造函数不同，不需要显式调用父类构造器，虚拟机保证在此前，父类的&lt;client&gt;方法已经执行完毕</li>
+<li>虚拟机会保证一个类的&lt;client&gt;方法会在多线程环境正确被加锁、同步。多个线程同时初始化一个类，只有一个线程去执行该方法，其他线程阻塞</li>
+</ul>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>将类加载阶段中的“通过一个类的全限定名来获取描述此类的二进制字节流”的动作放到虚拟机外部实现，以便让程序自己决定如何获取所需要的类。实现该动作的代码模块为类加载器。</p>
+<p>类加载器（class loader）用来加载 Java 类到 Java 虚拟机中。一般来说，Java 虚拟机使用 Java 类的方式如下：Java 源程序（.java 文件）在经过 Java 编译器编译之后就被转换成 Java 字节代码（.class 文件）。类加载器负责读取 Java 字节代码，并转换成 <code>java.lang.Class</code>类的一个实例。每个这样的实例用来表示一个 Java 类。通过此实例的 <code>newInstance()</code>方法就可以创建出该类的一个对象。实际的情况可能更加复杂，比如 Java 字节代码可能是通过工具动态生成的，也可能是通过网络下载的。</p>
+<h3 id="类与类加载器"><a href="#类与类加载器" class="headerlink" title="类与类加载器"></a>类与类加载器</h3><p>类加载器用于实现类的加载动作。</p>
+<ul>
+<li>基本职责：根据一个指定的类的名称，找到或者生成其对应的字节代码，然后从这些字节代码中定义出一个 Java 类，即 <code>java.lang.Class</code>类的一个实例。还负责加载 Java 应用所需的资源</li>
+<li>对于任意一个类，都需要由加载它的类加载器与这个类本身一同确立其在Java虚拟机中的唯一性，每一个类加载器都有一个独立的类名称空间</li>
+<li>判断两个类是否相等，只有两个类是由同一个类加载器加载的前提下才有意义</li>
+<li>相等：equalis等方法返回的结果</li>
+</ul>
+<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p>从Java虚拟机角度讲，只存在两种不同的类加载器</p>
+<ul>
+<li>启动类加载器，使用C++实现，是虚拟机自身一部分</li>
+<li>所有其他的类加载器，Java实现，独立于虚拟机外部，并全部继承自抽象类java.lang.ClassLoader</li>
+</ul>
+<p>从程序员角度讲</p>
+<ul>
+<li>启动类加载器。负责将类库加载到虚拟机内存当中，该加载器无法被Java程序直接引用。用户在编写自定义类加载器时，如果需要把加载请求委派给引导类加载器，那直接使用null代替即可</li>
+<li>扩展类加载器。负责加载&lt;JAVA_HOME&gt;\lib\ext目录，或者java.ext.dirs系统变量指定的路径中所有类库，开发者可以直接使用扩展类加载器</li>
+<li>应用程序（系统）类加载器。负责加载用户类路径上指定的路径，可以直接使用这个类加载器，并且是程序中的默认加载器</li>
+</ul>
+<p><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1552378339303.png" alt="1552378339303"></p>
+<p>要求除了顶层的启动类加载器，其余的类加载器都应当有字节的父类加载器。父子关系一般不会以继承关系实现，而都是以组合关系来复用代码。</p>
+<p>工作过程：</p>
+<ul>
+<li>如果一个类加载器收到了类加载的请求，首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此既</li>
+<li>所有的加载请求都会传送到顶层的启动类加载器，只有父类无法完成这个加载请求，子加载器才会尝试自己去加载</li>
+</ul>
+<p>优势：</p>
+<ul>
+<li>Java类随着它的类加载器一起具备了一种带有优先级的层次关系。如Object类，任何一个类加载器加载这个类，都委派给了启动类加载器，因此他们都是同一个类。而如果让各个类去自行加载，那么系统会出现多个不同的object类。</li>
+<li>其次是考虑到安全因素，java核心api中定义类型不会被随意替换，假设通过网络传递一个名为java.lang.Integer的类，通过双亲委托模式传递到启动类加载器，而启动类加载器在核心Java API发现这个名字的类，发现该类已被加载，并不会重新加载网络传递的过来的java.lang.Integer，而直接返回已加载过的Integer.class，这样便可以防止核心API库被随意篡改。</li>
+</ul>
+<p>实现：</p>
+<ul>
+<li>先检查是否已经被加载过</li>
+<li>如果没有，则调用父类的loadClass</li>
+<li>若父加载器为空，则默认使用启动类加载器作为父加载器</li>
+<li>如果父加载失败，抛出异常，则调用字节的findClass方法加载</li>
+</ul>
+<h3 id="破坏双亲委派模型"><a href="#破坏双亲委派模型" class="headerlink" title="破坏双亲委派模型"></a>破坏双亲委派模型</h3><h2 id="网络类加载器"><a href="#网络类加载器" class="headerlink" title="网络类加载器"></a>网络类加载器</h2><p>下面将通过一个网络类加载器来说明如何通过类加载器来实现组件的动态更新。即基本的场景是：Java 字节代码（.class）文件存放在服务器上，客户端通过网络的方式获取字节代码并执行。当有版本更新的时候，只需要替换掉服务器上保存的文件即可。通过类加载器可以比较简单的实现这种需求。</p>
+<p>类 <code>NetworkClassLoader</code>负责通过网络下载 Java 类字节代码并定义出 Java 类。它的实现与 <code>FileSystemClassLoader</code>类似。在通过 <code>NetworkClassLoader</code>加载了某个版本的类之后，一般有两种做法来使用它。第一种做法是使用 Java 反射 API。另外一种做法是使用接口。需要注意的是，并不能直接在客户端代码中引用从服务器上下载的类，因为客户端代码的类加载器找不到这些类。使用 Java 反射 API 可以直接调用 Java 类的方法。而使用接口的做法则是把接口的类放在客户端中，从服务器上加载实现此接口的不同版本的类。在客户端通过相同的接口来使用这些实现类。网络类加载器的具体代码见 <a href="https://www.ibm.com/developerworks/cn/java/j-lo-classloader/index.html#artdownload" target="_blank" rel="noopener">下载</a>。</p>
+<p>在介绍完如何开发自己的类加载器之后，下面说明类加载器和 Web 容器的关系。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/" title="JVM（4）：类文件与类加载">http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/01/Java/base/JVM：调优/" rel="next" title="JVM：调优">
+                <i class="fa fa-chevron-left"></i> JVM：调优
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/01/Java/base/JVM：程序优化/" rel="prev" title="JVM（5）：程序优化">
+                JVM（5）：程序优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类文件结构"><span class="nav-number">1.</span> <span class="nav-text">类文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无关性的基石"><span class="nav-number">1.2.</span> <span class="nav-text">无关性的基石</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class类文件结构"><span class="nav-number">1.3.</span> <span class="nav-text">Class类文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#魔数与Class文件版本"><span class="nav-number">1.3.1.</span> <span class="nav-text">魔数与Class文件版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量池"><span class="nav-number">1.3.2.</span> <span class="nav-text">常量池</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#其它常量"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">其它常量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问地址"><span class="nav-number">1.3.3.</span> <span class="nav-text">访问地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类索引、父类索引与接口索引集合"><span class="nav-number">1.3.4.</span> <span class="nav-text">类索引、父类索引与接口索引集合****</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段表集合"><span class="nav-number">1.3.5.</span> <span class="nav-text">字段表集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法表集合"><span class="nav-number">1.3.6.</span> <span class="nav-text">方法表集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TODO属性表集合"><span class="nav-number">1.3.7.</span> <span class="nav-text">TODO属性表集合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公有设计与私有实现"><span class="nav-number">2.</span> <span class="nav-text">公有设计与私有实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机类加载机制"><span class="nav-number">3.</span> <span class="nav-text">虚拟机类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-1"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载的时机"><span class="nav-number">3.2.</span> <span class="nav-text">类加载的时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载的过程"><span class="nav-number">3.3.</span> <span class="nav-text">类加载的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载"><span class="nav-number">3.3.1.</span> <span class="nav-text">加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证"><span class="nav-number">3.3.2.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">3.3.3.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">3.3.4.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">3.3.5.</span> <span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载器"><span class="nav-number">3.4.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类与类加载器"><span class="nav-number">3.4.1.</span> <span class="nav-text">类与类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双亲委派模型"><span class="nav-number">3.4.2.</span> <span class="nav-text">双亲委派模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#破坏双亲委派模型"><span class="nav-number">3.4.3.</span> <span class="nav-text">破坏双亲委派模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络类加载器"><span class="nav-number">3.5.</span> <span class="nav-text">网络类加载器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

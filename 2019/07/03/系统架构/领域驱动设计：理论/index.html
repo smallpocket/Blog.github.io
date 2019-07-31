@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="来自于Eric Evans的书">
+<meta property="og:type" content="article">
+<meta property="og:title" content="领域驱动设计">
+<meta property="og:url" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="来自于Eric Evans的书">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/1562555825617.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/849051-20170907235453351-1114451559.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/1562565186285.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/1562567548062.png">
+<meta property="og:updated_time" content="2019-07-10T00:37:18.839Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="领域驱动设计">
+<meta name="twitter:description" content="来自于Eric Evans的书">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/1562555825617.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>领域驱动设计 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">领域驱动设计
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-03 15:00:51" itemprop="dateCreated datePublished" datetime="2019-07-03T15:00:51+08:00">2019-07-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-10 08:37:18" itemprop="dateModified" datetime="2019-07-10T08:37:18+08:00">2019-07-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/03/系统架构/领域驱动设计：理论/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/03/系统架构/领域驱动设计：理论/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">来自于Eric Evans的书</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关注精简的业务模型及实现的匹配</p>
+<p>如果你了解”模型”的定义是对现实的有选择性的精简，然后用这样的观点去读 DDD 这本书，你就会发现，DDD 其实没有什么太多的新鲜玩意，它更多地是可以看作是面向对象思潮的回归和升华。在一个”万事万物皆对象”的世界里，哪些对象是对我们的系统有用的？哪些是对我们拟建系统没有用处的？我们应该如何保证我们选取的模型对象恰好够用？</p>
+<p>前面的选择性问题只是解决了一个初步框选的问题，对象并不是独立存在的，它们之间有着千丝万缕的联系。这种扯不断理还乱的联系构成了系统的复杂性。一个具体的体现就是，我们修改了一处变更，结果引发了一系列的连锁反应。虽然对象的封装机制可以帮我们解决一部分问题，但那只是有限的一部分。我们应该如何在一个更高点的层次上，通过<strong>保留对象之间有用的关系去除无用的关系，并且限定变更影响的范围以来降低系统的复杂度呢</strong>？即<strong><em>在抽象的角度做业务。</em></strong></p>
+<p>在 DDD 以及传统 OO 的观点中，业务而不是技术是一个开发团队首先要关注的内容，众多的框架和平台产品也在宣称把开发人员解放出来，让他们有更多的精力去关注业务。但是，当我们真正去看待时，会发现，开发人员大多还是沉溺于技术中，对业务的理解和深入付出的太少太少。其实要解决这个问题，就要先看清楚我们提炼出来的模型,在整个架构和整个开发过程中所处的位置和地位。我们经常听到两个词，一个是 MDD（模型驱动设计），一个是MDA（模型驱动架构）。如果 DDD 特别关注的是”M”(以及其实现)，那么，这个 M 应该如何与架构和开发过程相融合呢？我经常会看到我们辛苦提取出来的领域模型被肢解后，分散到系统的若干角落。这真是一件可怕的事情，因为一旦形成了”人脑拼图”，就很难再有一个人将它们一一复原，除非这个人是个天才。</p>
+<p>很多面向对象的教材，都会告诉你若干的技巧，让你去机械化地处理模型和对象实现，但是这些教材通常会忽略一个大的上下文环境，就是应该由哪些具有什么样素质和技能的人来处理模型和对象实现,或者说白了，就是应该用什么样的团队模型来匹配业务模型。不同的模型，需要不同的团队模型的支撑，不同的团队模型也会让一个模型实现更优秀或者更糟糕。</p>
+<p>相信很多人读过 ATM 机的例子，你发现自己彻底明白了用例应该怎么编写、模型怎么提取和实现，但是当你信心十足地去开始你自己的项目时，你又会发现你的思路片段化了，所有你明白了的技能在你的新项目中好像用不上。算了，还是老的工作思路和工作方式比较顺手，于是一切都照旧会到了老的套路上。那么，面向对象技术或者说我们提炼出来的模型应该如何在大型项目/团队中使用呢？我们是应该要求一个项目使用统一的模型，还是应该把它们分成不同的模型？我们应该如何抉择？</p>
+<h1 id="领域驱动设计"><a href="#领域驱动设计" class="headerlink" title="领域驱动设计"></a>领域驱动设计</h1><p>软件开发通常被应用到真实世界中已经存在的自动化流程，或者给真实的业务问题提供解决方案。即软件脱胎于领域，并与领域密切相关。</p>
+<h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><p>以汽车制造为例。参与汽车制造的工人会专门负责汽车的某个部件，但这样做的后果是工人们通常对整体的汽车制造流程缺乏了解。他们可能将汽车视为一大堆需要固定在一起的零件的集合体，但一辆汽车的意义远不只于此。一辆好车起源于一个好的创意，开始于认真制定的规格说明，然后再交付给设计。经历若干道设计工序，（历经岁月），用上几个月甚至几年的时间去设计、修改、精化直至完美，直至它反映出最初的愿景。设计的过程也不全然是在纸上进行的。许多的设计工作包括制模、在极端条件下对它们进行测试，以验证它们是否能工作等。设计会根据测试的结果做出修改。汽车最终被交付到生产线上，在那里，所有的部件已经就绪，然后被组装到一起。</p>
+<p><strong>因此</strong>，为了创建一个好软件，你必须知道这个软件究竟是什么。在你充分了解金融业务是什么之前，你是做不出一个好的银行业软件系统的，你必须理解银行业的<strong>领域</strong>。</p>
+<p>那么对于软件架构师，他只是在使用银行来保护他的财产安全，以保证他的急时所需；软件分析师吗？也不是，他只精通于如何运用所有能够获得的必要因素去分析一个给定的主题；软件开发人员？别难为他了。</p>
+<p>真正明白领域的人是业务人员。银行业务系统被银行的内部人员所熟知，我们称其为专家。他们知道所有的细节，所有的困难、所有可能出现的问题，以及所有的规章等。这些就是我们永远的起始点：领域。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><strong><em>目标</em></strong></p>
+<p>在启动一个软件项目时，我们应该关注软件涉及的领域。软件的最终目的是增进一个特定的领域。为了达到这个目的，软件需要跟要它服务的领域和谐相处，否则，它会给领域引入麻烦，产生障碍、灾难甚至导致混乱等。</p>
+<p><strong><em>做什么</em></strong></p>
+<p>让软件成为领域的反射（映射）。软件需要具现领域里重要的核心概念和元素，并精确实现它们之间的关系。软件需要对领域进行建模。</p>
+<p>需要建立领域的抽象——在脑海当中建立一个蓝图。这个<strong>抽象</strong>是一个关于领域的模型，并不是一个图，是那副图要极力传递的思想。</p>
+<p>模型是我们对目标领域的内部展现方式，会贯穿设计和开发的全过程。</p>
+<p><strong><em>怎么做</em></strong></p>
+<p>一个领域当中包含着海量的信息。我们需要组织信息，将其系统化，分割成一个小一点的信息块，将这些信息块分类放到逻辑模块当中，每次只处理其中的一个逻辑模块。</p>
+<p>我们需要忽略领域中的很多部分，因为信息太多，不能放到一个模型当中，并且也存在一些信息并不需要我们去考虑。这同样是一个挑战。</p>
+<p><strong><em>模型</em></strong></p>
+<p>模型是软件设计中的最基础的部分。我们需要它，是因为能够用它来处理复杂问题。我们对领域的所有的思考过程被汇总到这个模型中。</p>
+<p>我们需要用模型与其他人进行交流。常见的一种方式是将模型图形化：图、用例、画和图片等。另一种方式是写，我们会写下我们对领域的愿景。还有一种方式是使用语言，我们能够也应该针对要交流的领域内的特定问题建立一种语言。</p>
+<p><strong><em>软件设计</em></strong></p>
+<p>软件设计类似于构建房子的架构，那是跟一个总图相关的。代码设计是非常细节性的工作，类似于在一面墙上定位一幅油画。</p>
+<ul>
+<li>瀑布设计方法<ul>
+<li>业务专家提出一堆需求同业务分析人员进行交流，分析人员基于那些需求来创建模型并作为结果传递给开发人员</li>
+<li>开发人员根据他们收到的内容开始编码</li>
+<li><strong>缺陷</strong>：业务专家得不到分析人员的反馈信息，分析人员也得不到开发人员的反馈信息。</li>
+</ul>
+</li>
+<li>敏捷方法学<ul>
+<li>产生背景：<ul>
+<li>预先很难确定所有的需求，特别是需求经常变化的情况。要想预先创建一个覆盖领域所有方面的完整模型确实很困难</li>
+<li>“分析瘫痪”，团队成员会因为害怕做出任何设计决定而无所事事。</li>
+</ul>
+</li>
+<li>使用大量灵活的实现，通过由业务涉众持续参与的迭代开发和许多重构，开发团队更多地学习到了客户的领域知识，从而能够产出满足客户需要的软件。</li>
+<li><strong>缺陷：</strong><ul>
+<li>他们提倡简单，但每个人都对“简单”的意义有着自己的观点。</li>
+<li>同时，缺乏了真实可见的设计原则，由开发人员执行地持续重构会导致代码更难理解或者更难改变。</li>
+<li>虽然瀑布方法可能会导致过度工程，但对过度工程的担心可能会带来另一种担心：害怕做出深度、彻底的设计</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="构建领域知识"><a href="#构建领域知识" class="headerlink" title="构建领域知识"></a>构建领域知识</h2><h1 id="通用语言"><a href="#通用语言" class="headerlink" title="通用语言"></a>通用语言</h1><h1 id="模型驱动设计"><a href="#模型驱动设计" class="headerlink" title="模型驱动设计"></a>模型驱动设计</h1><p>软件开发过程的重点，以业务领域为中心。让模型植根于领域，并精确反映出领域中的基础概念是建立模型的一个最重要的基础。</p>
+<ul>
+<li>建立模型<ul>
+<li>在业务层通过接口确立模型，进行模型间的交互？</li>
+</ul>
+</li>
+<li>将模型实现代码。<ul>
+<li>在模型确立后，用代码进行实现模型，进行不断的迭代？</li>
+</ul>
+</li>
+</ul>
+<h2 id="模型驱动设计的基本构成要素"><a href="#模型驱动设计的基本构成要素" class="headerlink" title="模型驱动设计的基本构成要素"></a>模型驱动设计的基本构成要素</h2><p><strong><em>模式与模式间的关系</em></strong></p>
+<p><img src="assets/1562555825617.png" alt="1562555825617"></p>
+<p><strong><em>分层架构</em></strong></p>
+<p><img src="assets/849051-20170907235453351-1114451559.png" alt="img"></p>
+<p>当创建一个软件应用时，应用的很大一部分是不能直接与领域相关的，但是它们或时基础设施的一部分，或是为软件服务的。如数据库访问、文件、用户界面等相关代码</p>
+<p>为了开发一个每个层内聚的设计，让层仅仅依赖于下面的层。一个统一的架构包含4个概念层</p>
+<ul>
+<li>用户界面/展现层。<ul>
+<li>负责向用户展现信息以及解释用户命令。</li>
+</ul>
+</li>
+<li>应用层<ul>
+<li>很薄的一层，用来协调应用的活动。它不包含业务逻辑。它不保留业务对象的状态，但它保有应用任务的进度状态。</li>
+</ul>
+</li>
+<li>领域层<ul>
+<li>本层包含关于领域的信息。这是业务软件的核心所在。在这里保留业务对象的状态，对业务对象和它们状态的持久化被委托给了基础设施层。</li>
+</ul>
+</li>
+<li>基础设施层<ul>
+<li>本层作为其他层的支撑库存在。它提供了层间的通信，实现对业务对象的持久化，包含对用户界面层的支撑库等作用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="实体"><a href="#实体" class="headerlink" title="实体"></a>实体</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>有一类对象看上去好像拥有标识符，它的标识符在历经软件的各种状态后仍能保持一致。对这些对象来讲这已经不再是它们关心的属性，这意味着能够跨越系统的生命周期甚至能超越软件系统的一系列的延续性和标识符。我们把这样的对象称为实体。</p>
+<p>标识符不是说一个对对象的引用。相反一个对象经常会被移出或移入内存，被序列化后在网络上传输，在另一端重新建立，或者都被消除。但是我们依然可以知道这个对象到底是什么。例如传过来一个“账户”的对象，我们还是可以确定这个账户到底是什么。</p>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>考虑一个银行系统，每一个账户都拥有它自己的数字码，一个账户可以用它的数字码来精确标识。这个数字码会在系统的生命周期中会保持不变，并保持延续性。</p>
+<p>账户码可以作为一个对象存在于内存中，也可以被在内存中销毁，发送到数据库中。当这个账户被关闭时，它还可以被归档，只要还有人对它感兴趣，它就依然在某处存在。不论它的表现形式如何，数字码会保持一致。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>创建实体，即意味着创建标识符。通常标识符或是对象的一个属性（或属性的组合），一个专门为保存和表现标识符而创建的属性，也或是一种行为。</p>
+<p>对两个拥有不同标识符的对象来说，能用系统轻易地把它们区分开来。或者两个使用了相同标识符的对象能被系统看成是相同的，这些都是非常重要的</p>
+<h2 id="值对象"><a href="#值对象" class="headerlink" title="值对象"></a>值对象</h2><h3 id="如何界定实体与值对象"><a href="#如何界定实体与值对象" class="headerlink" title="如何界定实体与值对象"></a>如何界定实体与值对象</h3><p>实体是领域模型中必需的对象。如何去确认一个实体？我们是否应该将所有的对象视为实体？每一个对象都应该有一个标识符吗？</p>
+<p>若是将所有对象看成是一个实体，那么由于实体是可以被跟踪的。创建与跟踪标识符需要很大的<strong>成本</strong>，需要保证每一个实体具有唯一的标识，并且根据标识符可以唯一去确定实体。同时会带来<strong>性能问题</strong>，如果Customer 是一个实体对象，那么这个对象的一个实例标识一个特殊的银行客户，不能被对应其他客户的账户操作所复用，造成的结果是必须为每一个客户建立一个这样的实例。这会导致系统在处理成千上万的实例时性能严重下降。</p>
+<p><strong><em>值对象</em></strong></p>
+<p>我们对某个对象是什么不感兴趣，只关心它拥有的属性。用来描述领域的特殊方面、且没有标识符的一个对象，叫做值对象。</p>
+<p><strong><em>实体对象</em></strong></p>
+<p>选择那些符合实体定义的对象作为实体</p>
+<h3 id="值对象的使用"><a href="#值对象的使用" class="headerlink" title="值对象的使用"></a>值对象的使用</h3><p>没有标识符，值对象可以很轻易地被创建和丢弃。</p>
+<p>极力推荐值对象是不变的，由一个构造器创建，并且在生命周期内永远不会被修改。这样值对象就可以被共享了，不变的对象可以在重要性能语境下共享，也能表明一致性。</p>
+<blockquote>
+<p>如果值对象是可共享的，那么它们应该是不可变的。<br>值对象应该保持尽量的简单。当其他当事人需要一个值对象时，可以简单地传递值，或者创建一个副本。</p>
+</blockquote>
+<h2 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h2><p>当分析领域并试图定义构成模型的主要对象时，有些方面的领域很难映射为对象。</p>
+<p>对象通常要考虑拥有属性，对象管理它的内部状态并暴露行为。对应的动词可以映射为对象的行为。但是领域中的一些动作，看上去不属于任何的对象，代表着领域中的一个重要行为，通常这种动作会跨越若干个对象。</p>
+<p>当识别出这样的动作，最佳实践是将它声明成一个服务。这样的对象不再拥有内置的状态了，它的作用是为了简化所提供的领域功能。服务所能提供的协调作用是非常重要的，一个服务可以将服务于实体和值对象的相关功能进行分组。最好显式声明服务，因为它创建了领域中的一个清晰的特性，它封装了一个概念。把这样的功能放入实体或者值对象都会导致混乱，因为那些对象的立场将变得不清楚。</p>
+<p>服务是多个对象的一个链接点</p>
+<h3 id="服务的特征"><a href="#服务的特征" class="headerlink" title="服务的特征"></a>服务的特征</h3><ul>
+<li>服务执行的操作涉及一个领域概念，这个领域概念通常不属于一个实体或者值对象。</li>
+<li>被执行的操作涉及到领域中的其他的对象。</li>
+<li>操作是无状态的</li>
+</ul>
+<h3 id="服务的设计"><a href="#服务的设计" class="headerlink" title="服务的设计"></a>服务的设计</h3><p>在使用服务时，需要保持领域层的隔离，不应当弄混属于领域层的服务和属于基础设施层的服务。</p>
+<p><strong><em>决定服务是否属于领域层</em></strong></p>
+<p>如果所执行的操作概念上属于领域层，那么服务就应该放到这个层。如果操作和领域对象相关，而且确实也跟领域有关，能够满足领域的需要，那么它就应该属于领域层。</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ul>
+<li>对于大型的复杂项目，模型较为复杂，为降低复杂性，将模型组织进模块当中</li>
+<li>代码应该具有高层次的内聚与低层次的耦合度，将内聚组织到模块当中</li>
+</ul>
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><blockquote>
+<p>聚合是用来定义对象所有权和边界的领域模式</p>
+</blockquote>
+<h3 id="提出问题-1"><a href="#提出问题-1" class="headerlink" title="提出问题"></a>提出问题</h3><p>一个领域会包含众多的领域对象，我们总会看到许多对象与其他对象发生关联，形成一个复杂的关系网。领域对象间的实际关联在代码中结束，有时甚至却在数据库中。</p>
+<p>直到模型中嵌入了对领域的深层理解，否则就要时常对模型中的关系进行消减和简化。</p>
+<p><strong><em>关联关系</em></strong></p>
+<p>对于1对1的关系。会表现为两个对象间的引用，并且在数据库表中隐含一个关联关系。</p>
+<p>对于1对多的关联关系。可以被简单转化为一个对象与一组其他对象间的关联，虽然不总是行得通</p>
+<p>对于多对多的关联。大部分是双向的，使得对这样的对象的生命周期管理变得困难。关联的数字应该被尽可能地消减。</p>
+<ul>
+<li>首先删除模型中非本质的关联关系</li>
+<li>增加约束，以消减多重性。如果很多对象满足一种关系，那么在这个关系上加入正确的约束后，很有可能只有一个对象会继续满足这种关系</li>
+<li>转换为非双向的关联。</li>
+</ul>
+<p><strong><em>数据一致性问题</em></strong></p>
+<p>当系统完全删除一个客户的信息时，必须保证所有的引用都被删除了。如果许多对象保有这样的引用，则很难保证它们全被删除了。</p>
+<p>同时当客户的某些数据发生了变化，系统必须确保在系统中执行了适当的更新。通常在数据库层面进行处理，手段是利用事务。若没有仔细设计模型，则会导致很大程度的数据库争夺导致性能佷差。</p>
+<p><strong><em>不变量</em></strong></p>
+<p>不变量是数据发生变化时必须维护的那些规则。这在许多对象与数据发生变化的对象保持引用时更难实现。</p>
+<h3 id="聚合定义"><a href="#聚合定义" class="headerlink" title="聚合定义"></a>聚合定义</h3><p>聚合是针对数据变化可以考虑成一个单元的一组相关的对象。聚合使用边界将内部和外部的对象划分开来。</p>
+<p>每个聚合有一个根。这个根是一个实体，并且它是外部可以访问的唯一的对象。根可以保持对任意聚合对象的引用，并且其他的对象可以持有任意其他的对象，但一个外部对象只能持有根对象的引用。如果边界内有其他的实体，那些实体的标识符是本地化的，只在聚合内有意义。</p>
+<h3 id="聚合原理"><a href="#聚合原理" class="headerlink" title="聚合原理"></a>聚合原理</h3><p>因为其他对象只能持有根对象的引用，意味着它们不能直接变更聚合内的其他的对象，只能对根进行变更，或让根来执行某些活动。</p>
+<p>当删除根后，聚合的所有其他对象也都删除了，因为不会有其他对象持有他们当中的任何一个。</p>
+<p>根对象可能将内部的临时引用传递给外部对象，作为限制，当操作完成后，外部对象不能再持有这个引用。（传递一个值对象的拷贝）</p>
+<p>如果聚合对象被保存到数据库当中，只有根可以通过查询获得。</p>
+<p><img src="assets/1562565186285.png" alt="1562565186285"></p>
+<h2 id="工厂"><a href="#工厂" class="headerlink" title="工厂"></a>工厂</h2><p>实体和聚合通常会很大很复杂，根实体的构造函数内的创建逻辑也会很复杂。通过构造器构建一个复杂的聚合与领域本身也会很冲突。</p>
+<p>工厂用来封装对象创建所必需的知识，他们对创建聚合十分有效。</p>
+<p><strong><em>注意</em></strong></p>
+<p>工厂破坏了一个对象的封装原则，当对象中发生了某种变化，会对构造规则或者某些不变量造成影响，需要确认工厂也被更新以支持新的条件。</p>
+<p><strong><em>使用构造函数的情况</em></strong></p>
+<ul>
+<li>构造过程不复杂</li>
+<li>对象的创建不涉及到其他对象的创建，所有的属性都需要传递给构造函数</li>
+<li>客户程序对实现很感兴趣，可能希望选择使用策略模式</li>
+<li>类是特定的类型，不涉及继承，所以不用在一系列的具体实现中进行选择</li>
+</ul>
+<h2 id="资源库"><a href="#资源库" class="headerlink" title="资源库"></a>资源库</h2><h3 id="提出问题-2"><a href="#提出问题-2" class="headerlink" title="提出问题"></a>提出问题</h3><p>创建对象的整体是为了能够使用他们。而想要获得这样的引用，客户程序必须创建一个对象或者通过导航已经有的关联关系从另一个对象中获得它。</p>
+<p>问题是，客户程序首先要获得对根的引用，对大型应用而言，我们必须保证客户始终对需要的对象保持引用。者会强制要求对象持有一系列他们可能其实并不需要保持的一系列的引用。增加了耦合性，创建了一系列不需要的关联。</p>
+<p>若是客户程序从数据库当中访问，获得它所需要的对象，看似简单，但是会对设计产生<strong>负面的影响</strong>。</p>
+<ul>
+<li>数据库是基础设施一部分，客户程序必须要知道访问数据库所需的细节。</li>
+<li>访问数据库可能会暴露其内部更细节的信息。</li>
+<li>进行数据库访问的代码在整个模型中四散，在领域模型当中处理许多基础设施的细节而不是领域概念。</li>
+</ul>
+<h3 id="资源库-1"><a href="#资源库-1" class="headerlink" title="资源库"></a>资源库</h3><p>目的是封装所有获取对象引用所需的逻辑，领域对象不需要处理基础设施，以得到领域中对其他对象的所需的引用，只需要从资源库中获取。</p>
+<p>资源库作为一个全局的可访问对象的存储点而存在。资源库会保存对某些对象的引用，当一个对象被创建出来时，可以被保存到资源库中，然后以后使用时可以从资源库中检索。</p>
+<p><img src="assets/1562567548062.png" alt="1562567548062"></p>
+<h1 id="面向深层理解的重构"><a href="#面向深层理解的重构" class="headerlink" title="面向深层理解的重构"></a>面向深层理解的重构</h1><h1 id="保持模型一致性"><a href="#保持模型一致性" class="headerlink" title="保持模型一致性"></a>保持模型一致性</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/" title="领域驱动设计">http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/02/系统架构/架构：StudyResources/" rel="next" title="架构：StudyResources">
+                <i class="fa fa-chevron-left"></i> 架构：StudyResources
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/03/系统架构/领域驱动设计：StudyResources/" rel="prev" title="领域驱动设计：StudyResources">
+                领域驱动设计：StudyResources <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#领域驱动设计"><span class="nav-number">1.</span> <span class="nav-text">领域驱动设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.1.1.</span> <span class="nav-text">背景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建领域知识"><span class="nav-number">1.2.</span> <span class="nav-text">构建领域知识</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通用语言"><span class="nav-number">2.</span> <span class="nav-text">通用语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型驱动设计"><span class="nav-number">3.</span> <span class="nav-text">模型驱动设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型驱动设计的基本构成要素"><span class="nav-number">3.1.</span> <span class="nav-text">模型驱动设计的基本构成要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实体"><span class="nav-number">3.2.</span> <span class="nav-text">实体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">3.2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-number">3.2.2.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.3.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值对象"><span class="nav-number">3.3.</span> <span class="nav-text">值对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何界定实体与值对象"><span class="nav-number">3.3.1.</span> <span class="nav-text">如何界定实体与值对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值对象的使用"><span class="nav-number">3.3.2.</span> <span class="nav-text">值对象的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务"><span class="nav-number">3.4.</span> <span class="nav-text">服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务的特征"><span class="nav-number">3.4.1.</span> <span class="nav-text">服务的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务的设计"><span class="nav-number">3.4.2.</span> <span class="nav-text">服务的设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块"><span class="nav-number">3.5.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合"><span class="nav-number">3.6.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提出问题-1"><span class="nav-number">3.6.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合定义"><span class="nav-number">3.6.2.</span> <span class="nav-text">聚合定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合原理"><span class="nav-number">3.6.3.</span> <span class="nav-text">聚合原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂"><span class="nav-number">3.7.</span> <span class="nav-text">工厂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源库"><span class="nav-number">3.8.</span> <span class="nav-text">资源库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提出问题-2"><span class="nav-number">3.8.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源库-1"><span class="nav-number">3.8.2.</span> <span class="nav-text">资源库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面向深层理解的重构"><span class="nav-number">4.</span> <span class="nav-text">面向深层理解的重构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#保持模型一致性"><span class="nav-number">5.</span> <span class="nav-text">保持模型一致性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

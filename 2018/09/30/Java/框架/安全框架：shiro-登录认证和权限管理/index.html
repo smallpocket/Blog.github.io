@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="解决的问题 shiro的介绍 shiro的权限验证和角色管理 如何在jsp中集成shiro  关于 Apache Shiro目的 想做一个对用户的登录进行权限的管理，保证安全性  Shiro基础知识Shiro需要的基础知识：权限管理 什么是权限管理？只要有用户参与的系统一般都要有权限管理，权限管理实现对用户访问系统的控制，按照安全规则或者安全策略控制用户可以访问而且只能访问自己被授权的资源。 对权">
+<meta name="keywords" content="框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安全框架：整合shiro-登录认证和权限管理">
+<meta property="og:url" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="解决的问题 shiro的介绍 shiro的权限验证和角色管理 如何在jsp中集成shiro  关于 Apache Shiro目的 想做一个对用户的登录进行权限的管理，保证安全性  Shiro基础知识Shiro需要的基础知识：权限管理 什么是权限管理？只要有用户参与的系统一般都要有权限管理，权限管理实现对用户访问系统的控制，按照安全规则或者安全策略控制用户可以访问而且只能访问自己被授权的资源。 对权">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/3491991135-5ab1ba00cceb2_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/584208214-5ab1ba0066265_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/2497122580-5ab1ba003b258_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/3309210765-5ab1ba0012112_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/4266318395-5ab1ba0047bb6_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/1506010554-5ab1ba024de1e_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/1551109644-5ab1b9ffe3548_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/94357956-5ab1b9ffac8b0_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/2915295527-5ab1b9ffad886_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/1841761624-5ab1b9ffe6b6e_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/3987084277-5ab1b9ffc4829_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/672979961-5ab1b9ffc5126_articlex.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/%E6%95%B4%E5%90%88shiro-%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%861.png">
+<meta property="og:updated_time" content="2019-03-31T12:58:07.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安全框架：整合shiro-登录认证和权限管理">
+<meta name="twitter:description" content="解决的问题 shiro的介绍 shiro的权限验证和角色管理 如何在jsp中集成shiro  关于 Apache Shiro目的 想做一个对用户的登录进行权限的管理，保证安全性  Shiro基础知识Shiro需要的基础知识：权限管理 什么是权限管理？只要有用户参与的系统一般都要有权限管理，权限管理实现对用户访问系统的控制，按照安全规则或者安全策略控制用户可以访问而且只能访问自己被授权的资源。 对权">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/assets/3491991135-5ab1ba00cceb2_articlex.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>安全框架：整合shiro-登录认证和权限管理 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">安全框架：整合shiro-登录认证和权限管理
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-30 14:44:33" itemprop="dateCreated datePublished" datetime="2018-09-30T14:44:33+08:00">2018-09-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-31 20:58:07" itemprop="dateModified" datetime="2019-03-31T20:58:07+08:00">2019-03-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/springBoot/" itemprop="url" rel="index"><span itemprop="name">springBoot</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h1><ul>
+<li>shiro的介绍</li>
+<li>shiro的权限验证和角色管理</li>
+<li>如何在jsp中集成shiro</li>
+</ul>
+<h1 id="关于-Apache-Shiro"><a href="#关于-Apache-Shiro" class="headerlink" title="关于 Apache Shiro"></a>关于 Apache Shiro</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ul>
+<li>想做一个对用户的登录进行权限的管理，保证安全性</li>
+</ul>
+<h2 id="Shiro基础知识"><a href="#Shiro基础知识" class="headerlink" title="Shiro基础知识"></a>Shiro基础知识</h2><p>Shiro需要的基础知识：权限管理</p>
+<h3 id="什么是权限管理？"><a href="#什么是权限管理？" class="headerlink" title="什么是权限管理？"></a>什么是权限管理？</h3><p><strong>只要有用户参与的系统一般都要有权限管理</strong>，权限管理实现对用户访问系统的控制，按照安全规则或者安全策略<strong>控制用户可以访问而且只能访问自己被授权的资源</strong>。</p>
+<p>对权限的管理又分为两大类别：</p>
+<ul>
+<li><strong>用户认证</strong></li>
+<li><strong>用户授权</strong></li>
+</ul>
+<h4 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h4><p>用户认证，<strong>用户去访问系统，系统要验证用户身份的合法性</strong></p>
+<p>最常用的用户身份验证的方法：1、用户名密码方式、2、指纹打卡机、3、基于证书验证方法。。<strong>系统验证用户身份合法，用户方可访问系统的资源。</strong></p>
+<p>举个例子：</p>
+<ul>
+<li>当我们输入了自己的淘宝的账户和密码，才能打开购物车</li>
+</ul>
+<p>用户认证的流程：</p>
+<ul>
+<li><strong>判断该资源能否不认证就能访问【登陆页面、首页】</strong></li>
+<li><strong>如果该资源需要认证后才能访问，那么判断该访问者是否认证了</strong></li>
+<li><strong>如果还没有认证，那么需要返回到【登陆页面】进行认证</strong></li>
+<li><strong>认证通过后才能访问资源</strong></li>
+</ul>
+<p><img src="assets/3491991135-5ab1ba00cceb2_articlex.png" alt="这里写图片描述"></p>
+<p>从用户认证我们可以抽取出这么几个概念</p>
+<ul>
+<li>subject主体：<strong>理解为用户,可能是程序，都要去访问系统的资源，系统需要对subject进行身份认证</strong></li>
+<li>principal身份信息：<strong>通常是唯一的，一个主体还有多个身份信息</strong>，但是都有一个主身份信息（primary principal）【我们可以选择身份证认证、学生证认证等等都是我们的身份信息】</li>
+<li>credential凭证信息：<strong>可以是密码 、证书、指纹。</strong></li>
+</ul>
+<p>总结：<strong>主体在进行身份认证时需要提供身份信息和凭证信息。</strong></p>
+<h4 id="用户授权"><a href="#用户授权" class="headerlink" title="用户授权"></a>用户授权</h4><p>用户授权，<strong>简单理解为访问控制</strong>，在用户认证通过后，<strong>系统对用户访问资源进行控制，用户具有资源的访问权限方可访问</strong>。</p>
+<p>用户授权的流程</p>
+<ul>
+<li>到达了用户授权环节，当然是需要用户认证之后了</li>
+<li><strong>用户访问资源，系统判断该用户是否有权限去操作该资源</strong></li>
+<li><strong>如果该用户有权限才能够访问，如果没有权限就不能访问了</strong></li>
+</ul>
+<p><img src="assets/584208214-5ab1ba0066265_articlex.png" alt="这里写图片描述"></p>
+<p>授权的过程可以简单理解为：<strong>主体认证之后，系统进行访问控制</strong></p>
+<p>subject必须具备资源的访问权限才可访问该资源..</p>
+<p>权限/许可(permission) ：<strong>针对资源的权限或许可，subject具有permission访问资源，如何访问/操作需要定义permission</strong>，权限比如：用户添加、用户修改、商品删除</p>
+<p>资源可以分为两种</p>
+<ul>
+<li>资源类型:<strong>系统的用户信息就是资源类型，相当于java类。</strong></li>
+<li>资源实例:<strong>系统中id为001的用户就是资源实例，相当于new的java对象。</strong></li>
+</ul>
+<h3 id="权限管理模型"><a href="#权限管理模型" class="headerlink" title="权限管理模型"></a>权限管理模型</h3><p>一般地，我们可以抽取出这么几个模型：</p>
+<ul>
+<li>主体（账号、密码）</li>
+<li>资源（资源名称、访问地址）</li>
+<li>权限（权限名称、资源id）</li>
+<li>角色（角色名称）</li>
+<li>角色和权限关系（角色id、权限id）</li>
+<li>主体和角色关系（主体id、角色id）</li>
+</ul>
+<p><img src="assets/2497122580-5ab1ba003b258_articlex.png" alt="这里写图片描述"></p>
+<p>通常企业开发中将资源和权限表合并为一张权限表，如下：</p>
+<ul>
+<li>资源（资源名称、访问地址）</li>
+<li>权限（权限名称、资源id）</li>
+</ul>
+<p>合并为：</p>
+<ul>
+<li><strong>权限（权限名称、资源名称、资源访问地址）</strong></li>
+</ul>
+<p><img src="assets/3309210765-5ab1ba0012112_articlex.png" alt="这里写图片描述"></p>
+<h3 id="分配权限"><a href="#分配权限" class="headerlink" title="分配权限"></a>分配权限</h3><p><strong>用户需要分配相应的权限才可访问相应的资源。权限是对于资源的操作许可。</strong></p>
+<p>通常给<strong>用户分配资源权限需要将权限信息持久化，比如存储在关系数据库中</strong>。把用户信息、权限管理、用户分配的权限信息写到数据库（权限数据模型）</p>
+<h4 id="基于角色访问控制"><a href="#基于角色访问控制" class="headerlink" title="基于角色访问控制"></a>基于角色访问控制</h4><p><strong>RBAC(role based access control)，基于角色的访问控制。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果该user是部门经理则可以访问if中的代码</span></span><br><span class="line"><span class="keyword">if</span>(user.hasRole(<span class="string">'部门经理'</span>))&#123;</span><br><span class="line">    <span class="comment">//系统资源内容</span></span><br><span class="line">    <span class="comment">//用户报表查看</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>角色针对人划分的，<strong>人作为用户在系统中属于活动内容，如果该 角色可以访问的资源出现变更，需要修改你的代码了</strong>，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(user.hasRole(<span class="string">'部门经理'</span>) || user.hasRole(<span class="string">'总经理'</span>)  )&#123;</span><br><span class="line">    <span class="comment">//系统资源内容</span></span><br><span class="line">    <span class="comment">//用户报表查看</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>基于角色的访问控制是不利于系统维护(可扩展性不强)。</strong></p>
+<h4 id="基于资源的访问控制"><a href="#基于资源的访问控制" class="headerlink" title="基于资源的访问控制"></a>基于资源的访问控制</h4><p><strong>RBAC(Resource based access control)，基于资源的访问控制。</strong></p>
+<p>资源在系统中是不变的，比如资源有：<strong>类中的方法，页面中的按钮。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">对资源的访问需要具有permission权限，代码可以写为：</span><br><span class="line"></span><br><span class="line">if(user.hasPermission (&apos;用户报表查看（权限标识符）&apos;))&#123;</span><br><span class="line">    //系统资源内容</span><br><span class="line">    //用户报表查看</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>建议使用基于资源的访问控制实现权限管理</strong>。</p>
+<h1 id="粗粒度和细粒度权限"><a href="#粗粒度和细粒度权限" class="headerlink" title="粗粒度和细粒度权限"></a>粗粒度和细粒度权限</h1><p>细粒度权限管理：对资源实例的权限管理。资源实例就资源类型的具体化，比如：用户id为001的修改连接，1110班的用户信息、行政部的员工。<strong>细粒度权限管理就是数据级别的权限管理。</strong></p>
+<p>粗粒度权限管理比如：超级管理员可以访问户添加页面、用户信息等全部页面。部门管理员可以访问用户信息页面包括 页面中所有按钮。</p>
+<p><strong>粗粒度和细粒度例子</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">系统有一个用户列表查询页面，对用户列表查询分权限，</span><br><span class="line"></span><br><span class="line">如果粗颗粒管理，张三和李四都有用户列表查询的权限，张三和李四都可以访问用户列表查询。</span><br><span class="line"></span><br><span class="line">进一步进行细颗粒管理，张三（行政部）和李四(开发部)只可以查询自己本部门的用户信息。</span><br><span class="line"></span><br><span class="line">张三只能查看行政部 的用户信息，李四只能查看开发部门的用户信息。</span><br><span class="line"></span><br><span class="line">细粒度权限管理就是数据级别的权限管理。</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何实现粗粒度权限管理？"><a href="#如何实现粗粒度权限管理？" class="headerlink" title="如何实现粗粒度权限管理？"></a>如何实现粗粒度权限管理？</h2><p>粗粒度权限管理比较容易<strong>将权限管理的代码抽取出来在系统架构级别统一处理</strong>。比如：通过<strong>springmvc的拦截器实现授权</strong>。</p>
+<p>对细粒度权限管理在<strong>数据级别是没有共性可言</strong>，针对细粒度权限管理就是<strong>系统业务逻辑的一部分</strong>，<strong>在业务层去处理相对比较简单</strong></p>
+<p>比如：<strong>部门经理只查询本部门员工信息，在service接口提供一个部门id的参数，controller中根据当前用户的信息得到该 用户属于哪个部门，调用service时将部门id传入service，实现该用户只查询本部门的员工。</strong></p>
+<h3 id="基于URL拦截"><a href="#基于URL拦截" class="headerlink" title="基于URL拦截"></a>基于URL拦截</h3><p>基于url拦截的方式实现在实际开发中比较常用的一种方式。</p>
+<p><strong>对于web系统，通过filter过虑器实现url拦截，也可以springmvc的拦截器实现基于url的拦截。</strong></p>
+<h3 id="使用权限管理框架实现"><a href="#使用权限管理框架实现" class="headerlink" title="使用权限管理框架实现"></a>使用权限管理框架实现</h3><p>对于粗粒度权限管理，建议使用优秀权限管理框架来实现，节省开发成功，提高开发效率。</p>
+<p><strong>shiro就是一个优秀权限管理框架。</strong></p>
+<h1 id="回顾URL拦截"><a href="#回顾URL拦截" class="headerlink" title="回顾URL拦截"></a>回顾URL拦截</h1><p>我们在学习的路途上也是使用过几次URL对权限进行拦截的</p>
+<p>当时我们做了权限的增删该查的管理系统，<strong>但是在权限表中是没有把资源添加进去，我们使用的是Map集合来进行替代的</strong>。<br><a href="http://blog.csdn.net/hon_3y/article/details/61926175" target="_blank" rel="noopener">http://blog.csdn.net/hon_3y/article/details/61926175</a></p>
+<p>随后，我们学习了动态代理和注解，我们也做了一个基于注解的拦截</p>
+<ul>
+<li><strong>在Controller得到service对象的时候，service工厂返回的是一个动态代理对象回去</strong></li>
+<li><strong>Controller拿着代理对象去调用方法，代理对象就会去解析该方法上是否有注解</strong></li>
+<li><strong>如果有注解，那么就需要我们进行判断该主体是否认证了，如果认证了就判断该主体是否有权限</strong></li>
+<li><strong>当我们解析出该主体的权限和我们注解的权限是一致的时候，才放行！</strong></li>
+</ul>
+<p><a href="http://blog.csdn.net/hon_3y/article/details/70767050" target="_blank" rel="noopener">http://blog.csdn.net/hon_3y/article/details/70767050</a></p>
+<p>流程:</p>
+<p><img src="assets/4266318395-5ab1ba0047bb6_articlex.png" alt="这里写图片描述"></p>
+<h2 id="认证的JavaBean"><a href="#认证的JavaBean" class="headerlink" title="认证的JavaBean"></a>认证的JavaBean</h2><p>我们之前认证都是放在默认的Javabean对象上的，现在既然我们准备学Shiro了，我们就得专业一点，弄一个<strong>专门存储认证信息的JavaBean</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用户身份信息，存入session 由于tomcat将session会序列化在本地硬盘上，所以使用Serializable接口</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Thinkpad</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActiveUser</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String userid;<span class="comment">//用户id（主键）</span></span><br><span class="line">    <span class="keyword">private</span> String usercode;<span class="comment">// 用户账号</span></span><br><span class="line">    <span class="keyword">private</span> String username;<span class="comment">// 用户名称</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;SysPermission&gt; menus;<span class="comment">// 菜单</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;SysPermission&gt; permissions;<span class="comment">// 权限</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsercode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> usercode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsercode</span><span class="params">(String usercode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.usercode = usercode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUserid</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserid</span><span class="params">(String userid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userid = userid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;SysPermission&gt; <span class="title">getMenus</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> menus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMenus</span><span class="params">(List&lt;SysPermission&gt; menus)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.menus = menus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;SysPermission&gt; <span class="title">getPermissions</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> permissions;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPermissions</span><span class="params">(List&lt;SysPermission&gt; permissions)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.permissions = permissions;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>认证的服务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ActiveUser <span class="title">authenticat</span><span class="params">(String userCode, String password)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">	认证过程：</span></span><br><span class="line"><span class="comment">	根据用户身份（账号）查询数据库，如果查询不到用户不存在</span></span><br><span class="line"><span class="comment">	对输入的密码 和数据库密码 进行比对，如果一致，认证通过</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">//根据用户账号查询数据库</span></span><br><span class="line">    SysUser sysUser = <span class="keyword">this</span>.findSysUserByUserCode(userCode);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(sysUser == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="comment">//抛出异常</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">"用户账号不存在"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//数据库密码 (md5密码 )</span></span><br><span class="line">    String password_db = sysUser.getPassword();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//对输入的密码 和数据库密码 进行比对，如果一致，认证通过</span></span><br><span class="line">    <span class="comment">//对页面输入的密码 进行md5加密 </span></span><br><span class="line">    String password_input_md5 = <span class="keyword">new</span> MD5().getMD5ofStr(password);</span><br><span class="line">    <span class="keyword">if</span>(!password_input_md5.equalsIgnoreCase(password_db))&#123;</span><br><span class="line">        <span class="comment">//抛出异常</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">"用户名或密码 错误"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//得到用户id</span></span><br><span class="line">    String userid = sysUser.getId();</span><br><span class="line">    <span class="comment">//根据用户id查询菜单 </span></span><br><span class="line">    List&lt;SysPermission&gt; menus =<span class="keyword">this</span>.findMenuListByUserId(userid);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//根据用户id查询权限url</span></span><br><span class="line">    List&lt;SysPermission&gt; permissions = <span class="keyword">this</span>.findPermissionListByUserId(userid);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//认证通过，返回用户身份信息</span></span><br><span class="line">    ActiveUser activeUser = <span class="keyword">new</span> ActiveUser();</span><br><span class="line">    activeUser.setUserid(sysUser.getId());</span><br><span class="line">    activeUser.setUsercode(userCode);</span><br><span class="line">    activeUser.setUsername(sysUser.getUsername());<span class="comment">//用户名称</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//放入权限范围的菜单和url</span></span><br><span class="line">    activeUser.setMenus(menus);</span><br><span class="line">    activeUser.setPermissions(permissions);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> activeUser;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Controller处理认证，<strong>如果身份认证成功，那么把认证信息存储在Session中</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/login"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(HttpSession session, String randomcode,String usercode,String password)</span><span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    <span class="comment">//校验验证码，防止恶性攻击</span></span><br><span class="line">    <span class="comment">//从session获取正确验证码</span></span><br><span class="line">    String validateCode = (String) session.getAttribute(<span class="string">"validateCode"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//输入的验证和session中的验证进行对比 </span></span><br><span class="line">    <span class="keyword">if</span>(!randomcode.equals(validateCode))&#123;</span><br><span class="line">        <span class="comment">//抛出异常</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> CustomException(<span class="string">"验证码输入错误"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//调用service校验用户账号和密码的正确性</span></span><br><span class="line">    ActiveUser activeUser = sysService.authenticat(usercode, password);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果service校验通过，将用户身份记录到session</span></span><br><span class="line">    session.setAttribute(<span class="string">"activeUser"</span>, activeUser);</span><br><span class="line">    <span class="comment">//重定向到商品查询页面</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"redirect:/first.action"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>身份认证拦截器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在执行handler之前来执行的</span></span><br><span class="line"><span class="comment">//用于用户认证校验、用户权限校验</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">        HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//得到请求的url</span></span><br><span class="line">    String url = request.getRequestURI();</span><br><span class="line">    <span class="comment">//判断是否是公开 地址</span></span><br><span class="line">    <span class="comment">//实际开发中需要公开 地址配置在配置文件中</span></span><br><span class="line">    <span class="comment">//从配置中取逆名访问url</span></span><br><span class="line">    List&lt;String&gt; open_urls = ResourcesUtil.gekeyList(<span class="string">"anonymousURL"</span>);</span><br><span class="line">    <span class="comment">//遍历公开 地址，如果是公开 地址则放行</span></span><br><span class="line">    <span class="keyword">for</span>(String open_url:open_urls)&#123;</span><br><span class="line">        <span class="keyword">if</span>(url.indexOf(open_url)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//如果是公开 地址则放行</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断用户身份在session中是否存在</span></span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line">    ActiveUser activeUser = (ActiveUser) session.getAttribute(<span class="string">"activeUser"</span>);</span><br><span class="line">    <span class="comment">//如果用户身份在session中存在放行</span></span><br><span class="line">    <span class="keyword">if</span>(activeUser!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//执行到这里拦截，跳转到登陆页面，用户进行身份认证</span></span><br><span class="line">    request.getRequestDispatcher(<span class="string">"/WEB-INF/jsp/login.jsp"</span>).forward(request, response);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果返回false表示拦截不继续执行handler，如果返回true表示放行</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>授权拦截器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在执行handler之前来执行的</span></span><br><span class="line"><span class="comment">//用于用户认证校验、用户权限校验</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">        HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//得到请求的url</span></span><br><span class="line">    String url = request.getRequestURI();</span><br><span class="line">    <span class="comment">//判断是否是公开 地址</span></span><br><span class="line">    <span class="comment">//实际开发中需要公开 地址配置在配置文件中</span></span><br><span class="line">    <span class="comment">//从配置中取逆名访问url</span></span><br><span class="line">    </span><br><span class="line">    List&lt;String&gt; open_urls = ResourcesUtil.gekeyList(<span class="string">"anonymousURL"</span>);</span><br><span class="line">    <span class="comment">//遍历公开 地址，如果是公开 地址则放行</span></span><br><span class="line">    <span class="keyword">for</span>(String open_url:open_urls)&#123;</span><br><span class="line">        <span class="keyword">if</span>(url.indexOf(open_url)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//如果是公开 地址则放行</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//从配置文件中获取公共访问地址</span></span><br><span class="line">    List&lt;String&gt; common_urls = ResourcesUtil.gekeyList(<span class="string">"commonURL"</span>);</span><br><span class="line">    <span class="comment">//遍历公用 地址，如果是公用 地址则放行</span></span><br><span class="line">    <span class="keyword">for</span>(String common_url:common_urls)&#123;</span><br><span class="line">        <span class="keyword">if</span>(url.indexOf(common_url)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//如果是公开 地址则放行</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取session</span></span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line">    ActiveUser activeUser = (ActiveUser) session.getAttribute(<span class="string">"activeUser"</span>);</span><br><span class="line">    <span class="comment">//从session中取权限范围的url</span></span><br><span class="line">    List&lt;SysPermission&gt; permissions = activeUser.getPermissions();</span><br><span class="line">    <span class="keyword">for</span>(SysPermission sysPermission:permissions)&#123;</span><br><span class="line">        <span class="comment">//权限的url</span></span><br><span class="line">        String permission_url = sysPermission.getUrl();</span><br><span class="line">        <span class="keyword">if</span>(url.indexOf(permission_url)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//如果是权限的url 地址则放行</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//执行到这里拦截，跳转到无权访问的提示页面</span></span><br><span class="line">    request.getRequestDispatcher(<span class="string">"/WEB-INF/jsp/refuse.jsp"</span>).forward(request, response);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果返回false表示拦截不继续执行handler，如果返回true表示放行</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拦截器配置：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--拦截器 --&gt;</span><br><span class="line">&lt;mvc:interceptors&gt;</span><br><span class="line"></span><br><span class="line">    &lt;mvc:interceptor&gt;</span><br><span class="line">        &lt;!-- 用户认证拦截 --&gt;</span><br><span class="line">        &lt;mvc:mapping path=<span class="string">"/**"</span> /&gt;</span><br><span class="line">        &lt;bean class="cn.itcast.ssm.controller.interceptor.LoginInterceptor"&gt;&lt;/bean&gt;</span><br><span class="line">    &lt;/mvc:interceptor&gt;</span><br><span class="line">    &lt;mvc:interceptor&gt;</span><br><span class="line">        &lt;!-- 授权拦截 --&gt;</span><br><span class="line">        &lt;mvc:mapping path=<span class="string">"/**"</span> /&gt;</span><br><span class="line">        &lt;bean class="cn.itcast.ssm.controller.interceptor.PermissionInterceptor"&gt;&lt;/bean&gt;</span><br><span class="line">    &lt;/mvc:interceptor&gt;</span><br><span class="line">&lt;/mvc:interceptors&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="什么是Shiro"><a href="#什么是Shiro" class="headerlink" title="什么是Shiro"></a>什么是Shiro</h1><p>shiro是apache的一个开源框架，<strong>是一个权限管理的框架，实现 用户认证、用户授权</strong>。</p>
+<p>spring中有spring security (原名Acegi)，是一个权限框架，它和spring依赖过于紧密，没有shiro使用简单。<br>shiro不依赖于spring，shiro不仅可以实现 web应用的权限管理，还可以实现c/s系统，分布式系统权限管理，<strong>shiro属于轻量框架，越来越多企业项目开始使用shiro。</strong></p>
+<p>Shiro架构：</p>
+<p><img src="assets/1506010554-5ab1ba024de1e_articlex.png" alt="这里写图片描述"></p>
+<ul>
+<li>subject：主体，可以是用户也可以是程序，主体要访问系统，系统需要对主体进行认证、授权。</li>
+<li>securityManager：安全管理器，主体进行认证和授权都 是通过securityManager进行。</li>
+<li>authenticator：认证器，主体进行认证最终通过authenticator进行的。</li>
+<li>authorizer：授权器，主体进行授权最终通过authorizer进行的。</li>
+<li>sessionManager：web应用中一般是用web容器对session进行管理，shiro也提供一套session管理的方式。</li>
+<li>SessionDao： 通过SessionDao管理session数据，针对个性化的session数据存储需要使用sessionDao。</li>
+<li>cache Manager：缓存管理器，主要对session和授权数据进行缓存，比如将授权数据通过cacheManager进行缓存管理，和ehcache整合对缓存数据进行管理。</li>
+<li>realm：域，领域，相当于数据源，<strong>通过realm存取认证、授权相关数据。</strong></li>
+</ul>
+<p><strong>cryptography：密码管理，提供了一套加密/解密的组件，方便开发。比如提供常用的散列、加/解密等功能。</strong></p>
+<ul>
+<li>比如md5散列算法。</li>
+</ul>
+<h1 id="为什么使用Shiro"><a href="#为什么使用Shiro" class="headerlink" title="为什么使用Shiro"></a>为什么使用Shiro</h1><p>我们在使用URL拦截的时候，<strong>要将所有的URL都配置起来，繁琐、不易维护</strong></p>
+<p>而我们的Shiro实现<strong>系统的权限管理，有效提高开发效率，从而降低开发成本。</strong></p>
+<h1 id="Shiro认证"><a href="#Shiro认证" class="headerlink" title="Shiro认证"></a>Shiro认证</h1><h2 id="导入jar包"><a href="#导入jar包" class="headerlink" title="导入jar包"></a>导入jar包</h2><p>我们使用的是Maven的坐标就行了</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;shiro-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;shiro-ehcache&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;shiro-quartz&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当然了，我们也可以把Shiro相关的jar包全部导入进去</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-all&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Shiro认证流程"><a href="#Shiro认证流程" class="headerlink" title="Shiro认证流程"></a>Shiro认证流程</h2><p><img src="assets/1551109644-5ab1b9ffe3548_articlex.png" alt="这里写图片描述"></p>
+<h3 id="通过配置文件创建工厂"><a href="#通过配置文件创建工厂" class="headerlink" title="通过配置文件创建工厂"></a>通过配置文件创建工厂</h3><p><img src="assets/94357956-5ab1b9ffac8b0_articlex.png" alt="这里写图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户登陆和退出</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLoginAndLogout</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建securityManager工厂，通过ini配置文件创建securityManager工厂</span></span><br><span class="line">    Factory&lt;SecurityManager&gt; factory = <span class="keyword">new</span> IniSecurityManagerFactory(</span><br><span class="line">            <span class="string">"classpath:shiro-first.ini"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建SecurityManager</span></span><br><span class="line">    SecurityManager securityManager = factory.getInstance();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将securityManager设置当前的运行环境中</span></span><br><span class="line">    SecurityUtils.setSecurityManager(securityManager);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从SecurityUtils里边创建一个subject</span></span><br><span class="line">    Subject subject = SecurityUtils.getSubject();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在认证提交前准备token（令牌）</span></span><br><span class="line">    <span class="comment">// 这里的账号和密码 将来是由用户输入进去</span></span><br><span class="line">    UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">"zhangsan"</span>,</span><br><span class="line">            <span class="string">"111111"</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 执行认证提交</span></span><br><span class="line">        subject.login(token);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (AuthenticationException e) &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 是否认证通过</span></span><br><span class="line">    <span class="keyword">boolean</span> isAuthenticated = subject.isAuthenticated();</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"是否认证通过："</span> + isAuthenticated);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 退出操作</span></span><br><span class="line">    subject.logout();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 是否认证通过</span></span><br><span class="line">    isAuthenticated = subject.isAuthenticated();</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"是否认证通过："</span> + isAuthenticated);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="assets/2915295527-5ab1b9ffad886_articlex.png" alt="这里写图片描述"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>ModularRealmAuthenticator作用进行认证，<strong>需要调用realm查询用户信息（在数据库中存在用户信息）</strong></li>
+<li>ModularRealmAuthenticator进行密码对比（认证过程）。</li>
+<li>realm：需要根据token中的身份信息去查询数据库（入门程序使用ini配置文件），<strong>如果查到用户返回认证信息，如果查询不到返回null</strong>。</li>
+</ul>
+<h2 id="自定义realm"><a href="#自定义realm" class="headerlink" title="自定义realm"></a>自定义realm</h2><p>从第一个认证程序我们可以看见，我们所说的流程，<strong>是认证器去找realm去查询我们相对应的数据</strong>。而默认的realm是直接去与配置文件来比对的，一般地，<strong>我们在开发中都是让realm去数据库中比对。</strong><br>因此，我们需要自定义realm</p>
+<p><img src="assets/1841761624-5ab1b9ffe6b6e_articlex.png" alt="这里写图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomRealm</span> <span class="keyword">extends</span> <span class="title">AuthorizingRealm</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置realm的名称</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.setName(<span class="string">"customRealm"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用于认证</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            AuthenticationToken token)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// token是用户输入的</span></span><br><span class="line">        <span class="comment">// 第一步从token中取出身份信息</span></span><br><span class="line">        String userCode = (String) token.getPrincipal();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第二步：根据用户输入的userCode从数据库查询</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果查询不到返回null</span></span><br><span class="line">        <span class="comment">//数据库中用户账号是zhangsansan</span></span><br><span class="line">        <span class="comment">/*if(!userCode.equals("zhangsansan"))&#123;//</span></span><br><span class="line"><span class="comment">            return null;</span></span><br><span class="line"><span class="comment">        &#125;*/</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 模拟从数据库查询到密码</span></span><br><span class="line">        String password = <span class="string">"111112"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果查询到返回认证信息AuthenticationInfo</span></span><br><span class="line"></span><br><span class="line">        SimpleAuthenticationInfo simpleAuthenticationInfo = <span class="keyword">new</span> SimpleAuthenticationInfo(</span><br><span class="line">                userCode, password, <span class="keyword">this</span>.getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> simpleAuthenticationInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用于授权</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AuthorizationInfo <span class="title">doGetAuthorizationInfo</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            PrincipalCollection principals)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置realm"><a href="#配置realm" class="headerlink" title="配置realm"></a>配置realm</h2><p><strong>需要在shiro-realm.ini配置realm注入到securityManager中。</strong></p>
+<p><img src="assets/3987084277-5ab1b9ffc4829_articlex.png" alt="这里写图片描述"></p>
+<h2 id="测试自定义realm"><a href="#测试自定义realm" class="headerlink" title="测试自定义realm"></a>测试自定义realm</h2><p>同上边的入门程序，需要更改ini配置文件路径：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">同上边的入门程序，需要更改ini配置文件路径：</span><br><span class="line">Factory&lt;SecurityManager&gt; factory = <span class="keyword">new</span> IniSecurityManagerFactory(</span><br><span class="line">                <span class="string">"classpath:shiro-realm.ini"</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="散列算法"><a href="#散列算法" class="headerlink" title="散列算法"></a>散列算法</h2><p>我们如果知道md5，我们就会知道md5是不可逆的，但是如果设置了一些安全性比较低的密码：111111…即时是不可逆的，但还是可以通过暴力算法来得到md5对应的明文…</p>
+<p><strong>建议对md5进行散列时加salt（盐），进行加密相当 于对原始密码+盐进行散列。</strong>\</p>
+<p>正常使用时散列方法：</p>
+<ul>
+<li>在程序中对原始密码+盐进行散列，将散列值存储到数据库中，并且还要将盐也要存储在数据库中。</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MD5Test</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//原始 密码 </span></span><br><span class="line">        String source = <span class="string">"111111"</span>;</span><br><span class="line">        <span class="comment">//盐</span></span><br><span class="line">        String salt = <span class="string">"qwerty"</span>;</span><br><span class="line">        <span class="comment">//散列次数</span></span><br><span class="line">        <span class="keyword">int</span> hashIterations = <span class="number">2</span>;</span><br><span class="line">        <span class="comment">//上边散列1次：f3694f162729b7d0254c6e40260bf15c</span></span><br><span class="line">        <span class="comment">//上边散列2次：36f2dfa24d0a9fa97276abbe13e596fc</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//构造方法中：</span></span><br><span class="line">        <span class="comment">//第一个参数：明文，原始密码 </span></span><br><span class="line">        <span class="comment">//第二个参数：盐，通过使用随机数</span></span><br><span class="line">        <span class="comment">//第三个参数：散列的次数，比如散列两次，相当 于md5(md5(''))</span></span><br><span class="line">        Md5Hash md5Hash = <span class="keyword">new</span> Md5Hash(source, salt, hashIterations);</span><br><span class="line">        </span><br><span class="line">        String password_md5 =  md5Hash.toString();</span><br><span class="line">        System.out.println(password_md5);</span><br><span class="line">        <span class="comment">//第一个参数：散列算法 </span></span><br><span class="line">        SimpleHash simpleHash = <span class="keyword">new</span> SimpleHash(<span class="string">"md5"</span>, source, salt, hashIterations);</span><br><span class="line">        System.out.println(simpleHash.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义realm支持md5"><a href="#自定义realm支持md5" class="headerlink" title="自定义realm支持md5"></a>自定义realm支持md5</h2><p><strong>自定义realm</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomRealmMd5</span> <span class="keyword">extends</span> <span class="title">AuthorizingRealm</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置realm的名称</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.setName(<span class="string">"customRealmMd5"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用于认证</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            AuthenticationToken token)</span> <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// token是用户输入的</span></span><br><span class="line">        <span class="comment">// 第一步从token中取出身份信息</span></span><br><span class="line">        String userCode = (String) token.getPrincipal();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第二步：根据用户输入的userCode从数据库查询</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果查询不到返回null</span></span><br><span class="line">        <span class="comment">// 数据库中用户账号是zhangsansan</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * if(!userCode.equals("zhangsansan"))&#123;// return null; &#125;</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 模拟从数据库查询到密码,散列值</span></span><br><span class="line">        String password = <span class="string">"f3694f162729b7d0254c6e40260bf15c"</span>;</span><br><span class="line">        <span class="comment">// 从数据库获取salt</span></span><br><span class="line">        String salt = <span class="string">"qwerty"</span>;</span><br><span class="line">        <span class="comment">//上边散列值和盐对应的明文：111111</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果查询到返回认证信息AuthenticationInfo</span></span><br><span class="line">        SimpleAuthenticationInfo simpleAuthenticationInfo = <span class="keyword">new</span> SimpleAuthenticationInfo(</span><br><span class="line">                userCode, password, ByteSource.Util.bytes(salt), <span class="keyword">this</span>.getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> simpleAuthenticationInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用于授权</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AuthorizationInfo <span class="title">doGetAuthorizationInfo</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            PrincipalCollection principals)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件：</p>
+<p><img src="assets/672979961-5ab1b9ffc5126_articlex.png" alt="这里写图片描述"></p>
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义realm实现散列值匹配</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCustomRealmMd5</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建securityManager工厂，通过ini配置文件创建securityManager工厂</span></span><br><span class="line">        Factory&lt;SecurityManager&gt; factory = <span class="keyword">new</span> IniSecurityManagerFactory(</span><br><span class="line">                <span class="string">"classpath:shiro-realm-md5.ini"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建SecurityManager</span></span><br><span class="line">        SecurityManager securityManager = factory.getInstance();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将securityManager设置当前的运行环境中</span></span><br><span class="line">        SecurityUtils.setSecurityManager(securityManager);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从SecurityUtils里边创建一个subject</span></span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在认证提交前准备token（令牌）</span></span><br><span class="line">        <span class="comment">// 这里的账号和密码 将来是由用户输入进去</span></span><br><span class="line">        UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">"zhangsan"</span>,</span><br><span class="line">                <span class="string">"222222"</span>);</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 执行认证提交</span></span><br><span class="line">            subject.login(token);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (AuthenticationException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 是否认证通过</span></span><br><span class="line">        <span class="keyword">boolean</span> isAuthenticated = subject.isAuthenticated();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"是否认证通过："</span> + isAuthenticated);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Shiro介绍"><a href="#Shiro介绍" class="headerlink" title="Shiro介绍"></a>Shiro介绍</h1><p>Apache Shiro是一个功能强大、灵活的，开源的安全框架。它可以干净利落地处理身份验证、授权、企业会话管理和加密。</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>验证用户身份</li>
+<li>用户访问权限控制，比如：</li>
+</ul>
+<ol>
+<li>判断用户是否分配了一定的安全角色。</li>
+<li>判断用户是否被授予完成某个操作的权限</li>
+</ol>
+<ul>
+<li>在非 web 或 EJB 容器的环境下可以任意使用Session API</li>
+<li>可以响应认证、访问控制，或者 Session 生命周期中发生的事件</li>
+<li>可将一个或以上用户安全数据源数据组合成一个复合的用户 “view”(视图)</li>
+<li>支持单点登录(SSO)功能</li>
+<li>支持提供“Remember Me”服务，获取用户关联信息而无需登录<br>···</li>
+</ul>
+<p>等等——都集成到一个有凝聚力的易于使用的API。</p>
+<p>Shiro 致力在所有应用环境下实现上述功能，小到命令行应用程序，大到企业应用中，而且不需要借助第三方框架、容器、应用服务器等。当然 Shiro 的目的是尽量的融入到这样的应用环境中去，但也可以在它们之外的任何环境下开箱即用。</p>
+<h2 id="shiro的核心管理对象"><a href="#shiro的核心管理对象" class="headerlink" title="shiro的核心管理对象"></a>shiro的核心管理对象</h2><ol>
+<li>ShiroFilterFactory：Shiro过滤器工厂类，具体的实现类是：ShiroFilterFactoryBean，此实现类是依赖于SecurityManager安全管理器的。</li>
+<li>SecurityManager：Shiro的安全管理器，主要是身份认证的管理，缓存管理，Cookie管理，所以在时机开发中主要是和SecurityManager进行打交道的，ShiroFilterFacotory只要配置好Filter就可以了。</li>
+<li>AccessControlFilter：访问控制过滤器，对请求进行拦截处理，在这里我们可以进行一些基本的判断以及数据的基本处理，然后生成一个AuthenticationToken，然后委托给Realm进行身份的验证和权限的验证。</li>
+<li>Ream：用于身份信息权限的验证。</li>
+</ol>
+<h2 id="Apache-Shiro-Features-特性"><a href="#Apache-Shiro-Features-特性" class="headerlink" title="Apache Shiro Features 特性"></a>Apache Shiro Features 特性</h2><p>Apache Shiro是一个全面的、蕴含丰富功能的安全框架。下图为描述Shiro功能的框架图：</p>
+<p>Authentication（认证）, Authorization（授权）, Session Management（会话管理）, Cryptography（加密）被 Shiro 框架的开发团队称之为应用安全的四大基石。那么就让我们来看看它们吧：</p>
+<ul>
+<li>Authentication（认证）：用户身份识别，通常被称为用户“登录”</li>
+<li>Authorization（授权）：访问控制。比如某个用户是否具有某个操作的使用权限。</li>
+<li>Session Management（会话管理）：特定于用户的会话管理,甚至在非web 或 EJB 应用程序。</li>
+<li>Cryptography（加密）：在对数据源使用加密算法加密的同时，保证易于使用。</li>
+</ul>
+<p>还有其他的功能来支持和加强这些不同应用环境下安全领域的关注点。特别是对以下的功能支持：</p>
+<ul>
+<li>Web支持：Shiro 提供的 web 支持 api ，可以很轻松的保护 web 应用程序的安全。</li>
+<li>缓存：缓存是 Apache Shiro 保证安全操作快速、高效的重要手段。</li>
+<li>并发：Apache Shiro 支持多线程应用程序的并发特性。</li>
+<li>测试：支持单元测试和集成测试，确保代码和预想的一样安全。</li>
+<li>“Run As”：这个功能允许用户假设另一个用户的身份(在许可的前提下)。</li>
+<li>“Remember Me”：跨 session 记录用户的身份，只有在强制需要时才需要登录。</li>
+</ul>
+<p>注意： Shiro不会去维护用户、维护权限，这些需要我们自己去设计/提供，然后通过相应的接口注入给Shiro</p>
+<h2 id="High-Level-Overview-高级概述"><a href="#High-Level-Overview-高级概述" class="headerlink" title="High-Level Overview 高级概述"></a>High-Level Overview 高级概述</h2><p>在概念层，Shiro 架构包含三个主要的理念：Subject,SecurityManager和 Realm。下面的图展示了这些组件如何相互作用，我们将在下面依次对其进行描述。</p>
+<p><img src="assets/%E6%95%B4%E5%90%88shiro-%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%E5%92%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%861.png" alt="avatar"></p>
+<ul>
+<li>Subject：当前用户，Subject 可以是一个人，但也可以是第三方服务、守护进程帐户、时钟守护任务或者其它–当前和软件交互的任何事件。</li>
+<li>SecurityManager：管理所有Subject，SecurityManager 是 Shiro 架构的核心，配合内部安全组件共同组成安全伞。</li>
+<li>Realms：用于进行权限信息的验证，我们自己实现。Realm 本质上是一个特定的安全 DAO：它封装与数据源连接的细节，得到Shiro 所需的相关的数据。在配置 Shiro 的时候，你必须指定至少一个Realm 来实现认证（authentication）和/或授权（authorization）。</li>
+</ul>
+<p>我们需要实现Realms的Authentication 和 Authorization。其中 Authentication 是用来验证用户身份，Authorization 是授权访问控制，用于对用户进行的操作授权，证明该用户是否允许进行当前操作，如访问某个链接，某个资源文件等。</p>
+<h1 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h1><h2 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h2><h3 id="pom包依赖"><a href="#pom包依赖" class="headerlink" title="pom包依赖"></a>pom包依赖</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;net.sourceforge.nekohtml&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;nekohtml&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;1.9.22&lt;/version&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;1.4.0&lt;/version&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">		&lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<p>重点是 shiro-spring包</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">datasource:</span><br><span class="line">  url: jdbc:mysql:<span class="comment">//localhost:3306/test</span></span><br><span class="line">  username: root</span><br><span class="line">  password: root</span><br><span class="line">  driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line"></span><br><span class="line">jpa:</span><br><span class="line">  database: mysql</span><br><span class="line">  show-sql: <span class="keyword">true</span></span><br><span class="line">  hibernate:</span><br><span class="line">    ddl-auto: update</span><br><span class="line">    naming:</span><br><span class="line">      strategy: org.hibernate.cfg.DefaultComponentSafeNamingStrategy</span><br><span class="line">  properties:</span><br><span class="line">     hibernate:</span><br><span class="line">        dialect: org.hibernate.dialect.MySQL5Dialect</span><br><span class="line"></span><br><span class="line">thymeleaf:</span><br><span class="line">   cache: <span class="keyword">false</span></span><br><span class="line">   mode: LEGACYHTML5</span><br></pre></td></tr></table></figure>
+
+<h3 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h3><p>我们新建了六个页面用来测试：</p>
+<ul>
+<li>index.html ：首页</li>
+<li>login.html ：登录页</li>
+<li>userInfo.html ： 用户信息页面</li>
+<li>userInfoAdd.html ：添加用户页面</li>
+<li>userInfoDel.html ：删除用户页面</li>
+<li>403.html ： 没有权限的页面</li>
+</ul>
+<p>除过登录页面其它都很简单，大概如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;index&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RBAC"><a href="#RBAC" class="headerlink" title="RBAC"></a>RBAC</h2><p>RBAC 是基于角色的访问控制（Role-Based Access Control ）在 RBAC 中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。这就极大地简化了权限的管理。这样管理都是层级相互依赖的，权限赋予给角色，而把角色又赋予用户，这样的权限设计很清楚，管理起来很方便。</p>
+<p>采用jpa技术来自动生成基础表格，对应的entity如下：</p>
+<h4 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Integer uid;</span><br><span class="line">    <span class="meta">@Column</span>(unique =<span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String username;<span class="comment">//帐号</span></span><br><span class="line">    <span class="keyword">private</span> String name;<span class="comment">//名称（昵称或者真实姓名，不同系统不同定义）</span></span><br><span class="line">    <span class="keyword">private</span> String password; <span class="comment">//密码;</span></span><br><span class="line">    <span class="keyword">private</span> String salt;<span class="comment">//加密密码的盐</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span> state;<span class="comment">//用户状态,0:创建未认证（比如没有激活，没有输入验证码等等）--等待验证的用户 , 1:正常状态,2：用户被锁定.</span></span><br><span class="line">    <span class="meta">@ManyToMany</span>(fetch= FetchType.EAGER)<span class="comment">//立即从数据库中进行加载数据;</span></span><br><span class="line">    <span class="meta">@JoinTable</span>(name = <span class="string">"SysUserRole"</span>, joinColumns = &#123; <span class="meta">@JoinColumn</span>(name = <span class="string">"uid"</span>) &#125;, inverseJoinColumns =&#123;<span class="meta">@JoinColumn</span>(name = <span class="string">"roleId"</span>) &#125;)</span><br><span class="line">    <span class="keyword">private</span> List&lt;SysRole&gt; roleList;<span class="comment">// 一个用户具有多个角色</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 省略 get set 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="角色信息"><a href="#角色信息" class="headerlink" title="角色信息"></a>角色信息</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysRole</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span><span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Integer id; <span class="comment">// 编号</span></span><br><span class="line">    <span class="keyword">private</span> String role; <span class="comment">// 角色标识程序中判断使用,如"admin",这个是唯一的:</span></span><br><span class="line">    <span class="keyword">private</span> String description; <span class="comment">// 角色描述,UI界面显示使用</span></span><br><span class="line">    <span class="keyword">private</span> Boolean available = Boolean.FALSE; <span class="comment">// 是否可用,如果不可用将不会添加给用户</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//角色 -- 权限关系：多对多关系;</span></span><br><span class="line">    <span class="meta">@ManyToMany</span>(fetch= FetchType.EAGER)</span><br><span class="line">    <span class="meta">@JoinTable</span>(name=<span class="string">"SysRolePermission"</span>,joinColumns=&#123;<span class="meta">@JoinColumn</span>(name=<span class="string">"roleId"</span>)&#125;,inverseJoinColumns=&#123;<span class="meta">@JoinColumn</span>(name=<span class="string">"permissionId"</span>)&#125;)</span><br><span class="line">    <span class="keyword">private</span> List&lt;SysPermission&gt; permissions;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用户 - 角色关系定义;</span></span><br><span class="line">    <span class="meta">@ManyToMany</span></span><br><span class="line">    <span class="meta">@JoinTable</span>(name=<span class="string">"SysUserRole"</span>,joinColumns=&#123;<span class="meta">@JoinColumn</span>(name=<span class="string">"roleId"</span>)&#125;,inverseJoinColumns=&#123;<span class="meta">@JoinColumn</span>(name=<span class="string">"uid"</span>)&#125;)</span><br><span class="line">    <span class="keyword">private</span> List&lt;UserInfo&gt; userInfos;<span class="comment">// 一个角色对应多个用户</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 省略 get set 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="权限信息"><a href="#权限信息" class="headerlink" title="权限信息"></a>权限信息</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysPermission</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span><span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Integer id;<span class="comment">//主键.</span></span><br><span class="line">    <span class="keyword">private</span> String name;<span class="comment">//名称.</span></span><br><span class="line">    <span class="meta">@Column</span>(columnDefinition=<span class="string">"enum('menu','button')"</span>)</span><br><span class="line">    <span class="keyword">private</span> String resourceType;<span class="comment">//资源类型，[menu|button]</span></span><br><span class="line">    <span class="keyword">private</span> String url;<span class="comment">//资源路径.</span></span><br><span class="line">    <span class="keyword">private</span> String permission; <span class="comment">//权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view</span></span><br><span class="line">    <span class="keyword">private</span> Long parentId; <span class="comment">//父编号</span></span><br><span class="line">    <span class="keyword">private</span> String parentIds; <span class="comment">//父编号列表</span></span><br><span class="line">    <span class="keyword">private</span> Boolean available = Boolean.FALSE;</span><br><span class="line">    <span class="meta">@ManyToMany</span></span><br><span class="line">    <span class="meta">@JoinTable</span>(name=<span class="string">"SysRolePermission"</span>,joinColumns=&#123;<span class="meta">@JoinColumn</span>(name=<span class="string">"permissionId"</span>)&#125;,inverseJoinColumns=&#123;<span class="meta">@JoinColumn</span>(name=<span class="string">"roleId"</span>)&#125;)</span><br><span class="line">    <span class="keyword">private</span> List&lt;SysRole&gt; roles;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 省略 get set 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据以上的代码会自动生成user_info（用户信息表）、sys_role（角色表）、sys_permission（权限表）、sys_user_role（用户角色表）、sys_role_permission（角色权限表）这五张表，为了方便测试我们给这五张表插入一些初始化数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES (<span class="string">'1'</span>, <span class="string">'admin'</span>, <span class="string">'管理员'</span>, <span class="string">'d3c59d25033dbf980d29554025c23a75'</span>, <span class="string">'8d78869f470951332959580424d4bf4f'</span>, <span class="number">0</span>);</span><br><span class="line">INSERT INTO `sys_permission` (`id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (<span class="number">1</span>,<span class="number">0</span>,<span class="string">'用户管理'</span>,<span class="number">0</span>,<span class="string">'0/'</span>,<span class="string">'userInfo:view'</span>,<span class="string">'menu'</span>,<span class="string">'userInfo/userList'</span>);</span><br><span class="line">INSERT INTO `sys_permission` (`id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (<span class="number">2</span>,<span class="number">0</span>,<span class="string">'用户添加'</span>,<span class="number">1</span>,<span class="string">'0/1'</span>,<span class="string">'userInfo:add'</span>,<span class="string">'button'</span>,<span class="string">'userInfo/userAdd'</span>);</span><br><span class="line">INSERT INTO `sys_permission` (`id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (<span class="number">3</span>,<span class="number">0</span>,<span class="string">'用户删除'</span>,<span class="number">1</span>,<span class="string">'0/1'</span>,<span class="string">'userInfo:del'</span>,<span class="string">'button'</span>,<span class="string">'userInfo/userDel'</span>);</span><br><span class="line">INSERT INTO `sys_role` (`id`,`available`,`description`,`role`) VALUES (<span class="number">1</span>,<span class="number">0</span>,<span class="string">'管理员'</span>,<span class="string">'admin'</span>);</span><br><span class="line">INSERT INTO `sys_role` (`id`,`available`,`description`,`role`) VALUES (<span class="number">2</span>,<span class="number">0</span>,<span class="string">'VIP会员'</span>,<span class="string">'vip'</span>);</span><br><span class="line">INSERT INTO `sys_role` (`id`,`available`,`description`,`role`) VALUES (<span class="number">3</span>,<span class="number">1</span>,<span class="string">'test'</span>,<span class="string">'test'</span>);</span><br><span class="line">INSERT INTO `sys_role_permission` VALUES (<span class="string">'1'</span>, <span class="string">'1'</span>);</span><br><span class="line">INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (<span class="number">2</span>,<span class="number">1</span>);</span><br><span class="line">INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (<span class="number">3</span>,<span class="number">2</span>);</span><br><span class="line">INSERT INTO `sys_user_role` (`role_id`,`uid`) VALUES (<span class="number">1</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Shiro-配置"><a href="#Shiro-配置" class="headerlink" title="Shiro 配置"></a>Shiro 配置</h2><p>首先要配置的是ShiroConfig类，Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachServlet 来主控制一样。 既然是使用 Filter 一般也就能猜到，是通过URL规则来进行过滤和权限校验，所以我们需要定义一系列关于URL的规则和访问权限。</p>
+<h3 id="ShiroConfig"><a href="#ShiroConfig" class="headerlink" title="ShiroConfig"></a>ShiroConfig</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShiroConfig</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> ShiroFilterFactoryBean <span class="title">shirFilter</span><span class="params">(SecurityManager securityManager)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"ShiroConfiguration.shirFilter()"</span>);</span><br><span class="line">		ShiroFilterFactoryBean shiroFilterFactoryBean = <span class="keyword">new</span> ShiroFilterFactoryBean();</span><br><span class="line">		shiroFilterFactoryBean.setSecurityManager(securityManager);</span><br><span class="line">		<span class="comment">//拦截器.</span></span><br><span class="line">		Map&lt;String,String&gt; filterChainDefinitionMap = <span class="keyword">new</span> LinkedHashMap&lt;String,String&gt;();</span><br><span class="line">		<span class="comment">// 配置不会被拦截的链接 顺序判断</span></span><br><span class="line">		filterChainDefinitionMap.put(<span class="string">"/static/**"</span>, <span class="string">"anon"</span>);</span><br><span class="line">		<span class="comment">//配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了</span></span><br><span class="line">		filterChainDefinitionMap.put(<span class="string">"/logout"</span>, <span class="string">"logout"</span>);</span><br><span class="line">		<span class="comment">//&lt;!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 --&gt;:这是一个坑呢，一不小心代码就不好使了;</span></span><br><span class="line">		<span class="comment">//&lt;!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问--&gt;</span></span><br><span class="line">		filterChainDefinitionMap.put(<span class="string">"/**"</span>, <span class="string">"authc"</span>);</span><br><span class="line">		<span class="comment">// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面</span></span><br><span class="line">		shiroFilterFactoryBean.setLoginUrl(<span class="string">"/login"</span>);</span><br><span class="line">		<span class="comment">// 登录成功后要跳转的链接</span></span><br><span class="line">		shiroFilterFactoryBean.setSuccessUrl(<span class="string">"/index"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//未授权界面;</span></span><br><span class="line">	shiroFilterFactoryBean.setUnauthorizedUrl(<span class="string">"/403"</span>);</span><br><span class="line">	shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);</span><br><span class="line">	<span class="keyword">return</span> shiroFilterFactoryBean;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MyShiroRealm <span class="title">myShiroRealm</span><span class="params">()</span></span>&#123;</span><br><span class="line">	MyShiroRealm myShiroRealm = <span class="keyword">new</span> MyShiroRealm();</span><br><span class="line">	<span class="keyword">return</span> myShiroRealm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SecurityManager <span class="title">securityManager</span><span class="params">()</span></span>&#123;</span><br><span class="line">	DefaultWebSecurityManager securityManager =  <span class="keyword">new</span> DefaultWebSecurityManager();</span><br><span class="line">	securityManager.setRealm(myShiroRealm());</span><br><span class="line">	<span class="keyword">return</span> securityManager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Filter-Chain定义说明："><a href="#Filter-Chain定义说明：" class="headerlink" title="Filter Chain定义说明："></a>Filter Chain定义说明：</h4><ol>
+<li>一个URL可以配置多个Filter，使用逗号分隔</li>
+<li>当设置多个过滤器时，全部验证通过，才视为通过</li>
+<li>部分过滤器可指定参数，如perms，roles</li>
+</ol>
+<p>Shiro内置的FilterChain</p>
+<table>
+<tr>
+<td>Filter Name</td>
+<td>Class</td>
+</tr>
+<tr>
+<td>anon</td>
+<td>org.apache.shiro.web.filter.authc.AnonymousFilter</td>
+</tr>
+<tr>
+<td>authc</td>
+<td>org.apache.shiro.web.filter.authc.FormAuthenticationFilter</td>
+</tr>
+<tr>
+<td>authcBasic</td>
+<td>org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter</td>
+</tr>
+<tr>
+<td>perms</td>
+<td>    org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter</td>
+</tr>
+<tr>
+<td>port</td>
+<td>org.apache.shiro.web.filter.authz.PortFilter</td>
+</tr>
+<tr>
+<td>rest</td>
+<td>org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>org.apache.shiro.web.filter.authz.RolesAuthorizationFilter</td>
+</tr>
+<tr>
+<td>ssl</td>
+<td>org.apache.shiro.web.filter.authz.SslFilter</td>
+</tr>
+<tr>
+<td>user</td>
+<td>org.apache.shiro.web.filter.authc.UserFilter</td>
+</tr>
+</table>
+
+<ul>
+<li>anon:所有url都都可以匿名访问</li>
+<li>authc: 需要认证才能进行访问</li>
+<li>user:配置记住我或认证通过可以访问</li>
+</ul>
+<h2 id="登录认证实现"><a href="#登录认证实现" class="headerlink" title="登录认证实现"></a>登录认证实现</h2><p>在认证、授权内部实现机制中都有提到，最终处理都将交给Real进行处理。因为在Shiro中，最终是通过Realm来获取应用程序中的用户、角色及权限信息的。通常情况下，在Realm中会直接从我们的数据源中获取Shiro需要的验证信息。可以说，Realm是专用于安全框架的DAO. Shiro的认证过程最终会交由Realm执行，这时会调用Realm的getAuthenticationInfo(token)方法。</p>
+<p>该方法主要执行以下操作:</p>
+<ol>
+<li>检查提交的进行认证的令牌信息</li>
+<li>根据令牌信息从数据源(通常为数据库)中获取用户信息</li>
+<li>对用户信息进行匹配验证。</li>
+<li>验证通过将返回一个封装了用户信息的AuthenticationInfo实例。</li>
+<li>验证失败则抛出AuthenticationException异常信息。</li>
+</ol>
+<p>而在我们的应用程序中要做的就是自定义一个Realm类，继承AuthorizingRealm抽象类，重载doGetAuthenticationInfo()，重写获取用户信息的方法。</p>
+<p>doGetAuthenticationInfo的重写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(AuthenticationToken token)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> AuthenticationException </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"MyShiroRealm.doGetAuthenticationInfo()"</span>);</span><br><span class="line">    <span class="comment">//获取用户的输入的账号.</span></span><br><span class="line">    String username = (String)token.getPrincipal();</span><br><span class="line">    System.out.println(token.getCredentials());</span><br><span class="line">    <span class="comment">//通过username从数据库中查找 User对象，如果找到，没找到.</span></span><br><span class="line">    <span class="comment">//实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法</span></span><br><span class="line">    UserInfo userInfo = userInfoService.findByUsername(username);</span><br><span class="line">    System.out.println(<span class="string">"-----&gt;&gt;userInfo="</span>+userInfo);</span><br><span class="line">    <span class="keyword">if</span>(userInfo == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    SimpleAuthenticationInfo authenticationInfo = <span class="keyword">new</span> SimpleAuthenticationInfo(</span><br><span class="line">            userInfo, <span class="comment">//用户名</span></span><br><span class="line">            userInfo.getPassword(), <span class="comment">//密码</span></span><br><span class="line">            ByteSource.Util.bytes(userInfo.getCredentialsSalt()),<span class="comment">//salt=username+salt</span></span><br><span class="line">            getName()  <span class="comment">//realm name</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> authenticationInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="链接权限的实现"><a href="#链接权限的实现" class="headerlink" title="链接权限的实现"></a>链接权限的实现</h3><p>shiro的权限授权是通过继承AuthorizingRealm抽象类，重载doGetAuthorizationInfo();当访问到页面的时候，链接配置了相应的权限或者shiro标签才会执行此方法否则不会执行，所以如果只是简单的身份认证没有权限的控制的话，那么这个方法可以不进行实现，直接返回null即可。在这个方法中主要是使用类：SimpleAuthorizationInfo进行角色的添加和权限的添加。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> AuthorizationInfo <span class="title">doGetAuthorizationInfo</span><span class="params">(PrincipalCollection principals)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"权限配置--&gt;MyShiroRealm.doGetAuthorizationInfo()"</span>);</span><br><span class="line">    SimpleAuthorizationInfo authorizationInfo = <span class="keyword">new</span> SimpleAuthorizationInfo();</span><br><span class="line">    UserInfo userInfo  = (UserInfo)principals.getPrimaryPrincipal();</span><br><span class="line">    <span class="keyword">for</span>(SysRole role:userInfo.getRoleList())&#123;</span><br><span class="line">        authorizationInfo.addRole(role.getRole());</span><br><span class="line">        <span class="keyword">for</span>(SysPermission p:role.getPermissions())&#123;</span><br><span class="line">            authorizationInfo.addStringPermission(p.getPermission());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> authorizationInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以添加set集合：roles是从数据库查询的当前用户的角色，stringPermissions是从数据库查询的当前用户对应的权限</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">authorizationInfo.setRoles(roles);</span><br><span class="line">authorizationInfo.setStringPermissions(stringPermissions);</span><br></pre></td></tr></table></figure>
+
+<p>就是说如果在shiro配置文件中添加了filterChainDefinitionMap.put(“/add”, “perms[权限添加]”);就说明访问/add这个链接必须要有“权限添加”这个权限才可以访问，如果在shiro配置文件中添加了filterChainDefinitionMap.put(“/add”, “roles[100002]，perms[权限添加]”);就说明访问/add这个链接必须要有“权限添加”这个权限和具有“100002”这个角色才可以访问。</p>
+<h3 id="登录实现"><a href="#登录实现" class="headerlink" title="登录实现"></a>登录实现</h3><p>登录过程其实只是处理异常的相关信息，具体的登录验证交给shiro来处理</p>
+<pre><code>@RequestMapping(&quot;/login&quot;)
+public String login(HttpServletRequest request, Map&lt;String, Object&gt; map) throws Exception{
+    System.out.println(&quot;HomeController.login()&quot;);
+    // 登录失败从request中获取shiro处理的异常信息。
+    // shiroLoginFailure:就是shiro异常类的全类名.
+    String exception = (String) request.getAttribute(&quot;shiroLoginFailure&quot;);
+    System.out.println(&quot;exception=&quot; + exception);
+    String msg = &quot;&quot;;
+    if (exception != null) {
+        if (UnknownAccountException.class.getName().equals(exception)) {
+            System.out.println(&quot;UnknownAccountException -- &gt; 账号不存在：&quot;);
+            msg = &quot;UnknownAccountException -- &gt; 账号不存在：&quot;;
+        } else if (IncorrectCredentialsException.class.getName().equals(exception)) {
+            System.out.println(&quot;IncorrectCredentialsException -- &gt; 密码不正确：&quot;);
+            msg = &quot;IncorrectCredentialsException -- &gt; 密码不正确：&quot;;
+        } else if (&quot;kaptchaValidateFailed&quot;.equals(exception)) {
+            System.out.println(&quot;kaptchaValidateFailed -- &gt; 验证码错误&quot;);
+            msg = &quot;kaptchaValidateFailed -- &gt; 验证码错误&quot;;
+        } else {
+            msg = &quot;else &gt;&gt; &quot;+exception;
+            System.out.println(&quot;else -- &gt;&quot; + exception);
+        }
+    }
+    map.put(&quot;msg&quot;, msg);
+    // 此方法不处理登录成功,由shiro进行处理
+    return &quot;/login&quot;;
+}</code></pre><p>其它dao层和service的代码就不贴出来了大家直接看代码。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ol>
+<li><p>编写好后就可以启动程序，访问<a href="http://localhost:8080/userInfo/userList页面，由于没有登录就会跳转到http://localhost:8080/login页面。登录之后就会跳转到index页面，登录后，直接在浏览器中输入http://localhost:8080/userInfo/userList访问就会看到用户信息。上面这些操作时候触发MyShiroRealm.doGetAuthenticationInfo()这个方法，也就是登录认证的方法。" target="_blank" rel="noopener">http://localhost:8080/userInfo/userList页面，由于没有登录就会跳转到http://localhost:8080/login页面。登录之后就会跳转到index页面，登录后，直接在浏览器中输入http://localhost:8080/userInfo/userList访问就会看到用户信息。上面这些操作时候触发MyShiroRealm.doGetAuthenticationInfo()这个方法，也就是登录认证的方法。</a></p>
+</li>
+<li><p>登录admin账户，访问：<br><a href="http://127.0.0.1:8080/userInfo/userAdd显示用户添加界面，访问http://127.0.0.1:8080/userInfo/userDel显示403没有权限。上面这些操作时候触发MyShiroRealm.doGetAuthorizationInfo()这个方面，也就是权限校验的方法。" target="_blank" rel="noopener">http://127.0.0.1:8080/userInfo/userAdd显示用户添加界面，访问http://127.0.0.1:8080/userInfo/userDel显示403没有权限。上面这些操作时候触发MyShiroRealm.doGetAuthorizationInfo()这个方面，也就是权限校验的方法。</a></p>
+</li>
+<li><p>修改admin不同的权限进行测试</p>
+</li>
+</ol>
+<p>shiro很强大，这仅仅是完成了登录认证和权限管理这两个功能，更多内容以后有时间再做探讨。</p>
+<h1 id="个人实战"><a href="#个人实战" class="headerlink" title="个人实战"></a>个人实战</h1><h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ol>
+<li>关于出现Whitelabel Error Page(空指针页面),原因是自己没有考虑到返回值的问题,原先的页面为了api考虑,使用的是@RestController,也就是返回JSON,但是在一个需要跳转页面的情况下是不合适的,此处应该使用@Controller</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>用户认证和用户授权是Shiro的基础，用户认证其实上就是登陆操作、用户授权实际上就是对资源拦截的操作。</li>
+<li>权限管理的模型一般我们都将资源放在权限表中进行管理起来。</li>
+<li>我们可以基于角色拦截，也可以基于资源拦截。要是基于角色拦截的话，那么如果角色的权限发生变化了，那就需要修改代码了<strong>。推荐使用基于资源进行拦截</strong></li>
+<li><strong>这次URL拦截，我们使用一个JavaBean来封装所有的认证信息。当用户登陆了之后，我们就把用户对菜单栏的访问、对资源的访问权限都封装到该JavaBean中</strong></li>
+<li>当使用拦截器进行用户认证的时候，我们只要判断Session域有没有JavaBen对象即可了。</li>
+<li>当时候拦截器进行用户授权的时候，我们要判断JavaBean中的权限是否能够访问该资源。</li>
+<li>以前URL拦截的方式需要把所有的URL都在数据库进行管理。非常麻烦，不易维护。</li>
+<li><strong>我们希望Shiro去认证的时候是通过realm去数据库查询数据的。而我们reaml默认是查询配置文件的数据的。</strong></li>
+<li>因此，我们需要自定义reaml，使得它是去数据库查询数据。只要继承AuthorizingRealm类就行了。</li>
+<li><strong>当然了，自定义后的reaml也需要在配置文件中写上我们的自定义reaml的位置的。</strong></li>
+<li>散列算法就是为了让密码不被别人给破解。<strong>我们可对原始的密码加盐再进行散列，这就加大了破解的难度了。</strong></li>
+<li>自定义的reaml也是支持散列算法的，相同的，还是需要我们在配置文件中配置一下就好了。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="http://www.ityouknow.com/springboot/2017/06/26/springboot-shiro.html" target="_blank" rel="noopener">springboot(十四)：springboot整合shiro-登录认证和权限管理</a></li>
+<li><a href="https://github.com/ityouknow/spring-boot-examples" target="_blank" rel="noopener">作者示例代码</a></li>
+<li><a href="http://412887952-qq-com.iteye.com/blog/2299732" target="_blank" rel="noopener">Spring Boot Shiro权限管理【从零开始学Spring Boot】</a></li>
+<li><a href="https://segmentfault.com/a/1190000013875092" target="_blank" rel="noopener">Shiro入门这篇就够了【Shiro的基础知识、回顾URL拦截】</a></li>
+<li><a href="http://www.sohu.com/a/212913571_100012573" target="_blank" rel="noopener">Shiro权限管理详解【面试+工作】 </a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/" title="安全框架：整合shiro-登录认证和权限管理">http://yoursite.com/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/30/服务器/CentOs7初玩/" rel="next" title="CentOs7初玩">
+                <i class="fa fa-chevron-left"></i> CentOs7初玩
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/30/Java/项目/eNet车联网项目开发日志/" rel="prev" title="eNet车联网项目开发日志">
+                eNet车联网项目开发日志 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#解决的问题"><span class="nav-number">1.</span> <span class="nav-text">解决的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于-Apache-Shiro"><span class="nav-number">2.</span> <span class="nav-text">关于 Apache Shiro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目的"><span class="nav-number">2.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro基础知识"><span class="nav-number">2.2.</span> <span class="nav-text">Shiro基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是权限管理？"><span class="nav-number">2.2.1.</span> <span class="nav-text">什么是权限管理？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户认证"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">用户认证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户授权"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">用户授权</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限管理模型"><span class="nav-number">2.2.2.</span> <span class="nav-text">权限管理模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分配权限"><span class="nav-number">2.2.3.</span> <span class="nav-text">分配权限</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色访问控制"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">基于角色访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">基于资源的访问控制</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#粗粒度和细粒度权限"><span class="nav-number">3.</span> <span class="nav-text">粗粒度和细粒度权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现粗粒度权限管理？"><span class="nav-number">3.1.</span> <span class="nav-text">如何实现粗粒度权限管理？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于URL拦截"><span class="nav-number">3.1.1.</span> <span class="nav-text">基于URL拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用权限管理框架实现"><span class="nav-number">3.1.2.</span> <span class="nav-text">使用权限管理框架实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回顾URL拦截"><span class="nav-number">4.</span> <span class="nav-text">回顾URL拦截</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#认证的JavaBean"><span class="nav-number">4.1.</span> <span class="nav-text">认证的JavaBean</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Shiro"><span class="nav-number">5.</span> <span class="nav-text">什么是Shiro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么使用Shiro"><span class="nav-number">6.</span> <span class="nav-text">为什么使用Shiro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro认证"><span class="nav-number">7.</span> <span class="nav-text">Shiro认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入jar包"><span class="nav-number">7.1.</span> <span class="nav-text">导入jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro认证流程"><span class="nav-number">7.2.</span> <span class="nav-text">Shiro认证流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过配置文件创建工厂"><span class="nav-number">7.2.1.</span> <span class="nav-text">通过配置文件创建工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">7.2.2.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义realm"><span class="nav-number">7.3.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置realm"><span class="nav-number">7.4.</span> <span class="nav-text">配置realm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试自定义realm"><span class="nav-number">7.5.</span> <span class="nav-text">测试自定义realm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散列算法"><span class="nav-number">7.6.</span> <span class="nav-text">散列算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义realm支持md5"><span class="nav-number">7.7.</span> <span class="nav-text">自定义realm支持md5</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shiro介绍"><span class="nav-number">8.</span> <span class="nav-text">Shiro介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能"><span class="nav-number">8.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro的核心管理对象"><span class="nav-number">8.2.</span> <span class="nav-text">shiro的核心管理对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Shiro-Features-特性"><span class="nav-number">8.3.</span> <span class="nav-text">Apache Shiro Features 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#High-Level-Overview-高级概述"><span class="nav-number">8.4.</span> <span class="nav-text">High-Level Overview 高级概述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速上手"><span class="nav-number">9.</span> <span class="nav-text">快速上手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础信息"><span class="nav-number">9.1.</span> <span class="nav-text">基础信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pom包依赖"><span class="nav-number">9.1.1.</span> <span class="nav-text">pom包依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">9.1.2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面"><span class="nav-number">9.1.3.</span> <span class="nav-text">页面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC"><span class="nav-number">9.2.</span> <span class="nav-text">RBAC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户信息"><span class="nav-number">9.2.0.1.</span> <span class="nav-text">用户信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#角色信息"><span class="nav-number">9.2.0.2.</span> <span class="nav-text">角色信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限信息"><span class="nav-number">9.2.0.3.</span> <span class="nav-text">权限信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro-配置"><span class="nav-number">9.3.</span> <span class="nav-text">Shiro 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ShiroConfig"><span class="nav-number">9.3.1.</span> <span class="nav-text">ShiroConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Filter-Chain定义说明："><span class="nav-number">9.3.1.1.</span> <span class="nav-text">Filter Chain定义说明：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录认证实现"><span class="nav-number">9.4.</span> <span class="nav-text">登录认证实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链接权限的实现"><span class="nav-number">9.4.1.</span> <span class="nav-text">链接权限的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录实现"><span class="nav-number">9.4.2.</span> <span class="nav-text">登录实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">9.5.</span> <span class="nav-text">测试</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#个人实战"><span class="nav-number">10.</span> <span class="nav-text">个人实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑"><span class="nav-number">10.1.</span> <span class="nav-text">踩坑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">11.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

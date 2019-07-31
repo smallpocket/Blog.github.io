@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="代码骨架  iface  定义接口iface  响应返回的类要用RpcResult包装  请求的接口的字段类req 请求返回的类res app在该层实现iface层的接口 将请求转换为命令，handle处理command 若是app抛出的face异常就抛出face的异常，若是domain的异常就抛出domain的异常 简介在DDD设计思想中，Application层主要职责为组装domain层各个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="领域驱动设计：骨架">
+<meta property="og:url" content="http://yoursite.com/2019/07/04/系统架构/领域驱动设计：骨架/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="代码骨架  iface  定义接口iface  响应返回的类要用RpcResult包装  请求的接口的字段类req 请求返回的类res app在该层实现iface层的接口 将请求转换为命令，handle处理command 若是app抛出的face异常就抛出face的异常，若是domain的异常就抛出domain的异常 简介在DDD设计思想中，Application层主要职责为组装domain层各个">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/系统架构/领域驱动设计：骨架/assets/image.png__thumbnail">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/系统架构/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/assets/849051-20170924221557337-1213380350.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/系统架构/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/assets/849051-20170924221557337-1213380350-1562289754641.png">
+<meta property="og:updated_time" content="2019-07-05T01:25:43.843Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="领域驱动设计：骨架">
+<meta name="twitter:description" content="代码骨架  iface  定义接口iface  响应返回的类要用RpcResult包装  请求的接口的字段类req 请求返回的类res app在该层实现iface层的接口 将请求转换为命令，handle处理command 若是app抛出的face异常就抛出face的异常，若是domain的异常就抛出domain的异常 简介在DDD设计思想中，Application层主要职责为组装domain层各个">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/04/系统架构/领域驱动设计：骨架/assets/image.png__thumbnail">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/04/系统架构/领域驱动设计：骨架/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>领域驱动设计：骨架 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/系统架构/领域驱动设计：骨架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">领域驱动设计：骨架
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-04 09:38:31" itemprop="dateCreated datePublished" datetime="2019-07-04T09:38:31+08:00">2019-07-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-05 09:25:43" itemprop="dateModified" datetime="2019-07-05T09:25:43+08:00">2019-07-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/04/系统架构/领域驱动设计：骨架/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/04/系统架构/领域驱动设计：骨架/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="代码骨架"><a href="#代码骨架" class="headerlink" title="代码骨架"></a>代码骨架</h1><p><img src="assets/image.png__thumbnail" alt="img"></p>
+<ul>
+<li><h1 id="iface"><a href="#iface" class="headerlink" title="iface"></a>iface</h1></li>
+</ul>
+<p>定义接口iface</p>
+<ul>
+<li>响应返回的类要用RpcResult包装</li>
+</ul>
+<p>请求的接口的字段类req</p>
+<p>请求返回的类res</p>
+<h1 id="app"><a href="#app" class="headerlink" title="app"></a>app</h1><p>在该层实现iface层的接口</p>
+<p>将请求转换为命令，handle处理command</p>
+<p>若是app抛出的face异常就抛出face的异常，若是domain的异常就抛出domain的异常</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在DDD设计思想中，Application层主要职责为组装domain层各个组件及基础设施层的公共组件，完成具体的业务服务。Application层可以理解为粘合各个组件的胶水，使得零散的组件组合在一起提供完整的业务服务。在复杂的业务场景下，一个业务case通常需要多个domain实体参与进来，所以Application的粘合效用正好有了用武之地。</p>
+<p>Application层主要由：service、assembler组成，下面分别对其做讲解。</p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h3 id="service是组件粘合剂"><a href="#service是组件粘合剂" class="headerlink" title="service是组件粘合剂"></a>service是组件粘合剂</h3><p>这里的Service区别于domain层的domain service，是应用服务。它是组件的粘合剂，组合domain层的各个组件和 infrastructure层的持久化组件、消息组件等等，完成具体的业务逻辑，提供完整的业务服务。</p>
+<p>通过不断的实践，我们发现：通过DDD实现业务服务时，检验业务模型的质量的一个标准便是 —— service方法中不要有if/else。如果存在if/else，要么就是系统用例存在耦合，要么就是业务模型不够友好，导致部分业务逻辑泄漏到service了。</p>
+<p>通常意义上，一个业务case在service层便会对应一个service方法，这样确保case实现的独立性。拿社区服务中的“帖子”模块来讲，我们有如下几个明显的case：发帖（posting）、删帖（deletePost）、查询帖子详情（queryPostDetail），这些case在service层都对应独立的业务方法。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>对于较为复杂的case：查询帖子列表，可能需要根据不同的tag过滤帖子，或者查询不同类型的帖子，或者查询热门帖子，这个时候应当用一个service方法实现呢？还是多个呢？</p>
+<p>考虑这个问题，主要从这两方面入手：domain的一致性，数据存储的一致性；如果两个一致性都满足，那么我们可以在一个业务方法中完成，否则就要在独立的业务方法中完成。</p>
+<p>例如：根据帖子运营标签查询帖子 和 查询全部帖子列表 这两个case我们可以放到一个service方法中实现，因为前一个case只是在后一个case的基础上加了一个过滤条件，这个过滤条件完全可以交给dao层的sql where条件处理掉，除此之外，domain和repository都完全一样；</p>
+<p>而“查询热门帖子” 这个case就不能和上面的两个case共用一个service方法了，因为热门帖子列表的数据源并不在数据库中，而是存在于缓存中，因此repository的取数逻辑存在很大差异，如果共用一个service方法，势必要在service层出现if/else判定，这是不友好的。</p>
+<h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3><p><img src="../%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/assets/849051-20170924221557337-1213380350.png" alt="img"></p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostServiceImpl</span> <span class="keyword">implements</span> <span class="title">PostService</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IPostRepository postRepository;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PostAssembler postAssembler;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PostingRespBody <span class="title">posting</span><span class="params">(RequestDto&lt;PostingReqBody&gt; requestDto)</span> <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line">        PostingReqBody postingReqBody = requestDto.getBody();</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         *NOTE： 请求参数校验交给了validation，这里无需校验userId和postId是否为空</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        String userId = postingReqBody.getUserId();</span><br><span class="line">        String title = postingReqBody.getTitle();</span><br><span class="line">        String sourceContent = postingReqBody.getSourceContent();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> userIdInLong = Long.valueOf(userId);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 组装domain model entity</span></span><br><span class="line"><span class="comment">         * NOTE：这里的PostAuthor不需要从repository重载，原因在于：deletePost场景需要用户登录后才能操作，</span></span><br><span class="line"><span class="comment">         *         在进入service之前，已经在controller层完成了用户身份鉴权，故到达这里的userId肯定是合法的用户</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        PostAuthor postAuthor = <span class="keyword">new</span> PostAuthor(userIdInLong);</span><br><span class="line">        Post post = postAuthor.posting(title, sourceContent);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * NOTE：使用repository将model entity 写入存储</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        postRepository.save(post);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * NOTE：使用postAssembler将Post model组装成dto返回。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">return</span> postAssembler.assemblePostingRespBody(post);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DeletePostRespBody <span class="title">delete</span><span class="params">(RequestDto&lt;DeletePostReqBody&gt; requestDto)</span> <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line">        DeletePostReqBody deletePostReqBody = requestDto.getBody();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         *NOTE： 请求参数校验交给了validation，这里无需校验userId和postId是否为空</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        String userId = deletePostReqBody.getUserId();</span><br><span class="line">        String postId = deletePostReqBody.getPostId();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> userIdInLong = Long.valueOf(userId);</span><br><span class="line">        <span class="keyword">long</span> postIdInLong = Long.valueOf(postId);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 组装domain model entity</span></span><br><span class="line"><span class="comment">         * NOTE：这里的PostAuthor不需要从repository重载，原因在于：deletePost场景需要用户登录后才能操作，</span></span><br><span class="line"><span class="comment">         *         在进入service之前，已经在controller层完成了用户身份鉴权，故到达这里的userId肯定是合法的用户</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        PostAuthor postAuthor = <span class="keyword">new</span> PostAuthor(userIdInLong);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 从repository中重载domain model entity</span></span><br><span class="line"><span class="comment">         * 借此判断该postId是否真的存在帖子</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Post post = postRepository.query(postIdInLong);</span><br><span class="line">        </span><br><span class="line">        postAuthor.deletePost(post);</span><br><span class="line">        </span><br><span class="line">        postRepository.delete(post);        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> QueryPostDetailRespBody <span class="title">queryPostDetail</span><span class="params">(RequestDto&lt;QueryPostDetailReqBody&gt; requestDto)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line">        QueryPostDetailReqBody queryPostDetailReqBody = requestDto.getBody();</span><br><span class="line">        </span><br><span class="line">        String readerId = queryPostDetailReqBody.getReaderId();</span><br><span class="line">        String postId = queryPostDetailReqBody.getPostId();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> readerIdInLong = Long.valueOf(readerId);</span><br><span class="line">        <span class="keyword">long</span> postIdInLong = Long.valueOf(postId);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//TODO 可能有一些权限校验，比如：判定该读者是否有查看作者帖子的权限等。这里暂且不展开讨论。</span></span><br><span class="line">        PostReader postReader = <span class="keyword">new</span> PostReader(readerIdInLong);</span><br><span class="line">        </span><br><span class="line">        Post post = postRepository.query(postIdInLong);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * <span class="doctag">NOTE:</span> 使用postAssembler将domain层的model组装成dto，组装过程：</span></span><br><span class="line"><span class="comment">         *         1、完成类型转换、数据格式化；</span></span><br><span class="line"><span class="comment">         *         2、将多个model组合成一个dto，一并返回。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">return</span> postAssembler.assembleQueryPostDetailRespBody(post);</span><br><span class="line">    &#125;    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Assembler"><a href="#Assembler" class="headerlink" title="Assembler"></a>Assembler</h2><h3 id="Assembler是组装器"><a href="#Assembler是组装器" class="headerlink" title="Assembler是组装器"></a>Assembler是组装器</h3><p>Assembler是组装器，负责完成domain model对象到dto的转换，组装职责包括：</p>
+<ol>
+<li>完成类型转换、数据格式化；如日志格式化，状态enum装换为前端认识的string；</li>
+<li>将多个domain领域对象组装为需要的dto对象，比如查询帖子列表，需要从Post（帖子）领域对象中获取帖子的详情，还需要从User（用户）领域对象中获取用户的社交信息（昵称、简介、头像等）；</li>
+<li>将domain领域对象属性裁剪并组装为dto；某些场景下，可能并不需要所有domain领域对象的属性，比如User领域对象的password属性属于隐私相关属性，在“查询用户信息”case中不需要返回，需要裁剪掉。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Post模块的组装器，完成domain model对象到dto的转换，组装职责包括：</span></span><br><span class="line"><span class="comment"> *         1、完成类型转换、数据格式化；如日志格式化，状态enum装换为前端认识的string；</span></span><br><span class="line"><span class="comment"> *         2、将多个model组合成一个dto，一并返回。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">TODO:</span> 不太好的地方每个assemble方法都需要先判断入参对象是否为空。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> daoqidelv</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@createdate</span> 2017年9月24日</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostAssembler</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String POSTING_TIME_STRING_DATE_FORMAT = <span class="string">"yyyy-MM-dd hh:mm:ss"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ApplicationUtil applicationUtil;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> PostingRespBody <span class="title">assemblePostingRespBody</span><span class="params">(Post post)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(post == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        PostingRespBody postingRespBody = <span class="keyword">new</span> PostingRespBody();</span><br><span class="line">        postingRespBody.setPostId(String.valueOf(post.getId()));</span><br><span class="line">        <span class="keyword">return</span> postingRespBody;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> QueryPostDetailRespBody <span class="title">assembleQueryPostDetailRespBody</span><span class="params">(Post post)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * <span class="doctag">NOTE:</span> 判定入参post是否为null</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span>(post == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        QueryPostDetailRespBody queryPostDetailRespBody = <span class="keyword">new</span> QueryPostDetailRespBody();</span><br><span class="line">        queryPostDetailRespBody.setAuthorId(String.valueOf(post.getAuthorId())); <span class="comment">//完成类型转换</span></span><br><span class="line">        queryPostDetailRespBody.setPostId(String.valueOf(post.getId()));<span class="comment">//完成类型转换</span></span><br><span class="line">        queryPostDetailRespBody.setPostingTime(</span><br><span class="line">                applicationUtil.convertTimestampToString(post.getPostingTime(), POSTING_TIME_STRING_DATE_FORMAT));<span class="comment">//完成日期格式化</span></span><br><span class="line">        queryPostDetailRespBody.setSourceContent(post.getSourceContent());</span><br><span class="line">        queryPostDetailRespBody.setTitle(post.getTitle());</span><br><span class="line">        <span class="keyword">return</span> queryPostDetailRespBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="类图-1"><a href="#类图-1" class="headerlink" title="类图"></a>类图</h3><p><img src="../%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/assets/849051-20170924221557337-1213380350-1562289754641.png" alt="img"></p>
+<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostAssembler</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String POSTING_TIME_STRING_DATE_FORMAT = <span class="string">"yyyy-MM-dd hh:mm:ss"</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> ApplicationUtil applicationUtil;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> PostingRespBody <span class="title">assemblePostingRespBody</span><span class="params">(Post post)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(post == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		PostingRespBody postingRespBody = <span class="keyword">new</span> PostingRespBody();</span><br><span class="line">		postingRespBody.setPostId(String.valueOf(post.getId()));</span><br><span class="line">		<span class="keyword">return</span> postingRespBody;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> QueryPostDetailRespBody <span class="title">assembleQueryPostDetailRespBody</span><span class="params">(Post post)</span> </span>&#123;</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">NOTE:</span> 判定入参post是否为null</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">if</span>(post == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		QueryPostDetailRespBody queryPostDetailRespBody = <span class="keyword">new</span> QueryPostDetailRespBody();</span><br><span class="line">		<span class="comment">//完成类型转换</span></span><br><span class="line">		queryPostDetailRespBody.setAuthorId(String.valueOf(post.getAuthorId())); </span><br><span class="line">		<span class="comment">//完成类型转换</span></span><br><span class="line">		queryPostDetailRespBody.setPostId(String.valueOf(post.getId()));</span><br><span class="line">		<span class="comment">//完成日期格式化</span></span><br><span class="line">		queryPostDetailRespBody.setPostingTime(</span><br><span class="line">				applicationUtil.convertTimestampToString(post.getPostingTime(), POSTING_TIME_STRING_DATE_FORMAT));</span><br><span class="line">		queryPostDetailRespBody.setSourceContent(post.getSourceContent());</span><br><span class="line">		queryPostDetailRespBody.setTitle(post.getTitle());</span><br><span class="line">		<span class="keyword">return</span> queryPostDetailRespBody;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="jooq"><a href="#jooq" class="headerlink" title="jooq"></a>jooq</h1><p>查官网</p>
+<p>申请 VPN</p>
+<p>jooq的模块pom文件</p>
+<p>将表名配置在pom文件中</p>
+<p>user:power_rent</p>
+<p>includes是表名</p>
+<p>mvn命令，前提是表已经创建了的</p>
+<p>jdbc的token是不一致，需要申请</p>
+<h1 id="domain"><a href="#domain" class="headerlink" title="domain"></a>domain</h1><p>domain层是具体的业务领域层，是发生业务变化最为频繁的地方，是业务系统最核心的一层，是DDD关注的焦点和难点。这一层包含了如下一些domain object：entity、value object、domain event、domain service、factory、repository等。DDD实践的难点其实就在于如何识别这些object。</p>
+<h2 id="entity"><a href="#entity" class="headerlink" title="entity"></a>entity</h2><p>领域实体是domain的核心成员。domain entity具有如下三个特征：</p>
+<ul>
+<li><strong>唯一业务标识</strong></li>
+<li><strong>持有自己的业务属性和业务行为</strong></li>
+<li><strong>属性可变，有着自己的生命周期</strong></li>
+</ul>
+<p>在社区这一业务领域中，‘帖子’就是一个业务实体，它需要有一个唯一性业务标识表征，拥有这个业务实体相关的业务属性（作者、标题、内容等）和业务行为（关联话题、删帖等），同时他的状态和内容可以不断发生变化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Post</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 帖子id</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id; <span class="comment">//1、‘帖子’实体有唯一业务标识</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *帖子作者</span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> authorId;    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子标题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String title;<span class="comment">//2、‘帖子’实体拥有自己的业务属性</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子源内容</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String sourceContent;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发帖时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Timestamp postingTime;    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子状态</span></span><br><span class="line"><span class="comment">     * NOTE：使用enum实现，限定status的字典值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> com.dqdl.community.domain.model.post.PostStatus</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> PostStatus status;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子作者</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> PostAuthor postAuthor;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子加入的话题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Set&lt;TopicPost&gt; topics = <span class="keyword">new</span> HashSet&lt;TopicPost&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Post</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.postingTime = <span class="keyword">new</span> Timestamp(System.currentTimeMillis());        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Post</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setId(id);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Post</span><span class="params">(<span class="keyword">long</span> authorId, String title, String sourceContent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>();</span><br><span class="line">        <span class="keyword">this</span>.setAuthorId(authorId);</span><br><span class="line">        <span class="keyword">this</span>.setTitle(title);</span><br><span class="line">        <span class="keyword">this</span>.setSourceContent(sourceContent);</span><br><span class="line">        <span class="keyword">this</span>.setPostAuthor(<span class="keyword">new</span> PostAuthor(authorId));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除帖子</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setStatus(PostStatus.HAS_DELETED);<span class="comment">//3、帖子的状态可以改变</span></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将帖子关联话题 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> topicIds 话题集合</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">joinTopics</span><span class="params">(String topicIds)</span> <span class="keyword">throws</span> BusinessException</span>&#123;<span class="comment">//2、‘帖子’实体拥有自己的业务行为</span></span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isEmpty(topicIds)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String[] topicIdArray = topicIds.split(CommonConstants.COMMA);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;topicIdArray.length; i++) &#123;</span><br><span class="line">            TopicPost topicPost = <span class="keyword">new</span> TopicPost(Long.valueOf(topicIdArray[i]), <span class="keyword">this</span>.getId());</span><br><span class="line">            <span class="keyword">this</span>.topics.add(topicPost);</span><br><span class="line">            <span class="keyword">if</span>(topicSize() &gt; MAX_JOINED_TOPICS_NUM) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(ReturnCode.ONE_POST_MOST_JOIN_INTO_FIVE_TOPICS);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//......</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="value-obj-区别于entity"><a href="#value-obj-区别于entity" class="headerlink" title="value obj(区别于entity)"></a>value obj(区别于entity)</h2><p>领域值对象。value object是相对于domain entity来讲的，对照起来value object有如下特征：</p>
+<ul>
+<li><strong>可以有唯一业务标识</strong>    <em>【区别于domain entity】</em></li>
+<li><strong>持有自己的业务属性和业务行为</strong> <em>【同domain entity】</em></li>
+<li><strong>一旦定义，他是不可变的，它通常是短暂的</strong>，这和java中的值对象（基本类型和String类型）类似 <em>【区别于domain entity】</em></li>
+</ul>
+<p>比如社区业务领域中，‘帖子的置顶信息’可以理解为是一个值对象，不需要为这一值对象定义独立的业务唯一性标识，直接使用‘帖子id‘便可表征，同时，它只有’置顶状态‘和’置顶位置‘，一旦其中一个属性需要发生变化，则重建值对象并赋值给’帖子‘实体的引用，不会对领域带来任何负面影响。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 帖子置顶消息，value object</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> daoqidelv</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@createdate</span> 2017年10月10日</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostTopInfo</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> postId;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 置顶标志。true -- 置顶， false -- 不置顶。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isTop;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 置顶位置，当isTop == true时，该字段有意义。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> topIndex;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PostTopInfo</span><span class="params">(<span class="keyword">long</span> postId, <span class="keyword">boolean</span> isTop, <span class="keyword">int</span> topIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setPostId(postId);</span><br><span class="line">        <span class="keyword">this</span>.setTop(isTop);</span><br><span class="line">        <span class="keyword">this</span>.setTopIndex(topIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getPostId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> postId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPostId</span><span class="params">(<span class="keyword">long</span> postId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.postId = postId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isTop;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTop</span><span class="params">(<span class="keyword">boolean</span> isTop)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isTop = isTop;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTopIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> topIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTopIndex</span><span class="params">(<span class="keyword">int</span> topIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.topIndex = topIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="service"><a href="#service" class="headerlink" title="service"></a>service</h2><p>领域服务。区别于应用服务，他属于业务领域层。可以认为，如果某种行为无法归类给任何实体/值对象，则就为这些行为建立相应的领域服务即可。传统意义上的util static方法中，涉及到业务逻辑的部分，都可以考虑归入domain service。</p>
+<p>比如：‘社区’这一业务领域中的‘内容过滤’这一模块，便是领域服务，他不只属于Post实体，还会被用于评论（Comment）实体中，故我们将他独立成domain service。</p>
+<p>即涉及到两个及以上的entity时，就可以将其归类为service</p>
+<h2 id="factory"><a href="#factory" class="headerlink" title="factory"></a>factory</h2><p>领域对象工厂。用于复杂领域对象的创建/重建。重建是指通过respostory加载持久化对象后，重建领域对象。</p>
+<h2 id="repository"><a href="#repository" class="headerlink" title="repository"></a>repository</h2><p>仓库。我们将仓库的接口定义归类在domain层，因为他和domain entity联系紧密。仓库接口定义了和基础实施的持久化层交互契约，完成领域对应的增删改查操作。domain层的repository只是定义契约的接口，实际实现仍然由infrastructure完成。</p>
+<p>仓库的实际实现根据不同的存储介质而不同，可以是redis、oracle、mongodb等。具体仓库的实现会讲给infrastructure层完成，我们会在下一篇blog中详细阐述repository的实现。</p>
+<p>对于repository的接口定义，建议规范接口名命名，比如：查询都叫着query等等，减小沟通成本。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPostRepository</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function">Post <span class="title">query</span><span class="params">(<span class="keyword">long</span> postId)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">save</span><span class="params">(Post post)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(Post post)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="domain-event"><a href="#domain-event" class="headerlink" title="domain-event"></a>domain-event</h1><p>领域事件。领域中产生的一些消息事件，可以在性能和解耦层面得到好处。我们通常借助于消息中间件，通过事件通知/订阅的方式落地。</p>
+<p>在‘社区’业务领域中，‘发帖’之后，会同时为帖子作者生成一个‘发帖动态’，这个‘生成发帖动态’场景并不同步完成，而是通过领域事件发布异步完成。‘发帖’创建Post实体后，发布一个‘发帖动态’领域事件（PostingDynamic），‘动态’（Dynamic）相关服务消费该领域事件，并生成Dynamic实体。</p>
+<h1 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h1><h2 id="查询式和命令式接口使用的domain需要分离"><a href="#查询式和命令式接口使用的domain需要分离" class="headerlink" title="查询式和命令式接口使用的domain需要分离"></a>查询式和命令式接口使用的domain需要分离</h2><p>查询式接口domain应当简化，甚至于去掉。通常查询接口的实现逻辑为：入参校验、鉴权、从Repository中获取数据、拼凑不同的数据、数据转换、返回数据。理论上，不应当存在过多的业务逻辑。所以可以淡化domain层。如果仍然按照：entity –&gt; model –&gt;dto的转换路径，实际model的作用没有，反而带来了代码复杂度，不值得。</p>
+<p>命令式接口，除去查询式接口的逻辑，还有部分业务相关的，比如“关注”这一业务逻辑，较为复杂，需要收口到domain。</p>
+<p>因此，建议如下处理方式：</p>
+<p>查询式和命令式接口使用的domain需要分离设计，查询式接口使用的domain可以淡化。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/04/系统架构/领域驱动设计：骨架/" title="领域驱动设计：骨架">http://yoursite.com/2019/07/04/系统架构/领域驱动设计：骨架/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/04/系统架构/系统设计：依赖反转与依赖注入/" rel="next" title="系统设计：依赖反转与依赖注入">
+                <i class="fa fa-chevron-left"></i> 系统设计：依赖反转与依赖注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/04/数据库/Jooq/Jooq：StudyResources/" rel="prev" title="Jooq：StudyResources">
+                Jooq：StudyResources <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码骨架"><span class="nav-number">1.</span> <span class="nav-text">代码骨架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iface"><span class="nav-number">2.</span> <span class="nav-text">iface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#app"><span class="nav-number">3.</span> <span class="nav-text">app</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">3.2.</span> <span class="nav-text">Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#service是组件粘合剂"><span class="nav-number">3.2.1.</span> <span class="nav-text">service是组件粘合剂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">3.2.2.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图"><span class="nav-number">3.2.3.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.2.4.</span> <span class="nav-text">code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Assembler"><span class="nav-number">3.3.</span> <span class="nav-text">Assembler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Assembler是组装器"><span class="nav-number">3.3.1.</span> <span class="nav-text">Assembler是组装器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-1"><span class="nav-number">3.3.3.</span> <span class="nav-text">code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jooq"><span class="nav-number">4.</span> <span class="nav-text">jooq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#domain"><span class="nav-number">5.</span> <span class="nav-text">domain</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#entity"><span class="nav-number">5.1.</span> <span class="nav-text">entity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#value-obj-区别于entity"><span class="nav-number">5.2.</span> <span class="nav-text">value obj(区别于entity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service"><span class="nav-number">5.3.</span> <span class="nav-text">service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#factory"><span class="nav-number">5.4.</span> <span class="nav-text">factory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#repository"><span class="nav-number">5.5.</span> <span class="nav-text">repository</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#domain-event"><span class="nav-number">6.</span> <span class="nav-text">domain-event</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考-1"><span class="nav-number">7.</span> <span class="nav-text">思考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查询式和命令式接口使用的domain需要分离"><span class="nav-number">7.1.</span> <span class="nav-text">查询式和命令式接口使用的domain需要分离</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

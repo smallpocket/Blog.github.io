@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="AOP产生的背景为了能够更好地将系统级别的代码抽离出来，去掉与对象的耦合，就产生了面向AOP（面向切面）。如上图所示，OOP属于一种横向扩展，AOP是一种纵向扩展。AOP依托于OOP，进一步将系统级别的代码抽象出来，进行纵向排列，实现低耦合。 应用场景 日志、安全性、事务等  AOP 的家庭成员PointCut即在哪个地方进行切入,它可以指定某一个点，也可以指定多个点。 比如类A的methord函">
+<meta name="keywords" content="Spring,框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring：AOP">
+<meta property="og:url" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="AOP产生的背景为了能够更好地将系统级别的代码抽离出来，去掉与对象的耦合，就产生了面向AOP（面向切面）。如上图所示，OOP属于一种横向扩展，AOP是一种纵向扩展。AOP依托于OOP，进一步将系统级别的代码抽象出来，进行纵向排列，实现低耦合。 应用场景 日志、安全性、事务等  AOP 的家庭成员PointCut即在哪个地方进行切入,它可以指定某一个点，也可以指定多个点。 比如类A的methord函">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea5e927d8">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea399586b">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea3e1fbcf">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea4fdea1d">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259edfbea6f0">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea8ffc354">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/163925a0307e7c6e">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f25f81c96">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f27c9deaf">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f334512f0">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f3be5cbb2">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f48e7ef5a">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f3916db2c">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f856b96ea">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f85f3f536">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f88bcecc8">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259fa6f87c3a">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259faa1e4069">
+<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/163925ac9488dccf">
+<meta property="og:updated_time" content="2019-05-09T12:38:00.864Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring：AOP">
+<meta name="twitter:description" content="AOP产生的背景为了能够更好地将系统级别的代码抽离出来，去掉与对象的耦合，就产生了面向AOP（面向切面）。如上图所示，OOP属于一种横向扩展，AOP是一种纵向扩展。AOP依托于OOP，进一步将系统级别的代码抽象出来，进行纵向排列，实现低耦合。 应用场景 日志、安全性、事务等  AOP 的家庭成员PointCut即在哪个地方进行切入,它可以指定某一个点，也可以指定多个点。 比如类A的methord函">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea5e927d8">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Spring：AOP | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Spring：AOP
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-26 21:00:39" itemprop="dateCreated datePublished" datetime="2019-03-26T21:00:39+08:00">2019-03-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-09 20:38:00" itemprop="dateModified" datetime="2019-05-09T20:38:00+08:00">2019-05-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/26/Java/框架/Spring：AOP/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/03/26/Java/框架/Spring：AOP/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="AOP产生的背景"><a href="#AOP产生的背景" class="headerlink" title="AOP产生的背景"></a>AOP产生的背景</h1><p>为了能够更好地将系统级别的代码抽离出来，去掉与对象的耦合，就产生了面向AOP（面向切面）。如上图所示，OOP属于一种横向扩展，AOP是一种纵向扩展。AOP依托于OOP，进一步将系统级别的代码抽象出来，进行纵向排列，实现低耦合。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
+<li>日志、安全性、事务等</li>
+</ul>
+<h2 id="AOP-的家庭成员"><a href="#AOP-的家庭成员" class="headerlink" title="AOP 的家庭成员"></a>AOP 的家庭成员</h2><h3 id="PointCut"><a href="#PointCut" class="headerlink" title="PointCut"></a>PointCut</h3><p>即在哪个地方进行切入,它可以指定某一个点，也可以指定多个点。</p>
+<p>比如类A的methord函数，当然一般的AOP与语言（AOL）会采用多用方式来定义PointCut,比如说利用正则表达式，可以同时指定多个类的多个函数。</p>
+<h3 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a>Advice</h3><p>在切入点干什么，指定在PointCut地方做什么事情（增强），打日志、执行缓存、处理异常等等。</p>
+<h3 id="Advisor-Aspect"><a href="#Advisor-Aspect" class="headerlink" title="Advisor/Aspect"></a>Advisor/Aspect</h3><p>PointCut + Advice 形成了切面Aspect，这个概念本身即代表切面的所有元素。但到这一地步并不是完整的，因为还不知道如何将切面植入到代码中，解决此问题的技术就是PROXY</p>
+<h3 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h3><p>Proxy 即代理，其不能算做AOP的家庭成员，更相当于一个管理部门，它管理 了AOP的如何融入OOP。之所以将其放在这里，是因为Aspect虽然是面向切面核心思想的重要组成部分，但其思想的践行者却是Proxy,也是实现AOP的难点与核心据在。</p>
+<h1 id="AOP的技术实现"><a href="#AOP的技术实现" class="headerlink" title="AOP的技术实现"></a>AOP的技术实现</h1><p>AOP仅仅是一种思想，那为了让这种思想发光，必然脱离语言本身的技术支持，Java在实现该技术时就是采用的代理Proxy,那我们就去了解一下，如何通过代理实现面向切面。</p>
+<ul>
+<li><strong>由于静态代理需要实现目标对象的相同接口，那么可能会导致代理类会非常非常多….不好维护</strong>—-&gt;因此出现了动态代理</li>
+<li>动态代理也有个约束：<strong>目标对象一定是要有接口的，没有接口就不能实现动态代理</strong>…..—–&gt;因此出现了cglib代理</li>
+<li>cglib代理也叫子类代理，<strong>从内存中构建出一个子类来扩展目标对象的功能！</strong><ul>
+<li><strong>CGLIB是一个强大的高性能的代码生成包，它可以在运行期扩展Java类与实现Java接口。它广泛的被许多AOP的框架使用，例如Spring AOP和dynaop，为他们提供方法的interception（拦截）。</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><p>就像我们去买二手房要经过中介一样，房主将房源委托给中介，中介将房源推荐给买方。中间的任何手续的承办都由中介来处理，不需要我们和房主直接打交道。无论对买方还是卖房都都省了很多事情，但同时也要付出代价，对于买房当然是中介费，对于代码的话就是性能。下面我们来介绍实现AOP的三种代理方式。</p>
+<p>下面我就以买房的过程中需要打日志为例介绍三种代理方式</p>
+<p>静态和动态是由代理产生的时间段来决定的。静态代理产生于代码编译阶段，即一旦代码运行就不可变了。下面我们来看一个例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPerson</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">IPerson</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I want wo sell this house"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonProxy</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IPerson iPerson;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(PersonProxy.class);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PersonProxy</span><span class="params">(IPerson iPerson)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.iPerson = iPerson;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    logger.info(<span class="string">"Before Proxy"</span>);</span><br><span class="line">    iPerson.doSomething();</span><br><span class="line">    logger.info(<span class="string">"After Proxy"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    PersonProxy personProxy = <span class="keyword">new</span> PersonProxy(<span class="keyword">new</span> Person());</span><br><span class="line">    personProxy.doSomething();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过代理类我们实现了将日志代码集成到了目标类，但从上面我们可以看出它具有很大的局限性：需要固定的类编写接口（或许还可以接受，毕竟有提倡面向接口编程），需要实现接口的每一个函数（不可接受），同样会造成代码的大量重复，将会使代码更加混乱。</p>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><p>那能否通过实现一次代码即可将logger织入到所有函数中呢，答案当然是可以的，此时就要用到java中的反射机制</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object delegate;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(<span class="keyword">this</span>.getClass();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">bind</span><span class="params">(Object delegate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.delegate = delegate;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(delegate.getClass().getClassLoader(), delegate.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        Object result = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            logger.info(<span class="string">"Before Proxy"</span>);</span><br><span class="line">            result = method.invoke(delegate, args);</span><br><span class="line">            logger.info(<span class="string">"After Proxy"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PersonProxy personProxy = <span class="keyword">new</span> PersonProxy();</span><br><span class="line">        IPerson iperson = (IPerson) personProxy.bind(<span class="keyword">new</span> Person());</span><br><span class="line">        iperson.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它的好处理时可以为我们生成任何一个接口的代理类，并将需要增强的方法织入到任意目标函数。但它仍然具有一个局限性，就是只有实现了接口的类，才能为其实现代理。</p>
+<h2 id="CGLIB"><a href="#CGLIB" class="headerlink" title="CGLIB"></a>CGLIB</h2><p>CGLIB解决了动态代理的难题，它通过生成目标类子类的方式来实现来实现代理，而不是接口，规避了接口的局限性。<br>CGLIB是一个强大的高性能代码生成包，其在运行时期（非编译时期）生成被 代理对象的子类，并重写了被代理对象的所有方法，从而作为代理对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonProxy</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object delegate;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(<span class="keyword">this</span>.getClass());</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object proxy, Method method, Object[] args,  MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"Before Proxy"</span>);</span><br><span class="line">        Object result = methodProxy.invokeSuper(method, args);</span><br><span class="line">        logger.info(<span class="string">"After Proxy"</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Person <span class="title">getProxyInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">        enhancer.setSuperclass(Person.class);</span><br><span class="line"></span><br><span class="line">        enhancer.setCallback(<span class="keyword">new</span> PersonProxy());</span><br><span class="line">        <span class="keyword">return</span> (Person) enhancer.create();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;复制代码</span><br></pre></td></tr></table></figure>
+
+<p>当然CGLIB也具有局限性，对于无法生成子类的类（final类），肯定是没有办法生成代理子类的。</p>
+<p>以上就是三种代理的实现方式，但千成别被迷惑了，在Spring AOP中这些东西已经被封装了，不需要我们自己实现。要不然得累死，但了解AOP的实现原理（即基于代理）还是很有必要的。</p>
+<h1 id="Spring-AOP全面认知"><a href="#Spring-AOP全面认知" class="headerlink" title="Spring AOP全面认知"></a>Spring AOP全面认知</h1><h2 id="AOP概述"><a href="#AOP概述" class="headerlink" title="AOP概述"></a>AOP概述</h2><p>AOP称为面向切面编程，那我们怎么理解面向切面编程？？</p>
+<p>我们可以先看看下面这段代码：</p>
+<p><img src="assets/1639259ea5e927d8" alt="img"></p>
+<p>我们学Java面向对象的时候，如果代码重复了怎么办啊？？可以分成下面几个步骤：</p>
+<ul>
+<li>1：抽取成方法</li>
+<li>2：抽取类</li>
+</ul>
+<p>抽取成类的方式我们称之为：<strong>纵向抽取</strong></p>
+<ul>
+<li>通过继承的方式实现纵向抽取</li>
+</ul>
+<p>但是，我们现在的办法不行：即使抽取成类还是会出现重复的代码，因为这些逻辑(开始、结束、提交事务)<strong>依附在我们业务类的方法逻辑中</strong>！</p>
+<p><img src="assets/1639259ea399586b" alt="img"></p>
+<p>现在纵向抽取的方式不行了，AOP的理念：就是将<strong>分散在各个业务逻辑代码中相同的代码通过横向切割的方式</strong>抽取到一个独立的模块中！</p>
+<p><img src="assets/1639259ea3e1fbcf" alt="img"></p>
+<p>上面的图也很清晰了，将重复性的逻辑代码横切出来其实很容易(我们简单可认为就是封装成一个类就好了)，但我们要将这些<strong>被我们横切出来的逻辑代码融合到业务逻辑中</strong>，来完成和之前(没抽取前)一样的功能！这就是AOP首要解决的问题了！</p>
+<h2 id="Spring-AOP原理"><a href="#Spring-AOP原理" class="headerlink" title="Spring AOP原理"></a>Spring AOP原理</h2><blockquote>
+<p>被我们横切出来的逻辑代码融合到业务逻辑中，来完成和之前(没抽取前)一样的功能</p>
+</blockquote>
+<p>没有学Spring AOP之前，我们就可以使用代理来完成。</p>
+<ul>
+<li>代理能干嘛？代理可以帮我们<strong>增强对象的行为</strong>！</li>
+<li>使用动态代理实质上就是<strong>调用时拦截对象方法，对方法进行改造、增强</strong>！</li>
+</ul>
+<p>其实Spring AOP的底层原理就是<strong>动态代理</strong>！</p>
+<p>来源《精通Spring4.x 企业应用开发实战》一段话：</p>
+<blockquote>
+<p>Spring AOP使用纯Java实现，它不需要专门的编译过程，也不需要特殊的类装载器，它在<strong>运行期通过代理方式向目标类织入增强代码</strong>。在Spring中可以无缝地将Spring AOP、IoC和AspectJ整合在一起。</p>
+</blockquote>
+<p>来源《Spring 实战 (第4版)》一句话：</p>
+<blockquote>
+<p>Spring AOP构建在动态代理基础之上，因此，<strong>Spring对AOP的支持局限于方法拦截</strong>。</p>
+</blockquote>
+<p>在Java中动态代理有<strong>两种</strong>方式：</p>
+<ul>
+<li>JDK动态代理</li>
+<li>CGLib动态代理</li>
+</ul>
+<p><img src="assets/1639259ea4fdea1d" alt="img"></p>
+<p>JDK动态代理是需要实现某个接口了，而我们类未必全部会有接口，于是CGLib代理就有了~~</p>
+<ul>
+<li>CGLib代理其生成的动态代理对象是目标类的子类</li>
+<li>Spring AOP<strong>默认是使用JDK动态代理</strong>，如果代理的类<strong>没有接口则会使用CGLib代理</strong>。</li>
+</ul>
+<p>那么JDK代理和CGLib代理我们该用哪个呢？？在《精通Spring4.x 企业应用开发实战》给出了建议：</p>
+<ul>
+<li>如果是<strong>单例的我们最好使用CGLib代理</strong>，如果是多例的我们最好使用JDK代理</li>
+</ul>
+<p>原因：</p>
+<ul>
+<li>JDK在创建代理对象时的性能要高于CGLib代理，而生成代理对象的运行性能却比CGLib的低。</li>
+<li>如果是单例的代理，推荐使用CGLib</li>
+</ul>
+<p>看到这里我们就应该知道什么是Spring AOP(面向切面编程)了：<strong>将相同逻辑的重复代码横向抽取出来，使用动态代理技术将这些重复代码织入到目标对象方法中，实现和原来一样的功能</strong>。</p>
+<ul>
+<li>这样一来，我们就在<strong>写业务时只关心业务代码</strong>，而不用关心与业务无关的代码</li>
+</ul>
+<h2 id="AOP的实现者"><a href="#AOP的实现者" class="headerlink" title="AOP的实现者"></a>AOP的实现者</h2><p>AOP除了有Spring AOP实现外，还有著名的AOP实现者：AspectJ，也有可能大家没听说过的实现者：JBoss AOP~~</p>
+<p>我们下面来说说AspectJ扩展一下知识面：</p>
+<blockquote>
+<p>AspectJ是<strong>语言级别</strong>的AOP实现，扩展了Java语言，定义了AOP语法，能够在<strong>编译期</strong>提供横切代码的织入，所以它有<strong>专门的编译器</strong>用来生成遵守Java字节码规范的Class文件。</p>
+</blockquote>
+<p>而Spring借鉴了AspectJ很多非常有用的做法，<strong>融合了AspectJ实现AOP的功能</strong>。但Spring AOP本质上<strong>底层还是动态代理</strong>，所以Spring AOP是不需要有专门的编辑器的~</p>
+<h2 id="AOP的术语"><a href="#AOP的术语" class="headerlink" title="AOP的术语"></a>AOP的术语</h2><p>嗯，AOP搞了好几个术语出来~~两本书都有讲解这些术语，我会尽量让大家看得明白的：</p>
+<p><strong>连接点</strong>(Join point)：</p>
+<ul>
+<li><strong>能够被拦截的地方</strong>：Spring AOP是基于动态代理的，所以是方法拦截的。每个成员方法都可以称之为连接点~</li>
+</ul>
+<p><strong>切点</strong>(Poincut)：</p>
+<ul>
+<li><strong>具体定位的连接点</strong>：上面也说了，每个方法都可以称之为连接点，我们<strong>具体定位到某一个方法就成为切点</strong>。</li>
+</ul>
+<p><strong>增强/通知</strong>(Advice)：</p>
+<ul>
+<li>表示添加到切点的一段逻辑代码，并定位连接点的方位信息。 <ul>
+<li>简单来说就定义了是干什么的，具体是在哪干</li>
+<li>Spring AOP提供了5种Advice类型给我们：前置、后置、返回、异常、环绕给我们使用！</li>
+</ul>
+</li>
+</ul>
+<p><strong>织入</strong>(Weaving)：</p>
+<ul>
+<li>将<code>增强/通知</code>添加到目标类的具体连接点上的过程。</li>
+</ul>
+<p><strong>引入/引介</strong>(Introduction)：</p>
+<ul>
+<li><code>引入/引介</code>允许我们<strong>向现有的类添加新方法或属性</strong>。是一种<strong>特殊</strong>的增强！</li>
+</ul>
+<p><strong>切面</strong>(Aspect)：</p>
+<ul>
+<li>切面由切点和<code>增强/通知</code>组成，它既包括了横切逻辑的定义、也包括了连接点的定义。</li>
+</ul>
+<p>在《Spring 实战 (第4版)》给出的总结是这样子的：</p>
+<blockquote>
+<p>通知/增强包含了需要用于多个应用对象的横切行为；连接点是程序执行过程中能够应用通知的所有点；切点定义了通知/增强被应用的具体位置。其中关键的是切点定义了哪些连接点会得到通知/增强。</p>
+</blockquote>
+<p>总的来说：</p>
+<ul>
+<li>这些术语可能翻译过来不太好理解，但对我们正常使用AOP的话<strong>影响并没有那么大</strong>~~看多了就知道它是什么意思了。</li>
+</ul>
+<h2 id="Spring对AOP的支持"><a href="#Spring对AOP的支持" class="headerlink" title="Spring对AOP的支持"></a>Spring对AOP的支持</h2><p>Spring提供了3种类型的AOP支持：</p>
+<ul>
+<li><p>基于代理的经典SpringAOP </p>
+<ul>
+<li>需要实现接口，手动创建代理</li>
+</ul>
+</li>
+<li><p>纯POJO切面 </p>
+<ul>
+<li>使用XML配置，aop命名空间</li>
+</ul>
+</li>
+<li><p>@AspectJ</p>
+<p>注解驱动的切面 </p>
+<ul>
+<li>使用注解的方式，这是最简洁和最方便的！</li>
+</ul>
+</li>
+</ul>
+<h1 id="基于代理的经典SpringAOP"><a href="#基于代理的经典SpringAOP" class="headerlink" title="基于代理的经典SpringAOP"></a>基于代理的经典SpringAOP</h1><p>这部分配置比较麻烦，用起来也很麻烦，这里我就主要整理一下书上的内容，大家看看了解一下吧，我们实际上使用Spring AOP基本不用这种方式了！</p>
+<p>首先，我们来看一下增强接口的继承关系图：</p>
+<p><img src="assets/1639259edfbea6f0" alt="img"></p>
+<p>可以分成<strong>五类</strong>增强的方式：</p>
+<p><img src="assets/1639259ea8ffc354" alt="img"></p>
+<p>Spring提供了<strong>六种的切点类型</strong>：</p>
+<p><img src="assets/163925a0307e7c6e" alt="img"></p>
+<p><strong>切面类型主要分成了三种</strong>：</p>
+<ul>
+<li><strong>一般切面</strong></li>
+<li><strong>切点切面</strong></li>
+<li><strong>引介/引入切面</strong></li>
+</ul>
+<p><img src="assets/1639259f25f81c96" alt="img"></p>
+<p>一般切面，切点切面，引介/引入切面介绍：</p>
+<p><img src="assets/1639259f27c9deaf" alt="img"></p>
+<p><img src="assets/1639259f334512f0" alt="img"></p>
+<p>对于切点切面我们一般都是直接用就好了，我们来看看引介/引入切面是怎么一回事：</p>
+<ul>
+<li>引介/引入切面是引介/引入增强的封装器，通过引介/引入切面，<strong>可以更容易地为现有对象添加任何接口的实现</strong>！</li>
+</ul>
+<p>继承关系图：</p>
+<p><img src="assets/1639259f3be5cbb2" alt="img"></p>
+<p>引介/引入切面有两个实现类：</p>
+<ul>
+<li>DefaultIntroductionAdvisor：常用的实现类</li>
+<li>DeclareParentsAdvisor：用于实现AspectJ语言的DeclareParent注解表示的引介/引入切面</li>
+</ul>
+<p>实际上，我们使用AOP往往是<strong>Spring内部使用BeanPostProcessor帮我们创建代理</strong>。</p>
+<p>这些代理的创建器可以分成三类：</p>
+<ul>
+<li>基于Bean配置名规则的自动代理创建器：BeanNameAutoProxyCreator</li>
+<li>基于Advisor匹配机制的自动代理创建器：它会对容器所有的Advisor进行扫描，实现类为DefaultAdvisorAutoProxyCreator</li>
+<li>基于Bean中的AspectJ注解标签的自动代理创建器：AnnotationAwareAspectJAutoProxyCreator</li>
+</ul>
+<p>对应的类继承图：</p>
+<p><img src="assets/1639259f48e7ef5a" alt="img"></p>
+<p>嗯，基于代理的经典SpringAOP就讲到这里吧，其实我是不太愿意去写这个的，因为已经几乎不用了，在《Spring 实战 第4版》也没有这部分的知识点了。</p>
+<ul>
+<li>但是通过这部分的知识点可以<strong>更加全面地认识Spring AOP的各种接口</strong>吧~</li>
+</ul>
+<h1 id="拥抱基于注解和命名空的AOP编程"><a href="#拥抱基于注解和命名空的AOP编程" class="headerlink" title="拥抱基于注解和命名空的AOP编程"></a>拥抱基于注解和命名空的AOP编程</h1><p>Spring在新版本中对AOP功能进行了增强，体现在这么几个方面：</p>
+<ul>
+<li>在XML配置文件中为AOP提供了aop命名空间</li>
+<li>增加了AspectJ切点表达式语言的支持</li>
+<li>可以无缝地集成AspectJ</li>
+</ul>
+<p>那我们使用<code>@AspectJ</code>来玩AOP的话，学什么？？其实也就是上面的内容，学如何设置切点、创建切面、增强的内容是什么…</p>
+<p><img src="assets/1639259f3916db2c" alt="img"></p>
+<p>具体的切点表达式使用还是前往：<a href="https://link.juejin.im?target=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzI4Njg5MDA5NA%3D%3D%26mid%3D2247483954%26idx%3D1%26sn%3Db34e385ed716edf6f58998ec329f9867%26chksm%3Debd74333dca0ca257a77c02ab458300ef982adff3cf37eb6d8d2f985f11df5cc07ef17f659d4%23rd" target="_blank" rel="noopener">Spring【AOP模块】就这么简单</a>看吧~~</p>
+<p>对应的增强注解：</p>
+<p><img src="assets/1639259f856b96ea" alt="img"></p>
+<p><img src="assets/1639259f85f3f536" alt="img"></p>
+<h2 id="使用引介-引入功能实现为Bean引入新方法"><a href="#使用引介-引入功能实现为Bean引入新方法" class="headerlink" title="使用引介/引入功能实现为Bean引入新方法"></a>使用引介/引入功能实现为Bean引入新方法</h2><p>其实前置啊、后置啊这些很容易就理解了，整篇文章看下来就只有这个引介/引入切面有点搞头。于是我们就来玩玩吧~</p>
+<p>我们来看一下具体的用法吧，现在我有个服务员的接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Waiter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向客人打招呼</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greetTo</span><span class="params">(String clientName)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 服务</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">serveTo</span><span class="params">(String clientName)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一位年轻服务员实现类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NaiveWaiter</span> <span class="keyword">implements</span> <span class="title">Waiter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">greetTo</span><span class="params">(String clientName)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"NaiveWaiter:greet to "</span> + clientName + <span class="string">"..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NeedTest</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveTo</span><span class="params">(String clientName)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"NaiveWaiter:serving "</span> + clientName + <span class="string">"..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在我想做的就是：<strong>想这个服务员可以充当售货员的角色，可以卖东西</strong>！当然了，我肯定不会加一个卖东西的方法到Waiter接口上啦，因为这个是暂时的~</p>
+<p>所以，我搞了一个售货员接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Seller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 卖东西</span></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">sell</span><span class="params">(String goods, String clientName)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个售货员实现类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmartSeller</span> <span class="keyword">implements</span> <span class="title">Seller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 卖东西</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sell</span><span class="params">(String goods,String clientName)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"SmartSeller: sell "</span>+goods +<span class="string">" to "</span>+clientName+<span class="string">"..."</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时，我们的类图是这样子的：</p>
+<p><img src="assets/1639259f88bcecc8" alt="img"></p>
+<p>现在我想干的就是：<strong>借助AOP的引入/引介切面，来让我们的服务员也可以卖东西</strong>！</p>
+<p>我们的引入/引介切面具体是这样干的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnableSellerAspect</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@DeclareParents</span>(value = <span class="string">"com.smart.NaiveWaiter"</span>,  <span class="comment">// 指定服务员具体的实现</span></span><br><span class="line">            defaultImpl = SmartSeller.class) <span class="comment">// 售货员具体的实现</span></span><br><span class="line">    <span class="keyword">public</span> Seller seller; <span class="comment">// 要实现的目标接口</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写了这个切面类会发生什么？？</p>
+<ul>
+<li>切面技术将SmartSeller融合到NaiveWaiter中，这样<strong>NaiveWaiter就实现了Seller接口</strong>！！！！</li>
+</ul>
+<p>是不是很神奇？？我也觉得很神奇啊，我们来测试一下：</p>
+<p>我们的<code>bean.xml</code>文件很简单：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> ?&gt;</span><br><span class="line">&lt;beans xmlns=<span class="string">"http://www.springframework.org/schema/beans"</span></span><br><span class="line">	xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">	xmlns:aop=<span class="string">"http://www.springframework.org/schema/aop"</span></span><br><span class="line">	xsi:schemaLocation=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd</span></span><br><span class="line"><span class="string">           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd"</span>&gt;</span><br><span class="line">    &lt;aop:aspectj-autoproxy/&gt;</span><br><span class="line">	&lt;bean id=<span class="string">"waiter"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.smart.NaiveWaiter"</span>/&gt;</span><br><span class="line">	&lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.smart.aspectj.basic.EnableSellerAspect"</span>/&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+
+<p>测试一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        ClassPathXmlApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"com/smart/aspectj/basic/beans.xml"</span>);</span><br><span class="line">        Waiter waiter = (Waiter) ctx.getBean(<span class="string">"waiter"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用服务员原有的方法</span></span><br><span class="line">        waiter.greetTo(<span class="string">"Java3y"</span>);</span><br><span class="line">        waiter.serveTo(<span class="string">"Java3y"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过引介/引入切面已经将waiter服务员实现了Seller接口，所以可以强制转换</span></span><br><span class="line">        Seller seller = (Seller) waiter;</span><br><span class="line">        seller.sell(<span class="string">"水军"</span>, <span class="string">"Java3y"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="assets/1639259fa6f87c3a" alt="img"></p>
+<p>具体的调用过程是这样子的：</p>
+<blockquote>
+<p>当引入接口方法被调用时，代理对象会把此调用委托给实现了新接口的某个其他对象。实际上，一个Bean的实现被拆分到多个类中</p>
+</blockquote>
+<p><img src="assets/1639259faa1e4069" alt="img"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来AOP有很多很多的知识点，其实我们只要记住AOP的核心概念就行啦。</p>
+<p>下面是我的简要总结AOP：</p>
+<ul>
+<li>AOP的底层实际上是动态代理，动态代理分成了JDK动态代理和CGLib动态代理。如果被代理对象没有接口，那么就使用的是CGLIB代理(也可以直接配置使用CBLib代理)</li>
+<li>如果是单例的话，那我们最好使用CGLib代理，因为CGLib代理对象运行速度要比JDK的代理对象要快</li>
+<li>AOP既然是基于动态代理的，那么它只能对方法进行拦截，它的层面上是方法级别的</li>
+<li>无论经典的方式、注解方式还是XML配置方式使用Spring AOP的原理都是一样的，只不过形式变了而已。一般我们使用注解的方式使用AOP就好了。</li>
+<li>注解的方式使用Spring AOP就了解几个切点表达式，几个增强/通知的注解就完事了，是不是贼简单…使用XML的方式和注解其实没有很大的区别，很快就可以上手啦。</li>
+<li>引介/引入切面也算是一个比较亮的地方，可以用代理的方式为某个对象实现接口，从而能够使用借口下的方法。这种方式是非侵入式的~</li>
+<li>要增强的方法还可以接收与被代理方法一样的参数、绑定被代理方法的返回值这些功能…</li>
+</ul>
+<p>最后，将我们上一次IOC的思维导图补充AOP的知识点上去吧<del>~</del></p>
+<p><img src="assets/163925ac9488dccf" alt="img"></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://juejin.im/post/5aa8edf06fb9a028d0432584" target="_blank" rel="noopener">Spring【AOP模块】就是这么简单</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/" title="Spring：AOP">http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/26/Java/框架/Spring：IOC/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/26/Java/框架/Spring：MVC/" rel="prev" title="Spring：MVC">
+                Spring：MVC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AOP产生的背景"><span class="nav-number">1.</span> <span class="nav-text">AOP产生的背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.1.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP-的家庭成员"><span class="nav-number">1.2.</span> <span class="nav-text">AOP 的家庭成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PointCut"><span class="nav-number">1.2.1.</span> <span class="nav-text">PointCut</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advice"><span class="nav-number">1.2.2.</span> <span class="nav-text">Advice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advisor-Aspect"><span class="nav-number">1.2.3.</span> <span class="nav-text">Advisor/Aspect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy"><span class="nav-number">1.2.4.</span> <span class="nav-text">Proxy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOP的技术实现"><span class="nav-number">2.</span> <span class="nav-text">AOP的技术实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态代理"><span class="nav-number">2.1.</span> <span class="nav-text">静态代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态代理"><span class="nav-number">2.2.</span> <span class="nav-text">动态代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CGLIB"><span class="nav-number">2.3.</span> <span class="nav-text">CGLIB</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-AOP全面认知"><span class="nav-number">3.</span> <span class="nav-text">Spring AOP全面认知</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP概述"><span class="nav-number">3.1.</span> <span class="nav-text">AOP概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-AOP原理"><span class="nav-number">3.2.</span> <span class="nav-text">Spring AOP原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP的实现者"><span class="nav-number">3.3.</span> <span class="nav-text">AOP的实现者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP的术语"><span class="nav-number">3.4.</span> <span class="nav-text">AOP的术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring对AOP的支持"><span class="nav-number">3.5.</span> <span class="nav-text">Spring对AOP的支持</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于代理的经典SpringAOP"><span class="nav-number">4.</span> <span class="nav-text">基于代理的经典SpringAOP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拥抱基于注解和命名空的AOP编程"><span class="nav-number">5.</span> <span class="nav-text">拥抱基于注解和命名空的AOP编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用引介-引入功能实现为Bean引入新方法"><span class="nav-number">5.1.</span> <span class="nav-text">使用引介/引入功能实现为Bean引入新方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

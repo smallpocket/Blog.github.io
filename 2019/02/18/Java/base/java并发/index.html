@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="十一、线程安全​    多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。 概念​    编写线程安全的代码，本质上就是管理对状态的访问，而且通常都是共享、可变的状态。 ​    一个对象的状态就是它的数据，存储在状态变量中，如静态域、实例域。共享即一个变量可以被多个线程访问。可变即变量的值在其生命周期内都可以改变。真正要做到的线程安全是在不可控制的并发访问当中">
+<meta name="keywords" content="并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java并发">
+<meta property="og:url" content="http://yoursite.com/2019/02/18/Java/base/java并发/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="十一、线程安全​    多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。 概念​    编写线程安全的代码，本质上就是管理对状态的访问，而且通常都是共享、可变的状态。 ​    一个对象的状态就是它的数据，存储在状态变量中，如静态域、实例域。共享即一个变量可以被多个线程访问。可变即变量的值在其生命周期内都可以改变。真正要做到的线程安全是在不可控制的并发访问当中">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550563393365.png">
+<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550587826303.png">
+<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550634538699.png">
+<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550636338076.png">
+<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550641893865.png">
+<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550642087788.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/18/Java/base/java并发/assets%5C1550825942991.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/18/Java/base/java并发/assets%5C1550825994345.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/18/Java/base/java并发/assets%5C1550988548365.png">
+<meta property="og:updated_time" content="2019-05-06T04:47:23.282Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java并发">
+<meta name="twitter:description" content="十一、线程安全​    多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。 概念​    编写线程安全的代码，本质上就是管理对状态的访问，而且通常都是共享、可变的状态。 ​    一个对象的状态就是它的数据，存储在状态变量中，如静态域、实例域。共享即一个变量可以被多个线程访问。可变即变量的值在其生命周期内都可以改变。真正要做到的线程安全是在不可控制的并发访问当中">
+<meta name="twitter:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550563393365.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/18/Java/base/java并发/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java并发 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/Java/base/java并发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">java并发
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-18 23:05:11" itemprop="dateCreated datePublished" datetime="2019-02-18T23:05:11+08:00">2019-02-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-06 12:47:23" itemprop="dateModified" datetime="2019-05-06T12:47:23+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/18/Java/base/java并发/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/02/18/Java/base/java并发/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="十一、线程安全"><a href="#十一、线程安全" class="headerlink" title="十一、线程安全"></a>十一、线程安全</h1><p>​    多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>​    编写线程安全的代码，本质上就是管理对<strong>状态</strong>的访问，而且通常都是<strong>共享、可变</strong>的状态。</p>
+<p>​    一个对象的状态就是它的数据，存储在状态变量中，如静态域、实例域。共享即一个变量可以被多个线程访问。可变即变量的值在其生命周期内都可以改变。真正要做到的线程安全是在不可控制的并发访问当中保护数据。</p>
+<p>​    无论何时，只要有多于一个的线程访问给定的状态变量，而且其中某个线程会写入该变量，此时必须使用同步来协调线程对该变量的访问。</p>
+<p>​    java的同步机制：synchronized(独占锁)，volatile(显示锁和原子变量的使用)</p>
+<p>​    修复同步隐患</p>
+<ul>
+<li>不跨线程的共享变量</li>
+<li>使用状态变量为不可变的</li>
+<li>在任何访问状态变量的时候使用同步</li>
+</ul>
+<h2 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h2><ul>
+<li>无状态的对象永远是安全的。即指这个对象没有状态域，也没有引用其他对象的域，是一次特定计算的瞬时状态，会唯一存放在一个本地变量当中，即线程的栈当中。而两个线程并不共享状态。</li>
+</ul>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>​    原子性：能作为一个单独的、不可分割的操作去执行</p>
+<p>​    当向一个无状态的对象添加一个域，并进行long++操作（读+改+写），则不是线程安全</p>
+<p>​    将long换作一个atomic包下的AtomicLong变量，则由于该变量是一个原子变量类，该计数器是线程安全的，该对象的状态即该计数器的对象，即该对象线程安全。（利用已有的线程安全类进行管理，如果只有一个，则线程安全，如果多个，则未必线程安全）</p>
+<p>​    当变量之间相互关联，则在一个原子操作当中，要将几个相互关联的变量同时更新</p>
+<p><strong>竞争条件</strong></p>
+<p>​    想得到正确的答案，依赖时序。</p>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><h4 id="内部锁（互斥锁）"><a href="#内部锁（互斥锁）" class="headerlink" title="内部锁（互斥锁）"></a>内部锁（互斥锁）</h4><p>​    synchronized块，声明方法</p>
+<p><strong>特性</strong></p>
+<ul>
+<li><p>重进入：内部锁是重进入的，当线程试图获得它自己所占有的锁时候，请求会成功，即重进入是基于每<strong>线程</strong>的，而不是调用。</p>
+<p>实现是通过为每个锁关联一个请求计数与一个占有它的线程，当同一线程访问，则计数++，线程退出该锁，则计数–，直到计数为0，释放该锁（父类与子类的使用）</p>
+</li>
+</ul>
+<p><strong>用锁来保持状态</strong></p>
+<ul>
+<li>如果每个可被多个线程访问的可变状态变量，如果所有访问它的线程在执行状态当中占有同一个锁，则称该变量是由这个锁保护的</li>
+<li>每个共享的可变变量都需要唯一一个确定的锁保护</li>
+</ul>
+<p><strong>设计</strong></p>
+<ul>
+<li>决定synchronize块大小需要权衡安全性（不能妥协）、简单性、性能。通常简单性与性能相互牵制，实现一个同步策略时候，不要过早地为了性能而牺牲简单性（是对安全性潜在的妥协）</li>
+<li>有些耗时的计算或操作，如网络或者控制台IO，难以快速完成，执行它们的时候不要占有锁</li>
+</ul>
+<h3 id="活跃度与性能"><a href="#活跃度与性能" class="headerlink" title="活跃度与性能"></a>活跃度与性能</h3><p>​    不能武断地将整个方法设置为synchronize的，通过缩小synchronize的范围来提高并发性</p>
+<p><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550563393365.png" alt="1550563393365"></p>
+<h2 id="共享对象"><a href="#共享对象" class="headerlink" title="共享对象"></a>共享对象</h2><p>​    在前面，使用同步来避免多个线程在同一时间访问同一数据，在该部分，进行共享和发布对象，使得多个线程可以安全地访问他们。</p>
+<p>​    同步的两个方面：</p>
+<ul>
+<li>原子操作</li>
+<li>内存可见性，即一个线程修改了对象的状态后，其他线程能够真正地看到改变</li>
+</ul>
+<h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>​    重排序现象：在单个线程当中，只要重排序不会对结果产生影响，则不能保证操作一定按照程序写定的顺序执行（java虚拟机的高性能）</p>
+<p>​    如果数据需要跨线程共享，就要进行恰当的同步。</p>
+<p><strong>过期数据</strong></p>
+<p>​    当读线程检查一个变量时，可能看到一个过期的数据。并且过期不会发生在全部变量上，也不会完全不出现。</p>
+<p>​    对于get与set方法，同样需要同步化，进行synchronize</p>
+<p><strong>锁与可见性</strong></p>
+<p>​    锁不仅仅是关于同步与互斥的，也是关于内存可见的，为了保证所有线程都能看到共享的、可变变量的最新值，读取和写入线程必须使用公共的锁进行同步</p>
+<p>​    volatile：弱同步，确保对一个变量的更新以可预见的方式告知其他线程</p>
+<h3 id="发布和逸出"><a href="#发布和逸出" class="headerlink" title="发布和逸出"></a>发布和逸出</h3><p>​    发布：发布一个对象指它能够被当前范围以外的代码所使用。发布一个对象，同时将发布该对象所有的非私有域引用的对象。</p>
+<p>​    逸出：一个对象在尚未准备好的时候就发布</p>
+<p>发布方式：</p>
+<ul>
+<li>将对象存放到公共静态域</li>
+</ul>
+<p>逸出：</p>
+<ul>
+<li><p>this引用在构造期间逸出，即对象在没有通过构造函数构造完毕（执行到了构造函数的某一句）时候逸出。</p>
+<p>当对象在构造函数当中创建一个线程，this引用总是被新线程共享，</p>
+</li>
+</ul>
+<h3 id="线程封闭"><a href="#线程封闭" class="headerlink" title="线程封闭"></a>线程封闭</h3><p>​    访问共享的、可变的数据要求使用同步。一个可以避免同步的方法就是不共享数据，如果数据仅仅在单线程当中访问，则不需要任何同步。当对象封装在一个线程当中，则自动成为线程安全的。</p>
+<ul>
+<li>Swing将事件分发到线程当中</li>
+<li>JDBC从池中分配一个对象给线程。</li>
+</ul>
+<p><strong>Ad-hoc线程限制</strong></p>
+<p>​    指维护线程限制性的任务全部落在实现上的情况</p>
+<ul>
+<li>确保只通过单一线程写入共享的volatile变量，则操作便是共享</li>
+</ul>
+<p><strong>栈限制</strong></p>
+<p>​    是线程限制的特例，只能通过本地变量才可以触及对象。本地变量使得对象更容易被限制在线程本地中<strong>，本地变量本身就被限制在执行线程</strong>中，它们存在于执行线程栈。其他线程无法访问这个栈</p>
+<p>​    例如方法当中的numPairs</p>
+<p><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550587826303.png" alt="1550587826303"></p>
+<p>​    在该方法当中，实例化的animals只有一个引用指向它，因此它保存在线程的栈当中，倘若发布了animals或其内部对象的引用，则破坏了限制，并导致了对象逸出</p>
+<p><strong>ThreadLocal</strong></p>
+<p>​    更规范的方式，允许将每个线程与持有数值的对象关联在一起。ThradLocal提供了get和set，为每个使用它的线程维护一份单独的拷贝，所以get总是返回当前执行线程通过set设置的最新值。</p>
+<blockquote>
+<p>ThreadLocal 提供了线程本地的实例。它与普通变量的区别在于，每个使用该变量的线程都会初始化一个完全独立的实例副本。ThreadLocal 变量通常被<code>private static</code>修饰。当一个线程结束时，它所使用的所有 ThreadLocal 相对的实例副本都可被回收。</p>
+</blockquote>
+<p>​    总的来说，<strong>ThreadLocal 适用于每个线程需要自己独立的实例且该实例需要在多个方法中被使用，也即变量在线程间隔离而在方法或类间共享的场景</strong></p>
+<h3 id="不可变性"><a href="#不可变性" class="headerlink" title="不可变性"></a>不可变性</h3><p>​    创建后不能被修改的对象称为不可变对象，不可变对象永远是线程安全的。</p>
+<p>不可变对象特征：</p>
+<ul>
+<li>状态创建后不能再修改</li>
+<li>所有域都是final类型（不获得可变对象的引用）</li>
+<li>对象被正确创建，不逸出this</li>
+</ul>
+<h3 id="安全发布"><a href="#安全发布" class="headerlink" title="安全发布"></a>安全发布</h3><p>​    如果希望跨线程共享对象，则必须安全地共享它</p>
+<p>​    对象的引用对其他线程可见，但它的状态可能是过期的，即对象的状态不一定对消费线程可见。</p>
+<p><strong>安全发布的模式</strong></p>
+<ul>
+<li>通过静态初始化器初始化对象的引用（JVM内部的同步机制）</li>
+<li>将它的引用存储到volatile域或者atomicReference</li>
+<li>将它的引用存储到正确创建的对象的final域</li>
+<li>或者将它的引用存储到由锁正确保护的域中</li>
+</ul>
+<p><strong>线程安全容器</strong></p>
+<p>​    线程安全容器的内部同步，即将对象置入这些容器的操作符合最后一条要求</p>
+<ul>
+<li>HashTable、synchronizedMap、concurrentMap</li>
+<li>Vector、CopyOnWriteArrayList、synchronizedList</li>
+<li>BlockingQueue、concurrentLinkedQueue</li>
+</ul>
+<p><strong>高效不可变对象</strong></p>
+<p>​    一个对象在技术上不是不可变得，但是它的状态在发布后不会再更改，即有效不可变对象。</p>
+<blockquote>
+<p>任何线程都可以在没有额外同步的情况下安全使用一个<strong>安全发布</strong>的高效不可变对象</p>
+</blockquote>
+<p><strong>可变对象</strong></p>
+<p>​    安全发布仅仅保证发布当时的可见性，对于可变性，还需要线程安全或锁</p>
+<ul>
+<li><p>可变对象必须要安全发布，同时必须要线程安全或者是锁保护的</p>
+<blockquote>
+<ul>
+<li>线程限制：一个线程限制的对象，通过限制在线程中，而被线程独占，且只能被占有它的线程修改</li>
+<li>共享只读：在没有额外同步的情况下可以被多个对象并发访问，但是任何线程都不可以修改它，包括可变对象和高效不可变对象</li>
+<li>共享线程安全：一个线程安全的对象在内部同步，所以其他线程无须额外同步，就可以通过公共接口访问</li>
+<li>被守护的：一个被守护的对象只能通过特定的锁来访问。被守护的对象包括那些被线程安全对象封装的对象，和已知被特定的锁保护起来的已发布对象</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h1 id="组合对象"><a href="#组合对象" class="headerlink" title="组合对象"></a>组合对象</h1><p>​    构造类的模式，使得类更容易成为线程安全的，并且不会使程序意外破坏类的线程安全性</p>
+<h2 id="设计线程安全的类"><a href="#设计线程安全的类" class="headerlink" title="设计线程安全的类"></a>设计线程安全的类</h2><blockquote>
+<p>设计线程安全类的过程的基本要素</p>
+<ul>
+<li>确定对象状态是由哪些变量构成的（linkedList状态包含了所有存储在链表中节点对象的状态）</li>
+<li>确定限制状态变量的不变约束</li>
+<li>制定一个管理并发访问对象状态的策略</li>
+</ul>
+</blockquote>
+<h3 id="同步策略"><a href="#同步策略" class="headerlink" title="同步策略"></a>同步策略</h3><blockquote>
+<p>同步策略定义了对象如何协调对其状态的访问，并且不会违反它的不变约束或后验条件。规定了如何把不可变性、线程限制、锁结合起来，从而维护线程的安全性，还指明了哪些锁维护哪些变量</p>
+</blockquote>
+<p>​    状态空间：对象与变量可能处于状态的范围</p>
+<p>​    <strong>操作的后验条件</strong>：对状态的值进行检验，如果不符合，则异常</p>
+<p>​    状态转换：一个对象的下一个状态源于当前状态。如果某些状态是非法的，则必须封装该状态下的状态变量，否则客户代码会将对象置于非法状态。如果一个操作的过程当中出现非法状态，则该操作必须是原子的</p>
+<p><strong>状态依赖的操作</strong></p>
+<p>​    某些对象的方法基于对象的先验条件，例如无法从空队列移除一个对象。在多线程当中，原本为假地先验条件可能在后续为真</p>
+<p><strong>状态所有权</strong></p>
+<h2 id="实例限制"><a href="#实例限制" class="headerlink" title="实例限制"></a>实例限制</h2><p>​    即使对象不是线程安全的，依然可以使得它安全用于多线程，比如确保其只在单一线程被访问（线程限制）、类实例（private的类成员）、语汇范围（本地变量），要确保不逸出</p>
+<blockquote>
+<p>​    将数据封装在对象内部，把对数据的访问限制在对象的方法（线程安全的锁或。。。）上，更容易确保线程在访问数据时总能获得正确的锁。</p>
+<p>​    限制性使得构造线程安全的类变得容易，因为类的状态被限制后，分析它的线程安全性便不需要检查完整的程序。</p>
+</blockquote>
+<p><strong>java监视器模式</strong></p>
+<p>​    遵循java监视器模式的对象封装了所有的可变状态，并且由对象自己的内部锁保护</p>
+<p>​    对于凭空创建一个类，或者使用非线程安全的对象组装一个类时，非常有效</p>
+<p><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550634538699.png" alt="1550634538699"></p>
+<p>​    内部锁：将synchronize添加到方法上</p>
+<h2 id="委托线程安全"><a href="#委托线程安全" class="headerlink" title="委托线程安全"></a>委托线程安全</h2><p>​    如果类的状态组件都是线程安全的，则监视器模式的使用需要视情况而定，它是一个额外的线程安全层。如果类组件都是线程安全的，那么可以说类将它的线程安全委托给了它的组件，因为组件安全，所以它也是安全的。</p>
+<p>​    如果将线程安全委托到多个隐含的状态变量上，只要这些变量相互独立，组合对象未增加任何涉及多个状态变量的<strong>不变约束</strong></p>
+<blockquote>
+<p>​    如果一个类由多个彼此相互独立的线程安全的状态变量组成，并且类的操作不包含任何无效状态转换时，可以将线程安全委托给这些状态变量</p>
+</blockquote>
+<p><strong>发布底层的状态变量</strong>（类组件）</p>
+<blockquote>
+<p>​    如果一个状态变量是线程安全的，没有任何的不变约束限制它的值，并且没有任何状态转换限制它的操作，那么它可以被安全发布</p>
+</blockquote>
+<h2 id="向已有的线程安全类添加功能"><a href="#向已有的线程安全类添加功能" class="headerlink" title="向已有的线程安全类添加功能"></a>向已有的线程安全类添加功能</h2><ul>
+<li>修改原始的类。但通常不可能，首先需要理解原始类的同步策略，其次要有修改源码的权限</li>
+<li>继承扩展，但并非所有类给子类暴露了足够多的状态，并且子类可能被底层类不知不觉破坏</li>
+<li>扩展功能。</li>
+</ul>
+<p><strong>客户端加锁</strong></p>
+<p>​    将扩展代码与类置于一个新类当中</p>
+<p><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550636338076.png" alt="1550636338076"></p>
+<p>​    但是这样并不正确，因为给方法加锁，但是这个锁与list的锁并不一致，方法所用的锁与list用于客户端加锁与外部加锁时用的锁并不一致。</p>
+<p>​    正确写法：</p>
+<p><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550641893865.png" alt="1550641893865"></p>
+<p>​    相比于扩展类，在客户端加锁更加脆弱，会破坏同步策略的封装性</p>
+<p><strong>组合</strong></p>
+<p>​    使用内部锁，基于java监视器实现了新的一层锁，只要持有list的唯一引用，则是线程安全的</p>
+<p><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550642087788.png" alt="1550642087788"></p>
+<h1 id="构建块"><a href="#构建块" class="headerlink" title="构建块"></a>构建块</h1><p>​    线程安全容器以及多种同步工具（synchronizer），synchronizer可以调节相互协作的线程间的控制流。</p>
+<h2 id="同步容器"><a href="#同步容器" class="headerlink" title="同步容器"></a>同步容器</h2><p>​    包括Vector和HashTable，这些类通过封装它们的状态，并对每一个公共方法进行同步实现了线程安全，这样一次只能有一个线程访问容器。通过对容器的所有状态串行访问实现的线程安全，削弱了并发性。</p>
+<p>​    容器本身是线程安全的，无论有多少线程同时调用容器，也不会破坏容器。但是对于方法的调用者来说，当线程在并发地修改容器，最后得到的结果并不是所预期的结果。面对这种情况，需要对容器类自身进行加锁，synchronized(list)。保证复合操作的原子性</p>
+<p><strong>迭代</strong></p>
+<p>​    对容器进行迭代的时候，需要对容器进行加锁，防止容器数据更改，但是这么一来对并发的性能就大大下降，会在相当长时间加锁，甚至产生死锁。一个解决办法是复制容器，因为是存在线程当中，但是在复制过程中依然需要加锁，而且占用空间。</p>
+<blockquote>
+<p>​    正如封装一个对象的状态，能够使它更容易地保持不变约束一样，封装它的同步则可以迫使它符合同步策略</p>
+</blockquote>
+<p>​    隐藏迭代器：有些迭代器是隐藏的，比如toString方法，hashCode方法，equals方法都会对容器进行迭代</p>
+<h2 id="并发容器"><a href="#并发容器" class="headerlink" title="并发容器"></a>并发容器</h2><p>​    为多线程的并发访问而设计。concurrentHashMap代替同步的HashMap，当多数操作为读取，CoayOnWriteArrayList是List的同步，concurrentMap接口增加了常见复合操作的支持</p>
+<blockquote>
+<p>​    用并发容器替换同步容器，这种做法以有很小的风险带来了可扩展性显著提高</p>
+</blockquote>
+<p><strong>ConcurrentHashMap</strong></p>
+<p>​    在该容器前，程序使用一个公共锁同步每一个方法，明确只有一个线程可以访问容器</p>
+<p>​    ConcurrentHashMap使用更细化的锁机制，即<strong>分离锁</strong>，任意数量的读线程可以并发访问，读者与写者可以并发访问，有限数量的写进程可以并发修改。该容器的迭代器具有<strong>弱一致性</strong>，即该迭代器容许并发修改，它会感应到迭代器被创建后对容器的修改。</p>
+<p>​    在独占的访问加锁中，该容器无法胜任</p>
+<h2 id="阻塞和可中断方法"><a href="#阻塞和可中断方法" class="headerlink" title="阻塞和可中断方法"></a>阻塞和可中断方法</h2><p>​    阻塞状态：blocked，waiting，Timed_waiting</p>
+<p>​    中断：thread.interrupt()，中断是一种协作机制，</p>
+<h2 id="synchronizer"><a href="#synchronizer" class="headerlink" title="synchronizer"></a>synchronizer</h2><h1 id="构建并发应用程序"><a href="#构建并发应用程序" class="headerlink" title="构建并发应用程序"></a>构建并发应用程序</h1><p>​    大多数的并发程序是围绕<strong>任务</strong>进行管理，任务即抽象、离散的工作单元</p>
+<h2 id="任务执行"><a href="#任务执行" class="headerlink" title="任务执行"></a>任务执行</h2><p><strong>在线程中执行任务</strong></p>
+<p>指明任务的边界，使得任务为一个独立的活动，不依赖其他任务的状态、结果、边界效应。</p>
+<p>任务边界：</p>
+<ul>
+<li>单独的客户请求</li>
+</ul>
+<p>任务执行策略：</p>
+<ul>
+<li><p>顺序执行</p>
+<p>即收到一个请求，服务器要处理完该请求才能继续accept下一个请求</p>
+</li>
+</ul>
+<p><img src="assets%5C1550825942991.png" alt="1550825942991"></p>
+<ul>
+<li>显式地为任务创建线程，为每一个服务请求创建一个线程<ul>
+<li>并行处理，并且能同时接受多个请求</li>
+<li>任务处理代码必须线程安全</li>
+<li>线程生命周期的开销、资源消耗、无限制线程的稳定性拖垮系统</li>
+</ul>
+</li>
+</ul>
+<p><img src="assets%5C1550825994345.png" alt="1550825994345"></p>
+<p><strong>Exeutor框架</strong></p>
+<p>​    基于生产者-消费者模式，提交任务的执行者是生产者，执行任务的线程是消费者。</p>
+<p>​    该框架可以用于异步任务执行，并且支持多种类型的任务执行策略，为任务提交与任务执行做了解耦。</p>
+<p><img src="assets%5C1550988548365.png" alt="1550988548365"></p>
+<p><strong>执行策略</strong></p>
+<p>​    任务的提交与任务的执行解耦，可以更简单地为一个类给定的任务制定执行策略，一个执行策略包含“what where when how”的因素</p>
+<ul>
+<li>任务在什么线程执行 what</li>
+<li>任务以什么顺序执行 what (FIFO,LIFO,优先级)</li>
+<li>可以由多少个任务并发执行 how many</li>
+<li>可以有多少个任务进入等待执行队列 how many</li>
+<li>如果系统过载，需要放弃一个任务，选择哪一个任务？如何通知应用程序 which</li>
+<li>在一个任务执行前与后，应该做什么处理 what</li>
+</ul>
+<p><strong>生命周期</strong></p>
+<p>​    由于exectuor异步执行任务，所以之前提交的任务状态不能立即可见（有些已经完成，有些正在运行，有些在队列当中），如果将其关闭，可能出现各种问题</p>
+<h2 id="取消和关闭"><a href="#取消和关闭" class="headerlink" title="取消和关闭"></a>取消和关闭</h2><p>​    中断，一种协作机制，使得一个线程能够要求另一个线程停止当前工作</p>
+<p><strong>任务取消</strong></p>
+<p>​    原因</p>
+<ul>
+<li>用户请求的取消，cancel</li>
+<li>限时活动，超时取消</li>
+<li>应用程序事件，当程序的不同任务在搜索，一个任务找到了解决方案，其他任务就取消</li>
+<li>错误，IO等错误</li>
+<li>关闭，</li>
+</ul>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>​    线程池与工作队列（持有所有等待执行的任务）绑定，线程从工作队列获取下一个任务，执行。</p>
+<p>优势</p>
+<ul>
+<li>重用存在的线程，抵消线程创建、消亡的开销</li>
+<li>在请求到达时，线程已存在，创建线程的等待时间不会延误任务的执行</li>
+<li>可以防止创建过多的线程，争夺资源</li>
+</ul>
+<p>死锁</p>
+<p>性能与可伸缩性</p>
+<p>显式锁</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li>Java并发编程实战</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/02/18/Java/base/java并发/" title="java并发">http://yoursite.com/2019/02/18/Java/base/java并发/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发编程/" rel="tag"># 并发编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/17/计算机网络/计算机网络：面试准备/" rel="next" title="计算机网络：面试准备">
+                <i class="fa fa-chevron-left"></i> 计算机网络：面试准备
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/26/计算机网络/计算机网络：HTTP协议/" rel="prev" title="计算机网络：HTTP协议">
+                计算机网络：HTTP协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#十一、线程安全"><span class="nav-number">1.</span> <span class="nav-text">十一、线程安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全性"><span class="nav-number">1.2.</span> <span class="nav-text">线程安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性"><span class="nav-number">1.2.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁"><span class="nav-number">1.2.2.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内部锁（互斥锁）"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">内部锁（互斥锁）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活跃度与性能"><span class="nav-number">1.2.3.</span> <span class="nav-text">活跃度与性能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享对象"><span class="nav-number">1.3.</span> <span class="nav-text">共享对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">1.3.1.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布和逸出"><span class="nav-number">1.3.2.</span> <span class="nav-text">发布和逸出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程封闭"><span class="nav-number">1.3.3.</span> <span class="nav-text">线程封闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可变性"><span class="nav-number">1.3.4.</span> <span class="nav-text">不可变性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全发布"><span class="nav-number">1.3.5.</span> <span class="nav-text">安全发布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组合对象"><span class="nav-number">2.</span> <span class="nav-text">组合对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计线程安全的类"><span class="nav-number">2.1.</span> <span class="nav-text">设计线程安全的类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步策略"><span class="nav-number">2.1.1.</span> <span class="nav-text">同步策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例限制"><span class="nav-number">2.2.</span> <span class="nav-text">实例限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#委托线程安全"><span class="nav-number">2.3.</span> <span class="nav-text">委托线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向已有的线程安全类添加功能"><span class="nav-number">2.4.</span> <span class="nav-text">向已有的线程安全类添加功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建块"><span class="nav-number">3.</span> <span class="nav-text">构建块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#同步容器"><span class="nav-number">3.1.</span> <span class="nav-text">同步容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发容器"><span class="nav-number">3.2.</span> <span class="nav-text">并发容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞和可中断方法"><span class="nav-number">3.3.</span> <span class="nav-text">阻塞和可中断方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronizer"><span class="nav-number">3.4.</span> <span class="nav-text">synchronizer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建并发应用程序"><span class="nav-number">4.</span> <span class="nav-text">构建并发应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务执行"><span class="nav-number">4.1.</span> <span class="nav-text">任务执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取消和关闭"><span class="nav-number">4.2.</span> <span class="nav-text">取消和关闭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">4.3.</span> <span class="nav-text">线程池</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

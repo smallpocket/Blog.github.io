@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数据库 Redis服务器的数据库实现 服务器保存数据库的方法 客户端切换数据库的方法 数据库保存键值对的方法 数据库的增删改查的实现方法 服务器保存键的过期时间的方法 服务器自动删除过期键的方法 Redis2.8数据库通知功能的实现    服务器中的数据库Redis服务器奖所有数据库保存在服务器状态中 123456struct redisServer&amp;#123;    //一个数组，保存着服务器中">
+<meta name="keywords" content="NoSQL,Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis（3）：单机数据库的实现">
+<meta property="og:url" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据库 Redis服务器的数据库实现 服务器保存数据库的方法 客户端切换数据库的方法 数据库保存键值对的方法 数据库的增删改查的实现方法 服务器保存键的过期时间的方法 服务器自动删除过期键的方法 Redis2.8数据库通知功能的实现    服务器中的数据库Redis服务器奖所有数据库保存在服务器状态中 123456struct redisServer&amp;#123;    //一个数组，保存着服务器中">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468398778.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468706260.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468722522.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468871546.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468919035.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552469157583.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552470569474.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552470819774.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552470946418.png">
+<meta property="og:updated_time" content="2019-04-08T15:40:43.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis（3）：单机数据库的实现">
+<meta name="twitter:description" content="数据库 Redis服务器的数据库实现 服务器保存数据库的方法 客户端切换数据库的方法 数据库保存键值对的方法 数据库的增删改查的实现方法 服务器保存键的过期时间的方法 服务器自动删除过期键的方法 Redis2.8数据库通知功能的实现    服务器中的数据库Redis服务器奖所有数据库保存在服务器状态中 123456struct redisServer&amp;#123;    //一个数组，保存着服务器中">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468398778.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Redis（3）：单机数据库的实现 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Redis（3）：单机数据库的实现
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-04 18:37:09" itemprop="dateCreated datePublished" datetime="2019-03-04T18:37:09+08:00">2019-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-08 23:40:43" itemprop="dateModified" datetime="2019-04-08T23:40:43+08:00">2019-04-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/04/数据库/Redis（3）：单机数据库的实现/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/03/04/数据库/Redis（3）：单机数据库的实现/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><ul>
+<li>Redis服务器的数据库实现<ul>
+<li>服务器保存数据库的方法</li>
+<li>客户端切换数据库的方法</li>
+<li>数据库保存键值对的方法</li>
+<li>数据库的增删改查的实现方法</li>
+<li>服务器保存键的过期时间的方法</li>
+<li>服务器自动删除过期键的方法</li>
+<li>Redis2.8数据库通知功能的实现</li>
+</ul>
+</li>
+</ul>
+<h2 id="服务器中的数据库"><a href="#服务器中的数据库" class="headerlink" title="服务器中的数据库"></a>服务器中的数据库</h2><p>Redis服务器奖所有数据库保存在服务器状态中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">redisServer</span>&#123;</span></span><br><span class="line">    <span class="comment">//一个数组，保存着服务器中所有的数据库</span></span><br><span class="line">    redisDb *db;</span><br><span class="line">    <span class="comment">//服务器中的数据库数量</span></span><br><span class="line">    <span class="keyword">int</span> dbnum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h2><p>每个redis客户端都有自己的目标数据库，即写命令的操作对象，默认为0号数据库</p>
+<p>执行select 2（需要转换到的数据库，即db[2]）命令可切换目标数据库</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisClient</span>;</span>&#123;</span><br><span class="line">    <span class="comment">//记录客户端当前使用的数据库</span></span><br><span class="line">    redisDb *db;</span><br><span class="line">&#125;redisClient;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库键空间"><a href="#数据库键空间" class="headerlink" title="数据库键空间"></a>数据库键空间</h2><p>Redis是一个键值对数据库服务器，服务器每一个数据库都是由一个redisDb表示</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisDb</span>&#123;</span></span><br><span class="line">    <span class="comment">//数据库键空间，保存着数据库中所有的键值对</span></span><br><span class="line">    dict *dict;</span><br><span class="line">&#125;redisDb;</span><br></pre></td></tr></table></figure>
+
+<p>键空间与用户所见的数据库是直接对应的。键空间的键就是数据库的键，键空间的值就是数据库的值</p>
+<p><strong>添加新键</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="built_in">date</span> <span class="string">"222"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>删除键</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del date</span><br></pre></td></tr></table></figure>
+
+<p><strong>更新键</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="built_in">date</span> <span class="string">"balst"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>取值</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get date</span><br></pre></td></tr></table></figure>
+
+<p>等命令</p>
+<p><strong>读写键空间的维护操作</strong></p>
+<p>当使用Redis命令对数据库进行读写，服务器不仅会对键空间执行指定的读写操作，还会执行一些额外的维护操作</p>
+<ul>
+<li>读取一个键后，服务器会根据键是否存在来更新服务器的键空间命中次数或不明智次数</li>
+<li>读取一个键后，服务器会更新键LRU时间，用于计算键的闲置时间</li>
+<li>服务器在读取一个键时发现该键已经过期，服务器会先删除这个过期键，然后才执行余下的其他操作</li>
+<li>如果有客户端使用Watch监视了某个键，服务器在对该键进行修改后，会将这个键标记为脏，从而让事务注意到这个键已经被修改</li>
+<li>服务器每次修改一个键后，都会对脏键计数器++，这个计数器会触发服务器的持久化以及复制操作</li>
+<li>如果服务器开启了数据库通知功能，那么在对键进行修改后，服务器将按配置发送给相应的数据库通知</li>
+</ul>
+<h2 id="设置键的生存时间或过期时间"><a href="#设置键的生存时间或过期时间" class="headerlink" title="设置键的生存时间或过期时间"></a>设置键的生存时间或过期时间</h2><p>使用EXPIRE命令或者PEXPIRE，以毫秒或秒的精度为数据库的某个键设置生存时间。在经过指定的时间，服务器会自动删除生存时间为0的键。</p>
+<p>以Expireat或PExpireat为键设置过期时间，当过期时间来临，自动删除该键。</p>
+<p><strong>保存过期时间</strong></p>
+<p>redisDb结构中的expires字典保存了数据库中所有键的过期时间，称为过期字典</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict *expires;<span class="comment">//值是long long类型的整数，保存这个键指向的数据库键的过期时间</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="过期键删除策略"><a href="#过期键删除策略" class="headerlink" title="过期键删除策略"></a>过期键删除策略</h2><p>如果一个键过期了，那么它什么时候会被删除呢</p>
+<ul>
+<li>定时删除<ul>
+<li>在设置键的过期时间的同时，创建一个定时器，让定时器在过期时间来临时，立即执行对键的删除操作</li>
+</ul>
+</li>
+<li>惰性删除<ul>
+<li>放任键过期不管，每次从键空间获取键时，都检查获得的键是否过期</li>
+</ul>
+</li>
+<li>定期删除<ul>
+<li>每隔一段时间，就对数据库进行一次检查，删除里面的过期键。删除的数量以及检查多少数据库由算法决定</li>
+</ul>
+</li>
+</ul>
+<h2 id="Redis的过期键删除策略"><a href="#Redis的过期键删除策略" class="headerlink" title="Redis的过期键删除策略"></a>Redis的过期键删除策略</h2><p>采用惰性删除与定期删除两种策略</p>
+<h2 id="AOF、RDB和复制功能对过期键的处理"><a href="#AOF、RDB和复制功能对过期键的处理" class="headerlink" title="AOF、RDB和复制功能对过期键的处理"></a>AOF、RDB和复制功能对过期键的处理</h2><p>过期键对Redis服务器中其他模块的影响</p>
+<p><strong>生成RDB文件</strong></p>
+<p>SAVE命令或BGSAVE命令创建一个新的RDB文件时，已过期的键不会被保存到新创建的RDB文件中</p>
+<p><strong>载入RDB文件</strong></p>
+<p>在启动Redis服务器，如果开启了RDB功能，服务器会对RDB文件载入</p>
+<ul>
+<li>如果服务器以主服务器模式允许，那么载入RDB文件时，过期键将会忽略</li>
+<li>如果以从服务器允许，文件中所有键，不管是否过期，都会载入到数据库中。<ul>
+<li>主从服务器进行数据同步时，从服务器的数据库就会被清空，因此过期键对从服务器也不会造成影响</li>
+</ul>
+</li>
+</ul>
+<p><strong>AOF文件写入</strong></p>
+<p>当服务器以AOF持久化模式运行时，如果键已经过期，但没有删除，那么AOF文件不会因为这个过期键产生任何影响。</p>
+<p>当过期键被删除后，程序会向AOF文件追加DEL命令，以显式记录该键已经被删除。</p>
+<p><strong>AOF重写</strong></p>
+<p>已过期的键不会被保存到重写后的AOF文件中</p>
+<p><strong>复制</strong></p>
+<p>当服务器允许在复制模式下，从服务器的过期键删除动作由主服务器控制</p>
+<ul>
+<li>主服务器在删除一个过期键后，会显式向所有从服务器发送一个DEL命令</li>
+<li>从服务器在执行客户端发送的读命令时，即使碰到过期键也不会将其删除，而是继续像处理未过期键一样处理</li>
+<li>从服务器只有在接到主服务器的DEL命令才会删除过期键</li>
+</ul>
+<h2 id="数据库通知"><a href="#数据库通知" class="headerlink" title="数据库通知"></a>数据库通知</h2><p>Redis2.8，可以让客户端通过订阅给定的频道或者模式，来获知数据库中键的变化，以及数据库中命令的执行情况</p>
+<h1 id="RDB持久化"><a href="#RDB持久化" class="headerlink" title="RDB持久化"></a>RDB持久化</h1><p>Redis是一个键值对数据库服务器，服务器中通常包含着任意个非空数据库，每个非空数据库又可以包含任意个键值对。</p>
+<p>数据库状态：服务器中的非空数据库以及它们的键值对。</p>
+<p>Redis是内存数据库，将数据库状态存储在内存当中，如果服务器进程一旦退出，则数据库状态也会消失不见。</p>
+<p>因此提供了RDB持久化功能，<strong>将Redis在内存当中的数据库状态保存到磁盘当中</strong>。</p>
+<ul>
+<li>RDB持久化既可以手动，也可以根据服务器配置定期执行。将某个时间点上的数据库状态保存到一个RDB文件中</li>
+<li>RDB持久化功能生成的RDB文件是一个压缩的二进制文件。</li>
+</ul>
+<h2 id="RDB文件的创建于载入"><a href="#RDB文件的创建于载入" class="headerlink" title="RDB文件的创建于载入"></a>RDB文件的创建于载入</h2><ul>
+<li>生成命令：SAVE于BGSAVE<ul>
+<li>SAVE会阻塞Redis服务器进程，直到RDB文件创建完毕为止</li>
+<li>BGSAVE会派生一个子进程，子进程负责创建RDB文件，服务器进程继续处理命令</li>
+</ul>
+</li>
+</ul>
+<p>RDB文件的载入时在服务器启动时自动执行，只要检测到RDB文件，就会自动载入。在载入文件期间，服务器一直处于阻塞状态。</p>
+<p>与AOF对比</p>
+<ul>
+<li>AOF文件的更新频率通常比RDB文件更新频率高，因此</li>
+<li>如果服务器开启了AOF持久化功能，服务器会优先使用AOF文件来还原数据库状态</li>
+<li>只有在AOF持久化功能处于关闭状态，服务器才会使用RDB文件来还原数据库状态</li>
+</ul>
+<h2 id="自动间隔保存"><a href="#自动间隔保存" class="headerlink" title="自动间隔保存"></a>自动间隔保存</h2><p>Redis允许用户通过服务器配置save选项，让服务器每隔一段时间自动执行一次BGSAVE</p>
+<h2 id="RDB文件结构"><a href="#RDB文件结构" class="headerlink" title="RDB文件结构"></a>RDB文件结构</h2><p>结构：</p>
+<p><img src="assets%5C1552468398778.png" alt="1552468398778"></p>
+<ul>
+<li>RDB文件保存的是二进制数据，而不是C字符串</li>
+<li>REDIS：长度为5字节，通过检测该字符，快速检查所载入的文件是否为RDB文件</li>
+<li>db_version：4字节，是一个字符串表示的整数，记录了RDB文件版本号</li>
+<li>database：包含0或任意个数据库，以及各个数据库中的键值对数据</li>
+<li>EOF：长度为1字节，表示正文内容结束</li>
+<li>check_sum：一个8字节长的无符号整数，保存一个校验和，通过对前4部分计算得出。服务器载入RDB文件时，会将载入数据计算得出的校验和与check_sum进行比较，以检查文件是否出错或损坏</li>
+</ul>
+<p><strong>database部分</strong></p>
+<p>如果0号与3号数据库非空，则：</p>
+<p><img src="assets%5C1552468706260.png" alt="1552468706260"></p>
+<p>每个非空数据库在RDB文件中的保存：</p>
+<p><img src="assets%5C1552468722522.png" alt="1552468722522"></p>
+<ul>
+<li>SELECTDB：长度为1字节，表示接下来读取的是一个数据库号码</li>
+<li>db_number：保存着一个数据库号码，长度1、2、5字节，当读取到的时候，服务器使用select进行数据库切换</li>
+<li>key_value_pairs保存所有键值对数据</li>
+</ul>
+<p><strong>key_value_pairs</strong></p>
+<p>如果键值对带有过期时间，则也会保存在内。不带过期时间的表示：</p>
+<p><img src="assets%5C1552468871546.png" alt="1552468871546"></p>
+<p><img src="assets%5C1552468919035.png" alt="1552468919035"></p>
+<ul>
+<li>TYPE：对象类型或者底层编码，决定如何读入和解释value数据</li>
+<li>key：字符串对象</li>
+<li>EXPIRETIME_MS：1字节，表示接下来将读取一个过期时间，以毫秒为单位</li>
+<li>ms：8字节带符号整数，记录一个毫秒为单位的UNIX时间戳</li>
+</ul>
+<p><strong>value的编码</strong></p>
+<p>不同类型的值对象在RDB文件中的保存结构</p>
+<p>字符串对象</p>
+<p>列表对象</p>
+<p>集合对象</p>
+<p>哈希表对象</p>
+<p>有序集合对象</p>
+<h2 id="分析RDB文件"><a href="#分析RDB文件" class="headerlink" title="分析RDB文件"></a>分析RDB文件</h2><h1 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h1><p>通过保存Redis服务器所执行的写命令来记录数据库状态</p>
+<p><img src="assets%5C1552469157583.png" alt="1552469157583"></p>
+<p>写入的命令都是以Redis的命令请求协议格式保存的。</p>
+<h2 id="AOF持久化的实现"><a href="#AOF持久化的实现" class="headerlink" title="AOF持久化的实现"></a>AOF持久化的实现</h2><p>功能实现分为：命令追加、文件写入、文件同步三个步骤</p>
+<p><strong>命令追加</strong></p>
+<p>当服务器执行完一个写命令后，会以协议格式将被执行的写命令追加到服务器状态的aof_buf缓冲区末尾</p>
+<p><strong>文件写入与同步</strong></p>
+<ul>
+<li>文件写入：只是写入到了内存缓冲区，可能还没有写到文件所拥有的磁盘数据块上 </li>
+<li>文件同步：将缓冲区中的内容冲洗到磁盘上</li>
+</ul>
+<p>Redis服务器进程就是一个事件循环，在循环中的</p>
+<ul>
+<li>文件事件负责接收客户端的命令请求，以及向客户端发送命令恢复</li>
+<li>时间事件负责执行像serverCron函数这样需要定时运行的函数</li>
+</ul>
+<p>服务器在处理文件事件时可能执行写命令，使得一些内容被追加到aof_buf缓冲区，因此服务器每次结束一个事件循环前，都会调用函数，考虑是否将aof_buf缓冲区里的内容写入和保存到AOF文件中。</p>
+<p><img src="assets%5C1552470569474.png" alt="1552470569474"></p>
+<p>flushAppendOnlyFile函数的行为由服务器配置的appendfsync选项的值决定</p>
+<ul>
+<li>值为always，将缓冲区内所有内容写入并同步到AOF文件</li>
+<li>默认为everysec，将缓冲区内所有内容写入到AOF文件，如果上次同步AOF文件的时间距离现在超过1S，则再次对AOF文件进行同步</li>
+<li>no，将缓冲区内所有内容写入并同步到AOF文件，但并不进行同步，何时同步由操作系统决定</li>
+</ul>
+<h2 id="AOF文件载入与数据还原"><a href="#AOF文件载入与数据还原" class="headerlink" title="AOF文件载入与数据还原"></a>AOF文件载入与数据还原</h2><p><img src="assets%5C1552470819774.png" alt="1552470819774"></p>
+<h2 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h2><p>随着服务器允许，AOF文件内容与体积会越来越大，可能会对服务器造成影响，并且文件太大会使得AOF文件进行数据还原时间太长。</p>
+<p>AOF文件重写：创建一个新的AOF文件替代现有的AOF文件，新旧的AOF保存的数据库状态相同，但是新的AOF文件不包含任何浪费空间的冗余指令。</p>
+<p>冗余指令：</p>
+<p><img src="assets%5C1552470946418.png" alt="1552470946418"></p>
+<p><strong>AOF文件重写的实现</strong></p>
+<p>通过读取服务器当前数据的状态来实现</p>
+<p><strong>AOF后台重写</strong></p>
+<p>因为Redis使用单个线程处理命令请求，如果由服务器调用重写，则会无法处理客户端命令请求</p>
+<p>使用子进程进行重写。</p>
+<ul>
+<li>子进程带有服务器进程的数据副本，使用子进程而不是线程，可以避免在使用锁的情况下，保证数据的安全性</li>
+<li>在AOF重写期间，可能会出现对现有数据库状态的修改<ul>
+<li>设置AOF重写缓冲区，当Redis执行完一个写命令，会将命令同时发送给AOF缓冲区与AOF重写缓冲区</li>
+<li>当子进程完成AOF后，向父进程发送信号，将AOF重写缓冲区所有内容写入新AOF文件</li>
+<li>替换原有的AOF文件</li>
+</ul>
+</li>
+</ul>
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><p>Redis服务器是一个事件驱动程序，需要处理一下两类事件</p>
+<ul>
+<li>文件事件：Redis服务器通过套接字与客户端进行连接，而文件事件就是服务器对套接字操作的抽象。服务器与客户端的通信会产生相应的文件事件，服务器通过监听并处理这些事件完成一系列的网络通信操作</li>
+<li>时间事件：需要在给定的时间点执行的操作</li>
+</ul>
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>Redis服务器是典型的一对多服务器程序：一个程序可以与多个客户端建立网络连接，每个客户端可以向服务器发送命令请求，而服务器接收并处理客户端发送的命令请求，并向客户端返回命令回复。</p>
+<p>通过使用由IO多路复用技术实现的文件事件处理器，Redis使用单线程单进程处理命令，并与多个客户端进行网络通信</p>
+<h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/" title="Redis（3）：单机数据库的实现">http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NoSQL/" rel="tag"># NoSQL</a>
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/数据库/Redis（2）：数据结构与对象/" rel="next" title="Redis（2）：数据结构与对象">
+                <i class="fa fa-chevron-left"></i> Redis（2）：数据结构与对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/数据库/Redis（4）：独立功能的实现/" rel="prev" title="Redis（4）：独立功能的实现">
+                Redis（4）：独立功能的实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器中的数据库"><span class="nav-number">1.1.</span> <span class="nav-text">服务器中的数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换数据库"><span class="nav-number">1.2.</span> <span class="nav-text">切换数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库键空间"><span class="nav-number">1.3.</span> <span class="nav-text">数据库键空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置键的生存时间或过期时间"><span class="nav-number">1.4.</span> <span class="nav-text">设置键的生存时间或过期时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过期键删除策略"><span class="nav-number">1.5.</span> <span class="nav-text">过期键删除策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis的过期键删除策略"><span class="nav-number">1.6.</span> <span class="nav-text">Redis的过期键删除策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF、RDB和复制功能对过期键的处理"><span class="nav-number">1.7.</span> <span class="nav-text">AOF、RDB和复制功能对过期键的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库通知"><span class="nav-number">1.8.</span> <span class="nav-text">数据库通知</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RDB持久化"><span class="nav-number">2.</span> <span class="nav-text">RDB持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RDB文件的创建于载入"><span class="nav-number">2.1.</span> <span class="nav-text">RDB文件的创建于载入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动间隔保存"><span class="nav-number">2.2.</span> <span class="nav-text">自动间隔保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDB文件结构"><span class="nav-number">2.3.</span> <span class="nav-text">RDB文件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析RDB文件"><span class="nav-number">2.4.</span> <span class="nav-text">分析RDB文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOF持久化"><span class="nav-number">3.</span> <span class="nav-text">AOF持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF持久化的实现"><span class="nav-number">3.1.</span> <span class="nav-text">AOF持久化的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF文件载入与数据还原"><span class="nav-number">3.2.</span> <span class="nav-text">AOF文件载入与数据还原</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF重写"><span class="nav-number">3.3.</span> <span class="nav-text">AOF重写</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件"><span class="nav-number">4.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端"><span class="nav-number">5.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务器"><span class="nav-number">6.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

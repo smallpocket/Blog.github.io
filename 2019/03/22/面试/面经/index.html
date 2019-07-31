@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="回答问题 是什么 为什么存在（解决了什么问题） 基本原理 使用场景 和其它相比有什么不同 一些细节（如果使用过的话）  计算机网络问题 TCP/IP五层结构及其相应的功能 浏览器输入URL发生了什么(浏览器输入网址后的全过程 )，分析其中哪些部分用到缓存 浏览器输入网址后，如果把http换成https需要测试什么？ 讲一下CDN  应用层 应用层有哪些常见协议 DNS解析过程  HTTP HTTP">
+<meta name="keywords" content="面经">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面经">
+<meta property="og:url" content="http://yoursite.com/2019/03/22/面试/面经/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="回答问题 是什么 为什么存在（解决了什么问题） 基本原理 使用场景 和其它相比有什么不同 一些细节（如果使用过的话）  计算机网络问题 TCP/IP五层结构及其相应的功能 浏览器输入URL发生了什么(浏览器输入网址后的全过程 )，分析其中哪些部分用到缓存 浏览器输入网址后，如果把http换成https需要测试什么？ 讲一下CDN  应用层 应用层有哪些常见协议 DNS解析过程  HTTP HTTP">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-15T08:33:20.217Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面经">
+<meta name="twitter:description" content="回答问题 是什么 为什么存在（解决了什么问题） 基本原理 使用场景 和其它相比有什么不同 一些细节（如果使用过的话）  计算机网络问题 TCP/IP五层结构及其相应的功能 浏览器输入URL发生了什么(浏览器输入网址后的全过程 )，分析其中哪些部分用到缓存 浏览器输入网址后，如果把http换成https需要测试什么？ 讲一下CDN  应用层 应用层有哪些常见协议 DNS解析过程  HTTP HTTP">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/22/面试/面经/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>面经 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/面试/面经/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">面经
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-22 16:58:29" itemprop="dateCreated datePublished" datetime="2019-03-22T16:58:29+08:00">2019-03-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-15 16:33:20" itemprop="dateModified" datetime="2019-06-15T16:33:20+08:00">2019-06-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/面试/" itemprop="url" rel="index"><span itemprop="name">面试</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/22/面试/面经/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/03/22/面试/面经/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="回答问题"><a href="#回答问题" class="headerlink" title="回答问题"></a>回答问题</h1><ul>
+<li>是什么</li>
+<li>为什么存在（解决了什么问题）</li>
+<li>基本原理</li>
+<li>使用场景</li>
+<li>和其它相比有什么不同</li>
+<li>一些细节（如果使用过的话）</li>
+</ul>
+<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
+<li>TCP/IP五层结构及其相应的功能</li>
+<li>浏览器输入URL发生了什么(浏览器输入网址后的全过程 )，分析其中哪些部分用到缓存</li>
+<li>浏览器输入网址后，如果把http换成https需要测试什么？</li>
+<li>讲一下CDN</li>
+</ul>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><ul>
+<li>应用层有哪些常见协议</li>
+<li>DNS解析过程</li>
+</ul>
+<h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><ul>
+<li>HTTP状态码类型有哪些，及其作用</li>
+<li>HTTP方法有哪些，及其作用</li>
+<li>幂等性了解过吗，有哪些HTTP方法是幂等性的，为什么（PUT、POST…）</li>
+<li>GET和POST的区别 </li>
+<li>HTTP1.0 HTTP1.1 HTTP2.0，这三个有什么区别及其改进</li>
+<li>HTTP如何实现状态化，cookie被禁用了怎么办（URL重写）</li>
+<li>cookie和session</li>
+<li>HTTP有哪些问题，加密算法有哪些，针对不同加密方式可能产生的问题，及其HTTPS是如何保证安全传输的（对称加密+非对称加密+数字证书）</li>
+<li>HTTP缓存</li>
+</ul>
+<h2 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h2><ul>
+<li>TCP如何保证可靠传输</li>
+<li>TCP/IP的握手过程</li>
+<li>TCP的流量控制，当接收方的接收窗口为0的时候该怎么办</li>
+<li>TCP的拥塞控制（慢启动，拥塞避免，超时间间隔传输及其快速重传，快速恢复）</li>
+<li>流量控制和拥塞控制有什么区别</li>
+<li>TCP的连接管理中可能出现的攻击漏洞（洪泛攻击，自顶向下那本书有讲到）</li>
+<li>TCP和UDP区别</li>
+</ul>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><ul>
+<li>网络层的路由算法有哪些，简述RIP，OSPF过程</li>
+<li>简述ARP协议过程，是如何通过IP地址获取MAC地址的</li>
+<li>arp会进行广播，会造成网络风暴，那应该怎么解决</li>
+<li>某地区，无法访问某网址，可能的问题</li>
+<li>ping命令所使用的协议是什么（ICMP），简述其过程</li>
+</ul>
+<h2 id="链路层"><a href="#链路层" class="headerlink" title="链路层"></a>链路层</h2><ul>
+<li>交换机是几层设备</li>
+<li>链路层通过什么访问主机</li>
+<li>链路层的差错检测有哪措施</li>
+</ul>
+<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><ul>
+<li>加密解密</li>
+</ul>
+<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><ul>
+<li>操作系统的内存管理机制</li>
+<li>并发和并行的区别</li>
+<li>线程间通信</li>
+<li>操作系统的竞态？自旋锁说一下</li>
+<li>系统如何知道线程池里哪些线程在执行，哪些线程资源是空的</li>
+<li>设计一个线程池</li>
+<li>实现读写锁</li>
+<li>怎么等一个线程做完</li>
+<li>内存溢出，泄漏概念</li>
+<li>分页式的页表放在哪</li>
+</ul>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><ul>
+<li>进程和线程的区别</li>
+<li>实现线程的同步？线程的上下文有哪些东西</li>
+<li>线程同步的方法。</li>
+<li>进程的PCB里还有哪些东西</li>
+<li>线程是怎么被执行的</li>
+<li>进程线程，信号量</li>
+</ul>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><ul>
+<li>造成死锁的原因有哪些，如何预防？</li>
+</ul>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><ul>
+<li><p>链表和数组的区别及其相应的复杂度</p>
+</li>
+<li><p>队列和栈的区别</p>
+</li>
+<li><p>二叉搜索树和平衡二叉树有什么关系，强平衡二叉树（AVL树）和弱平衡二叉树（红黑树）有什么区别，及其代表数据结构</p>
+</li>
+<li><p>跳表怎么实现的</p>
+</li>
+<li><p>哈夫曼编码是怎么回事</p>
+</li>
+</ul>
+<h2 id="算法-1"><a href="#算法-1" class="headerlink" title="算法"></a>算法</h2><ul>
+<li>图的遍历算法（dfs，bfs），最小生成树的算法，最短路径的算法及简述其思想</li>
+<li>非递归且不用额外空间（不用栈），如何遍历二叉树</li>
+</ul>
+<h1 id="web框架"><a href="#web框架" class="headerlink" title="web框架"></a>web框架</h1><h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><ul>
+<li>Spring的IOC和AOP</li>
+<li>Spring bean的生存范围</li>
+<li>Spring IOC容器生命周期</li>
+</ul>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><ul>
+<li><p>设计模式有哪些大类，及熟悉其中哪些设计模式</p>
+</li>
+<li><p>在平时看源码过程中有哪些源码使用到了设计模式（这个问题范围很广，我从并发、IO、集合框架、SSM方面一个个答，答到Spring的时候被面试官打住，说可以了…）</p>
+</li>
+<li><p>项目中用到哪些设计模式，简述代理模式，策略模式和状态模式</p>
+</li>
+</ul>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><ul>
+<li>数据库引擎</li>
+<li>MySQL的MyISAM和Innodb的区别（从事务，锁，B+树索引，读写性能方面分析）</li>
+<li>Innodb的B+树索引和MyISAM的B+树索引的结构区别</li>
+<li>为什么索引能够提升性能（可以从B+树结构方面分析）</li>
+<li>B树和B+树的区别，为什么MySQL要使用B+树（磁盘和树高方面答）</li>
+<li>count(*)和count(1)的区别</li>
+<li>MySQL的主备模式</li>
+<li>事务隔离级别</li>
+<li>悲观锁和乐观锁</li>
+<li>ACID</li>
+<li>MVVC</li>
+</ul>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
+<li>聊一聊多进程多线程，各自的优势，一个服务器大量的请求怎么同步等等</li>
+<li>解释下线程和协程区别，协程库中yield干嘛用的</li>
+<li>CAS操作，及其可能带来问题和可以怎么解决（ABA问题用版本号来解决，自旋时n间过长问题可以通过上次自旋时间来进行判断）</li>
+<li>中断机制，interrupt和interrupted的区别，哪些状态可以中断并抛出InterruptedException</li>
+<li>sleep和wait的区别<ul>
+<li>wait底层原理</li>
+</ul>
+</li>
+<li>sychronized、Lock<ul>
+<li>sychronized和ReentrantLock的区别（其中有个异常机制的区别没答上来）</li>
+<li>为什么ReentrantLock的锁粒度小，sychronized不是也可以用方法块来降低锁粒度</li>
+<li>公平锁和非公平锁的定义，及其优缺点、以及实现，ReentrantLock和synchronized使用公平还是非公平锁</li>
+<li>sychronized的自旋锁、偏向锁、轻量级锁、重量级锁，分别介绍和联系（膨胀）</li>
+</ul>
+</li>
+<li>volatile</li>
+<li>final关键字怎么用</li>
+</ul>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="JavaSE"><a href="#JavaSE" class="headerlink" title="JavaSE"></a>JavaSE</h2><ul>
+<li>怎样实现反射，作用是什么</li>
+<li>说一下map的分类和常见的情况 </li>
+<li>Object若不重写hashCode()的话，hashCode()如何计算出来的？比较的是什么？ </li>
+<li>若对一个类不重写，它的equals()方法是如何比较的？ </li>
+<li>Java8新特性 </li>
+<li>说说Lamda表达式的优缺点。 </li>
+<li>一个十进制的数在内存中是怎么存的？ </li>
+<li>为啥有时会出现4.0-3.6=0.40000001这种现象？ </li>
+<li>Java支持的数据类型有哪些？什么是自动拆装箱？ </li>
+<li>什么是值传递和引用传递？ </li>
+<li>数组(Array)和列表(ArrayList)有什么区别？什么时候应该使用Array而不是ArrayList？ </li>
+<li>你了解大O符号(big-O notation)么？你能给出不同数据结构的例子么？ </li>
+<li>String是最基本的数据类型吗? </li>
+<li>int 和 Integer 有什么区别 </li>
+<li>String 和StringBuffer的区别 </li>
+<li>我们在web应用开发过程中经常遇到输出某种编码的字符，如iso8859-1等，如何输出一个某种编码的字符串？ </li>
+<li>int和Integer有什么区别？ </li>
+<li>&amp;和&amp;&amp;的区别？ </li>
+<li>在Java中，如何跳出当前的多重嵌套循环？ </li>
+<li>你能比较一下Java和JavaSciprt吗？ </li>
+<li>简述正则表达式及其用途。 </li>
+<li>Java中是如何支持正则表达式操作的？ </li>
+<li>请你说说Java和PHP的区别？</li>
+</ul>
+<h1 id="其他人"><a href="#其他人" class="headerlink" title="其他人"></a>其他人</h1><p>作者：宋欣建</p>
+<p>链接：<a href="https://www.zhihu.com/question/266086679/answer/303789485" target="_blank" rel="noopener">https://www.zhihu.com/question/266086679/answer/303789485</a></p>
+<p>来源：知乎</p>
+<p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>***Java&amp;JVM&amp;设计模式&amp;UML</p>
+<p>jvm，jre以及jdk三者之间的关系？<br>序列化原理；类序列化时类的版本号的用途，如果没有指定一个版本号，系统是怎么处理的？如果加了字段会怎么样？哪些类有serialVersionUID属性，作用<br>synchronized原理 synchronized修饰静态变量和普通变量的区别 修饰普通方法和类方法的区别：和Lock对比着说，说到各自的优缺点，synchronized从最初性能差到jdk高版本后的锁膨胀机制，大大提高性能，再说底层实现，Lock的乐观锁机制，通过AQS队列同步器，调用了unsafe的CAS操作，CAS函数的参数及意义；同时可以说说synchronized底层原理，jvm层的moniter监视器，对于方法级和代码块级，互斥原理的不同，+1-1可重入的原理等<br>lock的原理和实现，lock和synchronize的区别<br>int范围（基础数据类型） 基本数据类型，长度<br>concurrenthashmap分段锁（1.7 1.8区别）<br>字节与字符的区别<br>JDK动态代理与CGLIB动态代理原理<br>List接口和Set接口的区别<br>Collections的同步集合的包装 synchronizedMap  与ConcurrentHashMap区别；Collections.sort在jdk1.6以前是用的归并排序，1.7后变成了TimSort排序（归并优化）<br>线程池原理 线程运行完后会消失吗？线程运行完后处于什么状态？怎么知道线程处于什么状态？线程池的构造类的方法的5个参数的具体意义？IO密集和CPU密集两种情况下，线程池里的线程数应该怎么设置<br>自己设计一个线程池<br>类加载机制（双亲委派、加载过程） 反双亲设计，类隔离<br>JVM 分区、GC算法：分代 分代又包含标记清除、标记整理、复制、GC对象存活、GC垃圾收集器（尤其是CMS、G1）年轻代为什么分为8比1<br>Serial 与 Parallel GC之间的不同之处<br>OOM ；方法区OOM时的异常；查看dump 文件，怎么查看，具体命令记得吗，答jstack  具体怎么用的<br>四种引用<br>finalize方法<br>final关键字用法<br>Condion await signal<br>hashcode和equals区别 如果重写equals不重写hashcode会出现什么问题<br>生产者消费者模式的几种实现<br>Java同步机制有哪几种<br>equals与==区别<br>Java内存模型  JMM<br>volatile happens-before 内存屏障 指令重排 内存可见性<br>线程的状态<br>Error、Exception，Java异常体系，常见RuntimeException，受检异常和运行时异常的区别；受检异常的JVM实现原理<br>泛型；泛型擦除<br>String常量池 intern<br>StringBuilder与StringBuffer<br>四种内部类<br>对象初始化顺序<br>JVM的内存参数；xmx,xms,xmn,xss参数你有调优过吗，设置大小和原则你能介绍一下吗？；Xss默认大小，在实际项目中你一般会设置多大<br>ThreadLocal<br>try-finally-return<br>JVM锁的几种状态（轻量级锁、重量级锁）<br>自旋锁 自旋锁会死锁吗<br>list和set的区别<br>JVM 逃逸分析<br>Integer的valueOf；为什么需要基础数据类型的包装类型<br>JUC的几种并发工具，用法和原理<br>BIO、NIO、AIO  重点NIO实现原理 NIO并不是严格意义上的非阻塞IO而应该属于多路复用IO；nio堆外内存<br>AIO在工程中如何实现的？（大概说了下ajax的回调函数），又问回调函数具体是怎么实现的（传递函数指针）<br>CAS 原理 底层是JNI；ABA问题； JNI下cpu和寄存器层面是怎么实现的<br>JVM中对象组成<br>原子操作 AtomicInteger的实现原理，主要能说清楚CAS机制并且AtomicInteger是如何利用CAS机制实现的<br>JVM指令（尤其是与并发有关的）<br>Iterator与ListIterator，Iterator实现原理<br>排他锁与共享锁<br>读写锁<br>竟态条件<br>Java8新特性<br>自动装箱、自动拆箱 int和Integer的区别<br>抽象类与接口 区别，使用场景<br>static关键字； static修饰的变量并发下怎么保证变量的安全；出static修饰变量、修饰方法我会认为你合格，答出静态块，我会认为你不错，答出静态内部类我会认为你很好，答出静态导包我会对你很满意<br>ArrayList和LinkedList的使用场景<br>switch实现原理<br>ReentrantLock底层的实现原理；lock和trylock的区别<br>HashMap的实现原理 为何按位与而不是取摸 hashmap的iterator读取时是否会读到另一个线程put的数据 红黑树；hashmap报ConcurrentModificationException的情况<br>手写HashMap的实现，set get方法，不要求线程安全<br>hashset的实现原理 因为别人知道源码怎么实现的，故意构造相同的hash的字符串进行攻击，怎么处理 如果要去除后还要有序<br>面向对象的三个特性<br>内存泄漏发生在哪 用过哪些调试java内存工具；非静态内部类会导致内存泄露，说了内存泄露的解决<br>AQS<br>公平锁非公平锁介绍<br>方法栈<br>hashmap，hashtable区别<br>arraylist linkedlist vector的区别<br>热加载的原理 osgi实现, 也就是自己实现classloader, 还是来自周志明的那本jvm<br>重写和重载<br>线程的几种实现方式<br>String有重写Object的hashcode和toString吗;String类添加功能，如何设计，可否继承<br>三个线程轮流打印ABC十次<br>对象深拷贝与浅拷贝<br>Java的反射原理<br>队列 set  map 区别<br>abstract 等关键字的作用，什么时候用<br>子类中如何调用父类的构造器，如果不用super关键字呢？有其他的方式吗？<br>如果两个线程都使用一个ByteBuf  怎么保证它的安全<br>java中所有类的父类是什么？他都有什么方法<br>wait()和sleep()的区别<br>解析XML的几种方式的原理与特点：DOM、SAX、PULL；Dom4J以及SAX的区别，什么时候用，怎么用<br>Minor GC与Full GC分别在什么时候发生； 如何手动触发全量回收垃圾，如何立即触发垃圾回收；minor gc回收新生代，major gc回收老年代，full gc是全堆回收，老年代+新生代。<br>分派：静态分派与动态分派<br>for each和正常for的用在不同数据结构（ArrayList、set、hashmap）上的效率区别<br>static class和non-static class的区别<br>一个大文件几个GB，怎么实现复制<br>如何把java内存的数据全部dump出来<br>jstack jmap、jconsole 等工具 可视化工具使用；如何线上排查JVM的相关问题？<br>String s=new String(“abc”)分别在堆栈上新建了哪些对象<br>线程的各种状态<br>Java 集合的快速失败机制 “fail-fast”<br>手写一个ArrayList类，实现add，remove，等基本的方法；对这个ArrayList进行改进，使之可以应对并发的场景<br>Collections.sort函数jdk7 和 jdk8 分别怎么实现的<br>ForkJoinPool ForkJoin框架<br>为什么匿名内部类的变量必须用final修饰，编译器为什么要这么做，否则会出现什么问题；如何访问在其外面定义的变量？<br>PriorityQueue实现原理 替代：用TreeMap复杂度太高，有没有更好的方法。hash方法，但是队列不是定长的，如果改变了大小要rehash代价太大，还有什么方法？用堆实现，那每次get put复杂度是多少（lgN）<br>判断线程是否销毁<br>如果一个接口调用很慢，原因是，如何定位，没有日志的话：假设一下，复现问题，dump查看内存，查看监控日志<br>SimpleDateFormat 线程安全<br>StackOverFlow 栈溢出如何解决<br>设计模式分类<br>各个设计模式的UML<br>代理模式和装饰区别<br>JDK中的设计模式实例有哪些<br>面向接口编程 优点<br>流程图和时序图<br>适配器和代理模式的区别<br>单例模式的几种实现<br>各种设计原则<br>单例模式的静态内部类式，为什么静态内部类式是线程安全的<br>抽象工厂和工厂方法模式的区别<br>Java代码编译过程<br>JKD1.8的JVM指令集上有什么更新吗对比1.7<br>JDK1.8 lambda表达式、HashMap升级、ConcurrentHashMap升级、synchronized升级<br>yield功能<br>JVM如何确立每个类在JVM的唯一性；类的全限定名和加载这个类的类加载器的ID<br>给定三个线程t1,t2,t3，如何保证他们依次执行<br>Java8 stream迭代的优势和区别；lambda表达式？为什么要引入它<br>在生产线Dump堆分析程序是否有内存及性能问题<br>comparable接口和comparator接口实现比较的区别和用法<br>Arrays.sort<br>protected权限能否被包外访问；几种访问权限<br>ArrayBlockingQueue和LinkedBlockingQueue 原理<br>java是如何实现跨平台的<br>字节码的编译过程<br>JVM线程死锁，你该如何判断是因为什么？如果用VisualVM，dump线程信息出来，会有哪些信息？<br>查看jvm虚拟机里面堆、线程的信息，你用过什么命令？<br>NIO DirectMemory是否了解</p>
+<p>-—————————————————————————–<br>***JavaWeb&amp;安全</p>
+<p>三层模型 MVC<br>如何过滤敏感评论<br>AJAX<br>DNS；底层用的什么协议<br>Forward和redirect的区别<br>tomcat集群会话怎么保证同步<br>部署项目时tomcat 的参数<br>如果运行的web项目突然停掉了，该怎么解决<br>有哪些服务器<br>HTTPS 公钥能用公钥解吗？在客户端抓包，看到的是加密的还是没加密 是没加密的<br>https ssl tcp三者关系，其中哪些用到了对称加密，哪些用到了非对称加密，非对称加密密钥是如何实现的<br>加密的私钥和公钥各自如何分配（客户端拿公钥，服务器拿私钥）<br>客户端是如何认证服务器的真实身份，详细说明一下过程，包括公钥如何申请，哪一层加密哪一层解密<br>怎么攻击https<br>什么是对称加密，什么是非对称加密，知道的加密算法有哪些<br>TLS改进，如果session ticket被偷听到会怎样，如何防止中间人攻击<br>Servlet 容器启动过程 生命周期 doPost，doGet，一些内置对象<br>httpServlet和genericServlet的区别<br>servlet过滤器和监听器所用到的设计模式<br>servlet,filter,listener的作用;生命周期<br>每一个 request 对应的 Servlet 是直接 new 出来还是只是用同一个<br>JDBC  JDBC的桥接设计模式 jdbc的详细链接过程；底层源码；在Java中调用存储过程的方法<br>Session与Cookie，Session实现原理，如果服务器的负载量很高内存负荷不住要怎么办；session默认过期时间，过长会怎么样<br>分布式Session的几种实现方式；session一致性问题；如何防止session被别人伪造cookie得到<br>Cookie如果我不想js或http读，应该设置什么属性？里面有个属性httpOnly，这个属性你了解吗？<br>URL编码解码<br>WebService SOAP协议<br>HTTP 协议内容 get和post有什么区别？url中的host是什么意思？content-type是什么意思？如何获取http的状态码？状态码301和302有什么区别？http req、resp头有哪些字段？user-agent表示什么？<br>GET,POST等HTTP Method<br>url有最大长度限制，就问长度有限制是get的原因还是url的原因，为什么长度会有限制，是http数据包的头的字段原因还是内容字段的原因<br>怎么保证http的安全性，幂等性，回调同一个会话怎么标识不同请求，不同会话怎么区分<br>幂等性是http层面的问题吗，还是服务器要处理和解决的内容。（就是看你对幂等性的定性是怎么理解的）<br>http的缺点，无状态，明文传输。<br>Git常用命令  git rebase git rebase和git merge区别<br>HTTP 的无状态<br>xss攻击<br>csrf攻击<br>301状态码和302状态码的区别  搜索引擎碰到301状态码和302状态码会怎么做<br>sql注入<br>HTTP的短连接和长连接；长连接与短连接的区别（LVS是通过长连接作负载均衡）<br>HTTP2.0 特性 原理<br>对称加密和非对称加密<br>进程和Java虚拟机的关系<br>linkedhashmap和hashmap，treemap的区别<br>数字签名，MD5<br>Wireshark抓包<br>了解BCrypt算法<br>前端？HTML的DOM对象说几个，Document的对象和方法</p>
+<p>-—————————————————————————–<br>***OS网络数据库Linux</p>
+<p>进程调度<br>文件系统；文件描述符是共享的还是私有的；文件系统（ext4）超级块<br>cp/mv的区别<br>软硬连接（inode这块，ln / ln -s）<br>32位系统的最大寻址空间<br>cache 替换算法（LRU是重点）<br>OS中的CAS<br>信号量<br>内存分页、分段 段页式调度 页面替换算法 ；段式与页式内存管理的优缺点<br>进程间的通信方式<br>进程的几种状态<br>软链接硬链接<br>大小端问题<br>什么是虚拟内存；虚拟内存机制<br>虚拟地址、逻辑地址、线性地址、物理地址的区别<br>什么是内存碎片？内碎片和外碎片的区别<br>OS死锁 死锁的必要条件，怎么处理死锁<br>共享内存原理<br>中断<br>进程与线程 怎么保证进程间数据的安全？线程呢？<br>进程的调度算法<br>乐观锁vs悲观锁；如果现在只有一张火车票，怎么让所有人都看见但是只有一个人能购买成功<br>访问网站的过程  输入<a href="https://link.zhihu.com/?target=http%3A//www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a>后每一层的作用 DNS、HTTP、TCP、OSPF、IP、<br>ARP协议<br>Ping的整个过程。ICMP报文是什么<br>IP地址分类<br>路由器与交换机区别；路由协议（RIP/OPSF）<br>b树，b+树，b*树 B树叶子节点个数、非叶子节点子树个数 磁盘IO次数<br>b 树和 hash 索引应用场合 区别<br>堆和栈的区别<br>TCP三次握手、四次挥手  挥手时客户端和服务器1s内发生5000次短连接，会发生什么问题 两次握手行不行 如果客户端不断的发送请求连接会怎样 那怎么知道连接是恶意的呢？可能是正常连接<br>TCP包的结构<br>四次挥手 为什么要有time_wait，以及如何避免<br>mysql索引底层 行级锁表级锁； sql语句写select *时如何加行级锁； mysql的行级锁加在哪个位置<br>mysql引擎<br>TCP可靠是如何保证<br>事务ACID；主键外键；视图与表<br>基于TCP的协议<br>索引失效，最佳左前缀法则<br>主键索引和普通索引的区别<br>各种join<br>事务隔离级别，mysql事务实现原理（redo log和undo log）<br>索引分类（unique、cluster、primary）  unique唯一索引的使用，索引字段若相同则更新，不同则插入<br>聚集索引在底层怎么实现的，数据和关键字是怎么存的<br>TCP长连接与短连接<br>explain SQL分析 每个列代表什么含义（关于优化级别 ref 和 all，什么时候应该用到index却没用到，关于extra列出现了usetempory 和 filesort分别的原因和如何着手优化等）<br>show profile 怎么使用<br>数据库范式，反范式<br>两军问题<br>TCP与UDP区别 udp怎么实现可靠传输<br>TCP 流量控制 拥塞处理 TCP滑动窗口与回退N针协议<br>Tcp连接状态如何查看<br>复合索引 复合索引要把那个字段放最前，为什么<br>计算机网络层次结构，每层内容（协议等）<br>TCP的数据包格式<br>数据库连接池； mysql数据库连接池的驱动参数 ；数据库连接池如何防止失效；数据库连接池代码<br>mysql 实现层级树形结构<br>sql 查询优化 mysql<br>linux 查看文件内容的命令<br>linux netstat top ipconfig ps<br>linux的显示文件夹大小 ls -al； Linux命令查看文件大小<br>linux的查看端口状态 natstat加参数<br>linux的查看进程的启动时间 ；查看一个进程具体信息，打开了哪些文件描述符，打开的端口，上一次占用CPU率<br>linux 显示文件属性 杀死进程 找出出现次数最多的ip linux指令<br>linux性能监测和调优<br>linux 查看磁盘读写吞吐量<br>linux 查看80端口连接数<br>mysql通信前端到sql解析到sql优化到数据库引擎<br>mysql cluster 实现原理 ；主从复制（架构/错误恢复/MHA）；读写分离 原理；<br>linux awk ；用awk统计一个ip文件中top10<br>linux 如果不知道tomcat的端口号，也不知道服务器的名称，如何查看服务器占用的哪个端口<br>如果确定查询的结果只有一行，在没有使用索引的情况下，怎么加速<br>mysql 数据类型 知道text和blob吗？text和blob有什么区别？ text中能存放图片吗？项目中图片是怎么存的？为什么不直接存成blob? text和varchar有什么区别？ int占多少位？<br>视图和存储过程<br>like%..%为什么会扫描全表？遵循什么原则？<br>TCP 四次挥手 TIME_WAIT 等待两个 MSL作用 如果在 TIME_WAIT等待时客户端手动指定该端口再次发起连接，那么可以建立连接吗？<br>TCP 三次握手 服务端回复时可以将 ACK 和SYN分开发送吗 ；最后一次没有握手成功会，连接会建立吗<br>客户端收到一个窗口为 0 的包怎么处理<br>linux select、epoll；什么是IO多路复用；epoll 水平触发和边缘触发 ；direct io和buffer io区别<br>给定一个图片 URL，讲一下获取这张图片的整个过程<br>为什么要设计进程 可以从进程演化历史、批处理、多道程序设计、进程间通信考虑<br>linux lsof、tcpdump、gdb<br>Linux 如何抓包<br>Linux管道机制，什么原理<br>linux vmstat命令<br>静态链接库和动态链接库的区别<br>TCP洪水攻击<br>32位系统的内存寻址空间多大,<br>具体分为哪几种形态?库函数和系统调用有什么区别<br>一个进程的内存分段以及对应的作用<br>linux实时查看打印的 log 日志内容； 实时查看日志命令<br>linux系统日志在哪里看<br>mysql的binlog<br>sql语句各种条件的执行顺序，如select， where， order by， group by<br>linux Java 中怎么获取一份线程 dump 文件：你可以通过命令 kill -3 PID （Java 进程的进程 ID）来获取 Java 应用的 dump 文件<br>写sql 查询带日期<br>mysql批量操作<br>mysql容灾备份 ；数据库挂了怎么办？除了热备份还有什么方法<br>mysql存储底层实现<br>MySQL存放地理信息位置<br>Mysql要加上nextkey锁，语句该怎么写<br>linux Cpu load的参数如果为4，描述一下现在系统处于什么情况<br>Linux 查找磁盘上最大的文件的命令<br>什么是elf头文件<br>linux sendfile<br>为啥mysql索引要用B+树而MongoDB用B树？<br>编译原理 LL1 ；语法解析词法解析；编译步骤分几个部分；编译程序常用表达方法<br>数据库死锁以及解决<br>Linux文件权限<br>shell编程<br>网络 连接重置<br>网络通信中管道选取异常什么情况下会出现<br>chmod、chown、chgrp<br>查看网络带宽的命令<br>替换文本字符串的命令 sed<br>将当前目录下所有以“.txt”结尾的文件打印出来，再追问，除了“.txt”再加上“.abc”结尾的也打印出来。</p>
+<p>-—————————————————————————–<br>***分布式理论与设计</p>
+<p>网站并发量是多少？<br>用手机扫二维码登录是怎么实现的？<br>一台机器可以能宕机怎么办？<br>影响单台服务器的并发量的因素有哪些？如何优化？<br>考虑如何设计一个高并发量高吞吐量的服务器？如果是分布式的怎么设计？<br>分布式服务器会出现哪些问题<br>项目中超卖问题解决 1）乐观锁 2）队列<br>抢购怎么实现？为什么用Redis? 具体该怎么做？一台Redis肯定是不行的，该怎么办？了解集群吗？<br>设计一个系统，解决抢购时所需要的大量的短链接的功能，如何保证高并发，如何设计短链接<br>一万个人抢100个红包，如何实现（不用队列），如何保证2个人不能抢到同一个红包，可用分布式锁<br>一致性hash；一致性hash增加减少cache时，是怎样做的<br>正向代理、反向代理<br>发布订阅模式 与 观察者模式<br>分布式数据库<br>分布式文件系统 分布式存储系统（GFS、HDFS、fastDFS）、存储模型（skipList、LSM等）<br>微信红包的设计<br>大型网站架构：《大型网站技术架构》中起码有哪些个方面<br>map reduce过程<br>SOA<br>项目中的1G左右的文件 如何实现断点续传和多线程上传<br>负载均衡方式<br>CAP+Base<br>PAXOS协议 RAFT协议<br>分布式锁 zk实现分布式锁的方式；redis实现；数据库乐观锁<br>分布式事务<br>Reactive backpressure<br>分布式接口的幂等性设计<br>缓存穿透<br>分库分表<br>RPC框架（包括整体的一些框架理论，通信的netty，序列化协议thrift，protobuff等）<br>分布式生成唯一序列号<br>负载均衡（DNS/nginx/LVS/vipserver）<br>高可用集群（heardbead/keepalived ）<br>heardbead与keepalived的区别，脑裂问题的解决，高可用方案的优劣<br>LVS四种模式</p>
+<p>-—————————————————————————–<br>***开源项目</p>
+<p>Tomcat 实现原理<br>JSON类库实现原理，给你一个json字符串, 你要怎么把它变成一个java对象?<br>websocket 原理<br>SpringIOC、AOP 优点，原理，常用注解介绍，AOP应用场景，Spring依赖注入方式；bean容器初始化bean之前之后要加入aop如何实现<br>Spring 初始化 @PostConstruct注解方式，init-method的XML配置方式，InitializingBean接口方式，三种实现上有什么区别<br>autowire和resourse关键字的区别<br>Spring 处理 XML 用的是什么库吗</p>
+<p>自己实现Spring：每一步用什么数据结构, 存什么<br>map的key存name有问题吗？<br>value存什么?class<br>那我要实例怎么办? forName<br>单例多例分别怎么解决?<br>内存泄露要考虑吗, 或者说怎么考虑生命周期和引用</p>
+<p>Spring事务传播行为<br>SpringMVC  原理，常用注解介绍<br>springmvc想要用HttpServlet的对象怎么用（在方法参数上加），那是怎么注入进去的，怎么实现的你知道嘛<br>MyBatis/Hibernate 原理，源码，区别；批量操作；MyBatis缓存（一级、二级）； mybatis的#和$号区别 ；mybatis一级缓存及可能存在的问题，两个机器能否共用同一个SqlSession实现一级缓存；mybatis如何映射表结构<br>在Hibernate中java的对象状态有哪些；hibernate主键生成策略<br>mybatis和hibernate各自的缓存原理和比较，hibernate的一级二级和查询缓存，还有针对缓存的miss率，置换策略，容量设置和性能的平衡<br>mybatis和ibatis的区别<br>怎么保证redis和db中的数据一致<br>redis实现原理 ；持久化；redis cluster实现原理 ；redis数据类型 string和list都有什么适用场景 ；Codis相关<br>redis与memcached区别 memcache如何保持缓存一致性<br>redis中SortedSet结果<br>redis主从复制过程，同步还是异步等； redis主从是怎么选取的<br>redis插槽的分配；redis主节点宕机了怎么办，还有没有同步的数据怎么办？<br>redis集群的话数据分片怎么分，然后就是如果并发很高，几十万并发，可以做哪些优化<br>Nginx配置（如果项目使用到了的话），负载均衡机制  ；nginx的请求转发算法，如何配置根据权重转发<br>Log4j 输出至数据库<br>Dubbo 通信原理；序列化原理；超时重试；负载均衡；<br>文件上传原理<br>Netty原理 ；心跳；线程模型；尝试看源码；优点；Netty零拷贝, 怎么实现<br>RocketMQ原理 可靠消息原理 尝试看一下源码；优点<br>Druid原理，数据源/数据库连接池原理；连接池中的连接是长连接还是短连接？为什么？；连接池中的连接是基于什么协议的连接？为什么？<br>zookeeper的Leader选举过程，实现机制，有缓存，如何存储注册服务的；事务，结点，服务提供方挂了如何告知消费方；3 个节点挂掉一个能正常工作吗？<br>jmeter、ab等性能测试工具<br>maven生命周期，常用maven命令；Maven包冲突怎么解决？Maven有什么命令可以解决包冲突？Maven怎么把所有包打包<br>Spring Boot实现原理<br>SSO JWT token原理<br>etcd 类似于Zookeeper，基于Raft协议<br>Jedis源码<br>-—————————————————————————–<br>***数据结构与算法</p>
+<p>求a的b次方，考虑负数<br>字符串全排列<br>两个大文件找重复行<br>汉诺塔<br>atoi 要考虑负数和溢出;itoa<br>手写BlockingQueue<br>怎么判断一个二叉树是否是平衡二叉树<br>斐波那契数列<br>冒泡排序优化<br>选择排序<br>求任意二叉树第k层结点个数<br>平衡二叉搜索树；平衡二叉树插入删除查找<br>手写快排，快排改进 归并排序和快速排序的思想和区别，不用递归实现快排、<br>归并排序<br>求质数最好的方法<br>手写链表<br>链表翻转 要O(1)<br>各种排序的时间复杂度、空间复杂度，是否稳定<br>平衡二叉树，使用一维数组存储<br>数组的最大子序列和；最长递增子序列，一个dp数组一个max数组，最优情况；一个数组，有正有负，不改变顺序的情况下，求和最大的最长子序列<br>二分查找<br>二叉树的遍历  二叉树非递归遍历 二叉树的层序遍历 查找复杂度、最差时间复杂度、最好时间复杂度<br>n<em>n 的矩阵，按副对角线打印 ；矩阵旋转打印；之字形打印矩阵；45度斜线打印矩阵<br>图的遍历（深度优先、广度优先）<br>背包问题<br>链表倒数第 k个节点<br>一个无序数组找第K大的元素<br>数组与链表区别<br>判断链表是否有环<br>Hash 冲突<br>不用自带库的情况下，如何求根号3，精度在0.00001以内，保留两位小数<br>前缀树<br>判断两个链表是否相交<br>两个栈实现队列<br>找出数组两个数的和等于给定的数；一个先减后增的数组，查找目标值<br>无序数组找中位数<br>两个有序数组找中位数<br>大数据去重问题<br>top K ；找到第k大的数 ；100000个数找出最小或最大的10个 ；有一个很长的链表，找出倒数第k个元素  ；单机版 Top K：给 N 个数，找出第 K 大的数（快排的 partition，最小堆），如果用堆的话，算法时间复杂度；海量数据（不能在单机完成）：分布式 Top K？（面试官说考察 map-reduce 思想）<br>维护一个堆；堆排序的原理；堆排序大概是怎么实现的？堆排序你使用过吗，是用的怎样的底层存储，数据结构；底层是用的数组，逻辑上是怎样的结构<br>字符串匹配 KMP 正则中用的改进后的BM算法；搜索算法PN<br>使用一个数组实现一个链表，i存自己下标，i+1存下一个结点下标，i+2存值 要求使用移位操作<br>找出一个数组里面重复的数：用hash方法，建一个2的32次方个bit的hash数组，每取一个int数，可hash下2的32次方找到它在hash数组中的位置，然后将bit置1表示已存在<br>单链表奇偶位反转<br>一堆数字里面去重<br>如果要你做一个防火墙，有10万个黑名单，有可能会增长达20万个，一个数据包过来，如何匹配<br>求一个集合的所有可能子集 给定字母集合(a-z), 求出由集合中这些字母组成的所有非空子集<br>合并两个有序链表的时间复杂度<br>翻转单词顺序<br><a href="https://link.zhihu.com/?target=https%3A//leetcode.com/problems/2-keys-keyboard/description/" target="_blank" rel="noopener">https://leetcode.com/problems/2-keys-keyboard/description/</a><br><a href="https://link.zhihu.com/?target=https%3A//leetcode.com/problems/fraction-to-recurring-decimal/description/" target="_blank" rel="noopener">https://leetcode.com/problems/fraction-to-recurring-decimal/description/</a><br>3L桶一个，5L桶一个，无限水，怎么倒腾出4L来<br>爬n层楼梯，一次只能上一层或两层，输出所有情况的路径； 爬楼梯，写出状态转移方程<br>跳阶问题<br>列出一个目录下所有文件，包括子目录<br>对整数分解质因数，90=2</em>3<em>3</em>5<br>找出只出现一次的数字<br>给单链表排序，时间复杂度O(nlogn),空间复杂度O(1)<br>判断一个字符串能否被字典完全分词(dp)<br>m乘n的格子，求正方形数<br>约瑟夫环<br>给定一个数组, 里面放置任意数量的随机数, 如何快速统计出数组中重复的数字以及出现次数<br>AVL树的概念, 四种旋转方式, AVL树左右旋转的例子<br>QQ每天都会产生大量的在线日志记录, 假设每天的在线日志记录有十亿条, 请设计一个算法快速找出今天的在线人数 ；3亿条IP中，怎么找到次数出现最多的5000条IP<br>扑克牌模拟题<br>每行一个单词，有很多行，统计出现频率最高前 10 个单词<br>最小生成树prim算法与最短路径Dijkstra算法<br>找素数<br>递归求阶层<br>把一个数组中奇数放前面，偶数放后面<br>统计一个整数的二进制表示中bit为1的个数<br>1000个苹果放10个篮子，怎么放，能让我拿到所有可能的个数<br>动态规划（笔试回回有。。）、贪心<br>二叉树的最长距离；二叉树最近相同父节点<br>旋转数组中查找某一个值<br>识别2的n次方:n&amp;(n-1)可以去掉二进制最右的1，那2的n次幂&amp;之后便为0<br>手写字符串的正则匹配，实现*和.的功能，用的递归<br>两个大数求和，要按高到低位的输入，实时输出结果的对应位，空间O，时间O(n)，不借助工具类。（要考虑实时的进位标识，以及多个9之后的连续进位标识）<br>int范围的随机数的阶乘编码实现<br>存储十万条数据(键值对)到内存如何实现<br>求一个不完全三叉树叶子最多的层，求深度；找出一个三叉树节点数最多的层<br>数组实现一个循环队列<br>红黑树的插入删除搜索效率，最坏插入删除搜索效率<br>给定一个字符串，找出只出现了一次的两个字符<br>找出连续数中缺失的数字<br>找出一个数在有序数组中的位置，不行就找出下一个<br>升降数组中的最大值<br>桶排序<br>链表删除倒数第K个节点<br>多路有序链表合并 改进<br>树的下一个节点<br>找出数组中n/2的数<br>找出链表环的头部<br>跳表和红黑树的区别<br>烧绳子<br>扔骰子，1-2对方赢，3-5 自己赢，6重新仍，问自己赢的概率<br>O(n) 合并两个二叉查找树<br>给跳跃步数求最短路径<br>Trie树 Implement Trie(Prefix Tree) 最长匹配；淘宝存着一个包含10w个敏感词的词库，紧接着需要从多个商品标题中随机抽查3个有没有包含敏感词的商品。<br>二分搜索变形：找第一个target<br>最长上升子序列<br>一个无序数组，其中一个数字出现的次数大于其他数字之和，求这个数字 （主元素）<br>一棵二叉排序树，给定一个数，找到与给定数差值最小的数<br>两个排序的数组A和B分别含有m和n个数，找到两个排序数组的中位数<br>Generate Parentheses<br>最小公倍数和最大公约数<br>如何判断一个树是不是另一颗树的子树<br>判断一个IP是否在黑名单列表中<br>将一个只含有1~n的乱序数组(不重复)的第一个数变成-1，求哪个数被变成了-1<br>二叉树高度(递归，非递归)<br>一个数组只有一个数不重复，找出这个数<br>一个数组有两个不重复，找出这两个数<br>如何判断一个数是2的次幂<br>图存储<br>两个数据集求并集<br>二进制文本切割，文本中前两个字节是要给字符串的长度，然后将整个文本进行切割换行放入另一个文本<br>现在有一个特别大的文件，大概1T，现在要从服务端拖拽到客户端，有什么思路？<br>最长回文子串的程序<br>有序链表构建平衡搜索二叉树<br>2Sum，然后引申Nsum<br>如何实现用户热搜关键词提示（字典树）<br>计算一个树中两叶子节点间最大路径和<br>一段字符序列，求每个字符出现的次数，要求时间复杂度和空间复杂度最优<br>给定一个数，要求求出比这个数稍大的一个数，该数是2的幂。时间复杂度O(1)<br>把 “<a href="https://link.zhihu.com/?target=http%3A//www.zhidao.baidu.com" target="_blank" rel="noopener">http://www.zhidao.baidu.com</a>“ 这样的字符串改成 “com/baidu/zhidao/www”。——老题目了，剑指 offer 的，两次逆序排列即可。<br>长为N的数组，元素范围是0-N-1，其中只有一个数是重复的，找出这个重复元素<br>矩阵从左上角向右下角走，每次只能向右或者向下移动，求经过最大的路径<br>数n可以由完全平方数构成，求最小的完全平方数构成数。<br>多叉树实现，并层次遍历的代码<br>找到最大子数组的 start, 和 end 下标<br>找出一串字符中第一个不重复字符的下标<br>如何求二叉树中两个节点的最短路径<br>一个无限长的数组实现一个类似hashmap的结构</p>
+<p>-—————————————————————————–<br>***技术无关问题</p>
+<p>自我介绍：最好背熟</p>
+<p>项目到底是做什么的，有哪些功能</p>
+<p>项目中遇到的困难？怎么解决</p>
+<p>项目的整体架构，在面试的时候能够清楚地画给面试官看并且清楚地指出从哪里调用到哪里、使用什么方式调用</p>
+<p>用到了哪些技术</p>
+<p>合作项目如何分工？</p>
+<p>曾遇到的挫折？</p>
+<p>项目画图；画一下项目的数据库表</p>
+<p>用三个词语描述下自己</p>
+<p>看过什么书</p>
+<p>对简历上的每一个字负责, 而且最好简洁明朗, 拒绝啰嗦, 让面试官的所有问题都针对你的简历进行提问</p>
+<p>带成绩单</p>
+<p>举出一个例子说明你的自学能力</p>
+<p>说一件大学难忘的事</p>
+<p>对方公司跟之前的offer比优势在哪，比如平台更大？专业技能栈更match？工作更有挑战力？地点更合适？有机会留用？</p>
+<p> 一定不要在没有面试经验的情况下先面大厂，或者是你想去的公司。</p>
+<p> 对于简历上的每一条一定要熟悉，做足准备，并且遇到简历上没有都扯到的方面，要想办法转移，不要在这耗着</p>
+<p> 给你印象深刻的事情</p>
+<p> 你有什么问题吗？</p>
+<p> 除了java还有学过其他语言吗？</p>
+<p> 技术难点有哪些？说大概三个</p>
+<p> 哪些专业课学的比较好？</p>
+<p> 是否会读研？为什么？</p>
+<p> 你身边同学如何评价你、老师呢</p>
+<p> 如果与同事发生了意见的不一致，你会如何解决呢</p>
+<h1 id="书籍推荐"><a href="#书籍推荐" class="headerlink" title="书籍推荐"></a>书籍推荐</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://xiaozhuanlan.com/topic/7205893164" target="_blank" rel="noopener">面试过程全解析</a></li>
+<li><a href="https://www.nowcoder.com/discuss/179560?type=0&order=0&pos=27&page=1" target="_blank" rel="noopener">快手Java开发实习面经（口头offer）</a></li>
+<li><a href="https://blog.csdn.net/qq_34337272/article/details/88376891" target="_blank" rel="noopener">5面阿里,终获offer(Java后端)</a></li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/03/22/面试/面经/" title="面经">http://yoursite.com/2019/03/22/面试/面经/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面经/" rel="tag"># 面经</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/22/OS/计算机操作系统：协程/" rel="next" title="计算机操作系统：协程">
+                <i class="fa fa-chevron-left"></i> 计算机操作系统：协程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/26/Java/设计模式/设计模式：工厂模式/" rel="prev" title="设计模式：工厂模式">
+                设计模式：工厂模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回答问题"><span class="nav-number">1.</span> <span class="nav-text">回答问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机网络"><span class="nav-number">2.</span> <span class="nav-text">计算机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层"><span class="nav-number">2.2.</span> <span class="nav-text">应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">2.2.1.</span> <span class="nav-text">HTTP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运输层"><span class="nav-number">2.3.</span> <span class="nav-text">运输层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络层"><span class="nav-number">2.4.</span> <span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链路层"><span class="nav-number">2.5.</span> <span class="nav-text">链路层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统"><span class="nav-number">3.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">3.1.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">3.2.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">3.3.</span> <span class="nav-text">死锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法"><span class="nav-number">4.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-number">4.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法-1"><span class="nav-number">4.2.</span> <span class="nav-text">算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web框架"><span class="nav-number">5.</span> <span class="nav-text">web框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-number">5.1.</span> <span class="nav-text">Spring</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式"><span class="nav-number">6.</span> <span class="nav-text">设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">7.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL"><span class="nav-number">7.1.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis"><span class="nav-number">7.2.</span> <span class="nav-text">Redis</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发编程"><span class="nav-number">8.</span> <span class="nav-text">并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">8.1.</span> <span class="nav-text">基础</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java"><span class="nav-number">9.</span> <span class="nav-text">Java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaSE"><span class="nav-number">9.1.</span> <span class="nav-text">JavaSE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他人"><span class="nav-number">10.</span> <span class="nav-text">其他人</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#书籍推荐"><span class="nav-number">11.</span> <span class="nav-text">书籍推荐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

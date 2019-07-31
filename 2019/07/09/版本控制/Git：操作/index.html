@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Git工作流程一般工作流程如下：  将Git的一个存储库克隆为工作副本。 可以通过添加/编辑文件修改工作副本。 如有必要，还可以通过让其他开发人员一起来更改/更新工作副本。 在提交之前查看更改。 提交更改：如果一切正常，那么将您的更改推送到存储库。 提交后，如果意识到某些错误并修改错误后，则将最后一个正确的修改提交并将推送到存储库。  下面显示的是工作流程的图示 -   gerrit提交代码到Ge">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git：操作">
+<meta property="og:url" content="http://yoursite.com/2019/07/09/版本控制/Git：操作/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Git工作流程一般工作流程如下：  将Git的一个存储库克隆为工作副本。 可以通过添加/编辑文件修改工作副本。 如有必要，还可以通过让其他开发人员一起来更改/更新工作副本。 在提交之前查看更改。 提交更改：如果一切正常，那么将您的更改推送到存储库。 提交后，如果意识到某些错误并修改错误后，则将最后一个正确的修改提交并将推送到存储库。  下面显示的是工作流程的图示 -   gerrit提交代码到Ge">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/07/09/版本控制/Git：操作/assets/497150749_38351.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/09/版本控制/Git：操作/assets/805110703_53359.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/09/版本控制/Git：操作/assets/138100701_61893.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/09/版本控制/Git：操作/assets/662100700_44490.png">
+<meta property="og:updated_time" content="2019-07-29T01:33:11.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git：操作">
+<meta name="twitter:description" content="Git工作流程一般工作流程如下：  将Git的一个存储库克隆为工作副本。 可以通过添加/编辑文件修改工作副本。 如有必要，还可以通过让其他开发人员一起来更改/更新工作副本。 在提交之前查看更改。 提交更改：如果一切正常，那么将您的更改推送到存储库。 提交后，如果意识到某些错误并修改错误后，则将最后一个正确的修改提交并将推送到存储库。  下面显示的是工作流程的图示 -   gerrit提交代码到Ge">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/09/版本控制/Git：操作/assets/497150749_38351.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/09/版本控制/Git：操作/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Git：操作 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/版本控制/Git：操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Git：操作
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-09 13:50:01" itemprop="dateCreated datePublished" datetime="2019-07-09T13:50:01+08:00">2019-07-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-29 09:33:11" itemprop="dateModified" datetime="2019-07-29T09:33:11+08:00">2019-07-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本控制/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/09/版本控制/Git：操作/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/09/版本控制/Git：操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Git工作流程"><a href="#Git工作流程" class="headerlink" title="Git工作流程"></a>Git工作流程</h1><p>一般工作流程如下：</p>
+<ul>
+<li>将Git的一个存储库克隆为工作副本。</li>
+<li>可以通过添加/编辑文件修改工作副本。</li>
+<li>如有必要，还可以通过让其他开发人员一起来更改/更新工作副本。</li>
+<li>在提交之前查看更改。</li>
+<li>提交更改：如果一切正常，那么将您的更改推送到存储库。</li>
+<li>提交后，如果意识到某些错误并修改错误后，则将最后一个正确的修改提交并将推送到存储库。</li>
+</ul>
+<p>下面显示的是工作流程的图示 - </p>
+<p><img src="assets/497150749_38351.png" alt="img"></p>
+<h2 id="gerrit"><a href="#gerrit" class="headerlink" title="gerrit"></a>gerrit</h2><h3 id="提交代码到Gerrit"><a href="#提交代码到Gerrit" class="headerlink" title="提交代码到Gerrit"></a>提交代码到Gerrit</h3><ol>
+<li><p>git stash。将自己的代码进行隐藏</p>
+</li>
+<li><p>git pull –rebase 拉取其他人的修改，进行合并最新的修改</p>
+</li>
+<li><p>git stash pop 将自己的代码合并进入最新的分支当中</p>
+</li>
+<li><p>若他人与自己修改了同一个文件则进行冲突解决</p>
+</li>
+<li><p>git add <file>     //需要提交的文件</file></p>
+</li>
+<li><p>git commit -m “注释”</p>
+</li>
+<li><p>git push origin HEAD:refs/for/&lt;分支名&gt;</p>
+</li>
+</ol>
+<h3 id="代码提交之后需要修改"><a href="#代码提交之后需要修改" class="headerlink" title="代码提交之后需要修改"></a>代码提交之后需要修改</h3><ol>
+<li><p>git stash</p>
+</li>
+<li><p>git pull –rebase</p>
+</li>
+<li><p>git stash pop</p>
+</li>
+<li><p>冲突解决</p>
+</li>
+<li><p>git add <file></file></p>
+</li>
+<li><p>git commit –amend</p>
+<ul>
+<li>vim操作退出</li>
+</ul>
+</li>
+<li><p>git push origin HEAD:refs/for/&lt;分支名&gt;</p>
+</li>
+<li><p>PS. 如果不使用amend会导致提交两个code review 到 gerrit上面 </p>
+</li>
+<li><p>如果提交了两次commit ，将gerrit上面的最新的一次提交abandon</p>
+</li>
+<li><p>同时本地执行 git log，git reset &lt;前一次提交的commit id&gt;</p>
+</li>
+<li><h3 id="reset之后再执行-5-开始的步骤"><a href="#reset之后再执行-5-开始的步骤" class="headerlink" title="reset之后再执行 5 开始的步骤"></a>reset之后再执行 5 开始的步骤</h3></li>
+</ol>
+<h1 id="查看更改git-log"><a href="#查看更改git-log" class="headerlink" title="查看更改git log"></a>查看更改git log</h1><p><strong><em>适用场景</em></strong></p>
+<ul>
+<li>查看git的历史提交<ul>
+<li>git log -n（查看前n条）</li>
+</ul>
+</li>
+<li>查看一次的详细提交<ul>
+<li>git show commitId</li>
+</ul>
+</li>
+</ul>
+<p>如何查看 Git 存储库的文件和提交记录，并对存储库中的文件作修改和提交。</p>
+<p>比如，我们查看提交详细信息后，需要修改代码，或添加更多的代码，或者对比提交结果。</p>
+<p>下面使用<code>git log</code>命令查看日志详细信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span></span></span><br></pre></td></tr></table></figure>
+
+<p>执行上面命令后，得到以下输出结果 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span></span></span><br><span class="line">commit be24e214620fa072efa877e1967571731c465884</span><br><span class="line">Author: your_name &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Fri Jul 7 18:58:16 2017 +0800</span><br><span class="line"></span><br><span class="line">    ？？mark</span><br><span class="line"></span><br><span class="line">commit 5eccf92e28eae94ec5fce7c687f6f92bf32a6a8d</span><br><span class="line">Author: your_name &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Fri Jul 7 18:52:06 2017 +0800</span><br><span class="line"></span><br><span class="line">    this is main.py file commit mark use -m option</span><br><span class="line"></span><br><span class="line">commit 6e5f31067466795c522b01692871f202c26ff948</span><br><span class="line">Author: your_name &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Fri Jul 7 18:42:43 2017 +0800</span><br><span class="line"></span><br><span class="line">    this is main.py file commit mark without use "-m" option</span><br><span class="line"></span><br><span class="line">commit 290342c270bc90f861ccc3d83afa920169e3b07e</span><br><span class="line">Author: Maxsu &lt;769728683@qq.com&gt;</span><br><span class="line">Date:   Fri Jul 7 16:55:12 2017 +0800</span><br><span class="line"></span><br><span class="line">    Initial commit</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>git show</code>命令查看某一次提交详细信息。 <code>git show</code>命令采用<strong>SHA-1</strong>提交ID作为参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git show be24e214620fa072efa877e1967571731c465884</span></span><br><span class="line">commit be24e214620fa072efa877e1967571731c465884</span><br><span class="line">Author: your_name &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Fri Jul 7 18:58:16 2017 +0800</span><br><span class="line"></span><br><span class="line">    ？？mark</span><br><span class="line"></span><br><span class="line">diff --git a/main.py b/main.py</span><br><span class="line">index 91a1389..657c8d0 100644</span><br><span class="line">--- a/main.py</span><br><span class="line">+++ b/main.py</span><br><span class="line">@@ -3,3 +3,5 @@</span><br><span class="line"></span><br><span class="line"> print ("Life is short, you need Python !")</span><br><span class="line"></span><br><span class="line">+# this is a comment line</span><br><span class="line">+</span><br></pre></td></tr></table></figure>
+
+<p>上面显示的结果中，可以看到符号 “<code>+</code>“ ，表示添加的内容。如果有 “<code>-</code>”则表示删除的内容，现在我们打开 <em>main.py</em> ，把注释行去掉并定义一个变量。修改后的 <em>main.py</em> 的内容如下所示 - </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Life is short, you need Python !"</span>)</span><br><span class="line">a = <span class="number">10</span></span><br><span class="line">b = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p>然后使用命令：<code>git stauts</code> 查看当前工作区状态 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is ahead of 'origin/master' by 3 commits.</span><br><span class="line">  (use "git push" to publish your local commits)</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   main.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br></pre></td></tr></table></figure>
+
+<p>测试代码后，通过运行<code>git diff</code>命令来回顾他的更改。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git diff</span></span><br><span class="line">diff --git a/main.py b/main.py</span><br><span class="line">index 95053b4..a4f953e 100644</span><br><span class="line">--- a/main.py</span><br><span class="line">+++ b/main.py</span><br><span class="line">@@ -4,4 +4,6 @@</span><br><span class="line"> print ("Life is short, you need Python !")</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-number = 100</span><br><span class="line">+a = 10</span><br><span class="line">+</span><br><span class="line">+b = 20</span><br></pre></td></tr></table></figure>
+
+<p>可以看到符号 “<code>+</code>“ (绿色)，表示添加的内容。如果有 “<code>-</code>”(红色)则表示删除的内容。执行的效果如下所示 - </p>
+<p><img src="assets/805110703_53359.png" alt="img"></p>
+<p>现在使用以下命令将文件：<em>main.py</em> 添加到 git 暂存区，然后提交代码完成 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git add main.py</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"define two var a &amp; b "</span></span></span><br></pre></td></tr></table></figure>
+
+<p>最近修改的代码已提交完成。</p>
+<h1 id="提交修改git-commit"><a href="#提交修改git-commit" class="headerlink" title="提交修改git commit"></a>提交修改git commit</h1><ul>
+<li>增补提交，会使用与当前提交节点相同的父节点进行一次新的提交，旧的提交将会被取消<ul>
+<li>git commit –amend </li>
+</ul>
+</li>
+</ul>
+<h2 id="合并commit"><a href="#合并commit" class="headerlink" title="合并commit"></a>合并commit</h2><ul>
+<li>要从HEAD版本呢开始合并过往的1-3条comit<ul>
+<li>git rebase -i HEAD~3(-i是指不需要合并的commit的hash值)</li>
+<li>或者是git rebase -i commitId</li>
+</ul>
+</li>
+</ul>
+<p>执行命令后会出现vim</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pick 3ca6ec3   '注释**********'</span><br><span class="line">pick 1b40566   '注释*********'</span><br><span class="line">pick 53f244a   '注释**********'</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>pick</code> 的意思是要会执行这个 commit</li>
+<li><code>squash(简写为s)</code> 的意思是这个 commit 会被合并到前一个commit，因此修改后两个的pick为s</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pick 3ca6ec3   '注释**********'</span><br><span class="line">s 1b40566   '注释*********'</span><br><span class="line">s 53f244a   '注释**********'</span><br></pre></td></tr></table></figure>
+
+<p>:wq保存退出，此时git会进行合并，并弹出提示信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a combination of 3 commits.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This is the 1st commit message:</span></span><br><span class="line">update3  </span><br><span class="line"><span class="meta">#</span><span class="bash"> This is the commit message <span class="comment">#2: </span></span></span><br><span class="line">update2  </span><br><span class="line"><span class="meta">#</span><span class="bash"> This is the commit message <span class="comment">#3: </span></span></span><br><span class="line">update1 </span><br><span class="line"><span class="meta">#</span><span class="bash"> Please enter the commit message <span class="keyword">for</span> your changes. Lines starting</span></span><br></pre></td></tr></table></figure>
+
+<p>修改我们最终需要的Commit msg。即改为,:wq保存退出</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> This is a combination of 3 commits.</span></span><br><span class="line">合并提交的文本msg</span><br><span class="line"><span class="meta">#</span><span class="bash"> Please enter the commit message <span class="keyword">for</span> your changes. Lines starting</span></span><br></pre></td></tr></table></figure>
+
+<p>查看log则有</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commit 4a51759fae9bbd84904029473fe09f8a77f143ed</span><br><span class="line">Author: pan </span><br><span class="line">Date:   Sun Apr 22 08:54:55 2018 +0800    合并提交的文本msg</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong>：如果这个过程中有操作错误，可以使用 <code>git rebase --abort</code>来撤销修改，回到没有开始操作合并之前的状态。</p>
+<h1 id="推送操作git-push"><a href="#推送操作git-push" class="headerlink" title="推送操作git push"></a>推送操作git push</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
+
+<p>上述命令将产生以下结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br><span class="line">Username for 'http://git.oschina.net': 76972883@qq.com &lt;输入帐号&gt;</span><br><span class="line">Password for 'http://76972883@qq.com@git.oschina.net': &lt;输入登录密码&gt;</span><br><span class="line">Counting objects: 13, done.</span><br><span class="line">Delta compression using up to 4 threads.</span><br><span class="line">Compressing objects: 100% (12/12), done.</span><br><span class="line">Writing objects: 100% (12/12), 1.20 KiB | 0 bytes/s, done.</span><br><span class="line">Total 12 (delta 3), reused 0 (delta 0)</span><br><span class="line">To http://git.oschina.net/yiibai/sample.git</span><br><span class="line">   290342c..51de0f0  master -&gt; master</span><br></pre></td></tr></table></figure>
+
+<h1 id="隐藏操作Git-Stash"><a href="#隐藏操作Git-Stash" class="headerlink" title="隐藏操作Git Stash"></a>隐藏操作Git Stash</h1><h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>假设您正在为产品新的功能编写/实现代码，当正在编写代码时，突然出现软件客户端升级。这时，您必须将新编写的功能代码保留几个小时然后去处理升级的问题。在这段时间内不能提交代码，也不能丢弃您的代码更改。 所以需要一些临时等待一段时间，您可以存储部分更改，然后再提交它。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在Git中，隐藏操作将使您能够修改跟踪文件，阶段更改，并将其保存在一系列未完成的更改中，并可以随时重新应用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   main.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br></pre></td></tr></table></figure>
+
+<p>现在，要切换分支以进行客户升级，但不想提交一直在做的工作; 那么可以把当前工作的改变隐藏起来。 要将一个新的存根推到堆栈上，运行<code>git stash</code>命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git stash</span></span><br><span class="line">Saved working directory and index state WIP on master: ef07ab5 synchronized with the remote repository</span><br><span class="line">HEAD is now at ef07ab5 synchronized with the remote repository</span><br></pre></td></tr></table></figure>
+
+<p>现在，工作目录是干净的，所有更改都保存在堆栈中。 现在使用<code>git status</code>命令来查看当前工作区状态。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<p>现在，可以安全地切换分支并在其他地方工作。通过使用<code>git stash list</code>命令来查看已存在更改的列表。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git stash list</span></span><br><span class="line">stash@&#123;0&#125;: WIP on master: ef07ab5 synchronized with the remote repository</span><br></pre></td></tr></table></figure>
+
+<p>假设您已经解决了客户升级问题，想要重新开始新的功能的代码编写，查找上次没有写完成的代码，只需执行<code>git stash pop</code>命令即可从堆栈中删除更改并将其放置在当前工作目录中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git status -s</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"></span><br><span class="line">[jerry@CentOS project]$ git stash pop</span><br></pre></td></tr></table></figure>
+
+<p>上述命令将产生以下结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git stash pop</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   main.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br><span class="line">Dropped refs/stash@&#123;0&#125; (e713780380632c142ed5833a9087aca883a826fa)</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   main.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，工作区中修改的文件(<code>main.py</code>)又显示了。现在我们就可以继续编写上次编写了未完成的代码。</p>
+<h1 id="修正错误"><a href="#修正错误" class="headerlink" title="修正错误"></a>修正错误</h1><h2 id="撤销暂存"><a href="#撤销暂存" class="headerlink" title="撤销暂存"></a>撤销暂存</h2><p><strong><em>适用场景</em></strong></p>
+<ul>
+<li>当我们将不想暂存的文件被git add到了索引后，想要回退取消<ul>
+<li>git reset HEAD &lt;file&gt;</li>
+</ul>
+</li>
+</ul>
+<h2 id="恢复未提交的更改git-checkout"><a href="#恢复未提交的更改git-checkout" class="headerlink" title="恢复未提交的更改git checkout"></a>恢复未提交的更改git checkout</h2><p><strong><em>适用场景</em></strong></p>
+<ul>
+<li>假设我们不小心修改（删除）了本地存储库中的一个文件，此时想撤销这些修改<ul>
+<li>为了处理这种情况，我们可以使用<code>git checkout</code>命令。可以使用此命令来还原文件的内容。</li>
+</ul>
+</li>
+</ul>
+<p>为了更好的演示，我们首先在 <code>sample/src</code> 目录下创建一个文件：<em>string.py</em> ，其代码如下所示 - </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line">var1 = <span class="string">'Hello World!'</span></span><br><span class="line">var2 = <span class="string">"Python Programming"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"var1[0]: "</span>, var1[<span class="number">0</span>])</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"var2[1:5]: "</span>, var2[<span class="number">1</span>:<span class="number">5</span>]) <span class="comment"># 切片加索引</span></span><br></pre></td></tr></table></figure>
+
+<p>并使用以下命令将此文件推送到远程存储库 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/D/worksp/sample</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git add src/</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use "git reset HEAD &lt;file&gt;..." to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   src/string.py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git add src/string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"add new file string.py"</span></span></span><br><span class="line">[master 44ea8e4] add new file string.py</span><br><span class="line"> 1 file changed, 7 insertions(+)</span><br><span class="line"> create mode 100644 src/string.py</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br><span class="line">Username for 'http://git.oschina.net': 769728683@qq.com</span><br><span class="line">Password for 'http://769728683@qq.com@git.oschina.net':</span><br><span class="line">Counting objects: 5, done.</span><br><span class="line">Delta compression using up to 4 threads.</span><br><span class="line">Compressing objects: 100% (3/3), done.</span><br><span class="line">Writing objects: 100% (4/4), 443 bytes | 0 bytes/s, done.</span><br><span class="line">Total 4 (delta 0), reused 0 (delta 0)</span><br></pre></td></tr></table></figure>
+
+<p>现在，已经将<em>string.py</em>添加到远程存储库中了。</p>
+<p>假设我们不小心/或者有心修改了本地存储库中的一个文件。但现在不想要这些修改的内容了，也就是说想要撤销修改。要处理这种情况，那么可以使用<code>git checkout</code>命令。可以使用此命令来还原文件的内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/D/worksp/sample</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use "git add &lt;file&gt;..." to update what will be committed)</span><br><span class="line">  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">        modified:   src/string.py</span><br><span class="line"></span><br><span class="line">no changes added to commit (use "git add" and/or "git commit -a")</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout src/string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<p>此外，还可以使用<code>git checkout</code>命令从本地存储库获取已删除的文件。假设我们从本地存储库中删除一个文件，我们想要恢复这个文件。那么可以通过使用<code>git checkout</code>命令来实现这一点。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br><span class="line">total 1</span><br><span class="line">-rw-r--r--    1 Administ Administ       57 Jul  7 05:37 README.md</span><br><span class="line">drwxr-xr-x    1 Administ Administ        0 Jul 10 21:16 src</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> src/</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br><span class="line">total 1</span><br><span class="line">-rwxr-xr-x    1 Administ Administ      156 Jul 10 21:16 string.py</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> rm string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br><span class="line">total 0</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status -s</span></span><br><span class="line"> D string.py</span><br></pre></td></tr></table></figure>
+
+<p>Git在文件名前显示字母<code>D</code>， 这表示该文件已从本地存储库中删除。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br><span class="line">total 1</span><br><span class="line">-rwxr-xr-x    1 Administ Administ      156 Jul 10 21:24 string.py</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample/src (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with 'origin/master'.</span><br><span class="line"></span><br><span class="line">nothing to commit, working directory clean</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：可以在提交操作之前执行这些操作。</p>
+</blockquote>
+<h2 id="用Git复位移动头指针（即回滚）"><a href="#用Git复位移动头指针（即回滚）" class="headerlink" title="用Git复位移动头指针（即回滚）"></a>用Git复位移动头指针（即回滚）</h2><p><strong><em>适用场景</em></strong></p>
+<ul>
+<li>当经过更改，并且执行commit后，并且决定删除更改，回退到之前的某个commit。<ul>
+<li>git reset –hard commitId</li>
+</ul>
+</li>
+<li>当代码提交了之后发现没有提交完整，或者想要重新编辑一下提交的信息<ul>
+<li>git reset –soft HEAD^。即重置HEAD指针，但不改变文件。</li>
+</ul>
+</li>
+</ul>
+<p>经过少量更改后，可以决定删除这些更改。 <code>git reset</code>命令用于复位或恢复更改。 我们可以执行三种不同类型的复位操作。</p>
+<p>下图显示了<code>git reset</code>命令的图示。</p>
+<p><code>git reset</code>命令之前 - </p>
+<p><img src="assets/138100701_61893.png" alt="img"></p>
+<p><code>git reset</code>命令之后 - </p>
+<p><img src="assets/662100700_44490.png" alt="img"></p>
+<p><strong>—soft选项</strong></p>
+<p>每个分支都有一个<code>HEAD</code>指针，它指向最新的提交。 如果用<code>--soft</code>选项后跟提交ID的<code>Git reset</code>命令，那么它将仅重置<code>HEAD</code>指针而不会破坏任何东西。</p>
+<p><code>.git/refs/heads/master</code>文件存储<code>HEAD</code>指针的提交ID。 可使用<code>git log -1</code>命令验证它。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/D/worksp/sample</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> cat .git/refs/heads/master</span></span><br><span class="line">44ea8e47307b47c9a80b44360e09f973e79312b0</span><br></pre></td></tr></table></figure>
+
+<p>现在，查看最新前两个的提交ID，最近一次ID将与上述提交ID一致。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -2</span></span><br><span class="line">commit 44ea8e47307b47c9a80b44360e09f973e79312b0</span><br><span class="line">Author: maxsu &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Mon Jul 10 21:09:35 2017 +0800</span><br><span class="line"></span><br><span class="line">    add new file string.py</span><br><span class="line"></span><br><span class="line">commit 7d8162db36723b8523c56ad658a07808ae7fb64c</span><br><span class="line">Author: minsu &lt;minsu@yiibai.com&gt;</span><br><span class="line">Date:   Mon Jul 10 17:51:11 2017 -0700</span><br><span class="line"></span><br><span class="line">    remove/delete module.py</span><br></pre></td></tr></table></figure>
+
+<p>下面我们重置<code>HEAD</code>指针。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset -soft 7d8162db36723b8523c56ad658a07808ae7fb64c</span><br></pre></td></tr></table></figure>
+
+<p>现在，只需将HEAD指针重新设置一个位置。现在查看<code>.git/refs/heads/master</code>文件的内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> cat .git/refs/heads/master</span></span><br><span class="line">7d8162db36723b8523c56ad658a07808ae7fb64c</span><br></pre></td></tr></table></figure>
+
+<p>来自文件的提交ID已更改，现在通过查看提交消息进行验证。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -2</span></span><br><span class="line">commit 7d8162db36723b8523c56ad658a07808ae7fb64c</span><br><span class="line">Author: minsu &lt;minsu@yiibai.com&gt;</span><br><span class="line">Date:   Mon Jul 10 17:51:11 2017 -0700</span><br><span class="line"></span><br><span class="line">    remove/delete module.py</span><br><span class="line"></span><br><span class="line">commit 6bdbf8219c60d8da9ad352c23628600faaefbe13</span><br><span class="line">Author: maxsu &lt;your_email@mail.com&gt;</span><br><span class="line">Date:   Mon Jul 10 20:34:28 2017 +0800</span><br><span class="line"></span><br><span class="line">    renamed main.py to module.py</span><br></pre></td></tr></table></figure>
+
+<p><strong>mixed选项</strong></p>
+<p>使用<code>--mixed</code>选项的Git重置将从尚未提交的暂存区域还原这些更改。它仅从暂存区域恢复更改。对文件的工作副本进行的实际更改不受影响。 默认Git复位等效于执行<code>git reset - mixed</code>。</p>
+<p><strong>hard选项</strong></p>
+<p>如果使用<code>--hard</code>选项与Git重置命令，它将清除分段区域; 它会将HEAD指针重置为特定提交ID的最新提交，并删除本地文件更改。</p>
+<p>让我们查看提交ID。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/D/worksp/sample</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -1</span></span><br><span class="line">commit 7d8162db36723b8523c56ad658a07808ae7fb64c</span><br><span class="line">Author: minsu &lt;minsu@yiibai.com&gt;</span><br><span class="line">Date:   Mon Jul 10 17:51:11 2017 -0700</span><br><span class="line"></span><br><span class="line">    remove/delete module.py</span><br></pre></td></tr></table></figure>
+
+<p>通过在文件开头添加单行注释来修改文件或者往文件里添加其它代码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> head -2 src/string.py</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status -s</span></span><br><span class="line"> M src/string.py</span><br></pre></td></tr></table></figure>
+
+<p>将修改的文件添加到暂存区域，并使用<code>git status</code>命令进行验证。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git add src/string.py</span></span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line">On branch master</span><br><span class="line">Your branch and 'origin/master' have diverged,</span><br><span class="line">and have 1 and 1 different commit each, respectively.</span><br><span class="line">  (use "git pull" to merge the remote branch into yours)</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use "git reset HEAD &lt;file&gt;..." to unstage)</span><br><span class="line"></span><br><span class="line">        modified:   src/string.py</span><br></pre></td></tr></table></figure>
+
+<p>Git状态显示该文件存在于暂存区域中。 现在，重置HEAD与<code>--hard</code>选项。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard 7d8162db36723b8523c56ad658a07808ae7fb64c</span></span><br><span class="line">HEAD is now at 7d8162d remove/delete module.py</span><br><span class="line"></span><br><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br></pre></td></tr></table></figure>
+
+<p><code>git reset</code>命令成功，这将从分段区域还原文件，并删除对文件所做的任何本地更改。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Administrator@MY-PC /D/worksp/sample (master)</span><br><span class="line"><span class="meta">$</span><span class="bash"> git status -s</span></span><br></pre></td></tr></table></figure>
+
+<p>Git状态显示该文件已从暂存区域还原，当前恢复到了删除 <code>moudle.py</code> 时的版本了。</p>
+<h1 id="处理冲突"><a href="#处理冲突" class="headerlink" title="处理冲突"></a>处理冲突</h1><ul>
+<li>使用idea的处理冲突工具</li>
+<li>注意自己的commit要尽量少一些，不然rebase很麻烦</li>
+<li>如果自己的commit很多，则先将自己的rebase为一个commit之后在进行拉取</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://www.yiibai.com/git/git_push_operation.html#article-start" target="_blank" rel="noopener">易百教程</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/09/版本控制/Git：操作/" title="Git：操作">http://yoursite.com/2019/07/09/版本控制/Git：操作/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/08/系统架构/Dubbo：理论/" rel="next" title="Dubbo：理论">
+                <i class="fa fa-chevron-left"></i> Dubbo：理论
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/10/OS/计算机操作系统：概述/" rel="prev" title="计算机操作系统：概述">
+                计算机操作系统：概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git工作流程"><span class="nav-number">1.</span> <span class="nav-text">Git工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gerrit"><span class="nav-number">1.1.</span> <span class="nav-text">gerrit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提交代码到Gerrit"><span class="nav-number">1.1.1.</span> <span class="nav-text">提交代码到Gerrit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码提交之后需要修改"><span class="nav-number">1.1.2.</span> <span class="nav-text">代码提交之后需要修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reset之后再执行-5-开始的步骤"><span class="nav-number">1.1.3.</span> <span class="nav-text">reset之后再执行 5 开始的步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看更改git-log"><span class="nav-number">2.</span> <span class="nav-text">查看更改git log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交修改git-commit"><span class="nav-number">3.</span> <span class="nav-text">提交修改git commit</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#合并commit"><span class="nav-number">3.1.</span> <span class="nav-text">合并commit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#推送操作git-push"><span class="nav-number">4.</span> <span class="nav-text">推送操作git push</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隐藏操作Git-Stash"><span class="nav-number">5.</span> <span class="nav-text">隐藏操作Git Stash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">5.0.1.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">5.0.2.</span> <span class="nav-text">使用</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#修正错误"><span class="nav-number">6.</span> <span class="nav-text">修正错误</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销暂存"><span class="nav-number">6.1.</span> <span class="nav-text">撤销暂存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复未提交的更改git-checkout"><span class="nav-number">6.2.</span> <span class="nav-text">恢复未提交的更改git checkout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用Git复位移动头指针（即回滚）"><span class="nav-number">6.3.</span> <span class="nav-text">用Git复位移动头指针（即回滚）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理冲突"><span class="nav-number">7.</span> <span class="nav-text">处理冲突</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

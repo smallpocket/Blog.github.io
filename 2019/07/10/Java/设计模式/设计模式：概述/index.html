@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="什么是设计模式每一个模式描述了一个在周围不断重复发生的问题，以及该文件的解决方案的核心。这样呢就能一次又一次地使用该方案而不必做重复劳动。设计模式是对被用来在特定场景下解决一般设计问题的类和互相通信的对象的描述。 模式的四个要素：  模式的名称。 问题。描述应该在何时使用模式。解释了设计问题和问题存在的前因后果，可能描述了特定的设计问题，包含使用模式必须满足的一系列先决条件。 解决方案。描述了设计">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式：概述">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="什么是设计模式每一个模式描述了一个在周围不断重复发生的问题，以及该文件的解决方案的核心。这样呢就能一次又一次地使用该方案而不必做重复劳动。设计模式是对被用来在特定场景下解决一般设计问题的类和互相通信的对象的描述。 模式的四个要素：  模式的名称。 问题。描述应该在何时使用模式。解释了设计问题和问题存在的前因后果，可能描述了特定的设计问题，包含使用模式必须满足的一系列先决条件。 解决方案。描述了设计">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/assets/1562807738415.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/assets/1563073963354.png">
+<meta property="og:updated_time" content="2019-07-29T01:52:30.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式：概述">
+<meta name="twitter:description" content="什么是设计模式每一个模式描述了一个在周围不断重复发生的问题，以及该文件的解决方案的核心。这样呢就能一次又一次地使用该方案而不必做重复劳动。设计模式是对被用来在特定场景下解决一般设计问题的类和互相通信的对象的描述。 模式的四个要素：  模式的名称。 问题。描述应该在何时使用模式。解释了设计问题和问题存在的前因后果，可能描述了特定的设计问题，包含使用模式必须满足的一系列先决条件。 解决方案。描述了设计">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/assets/1562807738415.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>设计模式：概述 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">设计模式：概述
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-10 20:03:31" itemprop="dateCreated datePublished" datetime="2019-07-10T20:03:31+08:00">2019-07-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-29 09:52:30" itemprop="dateModified" datetime="2019-07-29T09:52:30+08:00">2019-07-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/10/Java/设计模式/设计模式：概述/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/10/Java/设计模式/设计模式：概述/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h1><p>每一个模式描述了一个在周围不断重复发生的问题，以及该文件的解决方案的核心。这样呢就能一次又一次地使用该方案而不必做重复劳动。设计模式是对被用来在特定场景下解决一般设计问题的类和互相通信的对象的描述。</p>
+<p>模式的四个要素：</p>
+<ul>
+<li>模式的名称。</li>
+<li>问题。描述应该在何时使用模式。解释了设计问题和问题存在的前因后果，可能描述了特定的设计问题，包含使用模式必须满足的一系列先决条件。</li>
+<li>解决方案。描述了设计的组成部分，它们间的相互关系以及格子的职责和协作方式。</li>
+<li>效果。描述了模式应用的效果以及使用模式应该权衡的问题。包括对时间、空间的衡量，对系统灵活性、扩展性、可移植性的影响。</li>
+</ul>
+<h1 id="描述设计模式"><a href="#描述设计模式" class="headerlink" title="描述设计模式"></a>描述设计模式</h1><ul>
+<li>模式名和分类</li>
+<li><strong>意图</strong>。设计模式是做什么的；它的基本原理和意图是什么；它解决的是什么样的特定设计问题</li>
+<li>别名</li>
+<li><strong>动机</strong>。说明一个设计问题以及如何用模式中的类、对象来解决该问题的特定情境。帮助理解随后对模式更抽象的描述</li>
+<li><strong>适用性</strong>。<ul>
+<li>什么情况下可以使用该设计模式</li>
+<li>适用案例</li>
+<li>该模式可以用来改进哪些不良设计</li>
+<li>怎样识别这些情况</li>
+</ul>
+</li>
+<li>结构。</li>
+<li>参与者。设计模式中的类或对象以及他们各自的职责</li>
+<li>协作。模式的参与者怎样协作已实现他们的职责</li>
+<li><strong>效果</strong>。模式怎样支持它的目标；使用模式的效果和所需要做的权衡取舍；系统结构哪些方面可以独立改；</li>
+<li>实现。实现模式时需要知道的一些提示、技术要点以及代码示例</li>
+<li>已知应用。实际系统中发现的模式的例子，每个模式至少包括了两个不同领域的实例</li>
+<li><strong>相关模式</strong>、与这个模式紧密相关的模式有哪些，其间重要的不同之处是什么，这个模式应该与哪些其他模式一起使用</li>
+</ul>
+<h1 id="设计模式的编目"><a href="#设计模式的编目" class="headerlink" title="设计模式的编目"></a>设计模式的编目</h1><p>详见：<strong><em>设计模式：目录</em></strong></p>
+<h1 id="设计模式怎样解决设计问题"><a href="#设计模式怎样解决设计问题" class="headerlink" title="设计模式怎样解决设计问题"></a>设计模式怎样解决设计问题</h1><h2 id="寻找合适的对象"><a href="#寻找合适的对象" class="headerlink" title="寻找合适的对象"></a>寻找合适的对象</h2><p>客户请求是使对象执行操作的唯一方法，操作又是对象改变内部数据的唯一方法。对象的内部状态是被封装的，不能被直接访问，它的表示对于对象外部是不可见的。</p>
+<p>面向对象设计最困难的部分是将系统分解成对象集合，因为要考虑许多因素：封装、粒度、依赖关系、灵活性、性能、演化、复用等。它们都影响系统的分解，并且这些因素通常还是互相冲突的。</p>
+<h3 id="设计方法"><a href="#设计方法" class="headerlink" title="设计方法"></a>设计方法</h3><p>面向对象设计方法学支持很多设计方法</p>
+<ul>
+<li>可以写出一个问题描述，挑出名词、动词进而创建相应的类和操作；</li>
+<li>关注系统的协作与职责关系</li>
+<li>对现实世界进行建模，再将分析时发现的对象转化至设计中等等</li>
+</ul>
+<p>设计的许多对象来源于现实世界的分析模型，但是设计结果所得到的的类通常在现实世界中并不存在。设计模式帮助确定并不明显的抽象和描述这些抽象的对象。</p>
+<h2 id="决定对象的粒度"><a href="#决定对象的粒度" class="headerlink" title="决定对象的粒度"></a>决定对象的粒度</h2><p>对象在大小和数目上变化极大。它们能表示下自硬件，上自整个应用的任何事物，如何决定一个对象应该是什么呢？</p>
+<p>Facade描述了怎样用对象表示完整的子系统</p>
+<p>Flyweight描述了如何支持大量的最小粒度的对象</p>
+<p>visitor和command生成的对象专门负责实现对其他对象或对象组的请求</p>
+<h2 id="指定对象接口"><a href="#指定对象接口" class="headerlink" title="指定对象接口"></a>指定对象接口</h2><p>对象声明的每一个操作指定操作名、作为参数的对象和返回值，构成了操作的<strong>型构</strong>。对象操作所定义的所有操作型构的集合被称为该对象的接口。</p>
+<p>设计模式通过确定接口的主要组成成分以及经接口发送的数据类型，帮助定义接口。设计模式也指定了接口间的关系，如要求一些类具有相似的接口或对一些类的接口做了限制。</p>
+<h2 id="运用复用机制"><a href="#运用复用机制" class="headerlink" title="运用复用机制"></a>运用复用机制</h2><h3 id="继承和组合的比较"><a href="#继承和组合的比较" class="headerlink" title="继承和组合的比较"></a>继承和组合的比较</h3><p>复用最常用的技巧即继承与组合。</p>
+<ul>
+<li>继承允许根据其他类的实现来定义一个类的实现，这种通过生成子类的复用通常被称为<strong>白箱</strong>（父类的内部细节对子类可见）<strong>复用</strong><ul>
+<li>编译时静态定义，可直接使用。较方便地改变被复用的实现</li>
+<li>无法再运行时刻改变从父类继承的实现。父类至少定义了部分子类的具体表示，并且破坏了封装性。他们之间具有强依赖关系。一定程度上限制了灵活性与复用性</li>
+</ul>
+</li>
+<li>新的复杂功能通过组装或组合对象来获得，要求被组合的对象具有良好定义的接口。称为黑箱复用（内部不可见）<ul>
+<li>运行时刻动态确定。要求对象遵守彼此的接口约定，要求更仔细定义接口。通过接口访问，依赖关系较少。有助于保持每个类被封装</li>
+</ul>
+</li>
+</ul>
+<h3 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h3><p>委托是一种组合方法，<strong>使得组合具有与继承同样的复用能力。</strong>委托方式下，有两个对象参与处理一个请求，接受请求的对象将操作委托给它的<strong>代理者</strong>。</p>
+<p>即类似于子类将请求交给它的父类进行处理。在使用继承时，被继承的操作总能够引用接受请求的对象，则接受请求的对象将自己传给被委托者（<strong>代理者</strong>），使得被委托的操作可以引用接受请求的对象。</p>
+<p><strong><em>缺陷</em></strong></p>
+<ul>
+<li>动态的、高度参数化的软件比静态软件更难于理解。</li>
+<li>当委托使得设计比较简单而不是复杂时，才是更好地选择</li>
+</ul>
+<p><strong><em>设计模式</em></strong>：</p>
+<ul>
+<li>state，一个对象将请求委托给一个描述当前状态的state进行处理</li>
+<li>strategy，一个对象将一个特定的请求委托给一个描述请求执行策略的对象，一个对象只有一个状态，但对不同的请求是有很多策略</li>
+<li>visitor，对象结构的每个元素上的操作都总是被委托到visitor</li>
+</ul>
+<h2 id="关联运行时刻和编译时刻的结构"><a href="#关联运行时刻和编译时刻的结构" class="headerlink" title="关联运行时刻和编译时刻的结构"></a>关联运行时刻和编译时刻的结构</h2><p>代码结构在编译时刻就被确定下来了，它由继承关系固定的类组成。程序的运行时刻结构是由快速变化的通信对象组成。</p>
+<p> <strong>聚合</strong>意味着一个对象拥有另一个对象或对一个另对象负责，意味着聚合对象和其所有者具有相同的生命周期。<strong>关联</strong>意味着一个对象仅仅知道另一个对象，关联的对象可能请求彼此的操作，但是不为对方负责，表示较松散的耦合。</p>
+<h2 id="设计应支持变化"><a href="#设计应支持变化" class="headerlink" title="设计应支持变化"></a>设计应支持变化</h2><p>获得最大限度复用的关键在于对新需求和已有需求发生变化时的预见性，要求系统设计能够相应地改进。因此要考虑在系统的生命周期内会发生怎样的变化。</p>
+<p>设计模式可以确保系统能以特定方式变化，从而帮助避免重新设计系统，每一个设计模式允许系统结构的某个人方面的变化独立于其他方面</p>
+<h3 id="导致系统重新设计的一般原因"><a href="#导致系统重新设计的一般原因" class="headerlink" title="导致系统重新设计的一般原因"></a>导致系统重新设计的一般原因</h3><ul>
+<li><p>显式指定一个类来创建对象。</p>
+<ul>
+<li>在创建对象时指定类名将使得你受特定实现的约束而不是特定接口的约束，使得未来变化更复杂，应该间接创建对象</li>
+<li>factory、prototype</li>
+</ul>
+</li>
+<li><p>对特殊操作的依赖</p>
+<ul>
+<li>当为请求指定一个特殊的操作时，完成该请求的方式就固定下来了，为了避免将代码写死。你将可以在编译期或运行期很方便改变响应请求的方法</li>
+<li>chainof resposibility 、command</li>
+</ul>
+</li>
+<li><p>对硬件和软件平台的依赖</p>
+<ul>
+<li>外部的操作系统接口和API在不同的平台上是不同的，依赖于特定平台的软件将很难移植，因此设计系统时限制其平台相关性就很重要</li>
+<li>factory、bridge</li>
+</ul>
+</li>
+<li><p>对对象表示或实现的依赖</p>
+<ul>
+<li>知道对象怎样表示、保存、定位或实现的客户在对象发生变化时可能也需要变化。对客户隐藏这些信息能阻止连锁变化</li>
+<li>factory、bridge、memento、proxy</li>
+</ul>
+</li>
+<li><p>算法依赖</p>
+<ul>
+<li>算法在开发和复用时常常被扩展、优化、代替。依赖于某个特定算法的对象在算法发生变化时不得不变化。因此有可能发生变化的算法应该被孤立起来。</li>
+<li>Builder、Iterator、Starategy、Template Method、Visitor</li>
+</ul>
+</li>
+<li><p>紧耦合</p>
+<ul>
+<li>紧耦合的类很难独立地被复用，因为他们是相互依赖的。紧耦合产生的系统，要改变或删掉一个类必须理解    和改变其他很多类。这样系统很难维护。实现松耦合很必要</li>
+<li>factory、command、facade、mediator、observer、chain of responsibility</li>
+</ul>
+</li>
+<li><p>通过生成子类来扩展功能</p>
+<ul>
+<li>通常很难通过子类来定制对象，每一个新类都有固定的实现开销。定义子类需要对父类有深入的理解。重定义一个操作可能需要重定义其他操作，即使一个简单的扩充也不得不引入许多新的子类</li>
+<li>使用组合、委托是继承外的灵活方式。但是过多使用对象组合会使得设计难以理解。可以去定义一个子类，将它的实例和已经存在的实例进行组合来引进定制的功能</li>
+<li>bridge、chain of responsibility、composite、decorator、observer、strategy</li>
+</ul>
+</li>
+<li><p>不能方便地对类进行修改</p>
+<ul>
+<li>有时不得不改变一个难以修改的类，对于商业类库（没有源代码），或可能对类的任何修改会要求修改许多已经存在的其他子类。</li>
+<li>adapter、Decorator、Visitor</li>
+</ul>
+</li>
+</ul>
+<h1 id="如何选择设计模式"><a href="#如何选择设计模式" class="headerlink" title="如何选择设计模式"></a>如何选择设计模式</h1><h2 id="考虑设计模式是怎样解决问题的"><a href="#考虑设计模式是怎样解决问题的" class="headerlink" title="考虑设计模式是怎样解决问题的"></a>考虑设计模式是怎样解决问题的</h2><p>从上一节：设计模式怎样解决设计问题研究</p>
+<h2 id="浏览模式的意图部分"><a href="#浏览模式的意图部分" class="headerlink" title="浏览模式的意图部分"></a>浏览模式的意图部分</h2><ul>
+<li>目的准则，即模式用来完成什么工作<ul>
+<li>创建型模式与对象创建有关</li>
+<li>结构型模式处理类或对象的组合</li>
+<li>行为型模式对类或对象怎么样交互和怎样分配职责进行描述</li>
+</ul>
+</li>
+<li>范围准则，指定模式主要是用于类还是用于对象。<ul>
+<li>类模式处理类和子类间的关系，通过继承建立，是静态的，编译期确定</li>
+<li>对象模式处理对象间关系，是动态的。</li>
+<li>创建型类模式将对象的部分创建工作延迟到子类</li>
+<li>创建型对象模式将它延迟到另一个对象中</li>
+<li>结构型类模式使用继承机制来组合类</li>
+<li>结构型对象模式描述了对象的组装方式</li>
+<li>行为型类模式使用继承描述算法和控制流</li>
+<li>行为型对象模式描述一组对象怎样协作完成单个对象无法完成的任务</li>
+</ul>
+</li>
+</ul>
+<h2 id="研究模式怎样相互关联"><a href="#研究模式怎样相互关联" class="headerlink" title="研究模式怎样相互关联"></a>研究模式怎样相互关联</h2><p>研究以获得合适的模式或模式组</p>
+<p><img src="assets/1562807738415.png" alt="1562807738415"></p>
+<h2 id="研究目的相似的模式"><a href="#研究目的相似的模式" class="headerlink" title="研究目的相似的模式"></a>研究目的相似的模式</h2><p>创建型、行为型、结构型模式</p>
+<h2 id="检查重新设计的原因"><a href="#检查重新设计的原因" class="headerlink" title="检查重新设计的原因"></a>检查重新设计的原因</h2><p>从<strong>设计应当支持变化</strong>研究引起重新设计的原因，再观察问题是否与它们有关，然后再找出哪些模式可以帮助避免这些会导致重新设计的因素</p>
+<h2 id="考虑设计中哪些是可变的"><a href="#考虑设计中哪些是可变的" class="headerlink" title="考虑设计中哪些是可变的"></a>考虑设计中哪些是可变的</h2><ul>
+<li>考虑想要什么变化却又不会引起重新设计，即封装变化的概念。</li>
+<li>下表是设计模式允许独立变化的方面，改变它们而不会导致需要重新设计。</li>
+</ul>
+<p><img src="assets/1563073963354.png" alt="1563073963354"></p>
+<h1 id="怎样使用设计模式"><a href="#怎样使用设计模式" class="headerlink" title="怎样使用设计模式"></a>怎样使用设计模式</h1><ul>
+<li>大致浏览一遍模式。特别注意其适用性部分和效果部分，确定适合你的问题</li>
+<li>研究结构部分、参与者部分和协作部分。确保理解这个模式的类和对象以及它们是怎样关联的</li>
+<li>看代码示例部分。看模式代码如何具体实现</li>
+<li>选择模式参与者的名字。使他们在应用上下文当中有意义。并且将模式作为后缀是有意义的</li>
+<li>定义类。声明他们的接口，建立继承关系，定义代表数据和对象引用的实例变量</li>
+<li>定义模式中专用于应用的操作名称。</li>
+<li>实现执行模式中的责任和协作的操作。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/" title="设计模式：概述">http://yoursite.com/2019/07/10/Java/设计模式/设计模式：概述/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/10/OS/计算机操作系统：概述/" rel="next" title="计算机操作系统：概述">
+                <i class="fa fa-chevron-left"></i> 计算机操作系统：概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/13/Java/设计模式/设计模式：外观模式/" rel="prev" title="设计模式：外观模式">
+                设计模式：外观模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是设计模式"><span class="nav-number">1.</span> <span class="nav-text">什么是设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#描述设计模式"><span class="nav-number">2.</span> <span class="nav-text">描述设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式的编目"><span class="nav-number">3.</span> <span class="nav-text">设计模式的编目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式怎样解决设计问题"><span class="nav-number">4.</span> <span class="nav-text">设计模式怎样解决设计问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找合适的对象"><span class="nav-number">4.1.</span> <span class="nav-text">寻找合适的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计方法"><span class="nav-number">4.1.1.</span> <span class="nav-text">设计方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决定对象的粒度"><span class="nav-number">4.2.</span> <span class="nav-text">决定对象的粒度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定对象接口"><span class="nav-number">4.3.</span> <span class="nav-text">指定对象接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运用复用机制"><span class="nav-number">4.4.</span> <span class="nav-text">运用复用机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承和组合的比较"><span class="nav-number">4.4.1.</span> <span class="nav-text">继承和组合的比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托"><span class="nav-number">4.4.2.</span> <span class="nav-text">委托</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关联运行时刻和编译时刻的结构"><span class="nav-number">4.5.</span> <span class="nav-text">关联运行时刻和编译时刻的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计应支持变化"><span class="nav-number">4.6.</span> <span class="nav-text">设计应支持变化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导致系统重新设计的一般原因"><span class="nav-number">4.6.1.</span> <span class="nav-text">导致系统重新设计的一般原因</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何选择设计模式"><span class="nav-number">5.</span> <span class="nav-text">如何选择设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#考虑设计模式是怎样解决问题的"><span class="nav-number">5.1.</span> <span class="nav-text">考虑设计模式是怎样解决问题的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览模式的意图部分"><span class="nav-number">5.2.</span> <span class="nav-text">浏览模式的意图部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究模式怎样相互关联"><span class="nav-number">5.3.</span> <span class="nav-text">研究模式怎样相互关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究目的相似的模式"><span class="nav-number">5.4.</span> <span class="nav-text">研究目的相似的模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查重新设计的原因"><span class="nav-number">5.5.</span> <span class="nav-text">检查重新设计的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#考虑设计中哪些是可变的"><span class="nav-number">5.6.</span> <span class="nav-text">考虑设计中哪些是可变的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎样使用设计模式"><span class="nav-number">6.</span> <span class="nav-text">怎样使用设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="注解提出问题概述是什么 注解（元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。  分类，各个分类是什么 标记注解，没有元素的注解  优缺 注解可以提供用来完整地描述程序所需的信息，而这些信息是无法用Java表达的 注解使得我们能够以将由编译器来测试和验证的格式，存储有关程序的额外信息，注解可以用来生成描述符文件，甚至是新的类定义，并且有助于减轻">
+<meta name="keywords" content="JavaBase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaBase：注解">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/Java/base/JavaBase：注解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="注解提出问题概述是什么 注解（元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。  分类，各个分类是什么 标记注解，没有元素的注解  优缺 注解可以提供用来完整地描述程序所需的信息，而这些信息是无法用Java表达的 注解使得我们能够以将由编译器来测试和验证的格式，存储有关程序的额外信息，注解可以用来生成描述符文件，甚至是新的类定义，并且有助于减轻">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-25T09:11:31.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaBase：注解">
+<meta name="twitter:description" content="注解提出问题概述是什么 注解（元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。  分类，各个分类是什么 标记注解，没有元素的注解  优缺 注解可以提供用来完整地描述程序所需的信息，而这些信息是无法用Java表达的 注解使得我们能够以将由编译器来测试和验证的格式，存储有关程序的额外信息，注解可以用来生成描述符文件，甚至是新的类定义，并且有助于减轻">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/25/Java/base/JavaBase：注解/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaBase：注解 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/Java/base/JavaBase：注解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JavaBase：注解
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-25 09:15:43 / Modified: 17:11:31" itemprop="dateCreated datePublished" datetime="2019-07-25T09:15:43+08:00">2019-07-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/25/Java/base/JavaBase：注解/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/25/Java/base/JavaBase：注解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><blockquote>
+<p>注解（元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。</p>
+</blockquote>
+<h3 id="分类，各个分类是什么"><a href="#分类，各个分类是什么" class="headerlink" title="分类，各个分类是什么"></a>分类，各个分类是什么</h3><ul>
+<li>标记注解，没有元素的注解</li>
+</ul>
+<h3 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h3><ul>
+<li>注解可以提供用来完整地描述程序所需的信息，而这些信息是无法用Java表达的</li>
+<li>注解使得我们能够以将由编译器来测试和验证的格式，存储有关程序的额外信息，注解可以用来生成描述符文件，甚至是新的类定义，并且有助于减轻编写“样板”代码的负担。</li>
+<li>可以将元数据保存在Java源代码中，并利用annotationAPI为自己的注解构造处理工具</li>
+<li>更加干净易读的代码以及编译期类型检查</li>
+</ul>
+<h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><ul>
+<li>每当你创建描述符性质的类或接口时，一旦其中包含了重复性的工作，那就可以考虑使用注解来简化与自动化该过程</li>
+</ul>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h1 id="常见注解"><a href="#常见注解" class="headerlink" title="常见注解"></a>常见注解</h1><h2 id="Java内置"><a href="#Java内置" class="headerlink" title="Java内置"></a>Java内置</h2><ul>
+<li>@Override。表示当前方法定义将覆盖超类中的错误，如果没有覆盖，则编译器发出错误提示</li>
+<li>@Deprecated。如果程序使用了注解为它的元素，编译器会发出警告</li>
+<li>@SuppressWarnings，关闭不当的编译器警告信息。</li>
+</ul>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><h2 id="定义注解"><a href="#定义注解" class="headerlink" title="定义注解"></a>定义注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Test &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注解的定义类似于定义一个接口，除了多出一个@，在定义注解时会需要一些<strong>元注解</strong>。</p>
+<p><strong><em>成员</em></strong></p>
+<p>在注解中会包含一些元素来表示某些值，当分析处理注解时，程序可以利用这些值，注解的元素类似接口的方法，唯一的区别是你可以为其指定默认值。</p>
+<p><strong><em>示例</em></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> UseCase &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">id</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">description</span><span class="params">()</span> <span class="keyword">default</span> "no description"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该注解用于跟踪一个项目中的用例，如果一个方法实现了某个用例的需求则可以加上该注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@UseCase</span>(id = <span class="number">47</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validatePassword</span><span class="params">(Stirng pws)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注解的元素在使用时表现为键值对的形式，置于@UseCase声明后的括号内。</p>
+<h3 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h3><ul>
+<li>@Target：定义你的注解将运用到什么地方，例如一个方法或者域</li>
+<li>Retention：定义该注解在哪个级别可用，Source（源代码）、CLASS（类文件）、RUNTIME（运行时）</li>
+<li>@Documented，将此注解包含在JavaDoc中</li>
+<li>@Inherited，允许子类继承父类中的注解。</li>
+</ul>
+<h2 id="注解元素"><a href="#注解元素" class="headerlink" title="注解元素"></a>注解元素</h2><p>注解@UseCase由UseCase.jva定义，其中可以包含的可用类型有：</p>
+<ul>
+<li>所有基本类型int 、float、boolean</li>
+<li>String</li>
+<li>Class、enum</li>
+<li>Annotation</li>
+<li>数组</li>
+</ul>
+<h2 id="默认值限制"><a href="#默认值限制" class="headerlink" title="默认值限制"></a>默认值限制</h2><ul>
+<li>编译器要求元素不能有不确定的值，即元素要么具有默认值，要么在使用注解时提供元素的值</li>
+<li>对于非基本类型的元素，无论是源代码声明或者定义默认值均不能为null。即所有元素都存在，因此只能以<strong>空字符串、负数</strong>来表示元素不存在</li>
+</ul>
+<h2 id="嵌套注解"><a href="#嵌套注解" class="headerlink" title="嵌套注解"></a>嵌套注解</h2><p>将<code>Constraints</code>注解嵌入到<code>SQLString</code>当中，并且值是默认的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SQLString &#123;</span><br><span class="line">  <span class="function">Constraints <span class="title">constraints</span><span class="params">()</span> <span class="keyword">default</span> @Constraints</span>;</span><br><span class="line">&#125; <span class="comment">///:~</span></span><br></pre></td></tr></table></figure>
+
+<p>若想要改变内部的值，则需要</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SQLString &#123;</span><br><span class="line">  <span class="function">Constraints <span class="title">constraints</span><span class="params">()</span> <span class="keyword">default</span> @<span class="title">Constraints</span><span class="params">(unique=<span class="keyword">true</span>)</span></span>;</span><br><span class="line">&#125; <span class="comment">///:~</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="快捷方式"><a href="#快捷方式" class="headerlink" title="快捷方式"></a>快捷方式</h2><p>当注解中定义了<strong>名为value</strong>的元素，并且在赋值时是唯一需要赋值的一个元素，此时无需使用键值对的语法，只需要赋值即可，这可以用于任何类型的元素。</p>
+<h1 id="编写注解处理器"><a href="#编写注解处理器" class="headerlink" title="编写注解处理器"></a>编写注解处理器</h1><p>Java通过反射机制构造注解处理器。并且Java提供了外部工具apt解析带有注解的Java代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseCaseTracker</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">trackUseCases</span><span class="params">(List&lt;Integer&gt; useCases, </span></span></span><br><span class="line"><span class="function"><span class="params">                Class&lt;?&gt; cl)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(Method m : cl.getDeclaredMethods()) &#123;<span class="comment">//获得该类声明的所有方法</span></span><br><span class="line">      UseCase uc = m.getAnnotation(UseCase.class);<span class="comment">//如果该方法存在UseCase的注解</span></span><br><span class="line">      <span class="keyword">if</span>(uc != <span class="keyword">null</span>) &#123;</span><br><span class="line">        System.out.println(<span class="string">"Found Use Case:"</span> + uc.id() +</span><br><span class="line">          <span class="string">" "</span> + uc.description());</span><br><span class="line">        useCases.remove(<span class="keyword">new</span> Integer(uc.id()));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i : useCases) &#123;</span><br><span class="line">      System.out.println(<span class="string">"Warning: Missing use case-"</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; useCases = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">    Collections.addAll(useCases, <span class="number">47</span>, <span class="number">48</span>, <span class="number">49</span>, <span class="number">50</span>);</span><br><span class="line">    trackUseCases(useCases, PasswordUtils.class);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="comment">/* Output:</span></span><br><span class="line"><span class="comment">Found Use Case:47 Passwords must contain at least one numeric</span></span><br><span class="line"><span class="comment">Found Use Case:48 no description</span></span><br><span class="line"><span class="comment">Found Use Case:49 New passwords can't equal previously used ones</span></span><br><span class="line"><span class="comment">Warning: Missing use case-50</span></span><br><span class="line"><span class="comment">*/</span><span class="comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="生成外部文件"><a href="#生成外部文件" class="headerlink" title="生成外部文件"></a>生成外部文件</h1><p>有些framework需要一些额外的信息才能与你的源代码协同工作，而这种情况最适合注解实现价值。</p>
+<p>如果你希望提供一些基本的对象/关系映射功能，能够自动生成数据库表用于存储JavaBean对象</p>
+<ul>
+<li>可以选择XML描述文件，指明类的名字、每个成员以及数据库映射的相关信息。</li>
+<li>使用注解将所有信息保存在Java源文件中。</li>
+</ul>
+<p>首先定义@DBTable</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE) <span class="comment">// Applies to classes only</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> DBTable &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">&#125; <span class="comment">///:~</span></span><br></pre></td></tr></table></figure>
+
+<p>为修饰JavaBean准备的注解</p>
+<p>注解处理器通过<code>@Constraints</code>提取出数据库表的元数据，尽管该注解只提供了数据库约束的一个很小的子集，但依然是一种帮助</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Constraints &#123;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">primaryKey</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">allowNull</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">true</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">unique</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line">&#125; <span class="comment">///:~</span></span><br></pre></td></tr></table></figure>
+
+<p>内部使用了嵌套注解<code>@Constraints</code>将CoLumn的约束嵌入，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SQLString &#123;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">  <span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">  <span class="function">Constraints <span class="title">constraints</span><span class="params">()</span> <span class="keyword">default</span> @Constraints</span>;</span><br><span class="line">&#125; <span class="comment">///:~</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SQLInteger &#123;</span><br><span class="line">  <span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">  <span class="function">Constraints <span class="title">constraints</span><span class="params">()</span> <span class="keyword">default</span> @Constraints</span>;</span><br><span class="line">&#125; <span class="comment">///:~</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DBTable</span>(name = <span class="string">"MEMBER"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Member</span> </span>&#123;</span><br><span class="line">  <span class="meta">@SQLString</span>(<span class="number">30</span>) String firstName;</span><br><span class="line">  <span class="meta">@SQLString</span>(<span class="number">50</span>) String lastName;</span><br><span class="line">  <span class="meta">@SQLInteger</span> Integer age;</span><br><span class="line">  <span class="meta">@SQLString</span>(value = <span class="number">30</span>,</span><br><span class="line">  constraints = <span class="meta">@Constraints</span>(primaryKey = <span class="keyword">true</span>))</span><br><span class="line">  String handle;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> memberCount;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getHandle</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> handle; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getFirstName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> firstName; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getLastName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> lastName; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> handle; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> age; &#125;</span><br><span class="line">&#125; <span class="comment">///:~</span></span><br></pre></td></tr></table></figure>
+
+<p>Bean对应的表名为MEMBER，其内部有firstName等元素，值为30、50.</p>
+<h2 id="注解处理器"><a href="#注解处理器" class="headerlink" title="注解处理器"></a>注解处理器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TableCreator</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(args.length &lt; <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">"arguments: annotated classes"</span>);</span><br><span class="line">      System.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(String className : args) &#123;</span><br><span class="line">      Class&lt;?&gt; cl = Class.forName(className);</span><br><span class="line">      DBTable dbTable = cl.getAnnotation(DBTable.class);</span><br><span class="line">      <span class="keyword">if</span>(dbTable == <span class="keyword">null</span>) &#123;</span><br><span class="line">        System.out.println(</span><br><span class="line">          <span class="string">"No DBTable annotations in class "</span> + className);</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      String tableName = dbTable.name();</span><br><span class="line">      <span class="comment">// If the name is empty, use the Class name:</span></span><br><span class="line">      <span class="keyword">if</span>(tableName.length() &lt; <span class="number">1</span>)</span><br><span class="line">        tableName = cl.getName().toUpperCase();</span><br><span class="line">      List&lt;String&gt; columnDefs = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">      <span class="keyword">for</span>(Field field : cl.getDeclaredFields()) &#123;</span><br><span class="line">        String columnName = <span class="keyword">null</span>;</span><br><span class="line">        Annotation[] anns = field.getDeclaredAnnotations();</span><br><span class="line">        <span class="keyword">if</span>(anns.length &lt; <span class="number">1</span>)</span><br><span class="line">          <span class="keyword">continue</span>; <span class="comment">// Not a db table column</span></span><br><span class="line">        <span class="keyword">if</span>(anns[<span class="number">0</span>] <span class="keyword">instanceof</span> SQLInteger) &#123;</span><br><span class="line">          SQLInteger sInt = (SQLInteger) anns[<span class="number">0</span>];</span><br><span class="line">          <span class="comment">// Use field name if name not specified</span></span><br><span class="line">          <span class="keyword">if</span>(sInt.name().length() &lt; <span class="number">1</span>)</span><br><span class="line">            columnName = field.getName().toUpperCase();</span><br><span class="line">          <span class="keyword">else</span></span><br><span class="line">            columnName = sInt.name();</span><br><span class="line">          columnDefs.add(columnName + <span class="string">" INT"</span> +</span><br><span class="line">            getConstraints(sInt.constraints()));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(anns[<span class="number">0</span>] <span class="keyword">instanceof</span> SQLString) &#123;</span><br><span class="line">          SQLString sString = (SQLString) anns[<span class="number">0</span>];</span><br><span class="line">          <span class="comment">// Use field name if name not specified.</span></span><br><span class="line">          <span class="keyword">if</span>(sString.name().length() &lt; <span class="number">1</span>)</span><br><span class="line">            columnName = field.getName().toUpperCase();</span><br><span class="line">          <span class="keyword">else</span></span><br><span class="line">            columnName = sString.name();</span><br><span class="line">          columnDefs.add(columnName + <span class="string">" VARCHAR("</span> +</span><br><span class="line">            sString.value() + <span class="string">")"</span> +</span><br><span class="line">            getConstraints(sString.constraints()));</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder createCommand = <span class="keyword">new</span> StringBuilder(</span><br><span class="line">          <span class="string">"CREATE TABLE "</span> + tableName + <span class="string">"("</span>);</span><br><span class="line">        <span class="keyword">for</span>(String columnDef : columnDefs)</span><br><span class="line">          createCommand.append(<span class="string">"\n    "</span> + columnDef + <span class="string">","</span>);</span><br><span class="line">        <span class="comment">// Remove trailing comma</span></span><br><span class="line">        String tableCreate = createCommand.substring(</span><br><span class="line">          <span class="number">0</span>, createCommand.length() - <span class="number">1</span>) + <span class="string">");"</span>;</span><br><span class="line">        System.out.println(<span class="string">"Table Creation SQL for "</span> +</span><br><span class="line">          className + <span class="string">" is :\n"</span> + tableCreate);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getConstraints</span><span class="params">(Constraints con)</span> </span>&#123;</span><br><span class="line">    String constraints = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">if</span>(!con.allowNull())</span><br><span class="line">      constraints += <span class="string">" NOT NULL"</span>;</span><br><span class="line">    <span class="keyword">if</span>(con.primaryKey())</span><br><span class="line">      constraints += <span class="string">" PRIMARY KEY"</span>;</span><br><span class="line">    <span class="keyword">if</span>(con.unique())</span><br><span class="line">      constraints += <span class="string">" UNIQUE"</span>;</span><br><span class="line">    <span class="keyword">return</span> constraints;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Output:</span></span><br><span class="line"><span class="comment">Table Creation SQL for annotations.database.Member is :</span></span><br><span class="line"><span class="comment">CREATE TABLE MEMBER(</span></span><br><span class="line"><span class="comment">    FIRSTNAME VARCHAR(30));</span></span><br><span class="line"><span class="comment">Table Creation SQL for annotations.database.Member is :</span></span><br><span class="line"><span class="comment">CREATE TABLE MEMBER(</span></span><br><span class="line"><span class="comment">    FIRSTNAME VARCHAR(30),</span></span><br><span class="line"><span class="comment">    LASTNAME VARCHAR(50));</span></span><br><span class="line"><span class="comment">Table Creation SQL for annotations.database.Member is :</span></span><br><span class="line"><span class="comment">CREATE TABLE MEMBER(</span></span><br><span class="line"><span class="comment">    FIRSTNAME VARCHAR(30),</span></span><br><span class="line"><span class="comment">    LASTNAME VARCHAR(50),</span></span><br><span class="line"><span class="comment">    AGE INT);</span></span><br><span class="line"><span class="comment">Table Creation SQL for annotations.database.Member is :</span></span><br><span class="line"><span class="comment">CREATE TABLE MEMBER(</span></span><br><span class="line"><span class="comment">    FIRSTNAME VARCHAR(30),</span></span><br><span class="line"><span class="comment">    LASTNAME VARCHAR(50),</span></span><br><span class="line"><span class="comment">    AGE INT,</span></span><br><span class="line"><span class="comment">    HANDLE VARCHAR(30) PRIMARY KEY);</span></span><br><span class="line"><span class="comment">*/</span><span class="comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+<p>Main方法会处理命令行传入的每个类名，用forName加载每个类，并检查类是否带有@DBTable注解，如果有就将发现的表名保存，并读取所有域。等等</p>
+<h1 id="注解处理器-1"><a href="#注解处理器-1" class="headerlink" title="注解处理器"></a>注解处理器</h1><h1 id="使用apt处理注解"><a href="#使用apt处理注解" class="headerlink" title="使用apt处理注解"></a>使用apt处理注解</h1><h1 id="将观察者模式用于apt"><a href="#将观察者模式用于apt" class="headerlink" title="将观察者模式用于apt"></a>将观察者模式用于apt</h1><h1 id="基于注解的单元测试"><a href="#基于注解的单元测试" class="headerlink" title="基于注解的单元测试"></a>基于注解的单元测试</h1><h1 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/25/Java/base/JavaBase：注解/" title="JavaBase：注解">http://yoursite.com/2019/07/25/Java/base/JavaBase：注解/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaBase/" rel="tag"># JavaBase</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/24/系统架构/grpc：概述/" rel="next" title="grpc：概述">
+                <i class="fa fa-chevron-left"></i> grpc：概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/27/Test/" rel="prev" title="Test">
+                Test <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注解"><span class="nav-number">1.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.2.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类，各个分类是什么"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类，各个分类是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺"><span class="nav-number">1.2.3.</span> <span class="nav-text">优缺</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用（作用）"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要用（作用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.4.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见注解"><span class="nav-number">2.</span> <span class="nav-text">常见注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内置"><span class="nav-number">2.1.</span> <span class="nav-text">Java内置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本语法"><span class="nav-number">3.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义注解"><span class="nav-number">3.1.</span> <span class="nav-text">定义注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元注解"><span class="nav-number">3.1.1.</span> <span class="nav-text">元注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解元素"><span class="nav-number">3.2.</span> <span class="nav-text">注解元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认值限制"><span class="nav-number">3.3.</span> <span class="nav-text">默认值限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套注解"><span class="nav-number">3.4.</span> <span class="nav-text">嵌套注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷方式"><span class="nav-number">3.5.</span> <span class="nav-text">快捷方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写注解处理器"><span class="nav-number">4.</span> <span class="nav-text">编写注解处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成外部文件"><span class="nav-number">5.</span> <span class="nav-text">生成外部文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">5.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解处理器"><span class="nav-number">5.2.</span> <span class="nav-text">注解处理器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注解处理器-1"><span class="nav-number">6.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用apt处理注解"><span class="nav-number">7.</span> <span class="nav-text">使用apt处理注解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将观察者模式用于apt"><span class="nav-number">8.</span> <span class="nav-text">将观察者模式用于apt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于注解的单元测试"><span class="nav-number">9.</span> <span class="nav-text">基于注解的单元测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反省总结"><span class="nav-number">10.</span> <span class="nav-text">反省总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

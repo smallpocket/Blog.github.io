@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="网络应用是计算机网络存在的理由 应用层协议原理研发网络应用的核心是写出能够运行在不同端系统和通过网络彼此通信的程序。因此研发新应用程序时，需要编写将在多台端系统上运行的软件，并且即使你要为网络核心设备写应用程序软件，也不需要写在网络核心设备如路由器上运行的软件。网络核心设备并不在应用层上起作用，只在较低层起作用，特别是网络层及下面层次，这种基本设计也即将应用软件限制在了端系统上。帮助了大量的应用程">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络：应用层">
+<meta property="og:url" content="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="网络应用是计算机网络存在的理由 应用层协议原理研发网络应用的核心是写出能够运行在不同端系统和通过网络彼此通信的程序。因此研发新应用程序时，需要编写将在多台端系统上运行的软件，并且即使你要为网络核心设备写应用程序软件，也不需要写在网络核心设备如路由器上运行的软件。网络核心设备并不在应用层上起作用，只在较低层起作用，特别是网络层及下面层次，这种基本设计也即将应用软件限制在了端系统上。帮助了大量的应用程">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/assets/1563434788420.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/assets/1563441157858.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/assets/1563584689162.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/b54eeb16-0b0e-484c-be62-306f57c40d77.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/03f47940-3843-4b51-9e42-5dcaff44858b.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/be5c2c61-86d2-4dba-a289-b48ea23219de.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/bf16c541-0717-473b-b75d-4115864f4fbf.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/7b3efa99-d306-4982-8cfb-e7153c33aab4.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/ed5522bb-3a60-481c-8654-43e7195a48fe.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/assets/1618288278-57f00bf9444dd_articlex.png">
+<meta property="og:updated_time" content="2019-07-21T03:50:31.902Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络：应用层">
+<meta name="twitter:description" content="网络应用是计算机网络存在的理由 应用层协议原理研发网络应用的核心是写出能够运行在不同端系统和通过网络彼此通信的程序。因此研发新应用程序时，需要编写将在多台端系统上运行的软件，并且即使你要为网络核心设备写应用程序软件，也不需要写在网络核心设备如路由器上运行的软件。网络核心设备并不在应用层上起作用，只在较低层起作用，特别是网络层及下面层次，这种基本设计也即将应用软件限制在了端系统上。帮助了大量的应用程">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/assets/1563434788420.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>计算机网络：应用层 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">计算机网络：应用层
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-21 15:34:42" itemprop="dateCreated datePublished" datetime="2019-04-21T15:34:42+08:00">2019-04-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-21 11:50:31" itemprop="dateModified" datetime="2019-07-21T11:50:31+08:00">2019-07-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/21/计算机网络/计算机网络：应用层/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/04/21/计算机网络/计算机网络：应用层/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>网络应用是计算机网络存在的理由</p>
+<h1 id="应用层协议原理"><a href="#应用层协议原理" class="headerlink" title="应用层协议原理"></a>应用层协议原理</h1><p>研发网络应用的核心是写出能够运行在不同端系统和通过网络彼此通信的程序。因此研发新应用程序时，需要编写将在多台端系统上运行的软件，并且即使你要为网络核心设备写应用程序软件，也不需要写在网络核心设备如路由器上运行的软件。网络核心设备并不在应用层上起作用，只在较低层起作用，特别是网络层及下面层次，这种基本设计也即将应用软件限制在了端系统上。帮助了大量的应用程序研发</p>
+<p>从宏观的角度来看，两个应用仿佛直接通信一样，而对于应用层只需要考虑如何与运输层进行交互即可。</p>
+<p><img src="assets/1563434788420.png" alt="1563434788420"></p>
+<h2 id="网络应用程序体系结构"><a href="#网络应用程序体系结构" class="headerlink" title="网络应用程序体系结构"></a>网络应用程序体系结构</h2><p>从应用程序研发者的角度看，网络体系结构是固定的，并为应用程序提供了特定的服务集合。另一方面，应用程序体系结构由应用程序研发者设计，规定了如何在各种端系统上组织该应用程序，常见的结构有：CS结构与P2P结构</p>
+<p><strong><em>CS结构</em></strong></p>
+<p>CS结构的特征</p>
+<ul>
+<li>有一个总是打开的主机称为服务器，服务于来自许多其他称为客户的主机的请求。例如Web应用程序。</li>
+<li>服务器具有固定的、周知的地址，并且因为该服务器总是打开的，客户总是能够通过向该服务器的IP地址发送分组来与其联系</li>
+</ul>
+<p>对于CS结构，常出现一台单独的服务器主机跟不上它所有客户的请求的情况，为此配备大量主机的数据中心常被用于创建强大的虚拟服务器，如Google搜索引擎。</p>
+<p><strong><em>P2P结构</em></strong></p>
+<p>对位于数据中心的专用服务器有最小的依赖，应用程序在间断连接的主机对之间直接通信，这些主机对被称为<strong>对等方</strong>，对等方并不为服务提供商所有，而是用户控制的PC所有，大多数对等方驻留在家庭、大学等，其不必通过专门的服务器。常见的有文件共享、因特网电话等。</p>
+<p>P2P结构存在<strong>自扩展性</strong>，在一个P2P文件共享应用中，尽管每个对等方都由于请求文件产生工作量，但每个对等方通过向其他对等方分发文件也为系统增加服务能力。P2P结构不需要庞大的服务器设施与服务器带宽，但面临三个主要挑战。</p>
+<ul>
+<li>ISP友好：大多数ISP受限于非对称的带宽应用，因此下载比上传要多得多。P2P结构改变了从服务器到住宅ISP的上传流量，为ISP带来了巨大压力</li>
+<li>安全性：高分布性与开放性</li>
+<li>激励：说服用户自愿向应用提供带宽、存储和计算资源</li>
+</ul>
+<h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><p><strong><em>客户与服务器进程</em></strong></p>
+<p>网络应用程序由成对的进程组成，这些进程通过网络相互发送报文，其中一个请求数据的进程为客户，另一个回应请求的进程为服务器。而在P2P的应用中，则一个进程既可以是客户又是服务器，因为它既可以上传数据也可以请求数据。</p>
+<blockquote>
+<p>在给定的一对进程之间的通信会话场景中，发起通信（即在会话开始时发起与其他进程的连续）的进程被标识为客户，在会话开始时等待联系的进程是服务器</p>
+</blockquote>
+<p><strong><em>进程与计算机网络之间的接口</em></strong></p>
+<p>多数应用程序是由通信进程对组成的，每对中的两个进程互相发送报文。从一个进程向另一个进程发送的报文必须通过下面的网络。</p>
+<p>进程通过一个称为<strong>套接字</strong>的软件接口向网络发送报文和从网络接收报文。套接字类似于房子的门，而进程就是房子，通过套接字走出门外到另一个进程。</p>
+<p><img src="assets/1563441157858.png" alt="1563441157858"></p>
+<p>套接字是同一台主机内应用层与运输层之间的接口，由于该套接字是建立网络应用程序的可编程接口，因此套接字也被称为应用程序与网络间的应用程序编程接口（API），应用程序开发者可以控制套接字在应用层端的一切， 但对该套接字在运输层端几乎没有控制权。对于运输层的控制权有</p>
+<ul>
+<li>选择运输层协议</li>
+<li>设定几个运输层参数，如最大缓存和最大报文段长度。</li>
+</ul>
+<h2 id="进程寻址"><a href="#进程寻址" class="headerlink" title="进程寻址"></a>进程寻址</h2><p>为了向特定目的地发送邮件，目的地需要一个地址，在一台主机上的进程为了向另一台主机上运行的进程发送分组，接收进程需要一个地址。为了标识接收进程需要两种信息</p>
+<ul>
+<li>主机的地址。即IP地址，是一个32比特的量且能够唯一标识主机</li>
+<li>定义在目的主机中的接收进程的标识符。即接收套接字，一般是指端口号</li>
+</ul>
+<h2 id="可供应用程序使用的运输服务"><a href="#可供应用程序使用的运输服务" class="headerlink" title="可供应用程序使用的运输服务"></a>可供应用程序使用的运输服务</h2><p>包括因特网在内的很多网络提供了不止一种的运输层协议，当开发一个应用时，必须选择一个可用的运输层协议。最可能的方式是研究这些可用的运输层协议所提供的服务，选择一个最能为你的应用需求提供恰当服务的协议。</p>
+<p>如何界定一个运输层协议能够为调用它的应用程序提供什么样的服务呢，大体从四个角度分类：<strong>可靠数据传输</strong>、<strong>吞吐量</strong>、<strong>定时</strong>、<strong>安全性</strong></p>
+<p><strong><em>可靠数据传输</em></strong></p>
+<p>分组在计算机网络中可能丢失。例如分组使得路由器中的缓存溢出，分组中的某些比特损坏后可能丢弃。而数据丢失可能会造成很严重的后果，因此为了支持一些对数据要求十分严格的应用，就需要保证确保数据交付服务，即<strong>可靠数据传输</strong>。</p>
+<p>当一个运输协议能够提供这种服务时，发送进程只要将其数据传输进套接字，就可以完全相信该数据将能够无差错到达接收进程。而对于音频等应用，它们是容忍丢失的应用，即使音频等出现小干扰，也并不是十分关键</p>
+<p><strong><em>吞吐量</em></strong></p>
+<p>在沿着一条网络路径上的两个进程间的通信会话场景中，可用吞吐量即发送进程能够向接收进程交付比特的速率。由于其他会话将共享沿着该网络路径的带宽，并且这些会话将到达和离开，因此可用吞吐量也会随时间波动。当一种服务能够以某种特定速率提供确保的可用吞吐量，即应用程序能够请求r/s的稳定速率，并且运输协议确保可用吞吐量至少为r/s，这样的<strong>确保吞吐量</strong>的协议将很有作用</p>
+<p>例如电话需要对语音以32kbps速率进行编码，那么他必须以这个速率向网络发送数据。具有吞吐量要求的应用称为<strong>带宽敏感的应用</strong>。<strong>弹性应用</strong>能够根据请求或多或少地利用吞吐量，例如文件传输应用、web传输应用等。</p>
+<p><strong><em>定时</em></strong></p>
+<p>运输层协议也能提供定时保证。如发送方注入进套接字中的每个比特到达接收方的套接字不迟于100ms，这种服务对于交互式的应用程序有吸引力。<strong>即实时应用</strong></p>
+<p><strong><em>安全性</em></strong></p>
+<p>如在发送主机中，运输协议能够加密由发送进程传输的所有数据，接收主机中，运输协议能够在将数据交付前解密数据，并且在进程间提供机密性，以及数据完整性和端口鉴别等。</p>
+<h2 id="因特网提供的运输服务"><a href="#因特网提供的运输服务" class="headerlink" title="因特网提供的运输服务"></a>因特网提供的运输服务</h2><p>因特网为应用层协议提供两个运输层协议，即TCP与UDP。而某些应用程序对运输层协议的要求是：</p>
+<p><img src="assets/1563584689162.png" alt="1563584689162"></p>
+<p><strong><em>TCP服务</em></strong></p>
+<p>TCP服务模型包括面向连接服务于可靠数据传输服务</p>
+<ul>
+<li>面向连接服务：<ul>
+<li>在应用层数据报文流动前，TCP让客户和服务器互相交换运输层控制信息，这个握手过程提示客户和服务器为大量分组的到来做好准备。</li>
+<li>在握手阶段，一个TCP连接就在两个进程的套接字间建立了，这条连接是全双工的，即双方进程可以在此连接上同时进行报文收发。</li>
+<li>当结束发送时，必须拆除连接</li>
+</ul>
+</li>
+<li>可靠的数据传输服务<ul>
+<li>通信进程能够依靠TCP无差错、按适当顺序交付所有发送的数据。</li>
+</ul>
+</li>
+</ul>
+<p>TCP协议提供拥塞控制功能，虽然不能为通信进程提供好处，但是为因特网整体带来好处。</p>
+<p><strong><em>UDP服务</em></strong></p>
+<p>UDP是一种不提供不必要服务的轻量级运输协议，它仅仅提供最小服务，是无连接的，即无需握手。并且UDP提供一种不可靠数据传输服务。UDP不包含拥塞控制。</p>
+<p><strong><em>因特网运输协议不提供的服务</em></strong></p>
+<p>不提供定时与吞吐量的保证，而可以使用SSL（应用层）为TCP提供安全性，TCP提供可靠传输</p>
+<h2 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h2><p>应用层协议定义了运行在不同端系统上的应用程序进程如何相互传递报文，应用层协议定义了</p>
+<ul>
+<li>交换的报文类型，例如请求报文和响应报文</li>
+<li>各自报文类型的语法，如报文中的各个字段及这些字段是如何描述的</li>
+<li>字段的语义，即这些字段中包含的信息的含义</li>
+<li>一个进程何时以及如何发送报文，对报文进行响应的规则</li>
+</ul>
+<h1 id="Web和HTTP"><a href="#Web和HTTP" class="headerlink" title="Web和HTTP"></a>Web和HTTP</h1><h2 id="HTTP概况"><a href="#HTTP概况" class="headerlink" title="HTTP概况"></a>HTTP概况</h2><p>Web的应用层协议是超文本传输协议（HTTP），是Web核心。在RFC文档中定义HTTP由两个程序实现，一个客户端和一个服务器，运行在不同的端系统中，通过交换报文进行会话，HTTP定义了报文的结构以及客户和服务器进行报文交换的方式。</p>
+<p><strong><em>Web术语</em></strong></p>
+<p>Web页面是由对象组成的，一个对象只是一个文件，如HTML文件、一个图形等，它们可以通过一个URL地址寻址，多数Web页面包含一个HTML基本文件以及几个引用对象。HTML基本文件通过对象的URL地址引用页面中的其他对象，每个URL地址由两部分组成：存放对象的服务器主机名与对象的路径名。</p>
+<p>Web浏览器实现了HTTP的客户端，Web服务器实现了HTTP的服务器端，用于存储Web对象，每个对象由URL寻址。</p>
+<p><strong><em>HTTP</em></strong></p>
+<p>HTTP定义了Web客户向Web服务器请求Web页面的方式，以及服务器向客户传送Web页面的方式。HTTP使用TCP作为运输层层协议。服务器向客户发送被请求的文件，而不存储任何关于该客户的状态信息，假如某个特定的客户在短短几秒内两次请求同一个对象，服务器依然会重新发送该对象。因此HTTP是一个<strong>无状态协议</strong></p>
+<h3 id="非持续连接与持续连接"><a href="#非持续连接与持续连接" class="headerlink" title="非持续连接与持续连接"></a>非持续连接与持续连接</h3><p>在许多因特网应用程序中，客户和服务器在一个相当长的时间范围内通信，客户发出一系列请求并且服务器对每个请求进行响应，这一系列请求可以以规则的间隔周期性地或者间断性地一个接一个发出。当这种客户-服务器交互是由TCP进行的，则应用程序研制者就需要考虑每个请求是由一个单独的TCP连接发送还是所有请求及响应由相同的TCP发送。前一种为非持续连接，后一种为持续连接</p>
+<p><strong><em>非持续连接</em></strong></p>
+<p><strong><em>持续连接</em></strong></p>
+<h2 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h2><h1 id="套接字编程"><a href="#套接字编程" class="headerlink" title="套接字编程"></a>套接字编程</h1><p>探讨网络应用程序是如何实际编写的，典型的网络应用是由一对程序组成的，即客户端与服务端。他们位于不同的端系统中，当运行这两个程序时，创建一个客户进程与服务器进程，同时它们通过从套接字读出和写入数据彼此进行通信。</p>
+<p>网络应用程序有两种，一类是实现在协议标准（如RFC标准文档）中定义的操作，又称为开放的应用程序。另一类是专用的网络应用程序，应用层协议没有公开，其他的开发者无法开发出与该应用程序交互的代码。</p>
+<h2 id="UDP套接字编程"><a href="#UDP套接字编程" class="headerlink" title="UDP套接字编程"></a>UDP套接字编程</h2><h2 id="TCP套接字编程"><a href="#TCP套接字编程" class="headerlink" title="TCP套接字编程"></a>TCP套接字编程</h2><h1 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h1><h2 id="域名系统"><a href="#域名系统" class="headerlink" title="域名系统"></a>域名系统</h2><p>DNS 是一个分布式数据库，提供了主机名和 IP 地址之间相互转换的服务。这里的分布式数据库是指，每个站点只保留它自己的那部分数据。</p>
+<p>域名具有层次结构，从上到下依次为：根域名、顶级域名、二级域名。</p>
+<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/b54eeb16-0b0e-484c-be62-306f57c40d77.jpg" alt="img"></p>
+<p>DNS 可以使用 UDP 或者 TCP 进行传输，使用的端口号都为 53。大多数情况下 DNS 使用 UDP 进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传来保证可靠性。在两种情况下会使用 TCP 进行传输：</p>
+<ul>
+<li>如果返回的响应超过的 512 字节（UDP 最大只支持 512 字节的数据）。</li>
+<li>区域传送（区域传送是主域名服务器向辅助域名服务器传送变化的那部分数据）。</li>
+</ul>
+<h3 id="DNS优化"><a href="#DNS优化" class="headerlink" title="DNS优化"></a>DNS优化</h3><p><strong>DNS缓存</strong></p>
+<p>DNS存在着多级缓存，从离浏览器的距离排序的话，有以下几种: 浏览器缓存，系统缓存，路由器缓存，IPS服务器缓存，根域名服务器缓存，顶级域名服务器缓存，主域名服务器缓存。</p>
+<p><strong>DNS负载均衡</strong></p>
+<p>不知道大家有没有思考过一个问题: DNS返回的IP地址是否每次都一样？如果每次都一样是否说明你请求的资源都位于同一台机器上面，那么这台机器需要多高的性能和储存才能满足亿万请求呢？</p>
+<p>其实真实的互联网世界背后存在成千上百台服务器，大型的网站甚至更多。但是在用户的眼中，它需要的只是处理他的请求，哪台机器处理请求并不重要。DNS可以返回一个合适的机器的IP给用户，例如可以根据每台机器的负载量，该机器离用户地理位置的距离等等，这种过程就是DNS负载均衡，又叫做DNS重定向。大家耳熟能详的CDN(Content Delivery Network)就是利用DNS的重定向技术，DNS服务器会返回一个跟用户最接近的点的IP地址给用户，CDN节点的服务器负责响应用户的请求，提供所需的内容。</p>
+<h2 id="文件传送协议"><a href="#文件传送协议" class="headerlink" title="文件传送协议"></a>文件传送协议</h2><p>FTP 使用 TCP 进行连接，它需要两个连接来传送一个文件：</p>
+<ul>
+<li>控制连接：服务器打开端口号 21 等待客户端的连接，客户端主动建立连接后，使用这个连接将客户端的命令传送给服务器，并传回服务器的应答。</li>
+<li>数据连接：用来传送一个文件数据。</li>
+</ul>
+<p>根据数据连接是否是服务器端主动建立，FTP 有主动和被动两种模式：</p>
+<ul>
+<li>主动模式：服务器端主动建立数据连接，其中服务器端的端口号为 20，客户端的端口号随机，但是必须大于 1024，因为 0~1023 是熟知端口号。</li>
+</ul>
+<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/03f47940-3843-4b51-9e42-5dcaff44858b.jpg" alt="img"></p>
+<ul>
+<li>被动模式：客户端主动建立数据连接，其中客户端的端口号由客户端自己指定，服务器端的端口号随机。</li>
+</ul>
+<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/be5c2c61-86d2-4dba-a289-b48ea23219de.jpg" alt="img"></p>
+<p>主动模式要求客户端开放端口号给服务器端，需要去配置客户端的防火墙。被动模式只需要服务器端开放端口号即可，无需客户端配置防火墙。但是被动模式会导致服务器端的安全性减弱，因为开放了过多的端口号。</p>
+<h2 id="动态主机配置协议"><a href="#动态主机配置协议" class="headerlink" title="动态主机配置协议"></a>动态主机配置协议</h2><p>DHCP (Dynamic Host Configuration Protocol) 提供了即插即用的连网方式，用户不再需要去手动配置 IP 地址等信息。</p>
+<p>DHCP 配置的内容不仅是 IP 地址，还包括子网掩码、网关 IP 地址。</p>
+<p>DHCP 工作过程如下：</p>
+<ol>
+<li>客户端发送 Discover 报文，该报文的目的地址为 255.255.255.255:67，源地址为 0.0.0.0:68，被放入 UDP 中，该报文被广播到同一个子网的所有主机上。如果客户端和 DHCP 服务器不在同一个子网，就需要使用中继代理。</li>
+<li>DHCP 服务器收到 Discover 报文之后，发送 Offer 报文给客户端，该报文包含了客户端所需要的信息。因为客户端可能收到多个 DHCP 服务器提供的信息，因此客户端需要进行选择。</li>
+<li>如果客户端选择了某个 DHCP 服务器提供的信息，那么就发送 Request 报文给该 DHCP 服务器。</li>
+<li>DHCP 服务器发送 Ack 报文，表示客户端此时可以使用提供给它的信息。</li>
+</ol>
+<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/bf16c541-0717-473b-b75d-4115864f4fbf.jpg" alt="img"></p>
+<h2 id="远程登录协议"><a href="#远程登录协议" class="headerlink" title="远程登录协议"></a>远程登录协议</h2><p>TELNET 用于登录到远程主机上，并且远程主机上的输出也会返回。</p>
+<p>TELNET 可以适应许多计算机和操作系统的差异，例如不同操作系统系统的换行符定义。</p>
+<h2 id="电子邮件协议"><a href="#电子邮件协议" class="headerlink" title="电子邮件协议"></a>电子邮件协议</h2><p>一个电子邮件系统由三部分组成：用户代理、邮件服务器以及邮件协议。</p>
+<p>邮件协议包含发送协议和读取协议，发送协议常用 SMTP，读取协议常用 POP3 和 IMAP。</p>
+<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/7b3efa99-d306-4982-8cfb-e7153c33aab4.png" alt="img"></p>
+<h3 id="1-SMTP"><a href="#1-SMTP" class="headerlink" title="1. SMTP"></a>1. SMTP</h3><p>SMTP 只能发送 ASCII 码，而互联网邮件扩充 MIME 可以发送二进制文件。MIME 并没有改动或者取代 SMTP，而是增加邮件主体的结构，定义了非 ASCII 码的编码规则。</p>
+<p><img src="../%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/assets/ed5522bb-3a60-481c-8654-43e7195a48fe.png" alt="img"></p>
+<h3 id="2-POP3"><a href="#2-POP3" class="headerlink" title="2. POP3"></a>2. POP3</h3><p>POP3 的特点是只要用户从服务器上读取了邮件，就把该邮件删除。</p>
+<h3 id="3-IMAP"><a href="#3-IMAP" class="headerlink" title="3. IMAP"></a>3. IMAP</h3><p>IMAP 协议中客户端和服务器上的邮件保持同步，如果不手动删除邮件，那么服务器上的邮件也不会被删除。IMAP 这种做法可以让用户随时随地去访问服务器上的邮件。</p>
+<h2 id="常用端口"><a href="#常用端口" class="headerlink" title="常用端口"></a>常用端口</h2><table>
+<thead>
+<tr>
+<th>应用</th>
+<th>应用层协议</th>
+<th>端口号</th>
+<th>传输层协议</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>域名解析</td>
+<td>DNS</td>
+<td>53</td>
+<td>UDP/TCP</td>
+<td>长度超过 512 字节时使用 TCP</td>
+</tr>
+<tr>
+<td>动态主机配置协议</td>
+<td>DHCP</td>
+<td>67/68</td>
+<td>UDP</td>
+<td></td>
+</tr>
+<tr>
+<td>简单网络管理协议</td>
+<td>SNMP</td>
+<td>161/162</td>
+<td>UDP</td>
+<td></td>
+</tr>
+<tr>
+<td>文件传送协议</td>
+<td>FTP</td>
+<td>20/21</td>
+<td>TCP</td>
+<td>控制连接 21，数据连接 20</td>
+</tr>
+<tr>
+<td>远程终端协议</td>
+<td>TELNET</td>
+<td>23</td>
+<td>TCP</td>
+<td></td>
+</tr>
+<tr>
+<td>超文本传送协议</td>
+<td>HTTP</td>
+<td>80</td>
+<td>TCP</td>
+<td></td>
+</tr>
+<tr>
+<td>简单邮件传送协议</td>
+<td>SMTP</td>
+<td>25</td>
+<td>TCP</td>
+<td></td>
+</tr>
+<tr>
+<td>邮件读取协议</td>
+<td>POP3</td>
+<td>110</td>
+<td>TCP</td>
+<td></td>
+</tr>
+<tr>
+<td>网际报文存取协议</td>
+<td>IMAP</td>
+<td>143</td>
+<td>TCP</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h3 id="从输入网址到获取页面的过程"><a href="#从输入网址到获取页面的过程" class="headerlink" title="从输入网址到获取页面的过程"></a><strong><em>从输入网址到获取页面的过程</em></strong></h3><p><strong>1. DHCP 配置主机信息</strong></p>
+<ul>
+<li>假设主机最开始没有 IP 地址以及其它信息，那么就需要先使用 DHCP 来获取。</li>
+<li>主机生成一个 DHCP 请求报文，并将这个报文放入具有目的端口 67 和源端口 68 的 UDP 报文段中。</li>
+<li>该报文段则被放入在一个具有广播 IP 目的地址(255.255.255.255) 和源 IP 地址（0.0.0.0）的 IP 数据报中。</li>
+<li>该数据报则被放置在 MAC 帧中，该帧具有目的地址，将广播到与交换机连接的所有设备。</li>
+<li>连接在交换机的 DHCP 服务器收到广播帧之后，不断地向上分解得到 IP 数据报、UDP 报文段、DHCP 请求报文，之后生成 DHCP ACK 报文，该报文包含以下信息：IP 地址、DNS 服务器的 IP 地址、默认网关路由器的 IP 地址和子网掩码。该报文被放入 UDP 报文段中，UDP 报文段有被放入 IP 数据报中，最后放入 MAC 帧中。</li>
+<li>该帧的目的地址是请求主机的 MAC 地址，因为交换机具有自学习能力，之前主机发送了广播帧之后就记录了 MAC 地址到其转发接口的交换表项，因此现在交换机就可以直接知道应该向哪个接口发送该帧。</li>
+<li>主机收到该帧后，不断分解得到 DHCP 报文。之后就配置它的 IP 地址、子网掩码和 DNS 服务器的 IP 地址，并在其 IP 转发表中安装默认网关。</li>
+</ul>
+<p><strong>2.ARP 解析 MAC 地址</strong></p>
+<ul>
+<li>主机通过浏览器生成一个 TCP 套接字，套接字向 HTTP 服务器发送 HTTP 请求。为了生成该套接字，主机需要知道网站的域名对应的 IP 地址。</li>
+<li>主机生成一个 DNS 查询报文，该报文具有 53 号端口，因为 DNS 服务器的端口号是 53。</li>
+<li>该 DNS 查询报文被放入目的地址为 DNS 服务器 IP 地址的 IP 数据报中。</li>
+<li>该 IP 数据报被放入一个以太网帧中，该帧将发送到网关路由器。</li>
+<li>DHCP 过程只知道网关路由器的 IP 地址，为了获取网关路由器的 MAC 地址，需要使用 ARP 协议。</li>
+<li>主机生成一个包含目的地址为网关路由器 IP 地址的 ARP 查询报文，将该 ARP 查询报文放入一个具有广播目的地址的以太网帧中，并向交换机发送该以太网帧，交换机将该帧转发给所有的连接设备，包括网关路由器。</li>
+<li>网关路由器接收到该帧后，不断向上分解得到 ARP 报文，发现其中的 IP 地址与其接口的 IP 地址匹配，因此就发送一个 ARP 回答报文，包含了它的 MAC 地址，发回给主机。</li>
+</ul>
+<p><strong>3.DNS 解析域名</strong></p>
+<ul>
+<li>知道了网关路由器的 MAC 地址之后，就可以继续 DNS 的解析过程了。</li>
+<li>网关路由器接收到包含 DNS 查询报文的以太网帧后，抽取出 IP 数据报，并根据转发表决定该 IP 数据报应该转发的路由器。</li>
+<li>因为路由器具有内部网关协议（RIP、OSPF）和外部网关协议（BGP）这两种路由选择协议，因此路由表中已经配置了网关路由器到达 DNS 服务器的路由表项。</li>
+<li>到达 DNS 服务器之后，DNS 服务器抽取出 DNS 查询报文，并在 DNS 数据库中查找待解析的域名。</li>
+<li>找到 DNS 记录之后，发送 DNS 回答报文，将该回答报文放入 UDP 报文段中，然后放入 IP 数据报中，通过路由器反向转发回网关路由器，并经过以太网交换机到达主机。</li>
+</ul>
+<p><strong>4. HTTP 请求页面</strong></p>
+<ul>
+<li>有了 HTTP 服务器的 IP 地址之后，主机就能够生成 TCP 套接字，该套接字将用于向 Web 服务器发送 HTTP GET 报文。</li>
+<li>在生成 TCP 套接字之前，必须先与 HTTP 服务器进行三次握手来建立连接。生成一个具有目的端口 80 的 TCP SYN 报文段，并向 HTTP 服务器发送该报文段。</li>
+<li>HTTP 服务器收到该报文段之后，生成 TCP SYN ACK 报文段，发回给主机。</li>
+<li>连接建立之后，浏览器生成 HTTP GET 报文，并交付给 HTTP 服务器。</li>
+<li>HTTP 服务器从 TCP 套接字读取 HTTP GET 报文，生成一个 HTTP 响应报文，将 Web 页面内容放入报文主体中，发回给主机。</li>
+<li>浏览器收到 HTTP 响应报文后，抽取出 Web 页面内容，之后进行渲染，显示 Web 页面。</li>
+</ul>
+<p><strong>1.DNS解析</strong></p>
+<ul>
+<li>先从浏览器缓存里找IP,因为浏览器会缓存DNS记录一段时间</li>
+<li>从操作系统缓存查找，查找存储在系统运行内存中的缓存。</li>
+<li>如没找到,再从Hosts文件查找是否有该域名和对应IP，看看其中有没有和这个域名对应的规则</li>
+<li>如没找到,再从路由器缓存找，一些路由器有DNS缓存功能</li>
+<li>如没好到,再从ISP DNS缓存查找，互联网服务提供商（如中国电信）也会提供DNS服务</li>
+<li>如果都没找到,浏览器域名服务器向根域名服务器(baidu.com)查找域名对应IP,还没找到就把请求转发到下一级,直到找到IP</li>
+<li><strong>dns劫持</strong>:黑客攻击根域名服务器的节点,发生在上面第四步,从DNS缓存数据库里找时被恶意改为其他的网址,所以请求到的是其他网址.</li>
+<li>最后，本地DNS服务器向域名的解析服务器发出请求，这时就能收到一个域名和IP地址对应关系，本地DNS服务器不仅要把IP地址返回给用户电脑，还要把这个对应关系保存在缓存中，以备下次别的用户查询时，可以直接返回结果，加快网络访问。</li>
+<li><img src="assets/1618288278-57f00bf9444dd_articlex.png" alt="DNS"></li>
+</ul>
+<p><strong>2.TCP连接</strong></p>
+<p><strong>3.发送HTTP请求</strong></p>
+<p><strong>4.服务器处理请求并返回HTTP报文</strong></p>
+<ul>
+<li>后端从在固定的端口接收到TCP报文开始，它会对TCP连接进行处理，对HTTP协议进行解析，并按照报文格式进一步封装成HTTP Request对象，供上层使用。   </li>
+<li>一些大一点的网站会将你的请求到反向代理服务器中，因为当网站访问量非常大，网站越来越慢，一台服务器已经不够用了。于是将同一个应用部署在多台服务器上，将大量用户的请求分配给多台机器处理。此时，客户端不是直接通过HTTP协议访问某网站应用服务器，而是先请求到Nginx，Nginx再请求应用服务器，然后将结果返回给客户端，这里Nginx的作用是反向代理服务器。同时也带来了一个好处，其中一台服务器万一挂了，只要还有其他服务器正常运行，就不会影响用户使用。</li>
+</ul>
+<p><strong>5.浏览器解析渲染页面</strong></p>
+<p><strong>6.连接结束</strong></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/" title="计算机网络：应用层">http://yoursite.com/2019/04/21/计算机网络/计算机网络：应用层/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/20/Java/框架/Spring：Beans/" rel="next" title="Spring：Beans">
+                <i class="fa fa-chevron-left"></i> Spring：Beans
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/09/数据库/MySQL：数据库原理/" rel="prev" title="MySQL：数据库原理">
+                MySQL：数据库原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#应用层协议原理"><span class="nav-number">1.</span> <span class="nav-text">应用层协议原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络应用程序体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">网络应用程序体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信"><span class="nav-number">1.2.</span> <span class="nav-text">进程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程寻址"><span class="nav-number">1.3.</span> <span class="nav-text">进程寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可供应用程序使用的运输服务"><span class="nav-number">1.4.</span> <span class="nav-text">可供应用程序使用的运输服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#因特网提供的运输服务"><span class="nav-number">1.5.</span> <span class="nav-text">因特网提供的运输服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层协议"><span class="nav-number">1.6.</span> <span class="nav-text">应用层协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web和HTTP"><span class="nav-number">2.</span> <span class="nav-text">Web和HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP概况"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP概况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非持续连接与持续连接"><span class="nav-number">2.1.1.</span> <span class="nav-text">非持续连接与持续连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP报文格式"><span class="nav-number">2.2.</span> <span class="nav-text">HTTP报文格式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#套接字编程"><span class="nav-number">3.</span> <span class="nav-text">套接字编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP套接字编程"><span class="nav-number">3.1.</span> <span class="nav-text">UDP套接字编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP套接字编程"><span class="nav-number">3.2.</span> <span class="nav-text">TCP套接字编程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#协议"><span class="nav-number">4.</span> <span class="nav-text">协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#域名系统"><span class="nav-number">4.1.</span> <span class="nav-text">域名系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS优化"><span class="nav-number">4.1.1.</span> <span class="nav-text">DNS优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件传送协议"><span class="nav-number">4.2.</span> <span class="nav-text">文件传送协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态主机配置协议"><span class="nav-number">4.3.</span> <span class="nav-text">动态主机配置协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程登录协议"><span class="nav-number">4.4.</span> <span class="nav-text">远程登录协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电子邮件协议"><span class="nav-number">4.5.</span> <span class="nav-text">电子邮件协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SMTP"><span class="nav-number">4.5.1.</span> <span class="nav-text">1. SMTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-POP3"><span class="nav-number">4.5.2.</span> <span class="nav-text">2. POP3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-IMAP"><span class="nav-number">4.5.3.</span> <span class="nav-text">3. IMAP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用端口"><span class="nav-number">4.6.</span> <span class="nav-text">常用端口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见问题"><span class="nav-number">5.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从输入网址到获取页面的过程"><span class="nav-number">5.0.1.</span> <span class="nav-text">从输入网址到获取页面的过程</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

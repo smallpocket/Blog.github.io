@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="domain建模示例发布帖子Round-I业务建模在大家的常识中，每个人都有自己的观点，并可以发表自己的观点，在社区中便表现为：发布帖子。那么谁发布帖子呢？ 很明显是帖子作者，于是我们便可以得到如下描述：帖子作者发布帖子。从上述描述中，我们很容易得到如下几个实体及其行为：帖子作者（PostAuthor）、帖子（Post），而PostAuthor拥有‘发布帖子’的业务行为，我们记着：posting(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="领域驱动设计：domain">
+<meta property="og:url" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="domain建模示例发布帖子Round-I业务建模在大家的常识中，每个人都有自己的观点，并可以发表自己的观点，在社区中便表现为：发布帖子。那么谁发布帖子呢？ 很明显是帖子作者，于是我们便可以得到如下描述：帖子作者发布帖子。从上述描述中，我们很容易得到如下几个实体及其行为：帖子作者（PostAuthor）、帖子（Post），而PostAuthor拥有‘发布帖子’的业务行为，我们记着：posting(">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/assets/849051-20170916213800235-1671481319.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/assets/849051-20170917095727297-570959893.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/assets/849051-20170917161428594-1398940496.png">
+<meta property="og:updated_time" content="2019-07-05T01:51:43.898Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="领域驱动设计：domain">
+<meta name="twitter:description" content="domain建模示例发布帖子Round-I业务建模在大家的常识中，每个人都有自己的观点，并可以发表自己的观点，在社区中便表现为：发布帖子。那么谁发布帖子呢？ 很明显是帖子作者，于是我们便可以得到如下描述：帖子作者发布帖子。从上述描述中，我们很容易得到如下几个实体及其行为：帖子作者（PostAuthor）、帖子（Post），而PostAuthor拥有‘发布帖子’的业务行为，我们记着：posting(">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/assets/849051-20170916213800235-1671481319.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>领域驱动设计：domain | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">领域驱动设计：domain
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-05 09:26:22 / Modified: 09:51:43" itemprop="dateCreated datePublished" datetime="2019-07-05T09:26:22+08:00">2019-07-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/05/系统架构/领域驱动设计：domain/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/05/系统架构/领域驱动设计：domain/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="domain建模示例"><a href="#domain建模示例" class="headerlink" title="domain建模示例"></a>domain建模示例</h1><h1 id="发布帖子"><a href="#发布帖子" class="headerlink" title="发布帖子"></a>发布帖子</h1><h2 id="Round-I"><a href="#Round-I" class="headerlink" title="Round-I"></a>Round-I</h2><h3 id="业务建模"><a href="#业务建模" class="headerlink" title="业务建模"></a>业务建模</h3><p>在大家的常识中，每个人都有自己的观点，并可以发表自己的观点，在社区中便表现为：发布帖子。那么谁发布帖子呢？ 很明显是帖子作者，于是我们便可以得到如下描述：<strong>帖子作者发布帖子</strong>。从上述描述中，我们很容易得到如下几个实体及其行为：帖子作者（PostAuthor）、帖子（Post），而PostAuthor拥有‘发布帖子’的业务行为，我们记着：posting()。</p>
+<p>我们再细化现有的模型中的实体。作为实体，必须有一个唯一业务标识，我们为PostAuthor添加一个’作者编号’（authorId），为Post添加一个‘帖子编号’（postId）；PostAuthor可能还存在其他一些属性，我们暂且不管，因为对于我们现在的业务场景无关紧要；再看Post实体，很明显帖子有‘帖子标题’（postTitle）、‘帖子正文’（postContent）、‘帖子发布时间’（postingTime）等等。同时，从业务上要求：帖子发帖时间即为帖子发布动作发生的时间点，帖子的作者是不能为空的，帖子的内容不能为空，帖子的标题可以为空。</p>
+<p>​此外，为了减少垃圾帖对社区的负面影响，对于‘帖子内容’强制要求帖子内容长度必须不少于16个汉字，字母和数字等同于汉字处理。</p>
+<p>总结可以得到‘发布帖子’场景的业务模型描述：</p>
+<ul>
+<li><strong>帖子作者发布帖子，帖子标题可以为空，帖子内容不能为空，且不少于16个汉字。</strong> </li>
+</ul>
+<p>鉴于PostAuthor和Post关系紧密，我们姑且将其和Post放到同一个模块，但是Post看上去并不是PostAuthor的根实体，有点怪怪的感觉，暂且不追究。</p>
+<h3 id="业务模型"><a href="#业务模型" class="headerlink" title="业务模型"></a>业务模型</h3><p>综上，于是我们得到如下的业务模型：</p>
+<p>　　<img src="assets/849051-20170916213800235-1671481319.png" alt="img"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="Post-java"><a href="#Post-java" class="headerlink" title="Post.java"></a>Post.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 帖子实体</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> DAOQIDELV</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@CreateDate</span> 2017年9月16日</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Post</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 帖子id</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *帖子作者</span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> authorId;    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子标题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子源内容</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String sourceContent;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发帖时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Timestamp postingTime;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Post</span><span class="params">(<span class="keyword">long</span> authorId, String title, String sourceContent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setAuthorId(authorId);</span><br><span class="line">        <span class="keyword">this</span>.setTitle(title);</span><br><span class="line">        <span class="keyword">this</span>.setSourceContent(sourceContent);</span><br><span class="line">        <span class="keyword">this</span>.postingTime = <span class="keyword">new</span> Timestamp(System.currentTimeMillis());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> authorId the authorId to set</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAuthorId</span><span class="params">(<span class="keyword">long</span> authorId)</span> </span>&#123;</span><br><span class="line">        Assert.isTrue(authorId &gt; <span class="number">0</span>, <span class="string">"Post's authorId must greater than ZERO."</span>);</span><br><span class="line">        <span class="keyword">this</span>.authorId = authorId;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sourceContent the sourceContent to set</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSourceContent</span><span class="params">(String sourceContent)</span> </span>&#123;</span><br><span class="line">        Assert.isTrue(!StringUtils.isEmpty(sourceContent), <span class="string">"Post's sourceContent must NOT be empty."</span>);</span><br><span class="line">        <span class="keyword">this</span>.sourceContent = sourceContent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//ignore some setter/getter</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="PostAuthor-java"><a href="#PostAuthor-java" class="headerlink" title="PostAuthor.java"></a>PostAuthor.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 帖子作者</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> DAOQIDELV</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@CreateDate</span> 2017年9月16日</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostAuthor</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PostAuthor</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发布帖子</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> title</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sourceContent</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Post 发布得到的帖子</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Post <span class="title">posting</span><span class="params">(String title, String sourceContent)</span> <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sourceContent.length() &lt; <span class="number">16</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(ExceptionCode.POST_SOURCE_CONTENT_AT_LEAST_SIXTEEN_WORDS);</span><br><span class="line">        &#125;</span><br><span class="line">        Post post = <span class="keyword">new</span> Post(<span class="keyword">this</span>.id, title, sourceContent);</span><br><span class="line">        <span class="keyword">return</span> post;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">       <span class="comment">//ignore some setter/getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><p>　　在代码示例中，我们为Post实体提供了一个私有的构造函数，其中只完成了postingTime的初始化，我们的目的是为了限制创建一个空内容的帖子，因为这在实际的业务场景中是不存在的，因此模型也不应当提供这样的构造函数；</p>
+<p>　　另外，还提供了一个包含（authorId,title,sourceContent）的public构造函数，从当前的情形来看是够用了，如果后续有业务场景需要更多的属性传入构造函数，则我们可以重载实现，但是通常来讲，构造函数的入参最好不要超过五个，否则不利于代码阅读，当然特殊业务场景下除外；</p>
+<p>　　最后，在构造函数中，我们并没有直接使用“this.title = title;”的写法，而是使用了这种写法：”this.setTitle(title);”，好处在于我们<strong>希望Post实体成为一个“自治的实体”，简单来讲就是可以自我检查 / 自我维护的实体</strong>，使用setter的方式，让我们可以再setter方法中加入一些规则判定，使得外部传入的参数满足一定的规格，具体可以参考下一节中的解释。这种处理方式被Martin Fowler称之为“自封装性”，参考了《实现领域驱动设计》P184。</p>
+<h4 id="setter方法"><a href="#setter方法" class="headerlink" title="setter方法"></a>setter方法</h4><p>　　接上一节中提到的“自治实体”，我们希望setter方法提供一种校验机制，确保外部传入的参数满足实体的一定规格，也就是具体的业务逻辑。比如说Post实体中的setSourceContent(String sourceContent)方法，业务规则要求：帖子的正文不能为空，因此在Post.setSourceContent(sourceContent)中加入了Assert断言，确保这一规则被强制实现。</p>
+<p>　　参考自Eric Evans的《领域驱动设计》P154。</p>
+<h4 id="posting方法"><a href="#posting方法" class="headerlink" title="posting方法"></a>posting方法</h4><p>　　PostAuthor实体现在有了一个业务方法：posting()，它接受具体帖子信息属性，最后返回一个Post实体，很明显PostAuthor现在作为一个Post实体的<strong>factory</strong>存在。</p>
+<p>　　posting方法对外声明会throw出一个BusinessException异常，BusinessException异常是自定义的业务异常大类，该异常会统一交由框架统一异常处理，这样确保domain领域的干净。posting方法中判定“帖子内容小于16个字”时，便会向上层抛出异常码为2000的BusinessException，</p>
+<h2 id="Round-II"><a href="#Round-II" class="headerlink" title="Round-II"></a>Round-II</h2><h3 id="业务建模-1"><a href="#业务建模-1" class="headerlink" title="业务建模"></a>业务建模</h3><p>　　我们继续往下探寻业务实体。在讨论中，我们发现发布帖子时，通常需要选择关联哪些话题，且一次性可以关联多个话题，最多可以关联五个话题，且话题不能重复加入。我们尝试用一句话将上述模型表述出来：</p>
+<ul>
+<li><strong>帖子可以加入不多于五个话题，且话题不能重复加入。</strong></li>
+</ul>
+<p>　　这样就引入了一个新的实体：话题（Topic），话题持有唯一业务标识，话题应当拥有这些常见的属性：话题名称（title）、话题简介（description）、话题创建者（authorId）、话题创建时间（creatingTime）等；其中，话题名称、话题内容和话题创建者均不能为空。由于这些属性和‘创建话题’的case相关，在这里我们不做过多讨论。</p>
+<p>　　那么Post和Topic的关系是什么呢？肯定不是“聚合”的关系，因为即使Topic消失了，但是Post还在；也不会是“组合”关系，Topic并不是由许多的Post组合而成的；正如业务建模中的描述：Post关联多个话题，所以Post和Topic之间是1：N的关联关系。那么我们是否应当让Post持有多个Topic呢？显然太重了，Topic是一个实体，实体的状态/属性值是会发生改变的，Topic状态发生改变就会引起Post实体内容改变，因此，我们可以有如下两种处理方式：</p>
+<ol>
+<li>引入一个值对象TopicId，让Post关联多个TopicId，这个值对象只有一个属性值：topicId，表征Topic的唯一标识值；这是《实现领域驱动设计》中的实现方式；</li>
+<li>引入一个值对象TopicPost，表征“话题相关的帖子”，这个值对象可以有更多的属性值。</li>
+</ol>
+<p>　　对比下来，方案2扩展性会更好，且表达能力更强，同时TopicPost这个值对象还可以应用到Topic实体中，在Topic相关的业务case中，会有找到一个Topic下关联的帖子列表的场景，这时候会发现TopicPost便大有用处了。</p>
+<p>　　那么TopicPost和Post之间还是关联关系吗？显然不是。一个Post被删除，那么与其相关的TopicPost值对象也就不复存在了，因此Post持有多个TopicPost，他们是组合关系。</p>
+<p>　　那么TopicPost是属于Topic模块（module）还是属于Post模块，很简单，它以“Topic”打头，因此我们将TopicPost放入Topic模块中。</p>
+<p>　　再来看业务行为，我们将“帖子加入话题”这个业务行为命名为joinTopics(String topics)，字面上‘帖子’是主语，显然joinTopics是Post的业务方法，在这个业务方法中，我们实现业务规则：帖子可以加入的话题数不能多于五个。</p>
+<p>　　上述关于TopicPost值对象引入的讨论非常典型，在两个实体存在关联关系时，可以参考建模。</p>
+<h3 id="业务模型-1"><a href="#业务模型-1" class="headerlink" title="业务模型"></a>业务模型</h3><p>　　综合上面的讨论，我们得到最新的业务模型如下：</p>
+<p><img src="assets/849051-20170917095727297-570959893.png" alt="img"></p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><p>PostAuthor.java没有变化，更改Post.java，新增Topic.java和TopicPost.java：</p>
+<h4 id="Post-java-new"><a href="#Post-java-new" class="headerlink" title="Post.java(new)"></a>Post.java(new)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Post</span> </span>&#123;</span><br><span class="line">      ......  </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将帖子关联话题 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> topicIds 话题集合</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">joinTopics</span><span class="params">(String topicIds)</span> <span class="keyword">throws</span> BusinessException</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isEmpty(topicIds)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String[] topicIdArray = topicIds.split(CommonConstants.COMMA);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;topicIdArray.length; i++) &#123;</span><br><span class="line">            TopicPost topicPost = <span class="keyword">new</span> TopicPost(Long.valueOf(topicIdArray[i]), <span class="keyword">this</span>.getId());</span><br><span class="line">            <span class="keyword">this</span>.topics.add(topicPost);</span><br><span class="line">            <span class="keyword">if</span>(topicSize() &gt; MAX_JOINED_TOPICS_NUM) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(ExceptionCode.ONE_POST_MOST_JOIN_INTO_FIVE_TOPICS);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取本帖子加入的话题数，参考jdk collection的api设计</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 本帖子加入的话题数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">topicSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.topics.size();</span><br><span class="line">    &#125;</span><br><span class="line">      ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> DAOQIDELV</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@CreateDate</span> 2017年9月16日</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Topic</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 话题id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 话题标题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 话题描述</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 话题创建时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Timestamp createTime;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 话题下的帖子列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Set&lt;TopicPost&gt; posts;</span><br><span class="line"></span><br><span class="line">        ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="TopicPost"><a href="#TopicPost" class="headerlink" title="TopicPost"></a>TopicPost</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> DAOQIDELV</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@CreateDate</span> 2017年9月16日</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TopicPost</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> postId;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> topicId;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TopicPost</span><span class="params">(<span class="keyword">long</span> topicId, <span class="keyword">long</span> postId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setPostId(postId);</span><br><span class="line">        <span class="keyword">this</span>.setTopicId(topicId);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(anObject <span class="keyword">instanceof</span> TopicPost) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.postId == ((TopicPost)anObject).getPostId()</span><br><span class="line">                    &amp;&amp; <span class="keyword">this</span>.topicId == ((TopicPost)anObject).getTopicId()) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Long.hashCode(<span class="keyword">this</span>.postId+<span class="keyword">this</span>.topicId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="组合关系集合化处理"><a href="#组合关系集合化处理" class="headerlink" title="组合关系集合化处理"></a>组合关系集合化处理</h3><p>　　如前面业务建模分析，Post持有多个TopicPost，他们是组合关系。代码中Post持有一个TopicPost类型的Set，最初这个topics属性没有被初始化，导致在每次用到它的时候都要去判空，代码冗余度高，可读性差，后面参考java集合的api设计，将topics这个Set直接在声明时就完成初始化，后续使用就没有后顾之忧了。这一个模式可以参考Martin Fowler的《重构》P208。</p>
+<p>　　‘帖子加入话题’的场景只涉及到了topics集合的元素添加，所以，这里暂且定义了两个api：joinTopics(), topicSize()，至于topics的查询、删除操作在后续的建模场景中会逐一涉及到。</p>
+<h3 id="改写TopicPost的equals和hashCode方法"><a href="#改写TopicPost的equals和hashCode方法" class="headerlink" title="改写TopicPost的equals和hashCode方法"></a>改写TopicPost的equals和hashCode方法</h3><p>　　一个帖子不能重复加入某个话题，因此我们使用了HashSet这种数据结构，HashSet中的元素是不能重复的，所以在向HashSet中add元素时，HashSet会判定元素是否相等（== || equals），默认的Object方法equals实现既是比较两个对象是否相等（==），这会带来一个问题：两个在业务上表征同一个帖子加入同一个话题的TopicPost对象会被认为是不相等的两个对象，因此我们需要重写TopicPost的equals和hashCode方法，使之和业务模型保持一致。</p>
+<p>　　equals()的实现参考了java.lang.String的写法；hashCode()的重写最佳实践参考了《重构》P185：读取equals()使用的所有字段的hash码，然后对他们进行按位异或操作。hashCode()的目标是保证在对该对象进行集合类api操作时，能保证较好的散列性，因此只要能达到这个目标就行，鉴于TopicPost中equals方法是用到的topicId和postId均为Long型，也可以简单地这么实现：Long.hashCode(this.postId + this.topicId)。</p>
+<h2 id="Round-III"><a href="#Round-III" class="headerlink" title="Round-III"></a>Round-III</h2><h3 id="业务建模-2"><a href="#业务建模-2" class="headerlink" title="业务建模"></a>业务建模</h3><p>　　为确保社区帖子的质量，以及满足国家法律法规的要求，我们需要对帖子标题和内容进行敏感词、广告语、色情、暴力等内容过滤，这些内容过滤即需要调用第三方服务完成，又需要经过社区系统自己积累的敏感词和广告词过滤，对于帖子标题和帖子正文，只要其中一项被过滤服务发现异常，则该帖子就需要被列入待审核队列，等待运营人员审核完成后才能对外发布。我们尝试使用一句话来描述上述case：</p>
+<ul>
+<li>　　<strong>帖子标题和内容通过内容过滤后方能发布，如果未能通过内容过滤，则需要经过运营审核之后才能发布。</strong></li>
+</ul>
+<p>　　可以看到上面场景中出现了一个新的短语“内容过滤”，它不是一个实体，看上去像是一个业务行为，是对帖子的标题和内容进行内容过滤，那么我们是不是直接放置到Post实体上呢？ 由于这个内容过滤的行为比较复杂，且涉及到第三方过滤服务的调用，且对帖子标题和帖子内容的过滤逻辑类似，因此我们有必要将“内容过滤”从帖子实体中抽离出来，变成一个领域服务，我们将之命名为：ContentFilter。</p>
+<p>　　考虑到存在多场景多规则的过滤，且只要一个命中一个过滤规则，就可以认为该帖子审核不通过，因此可以使用‘责任链模式’来设计。关于责任链模式的实现和优缺点这里不再赘述，可参考网上资料，或直接看代码即可。</p>
+<p>　　另外，我们发现上面的case描述中，还出现了‘内容过滤未通过’的字样，表明Post需要有一个属性来表征内容过滤的结果，考虑到可见case中存在帖子被用户删除等状态，我们记为“帖子状态”（staus），字典定义为：00 – 已发布；01 – 待运营审核；99 – 已删除。</p>
+<p>　　上面虽然已经创建了一个领域服务专门来承担‘内容过滤’的职责，但是这个业务行为仍然应当属于Post实体，因此我们为Post增加一个filt()业务行为，在这个业务行为中，会去调用“过滤标题”（filtTitle()） 和 “过滤正文”（filtMainBody()）l两个业务方法完成。而filtTitle()和filtMainBody()则会将具体的内容过滤工作委托给上面提到的责任链模式实现的领域服务ContentFilter。</p>
+<p>　　由于ContentFilter这一领域服务采用责任链模式实现，类较多，如果放置到post module下面，不利于阅读，且考虑到后续的评论等场景可能使用到这个服务，故将其单独建立module，取名为：domain.service.contentfilter。</p>
+<h3 id="业务模型-2"><a href="#业务模型-2" class="headerlink" title="业务模型"></a>业务模型</h3><p>　　综上，我们可以得到如下业务模型：</p>
+<p> <img src="assets/849051-20170917161428594-1398940496.png" alt="img"></p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><p>Post.java(new)</p>
+<p>PostStatus.java</p>
+<p>PostMainBodyContentFilterChain.java</p>
+<p>PostTitleContentFilterChain.java</p>
+<p>ContentFilter.java</p>
+<p>ImageContentFilter.java</p>
+<p> TextContentFilter.java</p>
+<p>LocalTextContentFilter.java</p>
+<p>RemoteTextContentFilter.java</p>
+<h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><h3 id="最终模型"><a href="#最终模型" class="headerlink" title="最终模型"></a>最终模型</h3><p>汇总上面建模过程中对模型的描述，我们得到如下：</p>
+<ul>
+<li><strong>帖子作者发布帖子，帖子标题可以为空，帖子内容不能为空，且不少于16个汉字；</strong></li>
+<li><strong>帖子可以加入不多于五个话题，且话题不能重复加入；</strong></li>
+<li><strong>帖子标题和内容通过内容过滤后方能发布，如果未能通过内容过滤，则需要经过运营审核之后才能发布。</strong></li>
+</ul>
+<p>业务模型图可以参考Round-III中的模型图。</p>
+<h3 id="建模经验"><a href="#建模经验" class="headerlink" title="建模经验"></a>建模经验</h3><h4 id="尝试用一句完整的话说描述业务场景"><a href="#尝试用一句完整的话说描述业务场景" class="headerlink" title="尝试用一句完整的话说描述业务场景"></a>尝试用一句完整的话说描述业务场景</h4><p>　　仔细观察，我们发现最终得到的业务模型描述其实和产品经理的PRD契合度非常高，但是产品经理的PRD描述很多适合缺少主语，或者语言分散，需要我们通过建模，将语言重新组织，找到业务实体，找到业务行为，找到业务规则，并反映在模型上。反过来想，我们的业务模型对于产品经理/业务专家来讲也不会陌生，因为我们都是使用统一的业务模型语言进行描述，大家都能懂才对。</p>
+<h4 id="小步快走，逐步迭代"><a href="#小步快走，逐步迭代" class="headerlink" title="小步快走，逐步迭代"></a>小步快走，逐步迭代</h4><p>　　’发布帖子‘这个业务场景我们经历了三轮迭代，最终得到了一个较完整的业务模型，每一轮迭代，我们都将焦点聚集在一个case，落实模型之后，再继续往前推进。文章描述起来比较啰嗦，实际建模过程中，可能很快就能完成三轮迭代，得到较满意的模型，但是实际的建模过程应当是和文章描述一样的。</p>
+<h4 id="有用的模式"><a href="#有用的模式" class="headerlink" title="有用的模式"></a>有用的模式</h4><ol>
+<li>具有关联关系的实体，可以为这种关联关系引入一个值对象，从而降低实体间的耦合，比如：在Post和Topic之间引入了TopicPost值对象；</li>
+<li>实体 / 值对象 之间存在组合 / 聚合关系，在设计对外的api时，可以参考jdk中集合的api设计，达到高内聚的目标，这在《重构》这本书中被称为“封装集合（Encapsulate Collection）”，比如：Post实体中的topics话题集便参考Set对外提供api；</li>
+<li>配合第2点的实现，通常需要重写equals()和hashCode()方法，最佳实践可以参考示例代码；</li>
+<li>极力推荐使用合适的设计模式，提高代码的扩展性和可维护性，比如：contentFilter领域服务组件便采用了“责任链模式”来实现；</li>
+<li>当实体依赖于领域服务时，可以讲领域服务作为实体业务方法的参数传入，尤其是当领域服务被ioc容器管理时。比如：contentFilter领域服务组件作为Post的filt()方法的参数传入。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/" title="领域驱动设计：domain">http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/05/系统架构/领域驱动设计：概述/" rel="next" title="领域驱动设计：概述">
+                <i class="fa fa-chevron-left"></i> 领域驱动设计：概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/05/Kotlin/Kotlin：start/" rel="prev" title="Kotlin：start">
+                Kotlin：start <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#domain建模示例"><span class="nav-number">1.</span> <span class="nav-text">domain建模示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布帖子"><span class="nav-number">2.</span> <span class="nav-text">发布帖子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Round-I"><span class="nav-number">2.1.</span> <span class="nav-text">Round-I</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务建模"><span class="nav-number">2.1.1.</span> <span class="nav-text">业务建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务模型"><span class="nav-number">2.1.2.</span> <span class="nav-text">业务模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.1.3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Post-java"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Post.java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PostAuthor-java"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">PostAuthor.java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造方法"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setter方法"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">setter方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#posting方法"><span class="nav-number">2.1.3.5.</span> <span class="nav-text">posting方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Round-II"><span class="nav-number">2.2.</span> <span class="nav-text">Round-II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务建模-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">业务建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务模型-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">业务模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Post-java-new"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">Post.java(new)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Topic"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">Topic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TopicPost"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">TopicPost</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合关系集合化处理"><span class="nav-number">2.2.4.</span> <span class="nav-text">组合关系集合化处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改写TopicPost的equals和hashCode方法"><span class="nav-number">2.2.5.</span> <span class="nav-text">改写TopicPost的equals和hashCode方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Round-III"><span class="nav-number">2.3.</span> <span class="nav-text">Round-III</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务建模-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">业务建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务模型-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">业务模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-2"><span class="nav-number">2.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summarize"><span class="nav-number">2.4.</span> <span class="nav-text">Summarize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最终模型"><span class="nav-number">2.4.1.</span> <span class="nav-text">最终模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建模经验"><span class="nav-number">2.4.2.</span> <span class="nav-text">建模经验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试用一句完整的话说描述业务场景"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">尝试用一句完整的话说描述业务场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小步快走，逐步迭代"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">小步快走，逐步迭代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有用的模式"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">有用的模式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

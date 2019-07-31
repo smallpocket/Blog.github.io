@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Jooq提出问题为什么要用（作用）与JPA相比到目前为止，只有少数的数据库抽象框架或者库，真正尊重SQL作为语言的一等公民，而包括JPA、EJB、doubts等许多框架都试图隐藏SQL本身，将其范围最小化。 JOOQ填补了这个空白 与LINQ相比与SQL相比SQL可以作为纯文本编写并通过JDBC API传递，多年来，人们对这种方式保持警惕  没有类型安全 没有语法安全 没有绑定值索引安全性 详细的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jooq：文档">
+<meta property="og:url" content="http://yoursite.com/2019/07/07/数据库/Jooq/Jooq：文档/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Jooq提出问题为什么要用（作用）与JPA相比到目前为止，只有少数的数据库抽象框架或者库，真正尊重SQL作为语言的一等公民，而包括JPA、EJB、doubts等许多框架都试图隐藏SQL本身，将其范围最小化。 JOOQ填补了这个空白 与LINQ相比与SQL相比SQL可以作为纯文本编写并通过JDBC API传递，多年来，人们对这种方式保持警惕  没有类型安全 没有语法安全 没有绑定值索引安全性 详细的">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-07T13:22:11.696Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jooq：文档">
+<meta name="twitter:description" content="Jooq提出问题为什么要用（作用）与JPA相比到目前为止，只有少数的数据库抽象框架或者库，真正尊重SQL作为语言的一等公民，而包括JPA、EJB、doubts等许多框架都试图隐藏SQL本身，将其范围最小化。 JOOQ填补了这个空白 与LINQ相比与SQL相比SQL可以作为纯文本编写并通过JDBC API传递，多年来，人们对这种方式保持警惕  没有类型安全 没有语法安全 没有绑定值索引安全性 详细的">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/07/数据库/Jooq/Jooq：文档/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Jooq：文档 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/数据库/Jooq/Jooq：文档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Jooq：文档
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-07 18:04:32 / Modified: 21:22:11" itemprop="dateCreated datePublished" datetime="2019-07-07T18:04:32+08:00">2019-07-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/07/数据库/Jooq/Jooq：文档/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/07/数据库/Jooq/Jooq：文档/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Jooq"><a href="#Jooq" class="headerlink" title="Jooq"></a>Jooq</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><h3 id="与JPA相比"><a href="#与JPA相比" class="headerlink" title="与JPA相比"></a>与JPA相比</h3><p>到目前为止，只有少数的数据库抽象框架或者库，真正尊重SQL作为语言的一等公民，而包括JPA、EJB、doubts等许多框架都试图隐藏SQL本身，将其范围最小化。</p>
+<p>JOOQ填补了这个空白</p>
+<h3 id="与LINQ相比"><a href="#与LINQ相比" class="headerlink" title="与LINQ相比"></a>与LINQ相比</h3><h3 id="与SQL相比"><a href="#与SQL相比" class="headerlink" title="与SQL相比"></a>与SQL相比</h3><p>SQL可以作为纯文本编写并通过JDBC API传递，多年来，人们对这种方式保持警惕</p>
+<ul>
+<li>没有类型安全</li>
+<li>没有语法安全</li>
+<li>没有绑定值索引安全性</li>
+<li>详细的SQL字符串连接</li>
+<li>无聊的绑定值索引技术</li>
+<li>JDBC中的详细资源和异常处理</li>
+<li>一个非常有“状态”的，不是非常面向对象的jdbc api，很难使用</li>
+</ul>
+<h1 id="JOOQ前置了解"><a href="#JOOQ前置了解" class="headerlink" title="JOOQ前置了解"></a>JOOQ前置了解</h1><h2 id="代码块内容"><a href="#代码块内容" class="headerlink" title="代码块内容"></a>代码块内容</h2><p>若未给出假设，则假定使用的是Oracle语法</p>
+<p>当看到独立函数，则是从org.jooq.impl.DSL导入的静态函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">每当您看到BOOK / Book，AUTHOR / Author和类似实体时，假设它们是从生成的模式中导入的（静态的）</span><br><span class="line">BOOK.TITLE，AUTHOR.LAST_NAME <span class="comment">//对应com.example.generated.Tables.BOOK.TITLE，com.example.generated.Tables.BOOK.TITLE</span></span><br><span class="line">FK_BOOK_AUTHOR <span class="comment">//对应com.example.generated.Keys.FK_BOOK_AUTHOR</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//每当看到Java代码中使用“create”时，假设这是org.jooq.DSLContext的一个实例。</span></span><br><span class="line"><span class="comment">//它被称为“创建”的原因是，从DSL对象创建了一个jOOQ QueryPart。</span></span><br><span class="line"><span class="comment">//“create”因此是非静态查询DSL的入口点</span></span><br><span class="line">DSLContext create = DSL.using（connection，SQLDialect.ORACLE）;</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>JOOQ无法确定声明是否完整，直到执行fetch或者execute</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create.selectOne().fetch();</span><br><span class="line">create.update(T).set(T.V, <span class="number">1</span>).execute();</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a><a href="https://www.jooq.org/doc/3.10/manual/getting-started/the-manual/#N3A272" target="_blank" rel="noopener">设置</a></h2><p>jOOQ允许使用<a href="https://www.jooq.org/javadoc/3.10.x/org/jooq/conf/Settings.html" target="_blank" rel="noopener">org.jooq.conf.Settings</a>覆盖运行时行为。如果未指定任何内容，则假定使用默认运行时设置。</p>
+<h2 id="样本数据库"><a href="#样本数据库" class="headerlink" title="样本数据库"></a><a href="https://www.jooq.org/doc/3.10/manual/getting-started/the-manual/#N3A27B" target="_blank" rel="noopener">样本数据库</a></h2><p>jOOQ查询示例针对示例数据库运行。</p>
+<h3 id="示例数据库"><a href="#示例数据库" class="headerlink" title="示例数据库"></a>示例数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">language</span> (</span><br><span class="line">  <span class="keyword">id</span>              <span class="built_in">NUMBER</span>(<span class="number">7</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  cd              <span class="built_in">CHAR</span>(<span class="number">2</span>)       <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  description     VARCHAR2(<span class="number">50</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> author (</span><br><span class="line">  <span class="keyword">id</span>              <span class="built_in">NUMBER</span>(<span class="number">7</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  first_name      VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  last_name       VARCHAR2(<span class="number">50</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  date_of_birth   <span class="built_in">DATE</span>,</span><br><span class="line">  year_of_birth   <span class="built_in">NUMBER</span>(<span class="number">7</span>),</span><br><span class="line">  distinguished   <span class="built_in">NUMBER</span>(<span class="number">1</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book (</span><br><span class="line">  <span class="keyword">id</span>              <span class="built_in">NUMBER</span>(<span class="number">7</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  author_id       <span class="built_in">NUMBER</span>(<span class="number">7</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  title           VARCHAR2(<span class="number">400</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  published_in    <span class="built_in">NUMBER</span>(<span class="number">7</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  language_id     <span class="built_in">NUMBER</span>(<span class="number">7</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_book_author     <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (author_id)   <span class="keyword">REFERENCES</span> author(<span class="keyword">id</span>),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_book_language   <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (language_id) <span class="keyword">REFERENCES</span> <span class="keyword">language</span>(<span class="keyword">id</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book_store (</span><br><span class="line">  <span class="keyword">name</span>            VARCHAR2(<span class="number">400</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">UNIQUE</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book_to_book_store (</span><br><span class="line">  <span class="keyword">name</span>            VARCHAR2(<span class="number">400</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  book_id         <span class="built_in">INTEGER</span>       <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  stock           <span class="built_in">INTEGER</span>,</span><br><span class="line">  </span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="keyword">name</span>, book_id),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_b2bs_book_store <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (<span class="keyword">name</span>)        <span class="keyword">REFERENCES</span> book_store (<span class="keyword">name</span>) <span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">CASCADE</span>,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_b2bs_book       <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (book_id)     <span class="keyword">REFERENCES</span> book (<span class="keyword">id</span>)         <span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">CASCADE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例数据"><a href="#示例数据" class="headerlink" title="示例数据"></a>示例数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">language</span> (<span class="keyword">id</span>, cd, description) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">'en'</span>, <span class="string">'English'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">language</span> (<span class="keyword">id</span>, cd, description) <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="string">'de'</span>, <span class="string">'Deutsch'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">language</span> (<span class="keyword">id</span>, cd, description) <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="string">'fr'</span>, <span class="string">'Français'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">language</span> (<span class="keyword">id</span>, cd, description) <span class="keyword">VALUES</span> (<span class="number">4</span>, <span class="string">'pt'</span>, <span class="string">'Português'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> author (<span class="keyword">id</span>, first_name, last_name, date_of_birth    , year_of_birth)</span><br><span class="line">  <span class="keyword">VALUES</span>           (<span class="number">1</span> , <span class="string">'George'</span>  , <span class="string">'Orwell'</span> , <span class="built_in">DATE</span> <span class="string">'1903-06-26'</span>, <span class="number">1903</span>         );</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> author (<span class="keyword">id</span>, first_name, last_name, date_of_birth    , year_of_birth)</span><br><span class="line">  <span class="keyword">VALUES</span>           (<span class="number">2</span> , <span class="string">'Paulo'</span>   , <span class="string">'Coelho'</span> , <span class="built_in">DATE</span> <span class="string">'1947-08-24'</span>, <span class="number">1947</span>         );</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book (<span class="keyword">id</span>, author_id, title         , published_in, language_id)</span><br><span class="line">  <span class="keyword">VALUES</span>         (<span class="number">1</span> , <span class="number">1</span>        , <span class="string">'1984'</span>        , <span class="number">1948</span>        , <span class="number">1</span>          );</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book (<span class="keyword">id</span>, author_id, title         , published_in, language_id)</span><br><span class="line">  <span class="keyword">VALUES</span>         (<span class="number">2</span> , <span class="number">1</span>        , <span class="string">'Animal Farm'</span> , <span class="number">1945</span>        , <span class="number">1</span>          );</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book (<span class="keyword">id</span>, author_id, title         , published_in, language_id)</span><br><span class="line">  <span class="keyword">VALUES</span>         (<span class="number">3</span> , <span class="number">2</span>        , <span class="string">'O Alquimista'</span>, <span class="number">1988</span>        , <span class="number">4</span>          );</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book (<span class="keyword">id</span>, author_id, title         , published_in, language_id)</span><br><span class="line">  <span class="keyword">VALUES</span>         (<span class="number">4</span> , <span class="number">2</span>        , <span class="string">'Brida'</span>       , <span class="number">1990</span>        , <span class="number">2</span>          );</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_store <span class="keyword">VALUES</span> (<span class="string">'Orell Füssli'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_store <span class="keyword">VALUES</span> (<span class="string">'Ex Libris'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_store <span class="keyword">VALUES</span> (<span class="string">'Buchhandlung im Volkshaus'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_to_book_store <span class="keyword">VALUES</span> (<span class="string">'Orell Füssli'</span>             , <span class="number">1</span>, <span class="number">10</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_to_book_store <span class="keyword">VALUES</span> (<span class="string">'Orell Füssli'</span>             , <span class="number">2</span>, <span class="number">10</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_to_book_store <span class="keyword">VALUES</span> (<span class="string">'Orell Füssli'</span>             , <span class="number">3</span>, <span class="number">10</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_to_book_store <span class="keyword">VALUES</span> (<span class="string">'Ex Libris'</span>                , <span class="number">1</span>, <span class="number">1</span> );</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_to_book_store <span class="keyword">VALUES</span> (<span class="string">'Ex Libris'</span>                , <span class="number">3</span>, <span class="number">2</span> );</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> book_to_book_store <span class="keyword">VALUES</span> (<span class="string">'Buchhandlung im Volkshaus'</span>, <span class="number">3</span>, <span class="number">1</span> );</span><br></pre></td></tr></table></figure>
+
+<h2 id="不同的使用情况进行JOOQ"><a href="#不同的使用情况进行JOOQ" class="headerlink" title="不同的使用情况进行JOOQ"></a>不同的使用情况进行JOOQ</h2><h3 id="JOOQ作为SQL构建器"><a href="#JOOQ作为SQL构建器" class="headerlink" title="JOOQ作为SQL构建器"></a>JOOQ作为SQL构建器</h3><p>允许为任何数据库构建有效的SQL，使用JOOQ的查询DSL API将字符串、文字和其他用户定义的对象包装到面向对象、类型安全的AST当中，为SQL建模</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fetch a SQL string from a jOOQ Query in order to manually execute it with another tool.</span></span><br><span class="line"><span class="comment">// For simplicity reasons, we're using the API to construct case-insensitive object references, here.</span></span><br><span class="line">String sql = create.select(field(<span class="string">"BOOK.TITLE"</span>), field(<span class="string">"AUTHOR.FIRST_NAME"</span>), field(<span class="string">"AUTHOR.LAST_NAME"</span>))</span><br><span class="line">                   .from(table(<span class="string">"BOOK"</span>))</span><br><span class="line">                   .join(table(<span class="string">"AUTHOR"</span>))</span><br><span class="line">                   .on(field(<span class="string">"BOOK.AUTHOR_ID"</span>).eq(field(<span class="string">"AUTHOR.ID"</span>)))</span><br><span class="line">                   .where(field(<span class="string">"BOOK.PUBLISHED_IN"</span>).eq(<span class="number">1948</span>))</span><br><span class="line">                   .getSQL();</span><br></pre></td></tr></table></figure>
+
+<p>之后，该sql语句可以直接使用JDBC进行执行，</p>
+<h3 id="JOOQ作为具有代码生成的SQL构建器"><a href="#JOOQ作为具有代码生成的SQL构建器" class="headerlink" title="JOOQ作为具有代码生成的SQL构建器"></a>JOOQ作为具有代码生成的SQL构建器</h3><h3 id="JOOQ作为SQL执行器"><a href="#JOOQ作为SQL执行器" class="headerlink" title="JOOQ作为SQL执行器"></a>JOOQ作为SQL执行器</h3><p>使用JOOQ直接执行JOOQ生成的SQL语句，通过让JOOQ执行SQL，JOOQ查询DSL成为真正的嵌入式SQL</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Typesafely execute the SQL statement directly with jOOQ</span></span><br><span class="line">Result&lt;Record3&lt;String, String, String&gt;&gt; result =</span><br><span class="line">create.select(BOOK.TITLE, AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)</span><br><span class="line">      .from(BOOK)</span><br><span class="line">      .join(AUTHOR)</span><br><span class="line">      .on(BOOK.AUTHOR_ID.eq(AUTHOR.ID))</span><br><span class="line">      .where(BOOK.PUBLISHED_IN.eq(<span class="number">1948</span>))</span><br><span class="line">      .fetch();</span><br></pre></td></tr></table></figure>
+
+<p>并且可以使用任何的SQL构建工具构建SQL语句，之后由JOOQ运行SQL语句。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Use your favourite tool to construct SQL strings:</span></span><br><span class="line">String sql = <span class="string">"SELECT title, first_name, last_name FROM book JOIN author ON book.author_id = author.id "</span> +</span><br><span class="line">             <span class="string">"WHERE book.published_in = 1984"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Fetch results using jOOQ</span></span><br><span class="line">Result&lt;Record&gt; result = create.fetch(sql);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Or execute that SQL with JDBC, fetching the ResultSet with jOOQ:</span></span><br><span class="line">ResultSet rs = connection.createStatement().executeQuery(sql);</span><br><span class="line">Result&lt;Record&gt; result = create.fetch(rs);</span><br></pre></td></tr></table></figure>
+
+<h3 id="JOOQ-for-CURD"><a href="#JOOQ-for-CURD" class="headerlink" title="JOOQ for CURD"></a>JOOQ for CURD</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fetch an author</span></span><br><span class="line">AuthorRecord author : create.fetchOne(AUTHOR, AUTHOR.ID.eq(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create a new author, if it doesn't exist yet</span></span><br><span class="line"><span class="keyword">if</span> (author == <span class="keyword">null</span>) &#123;</span><br><span class="line">    author = create.newRecord(AUTHOR);</span><br><span class="line">    author.setId(<span class="number">1</span>);</span><br><span class="line">    author.setFirstName(<span class="string">"Dan"</span>);</span><br><span class="line">    author.setLastName(<span class="string">"Brown"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Mark the author as a "distinguished" author and store it</span></span><br><span class="line">author.setDistinguished(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Executes an update on existing authors, or insert on new ones</span></span><br><span class="line">author.store();</span><br></pre></td></tr></table></figure>
+
+<h3 id="PRO的JOOQ"><a href="#PRO的JOOQ" class="headerlink" title="PRO的JOOQ"></a>PRO的JOOQ</h3><h2 id="JOOQ的工具"><a href="#JOOQ的工具" class="headerlink" title="JOOQ的工具"></a>JOOQ的工具</h2><ul>
+<li><a href="https://www.jooq.org/doc/3.10/manual/sql-execution/execute-listeners/" target="_blank" rel="noopener">jOOQ的执行监听器</a>：jOOQ允许您将自定义执行监听器挂钩到jOOQ的SQL语句执行生命周期中，以集中协调对正在执行的SQL执行的任何操作。用于记录，标识生成，SQL跟踪，性能测量等。</li>
+<li><a href="https://www.jooq.org/doc/3.10/manual/sql-execution/logging/" target="_blank" rel="noopener">记录</a>：jOOQ内置一个标准的DEBUG记录器，用于记录和跟踪所有已执行的SQL语句和获取的结果集</li>
+<li><a href="https://www.jooq.org/doc/3.10/manual/sql-execution/stored-procedures/" target="_blank" rel="noopener">存储过程</a>：jOOQ支持您喜欢的数据库的存储过程和函数。生成所有例程和用户定义类型，并且可以作为函数引用包含在jOOQ的SQL构建API中。</li>
+<li><a href="https://www.jooq.org/doc/3.10/manual/sql-execution/batch-execution/" target="_blank" rel="noopener">批量执行</a>：执行大量SQL语句时，批量执行很重要。与JDBC相比，jOOQ简化了这些操作</li>
+<li><a href="https://www.jooq.org/doc/3.10/manual/sql-execution/exporting/" target="_blank" rel="noopener">导出</a>和<a href="https://www.jooq.org/doc/3.10/manual/sql-execution/importing/" target="_blank" rel="noopener">导入</a>：jOOQ附带API，可以轻松导出/导入各种格式的数据</li>
+</ul>
+<h1 id="JOOQ教程入门"><a href="#JOOQ教程入门" class="headerlink" title="JOOQ教程入门"></a>JOOQ教程入门</h1><h2 id="JOOQ简单7个步骤"><a href="#JOOQ简单7个步骤" class="headerlink" title="JOOQ简单7个步骤"></a>JOOQ简单7个步骤</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>JOOQ的<strong><em>maven</em></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jooq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jooq<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.10.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jooq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jooq-meta<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.10.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jooq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jooq-codegen<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.10.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.jooq.org/doc/3.10/manual/getting-started/tutorials/jooq-in-7-steps/jooq-in-7-steps-step1/" target="_blank" rel="noopener">商业版</a></p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>创建一个library的数据库以及一个对应的author表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="string">`library`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">USE</span> <span class="string">`library`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`author`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`first_name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`last_name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h3><p>使用JOOQ的命令行工具生成映射到我们刚创建的Author表的类。详细信息参照：<a href="https://www.jooq.org/doc/3.10/manual/code-generation/" target="_blank" rel="noopener">关于设置代码生成器的jOOQ手册页</a></p>
+<p>最简单的方式是将JOOQ的jar文件（3个）以及数据库的connect文件复制到临时目录下，创建一个library.xml</p>
+<ul>
+<li>更新用户名、url、driver等数据</li>
+<li><code>database.includes</code>里包含要创建的数据库表，<code>database.excludes</code>包含需要排除的数据库表</li>
+<li><code>generator.target.package</code> - 将其设置为要为生成的类创建的父包。</li>
+<li>设置<code>test.generated</code>将导致<code>test.generated.Author</code>和<code>test.generated.AuthorRecord</code>创建</li>
+<li><code>generator.target.directory</code> - 要输出的目录。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">xmlns</span>=<span class="string">"http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Configure the database connection here --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">jdbc</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">driver</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">driver</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>jdbc:mysql://localhost:3306/library<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">user</span>&gt;</span>root<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">password</span>&gt;</span><span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">jdbc</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">generator</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- The default code generator. You can override this one, to generate your own code style.</span></span><br><span class="line"><span class="comment">         Supported generators:</span></span><br><span class="line"><span class="comment">         - org.jooq.util.JavaGenerator</span></span><br><span class="line"><span class="comment">         - org.jooq.util.ScalaGenerator</span></span><br><span class="line"><span class="comment">         Defaults to org.jooq.util.JavaGenerator </span></span><br><span class="line"><span class="comment">         </span></span><br><span class="line"><span class="comment">         Note the classes have been moved to org.jooq.codegen or org.jooq.meta in jOOQ 3.11 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>org.jooq.util.JavaGenerator<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">database</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- The database type. The format here is:</span></span><br><span class="line"><span class="comment">           org.jooq.util.[database].[database]Database</span></span><br><span class="line"><span class="comment">       </span></span><br><span class="line"><span class="comment">           Note the classes have been moved to org.jooq.codegen or org.jooq.meta in jOOQ 3.11 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>org.jooq.util.mysql.MySQLDatabase<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- The database schema (or in the absence of schema support, in your RDBMS this</span></span><br><span class="line"><span class="comment">           can be the owner, user, database name) to be generated --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">inputSchema</span>&gt;</span>library<span class="tag">&lt;/<span class="name">inputSchema</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- All elements that are generated from your schema</span></span><br><span class="line"><span class="comment">           (A Java regular expression. Use the pipe to separate several expressions)</span></span><br><span class="line"><span class="comment">           Watch out for case-sensitivity. Depending on your database, this might be important! --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">includes</span>&gt;</span>.*<span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- All elements that are excluded from your schema</span></span><br><span class="line"><span class="comment">           (A Java regular expression. Use the pipe to separate several expressions).</span></span><br><span class="line"><span class="comment">           Excludes match before includes, i.e. excludes have a higher priority --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">excludes</span>&gt;</span><span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">database</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">target</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- The destination package of your generated classes (within the destination directory) --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">packageName</span>&gt;</span>test.generated<span class="tag">&lt;/<span class="name">packageName</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- The destination directory of your generated classes. Using Maven directory layout here --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">directory</span>&gt;</span>C:/workspace/MySQLTest/src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">generator</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>到达临时目录后，windows键入。记得替换文件名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -classpath jooq-3.10.8.jar; jooq-meta-3.10.8.jar; jooq-codegen-3.10.8.jar; mysql-connector-java-5.1.18-bin.jar;。</span><br><span class="line">  org.jooq.util.GenerationTool library.xml</span><br></pre></td></tr></table></figure>
+
+<p>mac键入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -classpath jooq-3.10.8.jar：jooq-meta-3.10.8.jar：jooq-codegen-3.10.8.jar：mysql-connector-java-5.1.18-bin.jar：。</span><br><span class="line">  org.jooq.util.GenerationTool library.xml</span><br></pre></td></tr></table></figure>
+
+<p>成功后的输出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">06</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Initialising properties  : /library.xml</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Database parameters</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: ----------------------------------------------------------</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO:   dialect                : MYSQL</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO:   schema                 : library</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO:   target dir             : C:/workspace/MySQLTest/src</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO:   target <span class="keyword">package</span>         : test.generated</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: ----------------------------------------------------------</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Emptying                 : C:/workspace/MySQLTest/src/test/generated</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Generating classes in    : C:/workspace/MySQLTest/src/test/generated</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Generating schema        : Library.java</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Schema generated         : Total: <span class="number">122.18</span>ms</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Sequences fetched        : <span class="number">0</span> (<span class="number">0</span> included, <span class="number">0</span> excluded)</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Tables fetched           : <span class="number">5</span> (<span class="number">5</span> included, <span class="number">0</span> excluded)</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Generating tables        : C:/workspace/MySQLTest/src/test/generated/tables</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: ARRAYs fetched           : <span class="number">0</span> (<span class="number">0</span> included, <span class="number">0</span> excluded)</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Enums fetched            : <span class="number">0</span> (<span class="number">0</span> included, <span class="number">0</span> excluded)</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: UDTs fetched             : <span class="number">0</span> (<span class="number">0</span> included, <span class="number">0</span> excluded)</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Generating table         : Author.java</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Tables generated         : Total: <span class="number">680.464</span>ms, +<span class="number">558.284</span>ms</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">07</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Generating Keys          : C:/workspace/MySQLTest/src/test/generated/tables</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">08</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Keys generated           : Total: <span class="number">718.621</span>ms, +<span class="number">38.157</span>ms</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">08</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Generating records       : C:/workspace/MySQLTest/src/test/generated/tables/records</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">08</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Generating record        : AuthorRecord.java</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">08</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Table records generated  : Total: <span class="number">782.545</span>ms, +<span class="number">63.924</span>ms</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">08</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Routines fetched         : <span class="number">0</span> (<span class="number">0</span> included, <span class="number">0</span> excluded)</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">08</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: Packages fetched         : <span class="number">0</span> (<span class="number">0</span> included, <span class="number">0</span> excluded)</span><br><span class="line">Nov <span class="number">1</span>, <span class="number">2011</span> <span class="number">7</span>:<span class="number">25</span>:<span class="number">08</span> PM org.jooq.impl.JooqLogger info</span><br><span class="line">INFO: GENERATION FINISHED!     : Total: <span class="number">791.688</span>ms, +<span class="number">9.143</span>ms</span><br></pre></td></tr></table></figure>
+
+<h3 id="连接到数据库"><a href="#连接到数据库" class="headerlink" title="连接到数据库"></a>连接到数据库</h3><p>连接数据库</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// For convenience, always static import your generated tables and jOOQ functions to decrease verbosity:</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> test.generated.Tables.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.jooq.impl.DSL.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String userName = <span class="string">"root"</span>;</span><br><span class="line">        String password = <span class="string">""</span>;</span><br><span class="line">        String url = <span class="string">"jdbc:mysql://localhost:3306/library"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Connection is the only JDBC resource that we need</span></span><br><span class="line">        <span class="comment">// PreparedStatement and ResultSet are handled by jOOQ, internally</span></span><br><span class="line">        <span class="keyword">try</span> (Connection conn = DriverManager.getConnection(url, userName, password)) &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="comment">// For the sake of this tutorial, let's keep exception handling simple</span></span><br><span class="line">        <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>DSL不会自己关闭，需要我们自己去完成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DSLContext create = DSL.using(conn, SQLDialect.MYSQL);</span><br><span class="line">Result&lt;Record&gt; result = create.select().from(AUTHOR).fetch();</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>打印结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Record r : result) &#123;</span><br><span class="line">    Integer id = r.getValue(AUTHOR.ID);</span><br><span class="line">    String firstName = r.getValue(AUTHOR.FIRST_NAME);</span><br><span class="line">    String lastName = r.getValue(AUTHOR.LAST_NAME);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"ID: "</span> + id + <span class="string">" first name: "</span> + firstName + <span class="string">" last name: "</span> + lastName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="探索"><a href="#探索" class="headerlink" title="探索"></a>探索</h3><h1 id="数据库版本管理工具Flyway"><a href="#数据库版本管理工具Flyway" class="headerlink" title="数据库版本管理工具Flyway"></a>数据库版本管理工具Flyway</h1><h2 id="Flyway简介"><a href="#Flyway简介" class="headerlink" title="Flyway简介"></a>Flyway简介</h2><p>Flyway是独立于数据库的应用、管理、跟踪数据库变更的数据库版本管理工具。<br>Flyway的项目主页是：<a href="https://flywaydb.org/" target="_blank" rel="noopener">https://flywaydb.org/</a></p>
+<h3 id="为什么使用Flyway"><a href="#为什么使用Flyway" class="headerlink" title="为什么使用Flyway"></a>为什么使用Flyway</h3><ul>
+<li>不同的开发人员在开发产品特性时，都有可能更新数据库（添加新表，新的约束等）。当开发人员完成工作并提交代码时，代码会被合并到主分支并在测试服务器上执行单元测试与集成测试。我们在哪个环节来执行数据库的更新操作呢？由QA 部门手工执行sql 脚本？或者我们开发一断程序自动执行数据库更新？以什么顺序来执行这些更新脚本？这些问题同样存在于生产环境。</li>
+<li>我们的产品部署在不同的客户服务器上，以及很多的测试、联调、实验局、销售环境上。不同的客户和测试环境上都部署着不同版本的产品。当他们需要升级他们的产品到新的版本时，我们不仅需要让他们的管理员可以升级产品到新的版本，同时需要保留他们的已有数据。在升级产品的步骤中，我们清楚地知道客户数据库的当前版本，以及需要在该数据库上执行哪些数据库更新脚本，来更新数据库表结构与数据库中已存在的数据。当升级完成时，数据库表结构及数据应当与升级后的产品版本保持一致。</li>
+<li>当升级失败时（比如在升级过程中出现网络连接失败），我们应当支持对失败进行修复。</li>
+</ul>
+<h3 id="更多Flyway文章（参考以下文档）"><a href="#更多Flyway文章（参考以下文档）" class="headerlink" title="更多Flyway文章（参考以下文档）"></a>更多Flyway文章（参考以下文档）</h3><ul>
+<li><a href="http://casheen.iteye.com/blog/1749916" target="_blank" rel="noopener">数据库版本管理工具Flyway——基础篇</a></li>
+<li><a href="http://blog.csdn.net/tanghin/article/details/51264795" target="_blank" rel="noopener">Flyway学习笔记</a></li>
+<li><a href="https://flywaydb.org/documentation/" target="_blank" rel="noopener">官方文档</a></li>
+</ul>
+<h2 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h2><p>在pom文件当中定义如下属性，以便在插件配置中进行重用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">db.url</span>&gt;</span>jdbc:h2:~/flyway-test<span class="tag">&lt;/<span class="name">db.url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">db.username</span>&gt;</span>sa<span class="tag">&lt;/<span class="name">db.username</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="maven项目配置"><a href="#maven项目配置" class="headerlink" title="maven项目配置"></a>maven项目配置</h3><p><strong><em>依赖</em></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- We'll add the latest version of jOOQ and our JDBC driver - in this case H2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Use org.jooq            for the Open Source Edition</span></span><br><span class="line"><span class="comment">             org.jooq.pro        for commercial editions, </span></span><br><span class="line"><span class="comment">             org.jooq.pro-java-6 for commercial editions with Java 6 support,</span></span><br><span class="line"><span class="comment">             org.jooq.trial      for the free trial edition </span></span><br><span class="line"><span class="comment">             </span></span><br><span class="line"><span class="comment">         <span class="doctag">Note:</span> Only the Open Source Edition is hosted on Maven Central. </span></span><br><span class="line"><span class="comment">               Import the others manually from your distribution --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jooq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jooq<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.10.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.h2database<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>h2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.177<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- For improved logging, we'll be using log4j via slf4j to see what's going on during migration and code generation --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- To ensure our code is working, we're using JUnit --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><em>Flyway插件</em></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.flywaydb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flyway-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Note that we're executing the Flyway plugin in the "generate-sources" phase --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>generate-sources<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>migrate<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Note that we need to prefix the db/migration path with filesystem: to prevent Flyway</span></span><br><span class="line"><span class="comment">         from looking for our migration scripts only on the classpath --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>$&#123;db.url&#125;<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">user</span>&gt;</span>$&#123;db.username&#125;<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">locations</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">location</span>&gt;</span>filesystem:src/main/resources/db/migration<span class="tag">&lt;/<span class="name">location</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">locations</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><em>jooq的maven配置</em></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Use org.jooq            for the Open Source Edition</span></span><br><span class="line"><span class="comment">             org.jooq.pro        for commercial editions, </span></span><br><span class="line"><span class="comment">             org.jooq.pro-java-6 for commercial editions with Java 6 support,</span></span><br><span class="line"><span class="comment">             org.jooq.trial      for the free trial edition </span></span><br><span class="line"><span class="comment">             </span></span><br><span class="line"><span class="comment">         <span class="doctag">Note:</span> Only the Open Source Edition is hosted on Maven Central. </span></span><br><span class="line"><span class="comment">               Import the others manually from your distribution --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jooq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jooq-codegen-maven<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;org.jooq.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- The jOOQ code generation plugin is also executed in the generate-sources phase, prior to compilation --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>generate-sources<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">goal</span>&gt;</span>generate<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- This is a minimal working configuration. See the manual's section about the code generator for more details --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbc</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">url</span>&gt;</span>$&#123;db.url&#125;<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">user</span>&gt;</span>$&#123;db.username&#125;<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbc</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">generator</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">database</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includes</span>&gt;</span>.*<span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">inputSchema</span>&gt;</span>FLYWAY_TEST<span class="tag">&lt;/<span class="name">inputSchema</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">database</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">target</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">packageName</span>&gt;</span>org.jooq.example.flyway.db.h2<span class="tag">&lt;/<span class="name">packageName</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">directory</span>&gt;</span>target/generated-sources/jooq-h2<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">generator</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库增量"><a href="#数据库增量" class="headerlink" title="数据库增量"></a>数据库增量</h2><p>当我们开始开发我们的数据库时。为此，我们将创建数据库增量脚本，我们将其放入<code>src/main/resources/db/migration</code>目录中，如之前为Flyway插件配置的那样。我们将添加这些文件：</p>
+<ul>
+<li>V1__initialise_database.sql</li>
+<li>V2__create_author_table.sql</li>
+<li>V3__create_book_table_and_records.sql</li>
+</ul>
+<p>这三个脚本模拟我们的模式版本1-3（注意大写V！）。这是脚本的内容</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- V1__initialise_database.sql</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">SCHEMA</span> flyway_test <span class="keyword">IF</span> <span class="keyword">EXISTS</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">SCHEMA</span> flyway_test;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- V2__create_author_table.sql</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">SEQUENCE</span> flyway_test.s_author_id <span class="keyword">START</span> <span class="keyword">WITH</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> flyway_test.author (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  first_name <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">  last_name <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  date_of_birth <span class="built_in">DATE</span>,</span><br><span class="line">  year_of_birth <span class="built_in">INT</span>,</span><br><span class="line">  address <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line"></span><br><span class="line">  <span class="keyword">CONSTRAINT</span> pk_author PRIMARY <span class="keyword">KEY</span> (<span class="keyword">ID</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- V3__create_book_table_and_records.sql</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> flyway_test.book (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  author_id <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  title <span class="built_in">VARCHAR</span>(<span class="number">400</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"></span><br><span class="line">  <span class="keyword">CONSTRAINT</span> pk_book PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> fk_book_author_id <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (author_id) <span class="keyword">REFERENCES</span> flyway_test.author(<span class="keyword">id</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> flyway_test.author <span class="keyword">VALUES</span> (<span class="keyword">next</span> <span class="keyword">value</span> <span class="keyword">for</span> flyway_test.s_author_id, <span class="string">'George'</span>, <span class="string">'Orwell'</span>, <span class="string">'1903-06-25'</span>, <span class="number">1903</span>, <span class="literal">null</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> flyway_test.author <span class="keyword">VALUES</span> (<span class="keyword">next</span> <span class="keyword">value</span> <span class="keyword">for</span> flyway_test.s_author_id, <span class="string">'Paulo'</span>, <span class="string">'Coelho'</span>, <span class="string">'1947-08-24'</span>, <span class="number">1947</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> flyway_test.book <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="number">1</span>, <span class="string">'1984'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> flyway_test.book <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="number">1</span>, <span class="string">'Animal Farm'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> flyway_test.book <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="number">2</span>, <span class="string">'O Alquimista'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> flyway_test.book <span class="keyword">VALUES</span> (<span class="number">4</span>, <span class="number">2</span>, <span class="string">'Brida'</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库迁移与代码生成"><a href="#数据库迁移与代码生成" class="headerlink" title="数据库迁移与代码生成"></a>数据库迁移与代码生成</h2><p>以上的三个脚本会由Flyway选取并按照版本顺序执行。执行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean install</span><br></pre></td></tr></table></figure>
+
+<p>之后观察log from flyway</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[INFO] --- flyway-maven-plugin:<span class="number">3.0</span>:migrate (<span class="keyword">default</span>) @ jooq-flyway-example ---</span><br><span class="line">[INFO] Database: jdbc:h2:~/flyway-test (H2 <span class="number">1.4</span>)</span><br><span class="line">[INFO] Validated <span class="number">3</span> migrations (execution time <span class="number">00</span>:<span class="number">00.004</span>s)</span><br><span class="line">[INFO] Creating Metadata table: <span class="string">"PUBLIC"</span>.<span class="string">"schema_version"</span></span><br><span class="line">[INFO] Current version of schema <span class="string">"PUBLIC"</span>: &lt;&lt; Empty Schema &gt;&gt;</span><br><span class="line">[INFO] Migrating schema <span class="string">"PUBLIC"</span> to version <span class="number">1</span></span><br><span class="line">[INFO] Migrating schema <span class="string">"PUBLIC"</span> to version <span class="number">2</span></span><br><span class="line">[INFO] Migrating schema <span class="string">"PUBLIC"</span> to version <span class="number">3</span></span><br><span class="line">[INFO] Successfully applied <span class="number">3</span> migrations to schema <span class="string">"PUBLIC"</span> (execution time <span class="number">00</span>:<span class="number">00.073</span>s).</span><br></pre></td></tr></table></figure>
+
+<p>jooq log</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[INFO] --- jooq-codegen-maven:3.10.8:generate (default) @ jooq-flyway-example ---</span><br><span class="line">[INFO] --- jooq-codegen-maven:3.10.8:generate (default) @ jooq-flyway-example ---</span><br><span class="line">[INFO] Using this configuration:</span><br><span class="line">...</span><br><span class="line">[INFO] Generating schemata      : Total: 1</span><br><span class="line">[INFO] Generating schema        : FlywayTest.java</span><br><span class="line">[INFO] ----------------------------------------------------------</span><br><span class="line">[....]</span><br><span class="line">[INFO] GENERATION FINISHED!     : Total: 337.576ms, +4.299ms</span><br></pre></td></tr></table></figure>
+
+<h2 id="发展"><a href="#发展" class="headerlink" title="发展"></a>发展</h2><p>每当有人向Maven模块添加新的迁移脚本时，所有前面的步骤都会自动执行。例如，团队成员可能已经提交了一个新的迁移脚本，您可以将其检出，重建并获取最新的jOOQ生成的源，以用于您自己的开发或集成测试数据库。</p>
+<p>现在，完成这些步骤后，您可以继续编写数据库查询。想象一下以下测试用例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.jooq.Result;</span><br><span class="line"><span class="keyword">import</span> org.jooq.impl.DSL;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.util.Arrays.asList;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.jooq.example.flyway.db.h2.Tables.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertEquals;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AfterMigrationTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryingAfterMigration</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> (Connection c = DriverManager.getConnection(<span class="string">"jdbc:h2:~/flyway-test"</span>, <span class="string">"sa"</span>, <span class="string">""</span>)) &#123;</span><br><span class="line">            Result&lt;?&gt; result =</span><br><span class="line">            DSL.using(c)</span><br><span class="line">               .select(</span><br><span class="line">                   AUTHOR.FIRST_NAME,</span><br><span class="line">                   AUTHOR.LAST_NAME,</span><br><span class="line">                   BOOK.ID,</span><br><span class="line">                   BOOK.TITLE</span><br><span class="line">               )</span><br><span class="line">               .from(AUTHOR)</span><br><span class="line">               .join(BOOK)</span><br><span class="line">               .on(AUTHOR.ID.eq(BOOK.AUTHOR_ID))</span><br><span class="line">               .orderBy(BOOK.ID.asc())</span><br><span class="line">               .fetch();</span><br><span class="line"></span><br><span class="line">            assertEquals(<span class="number">4</span>, result.size());</span><br><span class="line">            assertEquals(asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>), result.getValues(BOOK.ID));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="SQL构建"><a href="#SQL构建" class="headerlink" title="SQL构建"></a>SQL构建</h1><p><a href="https://www.jooq.org/doc/3.10/manual/sql-building/" target="_blank" rel="noopener">https://www.jooq.org/doc/3.10/manual/sql-building/</a></p>
+<h2 id="查询DSL类型"><a href="#查询DSL类型" class="headerlink" title="查询DSL类型"></a>查询DSL类型</h2><p>JOOQ暴露了许多接口，并隐藏了客户端代码的大多数实现，原因是</p>
+<ul>
+<li>接口驱动设计，允许最有效地在流畅的API中建模查询</li>
+<li>降低客户端代码的复杂性</li>
+<li>API保证，只依赖于公开的接口，而不是具体的实现。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.jooq.impl.DSL.*;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>DSL子类</em></strong></p>
+<p>每种SQL方言都有自己的方言专用DSL，如只使用MySQL方言，则可以选择引用MySQLDSL而不是标准DSL</p>
+<h2 id="DSLContext类"><a href="#DSLContext类" class="headerlink" title="DSLContext类"></a>DSLContext类</h2><p><strong><em>创建</em></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create it from a pre-existing configuration，从预先的配置中创建</span></span><br><span class="line">DSLContext create = DSL.using(configuration);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create it from ad-hoc arguments，从ad-hoc参数创建</span></span><br><span class="line">DSLContext create = DSL.using(connection, dialect);</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>配置</em></strong></p>
+<p>可以为这些对象提供配置：</p>
+<ul>
+<li><a href="https://www.jooq.org/javadoc/3.10.x/org/jooq/SQLDialect.html" target="_blank" rel="noopener">org.jooq.SQLDialect</a>：数据库的方言。这可能是任何当前支持的数据库类型（有关详细信息，请参阅<a href="https://www.jooq.org/doc/3.10/manual/sql-building/dsl-context/sql-dialects/" target="_blank" rel="noopener">SQL Dialect</a>）</li>
+<li><a href="https://www.jooq.org/javadoc/3.10.x/org/jooq/conf/Settings.html" target="_blank" rel="noopener">org.jooq.conf.Settings</a>：可选的运行时配置（有关详细信息，请参阅<a href="https://www.jooq.org/doc/3.10/manual/sql-building/dsl-context/custom-settings/" target="_blank" rel="noopener">自定义设置</a>）</li>
+<li><a href="https://www.jooq.org/javadoc/3.10.x/org/jooq/ExecuteListenerProvider.html" target="_blank" rel="noopener">org.jooq.ExecuteListenerProvider</a>：对可以为jOOQ提供执行侦听器的提供程序类的可选引用（有关详细信息，请参阅<a href="https://www.jooq.org/doc/3.10/manual/sql-execution/execute-listeners/" target="_blank" rel="noopener">ExecuteListeners</a>）</li>
+<li><a href="https://www.jooq.org/javadoc/3.10.x/org/jooq/RecordMapperProvider.html" target="_blank" rel="noopener">org.jooq.RecordMapperProvider</a>：对可以为jOOQ提供记录映射器的提供者类的可选引用（有关详细信息，请参阅<a href="https://www.jooq.org/doc/3.10/manual/sql-execution/fetching/pojos-with-recordmapper-provider/" target="_blank" rel="noopener">带有RecordMappers的POJO</a>）</li>
+<li>任何这些：<ul>
+<li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/Connection.html" target="_blank" rel="noopener">java.sql.Connection</a>：可选的JDBC连接，将在配置的整个生命周期中重复使用（有关详细信息，请参阅<a href="https://www.jooq.org/doc/3.10/manual/sql-building/dsl-context/connection-vs-datasource/" target="_blank" rel="noopener">连接与数据源</a>）。为简单起见，这是本手册中引用的用例，大部分时间都是如此。</li>
+<li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/DataSource.html" target="_blank" rel="noopener">java.sql.DataSource</a>：一个可选的JDBC DataSource，它将在Configuration的整个生命周期中重用。如果您更喜欢在Connections上使用DataSources，jOOQ将在内部从您的DataSource获取新的Connections，在查询执行后方便地再次关闭它们。这在J2EE或Spring上下文中特别有用（有关详细信息，请参阅<a href="https://www.jooq.org/doc/3.10/manual/sql-building/dsl-context/connection-vs-datasource/" target="_blank" rel="noopener">Connection与DataSource</a>）</li>
+<li><a href="https://www.jooq.org/javadoc/3.10.x/org/jooq/ConnectionProvider.html" target="_blank" rel="noopener">org.jooq.ConnectionProvider</a>：jOOQ用于“获取”和“释放”连接的自定义抽象。jOOQ将在内部“获取”来自ConnectionProvider的新连接，在查询执行后方便地“释放”它们。（有关详细信息，请参阅<a href="https://www.jooq.org/doc/3.10/manual/sql-building/dsl-context/connection-vs-datasource/" target="_blank" rel="noopener">Connection vs. DataSource</a>）</li>
+</ul>
+</li>
+</ul>
+<h2 id="SQL语句（DML）"><a href="#SQL语句（DML）" class="headerlink" title="SQL语句（DML）"></a>SQL语句（DML）</h2><h2 id="SQL语句（DDL）"><a href="#SQL语句（DDL）" class="headerlink" title="SQL语句（DDL）"></a>SQL语句（DDL）</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/07/数据库/Jooq/Jooq：文档/" title="Jooq：文档">http://yoursite.com/2019/07/07/数据库/Jooq/Jooq：文档/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/06/计算机网络/计算机网络：概述/" rel="next" title="计算机网络：概述">
+                <i class="fa fa-chevron-left"></i> 计算机网络：概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/08/版本控制/Git：命令/" rel="prev" title="Git：命令">
+                Git：命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Jooq"><span class="nav-number">1.</span> <span class="nav-text">Jooq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用（作用）"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要用（作用）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#与JPA相比"><span class="nav-number">1.2.1.</span> <span class="nav-text">与JPA相比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与LINQ相比"><span class="nav-number">1.2.2.</span> <span class="nav-text">与LINQ相比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与SQL相比"><span class="nav-number">1.2.3.</span> <span class="nav-text">与SQL相比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JOOQ前置了解"><span class="nav-number">2.</span> <span class="nav-text">JOOQ前置了解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码块内容"><span class="nav-number">2.1.</span> <span class="nav-text">代码块内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行"><span class="nav-number">2.2.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">2.3.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样本数据库"><span class="nav-number">2.4.</span> <span class="nav-text">样本数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例数据库"><span class="nav-number">2.4.1.</span> <span class="nav-text">示例数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例数据"><span class="nav-number">2.4.2.</span> <span class="nav-text">示例数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的使用情况进行JOOQ"><span class="nav-number">2.5.</span> <span class="nav-text">不同的使用情况进行JOOQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JOOQ作为SQL构建器"><span class="nav-number">2.5.1.</span> <span class="nav-text">JOOQ作为SQL构建器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JOOQ作为具有代码生成的SQL构建器"><span class="nav-number">2.5.2.</span> <span class="nav-text">JOOQ作为具有代码生成的SQL构建器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JOOQ作为SQL执行器"><span class="nav-number">2.5.3.</span> <span class="nav-text">JOOQ作为SQL执行器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JOOQ-for-CURD"><span class="nav-number">2.5.4.</span> <span class="nav-text">JOOQ for CURD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PRO的JOOQ"><span class="nav-number">2.5.5.</span> <span class="nav-text">PRO的JOOQ</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JOOQ的工具"><span class="nav-number">2.6.</span> <span class="nav-text">JOOQ的工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JOOQ教程入门"><span class="nav-number">3.</span> <span class="nav-text">JOOQ教程入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JOOQ简单7个步骤"><span class="nav-number">3.1.</span> <span class="nav-text">JOOQ简单7个步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">3.1.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">3.1.2.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码生成"><span class="nav-number">3.1.3.</span> <span class="nav-text">代码生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到数据库"><span class="nav-number">3.1.4.</span> <span class="nav-text">连接到数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询"><span class="nav-number">3.1.5.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代"><span class="nav-number">3.1.6.</span> <span class="nav-text">迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探索"><span class="nav-number">3.1.7.</span> <span class="nav-text">探索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库版本管理工具Flyway"><span class="nav-number">4.</span> <span class="nav-text">数据库版本管理工具Flyway</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flyway简介"><span class="nav-number">4.1.</span> <span class="nav-text">Flyway简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用Flyway"><span class="nav-number">4.1.1.</span> <span class="nav-text">为什么使用Flyway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更多Flyway文章（参考以下文档）"><span class="nav-number">4.1.2.</span> <span class="nav-text">更多Flyway文章（参考以下文档）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven配置"><span class="nav-number">4.2.</span> <span class="nav-text">Maven配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maven项目配置"><span class="nav-number">4.2.1.</span> <span class="nav-text">maven项目配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库增量"><span class="nav-number">4.3.</span> <span class="nav-text">数据库增量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库迁移与代码生成"><span class="nav-number">4.4.</span> <span class="nav-text">数据库迁移与代码生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发展"><span class="nav-number">4.5.</span> <span class="nav-text">发展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL构建"><span class="nav-number">5.</span> <span class="nav-text">SQL构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查询DSL类型"><span class="nav-number">5.1.</span> <span class="nav-text">查询DSL类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DSLContext类"><span class="nav-number">5.2.</span> <span class="nav-text">DSLContext类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL语句（DML）"><span class="nav-number">5.3.</span> <span class="nav-text">SQL语句（DML）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL语句（DDL）"><span class="nav-number">5.4.</span> <span class="nav-text">SQL语句（DDL）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

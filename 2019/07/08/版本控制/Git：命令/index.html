@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Git resetgit reset命令用于将当前HEAD复位到指定状态。一般用于撤消之前的一些操作(如：git add,git commit等)。 简介 123git reset [-q] [&amp;lt;tree-ish&amp;gt;] [--] &amp;lt;paths&amp;gt;…git reset (--patch | -p) [&amp;lt;tree-ish&amp;gt;] [--] [&amp;lt;paths&amp;gt;…]g">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git：命令">
+<meta property="og:url" content="http://yoursite.com/2019/07/08/版本控制/Git：命令/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Git resetgit reset命令用于将当前HEAD复位到指定状态。一般用于撤消之前的一些操作(如：git add,git commit等)。 简介 123git reset [-q] [&amp;lt;tree-ish&amp;gt;] [--] &amp;lt;paths&amp;gt;…git reset (--patch | -p) [&amp;lt;tree-ish&amp;gt;] [--] [&amp;lt;paths&amp;gt;…]g">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/版本控制/Git：命令/assets/842100748_44775.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/版本控制/Git：命令/assets/810100749_17109.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/版本控制/Git：命令/assets/350100750_71786.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/版本控制/Git：命令/assets/845100751_76810.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/版本控制/Git：命令/assets/141100752_31232.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/版本控制/Git：命令/assets/645100753_82870.png">
+<meta property="og:updated_time" content="2019-07-29T01:23:47.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git：命令">
+<meta name="twitter:description" content="Git resetgit reset命令用于将当前HEAD复位到指定状态。一般用于撤消之前的一些操作(如：git add,git commit等)。 简介 123git reset [-q] [&amp;lt;tree-ish&amp;gt;] [--] &amp;lt;paths&amp;gt;…git reset (--patch | -p) [&amp;lt;tree-ish&amp;gt;] [--] [&amp;lt;paths&amp;gt;…]g">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/08/版本控制/Git：命令/assets/842100748_44775.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/08/版本控制/Git：命令/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Git：命令 | Hexo</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c90f7388e03d4ed7e98a545b1d69200e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+    <a href="/schedule/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/版本控制/Git：命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Git：命令
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-08 09:16:29" itemprop="dateCreated datePublished" datetime="2019-07-08T09:16:29+08:00">2019-07-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-29 09:23:47" itemprop="dateModified" datetime="2019-07-29T09:23:47+08:00">2019-07-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本控制/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/08/版本控制/Git：命令/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/08/版本控制/Git：命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Git-reset"><a href="#Git-reset" class="headerlink" title="Git reset"></a>Git reset</h1><p><code>git reset</code>命令用于将当前<code>HEAD</code>复位到指定状态。一般用于撤消之前的一些操作(如：<code>git add</code>,<code>git commit</code>等)。</p>
+<p><strong>简介</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset [-q] [&lt;tree-ish&gt;] [--] &lt;paths&gt;…</span><br><span class="line">git reset (--patch | -p) [&lt;tree-ish&gt;] [--] [&lt;paths&gt;…]</span><br><span class="line">git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [&lt;commit&gt;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>在第一和第二种形式中，将条目从<code>&lt;tree-ish&gt;</code>复制到索引。 在第三种形式中，将当前分支头(<code>HEAD</code>)设置为<code>&lt;commit&gt;</code>，可选择修改索引和工作树进行匹配。所有形式的<code>&lt;tree-ish&gt;/&lt;commit&gt;</code>默认为 <code>HEAD</code> 。</p>
+<p>这里的 <code>HEAD</code> 关键字指的是当前分支最末梢最新的一个提交。也就是版本库中该分支上的最新版本。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>以下是一些示例 -</p>
+<p>在git的一般使用中，如果发现错误的将不想暂存的文件被<code>git add</code>进入索引之后，想回退取消，则可以使用命令：<code>git reset HEAD &lt;file&gt;</code>，同时<code>git add</code>完毕之后，git也会做相应的提示，比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Changes to be committed: </span></span><br><span class="line"><span class="meta">#</span><span class="bash">   (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage) </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> new file:   test.py</span></span><br></pre></td></tr></table></figure>
+
+<p><code>git reset [--hard|soft|mixed|merge|keep] [&lt;commit&gt;或HEAD]</code>：将当前的分支重设(<code>reset</code>)到指定的<code>&lt;commit&gt;</code>或者<code>HEAD</code>(默认，如果不显示指定<code>&lt;commit&gt;</code>，默认是<code>HEAD</code>，即最新的一次提交)，并且根据<code>[mode]</code>有可能更新索引和工作目录。<code>mode</code>的取值可以是<code>hard</code>、<code>soft</code>、<code>mixed</code>、<code>merged</code>、<code>keep</code>。下面来详细说明每种模式的意义和效果。</p>
+<p>A). <code>--hard</code>：重设(reset) 索引和工作目录，自从<code>&lt;commit&gt;</code>以来在工作目录中的任何改变都被丢弃，并把HEAD指向<code>&lt;commit&gt;</code>。 </p>
+<p>下面是具体一个例子，假设有三个commit， 执行 <code>git status</code>结果如下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commit3: add test3.c</span><br><span class="line">commit2: add test2.c</span><br><span class="line">commit1: add test1.c</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>git reset --hard HEAD~1</code>命令后，<br>显示：<code>HEAD is now at commit2</code>，运行<code>git log</code>，如下所示 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">commit2: add test2.c</span><br><span class="line">commit1: add test1.c</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>下面列出一些git reset的典型的应用场景： </p>
+<p><strong>(A) 回滚添加操作</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> edit    file1.c file2.c           <span class="comment"># (1) </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git add file1.c file1.c           <span class="comment"># (1.1) 添加两个文件到暂存</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mailx                             <span class="comment">#  (2) </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset                           <span class="comment"># (3) </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git pull git://info.example.com/ nitfol    <span class="comment"># (4)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>(1). 编辑文件 <code>file1.c</code>, <code>file2.c</code>，做了些更改，并把更改添加到了暂存区。<br>(2). 查看邮件，发现某人要您执行<code>git pull</code>，有一些改变需要合并下来。<br>(3). 然而，您已经把暂存区搞乱了，因为暂存区同HEAD commit不匹配了，但是即将<code>git pull</code>下来的东西不会影响已经修改的<code>file1.c</code> 和 <code>file2.c</code>，因此可以<code>revert</code>这两个文件的改变。在revert后，那些改变应该依旧在工作目录中，因此执行<code>git reset</code>。<br>(4). 然后，执行了<code>git pull</code>之后，自动合并，<code>file1.c</code> 和 <code>file2.c</code>这些改变依然在工作目录中。 </p>
+<p><strong>(B)回滚最近一次提交</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git commit -a -m <span class="string">"这是提交的备注信息"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset --soft HEAD^      <span class="comment">#(1) </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> edit code                        <span class="comment">#(2) 编辑代码操作</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -a -c ORIG_HEAD  <span class="comment">#(3)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>(1) 当提交了之后，又发现代码没有提交完整，或者想重新编辑一下提交的信息，可执行<code>git reset --soft HEAD^</code>，让工作目录还跟<code>reset</code>之前一样，不作任何改变。<br><code>HEAD^</code>表示指向<code>HEAD</code>之前最近的一次提交。<br>(2) 对工作目录下的文件做修改，比如：修改文件中的代码等。<br>(3) 然后使用<code>reset</code>之前那次提交的注释、作者、日期等信息重新提交。注意，当执行<code>git reset</code>命令时，git会把老的HEAD拷贝到文件<code>.git/ORIG_HEAD</code>中，在命令中可以使用ORIG_HEAD引用这个提交。<code>git commit</code> 命令中 <code>-a</code>参数的意思是告诉git，自动把所有修改的和删除的文件都放进暂存区，未被git跟踪的新建的文件不受影响。<code>commit</code>命令中<code>-c &lt;commit&gt;</code> 或者 <code>-C &lt;commit&gt;</code>意思是拿已经提交的对象中的信息(作者，提交者，注释，时间戳等)提交，那么这条<code>git commit</code> 命令的意思就非常清晰了，把所有更改的文件加入暂存区，并使用上次的提交信息重新提交。 </p>
+<p><strong>(C) 回滚最近几次提交，并把这几次提交放到指定分支中</strong></p>
+<p>回滚最近几次提交，并把这几次提交放到叫做<code>topic/wip</code>的分支上去。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git branch topic/wip     (1) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard HEAD~3  (2) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout topic/wip   (3)</span></span><br></pre></td></tr></table></figure>
+
+<p>(1) 假设已经提交了一些代码，但是此时发现这些提交还不够成熟，不能进入<code>master</code>分支，希望在新的<code>branch</code>上暂存这些改动。因此执行了<code>git branch</code>命令在当前的HEAD上建立了新的叫做 <code>topic/wip</code> 的分支。<br>(2) 然后回滚<code>master</code>分支上的最近三次提交。<code>HEAD~3</code>指向当前<code>HEAD-3</code>个提交，<code>git reset --hard HEAD~3</code>，即删除最近的三个提交(删除<code>HEAD</code>, <code>HEAD^</code>, <code>HEAD~2</code>)，将HEAD指向<code>HEAD~3</code>。 </p>
+<p><strong>(D) 永久删除最后几个提交</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git commit <span class="comment">## 执行一些提交</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard HEAD~3   (1)</span></span><br></pre></td></tr></table></figure>
+
+<p>(1) 最后三个提交(即<code>HEAD</code>, <code>HEAD^</code>和<code>HEAD~2</code>)提交有问题，想永久删除这三个提交。 </p>
+<p><strong>(E) 回滚merge和pull操作</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git pull                         (1) </span></span><br><span class="line">Auto-merging nitfol </span><br><span class="line">CONFLICT (content): Merge conflict in nitfol </span><br><span class="line">Automatic merge failed; fix conflicts and then commit the result. </span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard                 (2) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git pull . topic/branch          (3) </span></span><br><span class="line">Updating from 41223... to 13134... </span><br><span class="line">Fast-forward </span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard ORIG_HEAD       (4)</span></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+
+<p>(1) 从<code>origin</code>拉取下来一些更新，但是产生了很多冲突，但您暂时没有这么多时间去解决这些冲突，因此决定稍候有空的时候再重新执行<code>git pull</code>操作。<br>(2) 由于<code>git pull</code>操作产生了冲突，因此所有拉取下来的改变尚未提交，仍然再暂存区中，这种情况下<code>git reset --hard</code> 与 <code>git reset --hard HEAD</code>意思相同，即都是清除索引和工作区中被搞乱的东西。<br>(3) 将<code>topic/branch</code>分支合并到当前的分支，这次没有产生冲突，并且合并后的更改自动提交。<br>(4) 但是此时又发现将<code>topic/branch</code>合并过来为时尚早，因此决定退滚合并，执行<code>git reset --hard ORIG_HEAD</code>回滚刚才的<code>pull/merge</code>操作。说明：前面讲过，执行<code>git reset</code>时，git会把<code>reset</code>之前的HEAD放入<code>.git/ORIG_HEAD</code>文件中，命令行中使用ORIG_HEAD引用这个提交。同样的，执行<code>git pull</code>和<code>git merge</code>操作时，git都会把执行操作前的HEAD放入<code>ORIG_HEAD</code>中，以防回滚操作。 </p>
+<p><strong>(F) 在污染的工作区中回滚合并或者拉取</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git pull                         (1) </span></span><br><span class="line">Auto-merging nitfol </span><br><span class="line">Merge made by recursive. </span><br><span class="line">nitfol                |   20 +++++---- </span><br><span class="line">... </span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset --merge ORIG_HEAD      (2)</span></span><br></pre></td></tr></table></figure>
+
+<p>(1) 即便你已经在本地更改了工作区中的一些东西，可安全的执行<code>git pull</code>操作，前提是要知道将要<code>git pull</code>下面的内容不会覆盖工作区中的内容。<br>(2) <code>git pull</code>完后，发现这次拉取下来的修改不满意，想要回滚到<code>git pull</code>之前的状态，从前面的介绍知道，我们可以执行<code>git reset --hard ORIG_HEAD</code>，但是这个命令有个副作用就是清空工作区，即丢弃本地未使用<code>git add</code>的那些改变。为了避免丢弃工作区中的内容，可以使用<code>git reset --merge ORIG_HEAD</code>，注意其中的<code>--hard</code> 换成了 <code>--merge</code>，这样就可以避免在回滚时清除工作区。 </p>
+<p><strong>(G) 中断的工作流程处理</strong> </p>
+<p>在实际开发中经常出现这样的情形：你正在开发一个大的新功能(工作在分支：<code>feature</code> 中)，此时来了一个紧急的bug需要修复，但是目前在工作区中的内容还没有成型，还不足以提交，但是又必须切换的另外的分支去修改bug。请看下面的例子 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout feature ;<span class="comment"># you were working in "feature" branch and </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> work work work       ;<span class="comment"># got interrupted </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -a -m <span class="string">"snapshot WIP"</span>                 (1) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout master </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> fix fix fix </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit ;<span class="comment"># commit with real log </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout feature </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset --soft HEAD^ ;<span class="comment"># go back to WIP state  (2) </span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset                                       (3)</span></span><br></pre></td></tr></table></figure>
+
+<p>(1) 这次属于临时提交，因此随便添加一个临时注释即可。<br>(2) 这次<code>reset</code>删除了WIP commit，并且把工作区设置成提交WIP快照之前的状态。<br>(3) 此时，在索引中依然遗留着“<em>snapshot WIP</em>”提交时所做的未提交变化，<code>git reset</code>将会清理索引成为尚未提交”<em>snapshot WIP</em>“时的状态便于接下来继续工作。 </p>
+<p><strong>(H) 重置单独的一个文件</strong> </p>
+<p>假设你已经添加了一个文件进入索引，但是而后又不打算把这个文件提交，此时可以使用<code>git reset</code>把这个文件从索引中去除。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset -- frotz.c                      (1) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"Commit files in index"</span>     (2) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git add frotz.c                           (3)</span></span><br></pre></td></tr></table></figure>
+
+<p>(1) 把文件<code>frotz.c</code>从索引中去除，<br>(2) 把索引中的文件提交<br>(3) 再次把<code>frotz.c</code>加入索引</p>
+<p><strong>(I) 保留工作区并丢弃一些之前的提交</strong> </p>
+<p>假设你正在编辑一些文件，并且已经提交，接着继续工作，但是现在你发现当前在工作区中的内容应该属于另一个分支，与之前的提交没有什么关系。此时，可以开启一个新的分支，并且保留着工作区中的内容。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git tag start </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout -b branch1 </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> edit </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit ...                            (1) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> edit </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout -b branch2                   (2) </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git reset --keep start                    (3)</span></span><br></pre></td></tr></table></figure>
+
+<p>(1) 这次是把在<code>branch1</code>中的改变提交了。<br>(2) 此时发现，之前的提交不属于这个分支，此时新建了<code>branch2</code>分支，并切换到了<code>branch2</code>上。<br>(3) 此时可以用<code>reset --keep</code>把在<code>start</code>之后的提交清除掉，但是保持工作区不变。</p>
+<h1 id="Git-checkout"><a href="#Git-checkout" class="headerlink" title="Git checkout"></a>Git checkout</h1><p><code>git checkout</code>命令用于切换分支或恢复工作树文件。<code>git checkout</code>是git最常用的命令之一，同时也是一个很危险的命令，因为这条命令会重写工作区。</p>
+<p><strong>使用语法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout [-q] [-f] [-m] [&lt;branch&gt;]</span><br><span class="line">git checkout [-q] [-f] [-m] --detach [&lt;branch&gt;]</span><br><span class="line">git checkout [-q] [-f] [-m] [--detach] &lt;commit&gt;</span><br><span class="line">git checkout [-q] [-f] [-m] [[-b|-B|--orphan] &lt;new_branch&gt;] [&lt;start_point&gt;]</span><br><span class="line">git checkout [-f|--ours|--theirs|-m|--conflict=&lt;style&gt;] [&lt;tree-ish&gt;] [--] &lt;paths&gt;…</span><br><span class="line">git checkout [-p|--patch] [&lt;tree-ish&gt;] [--] [&lt;paths&gt;…]</span><br></pre></td></tr></table></figure>
+
+<h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><p>更新工作树中的文件以匹配索引或指定树中的版本。如果没有给出路径 - <code>git checkout</code>还会更新<code>HEAD</code>，将指定的分支设置为当前分支。</p>
+<h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h2><p>以下是一些示例 -</p>
+<p><strong>示例-1</strong></p>
+<p>以下顺序检查主分支，将<code>Makefile</code>还原为两个修订版本，错误地删除<code>hello.c</code>，并从索引中取回。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout master             <span class="comment">#(1)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout master~2 Makefile  <span class="comment">#(2)</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rm -f hello.c</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout hello.c            <span class="comment">#(3)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>(1) 切换分支<br>(2) 从另一个提交中取出文件<br>(3)从索引中恢复<code>hello.c</code></p>
+<p>如果想要检出索引中的所有<code>C</code>源文件，可以使用以下命令 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout -- <span class="string">'*.c'</span></span></span><br></pre></td></tr></table></figure>
+
+<p>注意:<code>*.c</code>是使用引号的。 文件<code>hello.c</code>也将被检出，即使它不再在工作树中，因为文件<code>globbing</code>用于匹配索引中的条目(而不是在shell的工作树中)。</p>
+<p>如果有一个分支也命名为<em>hello.c</em>，这一步将被混淆为一个指令切换到该分支。应该写：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout -- hello.c</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例-2</strong></p>
+<p>在错误的分支工作后，想切换到正确的分支，则使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout mytopic</span></span><br></pre></td></tr></table></figure>
+
+<p>但是，您的“错误”分支和正确的“<code>mytopic</code>”分支可能会在在本地修改的文件中有所不同，在这种情况下，上述检出将会失败：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout mytopic</span></span><br><span class="line">error: You have local changes to 'frotz'; not switching branches.</span><br></pre></td></tr></table></figure>
+
+<p>可以将<code>-m</code>标志赋给命令，这将尝试三路合并：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout -m mytopic</span></span><br><span class="line">Auto-merging frotz</span><br></pre></td></tr></table></figure>
+
+<p>在这种三路合并之后，本地的修改没有在索引文件中注册，所以<code>git diff</code>会显示从新分支的提示之后所做的更改。</p>
+<p><strong>示例-3</strong></p>
+<p>当使用<code>-m</code>选项切换分支时发生合并冲突时，会看到如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout -m mytopic</span></span><br><span class="line">Auto-merging frotz</span><br><span class="line">ERROR: Merge conflict in frotz</span><br><span class="line">fatal: merge program failed</span><br></pre></td></tr></table></figure>
+
+<p>此时，<code>git diff</code>会显示上一个示例中干净合并的更改以及冲突文件中的更改。 编辑并解决冲突，并用常规方式用<code>git add</code>来标记它：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> edit frotz <span class="comment"># 编辑 frotz 文件中内容，然后重新添加</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git add frotz</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>其它示例</strong></p>
+<p><code>git checkout</code>的主要功能就是迁出一个分支的特定版本。默认是迁出分支的HEAD版本<br>一此用法示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout master     <span class="comment">#//取出master版本的head。</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout tag_name    <span class="comment">#//在当前分支上 取出 tag_name 的版本</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout  master file_name  <span class="comment">#//放弃当前对文件file_name的修改</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout  commit_id file_name  <span class="comment">#//取文件file_name的 在commit_id是的版本。commit_id为 git commit 时的sha值。</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout -b dev/1.5.4 origin/dev/1.5.4</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 从远程dev/1.5.4分支取得到本地分支/dev/1.5.4</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout -- hello.rb</span></span><br><span class="line"><span class="meta">#</span><span class="bash">这条命令把hello.rb从HEAD中签出.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git checkout .</span></span><br><span class="line"><span class="meta">#</span><span class="bash">这条命令把 当前目录所有修改的文件 从HEAD中签出并且把它恢复成未修改时的样子.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">注意：在使用 git checkout 时，如果其对应的文件被修改过，那么该修改会被覆盖掉。</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Git-merge"><a href="#Git-merge" class="headerlink" title="Git merge"></a>Git merge</h1><p><code>git merge</code>命令用于将两个或两个以上的开发历史加入(合并)一起。</p>
+<p><strong>使用语法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git merge [-n] [--stat] [--no-commit] [--squash] [--[no-]edit]</span><br><span class="line">    [-s &lt;strategy&gt;] [-X &lt;strategy-option&gt;] [-S[&lt;keyid&gt;]]</span><br><span class="line">    [--[no-]allow-unrelated-histories]</span><br><span class="line">    [--[no-]rerere-autoupdate] [-m &lt;msg&gt;] [&lt;commit&gt;…]</span><br><span class="line">git merge --abort</span><br><span class="line">git merge --continue</span><br></pre></td></tr></table></figure>
+
+<h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>将来自命名提交的更改(从其历史从当前分支转移到当前分支之后)。 该命令由<code>git pull</code>用于合并来自另一个存储库的更改，可以手动使用将更改从一个分支合并到另一个分支。</p>
+<h2 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h2><p>以下是一些示例 -</p>
+<p><strong>示例-1</strong></p>
+<p>合并分支<code>fixes</code>和<code>enhancements</code>在当前分支的顶部，使它们合并：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git merge fixes enhancements</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例-2</strong></p>
+<p>合并<code>obsolete</code>分支到当前分支，使用<code>ours</code>合并策略：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git merge -s ours obsolete</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例-3</strong></p>
+<p>将分支<code>maint</code>合并到当前分支中，但不要自动进行新的提交：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git merge --no-commit maint</span></span><br></pre></td></tr></table></figure>
+
+<p>当您想要对合并进行进一步更改时，可以使用此选项，或者想要自己编写合并提交消息。应该不要滥用这个选项来潜入到合并提交中。小修补程序，如版本名称将是可以接受的。</p>
+<p><strong>示例-4</strong></p>
+<p>将分支<code>dev</code>合并到当前分支中，自动进行新的提交：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git merge dev</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Git-fetch"><a href="#Git-fetch" class="headerlink" title="Git fetch"></a>Git fetch</h1><h1 id="Git-pull"><a href="#Git-pull" class="headerlink" title="Git pull"></a>Git pull</h1><p><code>git pull</code>命令用于从另一个存储库或本地分支获取并集成(整合)。<code>git pull</code>命令的作用是：取回远程主机某个分支的更新，再与本地的指定分支合并，它的完整格式稍稍有点复杂。</p>
+<p><strong>使用语法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull [options] [&lt;repository&gt; [&lt;refspec&gt;…]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h2><p>将远程存储库中的更改合并到当前分支中。在默认模式下，<code>git pull</code>是<code>git fetch</code>后跟<code>git merge FETCH_HEAD</code>的缩写。</p>
+<p>更准确地说，<code>git pull</code>使用给定的参数运行<code>git fetch</code>，并调用<code>git merge</code>将检索到的分支头合并到当前分支中。 使用<code>--rebase</code>，它运行<code>git rebase</code>而不是<code>git merge</code>。</p>
+<h2 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h2><p>以下是一些示例 -</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>比如，要取回<code>origin</code>主机的<code>next</code>分支，与本地的<code>master</code>分支合并，需要写成下面这样 -</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git pull origin next:master</span></span><br></pre></td></tr></table></figure>
+
+<p>如果远程分支(<code>next</code>)要与当前分支合并，则冒号后面的部分可以省略。上面命令可以简写为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git pull origin next</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令表示，取回<code>origin/next</code>分支，再与当前分支合并。实质上，这等同于先做<code>git fetch</code>，再执行<code>git merge</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git fetch origin</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git merge origin/next</span></span><br></pre></td></tr></table></figure>
+
+<p>在某些场合，Git会自动在本地分支与远程分支之间，建立一种追踪关系(tracking)。比如，在<code>git clone</code>的时候，所有本地分支默认与远程主机的同名分支，建立追踪关系，也就是说，本地的<code>master</code>分支自动”追踪”<code>origin/master</code>分支。</p>
+<p>Git也允许手动建立追踪关系。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git branch --<span class="built_in">set</span>-upstream master origin/next</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令指定<code>master</code>分支追踪<code>origin/next</code>分支。</p>
+<p>如果当前分支与远程分支存在追踪关系，<code>git pull</code>就可以省略远程分支名。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git pull origin</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令表示，本地的当前分支自动与对应的<code>origin</code>主机”追踪分支”(remote-tracking branch)进行合并。</p>
+<p>如果当前分支只有一个追踪分支，连远程主机名都可以省略。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git pull</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令表示，当前分支自动与唯一一个追踪分支进行合并。</p>
+<p>如果合并需要采用<code>rebase</code>模式，可以使用<code>–rebase</code>选项。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git pull --rebase &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>git fetch和git pull的区别</strong></p>
+<ol>
+<li><em>git fetch</em>：相当于是从远程获取最新版本到本地，不会自动合并。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git fetch origin master</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -p master..origin/master</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git merge origin/master</span></span><br></pre></td></tr></table></figure>
+
+<p>以上命令的含义：</p>
+<ul>
+<li>首先从远程的<code>origin</code>的<code>master</code>主分支下载最新的版本到<code>origin/master</code>分支上</li>
+<li>然后比较本地的<code>master</code>分支和<code>origin/master</code>分支的差别</li>
+<li>最后进行合并</li>
+</ul>
+<p>上述过程其实可以用以下更清晰的方式来进行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git fetch origin master:tmp</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git diff tmp </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git merge tmp</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><em>git pull</em>：相当于是从远程获取最新版本并<code>merge</code>到本地 </li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+
+<p>上述命令其实相当于<code>git fetch</code> 和 <code>git merge</code><br>在实际使用中，<code>git fetch</code>更安全一些，因为在<code>merge</code>前，我们可以查看更新情况，然后再决定是否合并。</p>
+<h1 id="Git-push"><a href="#Git-push" class="headerlink" title="Git push"></a>Git push</h1><p><code>git push</code>命令用于将本地分支的更新，推送到远程主机。它的格式与<code>git pull</code>命令相似。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用语法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git push [--all | --mirror | --tags] [--follow-tags] [--atomic] [-n | --dry-run] [--receive-pack=&lt;git-receive-pack&gt;]</span><br><span class="line">       [--repo=&lt;repository&gt;] [-f | --force] [-d | --delete] [--prune] [-v | --verbose]</span><br><span class="line">       [-u | --set-upstream] [--push-option=&lt;string&gt;]</span><br><span class="line">       [--[no-]signed|--sign=(true|false|if-asked)]</span><br><span class="line">       [--force-with-lease[=&lt;refname&gt;[:&lt;expect&gt;]]]</span><br><span class="line">       [--no-verify] [&lt;repository&gt; [&lt;refspec&gt;…]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h2><p>使用本地引用更新远程引用，同时发送完成给定引用所需的对象。可以在每次推入存储库时，通过在那里设置挂钩触发一些事件。</p>
+<p>当命令行不指定使用<code>&lt;repository&gt;</code>参数推送的位置时，将查询当前分支的<code>branch.*.remote</code>配置以确定要在哪里推送。 如果配置丢失，则默认为<code>origin</code>。</p>
+<h2 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h2><p>以下是一些示例 -</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令表示，将本地的<code>master</code>分支推送到<code>origin</code>主机的<code>master</code>分支。如果<code>master</code>不存在，则会被新建。</p>
+<p>如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin :master</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 等同于</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin --delete master</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令表示删除<code>origin</code>主机的<code>master</code>分支。如果当前分支与远程分支之间存在追踪关系，则本地分支和远程分支都可以省略。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令表示，将当前分支推送到<code>origin</code>主机的对应分支。如果当前分支只有一个追踪分支，那么主机名都可以省略。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push</span></span><br></pre></td></tr></table></figure>
+
+<p>如果当前分支与多个主机存在追踪关系，则可以使用<code>-u</code>选项指定一个默认主机，这样后面就可以不加任何参数使用<code>git push</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push -u origin master</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令将本地的<code>master</code>分支推送到<code>origin</code>主机，同时指定<code>origin</code>为默认主机，后面就可以不加任何参数使用<code>git push</code>了。</p>
+<p>不带任何参数的<code>git push</code>，默认只推送当前分支，这叫做<code>simple</code>方式。此外，还有一种<code>matching</code>方式，会推送所有有对应的远程分支的本地分支。Git 2.0版本之前，默认采用<code>matching</code>方法，现在改为默认采用<code>simple</code>方式。如果要修改这个设置，可以采用<code>git config</code>命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git config --global push.default matching</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config --global push.default simple</span></span><br></pre></td></tr></table></figure>
+
+<p>还有一种情况，就是不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机，这时需要使用<code>–all</code>选项。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push --all origin</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令表示，将所有本地分支都推送到<code>origin</code>主机。<br>如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做<code>git pull</code>合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用<code>–force</code>选项。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push --force origin</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令使用<code>-–force</code>选项，结果导致在远程主机产生一个”非直进式”的合并(non-fast-forward merge)。除非你很确定要这样做，否则应该尽量避免使用<code>–-force</code>选项。</p>
+<p>最后，<code>git push</code>不会推送标签(tag)，除非使用<code>–tags</code>选项。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin --tags</span></span><br></pre></td></tr></table></figure>
+
+<p>将当前分支推送到远程的同名的简单方法，如下 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin HEAD</span></span><br></pre></td></tr></table></figure>
+
+<p>将当前分支推送到源存储库中的远程引用匹配主机。 这种形式方便推送当前分支，而不考虑其本地名称。如下 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin HEAD:master</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>其它示例</strong></p>
+<p>1.推送本地分支<code>lbranch-1</code>到新大远程分支<code>rbranch-1</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin lbranch-1:refs/rbranch-1</span></span><br></pre></td></tr></table></figure>
+
+<p>2.推送<code>lbranch-2</code>到已有的<code>rbranch-1</code>，用于补充<code>rbranch-1</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout lbranch-2</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git rebase rbranch-1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin lbranch-2:refs/rbranch-1</span></span><br></pre></td></tr></table></figure>
+
+<p>3.用本地分支<code>lbranch-3</code>覆盖远程分支<code>rbranch-1</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push -f origin lbranch-2:refs/rbranch-1</span></span><br></pre></td></tr></table></figure>
+
+<p>或者 - </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin :refs/rbranch-1   //删除远程的rbranch-1分支</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin lbranch-1:refs/rbranch-1</span></span><br></pre></td></tr></table></figure>
+
+<p>4.查看<code>push</code>的结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gitk rbranch-1</span></span><br></pre></td></tr></table></figure>
+
+<p>5.推送tag</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin tag_name</span></span><br></pre></td></tr></table></figure>
+
+<p>6.删除远程标签</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push origin :tag_name</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Git-rebase"><a href="#Git-rebase" class="headerlink" title="Git rebase"></a>Git rebase</h1><p><code>git rebase</code>命令在另一个分支基础之上重新应用，用于把一个分支的修改合并到当前分支。</p>
+<p><strong>使用语法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git rebase [-i | --interactive] [options] [--exec &lt;cmd&gt;] [--onto &lt;newbase&gt;]</span><br><span class="line">    [&lt;upstream&gt; [&lt;branch&gt;]]</span><br><span class="line">git rebase [-i | --interactive] [options] [--exec &lt;cmd&gt;] [--onto &lt;newbase&gt;]</span><br><span class="line">    --root [&lt;branch&gt;]</span><br><span class="line">git rebase --continue | --skip | --abort | --quit | --edit-todo</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h2><p>假设你现在基于远程分支”<code>origin</code>“，创建一个叫”<code>mywork</code>“的分支。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout -b mywork origin</span></span><br></pre></td></tr></table></figure>
+
+<p>结果如下所示 - </p>
+<p><img src="assets/842100748_44775.png" alt="img"></p>
+<p>现在我们在这个分支(<em>mywork</em>)做一些修改，然后生成两个提交(commit).</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi file.txt</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi otherfile.txt</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit</span></span><br><span class="line">... ...</span><br></pre></td></tr></table></figure>
+
+<p>但是与此同时，有些人也在”<code>origin</code>“分支上做了一些修改并且做了提交了，这就意味着”<code>origin</code>“和”<code>mywork</code>“这两个分支各自”前进”了，它们之间”分叉”了。</p>
+<p><img src="assets/810100749_17109.png" alt="img"></p>
+<p>在这里，你可以用”<code>pull</code>“命令把”<code>origin</code>“分支上的修改拉下来并且和你的修改合并； 结果看起来就像一个新的”合并的提交”(merge commit):</p>
+<p><img src="assets/350100750_71786.png" alt="img"></p>
+<p>但是，如果你想让”<code>mywork</code>“分支历史看起来像没有经过任何合并一样，也可以用 <code>git rebase</code>，如下所示:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout mywork</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git rebase origin</span></span><br></pre></td></tr></table></figure>
+
+<p>这些命令会把你的”<code>mywork</code>“分支里的每个提交(commit)取消掉，并且把它们临时 保存为补丁(patch)(这些补丁放到”<code>.git/rebase</code>“目录中),然后把”<code>mywork</code>“分支更新 到最新的”<code>origin</code>“分支，最后把保存的这些补丁应用到”<code>mywork</code>“分支上。</p>
+<p><img src="assets/845100751_76810.png" alt="img"></p>
+<p>当’<code>mywork</code>‘分支更新之后，它会指向这些新创建的提交(commit),而那些老的提交会被丢弃。 如果运行垃圾收集命令(pruning garbage collection), 这些被丢弃的提交就会删除. </p>
+<p><img src="assets/141100752_31232.png" alt="img"></p>
+<p>现在我们可以看一下用合并(merge)和用<code>rebase</code>所产生的历史的区别：</p>
+<p><img src="assets/645100753_82870.png" alt="img"></p>
+<p>在<code>rebase</code>的过程中，也许会出现冲突(conflict)。在这种情况，Git会停止<code>rebase</code>并会让你去解决冲突；在解决完冲突后，用”<code>git add</code>“命令去更新这些内容的索引(index), 然后，你无需执行 <code>git commit</code>,只要执行:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git rebase --<span class="built_in">continue</span></span></span><br></pre></td></tr></table></figure>
+
+<p>这样git会继续应用(apply)余下的补丁。</p>
+<h2 id="撤销操作git-rebase-–abort"><a href="#撤销操作git-rebase-–abort" class="headerlink" title="撤销操作git rebase –abort"></a>撤销操作git rebase –abort</h2><p>在任何时候，可以用<code>--abort</code>参数来终止<code>rebase</code>的操作，并且”<code>mywork</code>“ 分支会回到<code>rebase</code>开始前的状态。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git rebase --abort</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Git-Commit"><a href="#Git-Commit" class="headerlink" title="Git Commit"></a>Git Commit</h1><p>git commit –amend # 增补提交，会使用与当前提交节点相同的父节点进行一次新的提交，旧的提交将会被取消。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://www.yiibai.com/git/git_reset.html" target="_blank" rel="noopener">易百教程</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Heper</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://yoursite.com/2019/07/08/版本控制/Git：命令/" title="Git：命令">http://yoursite.com/2019/07/08/版本控制/Git：命令/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under CC BY-NC-SA 3.0 unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/07/数据库/Jooq/Jooq：文档/" rel="next" title="Jooq：文档">
+                <i class="fa fa-chevron-left"></i> Jooq：文档
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/08/系统架构/Dubbo：Start/" rel="prev" title="Dubbo：Start">
+                Dubbo：Start <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Heper">
+            
+              <p class="site-author-name" itemprop="name">Heper</p>
+              <p class="site-description motion-element" itemprop="description">To be awesome</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/smallpocket" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-reset"><span class="nav-number">1.</span> <span class="nav-text">Git reset</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">1.2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.3.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-checkout"><span class="nav-number">2.</span> <span class="nav-text">Git checkout</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例-1"><span class="nav-number">2.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-merge"><span class="nav-number">3.</span> <span class="nav-text">Git merge</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-2"><span class="nav-number">3.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例-2"><span class="nav-number">3.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-fetch"><span class="nav-number">4.</span> <span class="nav-text">Git fetch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-pull"><span class="nav-number">5.</span> <span class="nav-text">Git pull</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-3"><span class="nav-number">5.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例-3"><span class="nav-number">5.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-push"><span class="nav-number">6.</span> <span class="nav-text">Git push</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述-4"><span class="nav-number">6.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例-4"><span class="nav-number">6.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-rebase"><span class="nav-number">7.</span> <span class="nav-text">Git rebase</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#示例-5"><span class="nav-number">7.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销操作git-rebase-–abort"><span class="nav-number">7.2.</span> <span class="nav-text">撤销操作git rebase –abort</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Commit"><span class="nav-number">8.</span> <span class="nav-text">Git Commit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Gemini</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'smallpocket',
+            repo: 'Blog',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '435e469c98444b64d4133c7d692994c93a94c194',
+            
+                client_id: 'a5dc6afe65772e33c437'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

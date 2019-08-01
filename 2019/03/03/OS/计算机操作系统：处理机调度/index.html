@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Kopieren',
-      copy_success: 'Kopiert',
-      copy_failure: 'Kopieren fehlgeschlagen'
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
     }
   };
 </script>
@@ -65,13 +65,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="处理机调度是OS中用来管理处理机执行能力的这一部分的资源的功能 CPU资源的时分复用  进程切换：CPU资源的当前占用者切换 保存当前进程在PCB中的执行上下文（CPU状态） 恢复下一个进程的CPU状态   处理机调度 从就绪队列中挑选下一个占用CPU运行的进程 从多个可用CPU中挑选就绪进程可以使用的CPU资源（多处理器）   调度程序：挑选就绪进程的内核函数 调度策略：依据什么原则挑选进程、线">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/03/OS/计算机操作系统：处理机调度/assets/1551773942678.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/03/OS/计算机操作系统：处理机调度/assets/1551779306328.png">
-<meta property="og:updated_time" content="2019-04-08T07:17:05.597Z">
+<meta property="og:image" content="http://yoursite.com/assets/1551773942678.png">
+<meta property="og:image" content="http://yoursite.com/assets/1551779306328.png">
+<meta property="og:updated_time" content="2019-08-01T06:09:13.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机操作系统（6）：处理机调度">
 <meta name="twitter:description" content="处理机调度是OS中用来管理处理机执行能力的这一部分的资源的功能 CPU资源的时分复用  进程切换：CPU资源的当前占用者切换 保存当前进程在PCB中的执行上下文（CPU状态） 恢复下一个进程的CPU状态   处理机调度 从就绪队列中挑选下一个占用CPU运行的进程 从多个可用CPU中挑选就绪进程可以使用的CPU资源（多处理器）   调度程序：挑选就绪进程的内核函数 调度策略：依据什么原则挑选进程、线">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/03/OS/计算机操作系统：处理机调度/assets/1551773942678.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1551773942678.png">
   <link rel="canonical" href="http://yoursite.com/2019/03/03/OS/计算机操作系统：处理机调度/">
 
 
@@ -137,7 +137,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Navigationsleiste an/ausschalten">
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -157,7 +157,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -168,7 +168,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -179,7 +179,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
         
@@ -190,7 +190,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -201,7 +201,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
         
@@ -212,13 +212,13 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
 
   </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
-            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
         </li>
       
     </ul>
@@ -234,7 +234,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Suche..." spellcheck="false"
+             placeholder="Searching..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -296,14 +296,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2019-03-03 23:07:29" itemprop="dateCreated datePublished" datetime="2019-03-03T23:07:29+08:00">2019-03-03</time>
+              <time title="Created: 2019-03-03 23:07:29" itemprop="dateCreated datePublished" datetime="2019-03-03T23:07:29+08:00">2019-03-03</time>
             </span>
           
             
@@ -314,9 +314,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Geändert am: 2019-04-08 15:17:05" itemprop="dateModified" datetime="2019-04-08T15:17:05+08:00">2019-04-08</time>
+                <time title="Modified: 2019-08-01 14:09:13" itemprop="dateModified" datetime="2019-08-01T14:09:13+08:00">2019-08-01</time>
               </span>
             
           
@@ -325,7 +325,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span>
@@ -342,7 +342,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Aufrufe: </span>
+                <span class="post-meta-item-text">Views: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -355,7 +355,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Kommentare: </span>
+      <span class="post-meta-item-text">Comments: </span>
     
   
     <a href="/2019/03/03/OS/计算机操作系统：处理机调度/#comments" itemprop="discussionUrl">
@@ -515,7 +515,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/1551773942678.png" alt="1551773942678"></p>
+<p><img src="/assets/1551773942678.png" alt="1551773942678"></p>
 <h2 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h2><p>单处理器</p>
 <p>调度算法分类</p>
 <ul>
@@ -726,7 +726,7 @@
 <li>指操作系统中高优先级进程长时间等待低优先级进程所占用资源的现象</li>
 <li>基于优先级的可抢占调度算法存在这种问题</li>
 </ul>
-<p><img src="assets/1551779306328.png" alt="1551779306328"></p>
+<p><img src="/assets/1551779306328.png" alt="1551779306328"></p>
 <p>解决：</p>
 <ul>
 <li>优先级继承<ul>
@@ -804,10 +804,10 @@
     <div class="sidebar-inner">
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -828,7 +828,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">218</span>
-          <span class="site-state-item-name">Artikel</span>
+          <span class="site-state-item-name">posts</span>
         </a>
       </div>
     
@@ -879,7 +879,7 @@
           
         
         <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">Kategorien</span>
+        <span class="site-state-item-name">categories</span>
         
       </div>
     
@@ -964,7 +964,7 @@
           
         
         <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">schlagwörter</span>
+        <span class="site-state-item-name">tags</span>
         
       </div>
     
@@ -1008,9 +1008,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 

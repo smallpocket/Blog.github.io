@@ -210,7 +210,37 @@
     <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
     </ul>
+    <div class="site-search">
+      
+  <div class="algolia-popup popup search-popup">
+  <div class="algolia-search">
+    <div class="algolia-search-input-icon">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="algolia-search-input" id="algolia-search-input"></div>
+  </div>
+
+  <div class="algolia-results">
+    <div id="algolia-stats"></div>
+    <div id="algolia-hits"></div>
+    <div id="algolia-pagination" class="algolia-pagination"></div>
+  </div>
+
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+
+
+
+    </div>
 </nav>
 
 </div>
@@ -512,9 +542,9 @@
     <header class="post-header">
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2018/04/06/Java/框架/nutz/登陆注册/" itemprop="url">
+          <a class="post-title-link" href="/2018/04/06/Java/框架/nutz/增删改查/" itemprop="url">
             
-              <span itemprop="name">Nutz：登录注册</span>
+              <span itemprop="name">Nutz：增删改查</span>
             
           </a>
         
@@ -878,6 +908,14 @@
 
 
 
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/instantsearch.js@2/dist/instantsearch.min.css">
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@2/dist/instantsearch.js"></script>
+
+
+<script src="/js/algolia-search.js?v=7.2.0"></script>
 
 
 

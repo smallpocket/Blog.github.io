@@ -58,20 +58,21 @@
 </script>
 
   <meta name="description" content="domain建模示例发布帖子Round-I业务建模在大家的常识中，每个人都有自己的观点，并可以发表自己的观点，在社区中便表现为：发布帖子。那么谁发布帖子呢？ 很明显是帖子作者，于是我们便可以得到如下描述：帖子作者发布帖子。从上述描述中，我们很容易得到如下几个实体及其行为：帖子作者（PostAuthor）、帖子（Post），而PostAuthor拥有‘发布帖子’的业务行为，我们记着：posting(">
+<meta name="keywords" content="系统设计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="领域驱动设计：domain">
 <meta property="og:url" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="domain建模示例发布帖子Round-I业务建模在大家的常识中，每个人都有自己的观点，并可以发表自己的观点，在社区中便表现为：发布帖子。那么谁发布帖子呢？ 很明显是帖子作者，于是我们便可以得到如下描述：帖子作者发布帖子。从上述描述中，我们很容易得到如下几个实体及其行为：帖子作者（PostAuthor）、帖子（Post），而PostAuthor拥有‘发布帖子’的业务行为，我们记着：posting(">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/assets/849051-20170916213800235-1671481319.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/assets/849051-20170917095727297-570959893.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/assets/849051-20170917161428594-1398940496.png">
-<meta property="og:updated_time" content="2019-07-05T01:51:43.898Z">
+<meta property="og:image" content="http://yoursite.com/assets/849051-20170916213800235-1671481319.png">
+<meta property="og:image" content="http://yoursite.com/assets/849051-20170917095727297-570959893.png">
+<meta property="og:image" content="http://yoursite.com/assets/849051-20170917161428594-1398940496.png">
+<meta property="og:updated_time" content="2019-08-01T12:11:33.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="领域驱动设计：domain">
 <meta name="twitter:description" content="domain建模示例发布帖子Round-I业务建模在大家的常识中，每个人都有自己的观点，并可以发表自己的观点，在社区中便表现为：发布帖子。那么谁发布帖子呢？ 很明显是帖子作者，于是我们便可以得到如下描述：帖子作者发布帖子。从上述描述中，我们很容易得到如下几个实体及其行为：帖子作者（PostAuthor）、帖子（Post），而PostAuthor拥有‘发布帖子’的业务行为，我们记着：posting(">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/assets/849051-20170916213800235-1671481319.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/849051-20170916213800235-1671481319.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：domain/">
 
 
@@ -303,11 +304,21 @@
                 
               
 
-              <time title="Erstellt: 2019-07-05 09:26:22 / Geändert am: 09:51:43" itemprop="dateCreated datePublished" datetime="2019-07-05T09:26:22+08:00">2019-07-05</time>
+              <time title="Erstellt: 2019-07-05 09:26:22" itemprop="dateCreated datePublished" datetime="2019-07-05T09:26:22+08:00">2019-07-05</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Bearbeitet am</span>
+                
+                <time title="Geändert am: 2019-08-01 20:11:33" itemprop="dateModified" datetime="2019-08-01T20:11:33+08:00">2019-08-01</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -367,14 +378,14 @@
       
         <h1 id="domain建模示例"><a href="#domain建模示例" class="headerlink" title="domain建模示例"></a>domain建模示例</h1><h1 id="发布帖子"><a href="#发布帖子" class="headerlink" title="发布帖子"></a>发布帖子</h1><h2 id="Round-I"><a href="#Round-I" class="headerlink" title="Round-I"></a>Round-I</h2><h3 id="业务建模"><a href="#业务建模" class="headerlink" title="业务建模"></a>业务建模</h3><p>在大家的常识中，每个人都有自己的观点，并可以发表自己的观点，在社区中便表现为：发布帖子。那么谁发布帖子呢？ 很明显是帖子作者，于是我们便可以得到如下描述：<strong>帖子作者发布帖子</strong>。从上述描述中，我们很容易得到如下几个实体及其行为：帖子作者（PostAuthor）、帖子（Post），而PostAuthor拥有‘发布帖子’的业务行为，我们记着：posting()。</p>
 <p>我们再细化现有的模型中的实体。作为实体，必须有一个唯一业务标识，我们为PostAuthor添加一个’作者编号’（authorId），为Post添加一个‘帖子编号’（postId）；PostAuthor可能还存在其他一些属性，我们暂且不管，因为对于我们现在的业务场景无关紧要；再看Post实体，很明显帖子有‘帖子标题’（postTitle）、‘帖子正文’（postContent）、‘帖子发布时间’（postingTime）等等。同时，从业务上要求：帖子发帖时间即为帖子发布动作发生的时间点，帖子的作者是不能为空的，帖子的内容不能为空，帖子的标题可以为空。</p>
-<p>​此外，为了减少垃圾帖对社区的负面影响，对于‘帖子内容’强制要求帖子内容长度必须不少于16个汉字，字母和数字等同于汉字处理。</p>
+<p>此外，为了减少垃圾帖对社区的负面影响，对于‘帖子内容’强制要求帖子内容长度必须不少于16个汉字，字母和数字等同于汉字处理。</p>
 <p>总结可以得到‘发布帖子’场景的业务模型描述：</p>
 <ul>
 <li><strong>帖子作者发布帖子，帖子标题可以为空，帖子内容不能为空，且不少于16个汉字。</strong> </li>
 </ul>
 <p>鉴于PostAuthor和Post关系紧密，我们姑且将其和Post放到同一个模块，但是Post看上去并不是PostAuthor的根实体，有点怪怪的感觉，暂且不追究。</p>
 <h3 id="业务模型"><a href="#业务模型" class="headerlink" title="业务模型"></a>业务模型</h3><p>综上，于是我们得到如下的业务模型：</p>
-<p>　　<img src="assets/849051-20170916213800235-1671481319.png" alt="img"></p>
+<p>　　<img src="/assets/849051-20170916213800235-1671481319.png" alt="img"></p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="Post-java"><a href="#Post-java" class="headerlink" title="Post.java"></a>Post.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 帖子实体</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> DAOQIDELV</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@CreateDate</span> 2017年9月16日</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Post</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 帖子id</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *帖子作者</span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> authorId;    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子标题</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 帖子源内容</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String sourceContent;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发帖时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Timestamp postingTime;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Post</span><span class="params">(<span class="keyword">long</span> authorId, String title, String sourceContent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setAuthorId(authorId);</span><br><span class="line">        <span class="keyword">this</span>.setTitle(title);</span><br><span class="line">        <span class="keyword">this</span>.setSourceContent(sourceContent);</span><br><span class="line">        <span class="keyword">this</span>.postingTime = <span class="keyword">new</span> Timestamp(System.currentTimeMillis());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> authorId the authorId to set</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAuthorId</span><span class="params">(<span class="keyword">long</span> authorId)</span> </span>&#123;</span><br><span class="line">        Assert.isTrue(authorId &gt; <span class="number">0</span>, <span class="string">"Post's authorId must greater than ZERO."</span>);</span><br><span class="line">        <span class="keyword">this</span>.authorId = authorId;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sourceContent the sourceContent to set</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSourceContent</span><span class="params">(String sourceContent)</span> </span>&#123;</span><br><span class="line">        Assert.isTrue(!StringUtils.isEmpty(sourceContent), <span class="string">"Post's sourceContent must NOT be empty."</span>);</span><br><span class="line">        <span class="keyword">this</span>.sourceContent = sourceContent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//ignore some setter/getter</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="PostAuthor-java"><a href="#PostAuthor-java" class="headerlink" title="PostAuthor.java"></a>PostAuthor.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 帖子作者</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> DAOQIDELV</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@CreateDate</span> 2017年9月16日</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PostAuthor</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PostAuthor</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发布帖子</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> title</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sourceContent</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Post 发布得到的帖子</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Post <span class="title">posting</span><span class="params">(String title, String sourceContent)</span> <span class="keyword">throws</span> BusinessException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sourceContent.length() &lt; <span class="number">16</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(ExceptionCode.POST_SOURCE_CONTENT_AT_LEAST_SIXTEEN_WORDS);</span><br><span class="line">        &#125;</span><br><span class="line">        Post post = <span class="keyword">new</span> Post(<span class="keyword">this</span>.id, title, sourceContent);</span><br><span class="line">        <span class="keyword">return</span> post;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">       <span class="comment">//ignore some setter/getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -402,7 +413,7 @@
 <p>　　再来看业务行为，我们将“帖子加入话题”这个业务行为命名为joinTopics(String topics)，字面上‘帖子’是主语，显然joinTopics是Post的业务方法，在这个业务方法中，我们实现业务规则：帖子可以加入的话题数不能多于五个。</p>
 <p>　　上述关于TopicPost值对象引入的讨论非常典型，在两个实体存在关联关系时，可以参考建模。</p>
 <h3 id="业务模型-1"><a href="#业务模型-1" class="headerlink" title="业务模型"></a>业务模型</h3><p>　　综合上面的讨论，我们得到最新的业务模型如下：</p>
-<p><img src="assets/849051-20170917095727297-570959893.png" alt="img"></p>
+<p><img src="/assets/849051-20170917095727297-570959893.png" alt="img"></p>
 <h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><p>PostAuthor.java没有变化，更改Post.java，新增Topic.java和TopicPost.java：</p>
 <h4 id="Post-java-new"><a href="#Post-java-new" class="headerlink" title="Post.java(new)"></a>Post.java(new)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Post</span> </span>&#123;</span><br><span class="line">      ......  </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将帖子关联话题 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> topicIds 话题集合</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">joinTopics</span><span class="params">(String topicIds)</span> <span class="keyword">throws</span> BusinessException</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isEmpty(topicIds)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String[] topicIdArray = topicIds.split(CommonConstants.COMMA);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;topicIdArray.length; i++) &#123;</span><br><span class="line">            TopicPost topicPost = <span class="keyword">new</span> TopicPost(Long.valueOf(topicIdArray[i]), <span class="keyword">this</span>.getId());</span><br><span class="line">            <span class="keyword">this</span>.topics.add(topicPost);</span><br><span class="line">            <span class="keyword">if</span>(topicSize() &gt; MAX_JOINED_TOPICS_NUM) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(ExceptionCode.ONE_POST_MOST_JOIN_INTO_FIVE_TOPICS);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取本帖子加入的话题数，参考jdk collection的api设计</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 本帖子加入的话题数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">topicSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.topics.size();</span><br><span class="line">    &#125;</span><br><span class="line">      ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -424,7 +435,7 @@
 <p>　　上面虽然已经创建了一个领域服务专门来承担‘内容过滤’的职责，但是这个业务行为仍然应当属于Post实体，因此我们为Post增加一个filt()业务行为，在这个业务行为中，会去调用“过滤标题”（filtTitle()） 和 “过滤正文”（filtMainBody()）l两个业务方法完成。而filtTitle()和filtMainBody()则会将具体的内容过滤工作委托给上面提到的责任链模式实现的领域服务ContentFilter。</p>
 <p>　　由于ContentFilter这一领域服务采用责任链模式实现，类较多，如果放置到post module下面，不利于阅读，且考虑到后续的评论等场景可能使用到这个服务，故将其单独建立module，取名为：domain.service.contentfilter。</p>
 <h3 id="业务模型-2"><a href="#业务模型-2" class="headerlink" title="业务模型"></a>业务模型</h3><p>　　综上，我们可以得到如下业务模型：</p>
-<p> <img src="assets/849051-20170917161428594-1398940496.png" alt="img"></p>
+<p> <img src="/assets/849051-20170917161428594-1398940496.png" alt="img"></p>
 <h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><p>Post.java(new)</p>
 <p>PostStatus.java</p>
 <p>PostMainBodyContentFilterChain.java</p>
@@ -461,6 +472,12 @@
     
 
     <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/系统设计/" rel="tag"># 系统设计</a>
+          
+        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
               <a href="/2019/07/05/系统架构/领域驱动设计：概述/" rel="next" title="领域驱动设计：概述">
@@ -533,7 +550,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -586,7 +603,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -677,7 +696,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

@@ -64,12 +64,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。  正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。   分布式锁的一些特点当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/04/15/Java/框架/分布式：分布式锁/assets/16653450d45a2a96">
-<meta property="og:updated_time" content="2019-05-10T09:09:50.211Z">
+<meta property="og:image" content="http://yoursite.com/assets/16653450d45a2a96">
+<meta property="og:updated_time" content="2019-08-01T11:51:27.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式：分布式锁">
 <meta name="twitter:description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。  正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。   分布式锁的一些特点当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/15/Java/框架/分布式：分布式锁/assets/16653450d45a2a96">
+<meta name="twitter:image" content="http://yoursite.com/assets/16653450d45a2a96">
   <link rel="canonical" href="http://yoursite.com/2019/04/15/Java/框架/分布式：分布式锁/">
 
 
@@ -314,7 +314,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-05-10 17:09:50" itemprop="dateModified" datetime="2019-05-10T17:09:50+08:00">2019-05-10</time>
+                <time title="Geändert am: 2019-08-01 19:51:27" itemprop="dateModified" datetime="2019-08-01T19:51:27+08:00">2019-08-01</time>
               </span>
             
           
@@ -412,7 +412,7 @@
 <h1 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h1><h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h1 id="分布式锁的安全问题"><a href="#分布式锁的安全问题" class="headerlink" title="分布式锁的安全问题"></a>分布式锁的安全问题</h1><p>上面我们介绍过红锁，但是Martin Kleppmann认为其依然不安全。有关于Martin反驳的几点，我认为其实不仅仅局限于RedLock,前面说的算法基本都有这个问题，下面我们来讨论一下这些问题:</p>
 <ul>
 <li><p>长时间的GC pause:熟悉Java的同学肯定对GC不陌生，在GC的时候会发生STW(stop-the-world),例如CMS垃圾回收器，他会有两个阶段进行STW防止引用继续进行变化。那么有可能会出现下面图(引用至Martin反驳Redlock的文章)中这个情况： </p>
-<p><img src="assets/16653450d45a2a96" alt="img"></p>
+<p><img src="/assets/16653450d45a2a96" alt="img"></p>
 <p> client1获取了锁并且设置了锁的超时时间，但是client1之后出现了STW，这个STW时间比较长，导致分布式锁进行了释放，client2获取到了锁，这个时候client1恢复了锁，那么就会出现client1，2同时获取到锁，这个时候分布式锁不安全问题就出现了。这个其实不仅仅局限于RedLock,对于我们的ZK,Mysql一样的有同样的问题。</p>
 </li>
 <li><p>时钟发生跳跃:对于Redis服务器如果其时间发生了向跳跃，那么肯定会影响我们锁的过期时间，那么我们的锁过期时间就不是我们预期的了，也会出现client1和client2获取到同一把锁，那么也会出现不安全，这个对于Mysql也会出现。但是ZK由于没有设置过期时间，那么发生跳跃也不会受影响。</p>
@@ -518,7 +518,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -571,7 +571,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -662,7 +664,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

@@ -65,13 +65,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="装饰者模式提出问题 将对象包装起来，赋予他们新的职责  为什么要用（作用） 为对象动态添加功能。  应用场景基础概述是什么装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/04/19/Java/设计模式/设计模式：装饰者模式/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/19/Java/设计模式/设计模式：装饰者模式/assets/c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg">
-<meta property="og:updated_time" content="2019-06-10T07:08:49.141Z">
+<meta property="og:image" content="http://yoursite.com/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png">
+<meta property="og:image" content="http://yoursite.com/assets/c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg">
+<meta property="og:updated_time" content="2019-08-01T12:03:22.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：装饰者模式">
 <meta name="twitter:description" content="装饰者模式提出问题 将对象包装起来，赋予他们新的职责  为什么要用（作用） 为对象动态添加功能。  应用场景基础概述是什么装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/19/Java/设计模式/设计模式：装饰者模式/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/19/Java/设计模式/设计模式：装饰者模式/">
 
 
@@ -316,7 +316,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-06-10 15:08:49" itemprop="dateModified" datetime="2019-06-10T15:08:49+08:00">2019-06-10</time>
+                <time title="Geändert am: 2019-08-01 20:03:22" itemprop="dateModified" datetime="2019-08-01T20:03:22+08:00">2019-08-01</time>
               </span>
             
           
@@ -382,7 +382,7 @@
 <li>为对象动态添加功能。</li>
 </ul>
 <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者的功能。装饰者的方法有一部分是自己的，这属于它的功能，然后调用被装饰者的方法实现，从而也保留了被装饰者的功能。可以看到，具体组件应当是装饰层次的最低层，因为只有具体组件的方法实现不需要依赖于其它对象。</p>
-<p><img src="assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png" alt="img"></p>
+<p><img src="/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png" alt="img"></p>
 <h3 id="分类，各个分类是什么"><a href="#分类，各个分类是什么" class="headerlink" title="分类，各个分类是什么"></a>分类，各个分类是什么</h3><p>以饮料为例</p>
 <ul>
 <li>装饰者：调料。Decorator</li>
@@ -404,7 +404,7 @@
 <p>装饰者即与需要装饰的对象实现同一个接口，并且在装饰者当中留有一个接口的引用用于引用被装饰对象。</p>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>设计不同种类的饮料，饮料可以添加配料，比如可以添加牛奶，并且支持动态添加新配料。每增加一种配料，该饮料的价格就会增加，要求计算一种饮料的价格。</p>
 <p>下图表示在 DarkRoast 饮料上新增新添加 Mocha 配料，之后又添加了 Whip 配料。DarkRoast 被 Mocha 包裹，Mocha 又被 Whip 包裹。它们都继承自相同父类，都有 cost() 方法，外层类的 cost() 方法调用了内层类的 cost() 方法。</p>
-<p><img src="assets/c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg" alt="img"></p>
+<p><img src="/assets/c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg" alt="img"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//装饰者</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DarkRoast</span> <span class="keyword">implements</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -508,7 +508,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -561,7 +561,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -652,7 +654,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

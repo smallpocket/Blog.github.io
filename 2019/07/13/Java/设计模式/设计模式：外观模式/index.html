@@ -65,12 +65,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="外观模式提出问题将一组类转换，提供一个简易接口 为什么要用（作用）应用场景当面对一个场景：需要挑选一个DVD，则需要进行  打开爆米花机、开始爆米花、调暗灯光、放下屏幕、打开投影机、输入切换道DVD、打开功放、功放切换道DVD、设置立体声、设置音量、打开DVD、播放DVD 倘若关闭，还需要反向操作。非常复杂  基础概述是什么外观模式是一个改变接口的新模式，改变接口的原因是为了简化接口。 外观模式将">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/13/Java/设计模式/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1555666122197.png">
-<meta property="og:updated_time" content="2019-07-13T02:33:09.648Z">
+<meta property="og:image" content="http://yoursite.com/assets/1555666122197.png">
+<meta property="og:updated_time" content="2019-08-01T12:02:38.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：外观模式">
 <meta name="twitter:description" content="外观模式提出问题将一组类转换，提供一个简易接口 为什么要用（作用）应用场景当面对一个场景：需要挑选一个DVD，则需要进行  打开爆米花机、开始爆米花、调暗灯光、放下屏幕、打开投影机、输入切换道DVD、打开功放、功放切换道DVD、设置立体声、设置音量、打开DVD、播放DVD 倘若关闭，还需要反向操作。非常复杂  基础概述是什么外观模式是一个改变接口的新模式，改变接口的原因是为了简化接口。 外观模式将">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/13/Java/设计模式/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1555666122197.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1555666122197.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/13/Java/设计模式/设计模式：外观模式/">
 
 
@@ -302,11 +302,21 @@
                 
               
 
-              <time title="Erstellt: 2019-07-13 10:32:40 / Geändert am: 10:33:09" itemprop="dateCreated datePublished" datetime="2019-07-13T10:32:40+08:00">2019-07-13</time>
+              <time title="Erstellt: 2019-07-13 10:32:40" itemprop="dateCreated datePublished" datetime="2019-07-13T10:32:40+08:00">2019-07-13</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Bearbeitet am</span>
+                
+                <time title="Geändert am: 2019-08-01 20:02:38" itemprop="dateModified" datetime="2019-08-01T20:02:38+08:00">2019-08-01</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -382,7 +392,7 @@
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeTheaterFacade</span> </span>&#123;</span><br><span class="line">    <span class="comment">//看DVD所需要的全部组件</span></span><br><span class="line">	Amplifier amp;</span><br><span class="line">	Tuner tuner;</span><br><span class="line">	DvdPlayer dvd;</span><br><span class="line">	CdPlayer cd;</span><br><span class="line">	Projector projector;</span><br><span class="line">	TheaterLights lights;</span><br><span class="line">	Screen screen;</span><br><span class="line">	PopcornPopper popper;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">HomeTheaterFacade</span><span class="params">(Amplifier amp, </span></span></span><br><span class="line"><span class="function"><span class="params">				 Tuner tuner, </span></span></span><br><span class="line"><span class="function"><span class="params">				 DvdPlayer dvd, </span></span></span><br><span class="line"><span class="function"><span class="params">				 CdPlayer cd, </span></span></span><br><span class="line"><span class="function"><span class="params">				 Projector projector, </span></span></span><br><span class="line"><span class="function"><span class="params">				 Screen screen,</span></span></span><br><span class="line"><span class="function"><span class="params">				 TheaterLights lights,</span></span></span><br><span class="line"><span class="function"><span class="params">				 PopcornPopper popper)</span> </span>&#123;</span><br><span class="line">	 </span><br><span class="line">		<span class="keyword">this</span>.amp = amp;</span><br><span class="line">		<span class="keyword">this</span>.tuner = tuner;</span><br><span class="line">		<span class="keyword">this</span>.dvd = dvd;</span><br><span class="line">		<span class="keyword">this</span>.cd = cd;</span><br><span class="line">		<span class="keyword">this</span>.projector = projector;</span><br><span class="line">		<span class="keyword">this</span>.screen = screen;</span><br><span class="line">		<span class="keyword">this</span>.lights = lights;</span><br><span class="line">		<span class="keyword">this</span>.popper = popper;</span><br><span class="line">	&#125;</span><br><span class="line">	 <span class="comment">//将操作全部封装到外观当中</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">watchMovie</span><span class="params">(String movie)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Get ready to watch a movie..."</span>);</span><br><span class="line">		popper.on();</span><br><span class="line">		popper.pop();</span><br><span class="line">		lights.dim(<span class="number">10</span>);</span><br><span class="line">		screen.down();</span><br><span class="line">		projector.on();</span><br><span class="line">		projector.wideScreenMode();</span><br><span class="line">		amp.on();</span><br><span class="line">		amp.setDvd(dvd);</span><br><span class="line">		amp.setSurroundSound();</span><br><span class="line">		amp.setVolume(<span class="number">5</span>);</span><br><span class="line">		dvd.on();</span><br><span class="line">		dvd.play(movie);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endMovie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Shutting movie theater down..."</span>);</span><br><span class="line">		popper.off();</span><br><span class="line">		lights.on();</span><br><span class="line">		screen.up();</span><br><span class="line">		projector.off();</span><br><span class="line">		amp.off();</span><br><span class="line">		dvd.stop();</span><br><span class="line">		dvd.eject();</span><br><span class="line">		dvd.off();</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listenToCd</span><span class="params">(String cdTitle)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Get ready for an audiopile experence..."</span>);</span><br><span class="line">		lights.on();</span><br><span class="line">		amp.on();</span><br><span class="line">		amp.setVolume(<span class="number">5</span>);</span><br><span class="line">		amp.setCd(cd);</span><br><span class="line">		amp.setStereoSound();</span><br><span class="line">		cd.on();</span><br><span class="line">		cd.play(cdTitle);</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endCd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Shutting down CD..."</span>);</span><br><span class="line">		amp.off();</span><br><span class="line">		amp.setCd(cd);</span><br><span class="line">		cd.eject();</span><br><span class="line">		cd.off();</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listenToRadio</span><span class="params">(<span class="keyword">double</span> frequency)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Tuning in the airwaves..."</span>);</span><br><span class="line">		tuner.on();</span><br><span class="line">		tuner.setFrequency(frequency);</span><br><span class="line">		amp.on();</span><br><span class="line">		amp.setVolume(<span class="number">5</span>);</span><br><span class="line">		amp.setTuner(tuner);</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endRadio</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Shutting down the tuner..."</span>);</span><br><span class="line">		tuner.off();</span><br><span class="line">		amp.off();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><h4 id="与其他的区别"><a href="#与其他的区别" class="headerlink" title="与其他的区别"></a>与其他的区别</h4><p>UML类图</p>
-<p><img src="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1555666122197.png" alt="1555666122197"></p>
+<p><img src="/assets/1555666122197.png" alt="1555666122197"></p>
 <h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -472,7 +482,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -525,7 +535,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -616,7 +628,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

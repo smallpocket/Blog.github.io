@@ -58,37 +58,37 @@
 </script>
 
   <meta name="description" content="AOP产生的背景为了能够更好地将系统级别的代码抽离出来，去掉与对象的耦合，就产生了面向AOP（面向切面）。如上图所示，OOP属于一种横向扩展，AOP是一种纵向扩展。AOP依托于OOP，进一步将系统级别的代码抽象出来，进行纵向排列，实现低耦合。 应用场景 日志、安全性、事务等  AOP 的家庭成员PointCut即在哪个地方进行切入,它可以指定某一个点，也可以指定多个点。 比如类A的methord函">
-<meta name="keywords" content="Spring,框架">
+<meta name="keywords" content="框架,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring：AOP">
 <meta property="og:url" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="AOP产生的背景为了能够更好地将系统级别的代码抽离出来，去掉与对象的耦合，就产生了面向AOP（面向切面）。如上图所示，OOP属于一种横向扩展，AOP是一种纵向扩展。AOP依托于OOP，进一步将系统级别的代码抽象出来，进行纵向排列，实现低耦合。 应用场景 日志、安全性、事务等  AOP 的家庭成员PointCut即在哪个地方进行切入,它可以指定某一个点，也可以指定多个点。 比如类A的methord函">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea5e927d8">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea399586b">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea3e1fbcf">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea4fdea1d">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259edfbea6f0">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea8ffc354">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/163925a0307e7c6e">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f25f81c96">
+<meta property="og:image" content="http://yoursite.com/assets/1639259ea5e927d8">
+<meta property="og:image" content="http://yoursite.com/assets/1639259ea399586b">
+<meta property="og:image" content="http://yoursite.com/assets/1639259ea3e1fbcf">
+<meta property="og:image" content="http://yoursite.com/assets/1639259ea4fdea1d">
+<meta property="og:image" content="http://yoursite.com/assets/1639259edfbea6f0">
+<meta property="og:image" content="http://yoursite.com/assets/1639259ea8ffc354">
+<meta property="og:image" content="http://yoursite.com/assets/163925a0307e7c6e">
+<meta property="og:image" content="http://yoursite.com/assets/1639259f25f81c96">
 <meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f27c9deaf">
 <meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f334512f0">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f3be5cbb2">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f48e7ef5a">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f3916db2c">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f856b96ea">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f85f3f536">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259f88bcecc8">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259fa6f87c3a">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259faa1e4069">
-<meta property="og:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/163925ac9488dccf">
-<meta property="og:updated_time" content="2019-05-09T12:38:00.864Z">
+<meta property="og:image" content="http://yoursite.com/assets/1639259f3be5cbb2">
+<meta property="og:image" content="http://yoursite.com/assets/1639259f48e7ef5a">
+<meta property="og:image" content="http://yoursite.com/assets/1639259f3916db2c">
+<meta property="og:image" content="http://yoursite.com/assets/1639259f856b96ea">
+<meta property="og:image" content="http://yoursite.com/assets/1639259f85f3f536">
+<meta property="og:image" content="http://yoursite.com/assets/1639259f88bcecc8">
+<meta property="og:image" content="http://yoursite.com/assets/1639259fa6f87c3a">
+<meta property="og:image" content="http://yoursite.com/assets/1639259faa1e4069">
+<meta property="og:image" content="http://yoursite.com/assets/163925ac9488dccf">
+<meta property="og:updated_time" content="2019-08-01T11:55:25.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring：AOP">
 <meta name="twitter:description" content="AOP产生的背景为了能够更好地将系统级别的代码抽离出来，去掉与对象的耦合，就产生了面向AOP（面向切面）。如上图所示，OOP属于一种横向扩展，AOP是一种纵向扩展。AOP依托于OOP，进一步将系统级别的代码抽象出来，进行纵向排列，实现低耦合。 应用场景 日志、安全性、事务等  AOP 的家庭成员PointCut即在哪个地方进行切入,它可以指定某一个点，也可以指定多个点。 比如类A的methord函">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/assets/1639259ea5e927d8">
+<meta name="twitter:image" content="http://yoursite.com/assets/1639259ea5e927d8">
   <link rel="canonical" href="http://yoursite.com/2019/03/26/Java/框架/Spring：AOP/">
 
 
@@ -333,7 +333,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-05-09 20:38:00" itemprop="dateModified" datetime="2019-05-09T20:38:00+08:00">2019-05-09</time>
+                <time title="Geändert am: 2019-08-01 19:55:25" itemprop="dateModified" datetime="2019-08-01T19:55:25+08:00">2019-08-01</time>
               </span>
             
           
@@ -431,7 +431,7 @@
 <p>以上就是三种代理的实现方式，但千成别被迷惑了，在Spring AOP中这些东西已经被封装了，不需要我们自己实现。要不然得累死，但了解AOP的实现原理（即基于代理）还是很有必要的。</p>
 <h1 id="Spring-AOP全面认知"><a href="#Spring-AOP全面认知" class="headerlink" title="Spring AOP全面认知"></a>Spring AOP全面认知</h1><h2 id="AOP概述"><a href="#AOP概述" class="headerlink" title="AOP概述"></a>AOP概述</h2><p>AOP称为面向切面编程，那我们怎么理解面向切面编程？？</p>
 <p>我们可以先看看下面这段代码：</p>
-<p><img src="assets/1639259ea5e927d8" alt="img"></p>
+<p><img src="/assets/1639259ea5e927d8" alt="img"></p>
 <p>我们学Java面向对象的时候，如果代码重复了怎么办啊？？可以分成下面几个步骤：</p>
 <ul>
 <li>1：抽取成方法</li>
@@ -442,9 +442,9 @@
 <li>通过继承的方式实现纵向抽取</li>
 </ul>
 <p>但是，我们现在的办法不行：即使抽取成类还是会出现重复的代码，因为这些逻辑(开始、结束、提交事务)<strong>依附在我们业务类的方法逻辑中</strong>！</p>
-<p><img src="assets/1639259ea399586b" alt="img"></p>
+<p><img src="/assets/1639259ea399586b" alt="img"></p>
 <p>现在纵向抽取的方式不行了，AOP的理念：就是将<strong>分散在各个业务逻辑代码中相同的代码通过横向切割的方式</strong>抽取到一个独立的模块中！</p>
-<p><img src="assets/1639259ea3e1fbcf" alt="img"></p>
+<p><img src="/assets/1639259ea3e1fbcf" alt="img"></p>
 <p>上面的图也很清晰了，将重复性的逻辑代码横切出来其实很容易(我们简单可认为就是封装成一个类就好了)，但我们要将这些<strong>被我们横切出来的逻辑代码融合到业务逻辑中</strong>，来完成和之前(没抽取前)一样的功能！这就是AOP首要解决的问题了！</p>
 <h2 id="Spring-AOP原理"><a href="#Spring-AOP原理" class="headerlink" title="Spring AOP原理"></a>Spring AOP原理</h2><blockquote>
 <p>被我们横切出来的逻辑代码融合到业务逻辑中，来完成和之前(没抽取前)一样的功能</p>
@@ -468,7 +468,7 @@
 <li>JDK动态代理</li>
 <li>CGLib动态代理</li>
 </ul>
-<p><img src="assets/1639259ea4fdea1d" alt="img"></p>
+<p><img src="/assets/1639259ea4fdea1d" alt="img"></p>
 <p>JDK动态代理是需要实现某个接口了，而我们类未必全部会有接口，于是CGLib代理就有了~~</p>
 <ul>
 <li>CGLib代理其生成的动态代理对象是目标类的子类</li>
@@ -551,18 +551,18 @@
 </ul>
 <h1 id="基于代理的经典SpringAOP"><a href="#基于代理的经典SpringAOP" class="headerlink" title="基于代理的经典SpringAOP"></a>基于代理的经典SpringAOP</h1><p>这部分配置比较麻烦，用起来也很麻烦，这里我就主要整理一下书上的内容，大家看看了解一下吧，我们实际上使用Spring AOP基本不用这种方式了！</p>
 <p>首先，我们来看一下增强接口的继承关系图：</p>
-<p><img src="assets/1639259edfbea6f0" alt="img"></p>
+<p><img src="/assets/1639259edfbea6f0" alt="img"></p>
 <p>可以分成<strong>五类</strong>增强的方式：</p>
-<p><img src="assets/1639259ea8ffc354" alt="img"></p>
+<p><img src="/assets/1639259ea8ffc354" alt="img"></p>
 <p>Spring提供了<strong>六种的切点类型</strong>：</p>
-<p><img src="assets/163925a0307e7c6e" alt="img"></p>
+<p><img src="/assets/163925a0307e7c6e" alt="img"></p>
 <p><strong>切面类型主要分成了三种</strong>：</p>
 <ul>
 <li><strong>一般切面</strong></li>
 <li><strong>切点切面</strong></li>
 <li><strong>引介/引入切面</strong></li>
 </ul>
-<p><img src="assets/1639259f25f81c96" alt="img"></p>
+<p><img src="/assets/1639259f25f81c96" alt="img"></p>
 <p>一般切面，切点切面，引介/引入切面介绍：</p>
 <p><img src="assets/1639259f27c9deaf" alt="img"></p>
 <p><img src="assets/1639259f334512f0" alt="img"></p>
@@ -571,7 +571,7 @@
 <li>引介/引入切面是引介/引入增强的封装器，通过引介/引入切面，<strong>可以更容易地为现有对象添加任何接口的实现</strong>！</li>
 </ul>
 <p>继承关系图：</p>
-<p><img src="assets/1639259f3be5cbb2" alt="img"></p>
+<p><img src="/assets/1639259f3be5cbb2" alt="img"></p>
 <p>引介/引入切面有两个实现类：</p>
 <ul>
 <li>DefaultIntroductionAdvisor：常用的实现类</li>
@@ -585,7 +585,7 @@
 <li>基于Bean中的AspectJ注解标签的自动代理创建器：AnnotationAwareAspectJAutoProxyCreator</li>
 </ul>
 <p>对应的类继承图：</p>
-<p><img src="assets/1639259f48e7ef5a" alt="img"></p>
+<p><img src="/assets/1639259f48e7ef5a" alt="img"></p>
 <p>嗯，基于代理的经典SpringAOP就讲到这里吧，其实我是不太愿意去写这个的，因为已经几乎不用了，在《Spring 实战 第4版》也没有这部分的知识点了。</p>
 <ul>
 <li>但是通过这部分的知识点可以<strong>更加全面地认识Spring AOP的各种接口</strong>吧~</li>
@@ -597,11 +597,11 @@
 <li>可以无缝地集成AspectJ</li>
 </ul>
 <p>那我们使用<code>@AspectJ</code>来玩AOP的话，学什么？？其实也就是上面的内容，学如何设置切点、创建切面、增强的内容是什么…</p>
-<p><img src="assets/1639259f3916db2c" alt="img"></p>
+<p><img src="/assets/1639259f3916db2c" alt="img"></p>
 <p>具体的切点表达式使用还是前往：<a href="https://link.juejin.im?target=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzI4Njg5MDA5NA%3D%3D%26mid%3D2247483954%26idx%3D1%26sn%3Db34e385ed716edf6f58998ec329f9867%26chksm%3Debd74333dca0ca257a77c02ab458300ef982adff3cf37eb6d8d2f985f11df5cc07ef17f659d4%23rd" target="_blank" rel="noopener">Spring【AOP模块】就这么简单</a>看吧~~</p>
 <p>对应的增强注解：</p>
-<p><img src="assets/1639259f856b96ea" alt="img"></p>
-<p><img src="assets/1639259f85f3f536" alt="img"></p>
+<p><img src="/assets/1639259f856b96ea" alt="img"></p>
+<p><img src="/assets/1639259f85f3f536" alt="img"></p>
 <h2 id="使用引介-引入功能实现为Bean引入新方法"><a href="#使用引介-引入功能实现为Bean引入新方法" class="headerlink" title="使用引介/引入功能实现为Bean引入新方法"></a>使用引介/引入功能实现为Bean引入新方法</h2><p>其实前置啊、后置啊这些很容易就理解了，整篇文章看下来就只有这个引介/引入切面有点搞头。于是我们就来玩玩吧~</p>
 <p>我们来看一下具体的用法吧，现在我有个服务员的接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Waiter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向客人打招呼</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greetTo</span><span class="params">(String clientName)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 服务</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">serveTo</span><span class="params">(String clientName)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -617,7 +617,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmartSeller</span> <span class="keyword">implements</span> <span class="title">Seller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 卖东西</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sell</span><span class="params">(String goods,String clientName)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"SmartSeller: sell "</span>+goods +<span class="string">" to "</span>+clientName+<span class="string">"..."</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>此时，我们的类图是这样子的：</p>
-<p><img src="assets/1639259f88bcecc8" alt="img"></p>
+<p><img src="/assets/1639259f88bcecc8" alt="img"></p>
 <p>现在我想干的就是：<strong>借助AOP的引入/引介切面，来让我们的服务员也可以卖东西</strong>！</p>
 <p>我们的引入/引介切面具体是这样干的：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnableSellerAspect</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@DeclareParents</span>(value = <span class="string">"com.smart.NaiveWaiter"</span>,  <span class="comment">// 指定服务员具体的实现</span></span><br><span class="line">            defaultImpl = SmartSeller.class) <span class="comment">// 售货员具体的实现</span></span><br><span class="line">    <span class="keyword">public</span> Seller seller; <span class="comment">// 要实现的目标接口</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -633,12 +633,12 @@
 <p>测试一下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        ClassPathXmlApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"com/smart/aspectj/basic/beans.xml"</span>);</span><br><span class="line">        Waiter waiter = (Waiter) ctx.getBean(<span class="string">"waiter"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用服务员原有的方法</span></span><br><span class="line">        waiter.greetTo(<span class="string">"Java3y"</span>);</span><br><span class="line">        waiter.serveTo(<span class="string">"Java3y"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过引介/引入切面已经将waiter服务员实现了Seller接口，所以可以强制转换</span></span><br><span class="line">        Seller seller = (Seller) waiter;</span><br><span class="line">        seller.sell(<span class="string">"水军"</span>, <span class="string">"Java3y"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="assets/1639259fa6f87c3a" alt="img"></p>
+<p><img src="/assets/1639259fa6f87c3a" alt="img"></p>
 <p>具体的调用过程是这样子的：</p>
 <blockquote>
 <p>当引入接口方法被调用时，代理对象会把此调用委托给实现了新接口的某个其他对象。实际上，一个Bean的实现被拆分到多个类中</p>
 </blockquote>
-<p><img src="assets/1639259faa1e4069" alt="img"></p>
+<p><img src="/assets/1639259faa1e4069" alt="img"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看起来AOP有很多很多的知识点，其实我们只要记住AOP的核心概念就行啦。</p>
 <p>下面是我的简要总结AOP：</p>
 <ul>
@@ -651,7 +651,7 @@
 <li>要增强的方法还可以接收与被代理方法一样的参数、绑定被代理方法的返回值这些功能…</li>
 </ul>
 <p>最后，将我们上一次IOC的思维导图补充AOP的知识点上去吧<del>~</del></p>
-<p><img src="assets/163925ac9488dccf" alt="img"></p>
+<p><img src="/assets/163925ac9488dccf" alt="img"></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a href="https://juejin.im/post/5aa8edf06fb9a028d0432584" target="_blank" rel="noopener">Spring【AOP模块】就是这么简单</a></li>
 </ol>
@@ -666,15 +666,15 @@
           
         
         <div class="post-tags">
-            <a href="/tags/Spring/" rel="tag"># Spring</a>
-          
             <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
           
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2019/03/26/Java/框架/Spring：MVC/" rel="next" title="Spring：MVC">
-                <i class="fa fa-chevron-left"></i> Spring：MVC
+              <a href="/2019/03/26/Java/框架/Spring：IOC/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -682,8 +682,8 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2019/03/26/Java/设计模式/设计模式：代理模式/" rel="prev" title="设计模式：代理模式">
-                设计模式：代理模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/26/Java/框架/Spring：MVC/" rel="prev" title="Spring：MVC">
+                Spring：MVC <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -743,7 +743,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -796,7 +796,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -887,7 +889,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

@@ -58,21 +58,22 @@
 </script>
 
   <meta name="description" content="来自于Eric Evans的书">
+<meta name="keywords" content="系统设计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="领域驱动设计">
 <meta property="og:url" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="来自于Eric Evans的书">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/1562555825617.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/849051-20170907235453351-1114451559.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/1562565186285.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/1562567548062.png">
-<meta property="og:updated_time" content="2019-07-10T00:37:18.839Z">
+<meta property="og:image" content="http://yoursite.com/assets/1562555825617.png">
+<meta property="og:image" content="http://yoursite.com/assets/849051-20170907235453351-1114451559.png">
+<meta property="og:image" content="http://yoursite.com/assets/1562565186285.png">
+<meta property="og:image" content="http://yoursite.com/assets/1562567548062.png">
+<meta property="og:updated_time" content="2019-08-01T12:09:54.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="领域驱动设计">
 <meta name="twitter:description" content="来自于Eric Evans的书">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/assets/1562555825617.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1562555825617.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/03/系统架构/领域驱动设计：理论/">
 
 
@@ -317,7 +318,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-07-10 08:37:18" itemprop="dateModified" datetime="2019-07-10T08:37:18+08:00">2019-07-10</time>
+                <time title="Geändert am: 2019-08-01 20:09:54" itemprop="dateModified" datetime="2019-08-01T20:09:54+08:00">2019-08-01</time>
               </span>
             
           
@@ -438,9 +439,9 @@
 </li>
 </ul>
 <h2 id="模型驱动设计的基本构成要素"><a href="#模型驱动设计的基本构成要素" class="headerlink" title="模型驱动设计的基本构成要素"></a>模型驱动设计的基本构成要素</h2><p><strong><em>模式与模式间的关系</em></strong></p>
-<p><img src="assets/1562555825617.png" alt="1562555825617"></p>
+<p><img src="/assets/1562555825617.png" alt="1562555825617"></p>
 <p><strong><em>分层架构</em></strong></p>
-<p><img src="assets/849051-20170907235453351-1114451559.png" alt="img"></p>
+<p><img src="/assets/849051-20170907235453351-1114451559.png" alt="img"></p>
 <p>当创建一个软件应用时，应用的很大一部分是不能直接与领域相关的，但是它们或时基础设施的一部分，或是为软件服务的。如数据库访问、文件、用户界面等相关代码</p>
 <p>为了开发一个每个层内聚的设计，让层仅仅依赖于下面的层。一个统一的架构包含4个概念层</p>
 <ul>
@@ -519,7 +520,7 @@
 <p>当删除根后，聚合的所有其他对象也都删除了，因为不会有其他对象持有他们当中的任何一个。</p>
 <p>根对象可能将内部的临时引用传递给外部对象，作为限制，当操作完成后，外部对象不能再持有这个引用。（传递一个值对象的拷贝）</p>
 <p>如果聚合对象被保存到数据库当中，只有根可以通过查询获得。</p>
-<p><img src="assets/1562565186285.png" alt="1562565186285"></p>
+<p><img src="/assets/1562565186285.png" alt="1562565186285"></p>
 <h2 id="工厂"><a href="#工厂" class="headerlink" title="工厂"></a>工厂</h2><p>实体和聚合通常会很大很复杂，根实体的构造函数内的创建逻辑也会很复杂。通过构造器构建一个复杂的聚合与领域本身也会很冲突。</p>
 <p>工厂用来封装对象创建所必需的知识，他们对创建聚合十分有效。</p>
 <p><strong><em>注意</em></strong></p>
@@ -541,7 +542,7 @@
 </ul>
 <h3 id="资源库-1"><a href="#资源库-1" class="headerlink" title="资源库"></a>资源库</h3><p>目的是封装所有获取对象引用所需的逻辑，领域对象不需要处理基础设施，以得到领域中对其他对象的所需的引用，只需要从资源库中获取。</p>
 <p>资源库作为一个全局的可访问对象的存储点而存在。资源库会保存对某些对象的引用，当一个对象被创建出来时，可以被保存到资源库中，然后以后使用时可以从资源库中检索。</p>
-<p><img src="assets/1562567548062.png" alt="1562567548062"></p>
+<p><img src="/assets/1562567548062.png" alt="1562567548062"></p>
 <h1 id="面向深层理解的重构"><a href="#面向深层理解的重构" class="headerlink" title="面向深层理解的重构"></a>面向深层理解的重构</h1><h1 id="保持模型一致性"><a href="#保持模型一致性" class="headerlink" title="保持模型一致性"></a>保持模型一致性</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -553,6 +554,12 @@
     
 
     <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/系统设计/" rel="tag"># 系统设计</a>
+          
+        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
               <a href="/2019/07/02/系统架构/架构：StudyResources/" rel="next" title="架构：StudyResources">
@@ -625,7 +632,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -678,7 +685,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -769,7 +778,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

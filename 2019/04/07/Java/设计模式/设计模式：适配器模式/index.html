@@ -65,13 +65,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="适配器模式提出问题 将类的接口转换为想要的接口，以便实现不同的接口。两个对象因为接口不兼容而不能一起工作，这时需要第三方适配。 适配器：我拥有一个三角插头，而只有一个二角的插座，则我需要一个适配器，让我能够重新充电  为什么要用（作用） 将一个类的接口转换为客户希望的另外一个接口，Adapter模式使得原本由于接口不兼容而不能一起工作的类可以一起工作。 为复用而设计的工具箱类不能够被复用的原因仅仅">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/04/07/Java/设计模式/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1555665102661.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/07/Java/设计模式/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1563087069455.png">
-<meta property="og:updated_time" content="2019-07-16T12:46:20.769Z">
+<meta property="og:image" content="http://yoursite.com/assets/1555665102661.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563087069455.png">
+<meta property="og:updated_time" content="2019-08-01T12:02:29.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：适配器模式">
 <meta name="twitter:description" content="适配器模式提出问题 将类的接口转换为想要的接口，以便实现不同的接口。两个对象因为接口不兼容而不能一起工作，这时需要第三方适配。 适配器：我拥有一个三角插头，而只有一个二角的插座，则我需要一个适配器，让我能够重新充电  为什么要用（作用） 将一个类的接口转换为客户希望的另外一个接口，Adapter模式使得原本由于接口不兼容而不能一起工作的类可以一起工作。 为复用而设计的工具箱类不能够被复用的原因仅仅">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/07/Java/设计模式/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1555665102661.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1555665102661.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/07/Java/设计模式/设计模式：适配器模式/">
 
 
@@ -316,7 +316,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-07-16 20:46:20" itemprop="dateModified" datetime="2019-07-16T20:46:20+08:00">2019-07-16</time>
+                <time title="Geändert am: 2019-08-01 20:02:29" itemprop="dateModified" datetime="2019-08-01T20:02:29+08:00">2019-08-01</time>
               </span>
             
           
@@ -423,7 +423,7 @@
 <h3 id="使用双向适配器提供透明操作"><a href="#使用双向适配器提供透明操作" class="headerlink" title="使用双向适配器提供透明操作"></a>使用双向适配器提供透明操作</h3><p>适配器并不对所有的客户都透明；被<strong>适配的对象不再兼容Adaptee的接口</strong>，因此并不是所有Adaptee对象都可以被使用的地方它都可以使用。<strong>即</strong>客户可以使用Adaptee对象的接口，但是Adaptee不能使用Target的接口</p>
 <p>双向适配器提供了这样的透明性。<strong>在两个不同的客户需要用不同的方式查看同一个对象时</strong>，尤其有用</p>
 <h1 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h1><h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>使<strong>多重继承</strong>对一个接口与另外一个接口进行匹配</p>
-<p><img src="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1555665102661.png" alt="1555665102661"></p>
+<p><img src="/assets/1555665102661.png" alt="1555665102661"></p>
 <h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><ul>
 <li>用一个具体的Adapter类对Adaptee和Target进行匹配。结果是当我们想要匹配一个类以及它所有子类时，类Adapter不能胜任</li>
 <li>Adapter可以重定义Adaptee的部分行为，因为是它的一个子类</li>
@@ -452,7 +452,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassAdapterTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"类适配器模式测试："</span>);</span><br><span class="line">        Target target = <span class="keyword">new</span> ClassAdapter();</span><br><span class="line">        target.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h1><h2 id="结构-1"><a href="#结构-1" class="headerlink" title="结构"></a>结构</h2><p>依赖于对象<strong>组合</strong></p>
-<p><img src="../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/assets/1563087069455.png" alt="1563087069455"></p>
+<p><img src="/assets/1563087069455.png" alt="1563087069455"></p>
 <h2 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h2><ul>
 <li>允许一个Adapter与多个Adaptee——即本身以及它的所有子类同时工作。Adapter也可以一次给所有的Adaptee添加功能</li>
 <li>使得重定义Adaptee的行为比较困难，需要生成Adaptee的子类并且使得Adapter引用这个子类而不是Adaptee本身。</li>
@@ -595,7 +595,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -648,7 +648,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -739,7 +741,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

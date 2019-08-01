@@ -58,24 +58,26 @@
 </script>
 
   <meta name="description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响应之类的">
+<meta name="keywords" content="框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RPC：概述">
 <meta property="og:url" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响应之类的">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/assets/1563772474306.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563772474306.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/22/系统架构/OS/assets/20160630-lpc.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/assets/1563773031397.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/assets/1563773983561.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/assets/1563777082595.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/assets/dubbo-architecture.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/assets/1563778296842.png">
-<meta property="og:updated_time" content="2019-07-26T01:29:26.037Z">
+<meta property="og:image" content="http://yoursite.com/assets/20160630-lpc.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563773031397.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563773983561.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563777082595.png">
+<meta property="og:image" content="http://yoursite.com/assets/dubbo-architecture.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/1563778296842.png">
+<meta property="og:updated_time" content="2019-08-01T12:41:53.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPC：概述">
 <meta name="twitter:description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响应之类的">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/assets/1563772474306.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1563772474306.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/22/系统架构/RPC：概述/">
 
 
@@ -320,7 +322,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-07-26 09:29:26" itemprop="dateModified" datetime="2019-07-26T09:29:26+08:00">2019-07-26</time>
+                <time title="Geändert am: 2019-08-01 20:41:53" itemprop="dateModified" datetime="2019-08-01T20:41:53+08:00">2019-08-01</time>
               </span>
             
           
@@ -404,7 +406,7 @@
 <h3 id="RPC协议实现"><a href="#RPC协议实现" class="headerlink" title="RPC协议实现"></a>RPC协议实现</h3><ul>
 <li>RPC协议以传输协议（HTTP，又或者TCP/UDP）为基础，为两个不同的应用程序传递数据。</li>
 <li>RPC采用客户端/服务端模式，请求程序就是一个客户端，服务提供程序就是一个服务端<ul>
-<li><img src="assets/1563772474306.png" alt="1563772474306"></li>
+<li><img src="/assets/1563772474306.png" alt="1563772474306"></li>
 </ul>
 </li>
 </ul>
@@ -420,6 +422,7 @@
 <li>调用方随后将参数从堆栈中移出，使堆栈还原到最初的状态。</li>
 </ul>
 <p><img src="../OS/assets/20160630-lpc.png" alt></p>
+<p><img src="/assets/20160630-lpc.png" alt></p>
 <p>一般为阻塞send，因为如同本地方法调用一般，需要先执行完需要执行的函数，才执行之后的</p>
 <h2 id="RPC调用过程"><a href="#RPC调用过程" class="headerlink" title="RPC调用过程"></a>RPC调用过程</h2><p>在本地调用过程中，read例程由链接器从库中提取出来，然后插入到目标程序当中。即通过编译的方式实现这一过程。而在RPC调用中并不可行，因为目标函数是存在于远端程序上，</p>
 <p>因此RPC调用是建立在语言级别的，必须使用socket通信完成，为使得RPC调用如同本地调用一般透明，则出现了几个新的概念</p>
@@ -436,7 +439,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/1563773031397.png" alt="1563773031397"></p>
+<p><img src="/assets/1563773031397.png" alt="1563773031397"></p>
 <ul>
 <li>客户端以正常的方式调用客户存根。<ul>
 <li>从客户端的角度来看，这个调用仿佛就是调用一个本地方法，而它的真正执行是发生在远端服务器上的。客户存根的方法将参数打包并封装成一个或多个网络消息体并发送到服务端。</li>
@@ -475,7 +478,7 @@
 <p>JavaRMI使程序员可以创建分布式应用程序，能够从其他JVM中调用远程对象的方法。</p>
 <p>只要客户端应用程序具有对远程对象的引用，就可以进行远程调用，该引用是通过查找RMI提供的命名服务（RMI注册表）中的远程对象得到的，调用该引用就可以像调用本地方法一样调用远程方法，然后接收方法执行之后传递回来的返回值。</p>
 <p><strong><em>RMI架构</em></strong></p>
-<p><img src="assets/1563773983561.png" alt="1563773983561"></p>
+<p><img src="/assets/1563773983561.png" alt="1563773983561"></p>
 <p><strong><em>RMI中分布式对象模型的特点</em></strong></p>
 <ul>
 <li>服务对象的引用可以作为参数传递或作为结果返回</li>
@@ -529,7 +532,7 @@
 <li>当对象仍在使用时，本地JVM会定期向服务器的JVM发送一个标记脏数据的调用。标记脏数据基于服务器给定的时间间隔定期重新发送心跳信息</li>
 <li>当客户端没有更多的本地引用远程对象时，会发送一个清理调用给服务器，因此服务器只需要计算客户端发送的清理调用或者说心跳超时，即可删除对象。</li>
 </ul>
-<h3 id="RMI架构"><a href="#RMI架构" class="headerlink" title="RMI架构"></a>RMI架构</h3><p><img src="assets/1563777082595.png" alt="1563777082595"></p>
+<h3 id="RMI架构"><a href="#RMI架构" class="headerlink" title="RMI架构"></a>RMI架构</h3><p><img src="/assets/1563777082595.png" alt="1563777082595"></p>
 <ul>
 <li>顶层是存根/骨架层，通过对将要传输的数据编码成流的行驶传递到远程引用层。</li>
 <li>远程引用层定义了RMI连接的调用语义并给予实现，RMI在进行远程调用时，用到JRMP协议，这一层提供了专门用于引用远程服务的RemoteRef对象</li>
@@ -548,13 +551,13 @@
 <h2 id="SOA与微服务"><a href="#SOA与微服务" class="headerlink" title="SOA与微服务"></a>SOA与微服务</h2><p>第三代RPC框架已经超越了RPC本身，主要是面向服务的实现，实现了服务的管理和治理，提供了服务监控的方法等。</p>
 <h3 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h3><p>面向服务的架构（SOA）是一种软件架构模式，一些应用程序组件通过网络通信协议向其他组件传递服务，这种服务间的通信可以是简单的数据传递，也可以是两个或更多个彼此需要协调的服务间相互连接。</p>
 <p>在SOA中根据服务的功能，将服务分为服务消费者和服务生产者两个主要角色。</p>
-<p><img src="assets/dubbo-architecture.jpg" alt="dubbo-architucture"></p>
+<p><img src="/assets/dubbo-architecture.jpg" alt="dubbo-architucture"></p>
 <h3 id="Web-Service和ESB"><a href="#Web-Service和ESB" class="headerlink" title="Web Service和ESB"></a>Web Service和ESB</h3><p>根据场景SOA具体可以分为标准的WebService和企业服务总线ESB</p>
 <p>Web Service底层使用HTTP，类似一个远程服务提供者，可以通过SOAP协议或RESTful协议实现。Web Service是一个平台独立、低耦合、自包含的基于可编程的Web应用程序，可使用开放的XML和JSON描述、发布、发现、协调和配置这些应用程序，用于开发分布式的应用程序。</p>
 <p>其特点是服务独立，服务间通过SOAP协议调用，服务内容通过WSDL描述，服务注册与发现通过UDDI实现</p>
 <p>ESB是集成架构的分割，允许通过公共通信总线进行通信。</p>
 <h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><p>微服务与SOA一脉相承，更侧重与服务间的隔离，让服务做专门的事情，可以敏捷迭代与上线。服务是一种软件架构模式，其中的复杂应用程序由微小而独立的进程组成，使用与语言无关的API通信。</p>
-<p><img src="assets/1563778296842.png" alt="1563778296842"></p>
+<p><img src="/assets/1563778296842.png" alt="1563778296842"></p>
 <p><strong><em>微服务与SOA的差异</em></strong></p>
 <ul>
 <li>微服务中，服务可以独立于其他服务进行操作和部署，更容易经常部署新版本的服务或独立扩展服务。</li>
@@ -600,6 +603,12 @@
     
 
     <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
               <a href="/2019/07/21/系统架构/Dubbo：概述/" rel="next" title="Dubbo：概述">
@@ -672,7 +681,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -725,7 +734,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -816,7 +827,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

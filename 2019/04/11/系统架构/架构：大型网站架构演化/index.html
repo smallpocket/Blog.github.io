@@ -58,29 +58,29 @@
 </script>
 
   <meta name="description" content="概述如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。 如何让网站随应用所需灵活变动 随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。  单一应用架构当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。">
-<meta name="keywords" content="网站架构">
+<meta name="keywords" content="架构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="架构：大型网站架构演化">
 <meta property="og:url" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="概述如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。 如何让网站随应用所需灵活变动 随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。  单一应用架构当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1561193987325.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1554990959181.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1563719826873.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1554991453473.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049101516.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049383697.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049588729.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049722498.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555049803999.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555050083322.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1555050317233.png">
-<meta property="og:updated_time" content="2019-07-22T04:22:15.008Z">
+<meta property="og:image" content="http://yoursite.com/assets/1561193987325.png">
+<meta property="og:image" content="http://yoursite.com/assets/1554990959181.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563719826873.png">
+<meta property="og:image" content="http://yoursite.com/assets/1554991453473.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555049101516.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555049383697.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555049588729.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555049722498.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555049803999.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555050083322.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555050317233.png">
+<meta property="og:updated_time" content="2019-08-01T12:13:51.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="架构：大型网站架构演化">
 <meta name="twitter:description" content="概述如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。 如何让网站随应用所需灵活变动 随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。  单一应用架构当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/assets/1561193987325.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1561193987325.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/11/系统架构/架构：大型网站架构演化/">
 
 
@@ -325,7 +325,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-07-22 12:22:15" itemprop="dateModified" datetime="2019-07-22T12:22:15+08:00">2019-07-22</time>
+                <time title="Geändert am: 2019-08-01 20:13:51" itemprop="dateModified" datetime="2019-08-01T20:13:51+08:00">2019-08-01</time>
               </span>
             
           
@@ -387,7 +387,7 @@
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。</p>
 <p>如何让网站随应用所需灵活变动</p>
 <p>随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。</p>
-<p><img src="assets/1561193987325.png" alt="1561193987325"></p>
+<p><img src="/assets/1561193987325.png" alt="1561193987325"></p>
 <h3 id="单一应用架构"><a href="#单一应用架构" class="headerlink" title="单一应用架构"></a>单一应用架构</h3><p>当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。</p>
 <p>当用户访问量提高时</p>
 <h3 id="垂直应用架构"><a href="#垂直应用架构" class="headerlink" title="垂直应用架构"></a>垂直应用架构</h3><p>当访问量逐渐增大，单一应用增加机器带来的加速度越来越小，将应用拆成互不相干的几个应用，以提升效率。此时，用于加速前端页面开发的Web框架(MVC)是关键。</p>
@@ -428,7 +428,7 @@
 <li>一台服务器即可</li>
 <li>应用程序、数据库、文件等所有资源都在一台服务器上。</li>
 </ul>
-<p><img src="assets/1554990959181.png" alt="1554990959181"></p>
+<p><img src="/assets/1554990959181.png" alt="1554990959181"></p>
 <h2 id="应用服务与数据服务分离"><a href="#应用服务与数据服务分离" class="headerlink" title="应用服务与数据服务分离"></a>应用服务与数据服务分离</h2><p><strong>问题</strong></p>
 <ul>
 <li>一台服务逐渐不能满足需求，越来越多的用户导致性能越来越差，越来越多的数据导致存储空间不足</li>
@@ -440,7 +440,7 @@
 <li>数据库服务器：快速磁盘检索和数据缓存，因此需要更快的磁盘和更大的内存</li>
 <li>文件服务器：存储大量用户上传的文件，需要更大的硬盘</li>
 </ul>
-<p><img src="assets/1563719826873.png" alt="1563719826873"></p>
+<p><img src="/assets/1563719826873.png" alt="1563719826873"></p>
 <p>不同的服务器承担不同的服务角色，网站的并发处理能力、数据存储空间得到很大改善</p>
 <h2 id="使用缓存改善网站性能"><a href="#使用缓存改善网站性能" class="headerlink" title="使用缓存改善网站性能"></a>使用缓存改善网站性能</h2><p><strong>问题</strong></p>
 <ul>
@@ -463,14 +463,14 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/1554991453473.png" alt="1554991453473"></p>
+<p><img src="/assets/1554991453473.png" alt="1554991453473"></p>
 <h2 id="使用应用服务器集群改善网站的并发处理能力"><a href="#使用应用服务器集群改善网站的并发处理能力" class="headerlink" title="使用应用服务器集群改善网站的并发处理能力"></a>使用应用服务器集群改善网站的并发处理能力</h2><p><strong>问题</strong></p>
 <ul>
 <li>单一应用服务器能够处理的请求连接有限，在网站访问高峰期，应用服务器成为瓶颈</li>
 </ul>
 <p><strong>解决方案：</strong></p>
 <p>增加服务器分担压力，并可以以此方式不断提升系统性能。实现系统的可伸缩性。</p>
-<p><img src="assets/1555049101516.png" alt="1555049101516"></p>
+<p><img src="/assets/1555049101516.png" alt="1555049101516"></p>
 <p><strong>负载均衡调度服务器</strong>：将来自用户的访问请求分发到应用服务器集群的任何一台服务器中，若有更多的用户，则在集群中增加更多的服务器，使应用服务器的负载压力不再成为整个网站的瓶颈</p>
 <h2 id="数据库读写分离"><a href="#数据库读写分离" class="headerlink" title="数据库读写分离"></a>数据库读写分离</h2><p><strong>问题</strong>：</p>
 <ul>
@@ -483,7 +483,7 @@
 <p><strong>解决方案</strong>：</p>
 <p>配置数据库的主从关系，将一台数据库服务器上的数据更新同步到另一台服务器上，实现读写分离。</p>
 <p>应用服务器在写数据时，访问主数据库，主数据库通过主从复制将数据更新同步到从数据库，当应用服务器读数据时，就可以通过从数据库获得数据。为了便于应用程序访问读写分离后的数据库，通常使用专门的数据访问模块，使数据库读写分离对应用透明</p>
-<p><img src="assets/1555049383697.png" alt="1555049383697"></p>
+<p><img src="/assets/1555049383697.png" alt="1555049383697"></p>
 <h2 id="使用反向代理和CDN加速网站响应"><a href="#使用反向代理和CDN加速网站响应" class="headerlink" title="使用反向代理和CDN加速网站响应"></a>使用反向代理和CDN加速网站响应</h2><p><strong>问题：</strong></p>
 <ul>
 <li>复杂的网络环境，导致不同地区的用户访问网站速度差别极大</li>
@@ -499,7 +499,7 @@
 </li>
 <li>通过缓存数据，也减轻了后端服务器的负载压力</li>
 </ul>
-<p><img src="assets/1555049588729.png" alt="1555049588729"></p>
+<p><img src="/assets/1555049588729.png" alt="1555049588729"></p>
 <h2 id="使用分布式文件系统和分布式数据库系统"><a href="#使用分布式文件系统和分布式数据库系统" class="headerlink" title="使用分布式文件系统和分布式数据库系统"></a>使用分布式文件系统和分布式数据库系统</h2><p><strong>问题：</strong></p>
 <ul>
 <li>任何强大的单一服务器都无法满足持续增长的业务需求</li>
@@ -513,7 +513,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/1555049722498.png" alt="1555049722498"></p>
+<p><img src="/assets/1555049722498.png" alt="1555049722498"></p>
 <h2 id="使用NoSQL和搜索引擎"><a href="#使用NoSQL和搜索引擎" class="headerlink" title="使用NoSQL和搜索引擎"></a>使用NoSQL和搜索引擎</h2><p><strong>问题：</strong></p>
 <ul>
 <li>网站业务复杂，对数据存储和检索的需求越来越复杂，需要采用一些非关系数据库（NoSQL）以及非数据库查询技术（搜索）</li>
@@ -523,7 +523,7 @@
 <li>NoSQL与搜索引擎都是源自互联网的技术手段，对于可伸缩的分布式特性有更好地支持</li>
 <li>应用服务器通过一个统一的数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦</li>
 </ul>
-<p><img src="assets/1555049803999.png" alt="1555049803999"></p>
+<p><img src="/assets/1555049803999.png" alt="1555049803999"></p>
 <h2 id="业务拆分"><a href="#业务拆分" class="headerlink" title="业务拆分"></a>业务拆分</h2><p><strong>问题：</strong></p>
 <p><strong>解决方案：</strong></p>
 <ul>
@@ -535,7 +535,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/1555050083322.png" alt="1555050083322"></p>
+<p><img src="/assets/1555050083322.png" alt="1555050083322"></p>
 <h2 id="分布式服务"><a href="#分布式服务" class="headerlink" title="分布式服务"></a>分布式服务</h2><p><strong>问题：</strong></p>
 <ul>
 <li>随着业务拆分越来越小，存储系统越来越大，应用系统的复杂性指数级增大，部署维护越来越困难</li>
@@ -547,7 +547,7 @@
 <li>由这些可复用的业务连接数据库，提供公共的业务服务。</li>
 <li>应用系统只需要管理用户界面，通过分布式服务调用共用业务服务完成具体业务操作</li>
 </ul>
-<p><img src="assets/1555050317233.png" alt="1555050317233"></p>
+<p><img src="/assets/1555050317233.png" alt="1555050317233"></p>
 <h2 id="云计算平台"><a href="#云计算平台" class="headerlink" title="云计算平台"></a>云计算平台</h2><p>当大型网站架构解决了海量数据管理和高并发事务的处理，就可以将这些解决方案应用到网站自身以外的业务上，即建设云计算平台，将计算作为一种基础资源出售。</p>
 <h1 id="大型网站架构演化的价值观"><a href="#大型网站架构演化的价值观" class="headerlink" title="大型网站架构演化的价值观"></a>大型网站架构演化的价值观</h1><p>网站的价值在于它能够为用户提供什么样的价值，在于能做什么，而不是怎么做的</p>
 <p>因此在小网站上追求架构是舍本逐末的，需要做的就是为用户提供更好的服务创造价值</p>
@@ -607,7 +607,7 @@
           
         
         <div class="post-tags">
-            <a href="/tags/网站架构/" rel="tag"># 网站架构</a>
+            <a href="/tags/架构/" rel="tag"># 架构</a>
           
         </div>
         <div class="post-nav">
@@ -682,7 +682,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -735,7 +735,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -826,7 +828,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

@@ -58,24 +58,25 @@
 </script>
 
   <meta name="description" content="精要核心 将所有业务逻辑内聚到业务领域（domain）层，将设计和开发的关注点聚焦到业务领域； 建立通用的‘业务领域语言（Ubiquitous Language）’，Ubiquitous Language是工程师和业务领域专家（可以是产品经理、运营、业务相关人员）的桥梁； 战略上，通‘上下文（Bounded Context）’解耦各个业务系统/组件，通过‘防腐层（Anticorruption la">
+<meta name="keywords" content="系统设计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="领域驱动设计：概述">
 <meta property="og:url" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="精要核心 将所有业务逻辑内聚到业务领域（domain）层，将设计和开发的关注点聚焦到业务领域； 建立通用的‘业务领域语言（Ubiquitous Language）’，Ubiquitous Language是工程师和业务领域专家（可以是产品经理、运营、业务相关人员）的桥梁； 战略上，通‘上下文（Bounded Context）’解耦各个业务系统/组件，通过‘防腐层（Anticorruption la">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/assets/1562554034673.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/assets/849051-20170909215810960-1659673125.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/assets/849051-20170910154357522-1724095095.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/assets/1562554210896.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/assets/1562554245897.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/assets/1562554487757.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/assets/849051-20170910175342226-1144290184.png">
-<meta property="og:updated_time" content="2019-07-08T02:54:49.822Z">
+<meta property="og:image" content="http://yoursite.com/assets/1562554034673.png">
+<meta property="og:image" content="http://yoursite.com/assets/849051-20170909215810960-1659673125.png">
+<meta property="og:image" content="http://yoursite.com/assets/849051-20170910154357522-1724095095.png">
+<meta property="og:image" content="http://yoursite.com/assets/1562554210896.png">
+<meta property="og:image" content="http://yoursite.com/assets/1562554245897.png">
+<meta property="og:image" content="http://yoursite.com/assets/1562554487757.png">
+<meta property="og:image" content="http://yoursite.com/assets/849051-20170910175342226-1144290184.png">
+<meta property="og:updated_time" content="2019-08-01T12:10:31.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="领域驱动设计：概述">
 <meta name="twitter:description" content="精要核心 将所有业务逻辑内聚到业务领域（domain）层，将设计和开发的关注点聚焦到业务领域； 建立通用的‘业务领域语言（Ubiquitous Language）’，Ubiquitous Language是工程师和业务领域专家（可以是产品经理、运营、业务相关人员）的桥梁； 战略上，通‘上下文（Bounded Context）’解耦各个业务系统/组件，通过‘防腐层（Anticorruption la">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/assets/1562554034673.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1562554034673.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/05/系统架构/领域驱动设计：概述/">
 
 
@@ -320,7 +321,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-07-08 10:54:49" itemprop="dateModified" datetime="2019-07-08T10:54:49+08:00">2019-07-08</time>
+                <time title="Geändert am: 2019-08-01 20:10:31" itemprop="dateModified" datetime="2019-08-01T20:10:31+08:00">2019-08-01</time>
               </span>
             
           
@@ -438,11 +439,11 @@
 <li>领域逻辑依赖基础设施</li>
 <li>代价：领域层到展示层的数据转化</li>
 </ul>
-<p><img src="assets/1562554034673.png" alt="1562554034673"></p>
+<p><img src="/assets/1562554034673.png" alt="1562554034673"></p>
 <h2 id="六边形架构（端口和适配器）"><a href="#六边形架构（端口和适配器）" class="headerlink" title="六边形架构（端口和适配器）"></a>六边形架构（端口和适配器）</h2><p>所谓的六边形架构，其实是分层架构的扩展，原来的分层架构通常是上下分层的，比如常见的MVC模式，上层是对外的服务接口，下层是对接存储层或者是集成第三方服务，中层是业务逻辑层。</p>
 <p>我们跳出分层的概念，会发现上面层和下面层其实都是端口+适配器的实现，上面层开放http/tcp端口，采用rest/soap/mq协议等对外提供服务，同时提供对应协议的适配器；下层也是端口+适配器，只不过应用程序这时候变成了调用者，第三方服务或者存储层提供端口和服务，应用程序本身实现适配功能。</p>
 <p>基于上述思考，将分层接口中的上层和下层统一起来就变成了六边形架构，基于端口和适配器的实现，示意图如下：</p>
-<p><img src="assets/849051-20170909215810960-1659673125.png" alt="img"></p>
+<p><img src="/assets/849051-20170909215810960-1659673125.png" alt="img"></p>
 <p><em>*上图来源于《实现领域驱动设计》的P111</em></p>
 <p>我认为六边形架构并非创造一种新的架构风格，只是将原来的分层架构风格重新解读，使得架构更加简洁通用。同时，在DDD的设计思想下，六边形架构风格，让领域模型处于架构的核心区域，让开发人员将焦点聚集到领域。<strong>DDD和六边形架构是天然契合的，是DDD的首选架构。</strong></p>
 <h2 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h2><p>REST——即Representational State Transfer的缩写，翻译过来是”表现层状态转化”。参考至：<a href="http://www.ruanyifeng.com/blog/2011/09/restful" target="_blank" rel="noopener">理解RESTful架构</a>。</p>
@@ -456,7 +457,7 @@
 <li>CQRS适用于极少数复杂的业务领域，如果不是很适合反而会增加复杂度；</li>
 <li>另一个适用场景为获取高性能的服务。</li>
 </ul>
-<p><img src="assets/849051-20170910154357522-1724095095.png" alt="img"></p>
+<p><img src="/assets/849051-20170910154357522-1724095095.png" alt="img"></p>
 <p>　　　　<em>图片来源于Martin Fowler的blog，图中表述的查询模型和命令模型共用数据源。</em></p>
 <p>关于CQRS的讨论可以参考Martin大叔的blog：<a href="https://martinfowler.com/bliki/CQRS.html" target="_blank" rel="noopener">CQRS</a>，以及：<a href="http://codebetter.com/gregyoung/2010/02/16/cqrs-task-based-uis-event-sourcing-agh/" target="_blank" rel="noopener">CQRS, Task Based UIs, Event Sourcing agh!</a></p>
 <h2 id="事件溯源"><a href="#事件溯源" class="headerlink" title="事件溯源"></a>事件溯源</h2><ul>
@@ -465,13 +466,13 @@
 <li>业务事件顺序存储，不会更新，写入效率极高</li>
 <li>代价：更强的针对事件建模能力，事件回溯机制</li>
 </ul>
-<p><img src="assets/1562554210896.png" alt="1562554210896"></p>
+<p><img src="/assets/1562554210896.png" alt="1562554210896"></p>
 <h2 id="LMAX-architecture"><a href="#LMAX-architecture" class="headerlink" title="LMAX architecture"></a>LMAX architecture</h2><ul>
 <li>将IO和并发从领域模型中分离出去</li>
 <li>单线程，异步IO，全内存操作，性能极高</li>
 <li>代价：异步IO，无事务回滚等</li>
 </ul>
-<p><img src="assets/1562554245897.png" alt="1562554245897"></p>
+<p><img src="/assets/1562554245897.png" alt="1562554245897"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li><p>端口适配器架构</p>
 <ul>
@@ -508,9 +509,9 @@
 <li><p>好的责任分配，能够形成好的依赖关系</p>
 </li>
 </ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><img src="assets/1562554487757.png" alt="1562554487757"></p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><img src="/assets/1562554487757.png" alt="1562554487757"></p>
 <h1 id="架构实例"><a href="#架构实例" class="headerlink" title="架构实例"></a>架构实例</h1><p>结合最近在重构的社区服务系统（COMMUNITY），尝试使用上述的指导思想和架构风格，完成一次架构设计尝试，并详述如下：</p>
-<h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="assets/849051-20170910175342226-1144290184.png" alt="img"></p>
+<h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="/assets/849051-20170910175342226-1144290184.png" alt="img"></p>
 <h2 id="架构详述"><a href="#架构详述" class="headerlink" title="架构详述"></a>架构详述</h2><p>COMMUNITY系统架构整合了六边形架构、RESTful架构风格、CQRS架构风格三种架构风格，并遵循经典的分层架构思想。</p>
 <p>1、在遵循分层架构思想的基础上，引入了六边形架构风格，对内对外均通过适配器+端口的方式呈现：</p>
 <ul>
@@ -547,6 +548,12 @@
     
 
     <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/系统设计/" rel="tag"># 系统设计</a>
+          
+        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
               <a href="/2019/07/04/数据库/Jooq/Jooq：Start/" rel="next" title="Jooq：Start">
@@ -619,7 +626,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">218</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -672,7 +679,9 @@
         
           
         
-        <span class="site-state-item-count">19</span>
+          
+        
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">Kategorien</span>
         </a>
       </div>
@@ -763,7 +772,11 @@
         
           
         
-        <span class="site-state-item-count">38</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">schlagwörter</span>
         </a>
       </div>

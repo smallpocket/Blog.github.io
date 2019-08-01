@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -65,21 +65,21 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564483003687.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564484128891.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564484562491.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564484590893.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564484888567.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564485105441.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564485753438.png">
-<meta property="og:image" content="d:%5CBlog%5Csource_posts%5CJava%5Cbase%5Cassets%5C1564485766278.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564488177169.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/assets%5C1564537447891.png">
-<meta property="og:updated_time" content="2019-07-31T02:02:10.261Z">
+<meta property="og:image" content="http://yoursite.com/assets/1564483003687.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564484128891.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564484562491.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564484590893.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564484888567.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564485105441.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564485753438.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564485766278.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564488177169.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564537447891.png">
+<meta property="og:updated_time" content="2019-08-01T06:34:08.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM（4）：类文件与类加载">
 <meta name="twitter:description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/.%5Cassets%5C1564483003687.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1564483003687.png">
   <link rel="canonical" href="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/">
 
 
@@ -145,7 +145,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -165,7 +165,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -176,7 +176,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -187,7 +187,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
         
@@ -198,7 +198,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -209,7 +209,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -220,13 +220,13 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
-            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -242,7 +242,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
+             placeholder="Suche..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -304,14 +304,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-03-01 10:46:32" itemprop="dateCreated datePublished" datetime="2019-03-01T10:46:32+08:00">2019-03-01</time>
+              <time title="Erstellt: 2019-03-01 10:46:32" itemprop="dateCreated datePublished" datetime="2019-03-01T10:46:32+08:00">2019-03-01</time>
             </span>
           
             
@@ -322,9 +322,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-07-31 10:02:10" itemprop="dateModified" datetime="2019-07-31T10:02:10+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-08-01 14:34:08" itemprop="dateModified" datetime="2019-08-01T14:34:08+08:00">2019-08-01</time>
               </span>
             
           
@@ -333,7 +333,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -350,7 +350,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Views: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -363,7 +363,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comments: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/01/Java/base/JVM：类文件与类加载/#comments" itemprop="discussionUrl">
@@ -416,7 +416,7 @@
 </ul>
 </li>
 </ul>
-<p><img src=".%5Cassets%5C1564483003687.png" alt="1564483003687"></p>
+<p><img src="/assets/1564483003687.png" alt="1564483003687"></p>
 <h3 id="魔数与Class文件版本"><a href="#魔数与Class文件版本" class="headerlink" title="魔数与Class文件版本"></a>魔数与Class文件版本</h3><ul>
 <li>魔数magic：Class文件的头4个字节。用于确定文件是否为一个能够被虚拟机接受的Class文件<ul>
 <li>即用于身份识别，例如jpeg等在文件头都有魔数。基于安全考虑，因为扩展名可以随意改动。</li>
@@ -440,7 +440,7 @@
 <p>虚拟机加载Class文件会进行<strong>动态连接，并不会像C一样有连接步骤</strong>，即Class文件不会保存各个方法、字段的内存最终布局信息。因此需要通过运行期转换才能得到真正的内存入口地址。</p>
 <p>当虚拟机运行时，需要从常量池获得对应的符号引用，再在类创建时或运行时解析，翻译到具体的内存地址之中。</p>
 <p>常量池中的每个常量都是一个表，在JDK7中具有14中，其共同特点是表开始的第一位是一个u1类型标志位，戴白哦该常量属于那种常量类型。</p>
-<p><img src=".%5Cassets%5C1564484128891.png" alt="1564484128891"></p>
+<p><img src="/assets/1564484128891.png" alt="1564484128891"></p>
 <p>其中<strong>CONSTANT_Class_info</strong>类型代表一个类或接口的符号引用。</p>
 <ul>
 <li>name_index是一个索引值，指向一个CONSTANT_Utf8_info类型常量，代表了这个类或接口的全限定名。<ul>
@@ -498,13 +498,13 @@
 </tbody></table>
 <h4 id="其它常量"><a href="#其它常量" class="headerlink" title="其它常量"></a>其它常量</h4><p>当利用javap进行分析常量池时，其中会出现一些其它的常量，例如<code>I</code>、<code>V</code>、<code>&lt;init&gt;</code>、<code>LineNumberTable</code>等，它们会被字段表、方法表、属性表引用到。用于描述一些不方便用<strong>固定字节</strong>表达的内容，例如方法的返回值是说明，有几个参数，每个参数的类型是说明等。</p>
 <p><strong>常量表常量项的结构总表</strong></p>
-<p><img src=".%5Cassets%5C1564484562491.png" alt="1564484562491"></p>
-<p><img src=".%5Cassets%5C1564484590893.png" alt="1564484590893"></p>
+<p><img src="/assets/1564484562491.png" alt="1564484562491"></p>
+<p><img src="/assets/1564484590893.png" alt="1564484590893"></p>
 <h3 id="访问地址"><a href="#访问地址" class="headerlink" title="访问地址"></a>访问地址</h3><p>位于常量池之后，紧接的两个字节代表访问标志<code>access_flags</code>，标志用于标识一些类或者接口层次的访问信息。如该Class是类还是接口，是否为public等。如果是类，是否为final。</p>
-<p><img src=".%5Cassets%5C1564484888567.png" alt="1564484888567"></p>
+<p><img src="/assets/1564484888567.png" alt="1564484888567"></p>
 <h3 id="类索引、父类索引与接口索引集合"><a href="#类索引、父类索引与接口索引集合" class="headerlink" title="类索引、父类索引与接口索引集合****"></a>类索引、父类索引与接口索引集合****</h3><p>类索引<code>this_class</code>、父类索引<code>super_class</code>：一个u2类型的数据。接口索引的集合<code>interfaces</code>：一组u2类型的数据。Class文件用于确定类的继承关系</p>
 <h3 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h3><p><code>field_info</code>用于描述接口或者类中声明的变量。字段包括类级变量以及实例级变量，但不包括在方法内部声明的局部变量。</p>
-<p><img src=".%5Cassets%5C1564485105441.png" alt="1564485105441"></p>
+<p><img src="/assets/1564485105441.png" alt="1564485105441"></p>
 <ul>
 <li><code>access_flags</code>描述字段的访问级别</li>
 <li><code>name_index</code>是对常量池的引用，描述字段的简单名称</li>
@@ -513,8 +513,8 @@
 <h3 id="方法表集合"><a href="#方法表集合" class="headerlink" title="方法表集合"></a>方法表集合</h3><p>与字段表几乎一致。在描述了方法表之后，方法内部的代码经过编译器编译成字节码指令后，存放在<strong>方法属性表集合</strong>中一个名为<code>Code</code>属性中。</p>
 <h3 id="TODO属性表集合"><a href="#TODO属性表集合" class="headerlink" title="TODO属性表集合"></a>TODO属性表集合</h3><p>Class文件、字段表、方法表都可以携带自己的属性表集合，用于描述某些场景专有的信息。</p>
 <p>属性表集合不再要求各个属性表具有严格的顺序，并且只要不与已有属性名重复，任何人实现的编译器都可以向属性表写入自己定义的属性信息，JVM运行时会忽略其不认识的属性。</p>
-<p><img src=".%5Cassets%5C1564485753438.png" alt="1564485753438"></p>
-<p><img src="D:%5CBlog%5Csource_posts%5CJava%5Cbase%5Cassets%5C1564485766278.png" alt="1564485766278"></p>
+<p><img src="/assets/1564485753438.png" alt="1564485753438"></p>
+<p><img src="/assets/1564485766278.png" alt="1564485766278"></p>
 <h1 id="公有设计与私有实现"><a href="#公有设计与私有实现" class="headerlink" title="公有设计与私有实现"></a>公有设计与私有实现</h1><h1 id="虚拟机类加载机制"><a href="#虚拟机类加载机制" class="headerlink" title="虚拟机类加载机制"></a>虚拟机类加载机制</h1><p>如何将字节码文件加载到虚拟机当中</p>
 <p>java.lang.ClassNotFoundExcetpion类加载异常</p>
 <h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p>虚拟机如何加载Class文件？Class文件中的信息进入虚拟机后会发生什么变化</p>
@@ -527,7 +527,7 @@
 <p>这里的Class文件：一串二进制字节流</p>
 <h2 id="类加载的时机"><a href="#类加载的时机" class="headerlink" title="类加载的时机"></a>类加载的时机</h2><p>类从被加载到虚拟机内存中开始，到卸载出内存为止，整个生命周期：</p>
 <p>加载、验证、准备、解析、初始化、使用、卸载</p>
-<p><img src=".%5Cassets%5C1564488177169.png" alt="1564488177169"></p>
+<p><img src="/assets/1564488177169.png" alt="1564488177169"></p>
 <p>加载、验证、准备、初始化、卸载的顺序是确定的，依次顺序开始（只是开始，不是进行或者完成，他们中间混合交叉进行）。而解析阶段不一定，它在某些情况下可以在初始化之后再开始，以支持动态绑定</p>
 <p><strong>立即对类进行初始化的情况</strong></p>
 <p>有且只有：这5种场景中的行为称为对一个类进行主动引用，除此外，所有引用类的方式都不会触发初始化，称为被动引用。</p>
@@ -644,7 +644,7 @@
 <li>扩展类加载器。负责加载&lt;JAVA_HOME&gt;\lib\ext目录，或者java.ext.dirs系统变量指定的路径中所有类库，开发者可以直接使用扩展类加载器</li>
 <li>应用程序（系统）类加载器。负责加载用户类路径上指定的路径，可以直接使用这个类加载器，并且是程序中的默认加载器</li>
 </ul>
-<p><img src="assets%5C1564537447891.png" alt="1564537447891"></p>
+<p><img src="/assets/1564537447891.png" alt="1564537447891"></p>
 <p>要求除了顶层的启动类加载器，其余的类加载器都应当有自己的父类加载器。父子关系一般不会以继承关系实现，而都是以组合关系来复用代码。</p>
 <p><strong><em>工作过程</em></strong>：</p>
 <ul>
@@ -712,8 +712,8 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2019/03/01/Java/base/JVM：程序优化/" rel="prev" title="JVM（5）：程序优化">
-                JVM（5）：程序优化 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/01/Java/base/JVM：程序优化/" rel="prev" title="JVM：程序优化">
+                JVM：程序优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -750,10 +750,10 @@
     <div class="sidebar-inner">
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -774,7 +774,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">218</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -822,10 +822,8 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">Kategorien</span>
         
       </div>
     
@@ -909,8 +907,10 @@
         
           
         
-        <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">tags</span>
+          
+        
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -954,9 +954,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 

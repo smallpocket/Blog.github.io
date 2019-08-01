@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -60,19 +60,19 @@
   <meta name="description" content="线程安全 线程安全：当多个线程访问一个对象，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要额外的同步，或者在调用放进行任何其他的协调操作， 调用这个对象的行为都可以获得正确的结果，那这个对象是线程安全的。  即要求线程安全的代码都必须具备一个特征：代码本身封装了所有必要的正确性保障手段(互斥同步等)，令调用者无须关系多线程的问题，更无须自己采用任何措施来保证多线程的正确调用。但这个并">
 <meta name="keywords" content="并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java并发：线程安全">
+<meta property="og:title" content="Java并发：线程安全">
 <meta property="og:url" content="http://yoursite.com/2019/03/01/Java/base/java并发：线程安全/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="线程安全 线程安全：当多个线程访问一个对象，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要额外的同步，或者在调用放进行任何其他的协调操作， 调用这个对象的行为都可以获得正确的结果，那这个对象是线程安全的。  即要求线程安全的代码都必须具备一个特征：代码本身封装了所有必要的正确性保障手段(互斥同步等)，令调用者无须关系多线程的问题，更无须自己采用任何措施来保证多线程的正确调用。但这个并">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550563393365.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/java并发：线程安全/assets/1551425245832.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/java并发：线程安全/assets/1551425259624.png">
+<meta property="og:image" content="http://yoursite.com/assets/1551425245832.png">
+<meta property="og:image" content="http://yoursite.com/assets/1551425259624.png">
 <meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550587826303.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/01/Java/base/java并发：线程安全/assets/6782674c-1bfe-4879-af39-e9d722a95d39.png">
-<meta property="og:updated_time" content="2019-07-31T07:46:43.265Z">
+<meta property="og:image" content="http://yoursite.com/assets/6782674c-1bfe-4879-af39-e9d722a95d39.png">
+<meta property="og:updated_time" content="2019-08-01T06:42:06.705Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java并发：线程安全">
+<meta name="twitter:title" content="Java并发：线程安全">
 <meta name="twitter:description" content="线程安全 线程安全：当多个线程访问一个对象，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要额外的同步，或者在调用放进行任何其他的协调操作， 调用这个对象的行为都可以获得正确的结果，那这个对象是线程安全的。  即要求线程安全的代码都必须具备一个特征：代码本身封装了所有必要的正确性保障手段(互斥同步等)，令调用者无须关系多线程的问题，更无须自己采用任何措施来保证多线程的正确调用。但这个并">
 <meta name="twitter:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550563393365.png">
   <link rel="canonical" href="http://yoursite.com/2019/03/01/Java/base/java并发：线程安全/">
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title>java并发：线程安全 | Hexo</title>
+  <title>Java并发：线程安全 | Hexo</title>
   
 
 
@@ -140,7 +140,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -160,7 +160,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -171,7 +171,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -182,7 +182,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
         
@@ -193,7 +193,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -204,7 +204,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -215,13 +215,13 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
-            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -237,7 +237,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
+             placeholder="Suche..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -286,7 +286,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">java并发：线程安全
+          <h1 class="post-title" itemprop="name headline">Java并发：线程安全
 
               
             
@@ -299,14 +299,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-03-01 15:42:55" itemprop="dateCreated datePublished" datetime="2019-03-01T15:42:55+08:00">2019-03-01</time>
+              <time title="Erstellt: 2019-03-01 15:42:55" itemprop="dateCreated datePublished" datetime="2019-03-01T15:42:55+08:00">2019-03-01</time>
             </span>
           
             
@@ -317,9 +317,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-07-31 15:46:43" itemprop="dateModified" datetime="2019-07-31T15:46:43+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-08-01 14:42:06" itemprop="dateModified" datetime="2019-08-01T14:42:06+08:00">2019-08-01</time>
               </span>
             
           
@@ -328,7 +328,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -340,12 +340,12 @@
           
 
           
-            <span id="/2019/03/01/Java/base/java并发：线程安全/" class="post-meta-item leancloud_visitors" data-flag-title="java并发：线程安全">
+            <span id="/2019/03/01/Java/base/java并发：线程安全/" class="post-meta-item leancloud_visitors" data-flag-title="Java并发：线程安全">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Views: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -358,7 +358,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comments: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/03/01/Java/base/java并发：线程安全/#comments" itemprop="discussionUrl">
@@ -543,11 +543,11 @@
 <ul>
 <li>对volatile变量<strong>写操作</strong>时，会在写操作后加入一条store屏障指令，将本地内存中的共享变量值刷新到主内存。（每次写之后都刷新），CPU指令级别进行操作。</li>
 </ul>
-<p><img src="assets/1551425245832.png" alt="1551425245832"></p>
+<p><img src="/assets/1551425245832.png" alt></p>
 <ul>
 <li>对volatile变量<strong>读操作</strong>时，会在读操作前加入一条load屏障指令，从主内存中读取共享变量。（每次读从主内存读）</li>
 </ul>
-<p><img src="assets/1551425259624.png" alt="1551425259624"></p>
+<p><img src="/assets/1551425259624.png" alt="1551425259624"></p>
 <p>但是volatile<strong>无法保证</strong>线程安全。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">count++;</span><br><span class="line"><span class="comment">// 1、count//获得的是最新值</span></span><br><span class="line"><span class="comment">// 2、+1   //两个进程同时++</span></span><br><span class="line"><span class="comment">// 3、count//同时写回,即丢掉了一次.</span></span><br></pre></td></tr></table></figure>
 
@@ -787,7 +787,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalExample1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ThreadLocal threadLocal1 = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line">        ThreadLocal threadLocal2 = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            threadLocal1.set(<span class="number">1</span>);</span><br><span class="line">            threadLocal2.set(<span class="number">1</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        Thread thread2 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            threadLocal1.set(<span class="number">2</span>);</span><br><span class="line">            threadLocal2.set(<span class="number">2</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h5 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h5><p>它所对应的底层结构图为：</p>
-<p><img src="assets/6782674c-1bfe-4879-af39-e9d722a95d39.png" alt="img"></p>
+<p><img src="/assets/6782674c-1bfe-4879-af39-e9d722a95d39.png" alt="img"></p>
 <p>每个 Thread 都有一个 ThreadLocal.ThreadLocalMap 对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* ThreadLocal values pertaining to this thread. This map is maintained</span></span><br><span class="line"><span class="comment"> * by the ThreadLocal class. */</span></span><br><span class="line">ThreadLocal.ThreadLocalMap threadLocals = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
 
@@ -877,8 +877,8 @@
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2019/03/01/Java/base/JVM：程序优化/" rel="next" title="JVM（5）：程序优化">
-                <i class="fa fa-chevron-left"></i> JVM（5）：程序优化
+              <a href="/2019/03/01/Java/base/JVM：程序优化/" rel="next" title="JVM：程序优化">
+                <i class="fa fa-chevron-left"></i> JVM：程序优化
               </a>
             
           </div>
@@ -924,10 +924,10 @@
     <div class="sidebar-inner">
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -948,7 +948,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">218</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -996,10 +996,8 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">Kategorien</span>
         
       </div>
     
@@ -1083,8 +1081,10 @@
         
           
         
-        <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">tags</span>
+          
+        
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -1128,9 +1128,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 

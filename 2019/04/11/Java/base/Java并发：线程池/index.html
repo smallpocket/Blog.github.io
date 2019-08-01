@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -65,12 +65,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="线程池为什么要用new Thread弊端  每次新建对象，性能差 线程缺乏统一管理，可能无限新建线程，相互竞争，有可能占用过多系统资源导致死机或OOM 缺少更多功能，如更多执行、定期执行、线程中断  线程池好处  重用存在的线程，减少对象创建、消亡的开销 可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞 提供定时执行、定期执行、单线程、并发控制等功能  基础概述是什">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：线程池/assets/1551616609267.png">
-<meta property="og:updated_time" content="2019-05-13T06:18:59.610Z">
+<meta property="og:image" content="http://yoursite.com/assets/1551616609267.png">
+<meta property="og:updated_time" content="2019-08-01T06:25:06.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：线程池">
 <meta name="twitter:description" content="线程池为什么要用new Thread弊端  每次新建对象，性能差 线程缺乏统一管理，可能无限新建线程，相互竞争，有可能占用过多系统资源导致死机或OOM 缺少更多功能，如更多执行、定期执行、线程中断  线程池好处  重用存在的线程，减少对象创建、消亡的开销 可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞 提供定时执行、定期执行、单线程、并发控制等功能  基础概述是什">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：线程池/assets/1551616609267.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1551616609267.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/11/Java/base/Java并发：线程池/">
 
 
@@ -136,7 +136,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -156,7 +156,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -167,7 +167,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -178,7 +178,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
         
@@ -189,7 +189,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -211,13 +211,13 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
-            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -233,7 +233,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
+             placeholder="Suche..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -295,14 +295,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-04-11 21:51:00" itemprop="dateCreated datePublished" datetime="2019-04-11T21:51:00+08:00">2019-04-11</time>
+              <time title="Erstellt: 2019-04-11 21:51:00" itemprop="dateCreated datePublished" datetime="2019-04-11T21:51:00+08:00">2019-04-11</time>
             </span>
           
             
@@ -313,9 +313,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-05-13 14:18:59" itemprop="dateModified" datetime="2019-05-13T14:18:59+08:00">2019-05-13</time>
+                <time title="Geändert am: 2019-08-01 14:25:06" itemprop="dateModified" datetime="2019-08-01T14:25:06+08:00">2019-08-01</time>
               </span>
             
           
@@ -324,7 +324,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -341,7 +341,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Views: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -354,7 +354,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comments: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/04/11/Java/base/Java并发：线程池/#comments" itemprop="discussionUrl">
@@ -494,7 +494,7 @@
 </li>
 <li>terminated</li>
 </ul>
-<p><img src="assets/1551616609267.png" alt="1551616609267"></p>
+<p><img src="/assets/1551616609267.png" alt="1551616609267"></p>
 <h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="线程池配置"><a href="#线程池配置" class="headerlink" title="线程池配置"></a>线程池配置</h3><ul>
 <li>CPU密集型任务，需要尽量压榨CPU，参考值设置为NCPU（CPU数量）+1</li>
 <li>IO密集型任务，参照值设置为2*NCPU</li>
@@ -565,10 +565,10 @@
     <div class="sidebar-inner">
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -589,7 +589,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">218</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -637,10 +637,8 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">Kategorien</span>
         
       </div>
     
@@ -724,8 +722,10 @@
         
           
         
-        <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">tags</span>
+          
+        
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -769,9 +769,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 

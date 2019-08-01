@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -60,7 +60,7 @@
   <meta name="description" content="十一、线程安全​    多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。 概念​    编写线程安全的代码，本质上就是管理对状态的访问，而且通常都是共享、可变的状态。 ​    一个对象的状态就是它的数据，存储在状态变量中，如静态域、实例域。共享即一个变量可以被多个线程访问。可变即变量的值在其生命周期内都可以改变。真正要做到的线程安全是在不可控制的并发访问当中">
 <meta name="keywords" content="并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java并发">
+<meta property="og:title" content="Java并发：待迁移">
 <meta property="og:url" content="http://yoursite.com/2019/02/18/Java/base/java并发/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="十一、线程安全​    多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。 概念​    编写线程安全的代码，本质上就是管理对状态的访问，而且通常都是共享、可变的状态。 ​    一个对象的状态就是它的数据，存储在状态变量中，如静态域、实例域。共享即一个变量可以被多个线程访问。可变即变量的值在其生命周期内都可以改变。真正要做到的线程安全是在不可控制的并发访问当中">
@@ -74,9 +74,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/18/Java/base/java并发/assets%5C1550825942991.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/18/Java/base/java并发/assets%5C1550825994345.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/18/Java/base/java并发/assets%5C1550988548365.png">
-<meta property="og:updated_time" content="2019-05-06T04:47:23.282Z">
+<meta property="og:updated_time" content="2019-08-01T06:42:55.690Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java并发">
+<meta name="twitter:title" content="Java并发：待迁移">
 <meta name="twitter:description" content="十一、线程安全​    多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。 概念​    编写线程安全的代码，本质上就是管理对状态的访问，而且通常都是共享、可变的状态。 ​    一个对象的状态就是它的数据，存储在状态变量中，如静态域、实例域。共享即一个变量可以被多个线程访问。可变即变量的值在其生命周期内都可以改变。真正要做到的线程安全是在不可控制的并发访问当中">
 <meta name="twitter:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1550563393365.png">
   <link rel="canonical" href="http://yoursite.com/2019/02/18/Java/base/java并发/">
@@ -88,7 +88,7 @@
   };
 </script>
 
-  <title>java并发 | Hexo</title>
+  <title>Java并发：待迁移 | Hexo</title>
   
 
 
@@ -144,7 +144,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -164,7 +164,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -175,7 +175,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -186,7 +186,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
         
@@ -197,7 +197,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -208,7 +208,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -219,13 +219,13 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
-            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -241,7 +241,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
+             placeholder="Suche..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -290,7 +290,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">java并发
+          <h1 class="post-title" itemprop="name headline">Java并发：待迁移
 
               
             
@@ -303,14 +303,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-02-18 23:05:11" itemprop="dateCreated datePublished" datetime="2019-02-18T23:05:11+08:00">2019-02-18</time>
+              <time title="Erstellt: 2019-02-18 23:05:11" itemprop="dateCreated datePublished" datetime="2019-02-18T23:05:11+08:00">2019-02-18</time>
             </span>
           
             
@@ -321,9 +321,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-05-06 12:47:23" itemprop="dateModified" datetime="2019-05-06T12:47:23+08:00">2019-05-06</time>
+                <time title="Geändert am: 2019-08-01 14:42:55" itemprop="dateModified" datetime="2019-08-01T14:42:55+08:00">2019-08-01</time>
               </span>
             
           
@@ -332,7 +332,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -344,12 +344,12 @@
           
 
           
-            <span id="/2019/02/18/Java/base/java并发/" class="post-meta-item leancloud_visitors" data-flag-title="java并发">
+            <span id="/2019/02/18/Java/base/java并发/" class="post-meta-item leancloud_visitors" data-flag-title="Java并发：待迁移">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Views: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -362,7 +362,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comments: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/02/18/Java/base/java并发/#comments" itemprop="discussionUrl">
@@ -706,10 +706,10 @@
     <div class="sidebar-inner">
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -730,7 +730,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">218</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -778,10 +778,8 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">Kategorien</span>
         
       </div>
     
@@ -865,8 +863,10 @@
         
           
         
-        <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">tags</span>
+          
+        
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -910,9 +910,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 

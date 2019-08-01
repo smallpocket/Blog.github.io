@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -65,25 +65,25 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="JMM基础内存模型：在特定的操作协议(应该时指缓存一致性协议把)下，对特定内存或高速缓存进行读写访问地过程抽象 Java内存模型(JMM)试图屏蔽各种硬件和OS间的内存访问差异，以实现Java程序在各种平台下都能达到一致的内存访问效果。 Java内存模型是围绕着在并发过程中如何处理原子性、可见性和有序性而建立的 JMMJMM规范了java虚拟机与计算机内存如何协同工作，规定了一个线程如何和何时能看">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551253396237.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551253669203.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551253796357.png">
-<meta property="og:image" content="d:/ABlog/source/_posts/Java/base/assets/1551254279492.png">
-<meta property="og:image" content="d:/ABlog/source/_posts/Java/base/assets/1555058673645.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/874b3ff7-7c5c-4e7a-b8ab-a82a3e038d20.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/8996a537-7c4a-4ec8-a3b7-7ef1798eae26.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/942f33c9-8ad9-4987-836f-007de4c21de0.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/6270c216-7ec0-4db7-94de-0003bce37cd2.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/233f8d89-31d7-413f-9c02-042f19c46ba1.png">
-<meta property="og:image" content="d:/ABlog/source/_posts/Java/base/assets/1555057714237.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555058346281.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555058415256.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1555058476394.png">
-<meta property="og:updated_time" content="2019-07-31T07:16:16.944Z">
+<meta property="og:image" content="http://yoursite.com/assets/1551253396237.png">
+<meta property="og:image" content="http://yoursite.com/assets/1551253669203.png">
+<meta property="og:image" content="http://yoursite.com/assets/1551253796357.png">
+<meta property="og:image" content="http://yoursite.com/assets/1551254279492.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555058673645.png">
+<meta property="og:image" content="http://yoursite.com/assets/874b3ff7-7c5c-4e7a-b8ab-a82a3e038d20.png">
+<meta property="og:image" content="http://yoursite.com/assets/8996a537-7c4a-4ec8-a3b7-7ef1798eae26.png">
+<meta property="og:image" content="http://yoursite.com/assets/942f33c9-8ad9-4987-836f-007de4c21de0.png">
+<meta property="og:image" content="http://yoursite.com/assets/6270c216-7ec0-4db7-94de-0003bce37cd2.png">
+<meta property="og:image" content="http://yoursite.com/assets/233f8d89-31d7-413f-9c02-042f19c46ba1.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555057714237.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555058346281.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555058415256.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555058476394.png">
+<meta property="og:updated_time" content="2019-08-01T06:27:06.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：JMM">
 <meta name="twitter:description" content="JMM基础内存模型：在特定的操作协议(应该时指缓存一致性协议把)下，对特定内存或高速缓存进行读写访问地过程抽象 Java内存模型(JMM)试图屏蔽各种硬件和OS间的内存访问差异，以实现Java程序在各种平台下都能达到一致的内存访问效果。 Java内存模型是围绕着在并发过程中如何处理原子性、可见性和有序性而建立的 JMMJMM规范了java虚拟机与计算机内存如何协同工作，规定了一个线程如何和何时能看">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/assets/1551253396237.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1551253396237.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/11/Java/base/Java并发：JMM/">
 
 
@@ -149,7 +149,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -169,7 +169,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -180,7 +180,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -191,7 +191,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
 
   </li>
         
@@ -202,7 +202,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -224,13 +224,13 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
 
   </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
-            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -246,7 +246,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
+             placeholder="Suche..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -308,14 +308,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-04-11 21:50:21" itemprop="dateCreated datePublished" datetime="2019-04-11T21:50:21+08:00">2019-04-11</time>
+              <time title="Erstellt: 2019-04-11 21:50:21" itemprop="dateCreated datePublished" datetime="2019-04-11T21:50:21+08:00">2019-04-11</time>
             </span>
           
             
@@ -326,9 +326,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Modified: 2019-07-31 15:16:16" itemprop="dateModified" datetime="2019-07-31T15:16:16+08:00">2019-07-31</time>
+                <time title="Geändert am: 2019-08-01 14:27:06" itemprop="dateModified" datetime="2019-08-01T14:27:06+08:00">2019-08-01</time>
               </span>
             
           
@@ -337,7 +337,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -354,7 +354,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Views: </span>
+                <span class="post-meta-item-text">Aufrufe: </span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -367,7 +367,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Comments: </span>
+      <span class="post-meta-item-text">Kommentare: </span>
     
   
     <a href="/2019/04/11/Java/base/Java并发：JMM/#comments" itemprop="discussionUrl">
@@ -398,10 +398,10 @@
 <p><strong><em>Java内存区域的堆栈</em></strong></p>
 <p>工作内存、主内存与Java堆栈不是一个层次的<strong>内存划分</strong>，即它们没有直接关联。</p>
 <p>若非要对应的话，则主内存主要对应与Java堆内的对象实例数据部分，而工作内存主要对应虚拟机栈内的部分区域。</p>
-<p><img src="assets/1551253396237.png" alt="1551253396237"></p>
+<p><img src="/assets/1551253396237.png" alt="1551253396237"></p>
 <p><strong>CPU寄存器</strong>CPU registers，访问缓存的速度最快，其次是高速缓存。它们都属于<strong>线程的本地内存</strong></p>
-<p><img src="assets/1551253669203.png" alt="1551253669203"></p>
-<p><img src="assets/1551253796357.png" alt="1551253796357"></p>
+<p><img src="/assets/1551253669203.png" alt="1551253669203"></p>
+<p><img src="/assets/1551253796357.png" alt="1551253796357"></p>
 <h3 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h3><p>关于主内存与工作内存间的具体交互协议，即一个变量如何从主内存拷贝到工作内存、如何从工作内存同步回主内存之类的实现细节。</p>
 <p>Java内存模型定义了8种操作，并且虚拟机实现时必须保证每一种操作都是原子的，不可再分的(long和double的load、store、read、write在某些平台上允许例外)</p>
 <ul>
@@ -414,7 +414,7 @@
 <li>store存储：作用于工作内存的变量，把工作内存的一个变量的值传递到主内存中，以便随后的write操作</li>
 <li>write写入：作用于主内存的变量，把store操作从工作内存中一个变量的值传送到主内存的变量中</li>
 </ul>
-<p><img src="D:/ABlog/source/_posts/Java/base/assets/1551254279492.png" alt="1551254279492"></p>
+<p><img src="/assets/1551254279492.png" alt="1551254279492"></p>
 <p>而具体操作间的顺序是有一定的规则的，较为简单的即happens-before原则判断</p>
 <p><strong><em>同步规则</em></strong></p>
 <ul>
@@ -434,7 +434,7 @@
 <p>如果两个操作的执行次序无法从happens before推导出来，<strong>则JVM可以对它进行随意的重排序。</strong></p>
 <p><strong>概述</strong></p>
 <p>在JMM中，<strong>如果一个操作执行的结果需要对另一个操作可见</strong>，那么这两个操作之间<strong>必须要存在</strong>happens-before关系。这里提到的两个操作既可以是在一个线程之内，也可以是在不同线程之间。</p>
-<p><img src="D:/ABlog/source/_posts/Java/base/assets/1555058673645.png" alt="1555058673645"></p>
+<p><img src="/assets/1555058673645.png" alt="1555058673645"></p>
 <p><strong>happens-before规则</strong></p>
 <ul>
 <li><strong>程序次序规则</strong>：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作<ul>
@@ -443,25 +443,25 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/874b3ff7-7c5c-4e7a-b8ab-a82a3e038d20.png" alt="img"></p>
+<p><img src="/assets/874b3ff7-7c5c-4e7a-b8ab-a82a3e038d20.png" alt="img"></p>
 <ul>
 <li><strong>锁定操作</strong>：一个unlock操作先行发生于后面对同一个锁的lock操作</li>
 </ul>
-<p><img src="assets/8996a537-7c4a-4ec8-a3b7-7ef1798eae26.png" alt="img"></p>
+<p><img src="/assets/8996a537-7c4a-4ec8-a3b7-7ef1798eae26.png" alt="img"></p>
 <ul>
 <li><strong>volatile变量规则</strong>：对一个变量的写操作先行发生于后面对于这个变量的读操作</li>
 </ul>
-<p><img src="assets/942f33c9-8ad9-4987-836f-007de4c21de0.png" alt="img"></p>
+<p><img src="/assets/942f33c9-8ad9-4987-836f-007de4c21de0.png" alt="img"></p>
 <ul>
 <li><strong>传递规则</strong>；如果操作A先行发生于操作B，而操作B又先行发生于操作C，则操作A先行发生于操作C</li>
 <li>线程启动规则：Thread对象的start（）方法先行发生于此线程的每一个动作</li>
 </ul>
-<p><img src="assets/6270c216-7ec0-4db7-94de-0003bce37cd2.png" alt="img"></p>
+<p><img src="/assets/6270c216-7ec0-4db7-94de-0003bce37cd2.png" alt="img"></p>
 <ul>
 <li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
 <li>线程终结规则：线程中所有的操作都先行发生于线程的终止检测</li>
 </ul>
-<p><img src="assets/233f8d89-31d7-413f-9c02-042f19c46ba1.png" alt="img"></p>
+<p><img src="/assets/233f8d89-31d7-413f-9c02-042f19c46ba1.png" alt="img"></p>
 <ul>
 <li>对象终结规则：一个对象的初始化完成先行发生于它的finalize（）方法的开始</li>
 </ul>
@@ -483,7 +483,7 @@
 </li>
 </ul>
 <p>对于Java源代码到最终执行的指令序列，会经历三种重排序，可能导致内存可见性问题：</p>
-<p><img src="D:/ABlog/source/_posts/Java/base/assets/1555057714237.png" alt="1555057714237"></p>
+<p><img src="/assets/1555057714237.png" alt="1555057714237"></p>
 <p>JMM属于语言级别的内存模型，确保在不同的编译器和处理器平台上，通过禁止特定类型的编译器重排序和处理器重排序，保证一致性的内存可见性。</p>
 <ul>
 <li>对于编译器，JMM的编译器重排序规则会禁止<strong>特定类型</strong>的编译器重排序</li>
@@ -496,12 +496,12 @@
 <li>缺点：写缓冲区只对其所在处理器可见。对内存操作的执行顺序产生重要影响。导致处理器对内存的读、写操作的执行顺序，不一定与内存实际发生的读、写顺序一致</li>
 </ul>
 <p>示例：在并行执行下</p>
-<p><img src="assets/1555058346281.png" alt="1555058346281"></p>
+<p><img src="/assets/1555058346281.png" alt="1555058346281"></p>
 <p>现代处理器都会允许对写-读操作重排序</p>
-<p><img src="assets/1555058415256.png" alt="1555058415256"></p>
+<p><img src="/assets/1555058415256.png" alt="1555058415256"></p>
 <h3 id="内存屏障指令"><a href="#内存屏障指令" class="headerlink" title="内存屏障指令"></a>内存屏障指令</h3><p>对于只有一个CPU访问内存时，并不需要内存屏障。但是如果有两个或更多个CPU访问同一块内存，并且其中有一个正在观测另一个，就需要内存屏障保证一致性。</p>
 <p>为了保证内存可见性，Java编译器在生成指令序列的适当位置会插入内存屏障指令来禁止特定类型的处理器重排序</p>
-<p><img src="assets/1555058476394.png" alt="1555058476394"></p>
+<p><img src="/assets/1555058476394.png" alt="1555058476394"></p>
 <ul>
 <li>StoreLoad Barriers<ul>
 <li>全能型屏障，具有其他3个屏障的效果。现代处理器大多数支持该屏障</li>
@@ -619,10 +619,10 @@
     <div class="sidebar-inner">
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -643,7 +643,7 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">218</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -691,10 +691,8 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">Kategorien</span>
         
       </div>
     
@@ -778,8 +776,10 @@
         
           
         
-        <span class="site-state-item-count">37</span>
-        <span class="site-state-item-name">tags</span>
+          
+        
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -823,9 +823,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 

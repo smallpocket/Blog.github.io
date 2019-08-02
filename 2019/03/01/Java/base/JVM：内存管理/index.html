@@ -4,7 +4,7 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
 <meta name="generator" content="Hexo 3.9.0">
@@ -57,14 +57,14 @@
   };
 </script>
 
-  <meta name="description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了jvm，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域 区域有各自的用途、">
+  <meta name="description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了JVM，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域。 区域有各自的用途">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM：内存管理">
 <meta property="og:url" content="http://yoursite.com/2019/03/01/Java/base/JVM：内存管理/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了jvm，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域 区域有各自的用途、">
-<meta property="og:locale" content="default">
+<meta property="og:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了JVM，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域。 区域有各自的用途">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/assets/1564413541987.png">
 <meta property="og:image" content="http://yoursite.com/assets/1564713632072.png">
 <meta property="og:image" content="http://yoursite.com/assets/20170818151037199.png">
@@ -74,10 +74,10 @@
 <meta property="og:image" content="http://yoursite.com/assets/1552120022744.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552121101706.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552131024681.png">
-<meta property="og:updated_time" content="2019-08-02T03:09:27.787Z">
+<meta property="og:updated_time" content="2019-08-02T03:29:17.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：内存管理">
-<meta name="twitter:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了jvm，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域 区域有各自的用途、">
+<meta name="twitter:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了JVM，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域。 区域有各自的用途">
 <meta name="twitter:image" content="http://yoursite.com/assets/1564413541987.png">
   <link rel="canonical" href="http://yoursite.com/2019/03/01/Java/base/JVM：内存管理/">
 
@@ -125,7 +125,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
@@ -323,7 +323,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-08-02 11:09:27" itemprop="dateModified" datetime="2019-08-02T11:09:27+08:00">2019-08-02</time>
+                <time title="Geändert am: 2019-08-02 11:29:17" itemprop="dateModified" datetime="2019-08-02T11:29:17+08:00">2019-08-02</time>
               </span>
             
           
@@ -372,6 +372,26 @@
   
   
           <br>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbole im Artikel gezählt: </span>
+              
+              <span title="Symbole im Artikel gezählt">12k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Lesezeit &asymp;</span>
+              
+              <span title="Lesezeit">15 minuten.</span>
+            </span>
+          
 
         </div>
       </header>
@@ -382,11 +402,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="java内存区域与内存溢出异常"><a href="#java内存区域与内存溢出异常" class="headerlink" title="java内存区域与内存溢出异常"></a>java内存区域与内存溢出异常</h1><p>Java将内存扩展的权利交给了jvm，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。</p>
+        <h1 id="java内存区域与内存溢出异常"><a href="#java内存区域与内存溢出异常" class="headerlink" title="java内存区域与内存溢出异常"></a>java内存区域与内存溢出异常</h1><p>Java将内存扩展的权利交给了JVM，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。</p>
 <h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><ul>
-<li>Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域</li>
+<li>Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域。</li>
 <li>区域有各自的用途、创建时间、销毁时间。</li>
-<li>有的区域随着虚拟机进程的启动而存在，有的区域随着用户线程的启动和结束而建立和销毁</li>
+<li>有的区域随着虚拟机进程的启动而存在，有的区域随着用户线程的启动和结束而建立和销毁。</li>
 </ul>
 <p>区域包括</p>
 <p><img src="/assets/1564413541987.png" alt="1564413541987"></p>
@@ -398,9 +418,10 @@
 <li>各个线程共享的内存区域，用于存储已被虚拟机加载的<strong>类信息、常量、静态变量、class文件、即时编译器编译后的代码等数据</strong></li>
 <li>垃圾回收器也会对这部分进行回收，如常量池的清理和类型的卸载。是Non-Heap、永久代。当无法满足内存分配需求时，OutOfMemoryError异常</li>
 </ul>
+<p>可以以方法区只有一个类的角度去思考。</p>
 <p><strong><em>运行时常量池</em></strong></p>
 <ul>
-<li>存放编译期生成的各种<strong>字面量和符号引用</strong>。<ul>
+<li>存放<strong>该类型</strong>编译期生成的各种<strong>字面量和符号引用</strong>。<ul>
 <li>包括直接常量<code>CONSTANT_String_info</code>、<code>CONSTANT_Integer_info</code>等。</li>
 <li>对其他类型、字段和方法的符号引用，以索引进行访问。</li>
 </ul>
@@ -1164,6 +1185,16 @@
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Insgesamt gezählte Symbole">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Insgesamte Lesezeit">23:10</span>
 </div>
   <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
@@ -1334,7 +1365,7 @@
     meta: guest,
     pageSize: '10' || 10,
     visitor: false,
-    lang: 'zh-cn' || 'zh-cn'
+    lang: 'zh-Hans' || 'zh-cn'
   });
 </script>
 

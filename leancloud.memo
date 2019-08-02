@@ -99,6 +99,7 @@
 {"title":"JVM（5）：程序优化","url":"/2019/03/01/Java/base/JVM：程序优化/"},
 {"title":"JVM：程序优化","url":"/2019/03/01/Java/base/JVM：程序优化/"},
 {"title":"JVM（4）：类文件与类加载","url":"/2019/03/01/Java/base/JVM：类文件与类加载/"},
+{"title":"JVM：类文件与类加载","url":"/2019/03/01/Java/base/JVM：类文件与类加载/"},
 {"title":"JVM：调优","url":"/2019/03/01/Java/base/JVM：调优/"},
 {"title":"java并发：线程安全","url":"/2019/03/01/Java/base/java并发：线程安全/"},
 {"title":"Java并发：线程安全","url":"/2019/03/01/Java/base/java并发：线程安全/"},
@@ -221,6 +222,7 @@
 {"title":"现代操作系统：虚拟化与云","url":"/2019/07/17/OS/现代操作系统：虚拟化与云/"},
 {"title":"现代操作系统：进程与线程","url":"/2019/07/17/OS/现代操作系统：进程与线程/"},
 {"title":"SOA:概述","url":"/2019/07/20/系统架构/SOA：概述/"},
+{"title":"SOA：概述","url":"/2019/07/20/系统架构/SOA：概述/"},
 {"title":"计算机网络：链路层","url":"/2019/07/20/计算机网络/计算机网络：链路层/"},
 {"title":"Dubbo：概述","url":"/2019/07/21/系统架构/Dubbo：概述/"},
 {"title":"Kafka：概述","url":"/2019/07/21/系统架构/Kafka：概述/"},
@@ -240,4 +242,5 @@
 {"title":"Hello World","url":"/2019/07/30/hello-world/"},
 {"title":"Java并发：CPU","url":"/2019/07/31/Java/base/Java并发：CPU/"},
 {"title":"Java并发：JMM-并发机制的原理","url":"/2019/07/31/Java/base/Java并发：JMM-并发机制的原理/"},
+{"title":"JVM：从JVM角度观察实际问题","url":"/2019/08/01/Java/base/JVM：从JVM角度观察实际问题/"},
 ]

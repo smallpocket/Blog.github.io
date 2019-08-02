@@ -4,7 +4,7 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
 <meta name="generator" content="Hexo 3.9.0">
@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/03/01/Java/base/JVM：类文件与类加载/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/assets/1564483003687.png">
 <meta property="og:image" content="http://yoursite.com/assets/1564484128891.png">
 <meta property="og:image" content="http://yoursite.com/assets/1564484562491.png">
@@ -79,7 +79,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1564707425505.png">
 <meta property="og:image" content="http://yoursite.com/assets/1564488177169.png">
 <meta property="og:image" content="http://yoursite.com/assets/1564537447891.png">
-<meta property="og:updated_time" content="2019-08-02T01:21:45.231Z">
+<meta property="og:updated_time" content="2019-08-02T03:25:20.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：类文件与类加载">
 <meta name="twitter:description" content="类文件结构.class文件，类文件，字节码文件。 代码编译的结果从本期机器码转变为字节码，是存储格式发展的一步 概述计算机只能识别0和1，因此程序需要经编译器翻译成二进制格式。 而随着虚拟机的发展，越来越多程序语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式。即将程序编译成二进制本地机器码已经不是唯一的选择 无关性的基石 平台无关系  许多虚拟机都可以载入和执行同一种">
@@ -130,7 +130,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
@@ -328,7 +328,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-08-02 09:21:45" itemprop="dateModified" datetime="2019-08-02T09:21:45+08:00">2019-08-02</time>
+                <time title="Geändert am: 2019-08-02 11:25:20" itemprop="dateModified" datetime="2019-08-02T11:25:20+08:00">2019-08-02</time>
               </span>
             
           
@@ -377,6 +377,26 @@
   
   
           <br>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbole im Artikel gezählt: </span>
+              
+              <span title="Symbole im Artikel gezählt">11k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Lesezeit &asymp;</span>
+              
+              <span title="Lesezeit">13 minuten.</span>
+            </span>
+          
 
         </div>
       </header>
@@ -436,13 +456,12 @@
 <li>常量池可以理解为Class文件中的资源仓库，是Class文件结构中与其他项目关联最多的数据类型，也是占用空间最大的数据项目之一，同时是Class文件中第一个出现表数据项目</li>
 <li>常量池中的常量的数量是不固定的，因此在入口需要放置一项u2类型的数据，代表常量池容量计数值：constant_pool_count。其计数从1开始，0表达不引用任何一个常量池项目。</li>
 <li>常量池主要存放两大类常量<ul>
-<li>字面量。文本字符串、声明为Final的常量值</li>
-<li>符号引用。类和接口的全限定名、字段的名称和描述符、方法的名称和描述符</li>
+<li><strong>字面量</strong>。文本字符串、声明为Final的常量值</li>
+<li><strong>符号引用</strong>。类和接口的全限定名、字段的名称和描述符、方法的名称和描述符</li>
 </ul>
 </li>
 </ul>
-<p>虚拟机加载Class文件会进行<strong>动态连接，并不会像C一样有连接步骤</strong>，即Class文件不会保存各个方法、字段的内存最终布局信息。因此需要通过运行期转换才能得到真正的内存入口地址。</p>
-<p>当虚拟机运行时，需要从常量池获得对应的符号引用，再在类创建时或运行时解析，翻译到具体的内存地址之中。</p>
+<p>虚拟机加载Class文件会进行<strong>动态连接，并不会像C一样有连接步骤</strong>，即Class文件不会保存各个方法、字段的内存最终布局信息。因此需要通过运行期转换才能得到真正的内存入口地址。当虚拟机运行时，需要从常量池获得对应的符号引用，再在类创建时或运行时解析，翻译到具体的内存地址之中。</p>
 <p>常量池中的每个常量都是一个表，在JDK7中具有14中，其共同特点是表开始的第一位是一个u1类型标志位，戴白哦该常量属于那种常量类型。</p>
 <p><img src="/assets/1564484128891.png" alt="1564484128891"></p>
 <p>其中<strong>CONSTANT_Class_info</strong>类型代表一个类或接口的符号引用。</p>
@@ -546,7 +565,7 @@
 <li><code>exception_table</code>是异常处理跳转信息</li>
 <li><code>attributes</code>包含Java源码行号与机器码的对应关系，以及局部变量表描述信息<ul>
 <li>LineNumberTable。因此抛出异常时可以知道是在代码中的哪一行等</li>
-<li>LocalVaribale。会记录栈帧局部变量表和Java源码中定义的变量中的关系，不是运行时必须的属性。与IDE的代码提示有关</li>
+<li>LocalVaribale。会记录栈帧局部变量表和Java源码中定义的变量中的关系，不是运行时必须的属性。与IDE的代码提示有关。</li>
 </ul>
 </li>
 </ul>
@@ -573,7 +592,9 @@
 <h1 id="公有设计与私有实现"><a href="#公有设计与私有实现" class="headerlink" title="公有设计与私有实现"></a>公有设计与私有实现</h1><h1 id="虚拟机类加载机制"><a href="#虚拟机类加载机制" class="headerlink" title="虚拟机类加载机制"></a>虚拟机类加载机制</h1><p>如何将字节码文件加载到虚拟机当中</p>
 <p>java.lang.ClassNotFoundExcetpion类加载异常</p>
 <h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p>虚拟机如何加载Class文件？Class文件中的信息进入虚拟机后会发生什么变化</p>
+<blockquote>
 <p>类加载机制：虚拟机把描述类的数据从Class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。</p>
+</blockquote>
 <p>Java里，类型的加载、连接和初始化过程都是在程序运行期间完成的，虽然使得类加载时稍增加一些性能开销，但是为应用提供高度灵活性。这实现了Java可以动态扩展的语言特性，其天生可以动态扩展的语言特性就是依赖运行期动态加载和动态连接这个特点实现的。</p>
 <ul>
 <li>编写一个面向接口的应用程序，可以等到运行时再指定实际的实现类</li>
@@ -658,9 +679,9 @@
 <ul>
 <li>符号引用：以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。以字面量形式定义在Class文件中。</li>
 <li>直接引用：直接指向目标的指针、相对偏移量或一个能够间接定位到目标的句柄。是与虚拟机实现的内存布局相关的。</li>
-<li>符号引用可能不存在于内存当中，但直接引用一定存在内存中</li>
+<li>符号引用可能不存在于内存当中，但直接引用一定存在内存中。</li>
 </ul>
-<p>对于同一个 符号引用进行多次解析是常见的，除invokedynamic指令外，虚拟机实现对第一次解析的结果进行缓存（<strong>缓存</strong>：在运行时常量池中记录直接引用，并将常量标识为已解析状态），从而避免解析重复进行。</p>
+<p>对于同一个符号引用进行多次解析是常见的，除invokedynamic指令外，虚拟机实现对第一次解析的结果进行缓存（<strong>缓存</strong>：在运行时常量池中记录直接引用，并将常量标识为已解析状态），从而避免解析重复进行。</p>
 <p>虚拟机需要保证在同一个实体中，如果一个符号引用之前已经被成功解析过，那么后续的引用解析请求就应当一直成功。如果第一次失败了，那么其他指令对这个符号的解析请求也应该收到同样的异常</p>
 <p>invokedynamic指令用于动态语言支持，只有当实际运行到该节点，才开始解析。</p>
 <p>解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号</p>
@@ -1022,6 +1043,16 @@
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Heper</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Insgesamt gezählte Symbole">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Insgesamte Lesezeit">23:10</span>
 </div>
   <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
@@ -1192,7 +1223,7 @@
     meta: guest,
     pageSize: '10' || 10,
     visitor: false,
-    lang: 'zh-cn' || 'zh-cn'
+    lang: 'zh-Hans' || 'zh-cn'
   });
 </script>
 

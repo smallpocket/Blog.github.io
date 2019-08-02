@@ -57,13 +57,13 @@
   };
 </script>
 
-  <meta name="description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响应之类的">
+  <meta name="description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调    用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响">
 <meta name="keywords" content="框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RPC：概述">
 <meta property="og:url" content="http://yoursite.com/2019/07/22/系统架构/RPC：概述/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响应之类的">
+<meta property="og:description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调    用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/assets/1563772474306.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/22/系统架构/OS/assets/20160630-lpc.png">
@@ -73,10 +73,10 @@
 <meta property="og:image" content="http://yoursite.com/assets/1563777082595.png">
 <meta property="og:image" content="http://yoursite.com/assets/dubbo-architecture.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/1563778296842.png">
-<meta property="og:updated_time" content="2019-08-01T12:41:53.863Z">
+<meta property="og:updated_time" content="2019-08-01T13:09:09.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RPC：概述">
-<meta name="twitter:description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响应之类的">
+<meta name="twitter:description" content="RPC提出问题 考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里 当在一台计算机上的某个对象需要调    用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。 远程对象响应请求，并返回客户端    概述客户端服务器角色我们需要的机制并不是HTTP的机制，而是客户端程序员以常规的方式进行方法调用而无需操心将数据发送到网络上或解析响">
 <meta name="twitter:image" content="http://yoursite.com/assets/1563772474306.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/22/系统架构/RPC：概述/">
 
@@ -322,7 +322,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-08-01 20:41:53" itemprop="dateModified" datetime="2019-08-01T20:41:53+08:00">2019-08-01</time>
+                <time title="Geändert am: 2019-08-01 21:09:09" itemprop="dateModified" datetime="2019-08-01T21:09:09+08:00">2019-08-01</time>
               </span>
             
           
@@ -383,7 +383,7 @@
       
         <h1 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><ul>
 <li>考虑将“无所不在”的对象作为所有问题的解决之道，其思想是所有相互协作的对象彼此都知道对方在哪里<ul>
-<li>当在一台计算机上的某个对象需要调用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。</li>
+<li>当在一台计算机上的某个对象需要调    用在另一台计算机上的某个对象时就会发送一个包含这个请求的详细信息的网络消息。</li>
 <li>远程对象响应请求，并返回客户端</li>
 </ul>
 </li>
@@ -433,7 +433,7 @@
 </li>
 <li>服务器存根：客户存根的等价物</li>
 <li>其具体的原理为：<ul>
-<li>对于每个独立的远程过程都有一个存根。当客户机调用原厂过程时，RPC系统调用合适的存根，并传递远程过程的参数</li>
+<li>对于每个独立的远程过程都有一个存根。当客户机调用远程过程时，RPC系统调用合适的存根，并传递远程过程的参数</li>
 <li>该存根位于服务器的端口，并编组参数（涉及将参数打包成可通过网络传输的形式），接着存根使用消息传递向服务器发送一个消息。</li>
 <li>服务器的一个类似存根接收这一消息，并调用服务器上的过程。如有必要，返回值可通过同样的技术返回客户机</li>
 </ul>
@@ -681,7 +681,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">211</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>

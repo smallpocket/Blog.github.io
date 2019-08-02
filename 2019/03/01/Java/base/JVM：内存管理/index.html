@@ -66,13 +66,15 @@
 <meta property="og:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了jvm，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域 区域有各自的用途、">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/assets/1564413541987.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564713632072.png">
+<meta property="og:image" content="http://yoursite.com/assets/20170818151037199.png">
 <meta property="og:image" content="http://yoursite.com/assets/ff5b89ac-798e-4fbc-b0ce-da2fc2358570.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/1564449805149.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552120017803.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552120022744.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552121101706.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552131024681.png">
-<meta property="og:updated_time" content="2019-08-01T06:35:18.559Z">
+<meta property="og:updated_time" content="2019-08-02T03:09:27.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：内存管理">
 <meta name="twitter:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了jvm，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域 区域有各自的用途、">
@@ -321,7 +323,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-08-01 14:35:18" itemprop="dateModified" datetime="2019-08-01T14:35:18+08:00">2019-08-01</time>
+                <time title="Geändert am: 2019-08-02 11:09:27" itemprop="dateModified" datetime="2019-08-02T11:09:27+08:00">2019-08-02</time>
               </span>
             
           
@@ -391,24 +393,46 @@
 <blockquote>
 <p>对于JVM的内存区域，其实远远不止堆内存、栈内存，这种方式的流行只是说明大多数程序员最关注的、与对象内存分配关系最密切的内存区域是这两块。</p>
 </blockquote>
+<p><img src="/assets/1564713632072.png" alt="1564713632072"></p>
 <h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><ul>
-<li>各个线程共享的内存区域，用于存储已被虚拟机加载的类信息、常量、静态变量、class文件、即时编译器编译后的代码等数据</li>
-<li>垃圾回收器也会对这部分进行回收，如常量池的清理和类型的卸载</li>
-<li>Non-Heap、永久代</li>
-<li>当无法满足内存分配需求时，OutOfMemoryError异常</li>
+<li>各个线程共享的内存区域，用于存储已被虚拟机加载的<strong>类信息、常量、静态变量、class文件、即时编译器编译后的代码等数据</strong></li>
+<li>垃圾回收器也会对这部分进行回收，如常量池的清理和类型的卸载。是Non-Heap、永久代。当无法满足内存分配需求时，OutOfMemoryError异常</li>
 </ul>
-<p><strong><em>运行时常量池</em></strong>（方法区的一部分）</p>
+<p><strong><em>运行时常量池</em></strong></p>
 <ul>
-<li>存放编译期生成的各种字面量和符号引用</li>
+<li>存放编译期生成的各种<strong>字面量和符号引用</strong>。<ul>
+<li>包括直接常量<code>CONSTANT_String_info</code>、<code>CONSTANT_Integer_info</code>等。</li>
+<li>对其他类型、字段和方法的符号引用，以索引进行访问。</li>
+</ul>
+</li>
 <li>相对于Class文件常量池的另一个重要特征时具备动态性，Java并不要求常量一定在编译期才能产生，即并非Class文件中常量池的内容才能进入该区域。运行期间也可以将新的常量放入池中，例如String的intern()</li>
 <li>当无法满足内存分配需求时，OutOfMemoryError异常</li>
 </ul>
+<p><strong><em>类型信息</em></strong></p>
+<p>类型的全限定名、类型直接超类的全限定名、直接接口的全限定名列表、该类型是类信息还是接口类型、类型的访问修饰符</p>
+<p><strong><em>字段信息</em></strong></p>
+<p>类中声明的所有字段，例如类级变量和实例变量的描述，不包括局部变量。如字段名称、字段修饰符、字段的类型。</p>
+<p><strong><em>方法信息</em></strong></p>
+<p>方法名、方法的返回类型、方法参数的个数和类型、顺序等、方法的修饰符、<strong>方法的字节码</strong>、操作数栈和该方法在栈帧中的局部变量区的大小、异常表</p>
+<p><strong><em>类变量</em></strong></p>
+<p>类中使用static修饰的变量，类变量是所有对象共享，保存在方法区当中</p>
+<ul>
+<li>非编译时变量。虚拟机使用某类前，必须为此类变量分配内存空间。</li>
+<li>编译时变量。对于编译时常量，则直接将其复制到使用它们的类的常量池当中，或者作为字节码流的一部分</li>
+</ul>
+<p><strong><em>指向类加载器的引用</em></strong></p>
+<p>一个类可以被启动类加载器或者自定义的类加载器加载，如果一个类被某个自定义类加载器的对象加载，则方法区必须保持该对象的引用</p>
+<p><strong><em>指向Class实例的引用</em></strong></p>
+<p>在加载过程中，虚拟机会创建一个代表该类型的Class对象，方法区中必须保存对该对象的引用</p>
+<p><strong><em>方法表</em></strong></p>
+<p>是为了提高访问效率，JVM对每个加载的非虚拟类的类型信息中都添加了一个方法表，方法表是一组对类实例方法的直接引用（包括从父类继承的方法），JVM通过方法表快速激活实例方法。</p>
+<p><img src="/assets/20170818151037199.png" alt></p>
 <h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><ul>
 <li>虚拟机管理的内存中最大的一块，在虚拟机启动时创建，所有线程共享<ul>
 <li>可以处于物理上不连续的内存空间中，只要逻辑上时连续的即可。</li>
 </ul>
 </li>
-<li>存放对象实例，几乎所有对象实例都在这里分配内存<ul>
+<li><strong>存放对象实例</strong>，几乎所有对象实例都在这里分配内存<ul>
 <li>随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术会导致一部分对象不会分配到堆上。</li>
 </ul>
 </li>
@@ -424,14 +448,30 @@
 <h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><ul>
 <li><p>线程私有，生命周期与线程相同</p>
 </li>
-<li><p>描述Java方法执行的内存模型（栈内存）</p>
+<li><p>描述Java方法执行的内存模型（栈内存）。每个方法在执行的同时都会<strong>创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息</strong>。一个方法从调用至完成则对应一个栈帧在虚拟机栈入栈到出栈</p>
+</li>
+<li><p>栈帧的组成</p>
 <ul>
-<li>每个方法在执行的同时都会创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息。一个方法从调用至完成则对应一个栈帧在虚拟机栈入栈到出栈</li>
-<li>方法体内的局部变量表（其中包括基础数据类型，例如boolean等、对象的引用）<ul>
-<li>64位的long和double会占据两个局部变量空间。</li>
-<li>局部变量表需要的内存空间在编译期间完成分配，当进入一个方法时这个需要分配多大的局部变量空间时完全确定的，运行期间不会改变局部变量表的大小</li>
+<li>局部变量表<ul>
+<li>（<strong>其中包括基础数据类型，例如boolean等、对象的引用</strong>）存储在方法的<code>Code</code>属性当中。</li>
+<li>局部变量表需要的内存空间在编译期间完成分配，当进入一个方法时这个需要分配多大的局部变量空间时完全确定的，运行期间不会改变局部变量表的大小64位的<code>long</code>和<code>double</code>会占据两个局部变量空间。</li>
 </ul>
 </li>
+<li>操作数栈<ul>
+<li>JVM底层字节码指令集是基于栈类型的，索引的操作码都是对操作数栈上的数据进行操作。对每一个方法调用，JVM会建立一个操作数栈，以供计算使用。</li>
+<li>栈的深度在源码编译成class文件后就已经确定，保存在方法的<code>Code</code>属性中</li>
+</ul>
+</li>
+<li>动态链接<ul>
+<li>包含一个指向运行时常量池的引用来支持当前方法的代码</li>
+</ul>
+</li>
+<li>方法出口<ul>
+<li>若方法正常返回，当前栈帧承担着恢复调用者状态的责任，其状态包括调用者的局部变量表、操作数栈和正确增加过来表示执行了该方法调用指令的程序计数器等。使得调用者的代码能在被调用的方法返回并且返回值被推入调用者栈帧的操作数栈后继续正常执行</li>
+<li>若在方法的执行过程中，某些指令导致了JVM抛出异常并且虚拟机抛出的异常在方法中没有办法处理，并且该方法内部没有将异常捕获，如果方法异常调用完成，一定没有方法返回值返回给调用者。</li>
+</ul>
+</li>
+<li>其他引用</li>
 </ul>
 </li>
 <li><p>线程请求栈深度大于虚拟机允许深度，StackOverflowError异常</p>
@@ -440,9 +480,9 @@
 </li>
 </ul>
 <p>  <img src="/assets/ff5b89ac-798e-4fbc-b0ce-da2fc2358570.jpg" alt="img"></p>
-<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>其功能与虚拟机栈发挥作用非常类似，虚拟机使用到的Native方法服务，不一定是Java实现的。</p>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>其功能与虚拟机栈发挥作用非常类似，虚拟机使用到的Native方法服务，不一定是Java实现的。结构也于虚拟机栈一致</p>
 <p>本地方法栈会抛出StackOverflawError和OutOfMemoryError异常</p>
-<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器是一块较小的内存空间（线程私有），可以看作时当前线程所执行的字节码的行号指示器。如果共享，则无法准确的执行当前线程需要执行的语句。</p>
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器是一块较小的内存空间（线程私有），<strong>可以看作时当前线程所执行的字节码的行号指示器</strong>。如果共享，则无法准确的执行当前线程需要执行的语句。</p>
 <p>在JVM的概念模型当中（实际虚拟机可能以更高效的方式实现），字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令。例如分支、循环、跳转、异常处理、线程恢复等基本功能</p>
 <p>当执行Java方法时，其记录的时正在执行的虚拟机字节码指向的地址。如果执行本地方法时，值为undefined</p>
 <p>CPU通过时分复用实现多线程，对确定时刻，一个CPU只会执行一条线程中的指令。每个线程都有一个独立的程序计数器。</p>
@@ -930,7 +970,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">211</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>

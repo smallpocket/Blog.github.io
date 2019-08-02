@@ -66,7 +66,7 @@
 <meta property="og:description" content="JVM概述，base深入理解Java虚拟机">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/assets/1553063936694.png">
-<meta property="og:updated_time" content="2019-08-01T06:32:34.796Z">
+<meta property="og:updated_time" content="2019-08-02T03:12:39.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：概述">
 <meta name="twitter:description" content="JVM概述，base深入理解Java虚拟机">
@@ -315,7 +315,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-08-01 14:32:34" itemprop="dateModified" datetime="2019-08-01T14:32:34+08:00">2019-08-01</time>
+                <time title="Geändert am: 2019-08-02 11:12:39" itemprop="dateModified" datetime="2019-08-02T11:12:39+08:00">2019-08-02</time>
               </span>
             
           
@@ -385,7 +385,7 @@
 <li>Java生态非常完善</li>
 <li>等</li>
 </ul>
-<h1 id="Java技术体系"><a href="#Java技术体系" class="headerlink" title="Java技术体系"></a>Java技术体系</h1><p>包括</p>
+<h2 id="Java技术体系"><a href="#Java技术体系" class="headerlink" title="Java技术体系"></a>Java技术体系</h2><p>包括</p>
 <ul>
 <li>Java程序设计语言</li>
 <li>各种硬件平台上的Java虚拟机</li>
@@ -406,8 +406,8 @@
 <li>Java虚拟机</li>
 <li>支持Java程序运行的标准环境</li>
 </ul>
-<h1 id="Java的跨平台特性"><a href="#Java的跨平台特性" class="headerlink" title="Java的跨平台特性"></a>Java的跨平台特性</h1><p>将Java代码编译为字节码，可以在网络上进行传播，当碰到Java虚拟机，就可以在其上运行</p>
-<h1 id="Java虚拟机的生存周期"><a href="#Java虚拟机的生存周期" class="headerlink" title="Java虚拟机的生存周期"></a>Java虚拟机的生存周期</h1><ul>
+<h2 id="Java的跨平台特性"><a href="#Java的跨平台特性" class="headerlink" title="Java的跨平台特性"></a>Java的跨平台特性</h2><p>将Java代码编译为字节码，可以在网络上进行传播，当碰到Java虚拟机，就可以在其上运行</p>
+<h2 id="Java虚拟机的生存周期"><a href="#Java虚拟机的生存周期" class="headerlink" title="Java虚拟机的生存周期"></a>Java虚拟机的生存周期</h2><ul>
 <li>一个运行中的Java虚拟机有着一个清晰的任务，执行Java程序，程序开始执行时它才运行，程序结束时它就停止。每个Java程序会单独运行一个Java虚拟机。</li>
 <li>Java虚拟机总是开始于一个main方法，固定格式。</li>
 <li>main方法是程序的起点，它被执行的线程初始化为程序的初始线程。程序中其他线程都由它启动，Java中线程分为两种：守护线程、普通线程。<ul>
@@ -417,7 +417,7 @@
 </li>
 <li>只要Java虚拟机中还有普通的线程还在执行，就不会停止。也可以使用exit终止。</li>
 </ul>
-<h1 id="Java虚拟机体系结构"><a href="#Java虚拟机体系结构" class="headerlink" title="Java虚拟机体系结构"></a>Java虚拟机体系结构</h1><ul>
+<h2 id="Java虚拟机体系结构"><a href="#Java虚拟机体系结构" class="headerlink" title="Java虚拟机体系结构"></a>Java虚拟机体系结构</h2><ul>
 <li>在Java虚拟机的规范中定义类一系列的子系统、内存区域、数据类型和使用指南。这些组件构成了Java虚拟机的内部结构，他们不仅仅为Java虚拟机的实现提供了清晰的内部结构，更规定了Java虚拟机实现的外部行为</li>
 <li>每个Java虚拟机都有一个类加载子系统，负责加载程序中的类型（class与interface），并赋予唯一的名字。每一个Java虚拟机都有一个执行引擎，负责执行被加载类中包含的指令</li>
 </ul>
@@ -429,10 +429,10 @@
 <p><strong>JVM体系结构</strong></p>
 <p>基本上由四部分组成</p>
 <ul>
-<li>类加载器，在 JVM 启动时或者类运行时将需要的 class 加载到 JVM 中</li>
-<li>执行引擎，执行引擎的任务是负责执行 class 文件中包含的字节码指令，相当于实际机器上的 CPU</li>
-<li>内存区，将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块，如实际机器上的各种功能的寄存器或者 PC 指针的记录器等</li>
-<li>本地方法调用，调用 C 或 C++ 实现的本地方法的代码返回结果</li>
+<li>类加载器，在JVM启动时或者类运行时将需要的class加载到JVM中</li>
+<li>执行引擎，执行引擎的任务是负责执行class文件中包含的字节码指令，相当于实际机器上的CPU</li>
+<li>内存区，将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块，如实际机器上的各种功能的寄存器或者PC指针的记录器等</li>
+<li>本地方法调用，调用C或C++实现的本地方法的代码返回结果</li>
 </ul>
 <p><img src="/assets/1553063936694.png" alt="1553063936694"></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
@@ -524,7 +524,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">211</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
@@ -695,7 +695,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java技术体系"><span class="nav-number">2.</span> <span class="nav-text">Java技术体系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java的跨平台特性"><span class="nav-number">3.</span> <span class="nav-text">Java的跨平台特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java虚拟机的生存周期"><span class="nav-number">4.</span> <span class="nav-text">Java虚拟机的生存周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java虚拟机体系结构"><span class="nav-number">5.</span> <span class="nav-text">Java虚拟机体系结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java技术体系"><span class="nav-number">1.1.</span> <span class="nav-text">Java技术体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java的跨平台特性"><span class="nav-number">1.2.</span> <span class="nav-text">Java的跨平台特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java虚拟机的生存周期"><span class="nav-number">1.3.</span> <span class="nav-text">Java虚拟机的生存周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java虚拟机体系结构"><span class="nav-number">1.4.</span> <span class="nav-text">Java虚拟机体系结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

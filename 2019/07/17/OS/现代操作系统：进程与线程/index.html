@@ -65,23 +65,23 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="进程操作系统最核心的概念是进程，是对正在运行程序的一个抽象。 现代计算机经常会在同一时间做许多事情。例如当系统启动时，会秘密启动很多线程，例如启动一个进程用来等待邮件、启动一个防病毒进程周期性检查等。这些进程的活动都需要管理，因此一个支持多进程的多道程序系统在这里十分必要。 在多道程序设计系统中，CPU由一个进程快速切换至另一个进程，使各个进程各运行几十或几百毫秒。即在某一个瞬间CPU只能运行一个">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563412629413.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563416025565.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563416197043.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563416995282.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563417443767.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563417721385.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563586908865.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563610808251.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563606959067.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563613403700.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563623076077.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563668524785.png">
-<meta property="og:updated_time" content="2019-07-21T04:45:22.033Z">
+<meta property="og:image" content="http://yoursite.com/assets/1563412629413.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563416025565.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563416197043.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563416995282.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563417443767.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563417721385.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563586908865.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563610808251.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563606959067.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563613403700.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563623076077.png">
+<meta property="og:image" content="http://yoursite.com/assets/1563668524785.png">
+<meta property="og:updated_time" content="2019-08-01T13:04:33.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="现代操作系统：进程与线程">
 <meta name="twitter:description" content="进程操作系统最核心的概念是进程，是对正在运行程序的一个抽象。 现代计算机经常会在同一时间做许多事情。例如当系统启动时，会秘密启动很多线程，例如启动一个进程用来等待邮件、启动一个防病毒进程周期性检查等。这些进程的活动都需要管理，因此一个支持多进程的多道程序系统在这里十分必要。 在多道程序设计系统中，CPU由一个进程快速切换至另一个进程，使各个进程各运行几十或几百毫秒。即在某一个瞬间CPU只能运行一个">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/assets/1563412629413.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1563412629413.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/17/OS/现代操作系统：进程与线程/">
 
 
@@ -326,7 +326,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-07-21 12:45:22" itemprop="dateModified" datetime="2019-07-21T12:45:22+08:00">2019-07-21</time>
+                <time title="Geändert am: 2019-08-01 21:04:33" itemprop="dateModified" datetime="2019-08-01T21:04:33+08:00">2019-08-01</time>
               </span>
             
           
@@ -395,7 +395,7 @@
 <p><strong><em>多道程序系统设计</em></strong></p>
 <p>考虑多道程序系统设计，4个程序被抽象为4个各自拥有自己控制流程（每个程序自己的逻辑程序计数器）的进程，并且每个程序都独立运行。</p>
 <p>而实际上只有一个物理程序计数器，当每个程序运行时，逻辑程序计数器被装入实际的程序计数器中，当该程序执行结束，物理程序寄存器被保存在内存中该进程的逻辑程序计数器中。从时间上可见，所有进程都运行了，但每个时间点只有一个进程运行。</p>
-<p><img src="assets/1563412629413.png" alt="1563412629413"></p>
+<p><img src="/assets/1563412629413.png" alt="1563412629413"></p>
 <p><strong><em>进程执行时序上的无序性</em></strong></p>
 <p>由于CPU在各个进程间来回快速的切换，因此每个进程执行其运算的速度并不确定，当同一进程再次运行时，其运算速度通常也不可再现，即对进程编程时不能对时序做任何想当然的假想。</p>
 <p>考虑一个IO进程，用流式磁带机恢复备份的文件，它执行一个10000次的空循环以等待磁带机到达正常速度，但是CPU决定在空循环时切换到其他进程，则IO进程可能在第一条记录通过磁头后还未运行</p>
@@ -440,17 +440,17 @@
 </ul>
 </li>
 </ul>
-<p><img src="assets/1563416025565.png" alt="1563416025565"></p>
+<p><img src="/assets/1563416025565.png" alt="1563416025565"></p>
 <p>OS的最底层是调度程序，在它上面有许多进程，所有关于中断处理、启动进程和停止进程的细节都被隐藏在调度程序中。不过很少有真实的系统是以这样的理想方式构造的。</p>
-<p><img src="assets/1563416197043.png" alt="1563416197043"></p>
+<p><img src="/assets/1563416197043.png" alt="1563416197043"></p>
 <h2 id="进程的实现"><a href="#进程的实现" class="headerlink" title="进程的实现"></a>进程的实现</h2><p>为了实现进程模型，OS维护一张表格，即<strong>进程表</strong>，每个进程占用一个进程表项（<strong>进程控制块</strong>），表内包含了进程状态的重要信息，包括程序计数器、堆栈指针、内存分配状况、打开的文件的状态、账号和调度信息，以及其他在进程由运行态转换到就绪态或阻塞态时必须保存的信息，从而保证该进程随后能再次启动，就像从未被中断过一样。</p>
-<p><img src="assets/1563416995282.png" alt="1563416995282"></p>
+<p><img src="/assets/1563416995282.png" alt="1563416995282"></p>
 <h3 id="单个CPU实现伪并行"><a href="#单个CPU实现伪并行" class="headerlink" title="单个CPU实现伪并行"></a>单个CPU实现伪并行</h3><p>与每一个IO类关联的是一个称作<strong>中断向量</strong>的位置（靠近内存底部的固定区域），包含中断服务程序的入口地址，假设当一个磁盘中断发生时，用户进程3正在运行，则中断硬件将程序计数器、程序状态字、寄存器压入堆栈，随后计算机跳转到中断向量所指示的地址。这些是硬件的操作，随后是软件，特别是中断服务例程就接管剩余工作。</p>
 <p>中断发生后OS最底层的工作步骤</p>
-<p><img src="assets/1563417443767.png" alt="1563417443767"></p>
+<p><img src="/assets/1563417443767.png" alt="1563417443767"></p>
 <h2 id="多道程序设计模型"><a href="#多道程序设计模型" class="headerlink" title="多道程序设计模型"></a>多道程序设计模型</h2><h3 id="CPU利用率（吞吐量）"><a href="#CPU利用率（吞吐量）" class="headerlink" title="CPU利用率（吞吐量）"></a>CPU利用率（吞吐量）</h3><p>多道程序设计可以提高CPU的利用率，如果进程用于计算的平均时间是进程在内存中停留时间的20%，并且内存中同时有5个进程， 则CPU会一直满负载运行。但是这个模型过于乐观，并且假设了进程不会同时等待IO</p>
 <p>更好的模型是从概率角度看CPU利用率，假设一个进程等待IO操作的时间与停留在内存的时间比为p，在内存中同时有n个进程，则n个进程都在等待IO的概率为p^n，则有<br>$$<br>CPU利用率=1-p^n<br>$$<br>则有</p>
-<p><img src="assets/1563417721385.png" alt="1563417721385"></p>
+<p><img src="/assets/1563417721385.png" alt="1563417721385"></p>
 <p>该模型只是描述了一个大致的状况，假设所有n个进程是独立的，即5个进程中，3个运行两个等待是完全可以接受的，但在单CPU中，不能同时运行3个进程，因此当CPU忙时，已就绪的进程也必须等待CPU，因而进程并不独立。</p>
 <p>更精确的模型则应该以排队论构建，然而原有模型依然很有效。</p>
 <p><strong>计算模式</strong>：当计算机有8G内存，OS占用2GB，用户程序占用2GB，则内存空间允许3个程序同时驻留在内存中，若80%时间用于IO等待，则CPU利用率约为1-0.8^3，即大约49%；若增加8GB的内存，则可以允许7道程序设计，CPU利用率提高到1-0.8^7，即79%，扩大8GB内存提高了30%的吞吐量</p>
@@ -464,7 +464,7 @@
 </ul>
 <p><strong><em>多线程应用举例</em></strong></p>
 <p>以WEB服务器为例，对页面的请求发给服务器，而所请求的页面发回给客户机。而组织Web服务器的方式如下所示</p>
-<p><img src="assets/1563586908865.png" alt="1563586908865"></p>
+<p><img src="/assets/1563586908865.png" alt="1563586908865"></p>
 <p>一个分派线程负责从网络中读入工作请求，检查请求后挑选一个空转的工作线程，提交该请求。通常是在    每个线程所分配有的某个专门字中写入一个消息指针，接着分派线程唤醒睡眠的工作线程，从阻塞转为就绪</p>
 <p>若没有多线程，则只能是线程进行循环等待请求，若是在请求到来的时候，工作线程正在任务中，则无法处理新的请求</p>
 <p><strong><em>多线程解决方案</em></strong></p>
@@ -479,9 +479,9 @@
 <p><strong><em>线程模型</em></strong></p>
 <p>线程的出现在进程模型的基础上增加了一项内容，即在同一个进程的基础上允许彼此之间有较大独立性的多个线程执行。</p>
 <p>当多线程进程在单CPU系统上运行时，线程轮流运行，CPU在线程间快速切换，系统制造了线程并行运行的假象，好似它们在一个比实际CPU慢一些的CPU上同时运行。</p>
-<p><img src="assets/1563610808251.png" alt="1563610808251"></p>
+<p><img src="/assets/1563610808251.png" alt="1563610808251"></p>
 <p>进程中的不同线程不像不同进程间那样存在很大的独立性，所有线程都有完全一样的地址空间，意味着他们也共享相同的全局变量,因此一个线程可以读、写甚至清除另一个线程的堆栈。即线程之间是没有保护的。</p>
-<p><img src="assets/1563606959067.png" alt="1563606959067"></p>
+<p><img src="/assets/1563606959067.png" alt="1563606959067"></p>
 <p>线程拥有它自己的堆栈，供各个被调用了但是还要从中返回的过程使用，该栈帧中存放着相应过程的局部变量以及过程调用完之后使用的返回地址。该栈帧是每个线程执行过程的过程历史，由于每个线程通常会调用不同的过程，从而有不同的执行历史，因此他们需要有自己的堆栈。</p>
 <h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p>与传统进程一样，线程可以处于若干种状态中的一个：运行、就绪或终止。并且其状态转换与进程也是一致的</p>
 <h3 id="线程调用"><a href="#线程调用" class="headerlink" title="线程调用"></a>线程调用</h3><ul>
@@ -508,7 +508,7 @@
 <li>其中的局部变量和参数不会引起问题。</li>
 <li>全局变量：对线程而言是全局变量，并不是对整个程序也是全局的，许多变量之所以是全局的，是因为线程中的许多过程都用到它，但是其他线程在逻辑上和这些变量无关<ul>
 <li>案例：考虑一个对象当中的errno变量，当进程进行系统调用失败时，错误码会放入errno中，线程1执行系统调用确定是否允许访问某个文件，OS将返回值放入errno，而此时线程1使用完CPU时间，切换到线程2，线程2执行一个系统调用并写入errno，因此之前的errno值丢失，随后线程1由于errno值不正常会执行错误的操作</li>
-<li><img src="assets/1563613403700.png" alt="1563613403700"></li>
+<li><img src="/assets/1563613403700.png" alt="1563613403700"></li>
 <li>解决方案：全面禁止全局变量。或为每个线程赋予私有的全局变量。</li>
 </ul>
 </li>
@@ -542,7 +542,7 @@
 <li>临界区外运行的进程不得阻塞其他进程</li>
 <li>不得使进程无限期等待进入临界区</li>
 </ul>
-<p><img src="assets/1563623076077.png" alt="1563623076077"></p>
+<p><img src="/assets/1563623076077.png" alt="1563623076077"></p>
 <p>考虑多种实现互斥的方案，当一个进程在临界区中，这些方案都可以使得进程将不会进入临界区</p>
 <h3 id="忙等待的互斥"><a href="#忙等待的互斥" class="headerlink" title="忙等待的互斥"></a>忙等待的互斥</h3><p>忙等待的互斥本质上是当一个进程想进入临界区时，先检测是否允许进入，若不允许则该进程原地等待直到允许为止。</p>
 <p>并且倘若进程A优先级高于进程B，若调度规则规定进程A就绪就可运行。则假设当进程B处于临界区时，进程A准备就绪，因此进程B不会被调度，则进程A将永远忙等待下去</p>
@@ -562,7 +562,7 @@
 <p>这种方式浪费CPU时间，通常应当避免，只有在有理由认为等待时间是非常短的情形下才使用忙等待。用于忙等待的锁称为<strong>自旋锁</strong>。当进程0试图进入临界区时，可能当前OS将turn=1，而此时进程1并没有占用临界区，是对资源的浪费。</p>
 <p>而这种方法违反了之前的条件3，即进程被一个临界区外的进程阻挡。</p>
 <h4 id="Peterson解法"><a href="#Peterson解法" class="headerlink" title="Peterson解法"></a>Peterson解法</h4><p>将锁变量与警告变量的思想结合，提出不需要严格轮换的软件互斥算法</p>
-<p><img src="assets/1563668524785.png" alt="1563668524785"></p>
+<p><img src="/assets/1563668524785.png" alt="1563668524785"></p>
 <ul>
 <li>起始时，没有任何进程在临界区中，进程0调用enter_region，设置数组元素与turn=0标识希望进入临界区</li>
 <li>若进程1现在调用enter_region，进程1将在此处挂起直到interest=false。即进程0退出</li>
@@ -710,7 +710,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">211</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM：Java虚拟机规范">
+<meta property="og:url" content="http://yoursite.com/2019/08/02/JVM：Java虚拟机规范/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-03T03:34:03.949Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM：Java虚拟机规范">
+<meta name="twitter:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
+  <link rel="canonical" href="http://yoursite.com/2019/08/02/JVM：Java虚拟机规范/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JVM：Java虚拟机规范 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+      
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>阅读排行</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/smallpocket" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/JVM：Java虚拟机规范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">JVM：Java虚拟机规范
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-02 19:30:43" itemprop="dateCreated datePublished" datetime="2019-08-02T19:30:43+08:00">2019-08-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 11:34:03" itemprop="dateModified" datetime="2019-08-03T11:34:03+08:00">2019-08-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/08/02/JVM：Java虚拟机规范/" class="post-meta-item leancloud_visitors" data-flag-title="JVM：Java虚拟机规范">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    
+      <span class="post-meta-item-text">评论数：</span>
+    
+  
+    <a href="/2019/08/02/JVM：Java虚拟机规范/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/08/02/JVM：Java虚拟机规范/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.9k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">3 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JVM结构"><a href="#JVM结构" class="headerlink" title="JVM结构"></a>JVM结构</h1><p>要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。</p>
+<p>对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。</p>
+<h2 id="class文件格式"><a href="#class文件格式" class="headerlink" title="class文件格式"></a>class文件格式</h2><p>编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来表示，并且<strong>经常</strong>以文件的形式存储。class文件格式精确定义了类与接口的表示形式。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>JVM当中可以操作的数据类型分为两类：<strong>原始类型和引用类型</strong>，也存在<strong>原始值和引用值</strong>两种类型的数值，它们可以用于变量赋值、参数传递、方法返回和运算操作。</p>
+<p>JVM希望尽可能多的类型检查能够在程序运行前完成，即编译器应该在编译期间尽最大努力完成可能的类型检查，使得虚拟机在运行期间无须进行这些操作。</p>
+<p>对于原始类型，不需要通过特殊标记或额外手段来在运行期确定它们的实际数据类型，即无需刻意将它们与引用类型分开，JVM的字节码指令本身就可以确定它的指令操作数的类型是声明，因此可以利用该特性直接确定操作数的类型。</p>
+<p>JVM是直接支持对象的，对象可以指动态分配的某个类的实例，也可以指某个数组。虚拟机中使用reference类型来表示对某个对象的引用。</p>
+<h2 id="原始类型与值"><a href="#原始类型与值" class="headerlink" title="原始类型与值"></a>原始类型与值</h2><p>原始数据类型包括：</p>
+<ul>
+<li>数值类型：<ul>
+<li>整数类型<ul>
+<li>byte：8位有符号二进制补码整数。-2^7^~2^7^-1</li>
+<li>short：16位有符号二进制补码整数-2^15^~2^15^-1</li>
+<li>int：32位有符号二进制补码整数-2^31^~2^31^-1</li>
+<li>long：64位有符号二进制补码帧整数-2^63^~2^63^-1</li>
+<li>char：16位无符号整数、指向基于多文种平面的Unicode码点，以UTF-16编码，默认值位Unicode的<code>null</code>码点。0~2^16^</li>
+</ul>
+</li>
+<li>浮点数类型：<ul>
+<li>float：32位，单精度浮点数集合中的元素</li>
+<li>double：64位，双精度浮点数集合中的元素</li>
+<li>包括了符号量，还包括了正负0、正负无穷大、NaN（无效的运算操作）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>boolean类型。默认为false<ul>
+<li>没有提供boolean值专用的字节码指令，Java语言表达式操作的boolean值会在编译后使用int代替</li>
+</ul>
+</li>
+<li>returnAddress类型。指向某个操作码(<code>opcode</code>)的指针，此操作码与JVM指令对应，在JVM支持的所有原始类型中，只有该类型不能直接与Java语言的数据类型对应。<ul>
+<li>会被jsr、ret、jsr_w指令所使用。并且无法在程序运行期间修改</li>
+</ul>
+</li>
+</ul>
+<h2 id="引用类型与值"><a href="#引用类型与值" class="headerlink" title="引用类型与值"></a>引用类型与值</h2><p>JVM中有3种引用类型：类类型、数组类型、接口类型。这些分别指向动态创建的类实例、数组实例、实现了某个接口的类实例或数组实例。</p>
+<p>对于数组的元素类型，其必须是原生类型、类类型或接口类型之一。</p>
+<p>在引用类型的值中有一个特殊的值null，当一个引用不指向任何对象的时候，它的值就为null。引用类型的默认值就是null</p>
+<h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><p>详情参见 JVM：内存管理</p>
+<h2 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h2><p>栈帧是用来存储数据和部分过程结果的数据结构，同时也用来处理动态链接、方法返回值和异常分派.</p>
+<p>栈帧随着方法调用而创建，随着方法结束而销毁。无论方法是正常完成还是异常完成都算作方法结束。</p>
+<p>栈帧的存储空间分配在虚拟机栈当中，并且每一个栈帧有自己的局部变量表、操作数栈、和指向当前方法所属的类的运行时常量池的引用。并且栈帧还允许携带与JVM实现相关的一些附加信息，例如对程序调试提供支持。</p>
+<p>在某条线程执行过程中的某个时间点上，只有目前正在执行的那个方法的栈帧是活动的。当方法返回时，当前栈帧会传回此方法的执行结果给前一个栈帧，然后JVM丢弃该栈帧。</p>
+<h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h3><p>每个栈帧内部都包含一组称为局部变量表的变量列表（<strong>其中包括基础数据类型，例如boolean等、对象的引用或returnAddress</strong>），栈帧内的局部变量表的长度由编译器决定，并且存储于类或接口的二进制表示中，即存储在方法的<code>Code</code>属性当中，并提供给栈帧使用。</p>
+<p>局部变量表需要的内存空间在编译期间完成分配，当进入一个方法时这个需要分配多大的局部变量空间时完全确定的，运行期间不会改变局部变量表的大小，64位的<code>long</code>和<code>double</code>会占据两个局部变量空间。</p>
+<p>局部变量使用索引来进行访问定位，0=&lt;index=&lt;length。当调用实例方法时，index=0的变量一定是this引用，之后是方法的参数。</p>
+<h3 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h3><p>JVM底层字节码指令集是基于栈类型的，索引的操作码都是对操作数栈上的数据进行操作。对每一个方法调用，JVM会建立一个操作数栈，以供计算使用。栈的深度在源码编译成class文件后就已经确定，保存在方法的<code>Code</code>属性中。</p>
+<p>在开始时操作数栈是空的，JVM提供了一些字节码指令来从局部变量表或对象实例的字段中复制常量值到操作数栈中，以及从操作数栈中取走数据、操作数据以及将操作结果重新入栈。在方法调用时，也用来准备调用方法的参数以及接收方法返回的结果。</p>
+<p><code>iadd</code>指令要求执行前操作数栈的栈顶已经存在两个由前面其他指令放入的int类型数值，执行<code>iadd</code>时将两个int值出栈，相加求和并将求和结果重新入栈。</p>
+<p>对于一部分指令可以不关注操作数的具体数据类型，将所有在运行时数据区中的数据当作裸类型数据来操作，例如<code>swap</code>。它们的操作的正确性会通过class文件的<strong>校验过程来强制保障</strong></p>
+<h3 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h3><p>包含一个指向当前方法所在类型的运行时常量池的引用，以支持对当前方法的代码实现动态链接。</p>
+<p>在class文件中，一个方法若调用其他方法或访问成员变量，则需要通过符号引用来表示，动态链接的作用就是将这些符号引用所表示的方法转换为对实际方法的直接引用。类加载过程中将要解析尚未被解析的符号引用，并且将对变量的访问转化为变量在程序运行时，位于数据结构中的正确偏移量</p>
+<h3 id="方法调用正常完成"><a href="#方法调用正常完成" class="headerlink" title="方法调用正常完成"></a>方法调用正常完成</h3><p>若方法正常返回，当前栈帧承担着恢复调用者状态的责任，其状态包括调用者的局部变量表、操作数栈和正确增加过来表示执行了该方法调用指令的程序计数器等。使得调用者的代码能在被调用的方法返回并且返回值被推入调用者栈帧的操作数栈后继续正常执行</p>
+<h3 id="方法调用异常完成"><a href="#方法调用异常完成" class="headerlink" title="方法调用异常完成"></a>方法调用异常完成</h3><p>若在方法的执行过程中，某些指令导致了JVM抛出异常并且虚拟机抛出的异常在方法中没有办法处理，并且该方法内部没有将异常捕获，如果方法异常调用完成，一定没有方法返回值返回给调用者。</p>
+<h3 id="其他引用"><a href="#其他引用" class="headerlink" title="其他引用"></a>其他引用</h3><h2 id="对象的表示"><a href="#对象的表示" class="headerlink" title="对象的表示"></a>对象的表示</h2><p>JVM并不强制规定对象的内部结构应当如何表示。</p>
+<p>句柄与直接引用。</p>
+<h2 id="浮点算法"><a href="#浮点算法" class="headerlink" title="浮点算法"></a>浮点算法</h2><h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h2><p>在JVM层面上，Java中的构造器是以应该名为&lt;init&gt;的特殊实例初始化方法的形式出现的，其是由编译器命名的，因为无法通过程序编码的方式实现。实例初始化方法只能在实例的初始化期间，通过JVM的<code>invokespecial</code>指令调用，并且只能在尚未初始化的实例上调用该指令。</p>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h2 id="字节码指令集简介"><a href="#字节码指令集简介" class="headerlink" title="字节码指令集简介"></a>字节码指令集简介</h2><h2 id="类库"><a href="#类库" class="headerlink" title="类库"></a>类库</h2><h2 id="公有设计、私有实现"><a href="#公有设计、私有实现" class="headerlink" title="公有设计、私有实现"></a>公有设计、私有实现</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/08/01/Java/base/JVM：从JVM角度观察实际问题/" rel="next" title="JVM：从JVM角度观察实际问题">
+                <i class="fa fa-chevron-left"></i> JVM：从JVM角度观察实际问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">212</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM结构"><span class="nav-number">1.</span> <span class="nav-text">JVM结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#class文件格式"><span class="nav-number">1.1.</span> <span class="nav-text">class文件格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原始类型与值"><span class="nav-number">1.3.</span> <span class="nav-text">原始类型与值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型与值"><span class="nav-number">1.4.</span> <span class="nav-text">引用类型与值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时数据区"><span class="nav-number">1.5.</span> <span class="nav-text">运行时数据区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈帧"><span class="nav-number">1.6.</span> <span class="nav-text">栈帧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部变量表"><span class="nav-number">1.6.1.</span> <span class="nav-text">局部变量表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作数栈"><span class="nav-number">1.6.2.</span> <span class="nav-text">操作数栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态链接"><span class="nav-number">1.6.3.</span> <span class="nav-text">动态链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法调用正常完成"><span class="nav-number">1.6.4.</span> <span class="nav-text">方法调用正常完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法调用异常完成"><span class="nav-number">1.6.5.</span> <span class="nav-text">方法调用异常完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他引用"><span class="nav-number">1.6.6.</span> <span class="nav-text">其他引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的表示"><span class="nav-number">1.7.</span> <span class="nav-text">对象的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点算法"><span class="nav-number">1.8.</span> <span class="nav-text">浮点算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊方法"><span class="nav-number">1.9.</span> <span class="nav-text">特殊方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">1.10.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字节码指令集简介"><span class="nav-number">1.11.</span> <span class="nav-text">字节码指令集简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类库"><span class="nav-number">1.12.</span> <span class="nav-text">类库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公有设计、私有实现"><span class="nav-number">1.13.</span> <span class="nav-text">公有设计、私有实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">23:13</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script>
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log(`Failed to save Visitor num, with error message: ${responseJSON.error}`);
+              })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+                'X-LC-Key': 'uTVcNIWdMCGpicrhTKygpKXi',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+            if (localhost.test(document.URL)) return;
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.2.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
+    appKey: 'uTVcNIWdMCGpicrhTKygpKXi',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-CN' || 'zh-cn'
+  });
+</script>
+
+
+</body>
+</html>

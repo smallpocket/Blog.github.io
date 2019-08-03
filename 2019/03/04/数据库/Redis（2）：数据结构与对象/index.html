@@ -4,7 +4,7 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="generator" content="Hexo 3.9.0">
@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Kopieren',
-      copy_success: 'Kopiert',
-      copy_failure: 'Kopieren fehlgeschlagen'
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
     }
   };
 </script>
@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/03/04/数据库/Redis（2）：数据结构与对象/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的  数据库键总是一个字符串对象 数据库值可以是 字符串对象 列表对象 哈希对象 集合对象（set） 有序集合对象    简单动态字符串SDSRedis的字符串与传统字符串（以空字符结尾的字符数组，C字符串）不同，Redis自己构建了一种简单动态字符串（SDS）的抽象类型，并用作默认字符串表示。  传统字符串在Redis当中只会作为字符串">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（2）：数据结构与对象/assets%5C1551695057543.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（2）：数据结构与对象/assets%5C1551695070215.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（2）：数据结构与对象/assets%5C1551695605130.png">
@@ -128,7 +128,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
@@ -147,7 +147,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Navigationsleiste an/ausschalten">
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -167,7 +167,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -178,7 +178,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
         
@@ -189,7 +189,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -200,7 +200,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -211,7 +211,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -222,13 +222,24 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+      
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>阅读排行</a>
 
   </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
-            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
         </li>
       
     </ul>
@@ -244,7 +255,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Suche..." spellcheck="false"
+             placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -306,14 +317,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2019-03-04 18:34:18" itemprop="dateCreated datePublished" datetime="2019-03-04T18:34:18+08:00">2019-03-04</time>
+              <time title="创建时间：2019-03-04 18:34:18" itemprop="dateCreated datePublished" datetime="2019-03-04T18:34:18+08:00">2019-03-04</time>
             </span>
           
             
@@ -324,9 +335,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">更新于</span>
                 
-                <time title="Geändert am: 2019-04-08 23:39:24" itemprop="dateModified" datetime="2019-04-08T23:39:24+08:00">2019-04-08</time>
+                <time title="修改时间：2019-04-08 23:39:24" itemprop="dateModified" datetime="2019-04-08T23:39:24+08:00">2019-04-08</time>
               </span>
             
           
@@ -335,7 +346,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
@@ -352,7 +363,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Aufrufe: </span>
+                <span class="post-meta-item-text">阅读次数：</span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -365,7 +376,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Kommentare: </span>
+      <span class="post-meta-item-text">评论数：</span>
     
   
     <a href="/2019/03/04/数据库/Redis（2）：数据结构与对象/#comments" itemprop="discussionUrl">
@@ -380,9 +391,9 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Symbole im Artikel gezählt: </span>
+                <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="Symbole im Artikel gezählt">7.7k</span>
+              <span title="本文字数">7.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -390,9 +401,9 @@
                 <i class="fa fa-clock-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Lesezeit &asymp;</span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="Lesezeit">9 minuten.</span>
+              <span title="阅读时长">9 分钟</span>
             </span>
           
 
@@ -800,10 +811,10 @@
     <div class="sidebar-inner">
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -823,8 +834,8 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">211</span>
-          <span class="site-state-item-name">Artikel</span>
+          <span class="site-state-item-count">212</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
     
@@ -879,7 +890,7 @@
           
         
         <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">Kategorien</span>
+        <span class="site-state-item-name">分类</span>
         </a>
       </div>
     
@@ -974,7 +985,7 @@
           
         
         <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">schlagwörter</span>
+        <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
@@ -1021,16 +1032,16 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Insgesamt gezählte Symbole">1.1m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Insgesamte Lesezeit">23:10</span>
+    <span title="站点阅读时长">23:13</span>
 </div>
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -1197,7 +1208,7 @@
     meta: guest,
     pageSize: '10' || 10,
     visitor: false,
-    lang: 'zh-Hans' || 'zh-cn'
+    lang: 'zh-CN' || 'zh-cn'
   });
 </script>
 

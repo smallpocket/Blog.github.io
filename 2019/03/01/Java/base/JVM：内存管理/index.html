@@ -4,7 +4,7 @@
 
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="generator" content="Hexo 3.9.0">
@@ -50,9 +50,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Kopieren',
-      copy_success: 'Kopiert',
-      copy_failure: 'Kopieren fehlgeschlagen'
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
     }
   };
 </script>
@@ -64,7 +64,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/03/01/Java/base/JVM：内存管理/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了JVM，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域。 区域有各自的用途">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1564413541987.png">
 <meta property="og:image" content="http://yoursite.com/assets/1564713632072.png">
 <meta property="og:image" content="http://yoursite.com/assets/20170818151037199.png">
@@ -74,7 +74,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1552120022744.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552121101706.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552131024681.png">
-<meta property="og:updated_time" content="2019-08-02T03:29:17.665Z">
+<meta property="og:updated_time" content="2019-08-02T14:54:48.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：内存管理">
 <meta name="twitter:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了JVM，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域。 区域有各自的用途">
@@ -125,7 +125,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
@@ -144,7 +144,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Navigationsleiste an/ausschalten">
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -164,7 +164,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -175,7 +175,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
         
@@ -186,7 +186,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Schlagwörter</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -197,7 +197,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -208,7 +208,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -219,13 +219,24 @@
       
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Zeitplan</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+      
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>阅读排行</a>
 
   </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
-            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
         </li>
       
     </ul>
@@ -241,7 +252,7 @@
     </span>
     <div class="local-search-input-wrapper">
       <input autocomplete="off"
-             placeholder="Suche..." spellcheck="false"
+             placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
   </div>
@@ -303,14 +314,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2019-03-01 10:45:42" itemprop="dateCreated datePublished" datetime="2019-03-01T10:45:42+08:00">2019-03-01</time>
+              <time title="创建时间：2019-03-01 10:45:42" itemprop="dateCreated datePublished" datetime="2019-03-01T10:45:42+08:00">2019-03-01</time>
             </span>
           
             
@@ -321,9 +332,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">更新于</span>
                 
-                <time title="Geändert am: 2019-08-02 11:29:17" itemprop="dateModified" datetime="2019-08-02T11:29:17+08:00">2019-08-02</time>
+                <time title="修改时间：2019-08-02 22:54:48" itemprop="dateModified" datetime="2019-08-02T22:54:48+08:00">2019-08-02</time>
               </span>
             
           
@@ -332,7 +343,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
@@ -349,7 +360,7 @@
                 <i class="fa fa-eye"></i>
               </span>
               
-                <span class="post-meta-item-text">Aufrufe: </span>
+                <span class="post-meta-item-text">阅读次数：</span>
               
                 <span class="leancloud-visitors-count"></span>
             </span>
@@ -362,7 +373,7 @@
       <i class="fa fa-comment-o"></i>
     </span>
     
-      <span class="post-meta-item-text">Kommentare: </span>
+      <span class="post-meta-item-text">评论数：</span>
     
   
     <a href="/2019/03/01/Java/base/JVM：内存管理/#comments" itemprop="discussionUrl">
@@ -377,9 +388,9 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Symbole im Artikel gezählt: </span>
+                <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="Symbole im Artikel gezählt">12k</span>
+              <span title="本文字数">12k</span>
             </span>
           
             <span class="post-meta-item">
@@ -387,9 +398,9 @@
                 <i class="fa fa-clock-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Lesezeit &asymp;</span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="Lesezeit">15 minuten.</span>
+              <span title="阅读时长">15 分钟</span>
             </span>
           
 
@@ -415,15 +426,17 @@
 </blockquote>
 <p><img src="/assets/1564713632072.png" alt="1564713632072"></p>
 <h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><ul>
-<li>各个线程共享的内存区域，用于存储已被虚拟机加载的<strong>类信息、常量、静态变量、class文件、即时编译器编译后的代码等数据</strong></li>
-<li>垃圾回收器也会对这部分进行回收，如常量池的清理和类型的卸载。是Non-Heap、永久代。当无法满足内存分配需求时，OutOfMemoryError异常</li>
+<li>各个线程共享的内存区域，存储了每一个类的结构信息，它存储了已被虚拟机加载的<strong>类信息、常量、静态变量、class文件、即时编译器编译后的代码、方法的字节码内容等数据</strong></li>
+<li>垃圾回收器也会对这部分进行回收，如常量池的清理和类型的卸载。是Non-Heap、永久代。</li>
+<li>可以支持动态扩展与收缩，当无法满足内存分配需求时，OutOfMemoryError异常</li>
 </ul>
 <p>可以以方法区只有一个类的角度去思考。</p>
 <p><strong><em>运行时常量池</em></strong></p>
+<p>运行时常量池是class文件中每一个类或接口的常量池表的运行时表示形式</p>
 <ul>
 <li>存放<strong>该类型</strong>编译期生成的各种<strong>字面量和符号引用</strong>。<ul>
 <li>包括直接常量<code>CONSTANT_String_info</code>、<code>CONSTANT_Integer_info</code>等。</li>
-<li>对其他类型、字段和方法的符号引用，以索引进行访问。</li>
+<li>对其他类型、字段和方法的符号引用，以索引进行访问。对于该类型的字段可能必须在运行期解析后才能获得直接</li>
 </ul>
 </li>
 <li>相对于Class文件常量池的另一个重要特征时具备动态性，Java并不要求常量一定在编译期才能产生，即并非Class文件中常量池的内容才能进入该区域。运行期间也可以将新的常量放入池中，例如String的intern()</li>
@@ -464,48 +477,26 @@
 <li>从内存分配的角度，划分出多个线程私有的分配缓冲区TLAB</li>
 </ul>
 </li>
-<li>当堆无法再扩展OutOfMemoryError</li>
+<li>可以支持动态扩展，并在不需要过多空间时自动收缩，其使用的内存不需要保证是连续的。当堆无法再扩展OutOfMemoryError</li>
 </ul>
 <h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><ul>
-<li><p>线程私有，生命周期与线程相同</p>
+<li><p>线程私有，生命周期与线程相同。描述Java方法执行的内存模型（栈内存）。每个方法在执行的同时都会<strong>创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息</strong>。</p>
 </li>
-<li><p>描述Java方法执行的内存模型（栈内存）。每个方法在执行的同时都会<strong>创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息</strong>。一个方法从调用至完成则对应一个栈帧在虚拟机栈入栈到出栈</p>
-</li>
-<li><p>栈帧的组成</p>
-<ul>
-<li>局部变量表<ul>
-<li>（<strong>其中包括基础数据类型，例如boolean等、对象的引用</strong>）存储在方法的<code>Code</code>属性当中。</li>
-<li>局部变量表需要的内存空间在编译期间完成分配，当进入一个方法时这个需要分配多大的局部变量空间时完全确定的，运行期间不会改变局部变量表的大小64位的<code>long</code>和<code>double</code>会占据两个局部变量空间。</li>
-</ul>
-</li>
-<li>操作数栈<ul>
-<li>JVM底层字节码指令集是基于栈类型的，索引的操作码都是对操作数栈上的数据进行操作。对每一个方法调用，JVM会建立一个操作数栈，以供计算使用。</li>
-<li>栈的深度在源码编译成class文件后就已经确定，保存在方法的<code>Code</code>属性中</li>
-</ul>
-</li>
-<li>动态链接<ul>
-<li>包含一个指向运行时常量池的引用来支持当前方法的代码</li>
-</ul>
-</li>
-<li>方法出口<ul>
-<li>若方法正常返回，当前栈帧承担着恢复调用者状态的责任，其状态包括调用者的局部变量表、操作数栈和正确增加过来表示执行了该方法调用指令的程序计数器等。使得调用者的代码能在被调用的方法返回并且返回值被推入调用者栈帧的操作数栈后继续正常执行</li>
-<li>若在方法的执行过程中，某些指令导致了JVM抛出异常并且虚拟机抛出的异常在方法中没有办法处理，并且该方法内部没有将异常捕获，如果方法异常调用完成，一定没有方法返回值返回给调用者。</li>
-</ul>
-</li>
-<li>其他引用</li>
-</ul>
+<li><p>一个方法从调用至完成则对应一个栈帧在虚拟机栈入栈到出栈。除了栈帧的出栈与入栈外，JVM不会再受其他因素的影响，因此<strong>栈帧可以在堆中分配</strong>，JVM栈使用的内存不需要保证是连续的</p>
 </li>
 <li><p>线程请求栈深度大于虚拟机允许深度，StackOverflowError异常</p>
 </li>
 <li><p>大部分虚拟机允许动态扩展，如果扩展无法申请到足够内存，则OutOfMemoryError</p>
 </li>
 </ul>
+<p><strong><em>栈帧的组成</em></strong></p>
+<p>参见JVM：Java虚拟机规范  </p>
 <p>  <img src="/assets/ff5b89ac-798e-4fbc-b0ce-da2fc2358570.jpg" alt="img"></p>
 <h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>其功能与虚拟机栈发挥作用非常类似，虚拟机使用到的Native方法服务，不一定是Java实现的。结构也于虚拟机栈一致</p>
 <p>本地方法栈会抛出StackOverflawError和OutOfMemoryError异常</p>
 <h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器是一块较小的内存空间（线程私有），<strong>可以看作时当前线程所执行的字节码的行号指示器</strong>。如果共享，则无法准确的执行当前线程需要执行的语句。</p>
 <p>在JVM的概念模型当中（实际虚拟机可能以更高效的方式实现），字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令。例如分支、循环、跳转、异常处理、线程恢复等基本功能</p>
-<p>当执行Java方法时，其记录的时正在执行的虚拟机字节码指向的地址。如果执行本地方法时，值为undefined</p>
+<p>当执行Java方法时，其记录的是JVM正在执行的字节码指向的地址。如果执行本地方法时，值为undefined</p>
 <p>CPU通过时分复用实现多线程，对确定时刻，一个CPU只会执行一条线程中的指令。每个线程都有一个独立的程序计数器。</p>
 <h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><ul>
 <li>不是虚拟机运行时数据区的一部分，也不是JVM定义的内存区域，但是可能导致OutOfMemoryError</li>
@@ -968,10 +959,10 @@
     <div class="sidebar-inner">
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -991,8 +982,8 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">211</span>
-          <span class="site-state-item-name">Artikel</span>
+          <span class="site-state-item-count">212</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
     
@@ -1047,7 +1038,7 @@
           
         
         <span class="site-state-item-count">20</span>
-        <span class="site-state-item-name">Kategorien</span>
+        <span class="site-state-item-name">分类</span>
         </a>
       </div>
     
@@ -1142,7 +1133,7 @@
           
         
         <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">schlagwörter</span>
+        <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
@@ -1189,16 +1180,16 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Insgesamt gezählte Symbole">1.1m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Insgesamte Lesezeit">23:10</span>
+    <span title="站点阅读时长">23:13</span>
 </div>
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
 
         
 
@@ -1365,7 +1356,7 @@
     meta: guest,
     pageSize: '10' || 10,
     visitor: false,
-    lang: 'zh-Hans' || 'zh-cn'
+    lang: 'zh-CN' || 'zh-cn'
   });
 </script>
 

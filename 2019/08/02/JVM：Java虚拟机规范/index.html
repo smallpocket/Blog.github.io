@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-03T03:51:15.639Z">
+<meta property="og:updated_time" content="2019-08-03T04:16:31.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：Java虚拟机规范">
 <meta name="twitter:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-03 11:51:15" itemprop="dateModified" datetime="2019-08-03T11:51:15+08:00">2019-08-03</time>
+                <time title="修改时间：2019-08-03 12:16:31" itemprop="dateModified" datetime="2019-08-03T12:16:31+08:00">2019-08-03</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">2.9k</span>
+              <span title="本文字数">3k</span>
             </span>
           
             <span class="post-meta-item">
@@ -432,7 +432,8 @@
 <h3 id="其他引用"><a href="#其他引用" class="headerlink" title="其他引用"></a>其他引用</h3><h2 id="对象的表示"><a href="#对象的表示" class="headerlink" title="对象的表示"></a>对象的表示</h2><p>JVM并不强制规定对象的内部结构应当如何表示。</p>
 <p>句柄与直接引用。</p>
 <h2 id="浮点算法"><a href="#浮点算法" class="headerlink" title="浮点算法"></a>浮点算法</h2><h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h2><p>在JVM层面上，对于对象，Java中的构造器是以应该名为&lt;init&gt;的特殊实例初始化方法的形式出现的，其是由编译器命名的，因为无法通过程序编码的方式实现。实例初始化方法只能在实例的初始化期间，通过JVM的<code>invokespecial</code>指令调用，并且只能在尚未初始化的实例上调用该指令。</p>
-<p>对于类或接口，则最多可以包含不超过应该类或接口的初始化方法，</p>
+<p>对于类或接口，则最多可以包含不超过应该类或接口的初始化方法，该方法是一个不包含参数的、返回类型为void的方法&lt;clinit&gt;。类或接口的初始化方法由JVM自身隐式调用，没有任何JVM字节码指令可以调用这个方法，只会在类的初始化阶段中由JVM自身调用。</p>
+<p>当一个方法具有<strong>签名多态性</strong>则意味着这个方法满足以下全部条件</p>
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h2 id="字节码指令集简介"><a href="#字节码指令集简介" class="headerlink" title="字节码指令集简介"></a>字节码指令集简介</h2><h2 id="类库"><a href="#类库" class="headerlink" title="类库"></a>类库</h2><h2 id="公有设计、私有实现"><a href="#公有设计、私有实现" class="headerlink" title="公有设计、私有实现"></a>公有设计、私有实现</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -718,7 +719,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23:13</span>
+    <span title="站点阅读时长">23:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

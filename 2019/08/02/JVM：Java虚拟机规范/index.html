@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-03T03:34:03.949Z">
+<meta property="og:updated_time" content="2019-08-03T03:51:15.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：Java虚拟机规范">
 <meta name="twitter:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-03 11:34:03" itemprop="dateModified" datetime="2019-08-03T11:34:03+08:00">2019-08-03</time>
+                <time title="修改时间：2019-08-03 11:51:15" itemprop="dateModified" datetime="2019-08-03T11:51:15+08:00">2019-08-03</time>
               </span>
             
           
@@ -344,34 +344,6 @@
             </span>
           
 
-          
-            <span id="/2019/08/02/JVM：Java虚拟机规范/" class="post-meta-item leancloud_visitors" data-flag-title="JVM：Java虚拟机规范">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-            
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="fa fa-comment-o"></i>
-    </span>
-    
-      <span class="post-meta-item-text">评论数：</span>
-    
-  
-    <a href="/2019/08/02/JVM：Java虚拟机规范/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/08/02/JVM：Java虚拟机规范/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
           <br>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -390,7 +362,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">3 分钟</span>
+              <span title="阅读时长">4 分钟</span>
             </span>
           
 
@@ -459,7 +431,8 @@
 <h3 id="方法调用异常完成"><a href="#方法调用异常完成" class="headerlink" title="方法调用异常完成"></a>方法调用异常完成</h3><p>若在方法的执行过程中，某些指令导致了JVM抛出异常并且虚拟机抛出的异常在方法中没有办法处理，并且该方法内部没有将异常捕获，如果方法异常调用完成，一定没有方法返回值返回给调用者。</p>
 <h3 id="其他引用"><a href="#其他引用" class="headerlink" title="其他引用"></a>其他引用</h3><h2 id="对象的表示"><a href="#对象的表示" class="headerlink" title="对象的表示"></a>对象的表示</h2><p>JVM并不强制规定对象的内部结构应当如何表示。</p>
 <p>句柄与直接引用。</p>
-<h2 id="浮点算法"><a href="#浮点算法" class="headerlink" title="浮点算法"></a>浮点算法</h2><h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h2><p>在JVM层面上，Java中的构造器是以应该名为&lt;init&gt;的特殊实例初始化方法的形式出现的，其是由编译器命名的，因为无法通过程序编码的方式实现。实例初始化方法只能在实例的初始化期间，通过JVM的<code>invokespecial</code>指令调用，并且只能在尚未初始化的实例上调用该指令。</p>
+<h2 id="浮点算法"><a href="#浮点算法" class="headerlink" title="浮点算法"></a>浮点算法</h2><h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h2><p>在JVM层面上，对于对象，Java中的构造器是以应该名为&lt;init&gt;的特殊实例初始化方法的形式出现的，其是由编译器命名的，因为无法通过程序编码的方式实现。实例初始化方法只能在实例的初始化期间，通过JVM的<code>invokespecial</code>指令调用，并且只能在尚未初始化的实例上调用该指令。</p>
+<p>对于类或接口，则最多可以包含不超过应该类或接口的初始化方法，</p>
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h2 id="字节码指令集简介"><a href="#字节码指令集简介" class="headerlink" title="字节码指令集简介"></a>字节码指令集简介</h2><h2 id="类库"><a href="#类库" class="headerlink" title="类库"></a>类库</h2><h2 id="公有设计、私有实现"><a href="#公有设计、私有实现" class="headerlink" title="公有设计、私有实现"></a>公有设计、私有实现</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -502,9 +475,6 @@
 
           </div>
           
-    
-    <div class="comments" id="comments"></div>
-  
 
 
         </div>
@@ -759,6 +729,14 @@
 
 
 
+  <script>
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66458302";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -815,64 +793,6 @@
 
 
 
-  
-  <script>
-    function addCount(Counter) {
-      var $visitors = $('.leancloud_visitors');
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
-        .done(function({ results }) {
-          if (results.length > 0) {
-            var counter = results[0];
-            
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
-            
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
-            
-              .fail(function ({ responseJSON }) {
-                console.log(`Failed to save Visitor num, with error message: ${responseJSON.error}`);
-              })
-          } else {
-            
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! More info at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
-          }
-        })
-        .fail(function ({ responseJSON }) {
-          console.log(`LeanCloud Counter Error: ${responseJSON.code} ${responseJSON.error}`);
-        });
-    }
-    
-
-    $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz')
-        .done(function({ api_server }) {
-          var Counter = function(method, url, data) {
-            return $.ajax({
-              method: method,
-              url: `https://${api_server}/1.1${url}`,
-              headers: {
-                'X-LC-Id': 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
-                'X-LC-Key': 'uTVcNIWdMCGpicrhTKygpKXi',
-                'Content-Type': 'application/json',
-              },
-              data: data
-            });
-          };
-            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
-            if (localhost.test(document.URL)) return;
-            addCount(Counter);
-          
-        });
-    });
-  </script>
 
 
 
@@ -898,30 +818,6 @@
 
 
 
-
-    
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-
-<script>
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: 'rNE6CB58iechI12zCD4oeVtM-gzGzoHsz',
-    appKey: 'uTVcNIWdMCGpicrhTKygpKXi',
-    placeholder: 'Just go go',
-    avatar: 'mm',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: false,
-    lang: 'zh-CN' || 'zh-cn'
-  });
-</script>
 
 
 </body>

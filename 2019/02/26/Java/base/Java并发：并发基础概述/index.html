@@ -65,16 +65,16 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="并发基础">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/assets/adfb427d-3b21-40d7-a142-757f4ed73079.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets/adfb427d-3b21-40d7-a142-757f4ed73079.png">
 <meta property="og:image" content="http://yoursite.com/assets/1551250626973.png">
 <meta property="og:image" content="http://yoursite.com/assets/1551250713552.png">
 <meta property="og:image" content="http://yoursite.com/assets/1551252298293.png">
-<meta property="og:image" content="http://yoursite.com/assets/1550555153691.png">
-<meta property="og:updated_time" content="2019-08-01T06:42:40.897Z">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets/1550555153691.png">
+<meta property="og:updated_time" content="2019-08-04T03:04:46.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：并发基础概述">
 <meta name="twitter:description" content="并发基础">
-<meta name="twitter:image" content="http://yoursite.com/assets/adfb427d-3b21-40d7-a142-757f4ed73079.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/assets/adfb427d-3b21-40d7-a142-757f4ed73079.png">
   <link rel="canonical" href="http://yoursite.com/2019/02/26/Java/base/Java并发：并发基础概述/">
 
 
@@ -330,7 +330,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 14:42:40" itemprop="dateModified" datetime="2019-08-01T14:42:40+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-04 11:04:46" itemprop="dateModified" datetime="2019-08-04T11:04:46+08:00">2019-08-04</time>
               </span>
             
           
@@ -358,7 +358,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">4.2k</span>
+              <span title="本文字数">5.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -368,7 +368,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">5 分钟</span>
+              <span title="阅读时长">7 分钟</span>
             </span>
           
             <div class="post-description">并发基础</div>
@@ -383,96 +383,68 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>多线程处理在OS当中几乎已经时一项必备的功能了，让计算机同时去做几件事情</p>
+        <h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>从OS的角度讲，多线程处理在OS当中几乎已经时一项必备的功能了，让计算机同时去做几件事情</p>
 <ul>
-<li>因为计算机的运算能力强大</li>
-<li>而且还因为计算机的运算速度与它的存储、通信子系统速度差距太大，大量时间花费在磁盘IO、网络通信或数据库访问上。而我们不希望将CPU大部分时间都处于等待其他资源的时间上。</li>
-<li>一个服务端提示对多个客户端提供服务是另一个更具体地并发应用场景。</li>
+<li>因为计算机的运算能力强大。而且还因为计算机的运算速度与它的存储、通信子系统速度差距太大，大量时间花费在磁盘IO、网络通信或数据库访问上。而我们不希望将CPU大部分时间都处于等待其他资源的时间上。</li>
+<li>一个服务端同时对多个客户端提供服务是另一个更具体地并发应用场景。</li>
 </ul>
-<h2 id="并发及并发的线程安全处理："><a href="#并发及并发的线程安全处理：" class="headerlink" title="并发及并发的线程安全处理："></a>并发及并发的线程安全处理：</h2><ul>
-<li>多线程并发编程<ul>
-<li>线程安全性<ul>
-<li>原子性、可见性、有序性</li>
-<li>atomic包</li>
-<li>CAS算法</li>
-<li>synchronize与Lock、volatile、happes-before</li>
-</ul>
-</li>
-<li>安全发布对象<ul>
-<li>安全发布方法</li>
-<li>不可变对象、final关键字的使用、不可变方法</li>
-<li>线程不安全类与写法</li>
-</ul>
-</li>
-<li>线程封闭、同步容器、并发容器<ul>
-<li>堆栈封闭</li>
-<li>ThreadLocal线程封闭、JDBC的线程封闭</li>
-<li>同步容器、并发容器</li>
-<li>J.U.C</li>
-</ul>
-</li>
-<li>AQS等J.U.C组件<br>- </li>
-<li>线程调度<ul>
-<li>线程池好处</li>
-<li>new Thread弊端</li>
-<li>ThreadPoolExecutor、Executor框架接口</li>
-</ul>
-</li>
-<li>线程安全补充内容<ul>
-<li>死锁产生于预防</li>
-<li>多线程并发的最佳实践</li>
-<li>spring的线程安全</li>
-<li>hashmap与concurrentHashMap</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="并发、高并发相关概念"><a href="#并发、高并发相关概念" class="headerlink" title="并发、高并发相关概念"></a>并发、高并发相关概念</h1><p>并发：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程将交替地还如或者换出内存，线程同时存在， 每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，程序的每个线程都将分配到一个处理器核上，因此可以同时运行。</p>
+<p>从开发的角度讲，线程使得复杂的异步代码变得简单，极大地简化了复杂系统地开发。</p>
+<h2 id="并发、高并发相关概念"><a href="#并发、高并发相关概念" class="headerlink" title="并发、高并发相关概念"></a>并发、高并发相关概念</h2><p>并发：同时拥有两个或多个线程，如果程序在单核处理器上运行，多个线程将交替地还如或者换出内存，线程同时存在， 每个线程都处于执行过程中的某个状态，如果运行在多核处理器上，程序的每个线程都将分配到一个处理器核上，因此可以同时运行。</p>
 <p>高并发：通过设计保证系统能够同时并行处理很多请求</p>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>线程将复杂、异步的代码转换为更直接、直观的代码，线程是控制和利用多CPU系统计算能力的最简单方式</p>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p>线程将复杂、异步的代码转换为更直接、直观的代码，线程是控制和利用多CPU系统计算能力的最简单方式</p>
 <p><strong>异步</strong>：当烧水的时候，水还在烧，这个时候水是否烧开了引起关注，在任务结束的时候发出信号，一边做其他的事情</p>
 <p>多线程将异步操作转换为了顺序，同步的代码</p>
-<h3 id="多线程的特点"><a href="#多线程的特点" class="headerlink" title="多线程的特点"></a>多线程的特点</h3><p><strong>优势：</strong></p>
+<p><strong><em>多线程的特点</em></strong></p>
+<p><strong>优势：</strong></p>
 <ul>
-<li>速度：同时处理多个请求，响应快，复杂操作可以分为多个进程同时执行</li>
-<li>设计：在某些情况更简单，将异步的代码转换为顺序的代码，容易维护<ul>
-<li>在单线程上进行文件读取与处理，则必须跟踪每个文件的读取与处理状态</li>
-<li>多线程下，可以启动两个线程，每个线程只读取和处理单个文件。</li>
+<li>发挥多处理的强大能力：同时处理多个请求，响应快，复杂操作可以分为多个线程程同时执行。<ul>
+<li>充分利用多个CPU的计算资源。在如果设计正确，多线程程序可以通过提高CPU资源的利用率来提升系统吞吐率。</li>
+<li>即使单CPU下，提高处理器的资源利用率来提升系统吞吐率。CPU在等待IO时可以做其他的事情。在IO时候，进程在读取文件，CPU在等待文件，因此CPU的资源浪费了，而利用多线程，可以使得在读取第二个文件的时候，处理第一个文件</li>
 </ul>
 </li>
-<li>资源利用：CPU在等待IO时可以做其他的事情<ul>
-<li>在IO时候，进程在读取文件，CPU在等待文件，因此CPU的资源浪费了，而利用多线程，可以使得在读取第二个文件的时候，处理第一个文件</li>
+<li>建模的简单性：在某些情况更简单，将异步的代码转换为顺序的代码，容易维护，更好地模拟人类的工作方式<ul>
+<li>在单线程上进行文件读取与处理，则必须跟踪每个文件的读取与处理状态。多线程下，可以启动两个线程，每个线程只读取和处理单个文件。</li>
+<li>如果在程序中只包含一种类型的任务，比包含多种不同类型任务的程序要更易于编写。使用线程可以讲复杂且异步的工作流进一步分解为一组简单且同步的工作流，每个工作流在一个单独的线程中运行，并在特定的同步位置交互</li>
+<li>例如Servlet的开发人员不需要了解有多少请求在同一时刻要被处理，也不需要理解套接字的输入流或输出流是否被阻塞，当调用Servlet的service方法响应请求时，可以用同步方式来处理这给请求，就好像它是应该单线程程序。</li>
 </ul>
 </li>
-<li>多线程可以利用多个处理器进行计算，提高吞吐量</li>
+<li>异步事件的简化处理<ul>
+<li>服务器应用程序在接受多个远程客户端的套接字连接请求时，如果为每个连接都分配各自的线程并且使用同步IO，就会降低这类程序的开发难度</li>
+<li>对于单线程，如果套接字没有数据到来，读操作将一直堵塞，为了避免该问题，单线程需要使用非阻塞IO(java.nio)，而这种IO复杂性远高于同步IO，并且容易出错。而使用多线程则该请求的阻塞不会影响其他请求的处理</li>
+</ul>
+</li>
+<li>响应更灵敏的用户界面</li>
 </ul>
 <p><strong>成本：</strong></p>
 <ul>
-<li>更复杂的设计<ul>
-<li>访问共享数据的多个线程执行的代码需要特别注意。线程交互远非简单。错误的线程同步引起的错误很难检测，重现和修复。</li>
+<li>安全性问题<ul>
+<li>访问<strong>共享数据</strong>的多个线程执行的代码需要特别注意，没有充分同步情况下，多线程的操作执行顺序时不可预测的。线程交互远非简单。错误的线程同步引起的错误很难检测，重现和修复。</li>
 </ul>
 </li>
 <li>上下文切换开销<ul>
 <li>当CPU从执行一个线程切换到执行另一个线程时，CPU需要保存当前线程的本地数据，程序指针等，并加载下一个线程的本地数据，程序指针等来执行。</li>
+<li>上下文切换过程中丢失<strong>局部性</strong>，并将CPU时间更多的花在线程调度而不是运行上。并且同步机制往往抑制某些编译器优化，使得内存缓冲区中数据无效，增加共享内存总线的同步流量。</li>
 </ul>
 </li>
 <li>资源消耗增加<ul>
 <li>线程需要来自计算机的一些资源才能运行。除了CPU时间，线程需要一些内存来保持其本地堆栈。它还可能占用管理线程所需的操作系统内部的一些资源。</li>
+<li><strong>如何选择正确的线程数</strong></li>
 </ul>
 </li>
 </ul>
-<p><strong>风险：</strong></p>
+<p><strong><em>风险：</em></strong></p>
 <ul>
 <li>安全性：多个线程共享数据可能会产生与预期不相符的结果<ul>
 <li>一个简单的next++分为三步：读取，++，写入新值。由于线程之间可能交替占有运行时，因此可能报错。它取决于运行时如何交替进行这些操作。</li>
 <li>同步机制：将方法声明为synchronized可以修正该问题</li>
 </ul>
 </li>
-<li>活跃性：某个操作无法继续执行下去，如死锁、饥饿等</li>
+<li>活跃性：某个操作无法继续执行下去，线程会导致一些在单线程程序中不会出现的问题，例如死锁、饥饿、活锁等。它们依赖于不同线程的事件发生时序，在开发或测试中并不总是能够重现。</li>
 <li>性能：线程过多使得CPU频繁切换（上下文切换），调度时间增多；同步机制；消耗过多内存</li>
 </ul>
-<h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p><img src="/assets/adfb427d-3b21-40d7-a142-757f4ed73079.png" alt="img"></p>
+<h3 id="实际场景"><a href="#实际场景" class="headerlink" title="实际场景"></a>实际场景</h3><p>对于RMI调用。RMI使得代码能够调用在其他JVM中运行的对象， 但是当RMI调用远程对象时，这个调用将在哪个线程中执行，但一定不是我们创建的线程，而RMI会创建多少个线程，同应该远程对象上的同一个远程方法会不会在多个RMI线程中被同时调用。</p>
+<p>远程 对象必须注意两个线程安全性问题：正确地协同在多个对象中共享的状态，以及对远程对象本身状态的访问，RMI对象需要做好被多个线程同时调用的准备。</p>
+<h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p><img src="assets/adfb427d-3b21-40d7-a142-757f4ed73079.png" alt="img"></p>
 <p><strong><em>新建（New）</em></strong></p>
 <p>创建后尚未启动。</p>
 <p><strong><em>可运行（Runnable）</em></strong></p>
@@ -538,6 +510,60 @@
 </tbody></table>
 <p><strong><em>死亡（Terminated）</em></strong></p>
 <p>可以是线程结束任务之后自己结束，或者产生了异常而结束。</p>
+<h1 id="如何设计解决并发问题"><a href="#如何设计解决并发问题" class="headerlink" title="如何设计解决并发问题"></a>如何设计解决并发问题</h1><h2 id="具体思想"><a href="#具体思想" class="headerlink" title="具体思想"></a>具体思想</h2><p>编写线程安全的代码，核心在于对状态访问操作进行管理，特别时对<strong>共享的和可边的状态的访问</strong>。而对象的状态包含了任何可能影响其外部可见行为的数据，其是指存储在实例或者静态域当中的数据，并且可能包括其他依赖对象的域，例如Map中的Entity。</p>
+<p>一个对象是否线程安全取决于它是否被多个线程访问。并且至少有一个线程是执行写入操作的。</p>
+<h3 id="手段"><a href="#手段" class="headerlink" title="手段"></a>手段</h3><ul>
+<li>不在线程间共享该状态变量</li>
+<li>将状态变量修改为不可变的变量</li>
+<li>在访问状态变量时使用同步。</li>
+</ul>
+<p><strong><em>使用同步</em></strong></p>
+<ul>
+<li>设计线程相对安全的类<ul>
+<li>在调用线程相对安全的类时，额外进行相关的安全访问。或者防止在调用方进行线程不安全的操作</li>
+<li>尽可能使用现有的线程安全对象(Atomic)来管理类的状态，相比于非线程安全的对象，判断线程安全对象的可能状态及其状态转换情况更为容易，也更容易维护和验证线程安全性。</li>
+</ul>
+</li>
+</ul>
+<h2 id="并发及并发的线程安全处理："><a href="#并发及并发的线程安全处理：" class="headerlink" title="并发及并发的线程安全处理："></a>并发及并发的线程安全处理：</h2><ul>
+<li>多线程并发编程<ul>
+<li>线程安全性<ul>
+<li>原子性、可见性、有序性</li>
+<li>atomic包</li>
+<li>CAS算法</li>
+<li>synchronize与Lock、volatile、happes-before</li>
+</ul>
+</li>
+<li>安全发布对象<ul>
+<li>安全发布方法</li>
+<li>不可变对象、final关键字的使用、不可变方法</li>
+<li>线程不安全类与写法</li>
+</ul>
+</li>
+<li>线程封闭、同步容器、并发容器<ul>
+<li>堆栈封闭</li>
+<li>ThreadLocal线程封闭、JDBC的线程封闭</li>
+<li>同步容器、并发容器</li>
+<li>J.U.C</li>
+</ul>
+</li>
+<li>AQS等J.U.C组件<br>- </li>
+<li>线程调度<ul>
+<li>线程池好处</li>
+<li>new Thread弊端</li>
+<li>ThreadPoolExecutor、Executor框架接口</li>
+</ul>
+</li>
+<li>线程安全补充内容<ul>
+<li>死锁产生于预防</li>
+<li>多线程并发的最佳实践</li>
+<li>spring的线程安全</li>
+<li>hashmap与concurrentHashMap</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1 id="硬件知识"><a href="#硬件知识" class="headerlink" title="硬件知识"></a>硬件知识</h1><h2 id="硬件的效率与一致性"><a href="#硬件的效率与一致性" class="headerlink" title="硬件的效率与一致性"></a>硬件的效率与一致性</h2><p>让计算机并发执行若干个运算任务与更充分地利用计算机处理器地效能间地因果关系，看似顺理成章，其实关系比较复杂</p>
 <p>其中一个原因是绝大多数地运算任务都不可能只靠处CPU计算就能完成，CPU至少需要与内存交互，读取运算数据、存储运算结果。而这个IO操作很难消除。</p>
 <p>由于计算机地存储设备与CPU运算速度有几个数量级地差距，很多现代OS不得不加入一层速度尽可能接近处理器运算速度的<strong>高速缓存</strong>。</p>
@@ -575,21 +601,33 @@
 <p><strong>乱序执行优化</strong></p>
 <p>处理器为提高运算速度而做出违背代码原有顺序的优化。在不影响结果的情况下，代码的执行次序可能会发生变化</p>
 <p>在多核CPU中，后写入缓存的数据未必真的写入缓存。</p>
-<h1 id="并发模型"><a href="#并发模型" class="headerlink" title="并发模型"></a>并发模型</h1><h2 id="并发模型与分布式系统相似性"><a href="#并发模型与分布式系统相似性" class="headerlink" title="并发模型与分布式系统相似性"></a>并发模型与分布式系统相似性</h2><p>在并发系统中，不同的线程彼此通信。在分布式系统中，不同的进程彼此通信（可能在不同的计算机上）</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>一个顺序处理相同类型问题的程序更加简单，更少出错，容易测试。如果处理多种类型的问题， 则需要考虑优先级，时间截止等，较为复杂。</p>
-<p>因此，为每一个相同类型任务的程序提供一个线程，提供理想上的顺序，并且将域逻辑与时序调度的细节分割开，进行相互交替的操作，只有在特定的同步点进行彼此间的交互。    </p>
-<h3 id="并行工人"><a href="#并行工人" class="headerlink" title="并行工人"></a>并行工人</h3><p>​    传入的工作分配给不同的工作人员。这是一个说明并行工作者并发模型的图表：</p>
-<p><img src="/assets/1550555153691.png" alt="1550555153691"></p>
-<p>​    在并行工作者并发模型中，委托者将传入的作业分发给不同的工作者。每个工人完成整个工作。这些工作程序并行工作，在不同的线程中运行，并且可能在不同的CPU上运行。是Java应用程序中最常用的并发模型（虽然这种情况正在发生变化）。</p>
-<h4 id="优劣"><a href="#优劣" class="headerlink" title="优劣"></a>优劣</h4><ul>
-<li>易于理解。要增加应用程序的并行化，您只需添加更多工作程序。</li>
-<li>共享可能变得复杂</li>
+<h1 id="多线程并发最佳实践"><a href="#多线程并发最佳实践" class="headerlink" title="多线程并发最佳实践"></a>多线程并发最佳实践</h1><ul>
+<li>尽量使用本地变量</li>
+<li>使用不可变类</li>
+<li>最小化锁的作用域范围</li>
+<li>使用线程池的executor，而不是newThread</li>
+<li>宁可使用同步也不要使用现场的wait和notify</li>
+<li>使用blockingQueue实现生产-消费模式</li>
+<li>使用并发集合而不是加了锁的同步集合</li>
+<li>使用semaphore创建有界的访问</li>
+<li>宁可使用同步代码块，也不使用同步的方法</li>
+<li>避免使用静态变量</li>
 </ul>
-<h1 id="并发模拟"><a href="#并发模拟" class="headerlink" title="并发模拟"></a>并发模拟</h1><ul>
+<h2 id="并发模拟"><a href="#并发模拟" class="headerlink" title="并发模拟"></a>并发模拟</h2><ul>
 <li>postman：http请求模拟</li>
 <li>Apache bench：测试网站性能</li>
 <li>JMeter：压力测试工具</li>
 <li>代码：semaphore信号量、CountDownLatch计数器。通常与线程池共同使用</li>
+</ul>
+<h1 id="并发模型"><a href="#并发模型" class="headerlink" title="并发模型"></a>并发模型</h1><h2 id="并发模型与分布式系统相似性"><a href="#并发模型与分布式系统相似性" class="headerlink" title="并发模型与分布式系统相似性"></a>并发模型与分布式系统相似性</h2><p>在并发系统中，不同的线程彼此通信。在分布式系统中，不同的进程彼此通信（可能在不同的计算机上）</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>一个顺序处理相同类型问题的程序更加简单，更少出错，容易测试。如果处理多种类型的问题， 则需要考虑优先级，时间截止等，较为复杂。</p>
+<p>因此，为每一个相同类型任务的程序提供一个线程，提供理想上的顺序，并且将域逻辑与时序调度的细节分割开，进行相互交替的操作，只有在特定的同步点进行彼此间的交互。    </p>
+<h3 id="并行工人"><a href="#并行工人" class="headerlink" title="并行工人"></a>并行工人</h3><p>​    传入的工作分配给不同的工作人员。这是一个说明并行工作者并发模型的图表：</p>
+<p><img src="assets/1550555153691.png" alt="1550555153691"></p>
+<p>​    在并行工作者并发模型中，委托者将传入的作业分发给不同的工作者。每个工人完成整个工作。这些工作程序并行工作，在不同的线程中运行，并且可能在不同的CPU上运行。是Java应用程序中最常用的并发模型（虽然这种情况正在发生变化）。</p>
+<h4 id="优劣"><a href="#优劣" class="headerlink" title="优劣"></a>优劣</h4><ul>
+<li>易于理解。要增加应用程序的并行化，您只需添加更多工作程序。</li>
+<li>共享可能变得复杂</li>
 </ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li>java并发编程入门与高并发解决方案</li>
@@ -678,7 +716,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">208</span>
+          <span class="site-state-item-count">204</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -729,7 +767,7 @@
         
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -828,7 +866,7 @@
         
           
         
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -849,7 +887,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发"><span class="nav-number">1.</span> <span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发及并发的线程安全处理："><span class="nav-number">1.2.</span> <span class="nav-text">并发及并发的线程安全处理：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发、高并发相关概念"><span class="nav-number">2.</span> <span class="nav-text">并发、高并发相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.1.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程的特点"><span class="nav-number">2.1.1.</span> <span class="nav-text">多线程的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程状态"><span class="nav-number">2.2.</span> <span class="nav-text">线程状态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件知识"><span class="nav-number">3.</span> <span class="nav-text">硬件知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件的效率与一致性"><span class="nav-number">3.1.</span> <span class="nav-text">硬件的效率与一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU多级缓存"><span class="nav-number">3.2.</span> <span class="nav-text">CPU多级缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存一致性-MESI协议"><span class="nav-number">3.3.</span> <span class="nav-text">缓存一致性(MESI协议)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发模型"><span class="nav-number">4.</span> <span class="nav-text">并发模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发模型与分布式系统相似性"><span class="nav-number">4.1.</span> <span class="nav-text">并发模型与分布式系统相似性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">4.2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并行工人"><span class="nav-number">4.2.1.</span> <span class="nav-text">并行工人</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优劣"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">优劣</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发模拟"><span class="nav-number">5.</span> <span class="nav-text">并发模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发"><span class="nav-number">1.</span> <span class="nav-text">并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发、高并发相关概念"><span class="nav-number">1.2.</span> <span class="nav-text">并发、高并发相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">1.2.1.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际场景"><span class="nav-number">1.2.2.</span> <span class="nav-text">实际场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程状态"><span class="nav-number">1.2.3.</span> <span class="nav-text">线程状态</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何设计解决并发问题"><span class="nav-number">2.</span> <span class="nav-text">如何设计解决并发问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#具体思想"><span class="nav-number">2.1.</span> <span class="nav-text">具体思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手段"><span class="nav-number">2.1.1.</span> <span class="nav-text">手段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发及并发的线程安全处理："><span class="nav-number">2.2.</span> <span class="nav-text">并发及并发的线程安全处理：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件知识"><span class="nav-number">3.</span> <span class="nav-text">硬件知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件的效率与一致性"><span class="nav-number">3.1.</span> <span class="nav-text">硬件的效率与一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU多级缓存"><span class="nav-number">3.2.</span> <span class="nav-text">CPU多级缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存一致性-MESI协议"><span class="nav-number">3.3.</span> <span class="nav-text">缓存一致性(MESI协议)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程并发最佳实践"><span class="nav-number">4.</span> <span class="nav-text">多线程并发最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发模拟"><span class="nav-number">4.1.</span> <span class="nav-text">并发模拟</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发模型"><span class="nav-number">5.</span> <span class="nav-text">并发模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发模型与分布式系统相似性"><span class="nav-number">5.1.</span> <span class="nav-text">并发模型与分布式系统相似性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">5.2.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并行工人"><span class="nav-number">5.2.1.</span> <span class="nav-text">并行工人</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优劣"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">优劣</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -876,12 +914,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23:18</span>
+    <span title="站点阅读时长">22:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

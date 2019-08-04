@@ -57,19 +57,18 @@
   };
 </script>
 
-  <meta name="description" content="大二至大三期间开发的一个车联网项目的体会Log">
-<meta name="keywords" content="hide,项目体会Log">
+  <meta name="description" content="参考">
 <meta property="og:type" content="article">
-<meta property="og:title" content="eNet车联网项目开发日志">
-<meta property="og:url" content="http://yoursite.com/2018/09/30/Java/项目/eNet车联网项目开发日志/index.html">
+<meta property="og:title" content="Java并发：线程安全-实现">
+<meta property="og:url" content="http://yoursite.com/2019/08/04/Java并发：线程安全-实现/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="大二至大三期间开发的一个车联网项目的体会Log">
+<meta property="og:description" content="参考">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-03T11:31:38.480Z">
+<meta property="og:updated_time" content="2019-08-04T03:07:20.513Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="eNet车联网项目开发日志">
-<meta name="twitter:description" content="大二至大三期间开发的一个车联网项目的体会Log">
-  <link rel="canonical" href="http://yoursite.com/2018/09/30/Java/项目/eNet车联网项目开发日志/">
+<meta name="twitter:title" content="Java并发：线程安全-实现">
+<meta name="twitter:description" content="参考">
+  <link rel="canonical" href="http://yoursite.com/2019/08/04/Java并发：线程安全-实现/">
 
 
 <script id="page.configurations">
@@ -78,7 +77,7 @@
   };
 </script>
 
-  <title>eNet车联网项目开发日志 | Hexo</title>
+  <title>Java并发：线程安全-实现 | Hexo</title>
   
 
 
@@ -277,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/30/Java/项目/eNet车联网项目开发日志/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/Java并发：线程安全-实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -291,7 +290,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">eNet车联网项目开发日志
+          <h1 class="post-title" itemprop="name headline">Java并发：线程安全-实现
 
               
             
@@ -311,36 +310,7 @@
                 
               
 
-              <time title="创建时间：2018-09-30 15:18:40" itemprop="dateCreated datePublished" datetime="2018-09-30T15:18:40+08:00">2018-09-30</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-03 19:31:38" itemprop="dateModified" datetime="2019-08-03T19:31:38+08:00">2019-08-03</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/项目/" itemprop="url" rel="index"><span itemprop="name">项目</span></a></span>
-
-                
-                
-              
+              <time title="创建时间：2019-08-04 11:07:20" itemprop="dateCreated datePublished" datetime="2019-08-04T11:07:20+08:00">2019-08-04</time>
             </span>
           
 
@@ -352,7 +322,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">629</span>
+              <span title="本文字数">5</span>
             </span>
           
             <span class="post-meta-item">
@@ -365,8 +335,6 @@
               <span title="阅读时长">1 分钟</span>
             </span>
           
-            <div class="post-description">大二至大三期间开发的一个车联网项目的体会Log</div>
-          
 
         </div>
       </header>
@@ -377,45 +345,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="log"><a href="#log" class="headerlink" title="log"></a>log</h1><h2 id="初期"><a href="#初期" class="headerlink" title="初期"></a>初期</h2><h3 id="2018-9-30"><a href="#2018-9-30" class="headerlink" title="2018.9.30"></a>2018.9.30</h3><ul>
-<li>国庆前一天，达成目标，将后台项目部署到CentOS7.2云服务器上面，并进行了成功的访问</li>
-<li>开启后台业务开发的新阶段</li>
-</ul>
-<h3 id="2018-10-1"><a href="#2018-10-1" class="headerlink" title="2018.10.1"></a>2018.10.1</h3><ul>
-<li>大国庆，搭建了一个shiro的简单框架，然而测试GG，先溜了</li>
-</ul>
-<h3 id="2018-10-2"><a href="#2018-10-2" class="headerlink" title="2018.10.2"></a>2018.10.2</h3><ul>
-<li>集成shiro,在HTML当中进行了权限和角色的验证，未集成到API当中，完成了基本配置</li>
-</ul>
-<h3 id="2018-10-3"><a href="#2018-10-3" class="headerlink" title="2018.10.3"></a>2018.10.3</h3><ul>
-<li>将shiro集成到restful中,实现了无状态的权限管理与角色管理</li>
-<li>创建了一个包moduleFun,用来存放一些功能模块,比如shiro或者说是qualtiy等</li>
-<li>待完成任务:现在的很多多是硬编码上去的,要从数据库加载</li>
-<li>测试的用例还没有写,悄咪咪偷个懒</li>
-</ul>
-<h3 id="2018-10-6"><a href="#2018-10-6" class="headerlink" title="2018.10.6"></a>2018.10.6</h3><ul>
-<li>集成shiro马上就ok了,就差一个不拦截登陆的URL将oK了</li>
-<li>将集成shiro的代码demo放到github的demo里面去,一共三个:</li>
-</ul>
-<ol>
-<li>无状态的一个 </li>
-<li>jsp和shiro的</li>
-<li>最终版的</li>
-</ol>
-<ul>
-<li>代码太稀烂了,等这些任务先搞定了,来一波重构</li>
-<li>各种文档都是英文的,努力学波英语,加油</li>
-</ul>
-<h3 id="2018-10-7"><a href="#2018-10-7" class="headerlink" title="2018.10.7"></a>2018.10.7</h3><ul>
-<li>登录的URL已经不拦截了,但是写的方法太稀烂了</li>
-</ul>
-<h2 id="初期踩坑"><a href="#初期踩坑" class="headerlink" title="初期踩坑"></a>初期踩坑</h2><h3 id="关于JPA"><a href="#关于JPA" class="headerlink" title="关于JPA"></a>关于JPA</h3><ul>
-<li>jpa的方法名不能瞎搞,会代码GG的</li>
-<li>shiro 自定义拦截器后,在filterDefination里面put基本是无效的,原因未知,待研究</li>
-</ul>
-<h1 id="中期"><a href="#中期" class="headerlink" title="中期"></a>中期</h1><p>努力搞设计模式和重构等,完善javaBase的学习,加油</p>
-<h2 id="中期踩坑"><a href="#中期踩坑" class="headerlink" title="中期踩坑"></a>中期踩坑</h2><p>还没开始,别做梦了</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+        <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -426,18 +356,10 @@
     
 
     <footer class="post-footer">
-          
-        
-        <div class="post-tags">
-            <a href="/tags/hide/" rel="tag"># hide</a>
-          
-            <a href="/tags/项目体会Log/" rel="tag"># 项目体会Log</a>
-          
-        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2018/09/30/Java/框架/安全框架：shiro-登录认证和权限管理/" rel="next" title="安全框架：整合shiro-登录认证和权限管理">
-                <i class="fa fa-chevron-left"></i> 安全框架：整合shiro-登录认证和权限管理
+              <a href="/2019/08/02/Java/base/JVM：Java虚拟机规范/" rel="next" title="JVM：Java虚拟机规范">
+                <i class="fa fa-chevron-left"></i> JVM：Java虚拟机规范
               </a>
             
           </div>
@@ -445,10 +367,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2018/10/02/Java/框架/缓存：Redis的使用/" rel="prev" title="Redis的使用">
-                Redis的使用 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -503,7 +421,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">208</span>
+          <span class="site-state-item-count">204</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -554,7 +472,7 @@
         
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -653,7 +571,7 @@
         
           
         
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -674,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#log"><span class="nav-number">1.</span> <span class="nav-text">log</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初期"><span class="nav-number">1.1.</span> <span class="nav-text">初期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2018-9-30"><span class="nav-number">1.1.1.</span> <span class="nav-text">2018.9.30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2018-10-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">2018.10.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2018-10-2"><span class="nav-number">1.1.3.</span> <span class="nav-text">2018.10.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2018-10-3"><span class="nav-number">1.1.4.</span> <span class="nav-text">2018.10.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2018-10-6"><span class="nav-number">1.1.5.</span> <span class="nav-text">2018.10.6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2018-10-7"><span class="nav-number">1.1.6.</span> <span class="nav-text">2018.10.7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初期踩坑"><span class="nav-number">1.2.</span> <span class="nav-text">初期踩坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于JPA"><span class="nav-number">1.2.1.</span> <span class="nav-text">关于JPA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中期"><span class="nav-number">2.</span> <span class="nav-text">中期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#中期踩坑"><span class="nav-number">2.1.</span> <span class="nav-text">中期踩坑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -701,12 +619,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23:18</span>
+    <span title="站点阅读时长">22:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

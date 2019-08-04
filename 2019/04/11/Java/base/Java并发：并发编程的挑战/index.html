@@ -70,7 +70,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1554969302239.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554969314949.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554969499806.png">
-<meta property="og:updated_time" content="2019-08-01T06:22:37.957Z">
+<meta property="og:updated_time" content="2019-08-03T13:17:43.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：并发编程的挑战">
 <meta name="twitter:description" content="问题并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战  上下文切换的问题 死锁的问题 受限于硬件和软件的资源限制问题  概述 上下文切换单核处理器实现多线程执行代码： CPU通过给每个线程分配CPU时间片来实现这个机制。时间片是CPU分配给各个线程的时间，因为时间片非常短，所以CPU通过不停">
@@ -330,7 +330,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 14:22:37" itemprop="dateModified" datetime="2019-08-01T14:22:37+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-03 21:17:43" itemprop="dateModified" datetime="2019-08-03T21:17:43+08:00">2019-08-03</time>
               </span>
             
           
@@ -425,7 +425,18 @@
 <h4 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h4><p>通过减少大量waiting线程来减少上下文切换</p>
 <p><img src="/assets/1554969302239.png" alt="1554969302239"></p>
 <p><img src="/assets/1554969314949.png" alt="1554969314949"></p>
-<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p><strong>死锁示例</strong></p>
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>死锁的必要条件</p>
+<ul>
+<li>互斥条件</li>
+<li>请求和保持条件</li>
+<li>不剥夺条件</li>
+<li>环路等待条件</li>
+</ul>
+<p>解决锁</p>
+<ul>
+<li>持有锁一定时间，依然在等待的话，则释放持有的所有锁。</li>
+</ul>
+<p><strong>死锁示例</strong></p>
 <p>A、B锁互相等待</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** A锁 */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String A = <span class="string">"A"</span>;</span><br><span class="line">    <span class="comment">/** B锁 */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String B = <span class="string">"B"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> DeadLockDemo().deadLock();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">deadLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (A) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">synchronized</span> (B) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"1"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (B) &#123;</span><br><span class="line">                    <span class="keyword">synchronized</span> (A) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"2"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -577,7 +588,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">208</span>
+          <span class="site-state-item-count">204</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -628,7 +639,7 @@
         
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -727,7 +738,7 @@
         
           
         
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -775,12 +786,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23:18</span>
+    <span title="站点阅读时长">22:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -79,7 +79,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1555058346281.png">
 <meta property="og:image" content="http://yoursite.com/assets/1555058415256.png">
 <meta property="og:image" content="http://yoursite.com/assets/1555058476394.png">
-<meta property="og:updated_time" content="2019-08-01T06:27:06.301Z">
+<meta property="og:updated_time" content="2019-08-04T13:01:01.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：JMM">
 <meta name="twitter:description" content="JMM基础内存模型：在特定的操作协议(应该时指缓存一致性协议把)下，对特定内存或高速缓存进行读写访问地过程抽象 Java内存模型(JMM)试图屏蔽各种硬件和OS间的内存访问差异，以实现Java程序在各种平台下都能达到一致的内存访问效果。 Java内存模型是围绕着在并发过程中如何处理原子性、可见性和有序性而建立的 JMMJMM规范了java虚拟机与计算机内存如何协同工作，规定了一个线程如何和何时能看">
@@ -339,7 +339,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 14:27:06" itemprop="dateModified" datetime="2019-08-01T14:27:06+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-04 21:01:01" itemprop="dateModified" datetime="2019-08-04T21:01:01+08:00">2019-08-04</time>
               </span>
             
           
@@ -367,7 +367,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">6.1k</span>
+              <span title="本文字数">7.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -377,7 +377,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">7 分钟</span>
+              <span title="阅读时长">9 分钟</span>
             </span>
           
 
@@ -515,11 +515,49 @@
 <h2 id="三个特性"><a href="#三个特性" class="headerlink" title="三个特性"></a>三个特性</h2><h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p><strong>数据类型级别</strong>：Java内存模型直接保证的原子性变量操作包括read、load、assign、use、store、write。大致可以认为基本数据类型的访问读写时具备原子性的。</p>
 <p><strong>synchronized</strong>：若应用场景需要一个更大范围的原子性保证，则提供了lock和unlock来满足这种需求，虽然虚拟机未将lock、unlock操作开放给用户使用，但提供了更高层次的<strong>字节码指令</strong><code>monitorenter</code>和<code>monitorexit</code>来隐式使用这两个操作，而反映到Java代码中即<code>synchronized</code>，即<code>synchronized</code>块间操作具备原子性</p>
 <h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>可见性是指当一个线程修改了共享变量的值，其他线程能够立即得知这个修改。</p>
+<p>导致共享变量在线程间不可见的原因</p>
+<ul>
+<li>线程交叉执行</li>
+<li>重排序结合线程交叉执行</li>
+<li>共享变量更新后的值没有在工作内存与主内存间及时更新</li>
+</ul>
+<blockquote>
+<p>在没有同步地情况下，编译器、处理器以及运行时等都可能对操作地执行顺序进行一些意想不到的调整。在缺乏足够同步的多线程程序中，要想对内存操作的执行顺序进行判断，几乎无法得到正确的结论。</p>
+</blockquote>
 <p>JMM是提供在变量修改后将新值同步回主内存，在变量读取前从主内存刷新变量值这种依赖主内存作为传递媒介的方式实现可见性的。</p>
 <ul>
 <li>volatile的特殊规则保证了新值能够立即同步到主内存，并且每次使用前立即从主内存刷新</li>
 <li>synchronized是由“对一个变量执行unlock操作前，必须先把此变量同步回主内存中”这条规则获得的</li>
 <li>final字段在构造器中一旦初始化完成，并且构造器没有将this引用传递出去(this引用逃逸可能让其他线程访问到初始化了一半的对象)，那再其他线程中就能看到final字段的值。</li>
+</ul>
+<p><strong><em>示例</em></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoVisibility</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> ready;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ReaderThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">        <span class="function">publi <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">while</span>(!ready)&#123;</span><br><span class="line">                Thread.yield();</span><br><span class="line">            &#125;</span><br><span class="line">           	println(number);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> ReadThread().start();</span><br><span class="line">        number = <span class="number">42</span>;</span><br><span class="line">        ready = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于<strong>线程交叉执行</strong>，在创建单例对象时可能创建两个对象</p>
+<p>由于<strong>重排序</strong>，可能先执行了<code>ready=true</code>导致此时依然<code>number=0</code>，因此ReadThread输出0。</p>
+<p>由于<strong>共享变量没有及时更新</strong>，ReadThread可能永远执行下去。</p>
+<h4 id="失效数据"><a href="#失效数据" class="headerlink" title="失效数据"></a>失效数据</h4><p>失效数据时指当读线程查看ready变量时，可能得到一个已经失效的值。除非每次访问变量时都使用同步，否则很可能得到该变量的一个失效值。而且失效值可能不会同时出现：一个线程可能获得某个变量的最新值，而获得另一个变量的失效值。</p>
+<h4 id="非原子的64位操作"><a href="#非原子的64位操作" class="headerlink" title="非原子的64位操作"></a>非原子的64位操作</h4><p>当线程在没有同步的情况下读取该变量时可能会得到一个失效值，但至少这个值时由之前某个线程设置的值，而不是一个随机值。这种安全性保证也被称为<strong>最低安全性</strong></p>
+<p>最低安全性适用于大多数变量，但是long和double不属于该类型，因此读取该变量时可能读取到某个值的高32位与另一个值的低32位。</p>
+<h4 id="加锁与可见性"><a href="#加锁与可见性" class="headerlink" title="加锁与可见性"></a>加锁与可见性</h4><p>加锁可以确保某个线程以一种可预测的方式来查看另一个线程的执行结果。在同步代码块M上调用unlock之前的所有操作结果，对于在M上调用lock之后的线程都是可见的。</p>
+<p>即为什么要求在访问某个共享且可变的变量时要求所有线程在同一个锁上同步，是为了确保某个线程写入该变量的值对于其他线程来说都是可见的。</p>
+<h4 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h4><p>volatile是一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程，当变量声明为volatile后，编译器与运行时都会注意到这个变量是共享的，因此不会讲该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或其他处理器不可见的地方，因此读取volatile变量总会返回最新的值。</p>
+<blockquote>
+<p>仅当volatile变量能够简化代码的实现以及对同步策略的验证时，才应该使用它们。如果在验证正确性时需要对可见性进行复杂的判断，那么就不要使用volatile变量。</p>
+</blockquote>
+<p>volatile的正确使用方式：</p>
+<ul>
+<li>确保它们自身状态的可见性。确保它所引用对象的状态的可见性</li>
+<li>标识一些重要的程序生命周期事件的发生。</li>
+</ul>
+<blockquote>
+<p>加锁机制既可以确保可见性又可以确保原子性，而volatile变量只能确保可见性</p>
+</blockquote>
+<p>当且仅当满足以下所有条件时才应该使用volatile变量</p>
+<ul>
+<li>对变量的写入操作不依赖变量的当前值，或者你能够确保只有单个线程更新变量的值</li>
+<li>该变量不会与其他状态变量一起纳入不变性条件中</li>
+<li>在访问变量时不需要加锁。</li>
 </ul>
 <h3 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h3><p><strong>线程内表现为串行的语义</strong>：如果在本线程内观察，所有的操作都是有序的。</p>
 <p><strong>指令重排序与工作内存与主内存同步延迟</strong>：如果在一个线程中观察另一个线程，所有操作都是无序的。</p>
@@ -813,7 +851,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM基础"><span class="nav-number">1.</span> <span class="nav-text">JMM基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JMM"><span class="nav-number">1.1.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存间交互操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">内存间交互操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#happens-before"><span class="nav-number">1.1.3.</span> <span class="nav-text">happens-before</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM的抽象结构"><span class="nav-number">1.1.4.</span> <span class="nav-text">JMM的抽象结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU"><span class="nav-number">1.2.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从源代码到指令序列的重排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">从源代码到指令序列的重排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程模型的分类"><span class="nav-number">1.3.</span> <span class="nav-text">并发编程模型的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存屏障指令"><span class="nav-number">1.3.1.</span> <span class="nav-text">内存屏障指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个特性"><span class="nav-number">1.4.</span> <span class="nav-text">三个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性"><span class="nav-number">1.4.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">1.4.2.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性"><span class="nav-number">1.4.3.</span> <span class="nav-text">有序性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#顺序一致性"><span class="nav-number">2.</span> <span class="nav-text">顺序一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据竞争与顺序一致性"><span class="nav-number">2.1.</span> <span class="nav-text">数据竞争与顺序一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序一致性内存模型"><span class="nav-number">2.2.</span> <span class="nav-text">顺序一致性内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步程序的顺序一致性效果"><span class="nav-number">2.3.</span> <span class="nav-text">同步程序的顺序一致性效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未同步程序的执行特性"><span class="nav-number">2.4.</span> <span class="nav-text">未同步程序的执行特性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#final域的内存语义"><span class="nav-number">3.</span> <span class="nav-text">final域的内存语义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#happens-before-1"><span class="nav-number">4.</span> <span class="nav-text">happens-before</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双重检查锁定与延迟初始化"><span class="nav-number">5.</span> <span class="nav-text">双重检查锁定与延迟初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM综述"><span class="nav-number">6.</span> <span class="nav-text">JMM综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM基础"><span class="nav-number">1.</span> <span class="nav-text">JMM基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JMM"><span class="nav-number">1.1.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存间交互操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">内存间交互操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#happens-before"><span class="nav-number">1.1.3.</span> <span class="nav-text">happens-before</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM的抽象结构"><span class="nav-number">1.1.4.</span> <span class="nav-text">JMM的抽象结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU"><span class="nav-number">1.2.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从源代码到指令序列的重排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">从源代码到指令序列的重排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程模型的分类"><span class="nav-number">1.3.</span> <span class="nav-text">并发编程模型的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存屏障指令"><span class="nav-number">1.3.1.</span> <span class="nav-text">内存屏障指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个特性"><span class="nav-number">1.4.</span> <span class="nav-text">三个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子性"><span class="nav-number">1.4.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">1.4.2.</span> <span class="nav-text">可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#失效数据"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">失效数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非原子的64位操作"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">非原子的64位操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加锁与可见性"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">加锁与可见性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile"><span class="nav-number">1.4.2.4.</span> <span class="nav-text">volatile</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序性"><span class="nav-number">1.4.3.</span> <span class="nav-text">有序性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#顺序一致性"><span class="nav-number">2.</span> <span class="nav-text">顺序一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据竞争与顺序一致性"><span class="nav-number">2.1.</span> <span class="nav-text">数据竞争与顺序一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序一致性内存模型"><span class="nav-number">2.2.</span> <span class="nav-text">顺序一致性内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步程序的顺序一致性效果"><span class="nav-number">2.3.</span> <span class="nav-text">同步程序的顺序一致性效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未同步程序的执行特性"><span class="nav-number">2.4.</span> <span class="nav-text">未同步程序的执行特性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#final域的内存语义"><span class="nav-number">3.</span> <span class="nav-text">final域的内存语义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#happens-before-1"><span class="nav-number">4.</span> <span class="nav-text">happens-before</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双重检查锁定与延迟初始化"><span class="nav-number">5.</span> <span class="nav-text">双重检查锁定与延迟初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM综述"><span class="nav-number">6.</span> <span class="nav-text">JMM综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -845,7 +883,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">22:57</span>
+    <span title="站点阅读时长">23:08</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。 但是它们能够进行全">
+<meta name="keywords" content="Elasticsearch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch：入门">
+<meta property="og:url" content="http://yoursite.com/2019/08/05/系统架构/Elasticsearch：入门/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。 但是它们能够进行全">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-05T11:04:37.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Elasticsearch：入门">
+<meta name="twitter:description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。 但是它们能够进行全">
+  <link rel="canonical" href="http://yoursite.com/2019/08/05/系统架构/Elasticsearch：入门/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Elasticsearch：入门 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+      
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>阅读排行</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/smallpocket" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/05/系统架构/Elasticsearch：入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Elasticsearch：入门
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-05 10:28:12 / 修改时间：19:04:37" itemprop="dateCreated datePublished" datetime="2019-08-05T10:28:12+08:00">2019-08-05</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">10k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">13 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="ElasticSearch概念"><a href="#ElasticSearch概念" class="headerlink" title="ElasticSearch概念"></a>ElasticSearch概念</h1><p>ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。</p>
+<p>它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。</p>
+<h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。</p>
+<p>但是它们能够进行全文搜索，处理同义词和根据相关性给文档打分吗？它们能根据同一份数据生成分析和聚合的结果吗？最重要的是，它们在没有大量工作进程（线程）的情况下能做到对数据的实时处理吗？</p>
+<p>ElasticSearch鼓励你浏览并利用你的数据，而不是烂在数据库里，因为在数据库里太难查询了。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>ElasticSearch是一个基于Apache Lucene的开源搜索引擎，Apache Lucene可以被认为是迄今为止最先进、性能最好的、功能最全的搜索引擎库。</p>
+<p>但是Lucene只是一个库，如果想要使用，则必须使用Java作为开发语言进行集成，而且Lucene非常复杂，需要深入了解检索的相关知识理解它是如何工作的。</p>
+<p>ElasticSearch使用Java开发，并使用Lucene作为核心来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来隐藏Lucene的复杂性，从而让全文搜索变得简单。</p>
+<p>ElasticSearch还可以这样描述：</p>
+<ul>
+<li>分布式的实时文件存储，每个字段都被索引并可被搜索</li>
+<li>分布式的实时分析搜索引擎</li>
+<li>可以扩展到上百台服务器，处理PB级结构化或非结构化数据。</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://www.elastic.co/cn/" target="_blank" rel="noopener">elasticsearch</a>安装后解压到相应目录即可</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>进入bin目录后：<code>elasticsearch-service start</code></p>
+<p>关闭服务：<code>elasticsearch-service stop</code></p>
+<p>如果是第一次启动则需要：<code>elasticsearch-service install</code></p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>安装插件Marvel，Marvel是Elasticsearch的管理和监控工具，包含一个sense的交互控制台，使用户方便地通过浏览器直接于Elasticsearch进行交互。</p>
+<p><code>./bin/elasticsearch-plugin install elasticsearch/marvel/latest</code></p>
+<p>禁用监控，通过命令关闭Marvel：<code>echo    &#39;marvel.agent.enabled:    false&#39;    &gt;&gt;    ./config/elasticsearch.yml</code></p>
+<p><a href="http://localhost:9200/_plugin/marvel" target="_blank" rel="noopener">查看Marvel</a></p>
+<h2 id="集群和节点"><a href="#集群和节点" class="headerlink" title="集群和节点"></a>集群和节点</h2><p>节点node是一个运行着地Elasticsearch实例，集群cluster是一组具有相同<code>cluster.name</code>的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能。</p>
+<p>修改<code>cluster.name</code>可以通过修改<code>config/</code>目录下的<code>elasticsearch.yml</code>文件，然后重启Elasticsearch来实现。</p>
+<h2 id="与Elasticsearch交互"><a href="#与Elasticsearch交互" class="headerlink" title="与Elasticsearch交互"></a>与Elasticsearch交互</h2><h3 id="JavaAPI"><a href="#JavaAPI" class="headerlink" title="JavaAPI"></a>JavaAPI</h3><p>Elasticsearch为Java用户提供了两种内置客户端</p>
+<p><strong><em>节点客户端</em></strong></p>
+<p>节点客户端以无数据节点身份加入集群，即自身不存储任何数据，但是它自导数据在集群中的具体位置，并且能够直接转发请求到对应的节点上。</p>
+<p><strong><em>传输客户端</em></strong></p>
+<p>这个更轻量的传输客户端能够发送请求到远端集群，它自己不加入集群，只是简单转发请求给集群中的节点。Java客户端都使用9300端口与集群交互，使用Elasticsearch传输协议(Elasticsearch transport protocol)。</p>
+<h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>基于HTTP，以JSON为数据交互格式的Restful API。向Elastic发出的请求的组成部分与其他普通的HTTP请求是一样的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X&lt;VERB&gt; &apos;&lt;PROTOCOL&gt;://&lt;HOST&gt;:&lt;PORT&gt;/&lt;PATH&gt;?&lt;QUERY_STRING&gt;&apos; -d &apos;&lt;BODY&gt;&apos;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>VERB HTTP方法：get、post、put、head、delete</li>
+<li>PROTOCOL：http或者https（当Elasticsearch前有https代理时可用）</li>
+<li>HOST： Elasticsearch集群中的任何一个节点的主机名，如果是在本地的节点，那么就叫localhost</li>
+<li>PORT： Elasticsearch HTTP服务所在的端口，默认为9200</li>
+<li>PATH： API路径，PATH中可以包含多个组件，例如_cluster/stats</li>
+<li>QUERY_STRING：一些可选的查询请求参数，<code>?pretty</code>可以使得请求返回更加美观易读的JSON数据</li>
+<li>BODY：一个JSON格式的请求主体</li>
+</ul>
+<p>一个完整的请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET “localhost:9200/_count?pretty” -d &apos;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>异常</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;error&quot;:&quot;Content-Type header [application/x-www-form-urlencoded] is not supported</span><br></pre></td></tr></table></figure>
+
+<p>则修改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;localhost:9200/_count?pretty&quot; -d &apos;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>异常2</em></strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"error"</span>: &#123;</span><br><span class="line">        <span class="attr">"root_cause"</span>: [&#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"mapper_parsing_exception"</span>,</span><br><span class="line">            <span class="attr">"reason"</span>: <span class="string">"failed to parse"</span></span><br><span class="line">        &#125;],</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"mapper_parsing_exception"</span>,</span><br><span class="line">        <span class="attr">"reason"</span>: <span class="string">"failed to parse"</span>,</span><br><span class="line">        <span class="attr">"caused_by"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"not_x_content_exception"</span>,</span><br><span class="line">            <span class="attr">"reason"</span>: <span class="string">"Compressor detection can only be called on some xcontent bytes or compressed xcontent bytes"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"status"</span>: <span class="number">400</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>垃圾windows命令行导致的，这边建议使用Ubuntu的WSL</p>
+<p><strong><em>一个put的示例</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl </span><br><span class="line">-H &quot;Content-Type: application/json&quot; </span><br><span class="line">-XPUT &quot;http://localhost:9200/megacorp/employee/1&quot; </span><br><span class="line">-d&apos;&#123;&quot;first_name&quot;: &quot;John&quot;,&quot;last_name&quot;: &quot;Smith&quot;,&quot;age&quot;: 25,&quot;about&quot;: &quot;rock&quot;,&quot;interests&quot;: [&quot;sports&quot;, &quot;music&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
+
+<h2 id="面向文档"><a href="#面向文档" class="headerlink" title="面向文档"></a>面向文档</h2><p>应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。</p>
+<p>而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建</p>
+<p>Elasticsearch是面向文档的，意味着它可以存储整个对象或文档，然而它不仅仅时存储，还会索引每个文档的内容使之可以被搜索。再Elasticsearch中，你可以对文档(并非表结构)进行索引、搜索、排序、过滤。这种理解数据的方式与MySQL完全不同，也是Elasticsearch能够进行复杂的全文搜索的原因之一。</p>
+<p><strong>Elasticsearch使用JSON作为文档序列化格式。</strong></p>
+<h1 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>在Elasticsearch中索引具有不同的涵义</p>
+<ul>
+<li>索引(名词)：一个索引就像时传统关系数据库中的数据库，它时相关文档存储的地方</li>
+<li>索引(动词)：索引一个文档，表示把一个文档存储到索引(名词n)中。以便它可以被检索或者查询，很像SQL的<code>insert</code>，但差别是如果文档已经存在，新的文档将覆盖旧的文档</li>
+<li>倒排索引：传统数据库为特定列增加一个索引，例如B-Tree索引来加速检索。而Elasticsearch和Lucene使用倒排索引的数据结构达到目的。</li>
+</ul>
+<p>默认情况下，文档中的所有字段都会被索引(拥有一个倒排索引)，只有这样他们才是可被搜索的。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong><em>需求</em></strong></p>
+<p>让我们建立一个员工目录。假设我们刚好在Megacorp工作，这时人力资源部门出于某种目的需要让我们创建一个员工目录，这个目录用于促进人文关怀和用于实时协同工作，所以它有以下不同的需求：</p>
+<ul>
+<li>数据能够包含多个值的标签、数字和纯文本。 </li>
+<li>检索任何员工的所有信息。 </li>
+<li>支持结构化搜索，例如查找30岁以上的员工。 </li>
+<li>支持简单的全文搜索和更复杂的短语(phrase)搜索 </li>
+<li>高亮搜索结果中的关键字。</li>
+<li>能够利用图表管理分析这些数据。</li>
+</ul>
+<p><strong><em>索引员工文档</em></strong></p>
+<p>我们首先要做的是存储员工数据，每个文档代表一个员工。在Elasticsearch中存储数据的行为就叫做索引(indexing)，不过在索引之前，我们需要明确数据应该存储在哪里。 </p>
+<p>在Elasticsearch中，文档归属于一种类型(type),而这些类型存在于索引(index)中，我们可以画一些简单的对比图来类比传统关系型数据库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Relational DB -&gt; Databases -&gt; Tables -&gt; Rows -&gt;	Columns</span><br><span class="line">Elasticsearch -&gt; Indices -&gt;	Types -&gt; Documents	-&gt;	Fields</span><br></pre></td></tr></table></figure>
+
+<p>Elasticsearch集群可以包含多个索引(indices)（数据库），每一个索引可以包含多个类型(types)（表），每一个类型包含多个文档(documents)（行），然后每个文档包含多个字段(Fields)（列）。</p>
+<p>所以为了创建员工目录，我们将进行如下操作：</p>
+<ul>
+<li>为每个员工的文档(document)建立索引，每个文档包含了相应员工的所有信息。 </li>
+<li>每个文档的<strong>类型为employee</strong>。</li>
+<li>employee类型归属于索引megacorp。</li>
+<li><strong>megacorp索引</strong>存储在Elasticsearch集群中。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT &apos;localhost:9200/megacorp/employee/1&#123;</span><br><span class="line">	&quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">	&quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">	&quot;age&quot; : 25,</span><br><span class="line">	&quot;about&quot; : &quot;rock&quot;,</span><br><span class="line">	&quot;interests&quot; : [&quot;sports&quot;,&quot;music&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><p>做简单搜索，即只需要执行HTTP GET请求并指出文档的”地址”——索引、类型和ID即可。</p>
+<h3 id="简单搜索"><a href="#简单搜索" class="headerlink" title="简单搜索"></a>简单搜索</h3><p><strong><em>搜索单个</em></strong>：</p>
+<p><code>curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/1?pretty&quot;</code></p>
+<p>响应的数据为，数据存在于<code>_source</code>字段中：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"_index"</span> : <span class="string">"megacorp"</span>,</span><br><span class="line">  <span class="attr">"_type"</span> : <span class="string">"employee"</span>,</span><br><span class="line">  <span class="attr">"_id"</span> : <span class="string">"1"</span>,</span><br><span class="line">  <span class="attr">"_version"</span> : <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"_seq_no"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_primary_term"</span> : <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"found"</span> : <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">    <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">    <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">    <span class="attr">"about"</span> : <span class="string">"rock"</span>,</span><br><span class="line">    <span class="attr">"interests"</span> : [</span><br><span class="line">      <span class="string">"sports"</span>,</span><br><span class="line">      <span class="string">"music"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>搜索全部员工</em></strong></p>
+<p><code>curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot;</code></p>
+<p>使用<code>_search</code>代替原来的文档ID，默认下会返回前10个结果，响应内容的<code>hits</code>数组会包含我们的文档。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"took"</span> : <span class="number">117</span>,</span><br><span class="line">  <span class="attr">"timed_out"</span> : <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"_shards"</span> : &#123;</span><br><span class="line">    <span class="attr">"total"</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"successful"</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"skipped"</span> : <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"failed"</span> : <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"hits"</span> : &#123;</span><br><span class="line">    <span class="attr">"total"</span> : &#123;</span><br><span class="line">      <span class="attr">"value"</span> : <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"relation"</span> : <span class="string">"eq"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"max_score"</span> : <span class="number">1.0</span>,</span><br><span class="line">    <span class="attr">"hits"</span> : [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"_index"</span> : <span class="string">"megacorp"</span>,</span><br><span class="line">        <span class="attr">"_type"</span> : <span class="string">"employee"</span>,</span><br><span class="line">        <span class="attr">"_id"</span> : <span class="string">"1"</span>,</span><br><span class="line">        <span class="attr">"_score"</span> : <span class="number">1.0</span>,</span><br><span class="line">        <span class="attr">"_source"</span> : &#123;</span><br><span class="line">          <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">          <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">          <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">          <span class="attr">"about"</span> : <span class="string">"rock"</span>,</span><br><span class="line">          <span class="attr">"interests"</span> : [</span><br><span class="line">            <span class="string">"sports"</span>,</span><br><span class="line">            <span class="string">"music"</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="query-string"><a href="#query-string" class="headerlink" title="query string"></a><strong><em>query string</em></strong></h3><p>搜索<code>first_name</code>包含”Smith”的员工，我们将在命令行中使用轻量级的搜索方法，这种方法被称为查询字符串(query string)搜索，因为像我们传递URL参数一样去传递查询语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?q=first_name:Jo&amp;pretty&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询字符串搜索便于通过命令行完成特定(ad hoc)的搜索</li>
+<li>但查询字符串搜索存在局限性</li>
+</ul>
+<h3 id="DSL"><a href="#DSL" class="headerlink" title="DSL"></a>DSL</h3><p>Elasticsearch提供丰富且灵活的查询语言叫做DSL查询，允许你构建更加复杂、强大的查询。</p>
+<p>DSL以JSON请求体的形式出现，可以这样表示之前对<code>first_name</code>的查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;</span><br><span class="line">&#123;&quot;query&quot;:&#123;</span><br><span class="line">	&quot;match&quot;:&#123;</span><br><span class="line">		&quot;first_name&quot;: &quot;John&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;&#125;&apos;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更复杂的搜索"><a href="#更复杂的搜索" class="headerlink" title="更复杂的搜索"></a>更复杂的搜索</h3><p>让搜索更为复杂一些，依旧想要找到姓氏为“John”的员工，但是我们只想得到年龄大于30岁的员工，即为语句添加过滤器，使得我们高效率地执行员工结构化的搜索</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;filtered&quot;:&#123;</span><br><span class="line">            &quot;filter&quot;:&#123;</span><br><span class="line">                &quot;range&quot;:&#123;</span><br><span class="line">                    &quot;age&quot;:&#123;&quot;gt&quot;: 0&#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;query&quot;:&#123;</span><br><span class="line">                &quot;match&quot;:&#123;</span><br><span class="line">                    &quot;first_name&quot;:&quot;John&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+
+<p>gt：greater than。</p>
+<h3 id="全文搜索"><a href="#全文搜索" class="headerlink" title="全文搜索"></a>全文搜索</h3><p>检索所有喜欢<code>&quot;rock climbing&quot;</code>的员工</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;query&quot;:&#123;</span><br><span class="line">		&quot;match&quot;:&#123;</span><br><span class="line">			&quot;about&quot;: &quot;rock climbing&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，Elasticsearch根据结果相关性评分来对结果集进行排序，即文档与查询条件的匹配程序。而在上述搜索中，如果about中只是出现了rock也会出现在结果集合当中。</p>
+<p>因此，该全文搜索不仅仅是匹配或不匹配，而且还有着相关性</p>
+<h4 id="短语搜索"><a href="#短语搜索" class="headerlink" title="短语搜索"></a>短语搜索</h4><p>不仅可以在字段中搜索单独的一个词，还可以匹配若干个词或者短语，例如想要查询同时包含<code>rock</code>和<code>climbing</code>（并且是相邻的）的记录。使用<code>match_parse</code>即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;query&quot;:&#123;</span><br><span class="line">		&quot;match_parse&quot;:&#123;</span><br><span class="line">			&quot;about&quot;: &quot;rock climbing&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="高亮搜索"><a href="#高亮搜索" class="headerlink" title="高亮搜索"></a>高亮搜索</h3><p>在语句中增加<code>hightlight</code>参数，将会高亮匹配到的关键字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;query&quot;:&#123;</span><br><span class="line">		&quot;match_parse&quot;:&#123;</span><br><span class="line">			&quot;about&quot;: &quot;rock climbing&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;highlight&quot;:&#123;</span><br><span class="line">		&quot;fields&quot;:&#123;</span><br><span class="line">			&quot;about&quot;:&#123;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在返回语句中会增加一个新的部分<code>highlight</code>，内部会包含来自about字段中的文本，并且用&lt;em&gt;和&lt;/em&gt;来标识匹配到的单词</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"took"</span> : <span class="number">111</span>,</span><br><span class="line">  <span class="attr">"timed_out"</span> : <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"_shards"</span> : &#123;</span><br><span class="line">    <span class="attr">"total"</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"successful"</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"skipped"</span> : <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"failed"</span> : <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"hits"</span> : &#123;</span><br><span class="line">    <span class="attr">"total"</span> : &#123;</span><br><span class="line">      <span class="attr">"value"</span> : <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"relation"</span> : <span class="string">"eq"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"max_score"</span> : <span class="number">0.2876821</span>,</span><br><span class="line">    <span class="attr">"hits"</span> : [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"_index"</span> : <span class="string">"megacorp"</span>,</span><br><span class="line">        <span class="attr">"_type"</span> : <span class="string">"employee"</span>,</span><br><span class="line">        <span class="attr">"_id"</span> : <span class="string">"1"</span>,</span><br><span class="line">        <span class="attr">"_score"</span> : <span class="number">0.2876821</span>,</span><br><span class="line">        <span class="attr">"_source"</span> : &#123;</span><br><span class="line">          <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">          <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">          <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">          <span class="attr">"about"</span> : <span class="string">"rock"</span>,</span><br><span class="line">          <span class="attr">"interests"</span> : [</span><br><span class="line">            <span class="string">"sports"</span>,</span><br><span class="line">            <span class="string">"music"</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"highlight"</span> : &#123;</span><br><span class="line">          <span class="attr">"about"</span> : [</span><br><span class="line">            <span class="string">"&lt;em&gt;rock&lt;/em&gt;"</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p>ES的聚合(aggregations)允许你在数据上生成复杂的分析统计，类似于<code>Group by</code>但是功能更强大。</p>
+<p>例如找到所有职员中最大的共同点(兴趣爱好)是什么：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;&#123;</span><br><span class="line">	&quot;aggs&quot;:&#123;</span><br><span class="line">		&quot;all_interests&quot;:&#123;</span><br><span class="line">			&quot;terms&quot;:&#123;&quot;field&quot;: &quot;interests&quot;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h2><p>Elasticsearch可以扩展到上百、千的服务器来处理PB级的数据，Elasticsearch的设计隐藏了分布式本身的复杂性。</p>
+<p>Elasticsearch在分布式概念上做了很大程度上的透明化，在教程中你不需要知道任何关于分布式系统、分片、集群发现或者其他大量的分布式概念。所有的教程你既可以运行在你的笔记本上，也可以运行在拥有100个节点的集群上，其工作方式是一样的。</p>
+<p>Elasticsearch致力于隐藏分布式系统的复杂性。以下这些操作都是在底层自动完成的：</p>
+<ul>
+<li>将你的文档分区到不同的容器或者分片(shards)中，它们可以存在于一个或多个节点中。 </li>
+<li>将分片均匀的分配到各个节点，对索引和搜索做负载均衡。 </li>
+<li>冗余每一个分片，防止硬件故障造成的数据丢失。 </li>
+<li>将集群中任意一个节点上的请求路由到相应数据所在的节点。 </li>
+<li>无论是增加节点，还是移除节点，分片都可以做到无缝的扩展和迁移。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/Elasticsearch/" rel="tag"># Elasticsearch</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/08/05/单元测试/" rel="next" title="单元测试">
+                <i class="fa fa-chevron-left"></i> 单元测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/08/05/系统架构/Elasticsearch：数据/" rel="prev" title="Elasticsearch：数据">
+                Elasticsearch：数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ElasticSearch概念"><span class="nav-number">1.</span> <span class="nav-text">ElasticSearch概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">1.3.1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">1.3.2.</span> <span class="nav-text">插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群和节点"><span class="nav-number">1.4.</span> <span class="nav-text">集群和节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与Elasticsearch交互"><span class="nav-number">1.5.</span> <span class="nav-text">与Elasticsearch交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaAPI"><span class="nav-number">1.5.1.</span> <span class="nav-text">JavaAPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.5.2.</span> <span class="nav-text">HTTP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向文档"><span class="nav-number">1.6.</span> <span class="nav-text">面向文档</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Start"><span class="nav-number">2.</span> <span class="nav-text">Start</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">2.1.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">2.1.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">2.2.</span> <span class="nav-text">搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单搜索"><span class="nav-number">2.2.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#query-string"><span class="nav-number">2.2.2.</span> <span class="nav-text">query string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSL"><span class="nav-number">2.2.3.</span> <span class="nav-text">DSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更复杂的搜索"><span class="nav-number">2.2.4.</span> <span class="nav-text">更复杂的搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全文搜索"><span class="nav-number">2.2.5.</span> <span class="nav-text">全文搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#短语搜索"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">短语搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高亮搜索"><span class="nav-number">2.2.6.</span> <span class="nav-text">高亮搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合"><span class="nav-number">2.3.</span> <span class="nav-text">聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式"><span class="nav-number">2.4.</span> <span class="nav-text">分布式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">23:26</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+        
+
+
+
+
+  <script>
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66458302";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.2.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

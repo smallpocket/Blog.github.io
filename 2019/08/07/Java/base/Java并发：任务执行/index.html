@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="任务执行大多数并发应用程序都是围绕任务执行来构造的，任务通常是一些抽象的且离散的工作单元，通过把应用程序的工作分解到多个任务中，可以简化程序的组织结构，提供一种自然的事务边界优化错误恢复过程，提供一种自然的并行工作结构来提升并发性 在线程中执行任务指明任务的边界，使得任务为一个独立的活动，不依赖其他任务的状态、结果、边界效应。独立性有助于实现并发，而不会导致任务间相互阻塞。 任务边界：在服务器应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发：任务执行">
+<meta property="og:url" content="http://yoursite.com/2019/08/07/Java/base/Java并发：任务执行/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="任务执行大多数并发应用程序都是围绕任务执行来构造的，任务通常是一些抽象的且离散的工作单元，通过把应用程序的工作分解到多个任务中，可以简化程序的组织结构，提供一种自然的事务边界优化错误恢复过程，提供一种自然的并行工作结构来提升并发性 在线程中执行任务指明任务的边界，使得任务为一个独立的活动，不依赖其他任务的状态、结果、边界效应。独立性有助于实现并发，而不会导致任务间相互阻塞。 任务边界：在服务器应用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/assets/1550825942991.png">
+<meta property="og:image" content="http://yoursite.com/assets/1550825994345.png">
+<meta property="og:updated_time" content="2019-08-07T11:03:02.781Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发：任务执行">
+<meta name="twitter:description" content="任务执行大多数并发应用程序都是围绕任务执行来构造的，任务通常是一些抽象的且离散的工作单元，通过把应用程序的工作分解到多个任务中，可以简化程序的组织结构，提供一种自然的事务边界优化错误恢复过程，提供一种自然的并行工作结构来提升并发性 在线程中执行任务指明任务的边界，使得任务为一个独立的活动，不依赖其他任务的状态、结果、边界效应。独立性有助于实现并发，而不会导致任务间相互阻塞。 任务边界：在服务器应用">
+<meta name="twitter:image" content="http://yoursite.com/assets/1550825942991.png">
+  <link rel="canonical" href="http://yoursite.com/2019/08/07/Java/base/Java并发：任务执行/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java并发：任务执行 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+      
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>阅读排行</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/smallpocket" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/Java/base/Java并发：任务执行/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Java并发：任务执行
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-07 09:41:01 / 修改时间：19:03:02" itemprop="dateCreated datePublished" datetime="2019-08-07T09:41:01+08:00">2019-08-07</time>
+            </span>
+          
+            
+
+            
+          
+
+          <br>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">2.7k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">3 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="任务执行"><a href="#任务执行" class="headerlink" title="任务执行"></a>任务执行</h1><p>大多数并发应用程序都是围绕任务执行来构造的，任务通常是一些抽象的且离散的工作单元，通过把应用程序的工作分解到多个任务中，可以简化程序的组织结构，提供一种自然的事务边界优化错误恢复过程，提供一种自然的并行工作结构来提升并发性</p>
+<h2 id="在线程中执行任务"><a href="#在线程中执行任务" class="headerlink" title="在线程中执行任务"></a>在线程中执行任务</h2><p>指明任务的边界，使得任务为一个独立的活动，不依赖其他任务的状态、结果、边界效应。独立性有助于实现并发，而不会导致任务间相互阻塞。</p>
+<p>任务边界：在服务器应用程序中通常以单独的客户请求作为边界。</p>
+<p>任务执行策略：</p>
+<ul>
+<li>串行执行<ul>
+<li>即收到一个请求，服务器要处理完该请求才能继续accept下一个请求</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/1550825942991.png" alt="1550825942991"></p>
+<ul>
+<li>显式地为任务创建线程，为每一个服务请求创建一个线程<ul>
+<li>并行处理，并且能同时接受多个请求</li>
+<li>任务处理代码必须线程安全</li>
+<li>任务处理过程从主线程中分离出来，使得主循环可以更快地重新等待下一个到来的连接。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/1550825994345.png" alt="1550825994345"></p>
+<h3 id="无限制创建线程的不足"><a href="#无限制创建线程的不足" class="headerlink" title="无限制创建线程的不足"></a>无限制创建线程的不足</h3><p>线程生命周期的开销、资源消耗。空闲线程会占用很多的内存。</p>
+<p>无限制线程的稳定性拖垮系统。该限制与JVM相关，并且受到多个因素制约，包括JVM启动参数、Thread构造函数中请求的栈大小，以及底层系统对线程的限制等。如果破坏了可能导致OOM</p>
+<h2 id="Exeutor框架"><a href="#Exeutor框架" class="headerlink" title="Exeutor框架"></a>Exeutor框架</h2><p>详情参见JUC-Executor</p>
+<h1 id="任务取消"><a href="#任务取消" class="headerlink" title="任务取消"></a>任务取消</h1><p>有时候我们希望提前结束任务或线程，或许是因为用户取消了操作，或应用程序需要被快速关闭。Java没有提供任何机制来安全地终止线程，即没有安全的抢占式方法停止线程。但它提供了中断，这是一种<strong>协作机制</strong>，能够使一个线程终止另一个线程的当前工作。</p>
+<p>并且大多数时候我们希望任务可以安全地结束它们的任务，而不是强制停止。</p>
+<h2 id="任务取消-1"><a href="#任务取消-1" class="headerlink" title="任务取消"></a>任务取消</h2><p>如果外部代码能在某个操作正常完成前将其置入“完成”状态，那么这个操作就可以称为可取消的，取消操作的原因有</p>
+<ul>
+<li>用户请求的取消，cancel</li>
+<li>限时活动，超时取消</li>
+<li>应用程序事件，当程序的不同任务在搜索，一个任务找到了解决方案，其他任务就取消</li>
+<li>错误，IO等错误</li>
+<li>关闭，关闭某个服务</li>
+</ul>
+<p>一个可取消的任务必须拥有<strong>取消策略</strong>，定义取消操作的How、When、What。</p>
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><p>线程中断是一种协作机制，线程可以通过这种机制来通知另一个线程，告诉它在合适或者可能的情况下停止当前工作，并转而执行其他的工作。</p>
+<p><strong><em>实现</em></strong></p>
+<p>在每个线程中都有一个Boolean类型的中断状态，当中断线程时，这个线程的中断状态设置为true。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">interrupt</span><span class="params">()</span></span>;<span class="comment">//中断目标线程</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isInterrupt</span><span class="params">()</span></span>;<span class="comment">//返回目标线程的中断状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">interrupted</span><span class="params">()</span></span>;<span class="comment">//清除当前线程的中断状态，并返回它的值。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>interrupt：<ul>
+<li>将线程的中断状态置位(中断状态由false变成true)；</li>
+<li>让被中断的线程抛出InterruptedException异常。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>调用interrupt并不意味着立即停止目标线程正在进行的工作，而只是传递了请求中断的消息。</p>
+</blockquote>
+<p><strong><em>阻塞</em></strong></p>
+<p>对于阻塞库方法，例如<code>Thread.sleep()</code>、<code>Object.wait()</code>都会去检查线程何时中断，并且在发现中断时提前返回。</p>
+<p>在响应中断时会清除中断状态，并抛出<code>InterruptedException</code>，表示阻塞时由中断而提前结束的。但JVM不会保证阻塞方法检测到中断的速度。</p>
+<p>阻塞与中断的关系是，如果在代码中实现中断，则由于阻塞将永远无法检测到中断信号。</p>
+<p>当线程在非阻塞的状态下中断，它的中断状态将被设置，然后根据被取消的操作来检查中断状态以判断是否中断（在取消点）。即如果不触发<code>InterruptedException</code>那么中断状态将一直保持，直到明确清除中断状态。</p>
+<blockquote>
+<p>因此如果任务代码能够响应中断，那么可以使用中断作为取消机制。</p>
+</blockquote>
+<h3 id="中断策略"><a href="#中断策略" class="headerlink" title="中断策略"></a>中断策略</h3><p>中断策略规定线程如何解释某个中断请求——当发现中断请求时，应该做哪些工作，哪些工作单元对于中断来说是原子操作，以及以多快的速度来响应中断。</p>
+<p>最合理的中断策略是某种形式的线程级取消操作或服务级取消操作：尽快退出，在必要时进行清理，通知某个所有者该线程已经退出。并可以建立其他中断策略，例如暂停服务或重新开始服务。</p>
+<p>要区分线程与任务对中断的反应，可以是取消当前任务，也可以是关闭工作线程。</p>
+<p>任务不会在其自己拥有的线程中执行，而是在某个服务(线程池)拥有的线程中执行。对于非线程所有者的代码(例如线程池，即任何在线程池实现以外的代码)，应该小心保存中断状态，这样拥有线程的代码才能对中断做出响应。即大多数可阻塞的函数只是抛出<code>InterruptException</code>的原因，将中断信息传递给调用方线程。</p>
+<blockquote>
+<p>由于每个线程拥有自己的中断策略，因此除非你知道中断对该线程的含义，否则就不应该中断这个线程。</p>
+</blockquote>
+<h3 id="响应中断"><a href="#响应中断" class="headerlink" title="响应中断"></a>响应中断</h3><p>有两种策略可以处理<code>InterruptedException</code></p>
+<ul>
+<li>传递异常，可能在执行某个特定于任务的清除操作后，从而使你的方法也成为可中断的阻塞方法<ul>
+<li>throw</li>
+</ul>
+</li>
+<li>恢复中断状态，从而使调用栈中的上层代码能够对其进行处理<ul>
+<li>再次调用interrupt来恢复中断线程，即不能屏蔽<code>InterruptedException</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>只有实现了线程中断策略的代码才可以屏蔽中断请求，在常规的任务和库代码中都不应该屏蔽中断请求。</p>
+</blockquote>
+<h3 id="通过Future实现取消"><a href="#通过Future实现取消" class="headerlink" title="通过Future实现取消"></a>通过Future实现取消</h3><h3 id="处理不可中断的阻塞"><a href="#处理不可中断的阻塞" class="headerlink" title="处理不可中断的阻塞"></a>处理不可中断的阻塞</h3><p>许多可阻塞的方法都是通过提前返回或者抛出<code>InterruptedException</code>来响应中断请求的，而并非所有的可阻塞方法或者阻塞机制都能响应中断。如果一个线程由于执行同步的socket IO或等待内置锁而阻塞，则中断没有任何作用。</p>
+<p>线程阻塞的原因：</p>
+<ul>
+<li>同步Socket IO。虽然read或write都不会响应中断，但是可以通过关闭套接字抛出<code>SocketException</code></li>
+<li>同步IO。关闭一个正在<code>InterruptibleChannel</code>上等待的线程时，将抛出<code>ClosedByInterruptException</code>，并关闭链路。</li>
+<li>Selector 异步IO。调用close或wake up会导致线程<code>CloasedSelectorException</code></li>
+<li>获取某个锁。Lock类提供了lockInterruptibly方法，允许等待锁时可以中断。</li>
+</ul>
+<h3 id="采用newTaskFor封装非标准的取消"><a href="#采用newTaskFor封装非标准的取消" class="headerlink" title="采用newTaskFor封装非标准的取消"></a>采用newTaskFor封装非标准的取消</h3><h1 id="停止基于线程的服务"><a href="#停止基于线程的服务" class="headerlink" title="停止基于线程的服务"></a>停止基于线程的服务</h1><p>应用程序通常会创建拥有多个线程的服务</p>
+<h1 id="处理非正常的线程终止"><a href="#处理非正常的线程终止" class="headerlink" title="处理非正常的线程终止"></a>处理非正常的线程终止</h1><h1 id="JVM关闭"><a href="#JVM关闭" class="headerlink" title="JVM关闭"></a>JVM关闭</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/08/06/MySQL：SQL进阶/" rel="next" title="MySQL：SQL进阶">
+                <i class="fa fa-chevron-left"></i> MySQL：SQL进阶
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/08/07/Java/base/Java并发：JUC-Executor/" rel="prev" title="Java并发：JUC-Executor">
+                Java并发：JUC-Executor <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#任务执行"><span class="nav-number">1.</span> <span class="nav-text">任务执行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在线程中执行任务"><span class="nav-number">1.1.</span> <span class="nav-text">在线程中执行任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无限制创建线程的不足"><span class="nav-number">1.1.1.</span> <span class="nav-text">无限制创建线程的不足</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exeutor框架"><span class="nav-number">1.2.</span> <span class="nav-text">Exeutor框架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#任务取消"><span class="nav-number">2.</span> <span class="nav-text">任务取消</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务取消-1"><span class="nav-number">2.1.</span> <span class="nav-text">任务取消</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断"><span class="nav-number">2.1.1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断策略"><span class="nav-number">2.1.2.</span> <span class="nav-text">中断策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应中断"><span class="nav-number">2.1.3.</span> <span class="nav-text">响应中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过Future实现取消"><span class="nav-number">2.1.4.</span> <span class="nav-text">通过Future实现取消</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理不可中断的阻塞"><span class="nav-number">2.1.5.</span> <span class="nav-text">处理不可中断的阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#采用newTaskFor封装非标准的取消"><span class="nav-number">2.1.6.</span> <span class="nav-text">采用newTaskFor封装非标准的取消</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#停止基于线程的服务"><span class="nav-number">3.</span> <span class="nav-text">停止基于线程的服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理非正常的线程终止"><span class="nav-number">4.</span> <span class="nav-text">处理非正常的线程终止</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM关闭"><span class="nav-number">5.</span> <span class="nav-text">JVM关闭</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">23:41</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+        
+
+
+
+
+  <script>
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66458302";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.2.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Java并发编程的知识目录">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-03T15:11:02.351Z">
+<meta property="og:updated_time" content="2019-08-07T01:11:14.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：目录">
 <meta name="twitter:description" content="Java并发编程的知识目录">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-03 23:11:02" itemprop="dateModified" datetime="2019-08-03T23:11:02+08:00">2019-08-03</time>
+                <time title="修改时间：2019-08-07 09:11:14" itemprop="dateModified" datetime="2019-08-07T09:11:14+08:00">2019-08-07</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">306</span>
+              <span title="本文字数">454</span>
             </span>
           
             <span class="post-meta-item">
@@ -422,11 +422,17 @@
 <li>高并发</li>
 </ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>Java并发关注的主要是由于数据共享而导致的不一致问题。<ul>
+<li>Java并发关注的主要是由于数据共享而导致的不一致问题。可变状态是至关重要的<ul>
 <li>同步只是保证共享数据在争用时的正确性的手段</li>
+<li>所有的并发问题都可以归结为如何协调对并发状态的访问。可变状态越少，越容易确保线程安全性</li>
 </ul>
 </li>
 <li>有些程序出现数据不一致的问题并不重要（个人猜想），要根据业务场景判断</li>
+<li>封装有助于管理复杂性<ul>
+<li>将数据封装在对象中，更易于维持不变性条件，将同步机制封装在对象中，更易于遵循同步策略。</li>
+</ul>
+</li>
+<li>执行复合操作期间要持有锁、当保护同一个不变性条件中的所有变量时要持有锁。</li>
 </ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
@@ -516,7 +522,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-count">208</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -721,7 +727,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23:26</span>
+    <span title="站点阅读时长">23:33</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

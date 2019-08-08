@@ -66,7 +66,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1550825942991.png">
 <meta property="og:image" content="http://yoursite.com/assets/1550825994345.png">
-<meta property="og:updated_time" content="2019-08-07T11:03:02.781Z">
+<meta property="og:updated_time" content="2019-08-07T11:33:52.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：任务执行">
 <meta name="twitter:description" content="任务执行大多数并发应用程序都是围绕任务执行来构造的，任务通常是一些抽象的且离散的工作单元，通过把应用程序的工作分解到多个任务中，可以简化程序的组织结构，提供一种自然的事务边界优化错误恢复过程，提供一种自然的并行工作结构来提升并发性 在线程中执行任务指明任务的边界，使得任务为一个独立的活动，不依赖其他任务的状态、结果、边界效应。独立性有助于实现并发，而不会导致任务间相互阻塞。 任务边界：在服务器应用">
@@ -313,7 +313,7 @@
                 
               
 
-              <time title="创建时间：2019-08-07 09:41:01 / 修改时间：19:03:02" itemprop="dateCreated datePublished" datetime="2019-08-07T09:41:01+08:00">2019-08-07</time>
+              <time title="创建时间：2019-08-07 09:41:01 / 修改时间：19:33:52" itemprop="dateCreated datePublished" datetime="2019-08-07T09:41:01+08:00">2019-08-07</time>
             </span>
           
             
@@ -329,7 +329,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">2.7k</span>
+              <span title="本文字数">2.9k</span>
             </span>
           
             <span class="post-meta-item">
@@ -339,7 +339,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">3 分钟</span>
+              <span title="阅读时长">4 分钟</span>
             </span>
           
 
@@ -438,7 +438,8 @@
 <li>Selector 异步IO。调用close或wake up会导致线程<code>CloasedSelectorException</code></li>
 <li>获取某个锁。Lock类提供了lockInterruptibly方法，允许等待锁时可以中断。</li>
 </ul>
-<h3 id="采用newTaskFor封装非标准的取消"><a href="#采用newTaskFor封装非标准的取消" class="headerlink" title="采用newTaskFor封装非标准的取消"></a>采用newTaskFor封装非标准的取消</h3><h1 id="停止基于线程的服务"><a href="#停止基于线程的服务" class="headerlink" title="停止基于线程的服务"></a>停止基于线程的服务</h1><p>应用程序通常会创建拥有多个线程的服务</p>
+<h3 id="采用newTaskFor封装非标准的取消"><a href="#采用newTaskFor封装非标准的取消" class="headerlink" title="采用newTaskFor封装非标准的取消"></a>采用newTaskFor封装非标准的取消</h3><h1 id="停止基于线程的服务"><a href="#停止基于线程的服务" class="headerlink" title="停止基于线程的服务"></a>停止基于线程的服务</h1><p>应用程序通常会创建拥有多个线程的服务，例如线程池，这些服务的生命周期通常比创建它们的方法的生命周期更长。如果应用程序结束，那么这些服务所拥有的线程也要结束。而且由于无法抢占式停止，因此需要它们自行结束。</p>
+<p>正确的封装原则是：除非拥有某个线程，否则不能对该线程进行操控。线程有一个相应的所有者，即线程池，如果要中断这些线程，那么应该使用线程池。由于线程的所有权无法传递，因此服务应该提供生命周期方法来关闭他自己以及拥有的线程，因此当服务关闭时就会关闭所有的线程。</p>
 <h1 id="处理非正常的线程终止"><a href="#处理非正常的线程终止" class="headerlink" title="处理非正常的线程终止"></a>处理非正常的线程终止</h1><h1 id="JVM关闭"><a href="#JVM关闭" class="headerlink" title="JVM关闭"></a>JVM关闭</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -519,7 +520,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -724,7 +725,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23:41</span>
+    <span title="站点阅读时长">23:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

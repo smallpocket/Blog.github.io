@@ -57,19 +57,21 @@
   };
 </script>
 
-  <meta name="description" content="Exeutor执行器框架 Future RunnableFuture   Callable Executor ThreadPoolExecutor   CompletionService RejectedExecutionhandler ThreadPoolExecutor.DiscardPolicy   TimeUnit  Executor概述JUC提供了一种灵活的线程池实现作为Executor">
+  <meta name="description" content="Exeutor执行器框架 Future RunnableFuture   Callable Executor ThreadPoolExecutor   CompletionService RejectedExecutionhandler ThreadPoolExecutor.DiscardPolicy   TimeUnit  Executor对于并发执行的任务，Executor提供了大量可调节的选">
 <meta name="keywords" content="并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发：JUC-Executor">
 <meta property="og:url" content="http://yoursite.com/2019/08/07/Java/base/Java并发：JUC-Executor/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Exeutor执行器框架 Future RunnableFuture   Callable Executor ThreadPoolExecutor   CompletionService RejectedExecutionhandler ThreadPoolExecutor.DiscardPolicy   TimeUnit  Executor概述JUC提供了一种灵活的线程池实现作为Executor">
+<meta property="og:description" content="Exeutor执行器框架 Future RunnableFuture   Callable Executor ThreadPoolExecutor   CompletionService RejectedExecutionhandler ThreadPoolExecutor.DiscardPolicy   TimeUnit  Executor对于并发执行的任务，Executor提供了大量可调节的选">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1550988548365.png">
-<meta property="og:updated_time" content="2019-08-07T09:47:09.254Z">
+<meta property="og:image" content="http://yoursite.com/assets/1551616609267.png">
+<meta property="og:image" content="http://yoursite.com/assets/1565179219646.png">
+<meta property="og:updated_time" content="2019-08-08T00:49:10.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：JUC-Executor">
-<meta name="twitter:description" content="Exeutor执行器框架 Future RunnableFuture   Callable Executor ThreadPoolExecutor   CompletionService RejectedExecutionhandler ThreadPoolExecutor.DiscardPolicy   TimeUnit  Executor概述JUC提供了一种灵活的线程池实现作为Executor">
+<meta name="twitter:description" content="Exeutor执行器框架 Future RunnableFuture   Callable Executor ThreadPoolExecutor   CompletionService RejectedExecutionhandler ThreadPoolExecutor.DiscardPolicy   TimeUnit  Executor对于并发执行的任务，Executor提供了大量可调节的选">
 <meta name="twitter:image" content="http://yoursite.com/assets/1550988548365.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/07/Java/base/Java并发：JUC-Executor/">
 
@@ -313,11 +315,21 @@
                 
               
 
-              <time title="创建时间：2019-08-07 10:13:24 / 修改时间：17:47:09" itemprop="dateCreated datePublished" datetime="2019-08-07T10:13:24+08:00">2019-08-07</time>
+              <time title="创建时间：2019-08-07 10:13:24" itemprop="dateCreated datePublished" datetime="2019-08-07T10:13:24+08:00">2019-08-07</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-08 08:49:10" itemprop="dateModified" datetime="2019-08-08T08:49:10+08:00">2019-08-08</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -344,7 +356,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">4.8k</span>
+              <span title="本文字数">8.9k</span>
             </span>
           
             <span class="post-meta-item">
@@ -354,7 +366,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">6 分钟</span>
+              <span title="阅读时长">11 分钟</span>
             </span>
           
 
@@ -384,7 +396,9 @@
 </li>
 <li>TimeUnit</li>
 </ul>
-<h1 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>JUC提供了一种灵活的线程池实现作为Executor框架的一部分。线程池基于生产者-消费者模式，提交任务的执行者是生产者，执行任务的线程是消费者。</p>
+<h1 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h1><p>对于并发执行的任务，Executor提供了大量可调节的选项，例如创建、关闭线程的策略，处理队列任务的策略，饱和策略，并且提供了几个钩子方法进行扩展行为。</p>
+<p>但是与大部分功能强大的框架一样，有一部分参数并不能很好的工作，某些类型的任务需要特定的执行策略，一些参数组合则可能产生奇怪的结果。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>JUC提供了一种灵活的线程池实现作为Executor框架的一部分。线程池基于生产者-消费者模式，提交任务的执行者是生产者，执行任务的线程是消费者。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Executot</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -423,13 +437,70 @@
 </ul>
 <p>当线程池关闭后，提交的任务将由“拒绝执行处理器Rejected Execution Handler”处理，将抛弃任务，或者排除一个未检查异常。</p>
 <h3 id="附加功能"><a href="#附加功能" class="headerlink" title="附加功能"></a>附加功能</h3><p>使用Executor可用实现各种调优、管理、监视、记录日志、错误报告和其他功能。</p>
+<h2 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h2><ul>
+<li>只有当任务都是同类型的并且相互独立时，线程池的性能才能达到最佳。<ul>
+<li>如果将运行时较长于运行时间较短的任务混合一起，除非线程池很大，否则很可能拥塞</li>
+<li>如果提交的任务依赖于其他任务，除非线程池无限大，否则可能死锁。</li>
+</ul>
+</li>
+<li>如果执行时间较长的任务存在很大的影响，则可以限定任务等待资源的时间，而不是无限制等待。</li>
+</ul>
+<h3 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h3><p>new Thread弊端</p>
+<ul>
+<li>每次新建对象，性能差</li>
+<li>线程缺乏统一管理，可能无限新建线程，相互竞争，有可能占用过多系统资源导致死机或OOM</li>
+<li>缺少更多功能，如更多执行、定期执行、线程中断</li>
+</ul>
+<p>线程池好处</p>
+<ul>
+<li>重用存在的线程，减少对象创建、消亡的开销</li>
+<li>可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞</li>
+<li>提供定时执行、定期执行、单线程、并发控制等功能</li>
+</ul>
+<h2 id="在任务与执行策略间的隐性耦合"><a href="#在任务与执行策略间的隐性耦合" class="headerlink" title="在任务与执行策略间的隐性耦合"></a>在任务与执行策略间的隐性耦合</h2><p>虽然Executor框架可以将任务的提交与任务的执行策略解耦开来，但是这种论断有一点言过其实。虽然Executor为制定和修改执行策略都提供了相当大的灵活性，但并非所有的任务都能适用所有的执行策略。<strong>有些类型的任务需要明确指定执行策略</strong></p>
+<ul>
+<li>依赖性任务。如果提交给线程池的任务需要依赖其他任务，那么就隐含地给执行策略带来了约束，此时必须小心维持这些执行策略以避免产生活跃性问题</li>
+<li>使用线程封闭机制的任务。单线程的Executor能够对并发性做出更强的承诺，能确保任务不会并发执行，使你放宽代码对线程安全的要求。则此时当线程池更改将失去线程安全性</li>
+<li>对响应时间敏感的任务。如果将应该运行时间较长的任务提交给单线程的Executor将导致性能下降</li>
+<li>使用ThreadLocal的任务。ThreadLocal使得线程可以拥有某个变量的私有版本。但是只要条件允许，Executor可以自由重用这些线程。因此只有当线程本地值的生命周期受限于任务的生命周期，线程池中使用ThreadLocal才有意义。</li>
+</ul>
 <h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><ul>
 <li>可用重用现有的线程而部署创建新线程，可用在处理多个请求时分摊在线程创建和销毁过程中产生的巨大开销</li>
 <li>当请求到达时，工作线程通常已经存在，因此不会由于等待创建线程而延迟任务的执行</li>
 <li>可通过调整线程池大小，创建足够的线程以便使处理器保持忙碌，并防止多线程相互竞争导致</li>
 </ul>
+<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p>线程池是事先创建若干个可执行的线程放入一个池（容器）中，需要的时候从池中获取线程，使用完毕不需要销毁线程而是放回池中，从而减少创建和销毁线程对象的开销</p>
+<p>线程池包括四个<strong>基本组成部分</strong></p>
+<ul>
+<li>线程管理器：用于创建并管理线程池，包括创建线程、销毁线程池、添加新任务</li>
+<li>工作线程：线程池中线程，在没有任务时处于等待状态，可以循环地执行任务</li>
+<li>任务接口：每个任务必须实现的接口，以供工作线程调度任务的执行，主要规定了任务的入口，任务执行完成的收尾工作，任务的执行状态等。</li>
+<li>任务队列：用于存放没有处理的任务，提供一种缓冲机制。</li>
+</ul>
+<h3 id="线程池实例的状态"><a href="#线程池实例的状态" class="headerlink" title="线程池实例的状态"></a>线程池实例的状态</h3><ul>
+<li>running<ul>
+<li>能接受新提交的任务，并能处理阻塞队列的任务</li>
+</ul>
+</li>
+<li>shutdown<ul>
+<li>关闭状态，不能接受新提交的任务，但能处理阻塞队列的任务</li>
+</ul>
+</li>
+<li>stop<ul>
+<li>不能接受新提交的任务，也不能处理阻塞队列的任务</li>
+<li>会中断正在处理任务的线程</li>
+</ul>
+</li>
+<li>tidying<ul>
+<li>如果所有任务都已经中止</li>
+</ul>
+</li>
+<li>terminated</li>
+</ul>
+<p><img src="/assets/1551616609267.png" alt="1551616609267"></p>
 <h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h3><p>创建一个固定长度的线程池，每当提交一个任务就创建一个新的线程，直到达到线程池的最大数量</p>
 <h3 id="newCachedThreadPool"><a href="#newCachedThreadPool" class="headerlink" title="newCachedThreadPool"></a>newCachedThreadPool</h3><p>创建一个可缓存的线程池，如果线程池的当前规模超过了处理需求时，将回收空闲线程，当需求增加时，则可用添加新的线程，其规模不存在限制</p>
+<p>当任务间存在依赖时，可以选择。</p>
 <h3 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor"></a>newSingleThreadExecutor</h3><p>是一个<strong>单线程</strong>的Executor，创建单个工作线程执行任务，如果线程异常结束，则创建另一个线程来替代。能够确保任务在队列中的顺序来串行执行。</p>
 <p>单线程的Executor提供了大量的内部同步机制，确保了任务执行的任何内存写入操作对于后续任务都是可见的，即使这个线程会不时被另一个线程替代，但对象总是可以安全地封闭在任务线程中。</p>
 <h3 id="newScheduledThreadExecutor"><a href="#newScheduledThreadExecutor" class="headerlink" title="newScheduledThreadExecutor"></a>newScheduledThreadExecutor</h3><p>创建了一个固定长度的线程池，而且以延迟或定时的方式来执行任务，类似于Timer。而Timer存在缺陷，应该考虑使用ScheduledThreadPoolExecutor代替。</p>
@@ -437,6 +508,40 @@
 <ul>
 <li>Timer在执行任务时只会创建应该线程，如果某个任务的执行事件过长，将破坏其他TimerTask的定时精确性。</li>
 <li>TimerTask如果抛出了一个未检查异常，而Timer线程并不会捕获异常，此时将终止定时线程，并且Timer也不恢复线程的执行，而是认为整个Timer都被取消了。</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<li>execute<ul>
+<li>提交任务，交给线程池执行</li>
+</ul>
+</li>
+<li>submit<ul>
+<li>提交任务，能够返回执行结果</li>
+</ul>
+</li>
+<li>shutdown<ul>
+<li>关闭线程池，等待任务都执行完</li>
+</ul>
+</li>
+<li>shutdownNow<ul>
+<li>关闭线程池，不等待任务执行完</li>
+</ul>
+</li>
+<li>getTaskCount<ul>
+<li>线程池已执行和未执行的任务总数</li>
+</ul>
+</li>
+<li>getCompletedTaskCount<ul>
+<li>已完成的任务数</li>
+</ul>
+</li>
+<li>getPoolSize<ul>
+<li>线程池当前的线程数量</li>
+</ul>
+</li>
+<li>getActiveCount<ul>
+<li>当前线程池当中正在执行任务的线程数量</li>
+</ul>
+</li>
 </ul>
 <h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><ul>
 <li>corePoolSize：核心线程数量</li>
@@ -463,12 +568,59 @@
 </li>
 </ul>
 <p>降低系统资源消耗：较大队列容量，较小线程池容量</p>
-<p>线程数目增加，则CPU利用率会提高，如果线程数目过大，则并发量过大，线程调度存在消耗</p>
+<h3 id="设置线程池的大小"><a href="#设置线程池的大小" class="headerlink" title="设置线程池的大小"></a>设置线程池的大小</h3><p>线程池的理想大小取决于被提交任务的类型以及所部署系统的特性。而设计线程池只要避免过大或过小的极端即可。</p>
+<p>如果过大，则线程将在相对少的CPU和内存上竞争，会导致更高的内存使用量，还可能耗尽资源。如果国小，将导致许多空闲的CPU无法执行工作，而降低吞吐率。</p>
+<p>设置线程池的大小，需要分析</p>
 <ul>
+<li><strong>计算环境</strong>。即部署的系统有多少CPU</li>
+<li><strong>资源预算</strong>。即部署的系统有多大的内存</li>
+<li><strong>任务的特性</strong>。任务时CPU密集型、IO密集型还是二者皆可。是否需要JDBC连接这样的稀缺资源。如果执行不同类别的任务，则应该考虑使用多个线程池<ul>
 <li>CPU密集型任务，需要尽量压榨CPU，参考值设置为NCPU（CPU数量）+1</li>
 <li>IO密集型任务，参照值设置为2*NCPU</li>
 </ul>
-<h1 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h1><p>找出可利用的并行性</p>
+</li>
+</ul>
+<p>并且可以通过在某个基准负载下，分别设置不同大小的线程池来运行应用程序，并观察CPU利用率的水平：</p>
+<p><img src="/assets/1565179219646.png" alt="1565179219646"></p>
+<h2 id="配置ThreadPoolExecutor"><a href="#配置ThreadPoolExecutor" class="headerlink" title="配置ThreadPoolExecutor"></a>配置ThreadPoolExecutor</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                         <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                         <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                         TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                         BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                         ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                         RejectedExecutionHandler handler)</span></span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程的创建与销毁"><a href="#线程的创建与销毁" class="headerlink" title="线程的创建与销毁"></a>线程的创建与销毁</h3><p>线程池的基本大小<code>corePoolSize</code>、最大大小<code>maximumPoolSize</code>、存活时间<code>keepAliveTime</code>等因素共同负责线程的创建与销毁。</p>
+<p>当某个线程的空闲时间超过了存活时间，则会被标记为可回收的，并在大小超过基本大小时将其终止。</p>
+<ul>
+<li>newFixedThreadPool工厂方法将线程池的基本大小和最大大小设置为参数中指定的值，而且创建的线程池不会超时</li>
+<li>newCachedThreadPool工厂方法将线程池的最大大小设置为MAX_VALUE，基本大小为0，并超时时间为1分钟。</li>
+</ul>
+<h3 id="管理队列任务"><a href="#管理队列任务" class="headerlink" title="管理队列任务"></a>管理队列任务</h3><p>在有限的线程池中会限制可并发执行的任务数量。单线程的线程池确保不会有任务并发执行。</p>
+<p>即使使用固定大小的线程池，在高负载下，应用程序仍可能耗尽资源。如果新请求的到达速率超过了线程池的处理速率，那么新到来的请求将累计起来。</p>
+<p>在线程池当中，<strong>累计的请求</strong>将在由Executor管理的Runnable队列张等待，而不会像线程那样竞争CPU资源。但是即使如此在请求的速率很高的时候依然可能会耗尽资源。并且在耗尽资源前，响应性能也随着任务队列的增长而增长。</p>
+<p>ThreadPoolExecutor允许提供一个<strong>BlockingQueue</strong>用于保存等待执行的任务。基本的任务排列方法有：<strong>无界队列</strong>、<strong>有界队列</strong>、<strong>同步移交</strong>。队列的选择也与线程池的其他配置有关。</p>
+<p><strong><em>无界队列</em></strong></p>
+<p>无界的<strong>LinkedBlockingQueue</strong>是newFixedThreadPool与newSingleThreadExecutor的默认选择</p>
+<p><strong><em>有界队列</em></strong></p>
+<p>一种更为稳妥的资源管理策略是使用<strong>有界队列</strong>，例如有界的<strong>ArrayBlockingQueue</strong>，有界的<strong>LinkedBlockingQueue</strong>，<strong>PriorityBlockingQueue</strong>，但是带来了新的问题：即当队列填满后如何解决新的任务。而且有界队列的大小需要与线程池的大小一同调节</p>
+<ul>
+<li>如果线程池较小而队列较大，有助于减少内存使用量，降低CPU利用率，并且减少上下文切换。但可能会限制吞吐率</li>
+</ul>
+<p><strong><em>同步移交</em></strong></p>
+<p>对于非常大的或无界的线程池，可以通过使用<strong>SynchronousQueue</strong>来避免排队，以及直接将任务从生产者移交给工作者线程。SynchronousQueue不是一个真正的队列，而是一种在线程间进行移交的机制。</p>
+<p>要将一个元素放入SynchronousQueue必须有另一个线程正在等待接受这个元素，如果没有线程等待，并且线程池的当前大小小于最大值，那么将创建一个新的线程，否则根据饱和策略将拒绝任务。</p>
+<p>使用移交将更加高效，因为任务直接交给了线程而不是放入队列。</p>
+<p><strong><em>控制优先级</em></strong></p>
+<p>使用PriorityBlockingQueue将根据任务的优先级来安排任务。</p>
+<h3 id="饱和策略"><a href="#饱和策略" class="headerlink" title="饱和策略"></a>饱和策略</h3><p>当有界队列被填满，则饱和策略开始发挥作用，<code>ThreadPoolExecutor.setRejectedExecutionHandler</code>进行设置。如果任务被提交到一个已被关闭的Executor时也会使用饱和策略。</p>
+<p>JDK提供了几种不同的实现：<code>AbortPolicy</code>、<code>CallerRuns</code>、<code>CallerRunPolicy</code>、<code>DiscardPolicy</code>、<code>DiscardOldestPolicy</code></p>
+<p><strong><em>Abort策略</em></strong></p>
+<p>默认的饱和策略，将抛出未检查的<strong>RejectedExecution</strong>，调用者可以捕获该异常，然后根据需求编写自己的处理代码。</p>
+<p><strong><em>Discard策略</em></strong></p>
+<p>当新提交的任务无法保存到队列中时，Discard策略将悄悄地抛弃任务</p>
+<p><strong><em>DiscardOldest策略</em></strong></p>
+<p>该策略会抛弃下一个即将执行的任务，然后重新提交新的任务。</p>
+<p><strong><em>CallerRuns策略</em></strong></p>
+<p>实现了一种调节机制，不会抛弃任务也不会抛出异常，而是将某些任务回退到调用者，从而降低新任务的流量。即任务不会由线程池执行，而是由调用了execute的线程执行该任务，因此也会导致提交任务的线程在一段时间内无法提交任务。</p>
+<h3 id="线程工厂"><a href="#线程工厂" class="headerlink" title="线程工厂"></a>线程工厂</h3><p>当线程池需要创建一个线程时，都是提供线程工厂方法来完成的。默认的线程工厂方法会创建一个新的、非守护的线程，并且不包含特殊的配置信息。</p>
+<p>可以指定一个线程工厂方法，定制线程池的配置信息。<code>ThreadFactory.newThread()</code>用于创建新线程。实现自己的线程工厂只需要实现该接口。</p>
+<h3 id="在调用构造函数后再定制ThreadPoolExecutor"><a href="#在调用构造函数后再定制ThreadPoolExecutor" class="headerlink" title="在调用构造函数后再定制ThreadPoolExecutor"></a>在调用构造函数后再定制ThreadPoolExecutor</h3><p>即使构造完ThreadPoolExecutor也可以通过<code>Setter</code>修改大多数传递给它的构造函数的参数。</p>
+<h2 id="扩展ThreadPoolExecutor"><a href="#扩展ThreadPoolExecutor" class="headerlink" title="扩展ThreadPoolExecutor"></a>扩展ThreadPoolExecutor</h2><h1 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h1><p>找出可利用的并行性</p>
 <p>当使用线程池时，必须将任务描述为一个Runnable，多数服务器应用程序存在一个明显的任务边界：单个客户请求。而有些时候依然需要去发掘并行性，或者客户请求内部更深层次的并行性。</p>
 <h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p>任务的生命周期：</p>
 <ul>
@@ -483,7 +635,7 @@
 <p>而对于<strong>异构任务</strong>，很难通过并行化来获得重大的性能提升。</p>
 <h2 id="Runnable"><a href="#Runnable" class="headerlink" title="Runnable"></a>Runnable</h2><p>Executor使用Runnable作为基本的任务表示形式，但它是一种具有很大局限的抽象，它不能返回一个值或者抛出一个受检查异常。</p>
 <h2 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h2><p>某些任务存在延迟的计算–执行数据库查询、从网络中获取资源、计算某个复杂的功能。Callable可以返回一个值，并抛出一个异常</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><ul>
 <li><code>call</code>。对于完成的任务，立即返回或抛出一个Exception。对于未完成任务，则阻塞直到任务完成。<ul>
 <li>任务抛出异常，则将异常封装到ExecutionException。如果任务被取消，则CancellationException。</li>
 </ul>
@@ -502,7 +654,7 @@
 <li>显式指定Runnable或Callable实例化FutureTask</li>
 </ul>
 <p>FutureTask实现了Runnable接口</p>
-<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><ul>
+<h3 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h3><ul>
 <li><code>boolean cancel(boolean mayInterruptIfRunning);</code>。用来取消任务，如果取消任务成功则返回true，如果取消任务失败则返回false。<ul>
 <li>参数mayInterruptIfRunning表示是否允许取消正在执行却没有执行完毕的任务，如果设置true，则表示可以取消正在执行过程中的任务。如果任务已经完成，则无论mayInterruptIfRunning为true还是false，此方法肯定返回false，即如果取消已经完成的任务会返回false；如果任务正在执行，若mayInterruptIfRunning设置为true，则返回true，若mayInterruptIfRunning设置为false，则返回false；如果任务还没有执行，则无论mayInterruptIfRunning为true还是false，肯定返回true</li>
 </ul>
@@ -599,7 +751,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -772,7 +924,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Exeutor执行器框架"><span class="nav-number">1.</span> <span class="nav-text">Exeutor执行器框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Executor"><span class="nav-number">2.</span> <span class="nav-text">Executor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行策略"><span class="nav-number">2.1.1.</span> <span class="nav-text">执行策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">2.1.2.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加功能"><span class="nav-number">2.1.3.</span> <span class="nav-text">附加功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程池"><span class="nav-number">3.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">3.1.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#newFixedThreadPool"><span class="nav-number">3.1.1.</span> <span class="nav-text">newFixedThreadPool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#newCachedThreadPool"><span class="nav-number">3.1.2.</span> <span class="nav-text">newCachedThreadPool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#newSingleThreadExecutor"><span class="nav-number">3.1.3.</span> <span class="nav-text">newSingleThreadExecutor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#newScheduledThreadExecutor"><span class="nav-number">3.1.4.</span> <span class="nav-text">newScheduledThreadExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Timer"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">Timer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数"><span class="nav-number">3.2.</span> <span class="nav-text">参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#任务"><span class="nav-number">4.</span> <span class="nav-text">任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-1"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务设计"><span class="nav-number">4.1.1.</span> <span class="nav-text">任务设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runnable"><span class="nav-number">4.2.</span> <span class="nav-text">Runnable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Callable"><span class="nav-number">4.3.</span> <span class="nav-text">Callable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">4.3.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Future"><span class="nav-number">4.4.</span> <span class="nav-text">Future</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">4.4.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时限"><span class="nav-number">4.4.2.</span> <span class="nav-text">时限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FutureTask"><span class="nav-number">4.5.</span> <span class="nav-text">FutureTask</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Exeutor执行器框架"><span class="nav-number">1.</span> <span class="nav-text">Exeutor执行器框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Executor"><span class="nav-number">2.</span> <span class="nav-text">Executor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行策略"><span class="nav-number">2.1.1.</span> <span class="nav-text">执行策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">2.1.2.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加功能"><span class="nav-number">2.1.3.</span> <span class="nav-text">附加功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用性"><span class="nav-number">2.2.</span> <span class="nav-text">适用性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用"><span class="nav-number">2.2.1.</span> <span class="nav-text">为什么要用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在任务与执行策略间的隐性耦合"><span class="nav-number">2.3.</span> <span class="nav-text">在任务与执行策略间的隐性耦合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程池"><span class="nav-number">3.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么"><span class="nav-number">3.1.</span> <span class="nav-text">是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池实例的状态"><span class="nav-number">3.1.1.</span> <span class="nav-text">线程池实例的状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">3.2.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#newFixedThreadPool"><span class="nav-number">3.2.1.</span> <span class="nav-text">newFixedThreadPool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#newCachedThreadPool"><span class="nav-number">3.2.2.</span> <span class="nav-text">newCachedThreadPool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#newSingleThreadExecutor"><span class="nav-number">3.2.3.</span> <span class="nav-text">newSingleThreadExecutor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#newScheduledThreadExecutor"><span class="nav-number">3.2.4.</span> <span class="nav-text">newScheduledThreadExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Timer"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">Timer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">3.3.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数"><span class="nav-number">3.4.</span> <span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置线程池的大小"><span class="nav-number">3.4.1.</span> <span class="nav-text">设置线程池的大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置ThreadPoolExecutor"><span class="nav-number">3.5.</span> <span class="nav-text">配置ThreadPoolExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建与销毁"><span class="nav-number">3.5.1.</span> <span class="nav-text">线程的创建与销毁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理队列任务"><span class="nav-number">3.5.2.</span> <span class="nav-text">管理队列任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#饱和策略"><span class="nav-number">3.5.3.</span> <span class="nav-text">饱和策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程工厂"><span class="nav-number">3.5.4.</span> <span class="nav-text">线程工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在调用构造函数后再定制ThreadPoolExecutor"><span class="nav-number">3.5.5.</span> <span class="nav-text">在调用构造函数后再定制ThreadPoolExecutor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展ThreadPoolExecutor"><span class="nav-number">3.6.</span> <span class="nav-text">扩展ThreadPoolExecutor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#任务"><span class="nav-number">4.</span> <span class="nav-text">任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-1"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务设计"><span class="nav-number">4.1.1.</span> <span class="nav-text">任务设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runnable"><span class="nav-number">4.2.</span> <span class="nav-text">Runnable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Callable"><span class="nav-number">4.3.</span> <span class="nav-text">Callable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Future"><span class="nav-number">4.4.</span> <span class="nav-text">Future</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-2"><span class="nav-number">4.4.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时限"><span class="nav-number">4.4.2.</span> <span class="nav-text">时限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FutureTask"><span class="nav-number">4.5.</span> <span class="nav-text">FutureTask</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -804,7 +956,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23:41</span>
+    <span title="站点阅读时长">23:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

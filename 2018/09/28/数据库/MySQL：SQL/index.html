@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="MySQL必知必会，即SQL语句">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-06T15:25:10.199Z">
+<meta property="og:updated_time" content="2019-08-08T14:37:36.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL：SQL">
 <meta name="twitter:description" content="MySQL必知必会，即SQL语句">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-06 23:25:10" itemprop="dateModified" datetime="2019-08-06T23:25:10+08:00">2019-08-06</time>
+                <time title="修改时间：2019-08-08 22:37:36" itemprop="dateModified" datetime="2019-08-08T22:37:36+08:00">2019-08-08</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.3k</span>
+              <span title="本文字数">3k</span>
             </span>
           
             <span class="post-meta-item">
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">2 分钟</span>
+              <span title="阅读时长">4 分钟</span>
             </span>
           
             <div class="post-description">MySQL必知必会，即SQL语句</div>
@@ -377,7 +377,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> [<span class="keyword">all</span> | <span class="keyword">distinct</span>] &lt;目标列表达式&gt; [,&lt;目标列表达式&gt;]...</span><br><span class="line">	<span class="keyword">from</span> &lt;表名或视图名&gt; [,&lt;表名或视图名&gt;]...</span><br><span class="line">	[<span class="keyword">where</span> &lt;条件表达式&gt;]</span><br><span class="line">	[<span class="keyword">group</span> <span class="keyword">by</span> &lt;列名&gt; [<span class="keyword">having</span> &lt;表达式&gt;]]</span><br><span class="line">	[<span class="keyword">order</span> <span class="keyword">by</span> &lt;列名&gt; [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>] [,&lt;列名&gt; [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]]]</span><br><span class="line">    [<span class="keyword">limit</span> &lt;数量&gt;]</span><br></pre></td></tr></table></figure>
+        <h1 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h1><p>对于MySQL可以配置是否区分大小写</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> [<span class="keyword">all</span> | <span class="keyword">distinct</span>] &lt;目标列表达式&gt; [,&lt;目标列表达式&gt;]...</span><br><span class="line">	<span class="keyword">from</span> &lt;表名或视图名&gt; [,&lt;表名或视图名&gt;]...</span><br><span class="line">	[<span class="keyword">where</span> &lt;条件表达式&gt; [<span class="keyword">AND</span> | <span class="keyword">OR</span>] [表达式]]</span><br><span class="line">	[<span class="keyword">group</span> <span class="keyword">by</span> &lt;列名&gt; [<span class="keyword">having</span> &lt;表达式&gt;]]</span><br><span class="line">	[<span class="keyword">order</span> <span class="keyword">by</span> &lt;列名&gt; [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>] [,&lt;列名&gt; [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]]]</span><br><span class="line">    [<span class="keyword">limit</span> &lt;数量&gt;]</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>select<ul>
@@ -406,6 +407,11 @@
 </ul>
 </li>
 <li>where &lt;条件表达式&gt;<ul>
+<li>条件表达式<ul>
+<li>条件操作符</li>
+<li>IN</li>
+</ul>
+</li>
 <li>详情查看后续</li>
 </ul>
 </li>
@@ -435,14 +441,66 @@
 <p>限制结果：<code>select prod_name from products limit 5</code></p>
 <p>使用完全限定的列名：<code>select products.prod_name from products</code></p>
 <p>使用完全限定的表名：<code>select products.prod_name from crashcourse.products</code></p>
+<h2 id="创建计算字段"><a href="#创建计算字段" class="headerlink" title="创建计算字段"></a>创建计算字段</h2><p>存储在数据库表中的数据一般不是应用程序所需要的格式：</p>
+<ul>
+<li>如果想在应该字段中既显示公司名，又显示公司地址，但这两个信息一般包含在不同的表列中</li>
+<li>城市、州、邮政编码存储在不同的列中，但邮件标签打印程序需要将它们作为应该恰当格式的字段检索出来</li>
+<li>列数据是大小写混合的，但是报表程序需要所有数据大写</li>
+<li>订单表存储物品的价格与数量，为打印发票，需要总价</li>
+<li>需要根据表数据进行总数、平均数计算或其他计算</li>
+</ul>
 <h2 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h2><p>以单列排序：<code>select prod_name from products order by prod_name</code></p>
 <p>以多列排序：<code>select prod_id from products order by prod_price, prod_name</code></p>
 <p>按降序排序：<code>select prod_id from products order by prod_price DESC, prod_name</code></p>
-<h2 id="where"><a href="#where" class="headerlink" title="where"></a>where</h2><p>过滤单个值：``</p>
-<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h1 id="CURD"><a href="#CURD" class="headerlink" title="CURD"></a>CURD</h1><h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><h2 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h2><h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><h1 id="运维"><a href="#运维" class="headerlink" title="运维"></a>运维</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://jingyan.baidu.com/article/3ea51489e6cfbe52e61bba25.html" target="_blank" rel="noopener">mysql重置密码</a></li>
-</ol>
-
+<h2 id="where"><a href="#where" class="headerlink" title="where"></a>where</h2><p>过滤单个值：<code>select prod_name from products where prod_name= &#39;2.5&#39;</code>即对<strong>串</strong>使用’’</p>
+<p>范围值检查：<code>select prod_name from products where prod_price between 5 and 10</code></p>
+<p>空值检查：<code>select prod_name from products where prod_price is NULL</code></p>
+<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><p><strong><em>条件操作符</em></strong></p>
+<ul>
+<li>=：</li>
+<li>&lt;&gt;：不等于</li>
+<li>!=：不等于</li>
+<li>&lt;：</li>
+<li>&lt;=：</li>
+<li>&gt;：</li>
+<li>&gt;=：</li>
+<li>BETWEEN：指定的两个值之间 </li>
+</ul>
+<p><strong><em>IN</em></strong></p>
+<p>IN操作符用来指定条件范围，范围内的每个条件都可以匹配，</p>
+<p><code>select prod_name from products where vend_id IN (1002,1003)</code></p>
+<ul>
+<li>对于长的合法选项清单，IN操作符更加清楚只管，计算次序更容易管理</li>
+<li>IN一般比OR操作符更快，并且<strong>可以包含其他的SELECT语句</strong></li>
+</ul>
+<p><code>select prod_name from products where vend_id IN (SELECT id from vend)</code></p>
+<p><strong><em>NOT</em></strong></p>
+<p>NOT操作符用于否定它之后所跟的任何条件。并只支持对IN、BETWEEN和EXISTS取反。</p>
+<p><code>select prod_name from products where vend_id NOT IN (1002,1003)</code></p>
+<h3 id="组合过滤"><a href="#组合过滤" class="headerlink" title="组合过滤"></a>组合过滤</h3><p>即使用多个WHERE子句。以OR或AND的方式使用。</p>
+<p>对多列进行过滤：<code>select prod_name from products where prod_orice = 10 AND vend_id = 1003</code></p>
+<p>检索匹配任一条件：``select prod_name from products where prod_orice = 10 OR vend_id = 1003`</p>
+<p><strong><em>AND与OR的计算次序：</em></strong></p>
+<p>SQL在处理OR之前优先会处理AND操作符。即AND操作符的优先级更高</p>
+<p><code>select prod_name from products where vend_id = 1002 OR vend_id = 1003 AND prod_price&gt;=10</code></p>
+<p>该语句等价于：<code>select prod_name from products where vend_id = 1002 OR (vend_id = 1003 AND prod_price&gt;=10)</code></p>
+<p>即当AND与OR混用时，一定要使用()</p>
+<h3 id="通配符过滤"><a href="#通配符过滤" class="headerlink" title="通配符过滤"></a>通配符过滤</h3><p>通配符用来匹配值的一部分的特殊字符。通配符本身实际上时SQL的WHERE子句中有特殊含义的字符</p>
+<p><strong><em>%百分号</em></strong></p>
+<p>%表示任意字符出现任意次数。但是不匹配NULL</p>
+<p>搜索以jet开头的词：<code>select prod_name from products where prod_name like &#39;jet%&#39;</code></p>
+<p><strong><em>_下划线</em></strong></p>
+<p>匹配任意字符出现单次</p>
+<p><code>select prod_name from products where prod_name like &#39;_ ton an&#39;</code></p>
+<p>通配符的技巧</p>
+<ul>
+<li>如果其他操作符能够达到相同目的，应该使用其他操作符</li>
+<li>搜索时除非必要，否则不要将通配符放在开始处</li>
+<li>仔细注意通配符的位置</li>
+</ul>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>使用REGEXP</p>
+<p><code>select prod_name from products where prod_name regexp &#39;1000&#39; order by prod_name</code></p>
+<h2 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h2><h2 id="联结表"><a href="#联结表" class="headerlink" title="联结表"></a>联结表</h2>
     </div>
 
     
@@ -700,7 +758,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#检索"><span class="nav-number">1.</span> <span class="nav-text">检索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单搜索"><span class="nav-number">1.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order-by"><span class="nav-number">1.2.</span> <span class="nav-text">order by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#where"><span class="nav-number">1.3.</span> <span class="nav-text">where</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-number">2.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CURD"><span class="nav-number">3.</span> <span class="nav-text">CURD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特性"><span class="nav-number">4.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-number">4.1.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储过程"><span class="nav-number">4.2.</span> <span class="nav-text">存储过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游标"><span class="nav-number">4.3.</span> <span class="nav-text">游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发器"><span class="nav-number">4.4.</span> <span class="nav-text">触发器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">5.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运维"><span class="nav-number">6.</span> <span class="nav-text">运维</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#检索"><span class="nav-number">1.</span> <span class="nav-text">检索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单搜索"><span class="nav-number">1.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建计算字段"><span class="nav-number">1.2.</span> <span class="nav-text">创建计算字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order-by"><span class="nav-number">1.3.</span> <span class="nav-text">order by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#where"><span class="nav-number">1.4.</span> <span class="nav-text">where</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符"><span class="nav-number">1.4.1.</span> <span class="nav-text">操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合过滤"><span class="nav-number">1.4.2.</span> <span class="nav-text">组合过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符过滤"><span class="nav-number">1.4.3.</span> <span class="nav-text">通配符过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.4.4.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-by"><span class="nav-number">1.5.</span> <span class="nav-text">group by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联结表"><span class="nav-number">1.6.</span> <span class="nav-text">联结表</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -732,7 +790,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23:45</span>
+    <span title="站点阅读时长">23:54</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

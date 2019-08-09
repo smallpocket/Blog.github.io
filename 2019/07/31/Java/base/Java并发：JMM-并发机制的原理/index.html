@@ -67,7 +67,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1555329646304.png">
 <meta property="og:image" content="http://yoursite.com/assets/1555329507304.png">
-<meta property="og:updated_time" content="2019-08-01T06:04:45.869Z">
+<meta property="og:updated_time" content="2019-08-09T01:23:45.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：JMM-并发机制的原理">
 <meta name="twitter:description" content="并发编程volatile当声明共享变量为volatile后，对这个变量的读/写将会很特别。JMM堆volatile专门定义了一些特殊的访问规则。如果一个字段被声明成volatile，Java线程内存模型确保所有线程看到这个变量的值是一致的。 概述 轻量级synchronized 在使用恰当情况下，比synchronized的使用和执行成本更低。它不会引起线程的上下文切换与调度   保证共享变量的可">
@@ -327,7 +327,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 14:04:45" itemprop="dateModified" datetime="2019-08-01T14:04:45+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-09 09:23:45" itemprop="dateModified" datetime="2019-08-09T09:23:45+08:00">2019-08-09</time>
               </span>
             
           
@@ -355,7 +355,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">3.7k</span>
+              <span title="本文字数">4k</span>
             </span>
           
             <span class="post-meta-item">
@@ -365,7 +365,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">4 分钟</span>
+              <span title="阅读时长">5 分钟</span>
             </span>
           
 
@@ -458,7 +458,10 @@
 <h2 id="JSR-133为什么要增强volatile的内存语义"><a href="#JSR-133为什么要增强volatile的内存语义" class="headerlink" title="JSR-133为什么要增强volatile的内存语义"></a>JSR-133为什么要增强volatile的内存语义</h2><p>在JSR-133之前的旧Java内存模型中，虽然不允许volatile变量之间重排序，但旧的Java内存模型允许volatile变量与普通变量重排序。</p>
 <p>为了提供一种比锁更轻量级的线程之间通信的机制，JSR-133专家组决定增强volatile的内存语义：严格限制编译器和处理器对volatile变量与普通变量的重排序，确保volatile的写-读和锁的释放-获取具有相同的内存语义。</p>
 <h1 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h1><p>synchronized在编译后会在同步块前后分别形成<code>monitorenter</code>与<code>monitorexit</code>两个字节码指令。这两个字节码都需要一个<code>reference</code>类型的参数来指明要锁定和解锁的对象，如果Java中synchronized明确指定了对象参数，即这个对象的reference，如果没有指定即根据修饰的是实例方法还是类方法，去取相应的对象实例或Class对象来作为锁对象。</p>
-<h1 id="锁的内存语义"><a href="#锁的内存语义" class="headerlink" title="锁的内存语义"></a>锁的内存语义</h1><p>锁可以让临界区互斥执行。</p>
+<h1 id="原子变量与非阻塞同步机制"><a href="#原子变量与非阻塞同步机制" class="headerlink" title="原子变量与非阻塞同步机制"></a>原子变量与非阻塞同步机制</h1><p>非阻塞算法用底层的原子机器指令代替锁来确保数据在并发访问中的一致性。与基于锁的方案相比，非阻塞算法在设计和实现上要复杂很多，但它们在可伸缩性和活跃性上有巨大的优势，由于非阻塞算法可以使多个线程在竞争相同的数据时不会发生阻塞，因此能够在粒度更细的层次上进行协调，并极大减少调度开销</p>
+<p>在非阻塞算法中不存在死锁与其他活跃性问题，Java中可以使用原子变量类来构建高效的非阻塞算法，原子变量也可以用作一种<strong>更好的volatile类型变量</strong></p>
+<h2 id="锁的劣势"><a href="#锁的劣势" class="headerlink" title="锁的劣势"></a>锁的劣势</h2><p>当多个线程同时请求锁，此时JVM需要借助OS的功能，此时一些线程将被挂起并在稍后恢复运行</p>
+<h2 id="硬件对并发的支持"><a href="#硬件对并发的支持" class="headerlink" title="硬件对并发的支持"></a>硬件对并发的支持</h2><h2 id="原子变量类"><a href="#原子变量类" class="headerlink" title="原子变量类"></a>原子变量类</h2><h2 id="非阻塞算法"><a href="#非阻塞算法" class="headerlink" title="非阻塞算法"></a>非阻塞算法</h2><h1 id="锁的内存语义"><a href="#锁的内存语义" class="headerlink" title="锁的内存语义"></a>锁的内存语义</h1><p>锁可以让临界区互斥执行。</p>
 <h2 id="锁的释放-获取建立的happens-before"><a href="#锁的释放-获取建立的happens-before" class="headerlink" title="锁的释放-获取建立的happens-before"></a>锁的释放-获取建立的happens-before</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -718,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发编程"><span class="nav-number">1.</span> <span class="nav-text">并发编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile"><span class="nav-number">2.</span> <span class="nav-text">volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile的内存语义"><span class="nav-number">2.2.</span> <span class="nav-text">volatile的内存语义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">2.2.1.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁止指令重排序优化"><span class="nav-number">2.2.2.</span> <span class="nav-text">禁止指令重排序优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM实现"><span class="nav-number">2.2.3.</span> <span class="nav-text">JMM实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用性"><span class="nav-number">2.3.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile写-读建立的happens-before关系"><span class="nav-number">2.4.</span> <span class="nav-text">volatile写-读建立的happens-before关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile写-读的内存语义"><span class="nav-number">2.5.</span> <span class="nav-text">volatile写-读的内存语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSR-133为什么要增强volatile的内存语义"><span class="nav-number">2.6.</span> <span class="nav-text">JSR-133为什么要增强volatile的内存语义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized"><span class="nav-number">3.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁的内存语义"><span class="nav-number">4.</span> <span class="nav-text">锁的内存语义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的释放-获取建立的happens-before"><span class="nav-number">4.1.</span> <span class="nav-text">锁的释放-获取建立的happens-before</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发编程"><span class="nav-number">1.</span> <span class="nav-text">并发编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile"><span class="nav-number">2.</span> <span class="nav-text">volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile的内存语义"><span class="nav-number">2.2.</span> <span class="nav-text">volatile的内存语义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可见性"><span class="nav-number">2.2.1.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁止指令重排序优化"><span class="nav-number">2.2.2.</span> <span class="nav-text">禁止指令重排序优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM实现"><span class="nav-number">2.2.3.</span> <span class="nav-text">JMM实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用性"><span class="nav-number">2.3.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile写-读建立的happens-before关系"><span class="nav-number">2.4.</span> <span class="nav-text">volatile写-读建立的happens-before关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile写-读的内存语义"><span class="nav-number">2.5.</span> <span class="nav-text">volatile写-读的内存语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSR-133为什么要增强volatile的内存语义"><span class="nav-number">2.6.</span> <span class="nav-text">JSR-133为什么要增强volatile的内存语义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized"><span class="nav-number">3.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原子变量与非阻塞同步机制"><span class="nav-number">4.</span> <span class="nav-text">原子变量与非阻塞同步机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的劣势"><span class="nav-number">4.1.</span> <span class="nav-text">锁的劣势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件对并发的支持"><span class="nav-number">4.2.</span> <span class="nav-text">硬件对并发的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原子变量类"><span class="nav-number">4.3.</span> <span class="nav-text">原子变量类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非阻塞算法"><span class="nav-number">4.4.</span> <span class="nav-text">非阻塞算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁的内存语义"><span class="nav-number">5.</span> <span class="nav-text">锁的内存语义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的释放-获取建立的happens-before"><span class="nav-number">5.1.</span> <span class="nav-text">锁的释放-获取建立的happens-before</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

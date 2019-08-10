@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="构建自定义同步工具类库中包含许多存在状态依赖性的类，例如FutureTask、Semaphore和BlockingQueu等，这些类的一些操作中有着基于状态的前提条件。 创建状态依赖类的最简单方法通常是在类库中现有状态依赖类的基础上进行构造。如果没有所需要的功能，则可以使用Java与类库提供的底层机制来构造自己的同步机制。包括内置的条件队列，显式的Condition对象以及AbstractQueu">
-<meta name="keywords" content="并发编程">
+  <meta name="description" content="J.U.C - AQSjava.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准来判">
+<meta name="keywords" content="并发编程,源码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java并发：构建自定义同步工具">
-<meta property="og:url" content="http://yoursite.com/2019/02/18/Java/base/Java并发：构建自定义同步工具/index.html">
+<meta property="og:title" content="Java并发：JUC-AQS">
+<meta property="og:url" content="http://yoursite.com/2019/08/10/Java/base/Java并发：JUC-AQS/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="构建自定义同步工具类库中包含许多存在状态依赖性的类，例如FutureTask、Semaphore和BlockingQueu等，这些类的一些操作中有着基于状态的前提条件。 创建状态依赖类的最简单方法通常是在类库中现有状态依赖类的基础上进行构造。如果没有所需要的功能，则可以使用Java与类库提供的底层机制来构造自己的同步机制。包括内置的条件队列，显式的Condition对象以及AbstractQueu">
+<meta property="og:description" content="J.U.C - AQSjava.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准来判">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-09T06:13:06.629Z">
+<meta property="og:updated_time" content="2019-08-10T14:05:02.515Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java并发：构建自定义同步工具">
-<meta name="twitter:description" content="构建自定义同步工具类库中包含许多存在状态依赖性的类，例如FutureTask、Semaphore和BlockingQueu等，这些类的一些操作中有着基于状态的前提条件。 创建状态依赖类的最简单方法通常是在类库中现有状态依赖类的基础上进行构造。如果没有所需要的功能，则可以使用Java与类库提供的底层机制来构造自己的同步机制。包括内置的条件队列，显式的Condition对象以及AbstractQueu">
-  <link rel="canonical" href="http://yoursite.com/2019/02/18/Java/base/Java并发：构建自定义同步工具/">
+<meta name="twitter:title" content="Java并发：JUC-AQS">
+<meta name="twitter:description" content="J.U.C - AQSjava.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准来判">
+  <link rel="canonical" href="http://yoursite.com/2019/08/10/Java/base/Java并发：JUC-AQS/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>Java并发：构建自定义同步工具 | Hexo</title>
+  <title>Java并发：JUC-AQS | Hexo</title>
   
 
 
@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/Java/base/Java并发：构建自定义同步工具/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/10/Java/base/Java并发：JUC-AQS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -291,7 +291,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">Java并发：构建自定义同步工具
+          <h1 class="post-title" itemprop="name headline">Java并发：JUC-AQS
 
               
             
@@ -311,21 +311,11 @@
                 
               
 
-              <time title="创建时间：2019-02-18 23:05:11" itemprop="dateCreated datePublished" datetime="2019-02-18T23:05:11+08:00">2019-02-18</time>
+              <time title="创建时间：2019-08-10 22:04:06 / 修改时间：22:05:02" itemprop="dateCreated datePublished" datetime="2019-08-10T22:04:06+08:00">2019-08-10</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-09 14:13:06" itemprop="dateModified" datetime="2019-08-09T14:13:06+08:00">2019-08-09</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -352,7 +342,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">232</span>
+              <span title="本文字数">430</span>
             </span>
           
             <span class="post-meta-item">
@@ -375,10 +365,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="构建自定义同步工具"><a href="#构建自定义同步工具" class="headerlink" title="构建自定义同步工具"></a>构建自定义同步工具</h1><p>类库中包含许多存在状态依赖性的类，例如FutureTask、Semaphore和BlockingQueu等，这些类的一些操作中有着基于状态的前提条件。</p>
-<p>创建状态依赖类的最简单方法通常是在类库中现有状态依赖类的基础上进行构造。如果没有所需要的功能，则可以使用Java与类库提供的底层机制来构造自己的同步机制。包括内置的条件队列，显式的Condition对象以及AbstractQueueSynchronizer框架。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li>Java并发编程实战</li>
+        <h1 id="J-U-C-AQS"><a href="#J-U-C-AQS" class="headerlink" title="J.U.C - AQS"></a>J.U.C - AQS</h1><p>java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。</p>
+<p>AQS：AbstractQueuedSynchronizer，即队列同步器。<strong>是许多同步类的基类，它是构建锁或者其他同步组件的基础框架</strong>。AQS解决了在实现同步器时设计的大量细节问题。</p>
+<ul>
+<li>例如等待线程采用FIFO队列操作顺序</li>
+<li>在不同的同步器当中还可以定义一些灵活的标准来判断某个线程是应该通过还是需要等待</li>
+</ul>
+<p>基于AQS构建同步器能够极大减少实现工作，而且也不必处理在多个位置上发生的竞争问题。在一般的同步器实现当中，获取许可的操作可能在两个时刻阻塞–当锁保护信号量状态时，以及当许可不可用时（<strong>LockSupport</strong>）。</p>
+<p>基于AQS构建的同步器只可能在一个时刻发生阻塞，从而降低上下文切换的开销，并提高吞吐量，在设计AQS时充分考虑了可伸缩性，因此JUC中所有基于AQS的同步器都能获得这个优势。</p>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
 </ol>
 
     </div>
@@ -393,11 +389,13 @@
         <div class="post-tags">
             <a href="/tags/并发编程/" rel="tag"># 并发编程</a>
           
+            <a href="/tags/源码/" rel="tag"># 源码</a>
+          
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2019/02/17/计算机网络/计算机网络：面试准备/" rel="next" title="计算机网络：面试准备">
-                <i class="fa fa-chevron-left"></i> 计算机网络：面试准备
+              <a href="/2019/08/07/Java/base/Java并发：JUC-Executor/" rel="next" title="Java并发：JUC-Executor">
+                <i class="fa fa-chevron-left"></i> Java并发：JUC-Executor
               </a>
             
           </div>
@@ -405,10 +403,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2019/02/26/计算机网络/计算机网络：HTTP协议/" rel="prev" title="计算机网络：HTTP协议">
-                计算机网络：HTTP协议 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -636,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构建自定义同步工具"><span class="nav-number">1.</span> <span class="nav-text">构建自定义同步工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#J-U-C-AQS"><span class="nav-number">1.</span> <span class="nav-text">J.U.C - AQS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">2.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LockSupport"><span class="nav-number">2.1.</span> <span class="nav-text">LockSupport</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -672,7 +666,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:11</span>
+    <span title="站点阅读时长">56:37</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

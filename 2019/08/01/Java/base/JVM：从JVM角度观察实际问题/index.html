@@ -69,7 +69,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/01/Java/base/JVM：从JVM角度观察实际问题/assets/1564709442096.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/01/Java/base/JVM：从JVM角度观察实际问题/assets/1564709607140.png">
 <meta property="og:image" content="http://yoursite.com/assets/20170818151037199.png">
-<meta property="og:updated_time" content="2019-08-02T02:51:22.138Z">
+<meta property="og:updated_time" content="2019-08-11T01:50:23.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：从JVM角度观察实际问题">
 <meta name="twitter:description" content="JVM方法调用的内部机制JVM作为一款虚拟机，必然要涉及计算机核心的3大功能。  方法调用。方法作为程序组成的基本单元，作为原子指令的初步封装，计算机必须能够支持方法的调用。同样，Java语言的原子指令是字节码，Java方法是对字节码的封装，因此，JVM必须支持对Java方法的调用。 取指。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件C">
@@ -329,7 +329,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-02 10:51:22" itemprop="dateModified" datetime="2019-08-02T10:51:22+08:00">2019-08-02</time>
+                <time title="修改时间：2019-08-11 09:50:23" itemprop="dateModified" datetime="2019-08-11T09:50:23+08:00">2019-08-11</time>
               </span>
             
           
@@ -357,7 +357,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">5k</span>
+              <span title="本文字数">5.1k</span>
             </span>
           
             <span class="post-meta-item">
@@ -367,7 +367,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">14 分钟</span>
+              <span title="阅读时长">15 分钟</span>
             </span>
           
 
@@ -420,13 +420,12 @@
 <p>JVM方法调用的过程是通过栈帧来实现的，那么，方法的指令是如何运行的呢？弄清楚这个之前，我们要先了解对于JVM而言，方法的结构是什么样的。我们知道，class文件是JVM能够识别的二进制文件，其中通过特定的结构描述了每个方法的定义。</p>
 <p>JVM在编译Bootstrap.java的过程中，在将源代码编译成二进制机器码的同时，会判断其中的每一个方法的三个信息：</p>
 <ul>
-<li><p>在运行时会使用到的局部变量的数量（作用是：当JVM为方法创建栈帧的时候，在栈帧中为该方法创建一个局部变量表，来存储方法指令在运算时的局部变量值）</p>
-</li>
-<li><p>其机器指令执行时所需要的最大的操作数栈的大小（当JVM为方法创建栈帧的时候，在栈帧中为方法创建一个操作数栈，保证方法内指令可以完成工作）</p>
-</li>
-<li><p>方法的参数的数量</p>
-</li>
+<li>在运行时会使用到的局部变量的数量（作用是：当JVM为方法创建栈帧的时候，在栈帧中为该方法创建一个局部变量表，来存储方法指令在运算时的局部变量值）</li>
+<li>其机器指令执行时所需要的最大的操作数栈的大小（当JVM为方法创建栈帧的时候，在栈帧中为方法创建一个操作数栈，保证方法内指令可以完成工作）</li>
+<li>方法的参数的数量</li>
 </ul>
+<h3 id="子类方法与父类方法的关系"><a href="#子类方法与父类方法的关系" class="headerlink" title="子类方法与父类方法的关系"></a>子类方法与父类方法的关系</h3><p>如果子类中不显式调用父类的方法，即不<code>super.method</code>，则不会执行父类的方法。</p>
+<p>因此<code>synchronized</code>关键字在子类中是需要显式声明的。</p>
 <h3 id="JVM对一个方法执行的基本策略"><a href="#JVM对一个方法执行的基本策略" class="headerlink" title="JVM对一个方法执行的基本策略"></a>JVM对一个方法执行的基本策略</h3><p>一般地，对于java方法的执行，在JVM在其某一特定线程的虚拟机栈(JVM Stack) 中会为方法分配一个 局部变量表，一个操作数栈，用以存储方法的运行过程中的中间值存储。</p>
 <p>由于JVM的指令是基于栈的，即大部分的指令的执行，都伴随着操作数的出栈和入栈。所以在学习JVM的机器指令的时候，一定要铭记一点：每个机器指令的执行，对操作数栈和局部变量的影响，充分地了解了这个机制，你就可以非常顺畅地读懂class文件中的二进制机器指令了。</p>
 <p>如下是栈帧信息的简化图，在分析JVM指令时，脑海中对栈帧有个清晰的认识：</p>
@@ -551,7 +550,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -602,7 +601,9 @@
         
           
         
-        <span class="site-state-item-count">16</span>
+          
+        
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -703,7 +704,11 @@
         
           
         
-        <span class="site-state-item-count">40</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -724,7 +729,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM方法调用的内部机制"><span class="nav-number">1.</span> <span class="nav-text">JVM方法调用的内部机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.2.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要理解"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">1.4.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机栈"><span class="nav-number">1.4.1.</span> <span class="nav-text">虚拟机栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用大致过程"><span class="nav-number">1.5.</span> <span class="nav-text">方法调用大致过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM对一个方法执行的基本策略"><span class="nav-number">1.5.1.</span> <span class="nav-text">JVM对一个方法执行的基本策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用的字节码指令"><span class="nav-number">1.6.</span> <span class="nav-text">方法调用的字节码指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态链接"><span class="nav-number">1.7.</span> <span class="nav-text">动态链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态链接-1"><span class="nav-number">1.7.1.</span> <span class="nav-text">动态链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚函数表"><span class="nav-number">1.7.2.</span> <span class="nav-text">虚函数表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法执行"><span class="nav-number">1.8.</span> <span class="nav-text">方法执行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM方法调用的内部机制"><span class="nav-number">1.</span> <span class="nav-text">JVM方法调用的内部机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.2.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要理解"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">1.4.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机栈"><span class="nav-number">1.4.1.</span> <span class="nav-text">虚拟机栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用大致过程"><span class="nav-number">1.5.</span> <span class="nav-text">方法调用大致过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子类方法与父类方法的关系"><span class="nav-number">1.5.1.</span> <span class="nav-text">子类方法与父类方法的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM对一个方法执行的基本策略"><span class="nav-number">1.5.2.</span> <span class="nav-text">JVM对一个方法执行的基本策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用的字节码指令"><span class="nav-number">1.6.</span> <span class="nav-text">方法调用的字节码指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态链接"><span class="nav-number">1.7.</span> <span class="nav-text">动态链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态链接-1"><span class="nav-number">1.7.1.</span> <span class="nav-text">动态链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚函数表"><span class="nav-number">1.7.2.</span> <span class="nav-text">虚函数表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法执行"><span class="nav-number">1.8.</span> <span class="nav-text">方法执行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -760,7 +765,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:43</span>
+    <span title="站点阅读时长">56:44</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

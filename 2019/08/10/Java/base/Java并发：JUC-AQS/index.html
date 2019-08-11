@@ -57,18 +57,18 @@
   };
 </script>
 
-  <meta name="description" content="J.U.C - AQSjava.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准来判">
+  <meta name="description" content="J.U.C - AQS概述java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准">
 <meta name="keywords" content="并发编程,源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发：JUC-AQS">
 <meta property="og:url" content="http://yoursite.com/2019/08/10/Java/base/Java并发：JUC-AQS/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="J.U.C - AQSjava.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准来判">
+<meta property="og:description" content="J.U.C - AQS概述java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-10T14:05:02.515Z">
+<meta property="og:updated_time" content="2019-08-10T15:05:22.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：JUC-AQS">
-<meta name="twitter:description" content="J.U.C - AQSjava.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准来判">
+<meta name="twitter:description" content="J.U.C - AQS概述java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同步器。是许多同步类的基类，它是构建锁或者其他同步组件的基础框架。AQS解决了在实现同步器时设计的大量细节问题。  例如等待线程采用FIFO队列操作顺序 在不同的同步器当中还可以定义一些灵活的标准">
   <link rel="canonical" href="http://yoursite.com/2019/08/10/Java/base/Java并发：JUC-AQS/">
 
 
@@ -311,7 +311,7 @@
                 
               
 
-              <time title="创建时间：2019-08-10 22:04:06 / 修改时间：22:05:02" itemprop="dateCreated datePublished" datetime="2019-08-10T22:04:06+08:00">2019-08-10</time>
+              <time title="创建时间：2019-08-10 22:04:06 / 修改时间：23:05:22" itemprop="dateCreated datePublished" datetime="2019-08-10T22:04:06+08:00">2019-08-10</time>
             </span>
           
             
@@ -342,7 +342,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">430</span>
+              <span title="本文字数">2.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">8 分钟</span>
             </span>
           
 
@@ -365,15 +365,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="J-U-C-AQS"><a href="#J-U-C-AQS" class="headerlink" title="J.U.C - AQS"></a>J.U.C - AQS</h1><p>java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。</p>
+        <h1 id="J-U-C-AQS"><a href="#J-U-C-AQS" class="headerlink" title="J.U.C - AQS"></a>J.U.C - AQS</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。</p>
 <p>AQS：AbstractQueuedSynchronizer，即队列同步器。<strong>是许多同步类的基类，它是构建锁或者其他同步组件的基础框架</strong>。AQS解决了在实现同步器时设计的大量细节问题。</p>
 <ul>
 <li>例如等待线程采用FIFO队列操作顺序</li>
 <li>在不同的同步器当中还可以定义一些灵活的标准来判断某个线程是应该通过还是需要等待</li>
 </ul>
-<p>基于AQS构建同步器能够极大减少实现工作，而且也不必处理在多个位置上发生的竞争问题。在一般的同步器实现当中，获取许可的操作可能在两个时刻阻塞–当锁保护信号量状态时，以及当许可不可用时（<strong>LockSupport</strong>）。</p>
+<h2 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h2><p>基于AQS构建同步器能够极大减少实现工作，而且也不必处理在多个位置上发生的竞争问题。在一般的同步器实现当中，获取许可的操作可能在两个时刻阻塞–当锁保护信号量状态时，以及当许可不可用时（<strong>LockSupport</strong>）。</p>
 <p>基于AQS构建的同步器只可能在一个时刻发生阻塞，从而降低上下文切换的开销，并提高吞吐量，在设计AQS时充分考虑了可伸缩性，因此JUC中所有基于AQS的同步器都能获得这个优势。</p>
-<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>在基于AQS构建的同步器类中，最基本的操作包括各种形式的<strong>获取操作</strong>和<strong>释放操作。</strong></p>
+<h3 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h3><p>如果一个类想要成为状态依赖的类，那么它必须拥有一些状态，AQS负责关联同步器类中的状态，它<strong>管理了一个整数状态信息</strong>，可以通过<code>getState()</code>、<code>setState()</code>、<code>compareAndSetState()</code>等protected方法来操作。这个整数可以用来表示任意状态。</p>
+<ul>
+<li><code>ReentrantLock</code>用它表示所有者线程以及重复获取该锁的次数</li>
+<li><code>Semaphore</code>用它表示剩余的许可数量</li>
+<li><code>FutureTask</code>用来表示任务的状态</li>
+</ul>
+<h3 id="获取-释放操作"><a href="#获取-释放操作" class="headerlink" title="获取\释放操作"></a>获取\释放操作</h3><p>获取操作是一种依赖状态的操作，并且通常会阻塞。当使用锁或信号量时，获取操作的含义就是获取锁或者许可，并且调用者可能会抑制等待直到同步器类处于可被获取的状态。对于CountDownLatch，意味着等待并直到闭锁到达结束状态。对于FutureTask意味着等待并直到任务以及完成。</p>
+<p>根据同步器不同，获取操作可能是独占的，也可能时非独占的。一个获取操作包括两部分</p>
+<ul>
+<li>同步器判断当前状态是否允许获得操作。</li>
+<li>如果是则允许线程执行，否则获取操作将阻塞或失败，这由同步器的语义决定。</li>
+</ul>
+<p>释放操作并不是可阻塞的操作，当执行释放操作时，所有在请求时被阻塞的线程都会开始执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">acquire</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(当前状态不允许获取操作)&#123;</span><br><span class="line">    	<span class="keyword">if</span>(需要阻塞获取请求)&#123;</span><br><span class="line">            如果当前线程不在队列中，则将其插入队列;</span><br><span class="line">            阻塞当前线程;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        	返回失败</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    可能更新同步器的状态;</span><br><span class="line">    如果线程位于队列中，则将其移出队列;</span><br><span class="line">	返回成功</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span>&#123;</span><br><span class="line">    更新同步器的状态;</span><br><span class="line">    <span class="keyword">if</span>(新的状态允许某个被阻塞的线程获取成功)&#123;</span><br><span class="line">        解除队列中一个或多个线程的阻塞状态;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="独占的获取操作"><a href="#独占的获取操作" class="headerlink" title="独占的获取操作"></a>独占的获取操作</h3><p>如果某个同步器支持独占的获取操作，那么需要实现一些保护方法，包括<code>tryAcquire</code>、<code>tryRelease</code>、<code>isHeldExclusivery</code>等，而对于支持共享获取的同步器，则应该实现<code>tryAcquireShared</code>、<code>tryReleaseShared</code>等方法。AQS的<code>accuire</code>、<code>acquireShared</code>、<code>release</code>、<code>releaseShared</code>等方法都将调用这些方法在子类中带有前缀try的版本来判断某个操作。</p>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h2><h1 id="AQS应用"><a href="#AQS应用" class="headerlink" title="AQS应用"></a>AQS应用</h1><h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> ignored)</span></span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Thread current = Thread.currentThread();</span><br><span class="line">    <span class="keyword">int</span> c = getState();</span><br><span class="line">    <span class="keyword">if</span>(c == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(compareAndSetState(<span class="number">0</span>, <span class="number">1</span>))&#123;</span><br><span class="line">            owner = current;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(current == owner)&#123;</span><br><span class="line">        setState(c+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">tryAcquireShard</span><span class="params">(<span class="keyword">int</span> acquires)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> available = getState();</span><br><span class="line">        <span class="keyword">int</span> remaining = available - acquires;</span><br><span class="line">        <span class="keyword">if</span>(remaining &lt; <span class="number">0</span> || compareAndSetState(available, remaining))&#123;</span><br><span class="line">            <span class="keyword">return</span> remaining;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryReleaseShared</span><span class="params">(<span class="keyword">int</span> release)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> p = getState();</span><br><span class="line">        <span class="keyword">if</span>(compareAndSetState(p, p+releases))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h2><h2 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h2><p><code>FutureTask.get</code>的语义类似于闭锁(<code>CountDownLatch</code>)的语义，如果发生了某个事件(由FutureTask表示的任务执行完成或被取消)，那么线程就可以恢复执行，否则将停留在队列中并直到该事件发生，</p>
+<p><code>FutureTask</code>使用AQS保存任务的状态。</p>
+<h2 id="ReentrantReadWriteLock"><a href="#ReentrantReadWriteLock" class="headerlink" title="ReentrantReadWriteLock"></a>ReentrantReadWriteLock</h2><p>使用单个AQS子类同时管理读锁与写锁，前16为状态表示写锁计数，后16为表示读锁计数。 </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -630,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#J-U-C-AQS"><span class="nav-number">1.</span> <span class="nav-text">J.U.C - AQS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">2.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LockSupport"><span class="nav-number">2.1.</span> <span class="nav-text">LockSupport</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#J-U-C-AQS"><span class="nav-number">1.</span> <span class="nav-text">J.U.C - AQS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用性"><span class="nav-number">1.2.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">1.3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态管理"><span class="nav-number">1.3.1.</span> <span class="nav-text">状态管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-释放操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">获取\释放操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#独占的获取操作"><span class="nav-number">1.3.3.</span> <span class="nav-text">独占的获取操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">2.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LockSupport"><span class="nav-number">2.1.</span> <span class="nav-text">LockSupport</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AQS应用"><span class="nav-number">3.</span> <span class="nav-text">AQS应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReentrantLock"><span class="nav-number">3.1.</span> <span class="nav-text">ReentrantLock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semaphore"><span class="nav-number">3.2.</span> <span class="nav-text">Semaphore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CountDownLatch"><span class="nav-number">3.3.</span> <span class="nav-text">CountDownLatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FutureTask"><span class="nav-number">3.4.</span> <span class="nav-text">FutureTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReentrantReadWriteLock"><span class="nav-number">3.5.</span> <span class="nav-text">ReentrantReadWriteLock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -666,7 +690,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:37</span>
+    <span title="站点阅读时长">56:43</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

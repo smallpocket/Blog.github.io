@@ -57,22 +57,22 @@
   };
 </script>
 
-  <meta name="description" content="JVM方法调用的内部机制JVM作为一款虚拟机，必然要涉及计算机核心的3大功能。  方法调用。方法作为程序组成的基本单元，作为原子指令的初步封装，计算机必须能够支持方法的调用。同样，Java语言的原子指令是字节码，Java方法是对字节码的封装，因此，JVM必须支持对Java方法的调用。 取指。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件C">
+  <meta name="description" content="JVM方法调用的内部机制JVM作为一款虚拟机，必然要涉及计算机核心的3大功能。  方法调用。方法作为程序组成的基本单元，作为原子指令的初步封装，计算机必须能够支持方法的调用。同样，Java语言的原子指令是字节码，Java方法是对字节码的封装，因此，JVM必须支持对Java方法的调用。 取值。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件C">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM：从JVM角度观察实际问题">
 <meta property="og:url" content="http://yoursite.com/2019/08/01/Java/base/JVM：从JVM角度观察实际问题/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JVM方法调用的内部机制JVM作为一款虚拟机，必然要涉及计算机核心的3大功能。  方法调用。方法作为程序组成的基本单元，作为原子指令的初步封装，计算机必须能够支持方法的调用。同样，Java语言的原子指令是字节码，Java方法是对字节码的封装，因此，JVM必须支持对Java方法的调用。 取指。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件C">
+<meta property="og:description" content="JVM方法调用的内部机制JVM作为一款虚拟机，必然要涉及计算机核心的3大功能。  方法调用。方法作为程序组成的基本单元，作为原子指令的初步封装，计算机必须能够支持方法的调用。同样，Java语言的原子指令是字节码，Java方法是对字节码的封装，因此，JVM必须支持对Java方法的调用。 取值。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件C">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1564709178169.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/01/Java/base/JVM：从JVM角度观察实际问题/assets/1564709442096.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/01/Java/base/JVM：从JVM角度观察实际问题/assets/1564709607140.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564709442096.png">
+<meta property="og:image" content="http://yoursite.com/assets/1564709607140.png">
 <meta property="og:image" content="http://yoursite.com/assets/20170818151037199.png">
-<meta property="og:updated_time" content="2019-08-11T01:50:23.348Z">
+<meta property="og:updated_time" content="2019-08-11T07:52:44.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：从JVM角度观察实际问题">
-<meta name="twitter:description" content="JVM方法调用的内部机制JVM作为一款虚拟机，必然要涉及计算机核心的3大功能。  方法调用。方法作为程序组成的基本单元，作为原子指令的初步封装，计算机必须能够支持方法的调用。同样，Java语言的原子指令是字节码，Java方法是对字节码的封装，因此，JVM必须支持对Java方法的调用。 取指。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件C">
+<meta name="twitter:description" content="JVM方法调用的内部机制JVM作为一款虚拟机，必然要涉及计算机核心的3大功能。  方法调用。方法作为程序组成的基本单元，作为原子指令的初步封装，计算机必须能够支持方法的调用。同样，Java语言的原子指令是字节码，Java方法是对字节码的封装，因此，JVM必须支持对Java方法的调用。 取值。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件C">
 <meta name="twitter:image" content="http://yoursite.com/assets/1564709178169.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/01/Java/base/JVM：从JVM角度观察实际问题/">
 
@@ -329,7 +329,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-11 09:50:23" itemprop="dateModified" datetime="2019-08-11T09:50:23+08:00">2019-08-11</time>
+                <time title="修改时间：2019-08-11 15:52:44" itemprop="dateModified" datetime="2019-08-11T15:52:44+08:00">2019-08-11</time>
               </span>
             
           
@@ -383,7 +383,7 @@
         <h1 id="JVM方法调用的内部机制"><a href="#JVM方法调用的内部机制" class="headerlink" title="JVM方法调用的内部机制"></a>JVM方法调用的内部机制</h1><p>JVM作为一款虚拟机，必然要涉及计算机核心的3大功能。</p>
 <ul>
 <li>方法调用。方法作为程序组成的基本单元，作为原子指令的初步封装，计算机必须能够支持方法的调用。同样，Java语言的原子指令是字节码，Java方法是对字节码的封装，因此，JVM必须支持对Java方法的调用。</li>
-<li>取指。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件CPU，能够从Java方法中逐条去除字节码指令。</li>
+<li>取值。计算机进入方法后，最终需要逐条取出指令并逐条执行。Java方法也不例外，因此JVM进入方法后，也要模拟硬件CPU，能够从Java方法中逐条去除字节码指令。</li>
 <li>运算。计算机取出指令后，就要根据指令进行相应的逻辑运算，实现指令的功能。JVM作为虚拟机，也需要具备对Java字节码的运算能力。</li>
 </ul>
 <p>即方法调用与方法执行</p>
@@ -405,9 +405,9 @@
 <h2 id="方法调用大致过程"><a href="#方法调用大致过程" class="headerlink" title="方法调用大致过程"></a>方法调用大致过程</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bootstrap</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String name = <span class="string">"Louis"</span>;</span><br><span class="line">		greeting(name);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">greeting</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello,"</span>+name);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol>
-<li><p>首先JVM会先将这个Bootstrap.class信息加载到 内存中的方法区(Method Area)中。Bootstrap.class 中包含了常量池信息，方法的定义 以及编译后的方法实现的二进制形式的机器指令，所有的线程共享一个方法区，从中读取方法定义和方法的指令集。</p>
+<li><p>首先JVM会先将这个Bootstrap.class信息加载到 内存中的方法区(Method Area)中。Bootstrap.class中包含了常量池信息，方法的定义 以及编译后的方法实现的二进制形式的机器指令，所有的线程共享一个方法区，从中读取方法定义和方法的指令集。</p>
 </li>
-<li><p>接着，JVM会在Heap堆上为Bootstrap.class 创建一个Class&lt;Bootstrap&gt;实例用来表示Bootstrap.class 的 类实例。</p>
+<li><p>接着，JVM会在Heap堆上为Bootstrap.class 创建一个<code>Class\&lt;Bootstrap&gt;</code>实例用来表示Bootstrap.class 的 类实例。</p>
 </li>
 <li><p>JVM开始执行main方法，这时会为main方法创建一个栈帧，以表示main方法的整个执行过程；</p>
 </li>
@@ -416,7 +416,7 @@
 <li><p>当greeting方法运行完成后，则greeting方法出栈，main方法继续运行；</p>
 </li>
 </ol>
-<p><img src="assets/1564709442096.png" alt="1564709442096"></p>
+<p><img src="/assets/1564709442096.png" alt="1564709442096"></p>
 <p>JVM方法调用的过程是通过栈帧来实现的，那么，方法的指令是如何运行的呢？弄清楚这个之前，我们要先了解对于JVM而言，方法的结构是什么样的。我们知道，class文件是JVM能够识别的二进制文件，其中通过特定的结构描述了每个方法的定义。</p>
 <p>JVM在编译Bootstrap.java的过程中，在将源代码编译成二进制机器码的同时，会判断其中的每一个方法的三个信息：</p>
 <ul>
@@ -429,7 +429,7 @@
 <h3 id="JVM对一个方法执行的基本策略"><a href="#JVM对一个方法执行的基本策略" class="headerlink" title="JVM对一个方法执行的基本策略"></a>JVM对一个方法执行的基本策略</h3><p>一般地，对于java方法的执行，在JVM在其某一特定线程的虚拟机栈(JVM Stack) 中会为方法分配一个 局部变量表，一个操作数栈，用以存储方法的运行过程中的中间值存储。</p>
 <p>由于JVM的指令是基于栈的，即大部分的指令的执行，都伴随着操作数的出栈和入栈。所以在学习JVM的机器指令的时候，一定要铭记一点：每个机器指令的执行，对操作数栈和局部变量的影响，充分地了解了这个机制，你就可以非常顺畅地读懂class文件中的二进制机器指令了。</p>
 <p>如下是栈帧信息的简化图，在分析JVM指令时，脑海中对栈帧有个清晰的认识：</p>
-<p><img src="assets/1564709607140.png" alt="1564709607140"></p>
+<p><img src="/assets/1564709607140.png" alt="1564709607140"></p>
 <h2 id="方法调用的字节码指令"><a href="#方法调用的字节码指令" class="headerlink" title="方法调用的字节码指令"></a>方法调用的字节码指令</h2><p>JVM里面提供了4条方法调用字节码指令。分别如下：</p>
 <ul>
 <li>invokestatic:调用静态方法</li>
@@ -550,7 +550,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">194</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -765,7 +765,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:44</span>
+    <span title="站点阅读时长">57:26</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

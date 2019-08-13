@@ -57,17 +57,21 @@
   };
 </script>
 
-  <meta name="description" content="参考">
+  <meta name="description" content="IOIO硬件原理IO设备IO设备可以大致分为两类：块设备与字符设备。 块设备将信息存储在固定大小的块中，每个块有自己的地址，所有传输以一个或多个完整的块位单位。每个块可以独立于其他块而读写。硬盘、USB等都是块设备。 字符设备以字符位单位发送或接收一个字符流，而不考虑任何块结构。字符设备不可寻址，也没有任何寻道操作，例如打印机、网络接口、鼠标等。 其他类别还有  时钟：按照预先规定好的时间间隔产生">
+<meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="现代操作系统：I&#x2F;O">
 <meta property="og:url" content="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="参考">
+<meta property="og:description" content="IOIO硬件原理IO设备IO设备可以大致分为两类：块设备与字符设备。 块设备将信息存储在固定大小的块中，每个块有自己的地址，所有传输以一个或多个完整的块位单位。每个块可以独立于其他块而读写。硬盘、USB等都是块设备。 字符设备以字符位单位发送或接收一个字符流，而不考虑任何块结构。字符设备不可寻址，也没有任何寻道操作，例如打印机、网络接口、鼠标等。 其他类别还有  时钟：按照预先规定好的时间间隔产生">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-17T15:43:38.856Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/1565667435120.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/1565674392424.png">
+<meta property="og:updated_time" content="2019-08-13T05:54:06.479Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="现代操作系统：I&#x2F;O">
-<meta name="twitter:description" content="参考">
+<meta name="twitter:description" content="IOIO硬件原理IO设备IO设备可以大致分为两类：块设备与字符设备。 块设备将信息存储在固定大小的块中，每个块有自己的地址，所有传输以一个或多个完整的块位单位。每个块可以独立于其他块而读写。硬盘、USB等都是块设备。 字符设备以字符位单位发送或接收一个字符流，而不考虑任何块结构。字符设备不可寻址，也没有任何寻道操作，例如打印机、网络接口、鼠标等。 其他类别还有  时钟：按照预先规定好的时间间隔产生">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/1565667435120.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/">
 
 
@@ -313,6 +317,35 @@
               <time title="创建时间：2019-07-17 23:43:38" itemprop="dateCreated datePublished" datetime="2019-07-17T23:43:38+08:00">2019-07-17</time>
             </span>
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-13 13:54:06" itemprop="dateModified" datetime="2019-08-13T13:54:06+08:00">2019-08-13</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           <br>
             <span class="post-meta-item">
@@ -322,7 +355,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">5</span>
+              <span title="本文字数">1.8k</span>
             </span>
           
             <span class="post-meta-item">
@@ -332,7 +365,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">5 分钟</span>
             </span>
           
 
@@ -345,7 +378,53 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+        <h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h1><h1 id="IO硬件原理"><a href="#IO硬件原理" class="headerlink" title="IO硬件原理"></a>IO硬件原理</h1><h2 id="IO设备"><a href="#IO设备" class="headerlink" title="IO设备"></a>IO设备</h2><p>IO设备可以大致分为两类：块设备与字符设备。</p>
+<p>块设备将信息存储在固定大小的块中，每个块有自己的地址，所有传输以一个或多个完整的块位单位。每个块可以独立于其他块而读写。硬盘、USB等都是块设备。</p>
+<p>字符设备以字符位单位发送或接收一个字符流，而不考虑任何块结构。字符设备不可寻址，也没有任何寻道操作，例如打印机、网络接口、鼠标等。</p>
+<p>其他类别还有</p>
+<ul>
+<li>时钟：按照预先规定好的时间间隔产生中断</li>
+<li>内存映射的显示器等。</li>
+</ul>
+<h2 id="设备控制器"><a href="#设备控制器" class="headerlink" title="设备控制器"></a>设备控制器</h2><p>IO设备一般分机械部件与电子部件。电子部件称为设备控制器，常以芯片形式出现。</p>
+<h2 id="内存映射IO"><a href="#内存映射IO" class="headerlink" title="内存映射IO"></a>内存映射IO</h2><p>每个控制器有几个寄存器用来与CPU进行通信，通过写入这些寄存器，OS可以命令设备发送数据、接收数据、开启或关闭，或执行某些其他操作。通过读取寄存器，OS可以了解设备的状态，是否准备好接收一个新的命令等。</p>
+<p>通常设备还会有一个OS可以读写的数据缓冲区。</p>
+<h3 id="CPU与IO通信"><a href="#CPU与IO通信" class="headerlink" title="CPU与IO通信"></a>CPU与IO通信</h3><p>CPU如何与设备的控制寄存器或缓冲区进行通信？</p>
+<ul>
+<li>方法1：早期的OS工作方式，每个控制寄存器被分配一个IO端口号，是一个8/16位的整数。所有IO端口形成IO端口空间，并只有OS可以进行访问。<ul>
+<li>使用一条特殊的IO指令例如<code>IN REG ，PORT</code>。CPU可以读取控制寄存器PORT的内容，并将结果存到CPU寄存器REG当中。</li>
+</ul>
+</li>
+<li>方法2：内存映射IO。将所有控制寄存器映射到内存空间中，每个控制寄存器被分配唯一的一个内存地址，并且不会有内存被分配这一地址，</li>
+<li>混合方法。</li>
+</ul>
+<p>当CPU想要读入一个字的时候，无论是从IO端口还是内存读入，都要将需要的地址放到总线的地址线上，然后在总线的一条控制线上置起一个READ信号。如果是内存空间，内存将响应请求，内存当中的每个内存模块和IO设备都会将地址线与它所服务的地址范围比较，比较成功则响应请求。</p>
+<h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p>在硬件层面上，中断的工作是当一个IO设备完成交给它的工作时，它就产生一个中断，它是通过在分配给它的一条总线信号线上置起信号而产生中断的。</p>
+<p><img src="1565667435120.png" alt="1565667435120"></p>
+<h3 id="处理中断"><a href="#处理中断" class="headerlink" title="处理中断"></a>处理中断</h3><p>设备与中断控制器之间的连接实际上使用的是总线上的中断线。如果有更高优先级或有其他中断正在处理，则暂时不会理会中断。</p>
+<p>为了处理中断，中断控制器在地址线上放置一个数字表明哪个设备需要关注，并置起一个中断CPU的信号。中断信号导致CPU停止当前正在做的工作并且开始做其他的事情，地址线上的数字被用作指向一个被称为<strong>中断向量</strong>的表格索引，以便读取一个新的程序计数器。</p>
+<p>中断服务过程开始运行后，立刻通过将一个确定的值写入中断控制器的某个IO端口来对中断作出应答。</p>
+<h3 id="精确中断和不精确中断"><a href="#精确中断和不精确中断" class="headerlink" title="精确中断和不精确中断"></a>精确中断和不精确中断</h3><p>由于现代OS的乱序执行以及CPU优化操作，当发生中断时，可能之前的指令还没有执行完，并且由于并行处理，则在处理中断时，很多指令还处于不同的执行阶段，即很难明确当前程序计数器到底执行到了哪里。</p>
+<p>将机器留在一个明确状态的中断称为<strong>精确中断</strong>，其具有4个特性：</p>
+<ul>
+<li>PC(程序计数器)保存在一个已知的地方</li>
+<li>PC所指向的指令之前的所有指令已经完全执行</li>
+<li>PC所指向的指令之后的所有指令都没有执行。并非禁止执行，只是中断发生前必须撤销它们对寄存器或内存的修改。</li>
+<li>PC所指向的指令的执行状态是已知的。</li>
+</ul>
+<p>不满足这些要求的称为不精确中断。</p>
+<h1 id="IO软件层次"><a href="#IO软件层次" class="headerlink" title="IO软件层次"></a>IO软件层次</h1><p>IO软件通常组织成四个层次，每一层具有一个要执行的定义明确的功能和一个定义明确的与临近层次的接口。</p>
+<p><img src="1565674392424.png" alt="1565674392424"></p>
+<h2 id="中断处理程序"><a href="#中断处理程序" class="headerlink" title="中断处理程序"></a>中断处理程序</h2><p>当中断发生时，中断处理程序 215</p>
+<h2 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h2><h2 id="与设备无关的操作系统软件"><a href="#与设备无关的操作系统软件" class="headerlink" title="与设备无关的操作系统软件"></a>与设备无关的操作系统软件</h2><h2 id="用户级IO软件"><a href="#用户级IO软件" class="headerlink" title="用户级IO软件"></a>用户级IO软件</h2><h1 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h1><p>时钟负责维护时间，并且防止一个进程垄断CPU，此外还有其他功能。</p>
+<h2 id="时钟硬件"><a href="#时钟硬件" class="headerlink" title="时钟硬件"></a>时钟硬件</h2><p>通常使用两种类型的时钟，简单的时钟连接到电源线上，每个电压周期产生一个中断，现在非常少。</p>
+<p>另一种时钟由三个部件组成：晶体振荡器、计数器和存储寄存器。它用来给计算机的各种电路提供同步信号，该信号被送到计数器，使其递减计数至0，当计数器变为0产生一个CPU中断。</p>
+<p>可编程时钟通常具有几种操作模式，</p>
+<ul>
+<li>一次完成模式：当时钟启动时，它把存储寄存器的值赋值到计数器中，然后来自晶体的每一个脉冲使计数器-1，当计数器位0产生一个中断，并停止工作，直到软件再一次显式启动它</li>
+<li>方波模式。当计数器变为0并且产生中断后，存储寄存器的值自动复制到计数器中，并且整个过程无限期继续下去。</li>
+</ul>
+<h2 id="时钟软件"><a href="#时钟软件" class="headerlink" title="时钟软件"></a>时钟软件</h2><h2 id="软定时器"><a href="#软定时器" class="headerlink" title="软定时器"></a>软定时器</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -356,6 +435,12 @@
     
 
     <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
               <a href="/2019/07/17/OS/现代操作系统：进程与线程/" rel="next" title="现代操作系统：进程与线程">
@@ -425,7 +510,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">194</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -604,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IO"><span class="nav-number">1.</span> <span class="nav-text">IO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO硬件原理"><span class="nav-number">2.</span> <span class="nav-text">IO硬件原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO设备"><span class="nav-number">2.1.</span> <span class="nav-text">IO设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备控制器"><span class="nav-number">2.2.</span> <span class="nav-text">设备控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存映射IO"><span class="nav-number">2.3.</span> <span class="nav-text">内存映射IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU与IO通信"><span class="nav-number">2.3.1.</span> <span class="nav-text">CPU与IO通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断"><span class="nav-number">2.4.</span> <span class="nav-text">中断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理中断"><span class="nav-number">2.4.1.</span> <span class="nav-text">处理中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精确中断和不精确中断"><span class="nav-number">2.4.2.</span> <span class="nav-text">精确中断和不精确中断</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO软件层次"><span class="nav-number">3.</span> <span class="nav-text">IO软件层次</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#中断处理程序"><span class="nav-number">3.1.</span> <span class="nav-text">中断处理程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备驱动程序"><span class="nav-number">3.2.</span> <span class="nav-text">设备驱动程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与设备无关的操作系统软件"><span class="nav-number">3.3.</span> <span class="nav-text">与设备无关的操作系统软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户级IO软件"><span class="nav-number">3.4.</span> <span class="nav-text">用户级IO软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时钟"><span class="nav-number">4.</span> <span class="nav-text">时钟</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟硬件"><span class="nav-number">4.1.</span> <span class="nav-text">时钟硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟软件"><span class="nav-number">4.2.</span> <span class="nav-text">时钟软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软定时器"><span class="nav-number">4.3.</span> <span class="nav-text">软定时器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -640,7 +725,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:44</span>
+    <span title="站点阅读时长">57:26</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

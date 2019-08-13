@@ -64,13 +64,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="了解Web及网络基础web是建立在何种技术上，HTTP协议是如何诞生并发展的 使用HTTP协议访问web HTTP超文本传输协议（HYperText Transfer Protocol） 概述 由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。 HTTP定义了这些报文的结构以及客户和服务器进行报文交换的方式 HTTP定义了web客户向web服务器请">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/02/26/计算机网络/计算机网络：HTTP协议/assets/1555161443581.png">
-<meta property="og:image" content="http://yoursite.com/2019/02/26/计算机网络/计算机网络：HTTP协议/assets/1555161432557.png">
-<meta property="og:updated_time" content="2019-04-21T12:08:15.783Z">
+<meta property="og:image" content="http://yoursite.com/assets/1555161443581.png">
+<meta property="og:image" content="http://yoursite.com/assets/1555161432557.png">
+<meta property="og:updated_time" content="2019-08-13T07:10:38.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络：HTTP协议">
 <meta name="twitter:description" content="了解Web及网络基础web是建立在何种技术上，HTTP协议是如何诞生并发展的 使用HTTP协议访问web HTTP超文本传输协议（HYperText Transfer Protocol） 概述 由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。 HTTP定义了这些报文的结构以及客户和服务器进行报文交换的方式 HTTP定义了web客户向web服务器请">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/26/计算机网络/计算机网络：HTTP协议/assets/1555161443581.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1555161443581.png">
   <link rel="canonical" href="http://yoursite.com/2019/02/26/计算机网络/计算机网络：HTTP协议/">
 
 
@@ -326,7 +326,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-21 20:08:15" itemprop="dateModified" datetime="2019-04-21T20:08:15+08:00">2019-04-21</time>
+                <time title="修改时间：2019-08-13 15:10:38" itemprop="dateModified" datetime="2019-08-13T15:10:38+08:00">2019-08-13</time>
               </span>
             
           
@@ -475,10 +475,10 @@
 </ul>
 <h3 id="报文流入源端服务器"><a href="#报文流入源端服务器" class="headerlink" title="报文流入源端服务器"></a>报文流入源端服务器</h3><p>HTTP使用术语流入、流出描述事务处理的方向。</p>
 <p>报文流入源端服务器，工作完成后，会流回用户的Agent代理中。</p>
-<p><img src="assets/1555161443581.png" alt="1555161443581"></p>
+<p><img src="/assets/1555161443581.png" alt="1555161443581"></p>
 <h3 id="报文向下游流动"><a href="#报文向下游流动" class="headerlink" title="报文向下游流动"></a>报文向下游流动</h3><p>无论是请求报文还是响应报文，所有报文都会向下游流动。</p>
 <p>所有报文的发送者都在接收者的上游。</p>
-<p><img src="assets/1555161432557.png" alt="1555161432557"></p>
+<p><img src="/assets/1555161432557.png" alt="1555161432557"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>服务器并不需要实现所有的方法，如果兼容HTTP1.1，只要为资源实现GET方法和HEAD方法。</p>
 <p>即使服务器实现了所有的方法，方法的使用可能也是受限的。如DELETE方法或PUT方法的服务器，可能并不希望任何人都能够删除或存储资源。这些限制通常在服务器的配置当中进行设置的，因此会随着站点和服务器的不同而不同</p>
 <h3 id="安全方法"><a href="#安全方法" class="headerlink" title="安全方法"></a>安全方法</h3><p>HTTP定义了安全方法包括GET、HEAD方法。</p>
@@ -530,15 +530,15 @@
 <li>Post请求不能被缓存</li>
 <li>post请求相对于Get是安全的</li>
 </ul>
-<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><h2 id="1XX-信息"><a href="#1XX-信息" class="headerlink" title="1XX 信息"></a><a href="http://zhangchangle.com/#/notes/HTTP?id=_1xx-%e4%bf%a1%e6%81%af" target="_blank" rel="noopener">1XX 信息</a></h2><ul>
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><h2 id="1XX-信息"><a href="#1XX-信息" class="headerlink" title="1XX 信息"></a>1XX 信息</h2><ul>
 <li><strong>100 Continue</strong> ：表明到目前为止都很正常，客户端可以继续发送请求或者忽略这个响应。</li>
 </ul>
-<h2 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a><a href="http://zhangchangle.com/#/notes/HTTP?id=_2xx-%e6%88%90%e5%8a%9f" target="_blank" rel="noopener">2XX 成功</a></h2><ul>
+<h2 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a>2XX 成功</h2><ul>
 <li><strong>200 OK</strong></li>
 <li><strong>204 No Content</strong> ：请求已经成功处理，但是返回的响应报文不包含实体的主体部分。一般在只需要从客户端往服务器发送信息，而不需要返回数据时使用。</li>
 <li><strong>206 Partial Content</strong> ：表示客户端进行了范围请求，响应报文包含由 Content-Range 指定范围的实体内容。</li>
 </ul>
-<h2 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a><a href="http://zhangchangle.com/#/notes/HTTP?id=_3xx-%e9%87%8d%e5%ae%9a%e5%90%91" target="_blank" rel="noopener">3XX 重定向</a></h2><ul>
+<h2 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a>3XX 重定向</h2><ul>
 <li><strong>301 Moved Permanently</strong> ：永久性重定向</li>
 <li><strong>302 Found</strong> ：临时性重定向</li>
 <li><strong>303 See Other</strong> ：和 302 有着相同的功能，但是 303 明确要求客户端应该采用 GET 方法获取资源。</li>
@@ -546,13 +546,13 @@
 <li><strong>304 Not Modified</strong> ：如果请求报文首部包含一些条件，例如：If-Match，If-Modified-Since，If-None-Match，If-Range，If-Unmodified-Since，如果不满足条件，则服务器会返回 304 状态码。</li>
 <li><strong>307 Temporary Redirect</strong> ：临时重定向，与 302 的含义类似，但是 307 要求浏览器不会把重定向请求的 POST 方法改成 GET 方法。</li>
 </ul>
-<h2 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a><a href="http://zhangchangle.com/#/notes/HTTP?id=_4xx-%e5%ae%a2%e6%88%b7%e7%ab%af%e9%94%99%e8%af%af" target="_blank" rel="noopener">4XX 客户端错误</a></h2><ul>
+<h2 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h2><ul>
 <li><strong>400 Bad Request</strong> ：请求报文中存在语法错误。</li>
 <li><strong>401 Unauthorized</strong> ：该状态码表示发送的请求需要有认证信息（BASIC 认证、DIGEST 认证）。如果之前已进行过一次请求，则表示用户认证失败。</li>
 <li><strong>403 Forbidden</strong> ：请求被拒绝。</li>
 <li><strong>404 Not Found</strong></li>
 </ul>
-<h2 id="5XX-服务器错误"><a href="#5XX-服务器错误" class="headerlink" title="5XX 服务器错误"></a><a href="http://zhangchangle.com/#/notes/HTTP?id=_5xx-%e6%9c%8d%e5%8a%a1%e5%99%a8%e9%94%99%e8%af%af" target="_blank" rel="noopener">5XX 服务器错误</a></h2><ul>
+<h2 id="5XX-服务器错误"><a href="#5XX-服务器错误" class="headerlink" title="5XX 服务器错误"></a>5XX 服务器错误</h2><ul>
 <li><strong>500 Internal Server Error</strong> ：服务器正在执行请求时发生错误。</li>
 <li><strong>503 Service Unavailable</strong> ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。</li>
 </ul>
@@ -709,7 +709,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">194</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -924,7 +924,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:44</span>
+    <span title="站点阅读时长">57:26</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

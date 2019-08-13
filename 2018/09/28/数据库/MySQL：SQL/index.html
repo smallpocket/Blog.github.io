@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="MySQL必知必会，即SQL语句">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-09T06:42:47.694Z">
+<meta property="og:updated_time" content="2019-08-12T10:06:38.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL：SQL">
 <meta name="twitter:description" content="MySQL必知必会，即SQL语句">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-09 14:42:47" itemprop="dateModified" datetime="2019-08-09T14:42:47+08:00">2019-08-09</time>
+                <time title="修改时间：2019-08-12 18:06:38" itemprop="dateModified" datetime="2019-08-12T18:06:38+08:00">2019-08-12</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">3.1k</span>
+              <span title="本文字数">8.2k</span>
             </span>
           
             <span class="post-meta-item">
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">9 分钟</span>
+              <span title="阅读时长">23 分钟</span>
             </span>
           
             <div class="post-description">MySQL必知必会，即SQL语句</div>
@@ -378,7 +378,7 @@
 
       
         <h1 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h1><p>对于MySQL可以配置是否区分大小写</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> [<span class="keyword">all</span> | <span class="keyword">distinct</span>] &lt;目标列表达式&gt; [,&lt;目标列表达式&gt;]...</span><br><span class="line">	<span class="keyword">from</span> &lt;表名或视图名&gt; [,&lt;表名或视图名&gt;]...</span><br><span class="line">	[<span class="keyword">where</span> &lt;条件表达式&gt; [<span class="keyword">AND</span> | <span class="keyword">OR</span>] [表达式]]</span><br><span class="line">	[<span class="keyword">group</span> <span class="keyword">by</span> &lt;列名&gt; [<span class="keyword">having</span> &lt;表达式&gt;]]</span><br><span class="line">	[<span class="keyword">order</span> <span class="keyword">by</span> &lt;列名&gt; [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>] [,&lt;列名&gt; [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]]]</span><br><span class="line">    [<span class="keyword">limit</span> &lt;数量&gt;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> [<span class="keyword">all</span> | <span class="keyword">distinct</span>] &lt;目标列表达式&gt; [,&lt;目标列表达式||计算字段&gt;]...</span><br><span class="line">	<span class="keyword">from</span> &lt;表名或视图名&gt; [,&lt;表名或视图名&gt;]...</span><br><span class="line">	[<span class="keyword">where</span> &lt;条件表达式&gt; [<span class="keyword">AND</span> | <span class="keyword">OR</span>] [表达式]]</span><br><span class="line">	[<span class="keyword">group</span> <span class="keyword">by</span> &lt;列名&gt; [<span class="keyword">having</span> &lt;表达式&gt;]]</span><br><span class="line">	[<span class="keyword">order</span> <span class="keyword">by</span> &lt;列名&gt; [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>] [,&lt;列名&gt; [<span class="keyword">ASC</span> |<span class="keyword">DESC</span>]]]</span><br><span class="line">    [<span class="keyword">limit</span> &lt;数量&gt;]</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>select<ul>
@@ -452,7 +452,18 @@
 <p>计算字段用于直接从数据库检索出转换、计算或格式化过的数据；</p>
 <p><strong><em>字段</em></strong></p>
 <p>基本上与列的意思相同，经常互换使用。数据库列一般称为列，而术语字段通常用在计算字段的连接。</p>
-<h3 id="拼接字段"><a href="#拼接字段" class="headerlink" title="拼接字段"></a>拼接字段</h3><h2 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h2><p>以单列排序：<code>select prod_name from products order by prod_name</code></p>
+<p><strong><em>拼接字段</em></strong></p>
+<p>拼接：将值联结到一起构成单个值。使用Concat()连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">concat</span>(vend_name,<span class="string">'('</span>,vebd_country,<span class="string">')'</span>)</span><br><span class="line">	frim vendors</span><br><span class="line">	<span class="keyword">order</span> <span class="keyword">by</span> vend_name</span><br></pre></td></tr></table></figure>
+
+<p><code>Concat()</code>拼接穿，将多个串连接起来形成一个较长的串。</p>
+<p><strong><em>计算</em></strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> quantity * item_price <span class="keyword">as</span> expanded_price</span><br><span class="line">	frim orderitems</span><br><span class="line">	<span class="keyword">where</span> order_num = <span class="number">2005</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>别名是一个字段或值的替换名，用AS赋值。有时候也称为导出列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">concat</span>(vend_name,<span class="string">'('</span>,vebd_country,<span class="string">')'</span>) <span class="keyword">AS</span> vend_title</span><br><span class="line">	frim vendors</span><br><span class="line">	<span class="keyword">order</span> <span class="keyword">by</span> vend_name</span><br></pre></td></tr></table></figure>
+
+<h2 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h2><p>以单列排序：<code>select prod_name from products order by prod_name</code></p>
 <p>以多列排序：<code>select prod_id from products order by prod_price, prod_name</code></p>
 <p>按降序排序：<code>select prod_id from products order by prod_price DESC, prod_name</code></p>
 <h2 id="where"><a href="#where" class="headerlink" title="where"></a>where</h2><p>过滤单个值：<code>select prod_name from products where prod_name= &#39;2.5&#39;</code>即对<strong>串</strong>使用’’</p>
@@ -503,7 +514,185 @@
 </ul>
 <h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>使用REGEXP</p>
 <p><code>select prod_name from products where prod_name regexp &#39;1000&#39; order by prod_name</code></p>
-<h2 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h2><h2 id="联结表"><a href="#联结表" class="headerlink" title="联结表"></a>联结表</h2>
+<h2 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h2><p>分组数据，count等函数只会对其对应的分组奏效</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> vend_id, <span class="keyword">count</span>(*) <span class="keyword">as</span> num_prods</span><br><span class="line">	<span class="keyword">from</span> products </span><br><span class="line">	<span class="keyword">group</span> <span class="keyword">by</span> vend_id</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>group by子句可以包含任意数目的列，这使得能够对分组进行嵌套，为数据分组提供更细致的控制</li>
+<li>如果在group by中嵌套了分组，数据将在最后规定的分组上进行汇总，即指定的所有列都一起计算，因此不能从个别的列取回数据</li>
+<li>group by子句中列出的每个列都必须时检索列或有效的表达式</li>
+<li>如果分组列中具有NULL，则NULL将作为一个分组返回</li>
+<li>group必须在where之后，order by之前。</li>
+</ul>
+<h2 id="Having"><a href="#Having" class="headerlink" title="Having"></a>Having</h2><p>过滤分组，规定包括哪些分组，排除哪些分组。即与where不同，where过滤行，having过滤分组。</p>
+<p>例如想要列出至少有两个订单的所有顾客，因此需要基于组过滤，而不是行过滤。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cust_id <span class="keyword">from</span> orders</span><br><span class="line">	<span class="keyword">group</span> <span class="keyword">by</span> cust_id</span><br><span class="line">	<span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;=<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h1><p>嵌套在其他查询中的查询。在子查询当中，总是由内向外处理。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cust_id <span class="keyword">from</span> orders</span><br><span class="line">	<span class="keyword">where</span> order_num <span class="keyword">in</span> (</span><br><span class="line">    	<span class="keyword">select</span> order_num <span class="keyword">from</span> orderitems</span><br><span class="line">    	<span class="keyword">where</span> prod_id = <span class="string">'TNT2'</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>列必须匹配：where子句当中使用子查询，则应该保证select语句具有与where子句中相同数目的列，通常子查询将返回单个列并与单个列匹配，但如果需要也可以使用多个列</p>
+</blockquote>
+<p>子查询也可以使用=、&lt;&gt;等</p>
+<p>子查询并不总是执行这种类型的数据检索的最有效的方法。</p>
+<h3 id="作为计算字段"><a href="#作为计算字段" class="headerlink" title="作为计算字段"></a>作为计算字段</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cust_name (<span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> orders </span><br><span class="line">                 <span class="keyword">where</span> orders.cust_id = customers.cust_id)<span class="keyword">as</span> orders</span><br><span class="line">       <span class="keyword">from</span> customers <span class="keyword">order</span> <span class="keyword">by</span> cust_name;</span><br></pre></td></tr></table></figure>
+
+<p>子查询并不总是执行这种类型的数据检索的最有效的方法。</p>
+<h2 id="联结表"><a href="#联结表" class="headerlink" title="联结表"></a>联结表</h2><p>联结是一种机制，用来在一条select语句中关联表。可以联结多个表返回一组输出，联结在运行时关联表中正确的行。</p>
+<p><strong><em>等值联结</em></strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> vend_name, prod_name </span><br><span class="line">	<span class="keyword">from</span> vendors, products</span><br><span class="line">	<span class="keyword">where</span> vendors.vend_id = products.vend_id</span><br><span class="line">	<span class="keyword">order</span> <span class="keyword">by</span> vend_name, prod_name</span><br></pre></td></tr></table></figure>
+
+<p>如果没有where语句，则将返回<strong>笛卡儿积</strong>，即返回的行数目，是第一个表的行数*第二个表。</p>
+<p>联结的表越多，性能越差</p>
+<p><strong><em>内部联结（其效果与等值一样）</em></strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> vend_name, prod_name </span><br><span class="line">	<span class="keyword">from</span> vendors <span class="keyword">inner</span> <span class="keyword">join</span> products</span><br><span class="line">	<span class="keyword">on</span> vendors.vend_id = products.vend_id</span><br></pre></td></tr></table></figure>
+
+<p>即在from处不同，并且使用了ON子句，而不是where</p>
+<p><strong>where虽然简单，但是innerjoin是首选语法，能够确保不会忘记联结条件，并且性能可能会稍微好一些</strong></p>
+<h3 id="高级联结"><a href="#高级联结" class="headerlink" title="高级联结"></a>高级联结</h3><p>使用别名进行联结</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select vend_name, prod_name </span><br><span class="line">	from vendors as v inner join products as p</span><br><span class="line">	on v.vend_id = p.vend_id</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>自联结</em></strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> p1.prod_id, p1.prod_name</span><br><span class="line">	<span class="keyword">from</span> products <span class="keyword">as</span> p1, products <span class="keyword">as</span> p2</span><br><span class="line">	<span class="keyword">where</span> p1.vend_id = p2.vend_id <span class="keyword">and</span> p2.vend_id = <span class="string">'DTNTR'</span></span><br></pre></td></tr></table></figure>
+
+<p>等价于：但是自联结的速度要快很多</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_id, prod_name <span class="keyword">from</span> products</span><br><span class="line">	<span class="keyword">where</span> vend_id = (<span class="keyword">select</span> vend_id</span><br><span class="line">		<span class="keyword">from</span> products</span><br><span class="line">		<span class="keyword">where</span> prod_id = <span class="string">'DTNTR'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>自然联结</em></strong></p>
+<p>对表进行联结时，可能有一个列不止一次出现在不止一个表当中，内部联结返回所有数据，自然联结排除多次出现，使得每个列只返回一次。但是MYSQL不自动完成该工作</p>
+<p><strong><em>外部联结</em></strong></p>
+<p>需要包含没有关联行的那些行。例如列出所有产品以及订购数量，包括没有人订购的产品。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> customers.cust_id, orders.order_num</span><br><span class="line">	<span class="keyword">from</span> customers <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> orders</span><br><span class="line">	<span class="keyword">on</span> customers.cust_id = orders.cust_id</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用联结和联结条件"><a href="#使用联结和联结条件" class="headerlink" title="使用联结和联结条件"></a>使用联结和联结条件</h3><ul>
+<li>注意所使用的联结类型，一般使用内部联结，但外部联结也是有效的</li>
+<li>保证使用正确的联结条件，</li>
+<li>在一个联结中可以包含多个表，甚至对于每个联结可以采用不同的联结类型。但在一起测试前，应该分别测试每个联结。</li>
+</ul>
+<h2 id="组合查询"><a href="#组合查询" class="headerlink" title="组合查询"></a>组合查询</h2><p>执行多个查询，并将结果作为单个返回及返回。应用场景：</p>
+<ul>
+<li>在单个查询中从不同的表返回类似结构的数据</li>
+<li>对单个表执行多个查询，按单个查询返回数据。</li>
+</ul>
+<p>利用UNION进行组合。</p>
+<p>UNION会自动去除重复行，其<strong>作用与单select使用多个where一样</strong>。如果需要重复行，则进行UNION ALL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select vend_id from products</span><br><span class="line">	where prod_price &lt;=5</span><br><span class="line">UNION</span><br><span class="line">select vend_id from products</span><br><span class="line">	where vend_id in (1001,1002)</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>UNION规则</em></strong></p>
+<p>必须由两条或两条以上的select组成，并且每个查询必须包含相同的列、表达式或聚集函数</p>
+<p>列数据类型必须兼容，类型可以不完全相同，但是必须是可以隐式转换的类型。</p>
+<h1 id="全文本搜索"><a href="#全文本搜索" class="headerlink" title="全文本搜索"></a>全文本搜索</h1><p>MyISAM引擎支持，使用全文本必须索引被搜索的列，索引后，select可与<code>match()</code>和<code>against()</code>一起使用以实际执行搜索。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> productnotes&#123;</span><br><span class="line">	note_text <span class="built_in">text</span> <span class="literal">null</span>,</span><br><span class="line">	FULLTEXT(note_text)<span class="comment">#表明进行全文索引</span></span><br><span class="line">&#125;<span class="keyword">ENGINE</span>=MyISAM</span><br></pre></td></tr></table></figure>
+
+<p>在导入数据时不应该开启FULLTEXT，而应该先导入数据，之后在开启索引，有助于更快地导入数据。</p>
+<p>搜索</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> note_text <span class="keyword">from</span> productnotes</span><br><span class="line">	<span class="keyword">where</span> <span class="keyword">match</span>(note_text) against(<span class="string">'rabbit'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询扩展"><a href="#查询扩展" class="headerlink" title="查询扩展"></a>查询扩展</h3><p>查询扩展用来设法放款所返回的全文本搜索结果的范围，</p>
+<h3 id="布尔搜索"><a href="#布尔搜索" class="headerlink" title="布尔搜索"></a>布尔搜索</h3><p>以布尔的形式提供如下内容的细节</p>
+<ul>
+<li>要匹配的词</li>
+<li>要排斥的词</li>
+<li>排列提示（指定某些词比其他词更重要）</li>
+<li>表达式分组</li>
+<li>另外一些内容</li>
+</ul>
+<h1 id="Insert、update、delete"><a href="#Insert、update、delete" class="headerlink" title="Insert、update、delete"></a>Insert、update、delete</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> customers <span class="keyword">values</span>(<span class="literal">null</span>,<span class="string">'test'</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> customers(cust_name, cust_address) <span class="keyword">values</span>(<span class="literal">null</span>, <span class="string">'test'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>省略列需要满足以下某个条件：</p>
+<ul>
+<li>该列定义位允许NULL</li>
+<li>在表定义中给出默认值</li>
+</ul>
+<p><strong><em>插入多行</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into customers(cust_name, cust_address) values(null, &apos;test&apos;),(&apos;do&apos;,&apos;test2&apos;)</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>插入检索出的数据</em></strong></p>
+<p>这里并不关心表名，只关心第几列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into customers(cust_name, cust_address) select cust_id,cust_address from custnew;</span><br></pre></td></tr></table></figure>
+
+<h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><p>update可以更新表中特定行，或表中所有行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> customers </span><br><span class="line"><span class="keyword">set</span> cust_email = <span class="string">'ela@gamil.com'</span></span><br><span class="line"><span class="keyword">where</span> cust_id =<span class="number">10005</span></span><br></pre></td></tr></table></figure>
+
+<p>在update语句中可以使用子查询。</p>
+<h3 id="IGNORE"><a href="#IGNORE" class="headerlink" title="IGNORE"></a>IGNORE</h3><p>如果update更新多行，如果在更新其中一行时出错，整个update会被取消。如果希望即使错误也继续执行则可以使用ignore</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">ignore</span> customers</span><br></pre></td></tr></table></figure>
+
+<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from customers where cust_id =10006</span><br></pre></td></tr></table></figure>
+
+<h1 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h1><p><strong><em>删除表</em></strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> customer2;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>重命名表</em></strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">rename</span> <span class="keyword">table</span> customer2 <span class="keyword">to</span> customer</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新表"><a href="#更新表" class="headerlink" title="更新表"></a>更新表</h2><p>新增一列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> vendors <span class="keyword">add</span> vend_phone <span class="built_in">char</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+
+<p>新增外键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table orders </span><br><span class="line">	add constranint fk_orders_customers foreign key (cust_id)</span><br><span class="line">	references customers (cust_id)</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h2><p>用于汇总数据而不用将它们实际检索出来。例如确定表中的行数，找出最大值等。</p>
+<p>聚集函数：运行在行组上，计算和返回单个值的函数。</p>
+<ul>
+<li>AVG()：堆表中的行数计数并计算特定列值之和，求得该列的平均值。会忽略所有值为NULL的行</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">AVG</span>(prod_price) <span class="keyword">as</span> avg_price </span><br><span class="line">	<span class="keyword">from</span> products</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>COUNT()：<ul>
+<li>count(*)计算所有行，不管是NULL还是非空</li>
+<li>count(column)对特定列计数，并忽略NULL</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">as</span> num_cust <span class="keyword">from</span> customers</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MAX()：可以用于返回文本列的数据，</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">MAX</span>(prod_price) <span class="keyword">from</span> products</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>SUM()：忽略NULL行</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">SUM</span>(prod_price) <span class="keyword">from</span> products</span><br></pre></td></tr></table></figure>
+
+<h3 id="聚集不同值"><a href="#聚集不同值" class="headerlink" title="聚集不同值"></a>聚集不同值</h3><p>即Distinct与ALL。ALL为默认值。当使用Distinct时，各个聚集函数只会考虑不同的值。</p>
+<h2 id="处理函数"><a href="#处理函数" class="headerlink" title="处理函数"></a>处理函数</h2><p>文本串处理函数</p>
+<ul>
+<li>Trim()：去除串左右的空格<ul>
+<li>R(L)tim()：删除数据右(左)侧多余的空格</li>
+</ul>
+</li>
+<li>Upper()：将文本转换为大写<ul>
+<li>Lower()：转换为小写</li>
+</ul>
+</li>
+<li>SubString()：返回子串中的字符</li>
+</ul>
+<p>数值计算函数</p>
+<p>日期与时间函数</p>
+<p>系统函数</p>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><ul>
+<li>重用SQL语句</li>
+<li>简化复杂的SQL操作，编写查询后，可以方便地重用而不必知道具体的查询细节</li>
+<li>使用表的组成部分而不是整个表</li>
+<li>保护数据</li>
+<li>更改数据格式和表示</li>
+</ul>
+<p>因为视图不包含数据，如果使用了多个联结和过滤创建了复杂的视图，可能性能下降很多。</p>
+<p><strong>创建视图</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> productcustomers <span class="keyword">as</span> </span><br><span class="line">	<span class="keyword">select</span> cust_name,cust_contact,prod_id</span><br><span class="line">	<span class="keyword">from</span> customers,orders,orderitems</span><br><span class="line">	<span class="keyword">where</span> customers.cust_id = orders.cust_id</span><br><span class="line">	<span class="keyword">and</span> orderitems.order_num = orders.order_num</span><br></pre></td></tr></table></figure>
+
+<p>查询创建视图的语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">view</span> viewname</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除视图</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop view viewname</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -588,7 +777,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">194</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -767,7 +956,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#检索"><span class="nav-number">1.</span> <span class="nav-text">检索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单搜索"><span class="nav-number">1.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建计算字段"><span class="nav-number">1.2.</span> <span class="nav-text">创建计算字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拼接字段"><span class="nav-number">1.2.1.</span> <span class="nav-text">拼接字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order-by"><span class="nav-number">1.3.</span> <span class="nav-text">order by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#where"><span class="nav-number">1.4.</span> <span class="nav-text">where</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符"><span class="nav-number">1.4.1.</span> <span class="nav-text">操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合过滤"><span class="nav-number">1.4.2.</span> <span class="nav-text">组合过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符过滤"><span class="nav-number">1.4.3.</span> <span class="nav-text">通配符过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.4.4.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-by"><span class="nav-number">1.5.</span> <span class="nav-text">group by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联结表"><span class="nav-number">1.6.</span> <span class="nav-text">联结表</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#检索"><span class="nav-number">1.</span> <span class="nav-text">检索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单搜索"><span class="nav-number">1.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建计算字段"><span class="nav-number">1.2.</span> <span class="nav-text">创建计算字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#别名"><span class="nav-number">1.2.1.</span> <span class="nav-text">别名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order-by"><span class="nav-number">1.3.</span> <span class="nav-text">order by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#where"><span class="nav-number">1.4.</span> <span class="nav-text">where</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符"><span class="nav-number">1.4.1.</span> <span class="nav-text">操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合过滤"><span class="nav-number">1.4.2.</span> <span class="nav-text">组合过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符过滤"><span class="nav-number">1.4.3.</span> <span class="nav-text">通配符过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.4.4.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-by"><span class="nav-number">1.5.</span> <span class="nav-text">group by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Having"><span class="nav-number">1.6.</span> <span class="nav-text">Having</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子查询"><span class="nav-number">2.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作为计算字段"><span class="nav-number">2.0.1.</span> <span class="nav-text">作为计算字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联结表"><span class="nav-number">2.1.</span> <span class="nav-text">联结表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#高级联结"><span class="nav-number">2.1.1.</span> <span class="nav-text">高级联结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用联结和联结条件"><span class="nav-number">2.1.2.</span> <span class="nav-text">使用联结和联结条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合查询"><span class="nav-number">2.2.</span> <span class="nav-text">组合查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全文本搜索"><span class="nav-number">3.</span> <span class="nav-text">全文本搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询扩展"><span class="nav-number">3.0.1.</span> <span class="nav-text">查询扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔搜索"><span class="nav-number">3.0.2.</span> <span class="nav-text">布尔搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Insert、update、delete"><span class="nav-number">4.</span> <span class="nav-text">Insert、update、delete</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#update"><span class="nav-number">4.1.</span> <span class="nav-text">update</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IGNORE"><span class="nav-number">4.1.1.</span> <span class="nav-text">IGNORE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete"><span class="nav-number">4.2.</span> <span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表操作"><span class="nav-number">5.</span> <span class="nav-text">表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#更新表"><span class="nav-number">5.1.</span> <span class="nav-text">更新表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-number">6.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#聚集函数"><span class="nav-number">6.1.</span> <span class="nav-text">聚集函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集不同值"><span class="nav-number">6.1.1.</span> <span class="nav-text">聚集不同值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理函数"><span class="nav-number">6.2.</span> <span class="nav-text">处理函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图"><span class="nav-number">7.</span> <span class="nav-text">视图</span></a></li></ol></div>
             
 
           </div>
@@ -803,7 +992,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:44</span>
+    <span title="站点阅读时长">57:26</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

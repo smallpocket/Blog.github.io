@@ -57,13 +57,13 @@
   };
 </script>
 
-  <meta name="description" content="关系数据库设计理论函数依赖记 A-&amp;gt;B 表示 A 函数决定 B，也可以说 B 函数依赖于 A。 如果 {A1，A2，… ，An} 是关系的一个或多个属性的集合，该集合函数决定了关系的其它所有属性并且是最小的，那么该集合就称为键码。 对于 A-&amp;gt;B，如果能找到 A 的真子集 A’，使得 A’-&amp;gt; B，那么 A-&amp;gt;B 就是部分函数依赖，否则就是完全函数依赖。 对于 A-&amp;gt;">
+  <meta name="description" content="MySQL数据类型串串数据类型存储串。并有定长串与变长串两种类型。串值需要在引号内（单引号最好） 定长串：接受长度固定的字符串，长度在建表时指定。（处理定长列速度很多）  CHAR：1-255个字符定长串，默认长度为1  变长串：存储可变长度的文本。有些变长数据类型具有最大的定长，有些完全变长的。（无法对变长列索引）  Varchar：长度可变，最大255 Text：最大长度64K TinyTex">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL：数据库原理">
 <meta property="og:url" content="http://yoursite.com/2019/05/09/数据库/MySQL：数据库原理/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="关系数据库设计理论函数依赖记 A-&amp;gt;B 表示 A 函数决定 B，也可以说 B 函数依赖于 A。 如果 {A1，A2，… ，An} 是关系的一个或多个属性的集合，该集合函数决定了关系的其它所有属性并且是最小的，那么该集合就称为键码。 对于 A-&amp;gt;B，如果能找到 A 的真子集 A’，使得 A’-&amp;gt; B，那么 A-&amp;gt;B 就是部分函数依赖，否则就是完全函数依赖。 对于 A-&amp;gt;">
+<meta property="og:description" content="MySQL数据类型串串数据类型存储串。并有定长串与变长串两种类型。串值需要在引号内（单引号最好） 定长串：接受长度固定的字符串，长度在建表时指定。（处理定长列速度很多）  CHAR：1-255个字符定长串，默认长度为1  变长串：存储可变长度的文本。有些变长数据类型具有最大的定长，有些完全变长的。（无法对变长列索引）  Varchar：长度可变，最大255 Text：最大长度64K TinyTex">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/05/09/数据库/%E6%95%B0%E6%8D%AE%E5%BA%93/assets/c2d343f7-604c-4856-9a3c-c71d6f67fecc.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/09/数据库/%E6%95%B0%E6%8D%AE%E5%BA%93/assets/292b4a35-4507-4256-84ff-c218f108ee31.jpg">
@@ -76,10 +76,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/09/数据库/MySQL：数据库原理/assets/66ae164c-ad47-4905-895e-51fe38ce797a.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/09/数据库/MySQL：数据库原理/assets/8fdc577d-552d-4b43-b5e4-a8f98bc2cb51.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/09/数据库/MySQL：数据库原理/assets/e41405a8-7c05-4f70-8092-e961e28d3112.jpg">
-<meta property="og:updated_time" content="2019-06-04T01:27:00.530Z">
+<meta property="og:updated_time" content="2019-08-12T07:36:37.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL：数据库原理">
-<meta name="twitter:description" content="关系数据库设计理论函数依赖记 A-&amp;gt;B 表示 A 函数决定 B，也可以说 B 函数依赖于 A。 如果 {A1，A2，… ，An} 是关系的一个或多个属性的集合，该集合函数决定了关系的其它所有属性并且是最小的，那么该集合就称为键码。 对于 A-&amp;gt;B，如果能找到 A 的真子集 A’，使得 A’-&amp;gt; B，那么 A-&amp;gt;B 就是部分函数依赖，否则就是完全函数依赖。 对于 A-&amp;gt;">
+<meta name="twitter:description" content="MySQL数据类型串串数据类型存储串。并有定长串与变长串两种类型。串值需要在引号内（单引号最好） 定长串：接受长度固定的字符串，长度在建表时指定。（处理定长列速度很多）  CHAR：1-255个字符定长串，默认长度为1  变长串：存储可变长度的文本。有些变长数据类型具有最大的定长，有些完全变长的。（无法对变长列索引）  Varchar：长度可变，最大255 Text：最大长度64K TinyTex">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/09/数据库/%E6%95%B0%E6%8D%AE%E5%BA%93/assets/c2d343f7-604c-4856-9a3c-c71d6f67fecc.png">
   <link rel="canonical" href="http://yoursite.com/2019/05/09/数据库/MySQL：数据库原理/">
 
@@ -336,7 +336,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-04 09:27:00" itemprop="dateModified" datetime="2019-06-04T09:27:00+08:00">2019-06-04</time>
+                <time title="修改时间：2019-08-12 15:36:37" itemprop="dateModified" datetime="2019-08-12T15:36:37+08:00">2019-08-12</time>
               </span>
             
           
@@ -374,7 +374,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">30 分钟</span>
+              <span title="阅读时长">33 分钟</span>
             </span>
           
 
@@ -387,7 +387,53 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="关系数据库设计理论"><a href="#关系数据库设计理论" class="headerlink" title="关系数据库设计理论"></a>关系数据库设计理论</h1><h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><p>记 A-&gt;B 表示 A 函数决定 B，也可以说 B 函数依赖于 A。</p>
+        <h1 id="MySQL数据类型"><a href="#MySQL数据类型" class="headerlink" title="MySQL数据类型"></a>MySQL数据类型</h1><h2 id="串"><a href="#串" class="headerlink" title="串"></a>串</h2><p>串数据类型存储串。并有定长串与变长串两种类型。串值需要在引号内（单引号最好）</p>
+<p>定长串：接受长度固定的字符串，长度在建表时指定。（处理定长列速度很多）</p>
+<ul>
+<li>CHAR：1-255个字符定长串，默认长度为1</li>
+</ul>
+<p>变长串：存储可变长度的文本。有些变长数据类型具有最大的定长，有些完全变长的。（无法对变长列索引）</p>
+<ul>
+<li>Varchar：长度可变，最大255</li>
+<li>Text：最大长度64K</li>
+<li>TinyText：最大长度255</li>
+<li>LongText：最大长度4GB</li>
+<li>MediumText：最大长度16K</li>
+</ul>
+<ul>
+<li>ENUM：接受最多64K个串组成应该预定义集合的某个串</li>
+<li>SET：接受最多64个串组成应该预定义集合的零个或某个串</li>
+</ul>
+<h2 id="数值数据"><a href="#数值数据" class="headerlink" title="数值数据"></a>数值数据</h2><p>数值不使用引号，对于货币一般使用Decimal(8,2)</p>
+<p>除了BIT和Boolean都可以由符号或无符号，默认是有符号，可以使用UNSIGNED取消存储负数。</p>
+<ul>
+<li>BIT：1字节，位字段，1~64位</li>
+<li>BigInt：8字节，整数值，-2^63^~2^63^</li>
+<li>Boolean：1字节，0或1</li>
+<li>Decimal：自定义长度，精度可变的浮点值</li>
+<li>Double：8字节，双精度浮点</li>
+<li>Float：4或8字节，单精度浮点</li>
+<li>Int：4字节，整数值-2^31^~2^31^</li>
+<li>MediumInt：3字节，</li>
+<li>Real：4字节，浮点值</li>
+<li>SmallInt：2字节，</li>
+<li>TinyInt：1字节，</li>
+</ul>
+<h2 id="日期与时间数据类型"><a href="#日期与时间数据类型" class="headerlink" title="日期与时间数据类型"></a>日期与时间数据类型</h2><ul>
+<li>Date：表示YYYY-MM-DD日期</li>
+<li>DateTime：Date与Time组合</li>
+<li>TimeStamp：与DateTime相同，但范围较小</li>
+<li>Time：格式位HH:MM:SS</li>
+<li>Year：2位数字表示，（19）70<del>（20）69。4位数字表示：1901</del>2155</li>
+</ul>
+<h2 id="二进制数据类型"><a href="#二进制数据类型" class="headerlink" title="二进制数据类型"></a>二进制数据类型</h2><p>可以存储任何数据，如图像、多媒体等</p>
+<ul>
+<li>Blob：最大长度64KB</li>
+<li>MediumBlob：最大长度16MB</li>
+<li>LongBlob：最大长度4GB</li>
+<li>TinyBlob：最大长度255字节</li>
+</ul>
+<h1 id="关系数据库设计理论"><a href="#关系数据库设计理论" class="headerlink" title="关系数据库设计理论"></a>关系数据库设计理论</h1><h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><p>记 A-&gt;B 表示 A 函数决定 B，也可以说 B 函数依赖于 A。</p>
 <p>如果 {A1，A2，… ，An} 是关系的一个或多个属性的集合，该集合函数决定了关系的其它所有属性并且是最小的，那么该集合就称为键码。</p>
 <p>对于 A-&gt;B，如果能找到 A 的真子集 A’，使得 A’-&gt; B，那么 A-&gt;B 就是部分函数依赖，否则就是完全函数依赖。</p>
 <p>对于 A-&gt;B，B-&gt;C，则 A-&gt;C 是一个传递函数依赖。</p>
@@ -1132,7 +1178,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">194</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1311,7 +1357,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关系数据库设计理论"><span class="nav-number">1.</span> <span class="nav-text">关系数据库设计理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数依赖"><span class="nav-number">1.0.1.</span> <span class="nav-text">函数依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-number">1.0.2.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范式"><span class="nav-number">1.0.3.</span> <span class="nav-text">范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ER-图"><span class="nav-number">1.1.</span> <span class="nav-text">ER 图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表示出现多次的关系"><span class="nav-number">1.1.1.</span> <span class="nav-text">表示出现多次的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联系的多向性"><span class="nav-number">1.1.2.</span> <span class="nav-text">联系的多向性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示子类"><span class="nav-number">1.1.3.</span> <span class="nav-text">表示子类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL"><span class="nav-number">2.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发一致性问题"><span class="nav-number">2.1.</span> <span class="nav-text">并发一致性问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#丢失修改"><span class="nav-number">2.1.1.</span> <span class="nav-text">丢失修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脏读"><span class="nav-number">2.1.2.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可重复读"><span class="nav-number">2.1.3.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#幻读"><span class="nav-number">2.1.4.</span> <span class="nav-text">幻读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封锁"><span class="nav-number">2.2.</span> <span class="nav-text">封锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封锁粒度"><span class="nav-number">2.2.1.</span> <span class="nav-text">封锁粒度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封锁类型"><span class="nav-number">2.2.2.</span> <span class="nav-text">封锁类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读写锁"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">读写锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#意向锁"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">意向锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封锁协议"><span class="nav-number">2.2.3.</span> <span class="nav-text">封锁协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三级封锁协议"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">三级封锁协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两段锁协议"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">两段锁协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL隐式与显式锁定"><span class="nav-number">2.2.4.</span> <span class="nav-text">MySQL隐式与显式锁定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离级别"><span class="nav-number">2.3.</span> <span class="nav-text">隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未提交读-Read-Uncommitted"><span class="nav-number">2.3.1.</span> <span class="nav-text">未提交读(Read Uncommitted)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交读-Read-Committed"><span class="nav-number">2.3.2.</span> <span class="nav-text">提交读(Read Committed)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可重复读-Repeated-Read"><span class="nav-number">2.3.3.</span> <span class="nav-text">可重复读(Repeated Read)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串行读-Serializable"><span class="nav-number">2.3.4.</span> <span class="nav-text">串行读(Serializable)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多版本并发控制"><span class="nav-number">2.4.</span> <span class="nav-text">多版本并发控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本号"><span class="nav-number">2.4.1.</span> <span class="nav-text">版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐藏的列"><span class="nav-number">2.4.2.</span> <span class="nav-text">隐藏的列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Undo日志"><span class="nav-number">2.4.3.</span> <span class="nav-text">Undo日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现过程"><span class="nav-number">2.4.4.</span> <span class="nav-text">实现过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快照读与当前读"><span class="nav-number">2.4.5.</span> <span class="nav-text">快照读与当前读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-Key-Locks"><span class="nav-number">2.5.</span> <span class="nav-text">Next-Key Locks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Record-Locks"><span class="nav-number">2.5.1.</span> <span class="nav-text">Record Locks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gap-Locks"><span class="nav-number">2.5.2.</span> <span class="nav-text">Gap Locks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#READ-COMMITTED"><span class="nav-number">2.5.2.1.</span> <span class="nav-text">READ COMMITTED</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SERIALIZABLE"><span class="nav-number">2.5.2.2.</span> <span class="nav-text">SERIALIZABLE</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-Key-Locks-1"><span class="nav-number">2.5.3.</span> <span class="nav-text">Next-Key Locks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL数据类型"><span class="nav-number">1.</span> <span class="nav-text">MySQL数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#串"><span class="nav-number">1.1.</span> <span class="nav-text">串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值数据"><span class="nav-number">1.2.</span> <span class="nav-text">数值数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期与时间数据类型"><span class="nav-number">1.3.</span> <span class="nav-text">日期与时间数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制数据类型"><span class="nav-number">1.4.</span> <span class="nav-text">二进制数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关系数据库设计理论"><span class="nav-number">2.</span> <span class="nav-text">关系数据库设计理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数依赖"><span class="nav-number">2.0.1.</span> <span class="nav-text">函数依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-number">2.0.2.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范式"><span class="nav-number">2.0.3.</span> <span class="nav-text">范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ER-图"><span class="nav-number">2.1.</span> <span class="nav-text">ER 图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表示出现多次的关系"><span class="nav-number">2.1.1.</span> <span class="nav-text">表示出现多次的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联系的多向性"><span class="nav-number">2.1.2.</span> <span class="nav-text">联系的多向性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示子类"><span class="nav-number">2.1.3.</span> <span class="nav-text">表示子类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL"><span class="nav-number">3.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发一致性问题"><span class="nav-number">3.1.</span> <span class="nav-text">并发一致性问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#丢失修改"><span class="nav-number">3.1.1.</span> <span class="nav-text">丢失修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脏读"><span class="nav-number">3.1.2.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可重复读"><span class="nav-number">3.1.3.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#幻读"><span class="nav-number">3.1.4.</span> <span class="nav-text">幻读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封锁"><span class="nav-number">3.2.</span> <span class="nav-text">封锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封锁粒度"><span class="nav-number">3.2.1.</span> <span class="nav-text">封锁粒度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封锁类型"><span class="nav-number">3.2.2.</span> <span class="nav-text">封锁类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读写锁"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">读写锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#意向锁"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">意向锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封锁协议"><span class="nav-number">3.2.3.</span> <span class="nav-text">封锁协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三级封锁协议"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">三级封锁协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两段锁协议"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">两段锁协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL隐式与显式锁定"><span class="nav-number">3.2.4.</span> <span class="nav-text">MySQL隐式与显式锁定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离级别"><span class="nav-number">3.3.</span> <span class="nav-text">隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未提交读-Read-Uncommitted"><span class="nav-number">3.3.1.</span> <span class="nav-text">未提交读(Read Uncommitted)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交读-Read-Committed"><span class="nav-number">3.3.2.</span> <span class="nav-text">提交读(Read Committed)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可重复读-Repeated-Read"><span class="nav-number">3.3.3.</span> <span class="nav-text">可重复读(Repeated Read)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串行读-Serializable"><span class="nav-number">3.3.4.</span> <span class="nav-text">串行读(Serializable)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多版本并发控制"><span class="nav-number">3.4.</span> <span class="nav-text">多版本并发控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本号"><span class="nav-number">3.4.1.</span> <span class="nav-text">版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐藏的列"><span class="nav-number">3.4.2.</span> <span class="nav-text">隐藏的列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Undo日志"><span class="nav-number">3.4.3.</span> <span class="nav-text">Undo日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现过程"><span class="nav-number">3.4.4.</span> <span class="nav-text">实现过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快照读与当前读"><span class="nav-number">3.4.5.</span> <span class="nav-text">快照读与当前读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-Key-Locks"><span class="nav-number">3.5.</span> <span class="nav-text">Next-Key Locks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Record-Locks"><span class="nav-number">3.5.1.</span> <span class="nav-text">Record Locks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gap-Locks"><span class="nav-number">3.5.2.</span> <span class="nav-text">Gap Locks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#READ-COMMITTED"><span class="nav-number">3.5.2.1.</span> <span class="nav-text">READ COMMITTED</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SERIALIZABLE"><span class="nav-number">3.5.2.2.</span> <span class="nav-text">SERIALIZABLE</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-Key-Locks-1"><span class="nav-number">3.5.3.</span> <span class="nav-text">Next-Key Locks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1347,7 +1393,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:44</span>
+    <span title="站点阅读时长">57:26</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

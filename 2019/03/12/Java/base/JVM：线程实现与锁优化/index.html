@@ -67,10 +67,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1564554481522.png">
 <meta property="og:image" content="http://yoursite.com/assets/1564554816857.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/12/Java/base/JVM：线程实现与锁优化/assets/bb6a49be-00f2-4f27-a0ce-4ed764bc605c.png">
-<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1552396993384.png">
-<meta property="og:image" content="c:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1552397312820.png">
-<meta property="og:updated_time" content="2019-08-01T06:36:08.891Z">
+<meta property="og:image" content="http://yoursite.com/assets/bb6a49be-00f2-4f27-a0ce-4ed764bc605c.png">
+<meta property="og:updated_time" content="2019-08-11T07:54:40.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：线程实现与锁优化">
 <meta name="twitter:description" content="Java">
@@ -330,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 14:36:08" itemprop="dateModified" datetime="2019-08-01T14:36:08+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-11 15:54:40" itemprop="dateModified" datetime="2019-08-11T15:54:40+08:00">2019-08-11</time>
               </span>
             
           
@@ -426,22 +424,20 @@
 
 <p>每个 append() 方法中都有一个同步块。虚拟机观察变量 sb，很快就会发现它的动态作用域被限制在 concatString() 方法内部。也就是说，sb 的所有引用永远不会逃逸到 concatString() 方法之外，其他线程无法访问到它，因此可以进行消除。</p>
 <h2 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h2><p>推荐同步块的作用范围限制尽量小，但如果一系列连续操作都对同一个对象反复加锁和解锁。这时虚拟机探测到这些时，将会将加锁同步的范围扩展到整个操作序列的外部。</p>
-<h2 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h2><p>JDK 1.6 引入了偏向锁和轻量级锁，从而让锁拥有了四个状态：无锁状态（unlocked）、偏向锁状态（biasble）、轻量级锁状态（lightweight locked）和重量级锁状态（inflated）。</p>
+<h2 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h2><p>JDK 1.6引入了偏向锁和轻量级锁，从而让锁拥有了四个状态：无锁状态（unlocked）、偏向锁状态（biasble）、轻量级锁状态（lightweight locked）和重量级锁状态（inflated）。</p>
 <p>在没有多线程竞争的前提下，减少传统的重量级锁使用操作系统互斥量产生的性能消耗。</p>
 <p>无竞争下使用CAS操作去消除同步使用的互斥量</p>
 <ul>
 <li>HotSpot虚拟机的对象内存布局：对象头包括两部分<ul>
 <li>存储对象自身的运行时数据，如哈希码，GC分代年龄等，在64位虚拟机中为64Bits，称为Mark Word，是轻量级锁与偏向锁的关键</li>
 <li>存储指向方法区对象类型数据的指针，如果是数组对象，则还会存储数组长度。</li>
-<li><img src="assets/bb6a49be-00f2-4f27-a0ce-4ed764bc605c.png" alt="img"></li>
-<li><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1552396993384.png" alt="1552396993384"></li>
+<li><img src="/assets/bb6a49be-00f2-4f27-a0ce-4ed764bc605c.png" alt="img"></li>
 </ul>
 </li>
 <li>轻量级锁执行过程：<ul>
 <li>代码进入同步块时，如果此同步对象没有被锁定（标志位01），虚拟机将在当前线程的栈帧建立一个名为锁记录的空间，存储锁对象目前的Mark Word拷贝</li>
 <li>虚拟机将使用CAS操作尝试将对象的Mark Word更新为指向Lock Record的指针<ul>
 <li>如果更新成功，则线程拥有了该对象的锁，锁标志位变为00</li>
-<li><img src="C:%5CUsers%5CHeper%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1552397312820.png" alt="1552397312820"></li>
 <li>更新失败，虚拟机首先检查对象的Mark Word是否指向当前线程的栈帧，<ul>
 <li>如果只说明当前线程已经拥有了这个对象的锁，那么就可以直接进入同步块继续执行。</li>
 <li>否则说明这个锁对象已经被其他线程抢占</li>
@@ -554,7 +550,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">194</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -769,7 +765,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:44</span>
+    <span title="站点阅读时长">57:26</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

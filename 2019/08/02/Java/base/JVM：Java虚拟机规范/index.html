@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-03T08:22:36.458Z">
+<meta property="og:updated_time" content="2019-08-11T07:52:24.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：Java虚拟机规范">
 <meta name="twitter:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
@@ -272,7 +272,7 @@
   <div id="posts" class="posts-expand">
     
 
-  <article class="post post-type-tags,categories" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-03 16:22:36" itemprop="dateModified" datetime="2019-08-03T16:22:36+08:00">2019-08-03</time>
+                <time title="修改时间：2019-08-11 15:52:24" itemprop="dateModified" datetime="2019-08-11T15:52:24+08:00">2019-08-11</time>
               </span>
             
           
@@ -414,20 +414,20 @@
 <p>对于数组的元素类型，其必须是原生类型、类类型或接口类型之一。</p>
 <p>在引用类型的值中有一个特殊的值null，当一个引用不指向任何对象的时候，它的值就为null。引用类型的默认值就是null</p>
 <h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><p>详情参见 JVM：内存管理</p>
-<h2 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h2><p>栈帧是用来存储数据和部分过程结果的数据结构，同时也用来处理动态链接、方法返回值和异常分派.</p>
+<h2 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h2><p>栈帧是用来存储数据和部分过程结果的数据结构，同时也用来处理动态链接、方法返回值和异常分派。</p>
 <p>栈帧随着方法调用而创建，随着方法结束而销毁。无论方法是正常完成还是异常完成都算作方法结束。</p>
 <p>栈帧的存储空间分配在虚拟机栈当中，并且每一个栈帧有自己的局部变量表、操作数栈、和指向当前方法所属的类的运行时常量池的引用。并且栈帧还允许携带与JVM实现相关的一些附加信息，例如对程序调试提供支持。</p>
 <p>在某条线程执行过程中的某个时间点上，只有目前正在执行的那个方法的栈帧是活动的。当方法返回时，当前栈帧会传回此方法的执行结果给前一个栈帧，然后JVM丢弃该栈帧。</p>
 <h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h3><p>每个栈帧内部都包含一组称为局部变量表的变量列表（<strong>其中包括基础数据类型，例如boolean等、对象的引用或returnAddress</strong>），栈帧内的局部变量表的长度由编译器决定，并且存储于类或接口的二进制表示中，即存储在方法的<code>Code</code>属性当中，并提供给栈帧使用。</p>
 <p>局部变量表需要的内存空间在编译期间完成分配，当进入一个方法时这个需要分配多大的局部变量空间时完全确定的，运行期间不会改变局部变量表的大小，64位的<code>long</code>和<code>double</code>会占据两个局部变量空间。</p>
-<p>局部变量使用索引来进行访问定位，0=&lt;index=&lt;length。当调用实例方法时，index=0的变量一定是this引用，之后是方法的参数。</p>
+<p>局部变量使用索引来进行访问定位，<code>0=&lt;index=&lt;length</code>。当调用实例方法时，<code>index=0</code>的变量一定是this引用，之后是方法的参数。</p>
 <h3 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h3><p>JVM底层字节码指令集是基于栈类型的，索引的操作码都是对操作数栈上的数据进行操作。对每一个方法调用，JVM会建立一个操作数栈，以供计算使用。栈的深度在源码编译成class文件后就已经确定，保存在方法的<code>Code</code>属性中。</p>
 <p>在开始时操作数栈是空的，JVM提供了一些字节码指令来从局部变量表或对象实例的字段中复制常量值到操作数栈中，以及从操作数栈中取走数据、操作数据以及将操作结果重新入栈。在方法调用时，也用来准备调用方法的参数以及接收方法返回的结果。</p>
 <p><code>iadd</code>指令要求执行前操作数栈的栈顶已经存在两个由前面其他指令放入的int类型数值，执行<code>iadd</code>时将两个int值出栈，相加求和并将求和结果重新入栈。</p>
 <p>对于一部分指令可以不关注操作数的具体数据类型，将所有在运行时数据区中的数据当作裸类型数据来操作，例如<code>swap</code>。它们的操作的正确性会通过class文件的<strong>校验过程来强制保障</strong></p>
 <h3 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h3><p>包含一个指向当前方法所在类型的运行时常量池的引用，以支持对当前方法的代码实现动态链接。</p>
-<p>在class文件中，一个方法若调用其他方法或访问成员变量，则需要通过符号引用来表示，动态链接的作用就是将这些符号引用所表示的方法转换为对实际方法的直接引用。类加载过程中将要解析尚未被解析的符号引用，并且将对变量的访问转化为变量在程序运行时，位于数据结构中的正确偏移量</p>
-<h3 id="方法调用正常完成"><a href="#方法调用正常完成" class="headerlink" title="方法调用正常完成"></a>方法调用正常完成</h3><p>若方法正常返回，当前栈帧承担着恢复调用者状态的责任，其状态包括调用者的局部变量表、操作数栈和正确增加过来表示执行了该方法调用指令的程序计数器等。使得调用者的代码能在被调用的方法返回并且返回值被推入调用者栈帧的操作数栈后继续正常执行</p>
+<p>在class文件中，一个方法若调用其他方法或访问成员变量，则需要通过符号引用来表示，动态链接的作用就是将这些符号引用所表示的方法转换为对实际方法的直接引用。类加载过程中将要解析尚未被解析的符号引用，并且将对变量的访问转化为变量在程序运行时，位于数据结构中的正确偏移量。</p>
+<h3 id="方法调用正常完成"><a href="#方法调用正常完成" class="headerlink" title="方法调用正常完成"></a>方法调用正常完成</h3><p>若方法正常返回，当前栈帧承担着恢复调用者状态的责任，其状态包括调用者的局部变量表、操作数栈和正确增加过来表示执行了该方法调用指令的程序计数器等。使得调用者的代码能在被调用的方法返回并且返回值被推入调用者栈帧的操作数栈后继续正常执行。</p>
 <h3 id="方法调用异常完成"><a href="#方法调用异常完成" class="headerlink" title="方法调用异常完成"></a>方法调用异常完成</h3><p>若在方法的执行过程中，某些指令导致了JVM抛出异常并且虚拟机抛出的异常在方法中没有办法处理，并且该方法内部没有将异常捕获，如果方法异常调用完成，一定没有方法返回值返回给调用者。</p>
 <h3 id="其他引用"><a href="#其他引用" class="headerlink" title="其他引用"></a>其他引用</h3><h2 id="对象的表示"><a href="#对象的表示" class="headerlink" title="对象的表示"></a>对象的表示</h2><p>JVM并不强制规定对象的内部结构应当如何表示。</p>
 <p>句柄与直接引用。</p>
@@ -572,7 +572,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">194</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -787,7 +787,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">56:44</span>
+    <span title="站点阅读时长">57:26</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="MySQL体系结构和存储引擎尽管各平台在底层实现方面都各有不同，但是MySQL基本上能保证在各平台上的物理体系结构的一致性。 定义数据库和实例 数据库：  物理操作系统文件或其他形式文件类型的集合。 在MySQL数据库中，文件可以是frm、MYD、MYI等结尾的文件。 NDB引擎时，可能是存放于内存当中的文件。 是文件的集合，是依照某种数据模型组织起来并存放于二级存储器中的数据集合。   实例：">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL：InnoDB">
+<meta property="og:url" content="http://yoursite.com/2019/04/01/数据库/MySQL：InnoDB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MySQL体系结构和存储引擎尽管各平台在底层实现方面都各有不同，但是MySQL基本上能保证在各平台上的物理体系结构的一致性。 定义数据库和实例 数据库：  物理操作系统文件或其他形式文件类型的集合。 在MySQL数据库中，文件可以是frm、MYD、MYI等结尾的文件。 NDB引擎时，可能是存放于内存当中的文件。 是文件的集合，是依照某种数据模型组织起来并存放于二级存储器中的数据集合。   实例：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/assets/1554105660683.png">
+<meta property="og:image" content="http://yoursite.com/assets/1554108833485.png">
+<meta property="og:image" content="http://yoursite.com/assets/1565692774481.png">
+<meta property="og:image" content="http://yoursite.com/assets/1554113635740.png">
+<meta property="og:image" content="http://yoursite.com/assets/1554113750574.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/01/数据库/MySQL：InnoDB/assets/1554113839689.png">
+<meta property="og:image" content="http://yoursite.com/assets/1565757877630.png">
+<meta property="og:image" content="http://yoursite.com/assets/1554120134521.png">
+<meta property="og:updated_time" content="2019-08-15T03:10:52.867Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL：InnoDB">
+<meta name="twitter:description" content="MySQL体系结构和存储引擎尽管各平台在底层实现方面都各有不同，但是MySQL基本上能保证在各平台上的物理体系结构的一致性。 定义数据库和实例 数据库：  物理操作系统文件或其他形式文件类型的集合。 在MySQL数据库中，文件可以是frm、MYD、MYI等结尾的文件。 NDB引擎时，可能是存放于内存当中的文件。 是文件的集合，是依照某种数据模型组织起来并存放于二级存储器中的数据集合。   实例：">
+<meta name="twitter:image" content="http://yoursite.com/assets/1554105660683.png">
+  <link rel="canonical" href="http://yoursite.com/2019/04/01/数据库/MySQL：InnoDB/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MySQL：InnoDB | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+      
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>阅读排行</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/smallpocket" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/01/数据库/MySQL：InnoDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heper">
+      <meta itemprop="description" content="To be awesome">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">MySQL：InnoDB
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-01 15:20:38" itemprop="dateCreated datePublished" datetime="2019-04-01T15:20:38+08:00">2019-04-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-15 11:10:52" itemprop="dateModified" datetime="2019-08-15T11:10:52+08:00">2019-08-15</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">13k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">23 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="MySQL体系结构和存储引擎"><a href="#MySQL体系结构和存储引擎" class="headerlink" title="MySQL体系结构和存储引擎"></a>MySQL体系结构和存储引擎</h1><p>尽管各平台在底层实现方面都各有不同，但是MySQL基本上能保证在各平台上的物理体系结构的一致性。</p>
+<h2 id="定义数据库和实例"><a href="#定义数据库和实例" class="headerlink" title="定义数据库和实例"></a>定义数据库和实例</h2><ul>
+<li><p>数据库：</p>
+<ul>
+<li>物理操作系统文件或其他形式文件类型的集合。</li>
+<li>在MySQL数据库中，文件可以是frm、MYD、MYI等结尾的文件。</li>
+<li>NDB引擎时，可能是存放于内存当中的文件。</li>
+<li>是文件的集合，是依照某种数据模型组织起来并存放于二级存储器中的数据集合。</li>
+</ul>
+</li>
+<li><p>实例：</p>
+<ul>
+<li>MySQL数据库由后台线程以及一个共享内存区组成。可以被运行的后台线程所共享。</li>
+<li>是真正用于操作数据库文件的。</li>
+<li>是程序，是位于用户与OS间的一层数据管理软件，程序只有通过实例才能和数据库打交道。</li>
+</ul>
+</li>
+</ul>
+<p>MySQL是一个<strong>单进程多线程架构的数据库</strong>。</p>
+<h2 id="MySQL体系结构"><a href="#MySQL体系结构" class="headerlink" title="MySQL体系结构"></a>MySQL体系结构</h2><p><img src="/assets/1554105660683.png" alt="1554105660683"></p>
+<p>MySQL组成</p>
+<ul>
+<li><p>连接池组件</p>
+</li>
+<li><p>管理服务和工具组件</p>
+</li>
+<li><p>SQL接口组件</p>
+</li>
+<li><p>查询分析器组件</p>
+</li>
+<li><p>优化器组件</p>
+</li>
+<li><p>缓冲组件</p>
+</li>
+<li><p><strong>插件式存储引擎</strong>。基于表而不是数据库</p>
+</li>
+<li><p>物理文件</p>
+</li>
+</ul>
+<h2 id="MySQL存储引擎"><a href="#MySQL存储引擎" class="headerlink" title="MySQL存储引擎"></a>MySQL存储引擎</h2><p>用户应该根据具体的应用选择合适的存储引擎</p>
+<h3 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h3><ul>
+<li>支持事务，设计目标主要面向在线事务处理的应用</li>
+<li>特点<ul>
+<li>行锁设计</li>
+<li>支持外键，并支持类似于Oracle的非锁定读，即默认读取操作不会产生锁</li>
+</ul>
+</li>
+<li>通过使用多版本并发控制（MVCC）来获得高并发性，并实现了SQL标准的4种隔离级别<ul>
+<li>默认为Repeatable read</li>
+<li>使用一种被称为next-keylocking的策略避免幻读</li>
+</ul>
+</li>
+<li>提供插入缓冲、二次写、自适应哈希索引、预读等高性能功能。</li>
+<li>对于表中数据的存储，采用了聚集的方式，因此每张表存储都是按照主键的顺序进行存放，如果没有显式定义逐渐，InnoDB将为每一行生成一个6字节的ROWID</li>
+<li>InnoDB存储引擎将数据放在一个逻辑的表空间，这个表空间像一个黑盒一样由InnoDB管理，可以将表单独存放到一个独立的idb文件中</li>
+</ul>
+<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><ul>
+<li>不支持事务、表锁设计</li>
+<li>支持全文索引</li>
+<li>主要面向一些OLAP数据库应用。适合报表查询系统，因为这些系统并不需要事务。</li>
+<li>只缓存索引文件，不缓冲数据文件</li>
+<li>锁的粒度为表级</li>
+<li>相对简单，在效率上更优，小型应用更为适合</li>
+<li>表是保存成文件形式，在跨平台的数据转移中会省去不少麻烦</li>
+</ul>
+<h3 id="NDB"><a href="#NDB" class="headerlink" title="NDB"></a>NDB</h3><ul>
+<li>一个集群存储引擎。结构为share nothing的集群架构，能够提供更高的可用性</li>
+<li>特点<ul>
+<li>数据全部放在内存中，因此主键查找速度极快</li>
+<li>可通过添加NDB数据存储结点，线性提高数据库性能</li>
+<li>从MySQL5.1开始，可以将非索引数据放在磁盘上。</li>
+</ul>
+</li>
+<li>缺陷<ul>
+<li>NDB存储引擎的连接操作是在MySQL数据库层完成的，而不是存储引擎层。因此复杂的连接操作需要巨大的网络开销，查询速度很慢</li>
+</ul>
+</li>
+</ul>
+<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><ul>
+<li>适用于存储临时数据的临时表，以及数据仓库中的维度表</li>
+<li>特点<ul>
+<li>将表中数据放在内存中，如果数据库重启或崩溃，表中数据都将消失。</li>
+<li>默认使用哈希索引</li>
+<li>速度非常快。</li>
+<li>只支持表锁，并发性能较差，不支持TEXT和BLOB列类型。存储变长字段时是按照定常字段的方式进行，会浪费内存。</li>
+</ul>
+</li>
+<li>当作为临时表存放中间结果集，如果中间结果集大于Memory存储引擎表的容量设置，或含有TEXT列类型，则会转换为MyISAM存储引擎</li>
+</ul>
+<h3 id="Archive"><a href="#Archive" class="headerlink" title="Archive"></a>Archive</h3><ul>
+<li>只支持Insert和select操作</li>
+<li>从MySQL5.1支持索引</li>
+<li>适合存储归档数据，如日志。使用zlib算法将数据行压缩存储，压缩比一般可达到1：10。</li>
+<li>使用行锁实现高并发的插入操作，但本身不是事务安全的，设计目标是提供高速的插入和压缩功能</li>
+</ul>
+<h3 id="Federated"><a href="#Federated" class="headerlink" title="Federated"></a>Federated</h3><ul>
+<li>不存放数据，只是指向一台远程MySQL数据库服务器上的表</li>
+</ul>
+<h3 id="Maria"><a href="#Maria" class="headerlink" title="Maria"></a>Maria</h3><ul>
+<li>新开发的引擎，设计目标是取代原有的MyISAM，从而成为MySQL的默认存储引擎</li>
+<li>支持缓存数据和索引文件</li>
+<li>应用行锁设计，提供MVCC功能，支持事务和非事务安全的选项，以及更好地blob字符类型的处理性能</li>
+</ul>
+<h2 id="连接MySQL"><a href="#连接MySQL" class="headerlink" title="连接MySQL"></a>连接MySQL</h2><p>管道、命名管道、命名字、TCP/IP套接字、UNIX域套接字</p>
+<h1 id="InnoDB存储引擎"><a href="#InnoDB存储引擎" class="headerlink" title="InnoDB存储引擎"></a>InnoDB存储引擎</h1><p>是事务安全的存储引擎。在InnoDB 1.2x增加了全文索引支持。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>第一个完整支持ACID事务的存储引擎<ul>
+<li>原子性（atomicity，或称不可分割性）。一个事务（transaction）中的所有操作，或者全部完成，或者全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。即，事务不可分割、不可约简。</li>
+<li>一致性（consistency）。在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设<strong>约束</strong>、<strong>触发器</strong>、<strong>级联回滚</strong>等。</li>
+<li>隔离性（isolation，又称独立性）。数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括<strong>读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）</strong>。</li>
+<li>持久性（durability）。事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li>
+</ul>
+</li>
+<li>特点<ul>
+<li>行锁设计、支持MVCC、支持外键、提供一致性非锁定读</li>
+</ul>
+</li>
+<li>被设计用来最有效地以及使用内存和CPU</li>
+</ul>
+<h2 id="InnoDB体系架构"><a href="#InnoDB体系架构" class="headerlink" title="InnoDB体系架构"></a>InnoDB体系架构</h2><p><img src="/assets/1554108833485.png" alt="1554108833485"></p>
+<p>InnoDB存储引擎有多个内存块，可以认为他们组成一个大内存池，负责：</p>
+<ul>
+<li>维护所有进程/线程需要访问的多个内部数据结构。</li>
+<li>缓存磁盘上的数据，方便快速地读取，同时在对磁盘文件的数据修改前在这里缓存。</li>
+<li>重做日志(redo log)缓冲。</li>
+<li>。。。</li>
+</ul>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><p>Innodb存储引擎可将所有数据存放于ibdata*的共享表空间，也可将每张表存放于独立的.ibd文件的独立表空间。共享表空间以及独立表空间都是针对数据的存储方式而言的。</p>
+<p><strong><em>独立表空间：</em></strong></p>
+<p>每一个表都将会生成以独立的文件方式来进行存储，每一个表都有一个.frm表描述文件，还有一个.ibd文件。 其中这个文件包括了单独一个表的数据内容以及索引内容，默认情况下它的存储位置也是在表的位置之中。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>每个表都有自已独立的表空间，每个表的数据和索引都会存在自已的表空间中，可以实现单表在不同的数据库中移动。</li>
+<li>空间可以回收（除drop table操作处，表空不能自已回收）</li>
+<li>Drop table操作自动回收表空间，如果对于统计分析或是日值表，删除大量数据后可以通过:alter table TableName engine=innodb;回缩不用的空间。</li>
+<li>对于使innodb-plugin的Innodb使用turncate table也会使空间收缩。</li>
+<li>对于使用独立表空间的表，不管怎么删除，表空间的碎片不会太严重的影响性能，而且还有机会处理。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<p>单表增加过大，当单表占用空间过大时，存储空间不足，只能从操作系统层面思考解决方法；</p>
+<p><strong><em>共享表空间：</em></strong></p>
+<p>即idbdata*，又称为系统表空间。某一个数据库的所有的表数据，索引文件全部放在一个单独的表空间中，而这个表空间可以由很多个文件组成，一个表可以跨多个文件存在，所以其大小限制不再是文件大小的限制，而是其自身的限制。默认这个共享表空间的文件路径在data目录下。 默认的文件名为:ibdata1 初始化为10M。</p>
+<p><strong>优点：</strong></p>
+<p>表空间可以分成多个文件存放到各个磁盘，所以表也就可以分成多个文件存放在磁盘上，表的大小不受磁盘大小的限制。数据和文件放在一起方便管理。</p>
+<p><strong>缺点：</strong></p>
+<p>所有的数据和索引存放到一个文件，虽然可以把一个大文件分成多个小文件，但是多个表及索引在表空间中混合存储，当数据量非常大的时候，表做了大量删除操作后表空间中将会有大量的空隙，特别是对于统计分析，对于经常删除操作的这类应用最不适合用共享表空间。</p>
+<p>共享表空间分配后不能回缩：当出现临时建索引或是创建一个临时表的操作表空间扩大后，就是删除相关的表也没办法回缩那部分空间了（可以理解为oracle的表空间10G，但是才使用10M，但是操作系统显示mysql的表空间为10G），进行数据库的冷备很慢；</p>
+<h3 id="后台线程"><a href="#后台线程" class="headerlink" title="后台线程"></a>后台线程</h3><p>负责</p>
+<ul>
+<li>刷新内存池中的数据，保证缓冲池中的内存缓存的是最近的数据。</li>
+<li>将已经修改的数据文件刷新到磁盘文件。</li>
+<li>保证数据库在发生异常的情况下InnoDB能恢复到正常运行状态。</li>
+</ul>
+<ol>
+<li><p>MasterThread</p>
+<p>负责将缓冲池中的数据异步刷新到磁盘，保证数据一致性，包括脏页的刷新、合并插入缓冲、UNDO页的回收</p>
+</li>
+<li><p>IO Thread</p>
+<ul>
+<li>InnoDB大量使用AIO处理写请求，可以极大提高数据库的性能</li>
+<li>负责将IO请求的回调处理。</li>
+<li>Linux下有4个，为write、read、insert buffer、log IO thread</li>
+<li>Windows可以自行设定，write与read增大到了4个，通过参数innodb_read(write)_io_threads设定</li>
+</ul>
+</li>
+<li><p>Purge Thread</p>
+<p>事务提交后，其使用的undo log可能不再需要，使用该线程回收已经使用并分配的undo页</p>
+</li>
+<li><p>Page Cleaner Thread</p>
+<p>将之前版本中脏页的刷新操作放入到单独的线程。</p>
+</li>
+</ol>
+<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><p>InnoDB存储引擎基于磁盘存储的，并将其中的记录按照页的方式进行管理。即可认为是基于磁盘的数据库系统。</p>
+<p>考虑CPU与磁盘速度，则使用缓冲池技术提高数据库整体性能。缓冲池是一块内存区域，通过内存的速度来弥补磁盘的速度较慢。</p>
+<ul>
+<li><p>数据库读取页的操作：</p>
+<ul>
+<li>首先将从磁盘读到的页存放到缓冲池中。</li>
+<li>下一次读取相同的页，判断该页是否在缓冲池中。若在，则该页被命中，直接读取。否则读取磁盘。</li>
+</ul>
+</li>
+<li><p>数据库页修改操作：</p>
+<ul>
+<li>首先修改在缓冲池中的页，再以一定频率刷新到磁盘（Checkpoint机制）。</li>
+</ul>
+</li>
+</ul>
+<p>缓冲池大小配置：<code>innodb_buffer_pool_size</code>。</p>
+<p><em>数据页类型</em></p>
+<p>缓冲池当中的数据页类型有：索引页、数据页、undo页、插入缓冲、自适应哈希索引、InnoDB存储的锁信息、数据字典信息等。</p>
+<p><img src="/assets/1565692774481.png" alt="1565692774481"></p>
+<p><em>多缓冲池</em></p>
+<p>InnoDB 1.0.x后允许有多个缓冲池实例。每个页根据哈希值平均分配到不同的缓冲池实例中。</p>
+<p>减少了数据库内部的资源竞争，增加数据库的并发处理能力</p>
+<p>配置：<code>innodb_buffer_pool_instances</code></p>
+<h3 id="LRU-List、Free-List和Flush-List"><a href="#LRU-List、Free-List和Flush-List" class="headerlink" title="LRU List、Free List和Flush List"></a>LRU List、Free List和Flush List</h3><p>对缓冲池这么大的内存区域进行管理。</p>
+<p>InnoDB使用LRU管理页，缓冲池中页的默认大小是16KB。使用<code>innodb_old_blocks_time</code>表示页读取到mid位置后需要等待多久才会被加入到LRU列表的热端。</p>
+<p>在数据库当启动时，LRU列表是空的，此时页都存放在Free列表中，当需要从缓冲区中分页时，首先从Free列表中查找是否有可用的空闲页，若有则将该页从Free列表中删除，放入到LRU列表中，否则根据LRU算法淘汰LRU列表末尾的列，将该内存空间分配给新的页。</p>
+<p><strong><em>压缩页</em></strong></p>
+<p>从1.0.x开始支持压缩页的概念，可将原本16KB的页压缩为1KB、2KB、4KB、8KB，因此LRU列表页存在变化，对于压缩过的页是通过unzip_LRU列表进行管理的。</p>
+<p><strong><em>Flush List</em></strong></p>
+<p>该列表当中的页为脏页列表，脏页既存在于LRU列表，也存在FLUSH列表中，LRU列表用来管理缓冲池中页的可用性，Flush列表用来管理将页刷新回磁盘。</p>
+<h3 id="重做日志缓冲"><a href="#重做日志缓冲" class="headerlink" title="重做日志缓冲"></a>重做日志缓冲</h3><p>InnoDB存储引擎的内存区域除了有缓冲池，还有重做日志缓冲(<strong>redo log buffer</strong>)。</p>
+<p>InnoDB首先将重做日志信息放入到该缓冲区，然后按一定频率将其刷新到重做日志文件。一般不需要很大，一般每s会将日志缓冲刷新到日志文件，用户只需要保证每s产生的事务量在这个缓冲范围内即可。</p>
+<ul>
+<li>在事务开始之后逐步写入重做日志文件，而不一定是事务提交才写入重做日志缓存。</li>
+<li>记录的是物理数据页面的修改的信息。</li>
+<li>可通过<code>innodb_log_buffer_size</code>控制，默认为8MB。</li>
+</ul>
+<p>刷新日志缓冲到外部磁盘的redo log buffer</p>
+<ul>
+<li>Master Thread每秒将重做日志缓冲刷新到重做日志文件。</li>
+<li>每个事务提交时会将重做日志缓冲刷新到重做日志文件中</li>
+<li>当重做日志缓冲池剩余空间小于1/2时，重做日志缓冲刷新到重做日志文件。</li>
+</ul>
+<h3 id="额外的内存池"><a href="#额外的内存池" class="headerlink" title="额外的内存池"></a>额外的内存池</h3><p>在InnoDB存储引擎中，对内存的管理是通过一种称为<strong>内存堆的方式</strong>进行的。在对一些数据结构本身的内存进行分配时，需要从额外的内存池中进行申请，当该区域的内存不够时，会从缓冲池中进行申请。</p>
+<p>分配了缓冲池，但是每个缓冲池的帧缓冲和对应的缓冲控制对象（这些对象记录LRU、锁、等待等信息）的内存需要从缓冲控制块申请。因此申请了很大的缓冲池，也要考虑相应增加额外内存池。</p>
+<h2 id="Checkpoint技术"><a href="#Checkpoint技术" class="headerlink" title="Checkpoint技术"></a>Checkpoint技术</h2><p>页的操作首先是在缓冲池中完成的。如果一条DML语句，则此时页是脏的，缓冲池中的页版本比磁盘当中新，数据库需要将新版本的页刷新到磁盘。</p>
+<ul>
+<li>倘若每次一个页发生变化，就刷新到磁盘，则开销极大。</li>
+<li>倘若在刷新到磁盘的过程中，服务器宕机，则数据无法恢复。</li>
+</ul>
+<p>为了避免数据丢失问题，普遍采用<strong>Write Ahead Log策略</strong></p>
+<ul>
+<li>当事务提交时，先写redo log，再修改页。</li>
+<li>当宕机导致数据丢失时，通过重做日志来完成数据的恢复，实现持久性的要求。</li>
+<li>是否不需要将缓冲池中页刷新到磁盘。<ul>
+<li>缓冲池无法缓存数据库所有的数据。</li>
+<li>重做日志无法无限增大，即使可以，运维难度大、成本高。</li>
+<li>日志文件太大，恢复数据库需要时间太久。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Checkpoint技术</strong></p>
+<p>解决的问题：</p>
+<ul>
+<li>缩短数据库的恢复时间。只需对Checkpoint后的重做日志进行恢复。</li>
+<li>缓冲池不够用时，将脏页刷新到磁盘。采用LRU算法溢出页面，如果为脏页则强制执行Checkpoint，刷新页面。</li>
+<li>重做日志不可用时，刷新脏页。数据库对重做日志进行循环使用，覆盖重用。<ul>
+<li>重做日志不可用是指当repo log已经满了，而repo log不可增大，此时必须将脏页刷新回磁盘。</li>
+</ul>
+</li>
+</ul>
+<p>Checkpoint发生的时间、条件以及脏页的选择等都非常复杂。Innodb中有两种Checkpoint：</p>
+<ul>
+<li>Sharp Checkpoint。<ul>
+<li>默认的工作方式，发生在数据库关闭时，将所有的脏页都刷新回磁盘。即参数<code>innodb_fast_shutdown=1</code></li>
+<li>若数据库运行时页使用该技术，则数据库可用性会受到很大限制。</li>
+</ul>
+</li>
+<li>Fuzzy Checkpoint。<ul>
+<li>只刷新一部分脏页，而不是刷新所有脏页回磁盘。</li>
+</ul>
+</li>
+</ul>
+<p><em>Fuzzy Checkpoint</em></p>
+<p>InnoDB存储引擎中可能发生的几种请求的Fuzzy Checkpoint。</p>
+<ul>
+<li>Master Thread Checkpoint。每s或每10s刷新，是异步操作。</li>
+<li>FLUSH_LRU_LIST Checkpoint。为保证LRU列表有100个空闲页可用。若没有，则移除尾端页，若这些页有脏页，则需要进行Checkpoint。</li>
+<li>Async/Sync Flush Checkpoint。为了保证重做日志的循环使用的可用性。重做日志文件不可用的情况下（写满了），需要强制将一些页刷新会磁盘。</li>
+<li>Dirty Page too much Checkpoint。脏页数量太多，目的是为了保证缓冲池当中有足够可用的页。</li>
+</ul>
+<h2 id="Master-Thread工作方式"><a href="#Master-Thread工作方式" class="headerlink" title="Master Thread工作方式"></a>Master Thread工作方式</h2><p>InnoDB的主要工作都是在一个单独的后台线程Master Thread中完成的，其具有最高的线程优先级别。内部由多个循环组成：主循环、后台循环、刷新循环、暂停循环。Master Thread会根据数据库运行的状态在四个循环间切换。</p>
+<ul>
+<li>主循环通过thread sleep实现，因此其计时并不精确，可能延迟。其包含每s或每10s的操作<ul>
+<li>每s的操作：<ul>
+<li>日志缓冲刷新到磁盘，即使这个事务还没有提交（总是）。</li>
+<li>合并插入缓冲（可能，会根据当前1s内IO次数是否小于5次，如果是则可以执行该操作）。</li>
+<li>至多刷新100个InnoDB的缓冲池中脏页到磁盘（可能，会去判断脏页比例是否超标）。</li>
+<li>如果当前没有用户活动，则切换大background loop（可能）。</li>
+</ul>
+</li>
+<li>每10s的操作<ul>
+<li>刷新100个脏页到磁盘（可能，判断10s内IO是否小于200次，如果是则执行）。</li>
+<li>合并至多5个插入缓冲（总是）。</li>
+<li>将日志缓冲刷新到磁盘（总是）。</li>
+<li>删除无用的undo页（总是）。</li>
+<li>数显100个或10个脏页到磁盘（总是）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>后台循环，若当前没有用户活动，或数据库关闭就会切换到该循环<ul>
+<li>删除无用的undo页（总是）。</li>
+<li>合并20个插入缓冲（总是）。</li>
+<li>跳回主循环（总是）。</li>
+<li>不断刷新100个页直到符合条件（可能或跳转到flush loop中完成）。</li>
+</ul>
+</li>
+<li>刷新循环。</li>
+<li>暂停循环。若flush loop无事可做，则切换到该循环，将Master  Thread挂起。</li>
+</ul>
+<p>在InnoDB1.1.x时</p>
+<ul>
+<li>合并插入缓冲时，数量未innodb_io_capacity的5%</li>
+<li>从缓冲区刷新脏页时，数量为innodb_io_capacity</li>
+<li>脏页阈值调整到75%</li>
+<li>可以动态设置full purge回收undo页的数量</li>
+</ul>
+<h3 id="InnoDB1-2-x"><a href="#InnoDB1-2-x" class="headerlink" title="InnoDB1.2.x"></a>InnoDB1.2.x</h3><p>在InnoDB1.2.x时，将Master Thread中的刷新脏页操作分离到了一个单独的Page Cleaner Thread当中，进一步提高了系统的并发现。</p>
+<h2 id="InnoDB关键特性"><a href="#InnoDB关键特性" class="headerlink" title="InnoDB关键特性"></a>InnoDB关键特性</h2><h3 id="插入缓冲"><a href="#插入缓冲" class="headerlink" title="插入缓冲"></a>插入缓冲</h3><p>Insert Buffer并不是缓冲区，而是与数据页一样，都是物理页的一个组成部分。</p>
+<p>在InnoDB存储引擎中，主键是行唯一标识符。通常应用程序中行记录的插入顺序是按照主键递增的顺序进行插入的。因此插入<strong>聚集索引</strong>一般是顺序的，不需要磁盘的随机读取。</p>
+<p>对于主键自增长的列，在页当中，行记录是按照聚集索引的值进行顺序存放的，一般不需要随机读取另一个页中的记录，因此对于此类插入操作，速度非常快。</p>
+<blockquote>
+<p>并不是所有的主键插入都是顺序的，若主键类为UUID这样，那么插入和辅助索引一样，同样随机</p>
+</blockquote>
+<p>但是一张表上同样有多个非聚集的辅助索引，则此时会产生非聚集且不是唯一的索引</p>
+<ul>
+<li>进行插入操作时，数据页的存放还是按主键进行顺序存放</li>
+<li>对于非聚集索引叶子结点的插入不再是顺序的了，需要离散地访问非聚集索引的页，由于<strong>随机读取的存在而导致了插入操作性能下降</strong></li>
+<li>B+树的特性决定了非聚集索引插入的离散性</li>
+</ul>
+<p><strong><em>Insert Buffer</em></strong></p>
+<p>对于非聚集索引的插入或更新操作，不是每一次直接插入到索引页当中</p>
+<ul>
+<li>判断插入的非聚集索引页是否在缓冲池内，若在，直接插入</li>
+<li>若不在，则先放入一个Insert Buffer对象中，假装已经插入到叶子结点</li>
+<li>以一定频率和情况进行Insert Buffer和辅助索引页子节点的合并操作。将多次插入合并到一次操作（因为在一个索引页当中），这样就大大提高了对于非聚集索引插入的性能。</li>
+</ul>
+<p>需要满足的条件</p>
+<ul>
+<li>索引是辅助索引。</li>
+<li>索引不唯一。插入缓冲时，数据库就不必去查找索引页判断记录的唯一性。否则为了判断唯一性一定要去磁盘当中查找该页面，此时Insert Buffer就没有了意义。</li>
+</ul>
+<p><strong>缺陷</strong></p>
+<ul>
+<li>宕机时，可能有很多Insert Buffer没有合并，导致恢复需要较长时间。</li>
+<li>在写密集情况下，Insert Buffer会占用过多的缓冲池内存，默认最大可用占用1/2的缓冲池内存。</li>
+</ul>
+<p><strong>内部实现</strong></p>
+<p>Insert Buffer的数据结构是B+树，在当前版本全局一颗Insert Buffer B+树。</p>
+<ul>
+<li>负责对所有的表的辅助索引进行Insert Buffer。</li>
+<li>存放在共享表空间，默认是idbata1中。<ul>
+<li>试图通过独立表空间idb文件恢复表数据，往往导致Check table失败，因为辅助索引还在Insert Buffer中。</li>
+<li>通过idb恢复后，还需要进行repair table进行重建辅助索引。</li>
+</ul>
+</li>
+</ul>
+<p>B+树非叶子结点存放的是查询的search key键值：</p>
+<p><img src="/assets/1554113635740.png" alt="1554113635740"></p>
+<p>当一个辅助索引要插入到页，且页不在缓冲池，则需要先构造一个search key，并插入到叶子结点当中。</p>
+<p><img src="/assets/1554113750574.png" alt="1554113750574"></p>
+<p><img src="assets/1554113839689.png" alt="1554113839689"></p>
+<p>第5列开始即实际插入记录的各个字段。</p>
+<p><strong><em>Change Buffer</em></strong></p>
+<p>Insert Buffer的升级，1.0.x。对DML操作都进行缓冲，即Insert Buffer、Delete Buffer、Purge buffer。</p>
+<p>对一条记录进行update操作：</p>
+<ul>
+<li>将记录标记为已删除，Delete Buffer</li>
+<li>真正将记录删除，Purge buffer</li>
+</ul>
+<p><strong><em>Insert Buffer Bitmap</em></strong></p>
+<p>启用Insert Buffer后，辅助索引页中的记录可能被插入到Insert Buffer B+树中，为了保证每次的Merge Insert Buffer成功，hi需要有一个特殊的页来标记每个辅助索引页的可用空间，即<strong>Insert Buffer Bitmap</strong>。</p>
+<p>每个Insert Buffer Bitmap用来追踪16384个辅助索引页，即256个区。</p>
+<p><img src="/assets/1565757877630.png" alt="1565757877630"></p>
+<p><strong><em>Merge Insert Buffer</em></strong></p>
+<p>将Insert Buffer合并到真正的辅助索引中，合并辅助索引可能发生在以下几种情况：</p>
+<ul>
+<li>辅助索引页被读取到缓冲池时</li>
+<li>Insert Buffer Bitmap页追踪到该辅助索引页已经没有可用空间时<ul>
+<li>至少需要有1/32页的空间</li>
+</ul>
+</li>
+<li>Master Thread<ul>
+<li>每s或每10s进行一次操作，不同之处在于每次进行merge的页数量不同</li>
+</ul>
+</li>
+</ul>
+<h3 id="两次写"><a href="#两次写" class="headerlink" title="两次写"></a>两次写</h3><p>提供<strong>数据页的可靠性</strong>：</p>
+<p>部分写失效：当服务器宕机，可能InnoDB存储引擎正在写入某个页到表中，但只写了一部分就宕机。面对部分写失效，重做日志可能没有效果</p>
+<ul>
+<li>重做日志中记录的是对页的物理操作，如偏移量800，写’aaaa’记录，如果页本身发生损坏，则进行重做无意义。</li>
+<li>在应用重做日志前，用户需要一个页的副本，当写入失效发生时，写通过页的副本来还原该页，再进行重做，即doublewrite。</li>
+</ul>
+<p><strong>doublewrite</strong></p>
+<p><img src="/assets/1554120134521.png" alt="1554120134521"></p>
+<p>在对缓冲池的脏页进行刷新时：</p>
+<ul>
+<li>并不直接写磁盘，而是通过memcpy函数将脏页先赋值到内存的doublewrite buffer。</li>
+<li>通过doublewrite buffer分两次，每次1MB顺序写入共享表空间的物理磁盘。double write页是连续的，顺序写，开销小。</li>
+<li>调用fsync函数，同步磁盘，避免缓冲写带来的问题。表空间是不连续的，写入是离散的。</li>
+</ul>
+<p>解决部分写失效：</p>
+<ul>
+<li>InnoDB存储引擎可以从共享表空间中的doublewrite中找到该页的一个副本，将其复制到表空间文件。</li>
+<li>应用redo log</li>
+</ul>
+<h3 id="自适应哈希索引"><a href="#自适应哈希索引" class="headerlink" title="自适应哈希索引"></a>自适应哈希索引</h3><p>在生产环境下B+树的高度一般为3-4层。</p>
+<p>自适应哈希索引（AHI）：InnoDB存储引擎会监控对表上各索引页的查询，如果观察到建立哈希索引可以带来速度提升，则建立哈希索引。</p>
+<ul>
+<li>AHI通过缓冲池的B+树页构造，速度很快，而且不需要对整张表构建哈希索引。</li>
+<li>会自动根据访问的频率和模式来自动为某些热点页建立哈希索引</li>
+<li>要求对这个页的连续访问模式必须是一样的，如where a= ？与where a=? and b=?是两种访问模式</li>
+<li>以该模式访问了100次，<strong>或</strong>页通过该模式访问了N次，N=页中记录/16</li>
+</ul>
+<h3 id="异步IO（AIO）"><a href="#异步IO（AIO）" class="headerlink" title="异步IO（AIO）"></a>异步IO（AIO）</h3><p>提高磁盘操作性能。在InnoDB1.1.X提供了内核级别的AIO支持。</p>
+<p>Sync IO：与AIO对应，每进行一次IO操作，需要等待此次操作结束才能继续接下来的操作。</p>
+<p>AIO可以进行IO Merge操作，将对多个连续页的IO合并为一个操作，提高IOPS的性能。</p>
+<h3 id="刷新临近页"><a href="#刷新临近页" class="headerlink" title="刷新临近页"></a>刷新临近页</h3><p>当刷新一个脏页时，InnoDB存储引擎会检测该页所在区的所有页，如果是脏页，那么一起进行刷新。通过AIO可以将多个IO写入操作合并为1个操作。</p>
+<p>存在的问题：</p>
+<ul>
+<li>是不是可能将不怎么脏的页进行了写入，而该页又很快变成了脏页。</li>
+<li>固态硬盘有较高的IOPS，是否还需要这个特性。</li>
+<li>因此提供参数<code>innodb_flush_neighbos</code>来控制是否启用该特性,对于固态硬盘具有较高的IOPS建议关闭。</li>
+</ul>
+<h1 id="索引与算法"><a href="#索引与算法" class="headerlink" title="索引与算法"></a>索引与算法</h1><p>若索引太多，程序的性能可能受到影响；索引太少，对查询性能又会产生影响。</p>
+<p>如果知道数据的使用，则一开始就应该在需要处添加索引</p>
+<h2 id="InnoDB存储引擎索引概述"><a href="#InnoDB存储引擎索引概述" class="headerlink" title="InnoDB存储引擎索引概述"></a>InnoDB存储引擎索引概述</h2><ul>
+<li>B+树索引（传统意义上的索引）。<ul>
+<li>不能找到一个给定键值的具体行，能找到的只是被查找数据行所在的页。然后数据库将页读入到内存，在内存中进行查找，最后得到所要查找的数据。</li>
+</ul>
+</li>
+<li>全文索引。</li>
+<li>哈希索引（自适应的，不能人为干预）。</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><strong><em>特点</em></strong></p>
+<ul>
+<li>可以加快数据库的检索速度。</li>
+<li>降低数据库插入、修改、删除等维护的速度</li>
+<li>只能创建在表上，不能创建到视图上</li>
+<li>既可以直接创建又可以间接创建</li>
+<li>可以优化隐藏中使用索引</li>
+<li>使用查询处理器执行SQL语句，在一个在表上，一次只能使用一个索引</li>
+</ul>
+<p><strong><em>优点</em></strong></p>
+<ul>
+<li>创建唯一性索引，保证数据库表中每一行数据的唯一性</li>
+<li>大大加快数据的检索速度，这是创建索引的最主要原因</li>
+<li>加速数据库表间连接，特别是在实现数据的参考完整性方面特别有意义</li>
+<li>在使用分组和排序子句进行数据检索时，同样可以显著减少查询中分组和排序的时间</li>
+<li>通过使用索引，可以在查询中使用优化隐藏器，提高系统的性能</li>
+</ul>
+<p><strong><em>缺点</em></strong></p>
+<ul>
+<li>创建索引和维护索引需要时间，随着数据量的增加而增加</li>
+<li>索引需要占用物理空间，除了数据表占用数据空间外，每一个索引需要占用一定的物理空间，如果建立聚簇索引，需要的空间更大</li>
+<li>当队表中数据进行增加、删除和修改时，索引也需要维护，降低数据维护的速度</li>
+</ul>
+<p><strong><em>分类</em></strong></p>
+<ul>
+<li>直接创建索引和间接创建索引</li>
+<li>普通索引与唯一性索引</li>
+<li>单个索引和复合索引</li>
+<li>聚簇索引和非聚簇索引</li>
+</ul>
+<p><strong><em>索引失效</em></strong></p>
+<ul>
+<li>如果条件中有Or，即使其中有条件带索引也不会使用</li>
+<li>对于多列索引，不是使用的第一部分，则不会使用索引</li>
+<li>like查询时以%开头</li>
+<li>如果列类型是字符串，那一定要在条件中使用引号引起来，否则不会使用索引</li>
+<li>如果MySQL估计全表扫描比索引块，则不使用索引</li>
+</ul>
+<p><strong><em>什么情况下适合建立索引</em></strong></p>
+<ul>
+<li>在经常出现关键字order by、group by、distinct后面的字段，建立索引</li>
+<li>在union等集合操作的结果集字段上，建立索引</li>
+<li>为经常用作查询选择的字段，建立索引</li>
+<li>在经常用作表连接的属性上，建立索引</li>
+<li>考虑使用索引覆盖，对数据很少被更新的表，如果用户经常只查询其中的几个字段，可以考虑在这几个字段上建立索引，从而将表的扫描改变为索引的扫描</li>
+</ul>
+<h2 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h2><p>B+树索引可以分为聚集索引和辅助索引。</p>
+<p>聚集索引与辅助索引不同的是，叶子节点存放的是否是一整行的信息</p>
+<h3 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h3><p>InnoDB存储引擎表是索引组织表，即表中数据按照主键顺序存放。</p>
+<p>聚集索引就是按照每张表的主键构造一颗B+树，同时叶子节点中存放的即为整张表的行记录数据，也将聚集索引的叶子节点称为数据页。</p>
+<p>数据页上存放的是完整的每行的记录，在非数据页的索引页中，存放的仅仅是键值以及指向数据页的偏移量，不是一个完整的行记录。</p>
+<ul>
+<li>对于主键的排序查找和范围查找非常快<ul>
+<li>叶子节点的数据就是用户查询的数据，若需要表最后的10位用户，由于是索引是双向链表，则用户可以快速地找到最后一个数据页</li>
+<li>对于范围查询，通过叶子节点的上层中间节点就可以得到页的范围，然后直接读取数据页即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="辅助索引"><a href="#辅助索引" class="headerlink" title="辅助索引"></a>辅助索引</h3><p>叶子节点不包含行记录的全部数据，除了包含键值外，还包含一个书签（告诉InnoDB可以在哪里找到与索引对应的行数据）</p>
+<ul>
+<li>若辅助索引与聚集索引的高度均为3，则一共需要6次IO以得到最终的数据页</li>
+</ul>
+<h3 id="B-树索引的分裂"><a href="#B-树索引的分裂" class="headerlink" title="B+树索引的分裂"></a>B+树索引的分裂</h3><p>与一般B+树的分裂不同，需要涉及到<strong>并发</strong></p>
+<p>当自增的主键插入时，如</p>
+<p>1，2，3，4，5（中间值），6，7，8，9</p>
+<p>此时插入10需要分裂，则：</p>
+<ul>
+<li>1，2，3，4</li>
+<li>5（大于等于键值的在右），6，7，8，9，10</li>
+</ul>
+<p>因为自增，则P1这个页不会再插入，从而导致浪费</p>
+<p>InnoDB存储引擎的Page Header有以下几个部分用来保存插入的顺序信息</p>
+<ul>
+<li>Page_Last_Insert</li>
+<li>Page_Direction</li>
+<li>Page_N_Direction</li>
+</ul>
+<p>通过这些决定向左还是向右进行分裂，同时决定将分裂点记录为哪一个</p>
+<ul>
+<li>若插入是随机的，则取中间记录分裂</li>
+<li>若往同一方向进行插入的记录数量为5，并且目前已经<strong>定位</strong>到的记录之后还有3条记录。<ul>
+<li>则分裂点的记录为定位到的记录后的第三条记录</li>
+<li>否则分裂点记录就是待插入的记录（自增插入中普遍存在）</li>
+<li>定位：在插入时，首先需要定位，定位到的记录为待插入记录的前一条记录</li>
+</ul>
+</li>
+</ul>
+<h3 id="B-树索引的管理"><a href="#B-树索引的管理" class="headerlink" title="B+树索引的管理"></a>B+树索引的管理</h3><h2 id="Cardinality值"><a href="#Cardinality值" class="headerlink" title="Cardinality值"></a>Cardinality值</h2><h3 id="什么是Cardinality"><a href="#什么是Cardinality" class="headerlink" title="什么是Cardinality"></a>什么是Cardinality</h3><p>低选择性：对于性别字段、类型字段、地区字段，他们可选择的范围很小</p>
+<p>高选择性：某个字段的取值范围很广，几乎没有重复。这时使用B+树索引才是最合适的</p>
+<p>通过Show Index结果中的列Cardinality来观察索引是否高选择性。</p>
+<p>Cardinality：表示索引中不重复记录数量的预估值，Cardinality/n_rows_in_table应尽可能接近1，如果非常小，则需要考虑是否还必要创建这个索引。</p>
+<h3 id="InnobDB存储引擎的Cardinality统计"><a href="#InnobDB存储引擎的Cardinality统计" class="headerlink" title="InnobDB存储引擎的Cardinality统计"></a>InnobDB存储引擎的Cardinality统计</h3><p>数据库对于Cardinality的统计是通过采样的方法完成。</p>
+<p>Cardinality统计信息的更新发生在两个操作中：insert与update</p>
+<p>更新Cardinality信息的策略为：</p>
+<ul>
+<li>表中1/16的数据已经发生变化</li>
+<li>stat_modified_counter（某一行数据频繁地变化，每变化一次+1）&gt;2000000000</li>
+</ul>
+<p>采样的过程，默认对8个叶子结点采用：</p>
+<ul>
+<li>取得B+树索引中叶子结点的数量，记为A</li>
+<li><strong>随机</strong>取得B+树索引中的8个叶子结点。统计每个页不同记录的个数，记为P1，P2，P8</li>
+<li>根据采样信息给出Cardinality的预估值，即SUM（P）*A/8</li>
+</ul>
+<h2 id="B-树索引的使用"><a href="#B-树索引的使用" class="headerlink" title="B+树索引的使用"></a>B+树索引的使用</h2><p>不同应用中B+树索引的使用</p>
+<p>联合索引</p>
+<p>覆盖索引</p>
+<p>优化器旋转不使用索引的情况</p>
+<p>索引提示</p>
+<p>Multi-Range-Read优化</p>
+<p>ICP优化</p>
+<h2 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h2><p>哈希表</p>
+<p>InnoDB哈希算法</p>
+<p>自适应哈希索引</p>
+<h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><p><em>概述</em></p>
+<p>全文检索是将存储于数据库中的整本书或整篇文章中的任意内容信息查找处理的技术。</p>
+<p>InnoDB 1.2.x开始，支持全文检索，支持MyISAM的全部功能，以及一些其他特性。</p>
+<p><em>倒排索引</em></p>
+<p>全文检索通常使用倒排索引实现。在辅助表中存储了单词与单词自身在一个或多个文档中所在位置之间的映射。通常使用关联数组实现，有两种表现形式：</p>
+<ul>
+<li>inverted file index，表现为｛单词，单词所在文档的ID｝</li>
+<li>full inverted index，表现为｛单词，（单词所在文档的ID，在文档的具体位置）｝</li>
+</ul>
+<p><em>InnoDB全文检索</em></p>
+<p>使用full inverted index，将（单词所在文档的ID，在文档的具体位置）视为一个ilist</p>
+<p>在InnoDB存储引擎中，为了提高全文检索的并行性能，共有6张辅助表，每张表根据word的Latin编码进行分区。</p>
+<p>辅助表是持久的表，存放于磁盘上。</p>
+<p>为了提高全文索引性能，使用了FTS Index Cache（全文检索索引缓存）。是一个红黑树结构，根据（word,ilist）排序</p>
+<p><em>全文检索</em></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/03/31/Java/设计模式/设计模式：单例模式/" rel="next" title="设计模式：单例模式">
+                <i class="fa fa-chevron-left"></i> 设计模式：单例模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/04/01/Java/base/JavaBase：IO/" rel="prev" title="JavaBase：IO">
+                JavaBase：IO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/head.jpg"
+      alt="Heper">
+  <p class="site-author-name" itemprop="name">Heper</p>
+  <div class="site-description motion-element" itemprop="description">To be awesome</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL体系结构和存储引擎"><span class="nav-number">1.</span> <span class="nav-text">MySQL体系结构和存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义数据库和实例"><span class="nav-number">1.1.</span> <span class="nav-text">定义数据库和实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL体系结构"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL存储引擎"><span class="nav-number">1.3.</span> <span class="nav-text">MySQL存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB"><span class="nav-number">1.3.1.</span> <span class="nav-text">InnoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyISAM"><span class="nav-number">1.3.2.</span> <span class="nav-text">MyISAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NDB"><span class="nav-number">1.3.3.</span> <span class="nav-text">NDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory"><span class="nav-number">1.3.4.</span> <span class="nav-text">Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Archive"><span class="nav-number">1.3.5.</span> <span class="nav-text">Archive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Federated"><span class="nav-number">1.3.6.</span> <span class="nav-text">Federated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maria"><span class="nav-number">1.3.7.</span> <span class="nav-text">Maria</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接MySQL"><span class="nav-number">1.4.</span> <span class="nav-text">连接MySQL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB存储引擎"><span class="nav-number">2.</span> <span class="nav-text">InnoDB存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB体系架构"><span class="nav-number">2.2.</span> <span class="nav-text">InnoDB体系架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储"><span class="nav-number">2.2.1.</span> <span class="nav-text">数据存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台线程"><span class="nav-number">2.2.2.</span> <span class="nav-text">后台线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">2.3.</span> <span class="nav-text">内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓冲池"><span class="nav-number">2.3.1.</span> <span class="nav-text">缓冲池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRU-List、Free-List和Flush-List"><span class="nav-number">2.3.2.</span> <span class="nav-text">LRU List、Free List和Flush List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重做日志缓冲"><span class="nav-number">2.3.3.</span> <span class="nav-text">重做日志缓冲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外的内存池"><span class="nav-number">2.3.4.</span> <span class="nav-text">额外的内存池</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checkpoint技术"><span class="nav-number">2.4.</span> <span class="nav-text">Checkpoint技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Master-Thread工作方式"><span class="nav-number">2.5.</span> <span class="nav-text">Master Thread工作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB1-2-x"><span class="nav-number">2.5.1.</span> <span class="nav-text">InnoDB1.2.x</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB关键特性"><span class="nav-number">2.6.</span> <span class="nav-text">InnoDB关键特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入缓冲"><span class="nav-number">2.6.1.</span> <span class="nav-text">插入缓冲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两次写"><span class="nav-number">2.6.2.</span> <span class="nav-text">两次写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自适应哈希索引"><span class="nav-number">2.6.3.</span> <span class="nav-text">自适应哈希索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步IO（AIO）"><span class="nav-number">2.6.4.</span> <span class="nav-text">异步IO（AIO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刷新临近页"><span class="nav-number">2.6.5.</span> <span class="nav-text">刷新临近页</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引与算法"><span class="nav-number">3.</span> <span class="nav-text">索引与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB存储引擎索引概述"><span class="nav-number">3.1.</span> <span class="nav-text">InnoDB存储引擎索引概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">3.2.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树索引"><span class="nav-number">3.3.</span> <span class="nav-text">B+树索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集索引"><span class="nav-number">3.3.1.</span> <span class="nav-text">聚集索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辅助索引"><span class="nav-number">3.3.2.</span> <span class="nav-text">辅助索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树索引的分裂"><span class="nav-number">3.3.3.</span> <span class="nav-text">B+树索引的分裂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树索引的管理"><span class="nav-number">3.3.4.</span> <span class="nav-text">B+树索引的管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cardinality值"><span class="nav-number">3.4.</span> <span class="nav-text">Cardinality值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Cardinality"><span class="nav-number">3.4.1.</span> <span class="nav-text">什么是Cardinality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnobDB存储引擎的Cardinality统计"><span class="nav-number">3.4.2.</span> <span class="nav-text">InnobDB存储引擎的Cardinality统计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树索引的使用"><span class="nav-number">3.5.</span> <span class="nav-text">B+树索引的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希算法"><span class="nav-number">3.6.</span> <span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文检索"><span class="nav-number">3.7.</span> <span class="nav-text">全文检索</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heper</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">36:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.2.0</div>
+
+        
+
+
+
+
+  <script>
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66458302";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+  
+  <script src="/js/affix.js?v=7.2.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.2.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

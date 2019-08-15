@@ -60,26 +60,26 @@
   <meta name="description" content="数据库 Redis服务器的数据库实现 服务器保存数据库的方法 客户端切换数据库的方法 数据库保存键值对的方法 数据库的增删改查的实现方法 服务器保存键的过期时间的方法 服务器自动删除过期键的方法 Redis2.8数据库通知功能的实现    服务器中的数据库Redis服务器奖所有数据库保存在服务器状态中 123456struct redisServer&amp;#123;    //一个数组，保存着服务器中">
 <meta name="keywords" content="NoSQL,Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis（3）：单机数据库的实现">
-<meta property="og:url" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/index.html">
+<meta property="og:title" content="Redis：单机数据库的实现">
+<meta property="og:url" content="http://yoursite.com/2019/03/04/数据库/Redis：单机数据库的实现/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="数据库 Redis服务器的数据库实现 服务器保存数据库的方法 客户端切换数据库的方法 数据库保存键值对的方法 数据库的增删改查的实现方法 服务器保存键的过期时间的方法 服务器自动删除过期键的方法 Redis2.8数据库通知功能的实现    服务器中的数据库Redis服务器奖所有数据库保存在服务器状态中 123456struct redisServer&amp;#123;    //一个数组，保存着服务器中">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468398778.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468706260.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468722522.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468871546.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468919035.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552469157583.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552470569474.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552470819774.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552470946418.png">
-<meta property="og:updated_time" content="2019-04-08T15:40:43.029Z">
+<meta property="og:image" content="http://yoursite.com/assets/1552468398778.png">
+<meta property="og:image" content="http://yoursite.com/assets/1552468706260.png">
+<meta property="og:image" content="http://yoursite.com/assets/1552468722522.png">
+<meta property="og:image" content="http://yoursite.com/assets/1552468871546.png">
+<meta property="og:image" content="http://yoursite.com/assets/1552468919035.png">
+<meta property="og:image" content="http://yoursite.com/assets/1552469157583.png">
+<meta property="og:image" content="http://yoursite.com/assets/1552470569474.png">
+<meta property="og:image" content="http://yoursite.com/assets/1552470819774.png">
+<meta property="og:image" content="http://yoursite.com/assets/1552470946418.png">
+<meta property="og:updated_time" content="2019-08-13T08:30:01.473Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis（3）：单机数据库的实现">
+<meta name="twitter:title" content="Redis：单机数据库的实现">
 <meta name="twitter:description" content="数据库 Redis服务器的数据库实现 服务器保存数据库的方法 客户端切换数据库的方法 数据库保存键值对的方法 数据库的增删改查的实现方法 服务器保存键的过期时间的方法 服务器自动删除过期键的方法 Redis2.8数据库通知功能的实现    服务器中的数据库Redis服务器奖所有数据库保存在服务器状态中 123456struct redisServer&amp;#123;    //一个数组，保存着服务器中">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/assets%5C1552468398778.png">
-  <link rel="canonical" href="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/">
+<meta name="twitter:image" content="http://yoursite.com/assets/1552468398778.png">
+  <link rel="canonical" href="http://yoursite.com/2019/03/04/数据库/Redis：单机数据库的实现/">
 
 
 <script id="page.configurations">
@@ -88,7 +88,7 @@
   };
 </script>
 
-  <title>Redis（3）：单机数据库的实现 | Hexo</title>
+  <title>Redis：单机数据库的实现 | Hexo</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/数据库/Redis（3）：单机数据库的实现/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/数据库/Redis：单机数据库的实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -301,7 +301,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">Redis（3）：单机数据库的实现
+          <h1 class="post-title" itemprop="name headline">Redis：单机数据库的实现
 
               
             
@@ -334,7 +334,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-08 23:40:43" itemprop="dateModified" datetime="2019-04-08T23:40:43+08:00">2019-04-08</time>
+                <time title="修改时间：2019-08-13 16:30:01" itemprop="dateModified" datetime="2019-08-13T16:30:01+08:00">2019-08-13</time>
               </span>
             
           
@@ -502,7 +502,7 @@
 </ul>
 <h2 id="自动间隔保存"><a href="#自动间隔保存" class="headerlink" title="自动间隔保存"></a>自动间隔保存</h2><p>Redis允许用户通过服务器配置save选项，让服务器每隔一段时间自动执行一次BGSAVE</p>
 <h2 id="RDB文件结构"><a href="#RDB文件结构" class="headerlink" title="RDB文件结构"></a>RDB文件结构</h2><p>结构：</p>
-<p><img src="assets%5C1552468398778.png" alt="1552468398778"></p>
+<p><img src="/assets/1552468398778.png" alt="1552468398778"></p>
 <ul>
 <li>RDB文件保存的是二进制数据，而不是C字符串</li>
 <li>REDIS：长度为5字节，通过检测该字符，快速检查所载入的文件是否为RDB文件</li>
@@ -513,9 +513,9 @@
 </ul>
 <p><strong>database部分</strong></p>
 <p>如果0号与3号数据库非空，则：</p>
-<p><img src="assets%5C1552468706260.png" alt="1552468706260"></p>
+<p><img src="/assets/1552468706260.png" alt="1552468706260"></p>
 <p>每个非空数据库在RDB文件中的保存：</p>
-<p><img src="assets%5C1552468722522.png" alt="1552468722522"></p>
+<p><img src="/assets/1552468722522.png" alt="1552468722522"></p>
 <ul>
 <li>SELECTDB：长度为1字节，表示接下来读取的是一个数据库号码</li>
 <li>db_number：保存着一个数据库号码，长度1、2、5字节，当读取到的时候，服务器使用select进行数据库切换</li>
@@ -523,8 +523,8 @@
 </ul>
 <p><strong>key_value_pairs</strong></p>
 <p>如果键值对带有过期时间，则也会保存在内。不带过期时间的表示：</p>
-<p><img src="assets%5C1552468871546.png" alt="1552468871546"></p>
-<p><img src="assets%5C1552468919035.png" alt="1552468919035"></p>
+<p><img src="/assets/1552468871546.png" alt="1552468871546"></p>
+<p><img src="/assets/1552468919035.png" alt="1552468919035"></p>
 <ul>
 <li>TYPE：对象类型或者底层编码，决定如何读入和解释value数据</li>
 <li>key：字符串对象</li>
@@ -539,7 +539,7 @@
 <p>哈希表对象</p>
 <p>有序集合对象</p>
 <h2 id="分析RDB文件"><a href="#分析RDB文件" class="headerlink" title="分析RDB文件"></a>分析RDB文件</h2><h1 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h1><p>通过保存Redis服务器所执行的写命令来记录数据库状态</p>
-<p><img src="assets%5C1552469157583.png" alt="1552469157583"></p>
+<p><img src="/assets/1552469157583.png" alt="1552469157583"></p>
 <p>写入的命令都是以Redis的命令请求协议格式保存的。</p>
 <h2 id="AOF持久化的实现"><a href="#AOF持久化的实现" class="headerlink" title="AOF持久化的实现"></a>AOF持久化的实现</h2><p>功能实现分为：命令追加、文件写入、文件同步三个步骤</p>
 <p><strong>命令追加</strong></p>
@@ -555,18 +555,18 @@
 <li>时间事件负责执行像serverCron函数这样需要定时运行的函数</li>
 </ul>
 <p>服务器在处理文件事件时可能执行写命令，使得一些内容被追加到aof_buf缓冲区，因此服务器每次结束一个事件循环前，都会调用函数，考虑是否将aof_buf缓冲区里的内容写入和保存到AOF文件中。</p>
-<p><img src="assets%5C1552470569474.png" alt="1552470569474"></p>
+<p><img src="/assets/1552470569474.png" alt="1552470569474"></p>
 <p>flushAppendOnlyFile函数的行为由服务器配置的appendfsync选项的值决定</p>
 <ul>
 <li>值为always，将缓冲区内所有内容写入并同步到AOF文件</li>
 <li>默认为everysec，将缓冲区内所有内容写入到AOF文件，如果上次同步AOF文件的时间距离现在超过1S，则再次对AOF文件进行同步</li>
 <li>no，将缓冲区内所有内容写入并同步到AOF文件，但并不进行同步，何时同步由操作系统决定</li>
 </ul>
-<h2 id="AOF文件载入与数据还原"><a href="#AOF文件载入与数据还原" class="headerlink" title="AOF文件载入与数据还原"></a>AOF文件载入与数据还原</h2><p><img src="assets%5C1552470819774.png" alt="1552470819774"></p>
+<h2 id="AOF文件载入与数据还原"><a href="#AOF文件载入与数据还原" class="headerlink" title="AOF文件载入与数据还原"></a>AOF文件载入与数据还原</h2><p><img src="/assets/1552470819774.png" alt="1552470819774"></p>
 <h2 id="AOF重写"><a href="#AOF重写" class="headerlink" title="AOF重写"></a>AOF重写</h2><p>随着服务器允许，AOF文件内容与体积会越来越大，可能会对服务器造成影响，并且文件太大会使得AOF文件进行数据还原时间太长。</p>
 <p>AOF文件重写：创建一个新的AOF文件替代现有的AOF文件，新旧的AOF保存的数据库状态相同，但是新的AOF文件不包含任何浪费空间的冗余指令。</p>
 <p>冗余指令：</p>
-<p><img src="assets%5C1552470946418.png" alt="1552470946418"></p>
+<p><img src="/assets/1552470946418.png" alt="1552470946418"></p>
 <p><strong>AOF文件重写的实现</strong></p>
 <p>通过读取服务器当前数据的状态来实现</p>
 <p><strong>AOF后台重写</strong></p>
@@ -609,8 +609,8 @@
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2019/03/04/数据库/Redis（2）：数据结构与对象/" rel="next" title="Redis（2）：数据结构与对象">
-                <i class="fa fa-chevron-left"></i> Redis（2）：数据结构与对象
+              <a href="/2019/03/04/数据库/Redis：数据结构与对象/" rel="next" title="Redis：数据结构与对象">
+                <i class="fa fa-chevron-left"></i> Redis：数据结构与对象
               </a>
             
           </div>
@@ -618,8 +618,8 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2019/03/04/数据库/Redis（4）：独立功能的实现/" rel="prev" title="Redis（4）：独立功能的实现">
-                Redis（4）：独立功能的实现 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/04/数据库/Redis：独立功能的实现/" rel="prev" title="Redis：独立功能的实现">
+                Redis：独立功能的实现 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -676,7 +676,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -891,7 +891,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:33</span>
+    <span title="站点阅读时长">36:47</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

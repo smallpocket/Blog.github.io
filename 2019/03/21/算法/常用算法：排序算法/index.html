@@ -77,7 +77,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/91550405374894.gif">
 <meta property="og:image" content="http://yoursite.com/assets/101550406418006.gif">
 <meta property="og:image" content="http://yoursite.com/assets/111550407277293.gif">
-<meta property="og:updated_time" content="2019-08-13T07:11:19.995Z">
+<meta property="og:updated_time" content="2019-08-14T07:26:27.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用算法：排序算法">
 <meta name="twitter:description" content="排序算法排序算法的比较当N&amp;lt;60，虽然插入排序O(N^2^)，但是常数项很低，因此速度非常快，甚至大于快排。    算法 稳定性 时间复杂度 空间复杂度 备注    选择排序 × N2 1    冒泡排序 √ N2 1    插入排序 √ N ~ N2 1 时间复杂度和初始顺序有关   希尔排序 × N 的若干倍乘于递增序列的长度 1 改进版插入排序   快速排序 × NlogN logN">
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-13 15:11:19" itemprop="dateModified" datetime="2019-08-13T15:11:19+08:00">2019-08-13</time>
+                <time title="修改时间：2019-08-14 15:26:27" itemprop="dateModified" datetime="2019-08-14T15:26:27+08:00">2019-08-14</time>
               </span>
             
           
@@ -578,7 +578,7 @@
 <p>堆排序是一种原地排序，没有利用额外的空间。</p>
 <p>现代操作系统很少使用堆排序，因为它无法利用局部性原理进行缓存，也就是数组元素很少和相邻的元素进行比较和交换。</p>
 <h1 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h1><h2 id="示例问题-2"><a href="#示例问题-2" class="headerlink" title="示例问题"></a>示例问题</h2><p>给定一个数组，求如果排序之后，相邻两数的最大差值，要求时间复杂度o(N)，且要求不能用非基于比较的排序。</p>
-<p>使用桶排序，如果N个数字，则使用N+1个桶，一定有至少一个桶会空下来，则这个桶相邻的数字就是最大的。即首先判断中间空桶的数目。只与数字的数目相关，与范围无关。</p>
+<p>使用桶排序，如果N个数字，则使用N+1个桶，一定有至少一个桶会空下来，则在一个桶内部的相邻数一定不会有最大差值。只与数字的数目相关，与范围无关。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><h2 id="Java-的排序算法实现"><a href="#Java-的排序算法实现" class="headerlink" title="Java 的排序算法实现"></a>Java 的排序算法实现</h2><p>Java主要排序方法为<code>java.util.Arrays.sort()</code>，对于原始数据类型使用三向切分的快速排序，对于引用类型使用归并排序。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a href="http://zhangchangle.com/#/notes/%E7%AE%97%E6%B3%95%20-%20%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">CyC2018</a></li>
@@ -666,7 +666,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -881,7 +881,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:33</span>
+    <span title="站点阅读时长">36:47</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

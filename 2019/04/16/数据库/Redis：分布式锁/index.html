@@ -65,17 +65,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Redis分布式锁简单实现熟悉Redis的同学那么肯定对setNx(set if not exist)方法不陌生，如果不存在则更新，其可以很好的用来实现我们的分布式锁。对于某个资源加锁我们只需要 1setNx resourceName value  这里有个问题，加锁了之后如果机器宕机那么这个锁就不会得到释放所以会加入过期时间，加入过期时间需要和setNx同一个原子操作，在Redis2.8之前我们">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/04/16/数据库/Redis：分布式锁/assets/16652989862ce5af">
-<meta property="og:image" content="http://yoursite.com/2019/04/16/数据库/Redis：分布式锁/assets/166529eb8139751a">
-<meta property="og:image" content="http://yoursite.com/2019/04/16/数据库/Redis：分布式锁/assets/16652acd8c664482">
-<meta property="og:image" content="http://yoursite.com/2019/04/16/数据库/Redis：分布式锁/assets/16730ecd592f41e3">
-<meta property="og:image" content="http://yoursite.com/2019/04/16/数据库/Redis：分布式锁/assets/166529eb8139751a">
-<meta property="og:image" content="http://yoursite.com/2019/04/16/数据库/Redis：分布式锁/assets/16652bd95e11a8b3">
-<meta property="og:updated_time" content="2019-05-10T09:28:43.077Z">
+<meta property="og:image" content="http://yoursite.com/assets/16652989862ce5af">
+<meta property="og:image" content="http://yoursite.com/assets/166529eb8139751a">
+<meta property="og:image" content="http://yoursite.com/assets/16652acd8c664482">
+<meta property="og:image" content="http://yoursite.com/assets/16730ecd592f41e3">
+<meta property="og:image" content="http://yoursite.com/assets/166529eb8139751a">
+<meta property="og:image" content="http://yoursite.com/assets/16652bd95e11a8b3">
+<meta property="og:updated_time" content="2019-08-13T08:27:44.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis：分布式锁">
 <meta name="twitter:description" content="Redis分布式锁简单实现熟悉Redis的同学那么肯定对setNx(set if not exist)方法不陌生，如果不存在则更新，其可以很好的用来实现我们的分布式锁。对于某个资源加锁我们只需要 1setNx resourceName value  这里有个问题，加锁了之后如果机器宕机那么这个锁就不会得到释放所以会加入过期时间，加入过期时间需要和setNx同一个原子操作，在Redis2.8之前我们">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/16/数据库/Redis：分布式锁/assets/16652989862ce5af">
+<meta name="twitter:image" content="http://yoursite.com/assets/16652989862ce5af">
   <link rel="canonical" href="http://yoursite.com/2019/04/16/数据库/Redis：分布式锁/">
 
 
@@ -331,7 +331,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-10 17:28:43" itemprop="dateModified" datetime="2019-05-10T17:28:43+08:00">2019-05-10</time>
+                <time title="修改时间：2019-08-13 16:27:44" itemprop="dateModified" datetime="2019-08-13T16:27:44+08:00">2019-08-13</time>
               </span>
             
           
@@ -390,11 +390,11 @@
 
 <h1 id="Redission"><a href="#Redission" class="headerlink" title="Redission"></a>Redission</h1><p>Javaer都知道Jedis，Jedis是Redis的Java实现的客户端，其API提供了比较全面的Redis命令的支持。Redission也是Redis的客户端，相比于Jedis功能简单。Jedis简单使用阻塞的I/O和redis交互，Redission通过Netty支持非阻塞I/O。Jedis最新版本2.9.0是2016年的快3年了没有更新，而Redission最新版本是2018.10月更新。</p>
 <p>Redission封装了锁的实现，其继承了java.util.concurrent.locks.Lock的接口，让我们像操作我们的本地Lock一样去操作Redission的Lock，下面介绍一下其如何实现分布式锁。</p>
-<p><img src="assets/16652989862ce5af" alt="img"></p>
+<p><img src="/assets/16652989862ce5af" alt="img"></p>
 <p>Redission不仅提供了Java自带的一些方法(lock,tryLock)，还提供了异步加锁，对于异步编程更加方便。 由于内部源码较多，就不贴源码了，这里用文字叙述来分析他是如何加锁的，这里分析一下tryLock方法:</p>
 <ol>
 <li><p>尝试加锁:首先会尝试进行加锁，由于保证操作是原子性，那么就只能使用lua脚本，相关的lua脚本如下： </p>
-<p><img src="assets/166529eb8139751a" alt="img">可以看见他并没有使用我们的sexNx来进行操作，而是使用的hash结构，我们的每一个需要锁定的资源都可以看做是一个HashMap，锁定资源的节点信息是Key,锁定次数是value。通过这种方式可以很好的实现可重入的效果，只需要对value进行加1操作，就能进行可重入锁。当然这里也可以用之前我们说的本地计数进行优化。</p>
+<p><img src="/assets/166529eb8139751a" alt="img">可以看见他并没有使用我们的sexNx来进行操作，而是使用的hash结构，我们的每一个需要锁定的资源都可以看做是一个HashMap，锁定资源的节点信息是Key,锁定次数是value。通过这种方式可以很好的实现可重入的效果，只需要对value进行加1操作，就能进行可重入锁。当然这里也可以用之前我们说的本地计数进行优化。</p>
 </li>
 <li><p>如果尝试加锁失败，判断是否超时，如果超时则返回false。</p>
 </li>
@@ -404,11 +404,11 @@
 </li>
 </ol>
 <p>对于我们的unlock方法比较简单也是通过lua脚本进行解锁，如果是可重入锁，只是减1。如果是非加锁线程解锁，那么解锁失败。 </p>
-<p><img src="assets/16652acd8c664482" alt="img"></p>
+<p><img src="/assets/16652acd8c664482" alt="img"></p>
 <p>Redission还有公平锁的实现，对于公平锁其利用了list结构和hashset结构分别用来保存我们排队的节点，和我们节点的过期时间，用这两个数据结构帮助我们实现公平锁，这里就不展开介绍了，有兴趣可以参考源码。</p>
-<h2 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h2><p><img src="assets/16730ecd592f41e3" alt="img"></p>
+<h2 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h2><p><img src="/assets/16730ecd592f41e3" alt="img"></p>
 <h3 id="加锁机制"><a href="#加锁机制" class="headerlink" title="加锁机制"></a>加锁机制</h3><p>现在某个客户端要加锁。如果该客户端面对的是一个redis cluster集群，他首先会根据hash节点选择一台机器。<strong>这里注意</strong>，仅仅只是选择一台机器！这点很关键！紧接着，就会发送一段lua脚本到redis上，那段lua脚本如下所示：</p>
-<p><img src="assets/166529eb8139751a" alt="img"></p>
+<p><img src="/assets/166529eb8139751a" alt="img"></p>
 <p>LUA脚本：保证复杂业务逻辑执行的<strong>原子性</strong>。</p>
 <ul>
 <li><p><strong>KEYS[1]</strong>代表的是你加锁的那个key，比如说：RLock lock = redisson.getLock(“myLock”);这里你自己设置了加锁的那个锁key就是“myLock”。</p>
@@ -440,7 +440,7 @@
 <p>接着就会导致，客户端2来尝试加锁的时候，在新的redis master上完成了加锁，而客户端1也以为自己成功加了锁。此时就会导致多个客户端对一个分布式锁完成了加锁。这时系统在业务语义上一定会出现问题，<strong>导致各种脏数据的产生</strong>。</p>
 <p>所以这个就是redis cluster，或者是redis master-slave架构的主从异步复制导致的redis分布式锁的最大缺陷：<strong>在redis master实例宕机的时候，可能导致多个客户端同时完成加锁</strong>。</p>
 <h1 id="RedLock"><a href="#RedLock" class="headerlink" title="RedLock"></a>RedLock</h1><p>我们想象一个这样的场景当机器A申请到一把锁之后，如果Redis主宕机了，这个时候从机并没有同步到这一把锁，那么机器B再次申请的时候就会再次申请到这把锁，为了解决这个问题Redis作者提出了RedLock红锁的算法,在Redission中也对RedLock进行了实现。</p>
-<p><img src="assets/16652bd95e11a8b3" alt="img"></p>
+<p><img src="/assets/16652bd95e11a8b3" alt="img"></p>
 <p>通过上面的代码，我们需要实现多个Redis集群，然后进行红锁的加锁，解锁。具体的步骤如下:</p>
 <ol>
 <li>首先生成多个Redis集群的Rlock，并将其构造成RedLock。</li>
@@ -542,7 +542,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -757,7 +757,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:33</span>
+    <span title="站点阅读时长">36:47</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

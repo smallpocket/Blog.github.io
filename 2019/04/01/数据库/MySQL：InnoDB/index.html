@@ -73,7 +73,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/01/数据库/MySQL：InnoDB/assets/1554113839689.png">
 <meta property="og:image" content="http://yoursite.com/assets/1565757877630.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554120134521.png">
-<meta property="og:updated_time" content="2019-08-15T03:14:33.769Z">
+<meta property="og:image" content="http://yoursite.com/assets/1565847371009.png">
+<meta property="og:updated_time" content="2019-08-15T08:08:52.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL：InnoDB">
 <meta name="twitter:description" content="MySQL体系结构和存储引擎尽管各平台在底层实现方面都各有不同，但是MySQL基本上能保证在各平台上的物理体系结构的一致性。 定义数据库和实例 数据库：  物理操作系统文件或其他形式文件类型的集合。 在MySQL数据库中，文件可以是frm、MYD、MYI等结尾的文件。 NDB引擎时，可能是存放于内存当中的文件。 是文件的集合，是依照某种数据模型组织起来并存放于二级存储器中的数据集合。   实例：">
@@ -333,7 +334,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-15 11:14:33" itemprop="dateModified" datetime="2019-08-15T11:14:33+08:00">2019-08-15</time>
+                <time title="修改时间：2019-08-15 16:08:52" itemprop="dateModified" datetime="2019-08-15T16:08:52+08:00">2019-08-15</time>
               </span>
             
           
@@ -361,7 +362,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">13k</span>
+              <span title="本文字数">15k</span>
             </span>
           
             <span class="post-meta-item">
@@ -371,7 +372,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">23 分钟</span>
+              <span title="阅读时长">28 分钟</span>
             </span>
           
 
@@ -850,19 +851,19 @@
 </ul>
 <h2 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h2><p>B+树索引可以分为聚集索引和辅助索引。</p>
 <p>聚集索引与辅助索引不同的是，叶子节点存放的是否是一整行的信息。</p>
-<h3 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h3><p>InnoDB存储引擎表是索引组织表，即表中数据按照主键顺序存放。</p>
-<p>聚集索引就是按照每张表的主键构造一颗B+树，同时叶子节点中存放的即为整张表的行记录数据，也将聚集索引的叶子节点称为数据页。</p>
+<h3 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h3><p>InnoDB存储引擎表是索引组织表，即表中数据按照主键顺序存放。而聚集索引就是按照每张表的主键构造一颗B+树，同时叶子节点中存放的即为整张表的行记录数据，也将聚集索引的叶子节点称为数据页，每个数据页都通过一个双向链表来进行连接。</p>
 <p>数据页上存放的是完整的每行的记录，在非数据页的索引页中，存放的仅仅是键值以及指向数据页的偏移量，不是一个完整的行记录。</p>
 <ul>
 <li>对于主键的排序查找和范围查找非常快<ul>
-<li>叶子节点的数据就是用户查询的数据，若需要表最后的10位用户，由于是索引是双向链表，则用户可以快速地找到最后一个数据页</li>
-<li>对于范围查询，通过叶子节点的上层中间节点就可以得到页的范围，然后直接读取数据页即可</li>
+<li>叶子节点的数据就是用户查询的数据，若需要表最后的10位用户，由于是索引是双向链表，则用户可以快速地找到最后一个数据页。</li>
+<li>对于范围查询，通过叶子节点的上层中间节点就可以得到页的范围，然后直接读取数据页即可。</li>
 </ul>
 </li>
+<li>对于排序，由于聚集索引默认有序，则不需要进行filesort</li>
 </ul>
-<h3 id="辅助索引"><a href="#辅助索引" class="headerlink" title="辅助索引"></a>辅助索引</h3><p>叶子节点不包含行记录的全部数据，除了包含键值外，还包含一个书签（告诉InnoDB可以在哪里找到与索引对应的行数据）</p>
+<h3 id="辅助索引"><a href="#辅助索引" class="headerlink" title="辅助索引"></a>辅助索引</h3><p>叶子节点不包含行记录的全部数据，除了包含键值外，还包含一个书签（告诉InnoDB可以在哪里找到与索引对应的行数据）。</p>
 <ul>
-<li>若辅助索引与聚集索引的高度均为3，则一共需要6次IO以得到最终的数据页</li>
+<li>若辅助索引与聚集索引的高度均为3，则一共需要6次IO以得到最终的数据页。</li>
 </ul>
 <h3 id="B-树索引的分裂"><a href="#B-树索引的分裂" class="headerlink" title="B+树索引的分裂"></a>B+树索引的分裂</h3><p>与一般B+树的分裂不同，需要涉及到<strong>并发</strong></p>
 <p>当自增的主键插入时，如</p>
@@ -889,13 +890,24 @@
 </ul>
 </li>
 </ul>
-<h3 id="B-树索引的管理"><a href="#B-树索引的管理" class="headerlink" title="B+树索引的管理"></a>B+树索引的管理</h3><h2 id="Cardinality值"><a href="#Cardinality值" class="headerlink" title="Cardinality值"></a>Cardinality值</h2><h3 id="什么是Cardinality"><a href="#什么是Cardinality" class="headerlink" title="什么是Cardinality"></a>什么是Cardinality</h3><p>低选择性：对于性别字段、类型字段、地区字段，他们可选择的范围很小</p>
-<p>高选择性：某个字段的取值范围很广，几乎没有重复。这时使用B+树索引才是最合适的</p>
-<p>通过Show Index结果中的列Cardinality来观察索引是否高选择性。</p>
+<h3 id="B-树索引的管理"><a href="#B-树索引的管理" class="headerlink" title="B+树索引的管理"></a>B+树索引的管理</h3><p><strong><em>Fast Index Creation</em></strong></p>
+<p>MySQL5.5前，对于索引的DDL操作操作为：</p>
+<ul>
+<li>首先创建一张新的临时表，表结构为通过Alter table定义的新结构。</li>
+<li>将原表中的数据导入临时表，并删除原表，将临时表重命名为原来的表名。</li>
+</ul>
+<p>因此DDL操作需要很久的时间，则使用了FIC的索引创建方式</p>
+<ul>
+<li>对于辅助索引的创建，会为创建索引的表加上应该S锁。</li>
+<li>对于辅助索引的删除，只需要更新内部视图，并将辅助索引空间标记为可用，同时删除索引定义即可。</li>
+</ul>
+<p>但是对于主键，依然需要重建一张表。</p>
+<h2 id="Cardinality值"><a href="#Cardinality值" class="headerlink" title="Cardinality值"></a>Cardinality值</h2><h3 id="什么是Cardinality"><a href="#什么是Cardinality" class="headerlink" title="什么是Cardinality"></a>什么是Cardinality</h3><p>低选择性：对于性别字段、类型字段、地区字段，他们可选择的范围很小。</p>
+<p>高选择性：某个字段的取值范围很广，几乎没有重复。这时使用B+树索引才是最合适的。</p>
+<p>通过<code>Show Index</code>结果中的列Cardinality来观察索引是否高选择性。</p>
 <p>Cardinality：表示索引中不重复记录数量的预估值，Cardinality/n_rows_in_table应尽可能接近1，如果非常小，则需要考虑是否还必要创建这个索引。</p>
 <h3 id="InnobDB存储引擎的Cardinality统计"><a href="#InnobDB存储引擎的Cardinality统计" class="headerlink" title="InnobDB存储引擎的Cardinality统计"></a>InnobDB存储引擎的Cardinality统计</h3><p>数据库对于Cardinality的统计是通过采样的方法完成。</p>
-<p>Cardinality统计信息的更新发生在两个操作中：insert与update</p>
-<p>更新Cardinality信息的策略为：</p>
+<p>Cardinality统计信息的更新发生在两个操作中：insert与update。更新Cardinality信息的策略为：</p>
 <ul>
 <li>表中1/16的数据已经发生变化</li>
 <li>stat_modified_counter（某一行数据频繁地变化，每变化一次+1）&gt;2000000000</li>
@@ -906,32 +918,67 @@
 <li><strong>随机</strong>取得B+树索引中的8个叶子结点。统计每个页不同记录的个数，记为P1，P2，P8</li>
 <li>根据采样信息给出Cardinality的预估值，即SUM（P）*A/8</li>
 </ul>
-<h2 id="B-树索引的使用"><a href="#B-树索引的使用" class="headerlink" title="B+树索引的使用"></a>B+树索引的使用</h2><p>不同应用中B+树索引的使用</p>
-<p>联合索引</p>
-<p>覆盖索引</p>
-<p>优化器旋转不使用索引的情况</p>
-<p>索引提示</p>
-<p>Multi-Range-Read优化</p>
-<p>ICP优化</p>
-<h2 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h2><p>哈希表</p>
-<p>InnoDB哈希算法</p>
-<p>自适应哈希索引</p>
-<h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><p><em>概述</em></p>
-<p>全文检索是将存储于数据库中的整本书或整篇文章中的任意内容信息查找处理的技术。</p>
+<h2 id="B-树索引的使用"><a href="#B-树索引的使用" class="headerlink" title="B+树索引的使用"></a>B+树索引的使用</h2><h3 id="不同应用中B-树索引的使用"><a href="#不同应用中B-树索引的使用" class="headerlink" title="不同应用中B+树索引的使用"></a>不同应用中B+树索引的使用</h3><p>数据库存在两种类型的应用：OLTP、OLAP。</p>
+<p>在OLTP当中，查询操作只是从数据库中取得一小部分数据，例如根据订单号获得订单的详情。这种情况下，B+树索引建立后，对该索引的使用也只是通过该索引取得表中少部分的数据，此时建立B+树索引才是有意义的。否则即使建立了，优化器也可能选择不使用索引。</p>
+<p>对于OLAP应用，情况比较复杂。但是大部分都需要访问表中大量的数据，根据这些数据产生查询的结果，其多是面向分析的查询，例如月每个用户的消费情况。因此OLAP中索引的添加根据的是宏观的信息，而不是用户ID，但是如果存在复杂查询、多表联结，则索引依然有意义。</p>
+<h3 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h3><p>联合索引是指对表上的多个列进行索引，例如<code>key idx_a_b(a,b)</code>。联合索引也是一颗B+树，不过其键值的数量&gt;=2.</p>
+<p><img src="/assets/1565847371009.png" alt="1565847371009"></p>
+<p>当执行<code>select * from table where a = xx and b = xx</code>则会利用到联合索引。如果只是单独查询一个字段，如果该字段存在单个键值的索引，则不会使用到，因为单个键值则理论上一个页能存放的记录更多。</p>
+<p>同时如果使用<code>select * from table where a = xx order by b</code>也会用到联合索引。</p>
+<ul>
+<li>使用联合索引后，键值是有序的，通过叶子结点但可用逻辑上顺序读出所有数据。其排序会首先根据第一个字段，然后根据第二个字段。</li>
+<li>使用联合索引避免了第二次的排序。因为索引本身在叶子结点已经排序了。</li>
+</ul>
+<p>对于联合索引(a,b,c)而言，下面语句同样可用通过联合索引得到结果，因为对于优化器而言，联合索引已经排好序了，因此会用到：</p>
+<p><code>select * from table where a = xxx order by b</code></p>
+<p><code>select * from table where a = xxx and b=xxx order by c</code></p>
+<p>但是对于下面的语句，依然需要filesort排序，因为索引(a,c)未排序：</p>
+<p><code>select * from table where a = xxx order by c</code></p>
+<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>覆盖索引即从辅助索引中就可以得到查询的记录，而不需要查询聚集索引中的记录。由于辅助索引不包含整行记录的所有信息，其大小远小于聚集索引。</p>
+<p>辅助索引中的信息包含主键信息，因此下面的语句可用使用一次辅助联合索引来完成查询：</p>
+<p><code>select key2 from table where key1 = xxx</code></p>
+<p>对于统计问题，例如<code>select count(*) from buy_log</code>也会使用辅助索引，因为辅助索引远小于聚集索引，可用减少IO操作。</p>
+<h3 id="优化器选择不使用索引的情况"><a href="#优化器选择不使用索引的情况" class="headerlink" title="优化器选择不使用索引的情况"></a>优化器选择不使用索引的情况</h3><ul>
+<li>当查询需要整行信息时，索引不能覆盖到我们需要的信息，因此还需要一次书签访问，虽然索引查询到数据有序，但是书签访问是无序的，带来很多的IO操作。<ul>
+<li>如果访问数据量很小，小于表20%时，会使用辅助索引。</li>
+<li>如果很大，则会优先通过聚集索引。如果对于硬盘很自信的话，可用强制使用force index来使用辅助索引</li>
+</ul>
+</li>
+</ul>
+<h3 id="索引提示"><a href="#索引提示" class="headerlink" title="索引提示"></a>索引提示</h3><p>Index hint显式地告诉优化器使用索引，其应用场景有：</p>
+<ul>
+<li>MySQL数据库的优化器错误地选择了某个索引，导致SQL语句运行的很慢。</li>
+<li>某SQL语句可用选择的索引非常的多，这时优化器选择执行计划时间的开销可能会大于SQL语句本身。优化器分析Range查询本身就是耗时的操作。</li>
+</ul>
+<h3 id="Multi-Range-Read优化"><a href="#Multi-Range-Read优化" class="headerlink" title="Multi-Range-Read优化"></a>Multi-Range-Read优化</h3><p>MySQL5.6的MRR优化，其目的是为了减少磁盘的随机访问，并将随机访问转化未较为顺序的数据访问，对于IO-bound类型的SQL查询语句可用带来性能极大的提升。MRR适用于range、ref、eq_ref类型的查询。</p>
+<p>优势：</p>
+<ul>
+<li>MRR使数据访问变得较为顺序，在查询辅助索引时，首先根据得到的查询结果，按照主键进行排序，并按照主键排序的顺序进行书签查找。</li>
+<li>减少缓冲池内页被替换的次数</li>
+<li>批量处理对键值的查询操作。</li>
+</ul>
+<p>对于范围查询和Join查询：</p>
+<ul>
+<li>将查询得到的辅助索引键值存放于一个缓存中，这时缓存中的数据是根据辅助索引键值排序的。</li>
+<li>将缓存中的键值根据RowId排序。</li>
+<li>根据RowId的排序顺序来访问实际的数据文件。</li>
+</ul>
+<h3 id="ICP优化"><a href="#ICP优化" class="headerlink" title="ICP优化"></a>ICP优化</h3><p>MySQL5.6支持的根据索引进行查询的优化方式，支持range、ref、eq_ref、ref_or_null类型的查询。</p>
+<p>之前的索引查询是首先根据索引来查找记录，然后再根据where来过滤记录。ICP之后，MySQL会在取出索引的同时判断是否可以进行where条件的过滤。</p>
+<h2 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h2><h3 id="InnoDB哈希算法"><a href="#InnoDB哈希算法" class="headerlink" title="InnoDB哈希算法"></a>InnoDB哈希算法</h3><p>冲突机制采用链表方式。对于缓冲池页的哈希表，都有一个chain指针指向相同哈希函数值的页。</p>
+<p>哈希函数采用除法散列方式。m的取值为略大于2倍的缓冲池页数量的质数。</p>
+<h3 id="自适应哈希索引-1"><a href="#自适应哈希索引-1" class="headerlink" title="自适应哈希索引"></a>自适应哈希索引</h3><p>只能用来搜索等值查找。</p>
+<h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>全文检索是将存储于数据库中的整本书或整篇文章中的任意内容信息查找处理的技术。可以根据需要获得全文中有关章、节、句、词等信息，也可以进行各种统计和分析。</p>
 <p>InnoDB 1.2.x开始，支持全文检索，支持MyISAM的全部功能，以及一些其他特性。</p>
-<p><em>倒排索引</em></p>
-<p>全文检索通常使用倒排索引实现。在辅助表中存储了单词与单词自身在一个或多个文档中所在位置之间的映射。通常使用关联数组实现，有两种表现形式：</p>
+<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><p>全文检索通常使用倒排索引实现。在辅助表中存储了单词与单词自身在一个或多个文档中所在位置之间的映射。通常使用关联数组实现，有两种表现形式：</p>
 <ul>
 <li>inverted file index，表现为｛单词，单词所在文档的ID｝</li>
 <li>full inverted index，表现为｛单词，（单词所在文档的ID，在文档的具体位置）｝</li>
 </ul>
-<p><em>InnoDB全文检索</em></p>
-<p>使用full inverted index，将（单词所在文档的ID，在文档的具体位置）视为一个ilist</p>
-<p>在InnoDB存储引擎中，为了提高全文检索的并行性能，共有6张辅助表，每张表根据word的Latin编码进行分区。</p>
-<p>辅助表是持久的表，存放于磁盘上。</p>
-<p>为了提高全文索引性能，使用了FTS Index Cache（全文检索索引缓存）。是一个红黑树结构，根据（word,ilist）排序</p>
-<p><em>全文检索</em></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<h3 id="InnoDB全文检索"><a href="#InnoDB全文检索" class="headerlink" title="InnoDB全文检索"></a>InnoDB全文检索</h3><p>使用full inverted index，将（单词所在文档的ID，在文档的具体位置）视为一个ilist。拥有两个列：word、ilist，并且在word上设有索引。</p>
+<p>倒排索引需要将word存放在一张辅助表当中，在InnoDB存储引擎中，为了提高全文检索的并行性能，共有6张辅助表Auxiliary Table，每张表根据word的Latin编码进行分区。辅助表是持久的表，存放于磁盘上。</p>
+<p>为了提高全文索引性能，使用了FTS Index Cache（全文检索索引缓存）。是一个红黑树结构，根据（word,ilist）排序，由于是缓存，其刷新类似于Insert Buffer。</p>
+<h3 id="全文检索-1"><a href="#全文检索-1" class="headerlink" title="全文检索"></a>全文检索</h3><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -1196,7 +1243,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL体系结构和存储引擎"><span class="nav-number">1.</span> <span class="nav-text">MySQL体系结构和存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义数据库和实例"><span class="nav-number">1.1.</span> <span class="nav-text">定义数据库和实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL体系结构"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL存储引擎"><span class="nav-number">1.3.</span> <span class="nav-text">MySQL存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB"><span class="nav-number">1.3.1.</span> <span class="nav-text">InnoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyISAM"><span class="nav-number">1.3.2.</span> <span class="nav-text">MyISAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NDB"><span class="nav-number">1.3.3.</span> <span class="nav-text">NDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory"><span class="nav-number">1.3.4.</span> <span class="nav-text">Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Archive"><span class="nav-number">1.3.5.</span> <span class="nav-text">Archive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Federated"><span class="nav-number">1.3.6.</span> <span class="nav-text">Federated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maria"><span class="nav-number">1.3.7.</span> <span class="nav-text">Maria</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接MySQL"><span class="nav-number">1.4.</span> <span class="nav-text">连接MySQL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB存储引擎"><span class="nav-number">2.</span> <span class="nav-text">InnoDB存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB体系架构"><span class="nav-number">2.2.</span> <span class="nav-text">InnoDB体系架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储"><span class="nav-number">2.2.1.</span> <span class="nav-text">数据存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台线程"><span class="nav-number">2.2.2.</span> <span class="nav-text">后台线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">2.3.</span> <span class="nav-text">内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓冲池"><span class="nav-number">2.3.1.</span> <span class="nav-text">缓冲池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRU-List、Free-List和Flush-List"><span class="nav-number">2.3.2.</span> <span class="nav-text">LRU List、Free List和Flush List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重做日志缓冲"><span class="nav-number">2.3.3.</span> <span class="nav-text">重做日志缓冲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外的内存池"><span class="nav-number">2.3.4.</span> <span class="nav-text">额外的内存池</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checkpoint技术"><span class="nav-number">2.4.</span> <span class="nav-text">Checkpoint技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Master-Thread工作方式"><span class="nav-number">2.5.</span> <span class="nav-text">Master Thread工作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB1-2-x"><span class="nav-number">2.5.1.</span> <span class="nav-text">InnoDB1.2.x</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB关键特性"><span class="nav-number">2.6.</span> <span class="nav-text">InnoDB关键特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入缓冲"><span class="nav-number">2.6.1.</span> <span class="nav-text">插入缓冲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两次写"><span class="nav-number">2.6.2.</span> <span class="nav-text">两次写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自适应哈希索引"><span class="nav-number">2.6.3.</span> <span class="nav-text">自适应哈希索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步IO（AIO）"><span class="nav-number">2.6.4.</span> <span class="nav-text">异步IO（AIO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刷新临近页"><span class="nav-number">2.6.5.</span> <span class="nav-text">刷新临近页</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引与算法"><span class="nav-number">3.</span> <span class="nav-text">索引与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB存储引擎索引概述"><span class="nav-number">3.1.</span> <span class="nav-text">InnoDB存储引擎索引概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">3.2.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树索引"><span class="nav-number">3.3.</span> <span class="nav-text">B+树索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集索引"><span class="nav-number">3.3.1.</span> <span class="nav-text">聚集索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辅助索引"><span class="nav-number">3.3.2.</span> <span class="nav-text">辅助索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树索引的分裂"><span class="nav-number">3.3.3.</span> <span class="nav-text">B+树索引的分裂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树索引的管理"><span class="nav-number">3.3.4.</span> <span class="nav-text">B+树索引的管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cardinality值"><span class="nav-number">3.4.</span> <span class="nav-text">Cardinality值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Cardinality"><span class="nav-number">3.4.1.</span> <span class="nav-text">什么是Cardinality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnobDB存储引擎的Cardinality统计"><span class="nav-number">3.4.2.</span> <span class="nav-text">InnobDB存储引擎的Cardinality统计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树索引的使用"><span class="nav-number">3.5.</span> <span class="nav-text">B+树索引的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希算法"><span class="nav-number">3.6.</span> <span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文检索"><span class="nav-number">3.7.</span> <span class="nav-text">全文检索</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL体系结构和存储引擎"><span class="nav-number">1.</span> <span class="nav-text">MySQL体系结构和存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义数据库和实例"><span class="nav-number">1.1.</span> <span class="nav-text">定义数据库和实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL体系结构"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL存储引擎"><span class="nav-number">1.3.</span> <span class="nav-text">MySQL存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB"><span class="nav-number">1.3.1.</span> <span class="nav-text">InnoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyISAM"><span class="nav-number">1.3.2.</span> <span class="nav-text">MyISAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NDB"><span class="nav-number">1.3.3.</span> <span class="nav-text">NDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory"><span class="nav-number">1.3.4.</span> <span class="nav-text">Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Archive"><span class="nav-number">1.3.5.</span> <span class="nav-text">Archive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Federated"><span class="nav-number">1.3.6.</span> <span class="nav-text">Federated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maria"><span class="nav-number">1.3.7.</span> <span class="nav-text">Maria</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接MySQL"><span class="nav-number">1.4.</span> <span class="nav-text">连接MySQL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB存储引擎"><span class="nav-number">2.</span> <span class="nav-text">InnoDB存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB体系架构"><span class="nav-number">2.2.</span> <span class="nav-text">InnoDB体系架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储"><span class="nav-number">2.2.1.</span> <span class="nav-text">数据存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台线程"><span class="nav-number">2.2.2.</span> <span class="nav-text">后台线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">2.3.</span> <span class="nav-text">内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓冲池"><span class="nav-number">2.3.1.</span> <span class="nav-text">缓冲池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRU-List、Free-List和Flush-List"><span class="nav-number">2.3.2.</span> <span class="nav-text">LRU List、Free List和Flush List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重做日志缓冲"><span class="nav-number">2.3.3.</span> <span class="nav-text">重做日志缓冲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外的内存池"><span class="nav-number">2.3.4.</span> <span class="nav-text">额外的内存池</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checkpoint技术"><span class="nav-number">2.4.</span> <span class="nav-text">Checkpoint技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Master-Thread工作方式"><span class="nav-number">2.5.</span> <span class="nav-text">Master Thread工作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB1-2-x"><span class="nav-number">2.5.1.</span> <span class="nav-text">InnoDB1.2.x</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB关键特性"><span class="nav-number">2.6.</span> <span class="nav-text">InnoDB关键特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入缓冲"><span class="nav-number">2.6.1.</span> <span class="nav-text">插入缓冲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两次写"><span class="nav-number">2.6.2.</span> <span class="nav-text">两次写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自适应哈希索引"><span class="nav-number">2.6.3.</span> <span class="nav-text">自适应哈希索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步IO（AIO）"><span class="nav-number">2.6.4.</span> <span class="nav-text">异步IO（AIO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刷新临近页"><span class="nav-number">2.6.5.</span> <span class="nav-text">刷新临近页</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引与算法"><span class="nav-number">3.</span> <span class="nav-text">索引与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB存储引擎索引概述"><span class="nav-number">3.1.</span> <span class="nav-text">InnoDB存储引擎索引概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">3.2.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树索引"><span class="nav-number">3.3.</span> <span class="nav-text">B+树索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集索引"><span class="nav-number">3.3.1.</span> <span class="nav-text">聚集索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辅助索引"><span class="nav-number">3.3.2.</span> <span class="nav-text">辅助索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树索引的分裂"><span class="nav-number">3.3.3.</span> <span class="nav-text">B+树索引的分裂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树索引的管理"><span class="nav-number">3.3.4.</span> <span class="nav-text">B+树索引的管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cardinality值"><span class="nav-number">3.4.</span> <span class="nav-text">Cardinality值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Cardinality"><span class="nav-number">3.4.1.</span> <span class="nav-text">什么是Cardinality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnobDB存储引擎的Cardinality统计"><span class="nav-number">3.4.2.</span> <span class="nav-text">InnobDB存储引擎的Cardinality统计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树索引的使用"><span class="nav-number">3.5.</span> <span class="nav-text">B+树索引的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不同应用中B-树索引的使用"><span class="nav-number">3.5.1.</span> <span class="nav-text">不同应用中B+树索引的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合索引"><span class="nav-number">3.5.2.</span> <span class="nav-text">联合索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖索引"><span class="nav-number">3.5.3.</span> <span class="nav-text">覆盖索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化器选择不使用索引的情况"><span class="nav-number">3.5.4.</span> <span class="nav-text">优化器选择不使用索引的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引提示"><span class="nav-number">3.5.5.</span> <span class="nav-text">索引提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Range-Read优化"><span class="nav-number">3.5.6.</span> <span class="nav-text">Multi-Range-Read优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICP优化"><span class="nav-number">3.5.7.</span> <span class="nav-text">ICP优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希算法"><span class="nav-number">3.6.</span> <span class="nav-text">哈希算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB哈希算法"><span class="nav-number">3.6.1.</span> <span class="nav-text">InnoDB哈希算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自适应哈希索引-1"><span class="nav-number">3.6.2.</span> <span class="nav-text">自适应哈希索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文检索"><span class="nav-number">3.7.</span> <span class="nav-text">全文检索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-1"><span class="nav-number">3.7.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒排索引"><span class="nav-number">3.7.2.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB全文检索"><span class="nav-number">3.7.3.</span> <span class="nav-text">InnoDB全文检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全文检索-1"><span class="nav-number">3.7.4.</span> <span class="nav-text">全文检索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1232,7 +1279,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:47</span>
+    <span title="站点阅读时长">36:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

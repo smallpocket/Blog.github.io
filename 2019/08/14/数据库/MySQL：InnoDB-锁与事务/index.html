@@ -65,15 +65,15 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="锁讨论InnoDB如何实现事务的隔离性的。  最大程度地利用数据库的并发访问 确保每个用户能以一致的方式读取和修改数据  将介绍InnoDB存储引擎对表中的数据的锁定，同时分析InnoDB存储引擎会以怎样的粒度锁定数据。 人们认为行级锁的一个神话：人们认为行级锁总会增加开销。实际上，只有当实现本身会增加开销时，行级锁才会增加开销。InnoDB存储引擎不需要锁升级，因为一个锁和多个锁的开销是相同的。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/08/themes/next/source/assets/1554133817951.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/themes/next/source/assets/1554134045205.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/themes/next/source/assets/1554134231937.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/themes/next/source/assets/417bc315-4409-48c6-83e0-59e8d405429e.jpg">
-<meta property="og:updated_time" content="2019-08-14T05:18:45.187Z">
+<meta property="og:image" content="http://yoursite.com/assets/1554133817951.png">
+<meta property="og:image" content="http://yoursite.com/assets/1554134045205.png">
+<meta property="og:image" content="http://yoursite.com/assets/1554134231937.png">
+<meta property="og:image" content="http://yoursite.com/assets/417bc315-4409-48c6-83e0-59e8d405429e.jpg">
+<meta property="og:updated_time" content="2019-08-15T09:19:30.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL：InnoDB-锁与事务">
 <meta name="twitter:description" content="锁讨论InnoDB如何实现事务的隔离性的。  最大程度地利用数据库的并发访问 确保每个用户能以一致的方式读取和修改数据  将介绍InnoDB存储引擎对表中的数据的锁定，同时分析InnoDB存储引擎会以怎样的粒度锁定数据。 人们认为行级锁的一个神话：人们认为行级锁总会增加开销。实际上，只有当实现本身会增加开销时，行级锁才会增加开销。InnoDB存储引擎不需要锁升级，因为一个锁和多个锁的开销是相同的。">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/themes/next/source/assets/1554133817951.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1554133817951.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/14/数据库/MySQL：InnoDB-锁与事务/">
 
 
@@ -316,11 +316,21 @@
                 
               
 
-              <time title="创建时间：2019-08-14 13:16:13 / 修改时间：13:18:45" itemprop="dateCreated datePublished" datetime="2019-08-14T13:16:13+08:00">2019-08-14</time>
+              <time title="创建时间：2019-08-14 13:16:13" itemprop="dateCreated datePublished" datetime="2019-08-14T13:16:13+08:00">2019-08-14</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-15 17:19:30" itemprop="dateModified" datetime="2019-08-15T17:19:30+08:00">2019-08-15</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -347,7 +357,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">9.5k</span>
+              <span title="本文字数">9.6k</span>
             </span>
           
             <span class="post-meta-item">
@@ -377,32 +387,35 @@
 </ul>
 <p>将介绍InnoDB存储引擎对表中的数据的锁定，同时分析InnoDB存储引擎会以怎样的粒度锁定数据。</p>
 <p>人们认为行级锁的一个神话：人们认为行级锁总会增加开销。实际上，只有当实现本身会增加开销时，行级锁才会增加开销。InnoDB存储引擎不需要锁升级，因为一个锁和多个锁的开销是相同的。</p>
-<h2 id="什么是锁"><a href="#什么是锁" class="headerlink" title="什么是锁"></a>什么是锁</h2><p>锁机制用于管理对共享资源的并发访问。</p>
-<p>InnoDB存储引擎在行级别上对表数据上锁，页会在数据库内部其他多个地方使用锁，从而允许对多种不同资源提供并发访问。如缓冲池的LRU列表。</p>
+<h2 id="什么是锁"><a href="#什么是锁" class="headerlink" title="什么是锁"></a>什么是锁</h2><p>锁机制用于管理对共享资源的并发访问。InnoDB存储引擎在行级别上对表数据上锁，页会在数据库内部其他多个地方使用锁，从而允许对多种不同资源提供并发访问。如缓冲池的LRU列表。</p>
 <p>InnoDB锁提供：</p>
 <ul>
-<li>一致性的非锁定读</li>
-<li>行级锁支持，且行级锁没有额外开销，同时得到并发性和一致性</li>
+<li>一致性的非锁定读。</li>
+<li>行级锁支持，且行级锁没有额外开销，同时得到并发性和一致性。</li>
 </ul>
 <h2 id="lock与latch"><a href="#lock与latch" class="headerlink" title="lock与latch"></a>lock与latch</h2><p>lock与latch都被称为锁，但具有截然不同的含义</p>
 <ul>
-<li>latch称为轻量级锁，要求锁定的时间必须非常短。若持续时间长，则性能会非常差<ul>
-<li>分为mutex互斥量和rwlock读写锁</li>
-<li>保证并发线程操作临界资源的正确性，并没有死锁检测机制</li>
+<li>latch称为轻量级锁，要求锁定的时间必须非常短。若持续时间长，则性能会非常差。<ul>
+<li>其对象为线程，保护内部数据结构，存在于每个数据结构的对象中。</li>
+<li>分为mutex互斥量和rwlock读写锁。</li>
+<li>保证并发线程操作临界资源的正确性，并没有死锁检测机制。</li>
 </ul>
 </li>
-<li>lock的对象是事务，用来锁定的是数据库中的对象，如表、页、行<ul>
-<li>lock的对象仅在commit或rollback后释放</li>
-<li>存在死锁机制</li>
+<li>lock用来锁定的是数据库中的对象，如表、页、行。<ul>
+<li>其对象为事务，持续整个事务过程。</li>
+<li>分为包含行锁、表锁、意向锁。</li>
+<li>lock的对象仅在commit或rollback后释放。</li>
+<li>存在死锁机制。通过waits-for graph、time out等机制进行死锁检测于处理。</li>
+<li>存在于Lock Manager的哈希表中。</li>
 </ul>
 </li>
 </ul>
-<h2 id="InnoDB存储引擎中的锁"><a href="#InnoDB存储引擎中的锁" class="headerlink" title="InnoDB存储引擎中的锁"></a>InnoDB存储引擎中的锁</h2><h3 id="锁的类型"><a href="#锁的类型" class="headerlink" title="锁的类型"></a>锁的类型</h3><p>InnoDB存储引擎实现了两种标准的<strong>行级锁</strong></p>
+<h2 id="InnoDB存储引擎中的锁"><a href="#InnoDB存储引擎中的锁" class="headerlink" title="InnoDB存储引擎中的锁"></a>InnoDB存储引擎中的锁</h2><h3 id="锁的类型"><a href="#锁的类型" class="headerlink" title="锁的类型"></a>锁的类型</h3><p>InnoDB存储引擎实现了两种标准的<strong>行级锁</strong>。</p>
 <ul>
-<li>共享锁S LOCK，允许事务读一行数据</li>
-<li>排他锁X LOCK，允许事务删除或更新一行数据</li>
+<li>共享锁S LOCK，允许事务读一行数据。</li>
+<li>排他锁X LOCK，允许事务删除或更新一行数据。</li>
 </ul>
-<p>兼容性</p>
+<p>兼容性：</p>
 <table>
 <thead>
 <tr>
@@ -422,9 +435,9 @@
 <td>兼容</td>
 </tr>
 </tbody></table>
-<p>InnoDB存储引擎支持<strong>多粒度锁定</strong>，允许事务在行级上的锁和表级上的锁同时存在。为了支持在不同粒度上进行加锁操作，支持一种额外的锁方式：<strong>意向锁</strong></p>
+<p>InnoDB存储引擎支持<strong>多粒度锁定</strong>，允许事务在行级上的锁和表级上的锁同时存在。为了支持在不同粒度上进行加锁操作，支持一种额外的锁方式：<strong>意向锁</strong>。</p>
 <p>意向锁：将锁定的对象分为多个层次，意味着事务希望在更细粒度上加锁。</p>
-<p><img src="../../../themes/next/source/assets/1554133817951.png" alt="1554133817951"></p>
+<p><img src="/assets/1554133817951.png" alt="1554133817951"></p>
 <ul>
 <li>如果希望对<strong>记录</strong>上锁，则分别需要对数据库、表、页上意向锁IX，最后对记录上X锁。</li>
 <li>若其中任一个部分导致等待，那么该操作需要等待粗粒度锁的完成<ul>
@@ -436,7 +449,7 @@
 <ol>
 <li>意向共享锁，事务想获得一张表中某几行的共享锁</li>
 <li>意向排他锁，事务想获得一张表中某几行的排他锁</li>
-<li><img src="../../../themes/next/source/assets/1554134045205.png" alt="1554134045205"></li>
+<li><img src="/assets/1554134045205.png" alt="1554134045205"></li>
 </ol>
 <h3 id="一致性非锁定读"><a href="#一致性非锁定读" class="headerlink" title="一致性非锁定读"></a>一致性非锁定读</h3><p>InnoDB存储引擎通过多版本控制（MVCC，多版本并发控制）的方式读取当前执行时间数据库中行的数据。</p>
 <ul>
@@ -446,7 +459,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="../../../themes/next/source/assets/1554134231937.png" alt="1554134231937"></p>
+<p><img src="/assets/1554134231937.png" alt="1554134231937"></p>
 <p>非锁定读：不需要等待访问的行上X锁的释放。</p>
 <p>因此非锁定读机制极大地提高了数据库并发性。</p>
 <ul>
@@ -581,7 +594,7 @@
 <li>在并发的情况下，多个事务并行执行，事务不仅要满足原子性，还需要满足隔离性，才能满足一致性。</li>
 <li>事务满足持久化是为了能应对数据库崩溃的情况。</li>
 </ul>
-<p><img src="../../../themes/next/source/assets/417bc315-4409-48c6-83e0-59e8d405429e.jpg" alt="img"></p>
+<p><img src="/assets/417bc315-4409-48c6-83e0-59e8d405429e.jpg" alt="img"></p>
 <h2 id="AUTOCOMMIT"><a href="#AUTOCOMMIT" class="headerlink" title="AUTOCOMMIT"></a>AUTOCOMMIT</h2><p>MySQL 默认采用自动提交模式。也就是说，如果不显式使用<code>START TRANSACTION</code>语句来开始一个事务，那么每个查询都会被当做一个事务自动提交。</p>
 <h2 id="事务的使用"><a href="#事务的使用" class="headerlink" title="事务的使用"></a>事务的使用</h2><ul>
 <li>transaction</li>
@@ -987,7 +1000,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:47</span>
+    <span title="站点阅读时长">36:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

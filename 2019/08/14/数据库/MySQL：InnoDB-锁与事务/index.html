@@ -68,8 +68,10 @@
 <meta property="og:image" content="http://yoursite.com/assets/1554133817951.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554134045205.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554134231937.png">
+<meta property="og:image" content="http://yoursite.com/assets/e41405a8-7c05-4f70-8092-e961e28d3112.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/417bc315-4409-48c6-83e0-59e8d405429e.jpg">
-<meta property="og:updated_time" content="2019-08-15T09:19:30.799Z">
+<meta property="og:image" content="http://yoursite.com/assets/1565917980166.png">
+<meta property="og:updated_time" content="2019-08-16T03:14:28.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL：InnoDB-锁与事务">
 <meta name="twitter:description" content="锁讨论InnoDB如何实现事务的隔离性的。  最大程度地利用数据库的并发访问 确保每个用户能以一致的方式读取和修改数据  将介绍InnoDB存储引擎对表中的数据的锁定，同时分析InnoDB存储引擎会以怎样的粒度锁定数据。 人们认为行级锁的一个神话：人们认为行级锁总会增加开销。实际上，只有当实现本身会增加开销时，行级锁才会增加开销。InnoDB存储引擎不需要锁升级，因为一个锁和多个锁的开销是相同的。">
@@ -329,7 +331,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-15 17:19:30" itemprop="dateModified" datetime="2019-08-15T17:19:30+08:00">2019-08-15</time>
+                <time title="修改时间：2019-08-16 11:14:28" itemprop="dateModified" datetime="2019-08-16T11:14:28+08:00">2019-08-16</time>
               </span>
             
           
@@ -357,7 +359,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">9.6k</span>
+              <span title="本文字数">13k</span>
             </span>
           
             <span class="post-meta-item">
@@ -367,7 +369,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">17 分钟</span>
+              <span title="阅读时长">24 分钟</span>
             </span>
           
 
@@ -392,6 +394,10 @@
 <ul>
 <li>一致性的非锁定读。</li>
 <li>行级锁支持，且行级锁没有额外开销，同时得到并发性和一致性。</li>
+</ul>
+<p>MyISAM：</p>
+<ul>
+<li>表级锁，不支持行级锁。</li>
 </ul>
 <h2 id="lock与latch"><a href="#lock与latch" class="headerlink" title="lock与latch"></a>lock与latch</h2><p>lock与latch都被称为锁，但具有截然不同的含义</p>
 <ul>
@@ -451,80 +457,123 @@
 <li>意向排他锁，事务想获得一张表中某几行的排他锁</li>
 <li><img src="/assets/1554134045205.png" alt="1554134045205"></li>
 </ol>
-<h3 id="一致性非锁定读"><a href="#一致性非锁定读" class="headerlink" title="一致性非锁定读"></a>一致性非锁定读</h3><p>InnoDB存储引擎通过多版本控制（MVCC，多版本并发控制）的方式读取当前执行时间数据库中行的数据。</p>
+<h4 id="查看当前锁请求的信息"><a href="#查看当前锁请求的信息" class="headerlink" title="查看当前锁请求的信息"></a>查看当前锁请求的信息</h4><p><code>show engine innodb status</code>可以查看当前锁请求的信息：</p>
+<p><code>select * from table.innodb_locks\G</code></p>
+<h3 id="一致性非锁定读"><a href="#一致性非锁定读" class="headerlink" title="一致性非锁定读"></a>一致性非锁定读</h3><p>多版本并发控制（Multi-Version Concurrency Control, MVCC）是MySQL的InnoDB存储引擎实现隔离级别的一种具体方式，用于实现提交读和可重复读这两种隔离级别。而未提交读隔离级别总是读取最新的数据行，无需使用MVCC。可串行化隔离级别需要对所有读取的行都加锁，单纯使用MVCC无法实现。</p>
 <ul>
 <li>如果读取的行正在执行DEL或update操作，这时读取操作不会因此去等待行上锁的释放，而是会去读行的一个快照数据。<ul>
-<li>快照数据是指该行的之前版本的数据。该实现是通过undo段来完成。undo用来在事务中回滚数据</li>
-<li>快照数据本身没有额外的开销，并不需要上锁，因为没有事务需要对历史的数据进行修改</li>
+<li>快照数据是指该行的之前版本的数据。该实现是通过undo段来完成。undo用来在事务中回滚数据。</li>
+<li>快照数据本身没有额外的开销，并不需要上锁，因为没有事务需要对历史的数据进行修改。</li>
 </ul>
 </li>
 </ul>
 <p><img src="/assets/1554134231937.png" alt="1554134231937"></p>
-<p>非锁定读：不需要等待访问的行上X锁的释放。</p>
-<p>因此非锁定读机制极大地提高了数据库并发性。</p>
+<p><strong>非锁定读</strong>：不需要等待访问的行上X锁的释放。因此非锁定读机制极大地提高了数据库并发性。</p>
 <ul>
-<li>是默认的读取方式</li>
+<li>是默认的读取方式。</li>
 <li>在不同事务隔离级别下读取方式不同。</li>
-<li>即使都是使用非锁定的一致性读，对快照数据的定义也各不相同</li>
+<li>即使都是使用非锁定的一致性读，对快照数据的定义也各不相同。</li>
 </ul>
-<p>在已提交读和可重复读下，采用非锁定的一致性读。但是快照数据的定义不同</p>
+<p><strong><em>版本号</em></strong></p>
 <ul>
-<li>已提交读下，总是读取被锁定行最新一份快照数据<ul>
-<li>在事务开始后，有其他的事务对该行数据进行了修改并commit，则会出现对一个数据的读取，两次结果不一致</li>
-<li>因为每次会读取最新一份快照</li>
+<li>系统版本号：是一个递增的数字，每开始一个新的事务，系统版本号就会自动递增。</li>
+<li>事务版本号：事务开始时的系统版本号。</li>
+</ul>
+<p><strong><em>隐藏的列</em></strong></p>
+<p>MVCC在每行记录后面都保存着两个隐藏的列，用来存储两个版本号：</p>
+<ul>
+<li>创建版本号：指示创建一个数据行的快照时的系统版本号。</li>
+<li>删除版本号：如果该快照的删除版本号大于当前事务版本号表示该快照有效，否则表示该快照已经被删除了。</li>
+</ul>
+<p><strong><em>Undo日志</em></strong></p>
+<p>MVCC使用到的快照存储在Undo日志中，该日志通过回滚指针把一个数据行（Record）的所有快照连接起来。</p>
+<p><img src="/assets/e41405a8-7c05-4f70-8092-e961e28d3112.jpg" alt="img"></p>
+<p><strong><em>实现过程</em></strong></p>
+<p>以下实现过程针对可重复读隔离级别。</p>
+<p>当开始新一个事务时，该事务的版本号肯定会大于当前所有数据行快照的创建版本号，理解这一点很关键。</p>
+<p><strong>1. SELECT</strong></p>
+<p>多个事务必须读取到同一个数据行的快照，并且这个快照是距离现在最近的一个有效快照。但是也有例外，如果有一个事务正在修改该数据行，那么它可以读取事务本身所做的修改，而不用和其它事务的读取结果一致。</p>
+<p>把没有对一个数据行做修改的事务称为T，T所要读取的数据行快照的创建版本号必须小于T的版本号，因为如果大于或者等于T的版本号，那么表示该数据行快照是其它事务的最新修改，因此不能去读取它。除此之外，T所要读取的数据行快照的删除版本号必须大于T的版本号，因为如果小于等于T的版本号，那么表示该数据行快照是已经被删除的，不应该去读取它。</p>
+<p><strong>2. INSERT</strong></p>
+<p>将当前系统版本号作为数据行快照的创建版本号。</p>
+<p><strong>3.DELETE</strong></p>
+<p>将当前系统版本号作为数据行快照的删除版本号。</p>
+<p><strong>4. UPDATE</strong></p>
+<p>将当前系统版本号作为更新前的数据行快照的删除版本号，并将当前系统版本号作为更新后的数据行快照的创建版本号。可以理解为先执行DELETE后执行INSERT。</p>
+<p><strong><em>快照读与当前读</em></strong></p>
+<p><strong>快照读</strong></p>
+<p>使用 MVCC 读取的是快照中的数据，这样可以减少加锁所带来的开销。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> ...;Copy to clipboardErrorCopied</span><br></pre></td></tr></table></figure>
+
+<p><strong>当前读</strong></p>
+<p>读取的是最新的数据，需要加锁。以下第一个语句需要加S锁，其它都需要加X锁。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> ? <span class="keyword">lock</span> <span class="keyword">in</span> <span class="keyword">share</span> <span class="keyword">mode</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> ? <span class="keyword">for</span> <span class="keyword">update</span>;</span><br><span class="line"><span class="keyword">insert</span>;</span><br><span class="line"><span class="keyword">update</span>;</span><br><span class="line"><span class="keyword">delete</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>快照定义</em></strong></p>
+<p>在READ COMMITED和REPEATABLE READ下，采用非锁定的一致性读。但是快照数据的定义不同</p>
+<ul>
+<li>已提交读下，总是读取被锁定行最新一份快照数据：<ul>
+<li>在事务开始后，有其他的事务对该行数据进行了修改并commit，则会出现对一个数据的读取，两次结果不一致。</li>
+<li>因为每次会读取最新一份快照。</li>
 </ul>
 </li>
 <li>可重复读下，总是读取<strong>事务开始时</strong>的行数据版本。<ul>
-<li>即只要事务开始了，在该次事务当中，对同一个数据的读取，永远不会改变</li>
+<li>即只要事务开始了，在该次事务当中，对同一个数据的读取，永远不会改变。</li>
 </ul>
 </li>
 </ul>
-<h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h4><p>从上图6-4可以看到，快照数据是当前行数据的历史版本，因此可能存在多个版本，即存在不止一个快照数据。由此带来的并发控制称为多版本并发控制（MVCC）</p>
+<h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h4><p>从上图6-4可以看到，快照数据是当前行数据的历史版本，因此可能存在多个版本，即存在不止一个快照数据。由此带来的并发控制称为多版本并发控制（MVCC）。</p>
 <h3 id="一致性锁定读"><a href="#一致性锁定读" class="headerlink" title="一致性锁定读"></a>一致性锁定读</h3><p>在某些情况下，用户需要显式地对数据库读取操作进行加锁以保证数据逻辑的一致性。</p>
-<p>InnoDB存储引擎对于Select语句支持两种一致性锁定读操作</p>
+<p>InnoDB存储引擎对于Select语句支持两种一致性锁定读操作，这些操作必须在一个事务当中：</p>
 <ul>
-<li>select … for update<ul>
-<li>对读取的行记录加一个X锁，其他事务不能对已经锁定的行加任何锁</li>
+<li>select … for update。<ul>
+<li>对读取的行记录加一个X锁，其他事务不能对已经锁定的行加任何锁。</li>
 </ul>
 </li>
-<li>select … lock in share mode<ul>
-<li>对读取的行记录加一个S锁，其他事务可以加S锁</li>
+<li>select … lock in share mode。<ul>
+<li>对读取的行记录加一个S锁，其他事务可以加S锁。</li>
 </ul>
 </li>
 </ul>
 <h3 id="自增长与锁"><a href="#自增长与锁" class="headerlink" title="自增长与锁"></a>自增长与锁</h3><h3 id="外键和锁"><a href="#外键和锁" class="headerlink" title="外键和锁"></a>外键和锁</h3><p>对于一个外键列，如果没有显式地对这个列加索引，InnoDB存储引擎会自动对其加一个索引，因为可以避免表锁。</p>
-<p>对于外键值的插入和更新</p>
+<p>对于外键值的插入和更新：</p>
 <ul>
-<li>首先向父表查询，并使用select … lock in share mode，以防止数据不一致的问题。</li>
+<li>首先向父表查询，并使用select … lock in share mode，以防止数据不一致的问题。如果使用一致性非锁定读会产生数据不一致问题。</li>
 </ul>
-<h2 id="锁的算法"><a href="#锁的算法" class="headerlink" title="锁的算法"></a>锁的算法</h2><h3 id="行锁的三种算法"><a href="#行锁的三种算法" class="headerlink" title="行锁的三种算法"></a>行锁的三种算法</h3><ul>
-<li>Record Lock：单个行记录上的锁<ul>
-<li>Read Committed下采用</li>
-<li>会锁住索引记录（而不是行数据），如果没有索引，则会使用隐式的主键来进行锁定</li>
+<h2 id="锁的算法"><a href="#锁的算法" class="headerlink" title="锁的算法"></a>锁的算法</h2><h3 id="Record-Locks"><a href="#Record-Locks" class="headerlink" title="Record Locks"></a>Record Locks</h3><p>锁定一个记录上的索引，而不是记录本身，即不是行数据。Read Committed下采用。</p>
+<p>Record locks会锁住索引记录（而不是行数据），如果表没有设置索引，InnoDB会自动在主键上创建隐藏的聚簇索引，因此Record Locks依然可以使用。</p>
+<h3 id="Gap-Locks"><a href="#Gap-Locks" class="headerlink" title="Gap Locks"></a>Gap Locks</h3><p>间隙锁，锁定一个范围，但不包含记录本身。作用是阻止多个事务将记录插入到同一范围内，会导致Phantom Problem问题的产生。</p>
+<ul>
+<li>如果对于辅助索引b，会话A锁定了b=3的记录。</li>
+<li>若没有gap Lock锁定(3,6)，则用户可以插入索引b=3的记录。</li>
+<li>此时会话A再次查询时，会返回不同的记录。</li>
+</ul>
+<p>而使用了gap locks后，例如当一个事务执行以下语句，其它事务就不能在t.c中插入 15。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> c <span class="keyword">BETWEEN</span> <span class="number">10</span> <span class="keyword">and</span> <span class="number">20</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br></pre></td></tr></table></figure>
+
+<p>locking reads，UPDATE和DELETE时，除了对唯一索引的唯一搜索外都会获取gap锁或next-key锁，即锁住其扫描的范围。</p>
+<blockquote>
+<p>如果表扫描没有用到索引，则会锁住整个表。</p>
+</blockquote>
+<p><strong><em>READ COMMITTED</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">For locking reads (SELECT with FOR UPDATE or LOCK IN SHARE MODE), UPDATE statements, </span><br><span class="line">and DELETE statements, InnoDB locks only index records, not the gaps before them,</span><br><span class="line"> and thus permits the free insertion of new records next to locked records.</span><br></pre></td></tr></table></figure>
+
+<p>只会锁住已有记录，不会加gap锁。</p>
+<p><strong><em>SERIALIZABLE</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This level is like REPEATABLE READ, but InnoDB implicitly converts all plain </span><br><span class="line">SELECT statements to SELECT ... LOCK IN SHARE MODE if autocommit is disabled.</span><br></pre></td></tr></table></figure>
+
+<p>和REPEATABLE READ的主要区别在于把普通的SELECT变成SELECT … LOCK IN SHARE MODE，即对普通的select都会获取gap锁或next-key锁。</p>
+<h3 id="Next-Key-Lock"><a href="#Next-Key-Lock" class="headerlink" title="Next-Key Lock"></a>Next-Key Lock</h3><p>Next-Key Lock：Gap Lock+Record Lock，锁定一个范围，并锁定记录本身。</p>
+<ul>
+<li>Repeadtable Read采用。</li>
+<li>如果查询用到的索引有10，11，13，20，则该索引可能被Next-Key锁定的区间为(-无穷，10]，(10,11]，(11,13]，(13,20]，(20,+无穷）。</li>
+<li>当查询的索引含有唯一属性（主键），则优化为Record Lock，如主键。即此时查询是wan’quan</li>
+<li>对于辅助索引，会对包含该键值的上下两个区间上锁，上区间加next-key lock，下区间加gap lock。<ul>
+<li>如11，则上区间(10,11]，下区间(11,13)。</li>
 </ul>
 </li>
-<li>Gap Lock：间隙锁，锁定一个范围，但不包含记录本身<ul>
-<li>作用是阻止多个事务将记录插入到同一范围内，会导致Phantom Problem问题的产生<ul>
-<li>如果对于辅助索引b，会话A锁定了b=3的记录</li>
-<li>若没有gap Lock锁定(3,6)，则用户可以插入索引b=3的记录</li>
-<li>此时会话A再次查询时，会返回不同的记录</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>Next-Key Lock：Gap Lock+Record Lock，锁定一个范围，并锁定记录本身<ul>
-<li>Repeadtable Read采用</li>
-<li>如果一个索引有10，11，13，20</li>
-<li>则该索引可能被Next-Key锁定的区间为(-无穷，10]，(10,11]，(11,13]，(13,20]，(20,+无穷）</li>
-<li>当查询的索引含有唯一属性（主键），则优化为Record Lock，如主键</li>
-<li>对于辅助索引，会对包含该键值的上下两个区间上锁，上区间加next-key lock，下区间加gap lock<ul>
-<li>如11，则上区间(10,11]，下区间(11,13)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>InnoDB存储引擎的锁算法的一些规则如下所示</p>
+<h3 id="锁算法规则"><a href="#锁算法规则" class="headerlink" title="锁算法规则"></a>锁算法规则</h3><p>InnoDB存储引擎的锁算法的一些规则如下所示：</p>
 <ul>
 <li>在不通过索引条件查询时，InnoDB 会锁定表中的所有记录。所以，如果考虑性能，WHERE语句中的条件查询的字段都应该加上索引。</li>
 <li>InnoDB通过索引来实现行锁，而不是通过锁住记录。因此，当操作的两条不同记录拥有相同的索引时，也会因为行锁被锁而发生等待。</li>
@@ -533,9 +582,9 @@
 <li>InnoDB对于辅助索引有特殊的处理，不仅会锁住辅助索引值所在的范围，还会将其下一键值加上Gap LOCK。</li>
 <li>InnoDB使用Next-Key Lock机制来避免Phantom Problem（幻读问题）。</li>
 </ul>
-<h3 id="解决Phantom-Problem幻像问题"><a href="#解决Phantom-Problem幻像问题" class="headerlink" title="解决Phantom Problem幻像问题"></a>解决Phantom Problem幻像问题</h3><p>InnoDB存储引擎使用Next-Key Lock避免幻像问题</p>
+<h3 id="解决Phantom-Problem幻像问题"><a href="#解决Phantom-Problem幻像问题" class="headerlink" title="解决Phantom Problem幻像问题"></a>解决Phantom Problem幻像问题</h3><p>InnoDB存储引擎使用Next-Key Lock避免幻像问题。</p>
 <p>Phantom Problem幻像问题：同一个事务下，连续执行两次同样的SQL语句可能导致不同的结果，第二次的SQL语句可能会返回之前不存在的行。</p>
-<h2 id="锁问题"><a href="#锁问题" class="headerlink" title="锁问题"></a>锁问题</h2><p>锁提高了并发，但会带来潜在的问题</p>
+<h2 id="锁问题"><a href="#锁问题" class="headerlink" title="锁问题"></a>锁问题</h2><p>锁提高了并发，但会带来潜在的问题。</p>
 <h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>脏读即读取到了脏数据，存在的级别为Read Uncommitted</p>
 <ul>
 <li>脏数据：事务对缓冲池中行记录的修改，并且还没有被提交<ul>
@@ -550,33 +599,31 @@
 <h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>在一个事务内多次读取同一数据集合，在这个事务还没有结束时，另外一个事务也访问该同一数据集合，并做了一些DML操作。因此在第一个事务中的两次读数据间，由于第二个事务的修改，第一个事务两次读取到的数据可能不一样。</p>
 <p>与脏读的区别：</p>
 <ul>
-<li>脏读读到未提交的数据，不可重复读读取到已经提交的数据</li>
-<li>不可重复读违反了数据库事务一致性的要求</li>
+<li>脏读读到未提交的数据，不可重复读读取到已经提交的数据。</li>
+<li>不可重复读违反了数据库事务一致性的要求。</li>
 </ul>
-<p>由于读取到的是已经提交的数据，一般而言不会带来很大问题，因此一些数据库允许该现象</p>
-<h3 id="丢失更新"><a href="#丢失更新" class="headerlink" title="丢失更新"></a>丢失更新</h3><p>一个事务的更新操作会被另一个事务的更新操作所覆盖，导致数据的不一致</p>
+<p>由于读取到的是已经提交的数据，一般而言不会带来很大问题，因此一些数据库允许该现象。</p>
+<h3 id="丢失更新"><a href="#丢失更新" class="headerlink" title="丢失更新"></a>丢失更新</h3><p>一个事务的更新操作会被另一个事务的更新操作所覆盖，导致数据的不一致：</p>
 <ul>
-<li>事务T1将行记录r更新为v1，但是事务T1未提交</li>
-<li>同时，事务T2将行记录r更新为v2，事务T2未提交</li>
-<li>事务T1提交</li>
-<li>事务T2提交</li>
+<li>事务T1将行记录r更新为v1，但是事务T1未提交。</li>
+<li>同时，事务T2将行记录r更新为v2，事务T2未提交。</li>
+<li>事务T1提交。</li>
+<li>事务T2提交。</li>
 </ul>
-<p>在任何隔离级别下都不会发生</p>
-<p>但可能出现另一个问题</p>
+<p>在任何隔离级别下都不会发生，但可能出现另一个问题：</p>
 <ul>
-<li>事务T1查询一行数据，放入本地内存，显示给一个用户U1</li>
-<li>同时，事务T2查询该记录，显式给用户U2</li>
-<li>U1修改这行记录，更新并提交</li>
-<li>U2修改这行记录，更新并提交</li>
-<li>银行转账场景下回出现问题</li>
+<li>事务T1查询一行数据，放入本地内存，显示给一个用户U1。</li>
+<li>同时，事务T2查询该记录，显式给用户U2。</li>
+<li>U1修改这行记录，更新并提交。</li>
+<li>U2修改这行记录，更新并提交。此时没有去读取新的数据。</li>
+<li>银行转账场景下会出现问题。</li>
 </ul>
-<h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>由于不同锁间的兼容性关系，在有些时刻一个事务中的锁需要等待另一个事务中的锁释放它占用的资源</p>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h2 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h2><p>锁升级是指将当前锁的粒度降低。</p>
-<p>将一个表的1000行锁升级为一个页锁</p>
-<p>升级保护了系统资源，防止系统使用太多内存来维护锁，一定程度上提高了效率</p>
-<p>InnoDB存储引擎不会有锁升级。因为根据页进行加锁，并采用<strong>位图方式</strong>，开销很小</p>
-<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务指的是满足 ACID 特性的一组操作，可以通过 Commit 提交一个事务，也可以使用 Rollback 进行回滚。</p>
-<p>主要关注事务的原子性概念</p>
+<h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>由于不同锁间的兼容性关系，在有些时刻一个事务中的锁需要等待另一个事务中的锁释放它占用的资源。</p>
+<p>参数<code>innodb_lock_wait_timeout</code>用来控制等待的时间，默认是50s；<code>innodb_rollback_on_timeout</code>用来设定是否在等待超时时对进行中的事务进行回滚操作，默认为false；</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h2 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h2><p>锁升级是指将当前锁的粒度降低。例如将一个表的1000行锁升级为一个页锁。</p>
+<p>升级保护了系统资源，防止系统使用太多内存来维护锁，一定程度上提高了效率。</p>
+<p>InnoDB存储引擎不会有锁升级。因为根据页进行加锁，并采用<strong>位图方式</strong>，开销很小。如果对3000000数据页，每页100记录进行加锁，如果每个页存储的锁信息占用30个字节，锁对象仅需要90MB。</p>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务指的是满足ACID特性的一组操作，可以通过Commit提交一个事务，也可以使用Rollback进行回滚。</p>
 <p>ACID：</p>
 <ul>
 <li>原子性（atomicity，或称不可分割性）。一个事务（transaction）中的所有操作，或者全部完成，或者全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。即，事务不可分割、不可约简。</li>
@@ -602,14 +649,35 @@
 <li>commit</li>
 <li>savepoint：指事务处理中设置的临时占位符，可以对它发布回退，而不是回退整个事务</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select * from ordertotals;</span><br><span class="line">start transaction</span><br><span class="line">savepoint delete1;</span><br><span class="line">delete from ordertotals;</span><br><span class="line">rollback(commit);</span><br><span class="line">(rollback to delete1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> ordertotals;</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span></span><br><span class="line"><span class="keyword">savepoint</span> delete1;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> ordertotals;</span><br><span class="line"><span class="keyword">rollback</span>(<span class="keyword">commit</span>);</span><br><span class="line">(<span class="keyword">rollback</span> <span class="keyword">to</span> delete1)</span><br></pre></td></tr></table></figure>
 
-<h2 id="认识事务"><a href="#认识事务" class="headerlink" title="认识事务"></a>认识事务</h2><p><strong>分类</strong></p>
-<p>从事务理论的角度来说，可以将事务分为以下几种类型</p>
+<h2 id="认识事务"><a href="#认识事务" class="headerlink" title="认识事务"></a>认识事务</h2><p>从事务理论的角度来说，可以将事务分为以下几种类型：</p>
 <ul>
-<li>扁平</li>
+<li>扁平事务。</li>
+<li>带有保存点的扁平事务。</li>
+<li>链事务。</li>
+<li>嵌套事务。</li>
+<li>分布式事务</li>
 </ul>
-<h2 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h2><table>
+<h3 id="事务的分类"><a href="#事务的分类" class="headerlink" title="事务的分类"></a>事务的分类</h3><p><strong><em>扁平事务</em></strong>：</p>
+<p>所有操作都处于同一层次，由<code>begin work</code>开始<code>Commit work</code>或<code>rollback work</code>结束，其间的操作都是原子的，要么都执行要么都回滚。</p>
+<p><strong><em>带有保存点的扁平事务</em></strong>：</p>
+<p>在扁平事务的基础上，允许事务执行过程中回滚到同一事务中较早的一个状态。<strong>保存点</strong>用来停止系统应该记住事务当前的状态，以便当之后发生错误时，事务能够回到保存点当时的状态。</p>
+<p>当系统崩溃时，所有保存点都会消失，其保存点并非持久的。</p>
+<p><strong><em>链事务</em></strong>：</p>
+<p>保存点事务的一种变种。在提交一个事务时，释放不需要的数据对象，将必要的处理上下文隐式地传给下一个要开始的事务。提交事务操作与开始下一个事务操作将合并为一个原子操作，意味着下一个事务可以看到上一个事务的结果。</p>
+<p><strong><em>嵌套事务</em></strong>：</p>
+<p>是一个层次结构框架，由一个顶层事务控制着各个层次的事务，顶层事务下嵌套的事务被称为子事务，其控制着每一个局部的变换。</p>
+<p><img src="/assets/1565917980166.png" alt="1565917980166"></p>
+<ul>
+<li>嵌套事务是由若干事务组成的一棵树，子事务既可以是嵌套事务，也可以是扁平事务。</li>
+<li>处在叶结点的事务是扁平事务，但每个子事务从根到叶结点的距离可以是不同的。</li>
+<li>子事务可以提交也可以回滚，但是它的提交操作不会马上生效，除非父事务已经提交，即所有子事务必须在顶层事务提交后才真正提交。</li>
+<li>树的任一个事务回滚都会引起它所有子事务一起回滚。</li>
+</ul>
+<p><strong><em>分布式事务</em></strong>：</p>
+<p>通常是一个在分布式环境下运行的扁平事务，因此需要根据数据所在位置访问网络中的不同节点。</p>
+<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><table>
 <thead>
 <tr>
 <th>隔离级别</th>
@@ -643,63 +711,76 @@
 <td>不可能</td>
 </tr>
 </tbody></table>
+<p><strong><em>未提交读(Read Uncommitted)</em></strong>：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据。</p>
+<p><strong><em>提交读(Read Committed)</em></strong>：只能读取到已经提交的数据。Oracle等多数数据库默认都是该级别 (不重复读)。</p>
 <ul>
-<li>未提交读(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中未提交事务修改的数据</li>
-<li>提交读(Read Committed)：只能读取到已经提交的数据。Oracle等多数数据库默认都是该级别 (不重复读)<ul>
-<li>脏读：即读取到了脏数据</li>
-<li>脏数据：事务对缓冲池中行记录的修改，并且还没有被提交<ul>
-<li>如果读到了脏数据，即一个事务读取到另一个事务未提交的数据，违反了数据库的隔离性</li>
+<li>脏读：即读取到了脏数据。</li>
+<li>脏数据：事务对缓冲池中行记录的修改，并且还没有被提交。<ul>
+<li>如果读到了脏数据，即一个事务读取到另一个事务未提交的数据，违反了数据库的隔离性。</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>可重复读(Repeated Read)：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻象读<ul>
-<li>不可重复读：读取到其他事务已经提交的数据<ul>
+<p><strong><em>可重复读(Repeated Read)</em></strong>：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻象读。</p>
+<ul>
+<li>不可重复读：读取到其他事务已经提交的数据：<ul>
 <li>在一个事务内多次读取同一数据集合，在这个事务还没有结束时，另外一个事务也访问该同一数据集合，并做了一些DML操作。因此在第一个事务中的两次读数据间，由于第二个事务的修改，第一个事务两次读取到的数据可能不一样。</li>
-<li>不可重复读违反了数据库事务一致性的要</li>
-<li>由于读取到的是已经提交的数据，一般而言不会带来很大问题，因此一些数据库允许该现象</li>
+<li>不可重复读违反了数据库事务一致性的要求。</li>
+<li>由于读取到的是已经提交的数据，一般而言不会带来很大问题，因此一些数据库允许该现象。</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>串行读(Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞<ul>
-<li>幻读：不可重复读的一种特殊场景<ul>
+<p><strong><em>串行读(Serializable)</em></strong>：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞：</p>
+<ul>
+<li>幻读：不可重复读的一种特殊场景：<ul>
 <li>幻读是指当事务不是独立执行时发生的一种现象。</li>
 <li>事务A读取与搜索条件相匹配的若干行。事务B以插入或删除行等方式来修改事务A的结果集，然后再提交。</li>
 <li>幻读是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，比如这种修改涉及到表中的“全部数据行”。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入“一行新数据”。那么，以后就会发生操作第一个事务的用户发现表中还存在没有修改的数据行，就好象发生了幻觉一样.一般解决幻读的方法是增加范围锁RangeS，锁定检索范围为只读，这样就避免了幻读。</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <p>默认的隔离级别：可重复读Repeated Read。采用Next-KeyLock算法避免锁的产生。</p>
-<p>同时使用隔离级别的开销基本一致。因此即使使用未提交读也不会得到性能的大幅提升</p>
+<p>同时使用隔离级别的开销基本一致。因此即使使用未提交读也不会得到性能的大幅提升。</p>
+<h2 id="事务的实现"><a href="#事务的实现" class="headerlink" title="事务的实现"></a>事务的实现</h2><p>事务的原子性、一致性、持久性通过数据库的redo log和undo log完成</p>
+<ul>
+<li>redo log保证事务的原子性和持久性，恢复提交事务修改的页操作，是物理日志，记录页的物理修改操作。</li>
+<li>undo log保证事务的一致性，回滚行记录到某个特定版本，是逻辑日志，根据每行记录进行记录。</li>
+</ul>
+<h3 id="redo"><a href="#redo" class="headerlink" title="redo"></a>redo</h3><p>redo由两部分组成：</p>
+<ul>
+<li>内存中的重做日志缓冲redo log buffer是易丢失的</li>
+<li>重做日志文件redo log file是是持久的。</li>
+</ul>
+<p>InnoDB通过force log at commit机制实现事务的持久性，即当事务提交时，必须先将事务的所有日志写入到重做日志文件进行持久化，待事务的Coomit操作完成才算结束。</p>
+<p>在每次将重做日志缓冲写入重做日志文件后，InnoDB都需要调用一次fsunc操作，因此磁盘性能决定了事务提交的性能。</p>
+<h3 id="purge"><a href="#purge" class="headerlink" title="purge"></a>purge</h3><p>purge负责最终完成delete和update操作，由于MVCC，记录不能在事务提交时立即进行处理。</p>
+<p>如果记录不被任何其他事务所引用，那么就可以真正进行delete操作。</p>
+<h3 id="group-commit"><a href="#group-commit" class="headerlink" title="group commit"></a>group commit</h3><p>若事务为非只读事务，则每次事务提交需要进行一次fsync操作，以确保操作日志都写入磁盘了，而group commit使得一次fsync可以刷新确保多个事务日志文件被写入文件。</p>
 <h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><h2 id="MySQL数据库分布式事务"><a href="#MySQL数据库分布式事务" class="headerlink" title="MySQL数据库分布式事务"></a>MySQL数据库分布式事务</h2><p>InnoDB存储引擎提供了对XA事务的支持，并通过XA事务来支持对分布式事务的实现。</p>
 <ul>
 <li>分布式事务：允许多个独立的事务资源参与到一个全局的事务中。</li>
 <li>事务资源：通常是关系型数据库系统，页可以是其他类型的资源。</li>
 <li>全局事务要求在其中的所有参与的事务要么都提交，要么都回滚。</li>
 </ul>
-<p>实现分布式事务，InnoDB存储引擎的事务隔离级别必须为Serializable</p>
+<p>实现分布式事务，InnoDB存储引擎的事务隔离级别必须为Serializable。</p>
 <p>XA事务允许不同数据库键的分布式事务，如MySQL、oracle数据库，只要参与全局事务中的每个节点都支持XA事务。</p>
 <p>XA事务由一个或多个资源管理器、一个事务管理器以及一个应用程序组成。</p>
 <ul>
-<li>资源管理器：提供访问事务资源的方法，通常一个数据库就是一个资源管理器</li>
-<li>事务管理器：协调参与全局事务中的各个事务，需要和参与全局事务的所有资源管理器进行通信</li>
+<li>资源管理器：提供访问事务资源的方法，通常一个数据库就是一个资源管理器。</li>
+<li>事务管理器：协调参与全局事务中的各个事务，需要和参与全局事务的所有资源管理器进行通信。</li>
 <li>应用程序：定义事务的边界，指定全局事务中的操作。</li>
 </ul>
 <p><em>分布式事务的实现</em></p>
 <ul>
-<li>采用两段式提交的方式</li>
-<li>第一阶段：所有参与全局事务的节点都开始准备，告诉事务管理器它们准备好提交了</li>
+<li>采用两段式提交的方式：</li>
+<li>第一阶段：所有参与全局事务的节点都开始准备，告诉事务管理器它们准备好提交了。</li>
 <li>第二阶段：事务管理器告诉资源管理器执行ROLLBACK或COMMIT。</li>
-<li>与本地事务不同的是，分布式事务要多一次prepare工作，待收到所有节点的同意信息后，再进行commit或者rollback</li>
+<li>与本地事务不同的是，分布式事务要多一次prepare工作，待收到所有节点的同意信息后，再进行commit或者rollback。</li>
 </ul>
 <h3 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h3><p>Java的JTA可以很好的支持MySQL的分布式事务</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyXid</span> <span class="keyword">implements</span> <span class="title">Xid</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> formatId;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">byte</span> gtrid[];</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">byte</span> bqual[];</span><br><span class="line">    <span class="comment">//get方法</span></span><br><span class="line">    <span class="comment">//构造器</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XaDemo</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MysqlXADataSource <span class="title">getDataSource</span><span class="params">(String connStr, String user, String pwd)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"> </span><br><span class="line">            MysqlXADataSource ds = <span class="keyword">new</span> MysqlXADataSource();</span><br><span class="line">            ds.setUrl(connStr);</span><br><span class="line">            ds.setUser(user);</span><br><span class="line">            ds.setPassword(pwd);</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">return</span> ds;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arg)</span> </span>&#123;</span><br><span class="line">        String connStr1 = <span class="string">"jdbc:mysql://192.168.0.1:3306/test"</span>;</span><br><span class="line">        String connStr2 = <span class="string">"jdbc:mysql://192.168.0.2:3306/test"</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//从不同数据库获取数据库数据源</span></span><br><span class="line">            MysqlXADataSource ds1 = getDataSource(connStr1, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line">            MysqlXADataSource ds2 = getDataSource(connStr2, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//数据库1获取连接</span></span><br><span class="line">            XAConnection xaConnection1 = ds1.getXAConnection();</span><br><span class="line">            XAResource xaResource1 = xaConnection1.getXAResource();</span><br><span class="line">            Connection connection1 = xaConnection1.getConnection();</span><br><span class="line">            Statement statement1 = connection1.createStatement();</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//数据库2获取连接</span></span><br><span class="line">            XAConnection xaConnection2 = ds2.getXAConnection();</span><br><span class="line">            XAResource xaResource2 = xaConnection2.getXAResource();</span><br><span class="line">            Connection connection2 = xaConnection2.getConnection();</span><br><span class="line">            Statement statement2 = connection2.createStatement();</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//创建事务分支的xid</span></span><br><span class="line">            Xid xid1 = <span class="keyword">new</span> MysqlXid(<span class="keyword">new</span> <span class="keyword">byte</span>[] &#123; <span class="number">0x01</span> &#125;, <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123; <span class="number">0x02</span> &#125;, <span class="number">100</span>);</span><br><span class="line">            Xid xid2 = <span class="keyword">new</span> MysqlXid(<span class="keyword">new</span> <span class="keyword">byte</span>[] &#123; <span class="number">0x011</span> &#125;, <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123; <span class="number">0x012</span> &#125;, <span class="number">100</span>);</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//事务分支1关联分支事务sql语句</span></span><br><span class="line">                xaResource1.start(xid1, XAResource.TMNOFLAGS);</span><br><span class="line">                <span class="keyword">int</span> update1Result = statement1.executeUpdate(<span class="string">"update account_from set money=money - 50 where id=1"</span>);</span><br><span class="line">                xaResource1.end(xid1, XAResource.TMSUCCESS);</span><br><span class="line"> </span><br><span class="line">                <span class="comment">//事务分支2关联分支事务sql语句</span></span><br><span class="line">                xaResource2.start(xid2, XAResource.TMNOFLAGS);</span><br><span class="line">                <span class="keyword">int</span> update2Result = statement2.executeUpdate(<span class="string">"update account_to set money= money + 50 where id=1"</span>);</span><br><span class="line">                xaResource2.end(xid2, XAResource.TMSUCCESS);</span><br><span class="line"> </span><br><span class="line">                <span class="comment">// 两阶段提交协议第一阶段</span></span><br><span class="line">                <span class="keyword">int</span> ret1 = xaResource1.prepare(xid1);</span><br><span class="line">                <span class="keyword">int</span> ret2 = xaResource2.prepare(xid2);</span><br><span class="line"> </span><br><span class="line">                <span class="comment">// 两阶段提交协议第二阶段</span></span><br><span class="line">                <span class="keyword">if</span> (XAResource.XA_OK == ret1 &amp;&amp; XAResource.XA_OK == ret2) &#123;</span><br><span class="line">                    xaResource1.commit(xid1, <span class="keyword">false</span>);</span><br><span class="line">                    xaResource2.commit(xid2, <span class="keyword">false</span>);</span><br><span class="line"> </span><br><span class="line">                    System.out.println(<span class="string">"reslut1:"</span> + update1Result + <span class="string">", result2:"</span> + update2Result);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="内部XA事务"><a href="#内部XA事务" class="headerlink" title="内部XA事务"></a>内部XA事务</h3><ul>
-<li>之前的分布式事务时外部事务，即资源管理器是MySQL数据库本身</li>
+<li>之前的分布式事务时外部事务，即资源管理器是MySQL数据库本身。</li>
 <li>另一种分布式事务在存储引擎与插件间，或者存在于存储引擎与存储引擎间，称为内部XA事务。</li>
 </ul>
 <p>常见的为binlog与InnoDB存储引擎间。</p>
@@ -964,7 +1045,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#锁"><span class="nav-number">1.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是锁"><span class="nav-number">1.1.</span> <span class="nav-text">什么是锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lock与latch"><span class="nav-number">1.2.</span> <span class="nav-text">lock与latch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB存储引擎中的锁"><span class="nav-number">1.3.</span> <span class="nav-text">InnoDB存储引擎中的锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#锁的类型"><span class="nav-number">1.3.1.</span> <span class="nav-text">锁的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性非锁定读"><span class="nav-number">1.3.2.</span> <span class="nav-text">一致性非锁定读</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">MVCC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性锁定读"><span class="nav-number">1.3.3.</span> <span class="nav-text">一致性锁定读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自增长与锁"><span class="nav-number">1.3.4.</span> <span class="nav-text">自增长与锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外键和锁"><span class="nav-number">1.3.5.</span> <span class="nav-text">外键和锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的算法"><span class="nav-number">1.4.</span> <span class="nav-text">锁的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行锁的三种算法"><span class="nav-number">1.4.1.</span> <span class="nav-text">行锁的三种算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决Phantom-Problem幻像问题"><span class="nav-number">1.4.2.</span> <span class="nav-text">解决Phantom Problem幻像问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁问题"><span class="nav-number">1.5.</span> <span class="nav-text">锁问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脏读"><span class="nav-number">1.5.1.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可重复读"><span class="nav-number">1.5.2.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#丢失更新"><span class="nav-number">1.5.3.</span> <span class="nav-text">丢失更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞"><span class="nav-number">1.6.</span> <span class="nav-text">阻塞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">1.7.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁升级"><span class="nav-number">1.8.</span> <span class="nav-text">锁升级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">2.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AUTOCOMMIT"><span class="nav-number">2.1.</span> <span class="nav-text">AUTOCOMMIT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的使用"><span class="nav-number">2.2.</span> <span class="nav-text">事务的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#认识事务"><span class="nav-number">2.3.</span> <span class="nav-text">认识事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的隔离级别"><span class="nav-number">2.4.</span> <span class="nav-text">事务的隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式事务"><span class="nav-number">2.5.</span> <span class="nav-text">分布式事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL数据库分布式事务"><span class="nav-number">2.6.</span> <span class="nav-text">MySQL数据库分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java实现"><span class="nav-number">2.6.1.</span> <span class="nav-text">Java实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部XA事务"><span class="nav-number">2.6.2.</span> <span class="nav-text">内部XA事务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#锁"><span class="nav-number">1.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是锁"><span class="nav-number">1.1.</span> <span class="nav-text">什么是锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lock与latch"><span class="nav-number">1.2.</span> <span class="nav-text">lock与latch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB存储引擎中的锁"><span class="nav-number">1.3.</span> <span class="nav-text">InnoDB存储引擎中的锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#锁的类型"><span class="nav-number">1.3.1.</span> <span class="nav-text">锁的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看当前锁请求的信息"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">查看当前锁请求的信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性非锁定读"><span class="nav-number">1.3.2.</span> <span class="nav-text">一致性非锁定读</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">MVCC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性锁定读"><span class="nav-number">1.3.3.</span> <span class="nav-text">一致性锁定读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自增长与锁"><span class="nav-number">1.3.4.</span> <span class="nav-text">自增长与锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外键和锁"><span class="nav-number">1.3.5.</span> <span class="nav-text">外键和锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的算法"><span class="nav-number">1.4.</span> <span class="nav-text">锁的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Record-Locks"><span class="nav-number">1.4.1.</span> <span class="nav-text">Record Locks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gap-Locks"><span class="nav-number">1.4.2.</span> <span class="nav-text">Gap Locks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-Key-Lock"><span class="nav-number">1.4.3.</span> <span class="nav-text">Next-Key Lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁算法规则"><span class="nav-number">1.4.4.</span> <span class="nav-text">锁算法规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决Phantom-Problem幻像问题"><span class="nav-number">1.4.5.</span> <span class="nav-text">解决Phantom Problem幻像问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁问题"><span class="nav-number">1.5.</span> <span class="nav-text">锁问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脏读"><span class="nav-number">1.5.1.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可重复读"><span class="nav-number">1.5.2.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#丢失更新"><span class="nav-number">1.5.3.</span> <span class="nav-text">丢失更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞"><span class="nav-number">1.6.</span> <span class="nav-text">阻塞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">1.7.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁升级"><span class="nav-number">1.8.</span> <span class="nav-text">锁升级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">2.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AUTOCOMMIT"><span class="nav-number">2.1.</span> <span class="nav-text">AUTOCOMMIT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的使用"><span class="nav-number">2.2.</span> <span class="nav-text">事务的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#认识事务"><span class="nav-number">2.3.</span> <span class="nav-text">认识事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的分类"><span class="nav-number">2.3.1.</span> <span class="nav-text">事务的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的隔离级别"><span class="nav-number">2.3.2.</span> <span class="nav-text">事务的隔离级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的实现"><span class="nav-number">2.4.</span> <span class="nav-text">事务的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#redo"><span class="nav-number">2.4.1.</span> <span class="nav-text">redo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#purge"><span class="nav-number">2.4.2.</span> <span class="nav-text">purge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#group-commit"><span class="nav-number">2.4.3.</span> <span class="nav-text">group commit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式事务"><span class="nav-number">2.5.</span> <span class="nav-text">分布式事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL数据库分布式事务"><span class="nav-number">2.6.</span> <span class="nav-text">MySQL数据库分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java实现"><span class="nav-number">2.6.1.</span> <span class="nav-text">Java实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部XA事务"><span class="nav-number">2.6.2.</span> <span class="nav-text">内部XA事务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1000,7 +1081,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:53</span>
+    <span title="站点阅读时长">36:52</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

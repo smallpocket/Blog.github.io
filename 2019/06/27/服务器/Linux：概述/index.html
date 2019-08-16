@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Linux发展史分类 内核版本：内核官网（www.kernel.org）  外核版本  在内核基础上做出改进，即发行版本。    发行版本 redhat：它有一部分收费的售后功能 Centos：是完全免费的，并且与redhat一致 fediro：个人版 Ubuntu：图形界面更优秀 debian：  Linux应用领域 开源软件开源软件，即获得程序的源代码，而不是编译后的二进制文件  使用的自由：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-11T02:11:08.180Z">
+<meta property="og:updated_time" content="2019-08-16T06:26:12.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux：概述">
 <meta name="twitter:description" content="Linux发展史分类 内核版本：内核官网（www.kernel.org）  外核版本  在内核基础上做出改进，即发行版本。    发行版本 redhat：它有一部分收费的售后功能 Centos：是完全免费的，并且与redhat一致 fediro：个人版 Ubuntu：图形界面更优秀 debian：  Linux应用领域 开源软件开源软件，即获得程序的源代码，而不是编译后的二进制文件  使用的自由：">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-11 10:11:08" itemprop="dateModified" datetime="2019-08-11T10:11:08+08:00">2019-08-11</time>
+                <time title="修改时间：2019-08-16 14:26:12" itemprop="dateModified" datetime="2019-08-16T14:26:12+08:00">2019-08-16</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.9k</span>
+              <span title="本文字数">1.5k</span>
             </span>
           
             <span class="post-meta-item">
@@ -411,96 +411,27 @@
 <li>Sphinx等</li>
 </ul>
 <h1 id="Linux应用领域"><a href="#Linux应用领域" class="headerlink" title="Linux应用领域"></a>Linux应用领域</h1><h3 id="基于Linux的企业服务器"><a href="#基于Linux的企业服务器" class="headerlink" title="基于Linux的企业服务器"></a>基于Linux的企业服务器</h3><p><a href="http://www.netcraft.com" target="_blank" rel="noopener">www.netcraft.com</a></p>
-<h3 id="嵌入式应用"><a href="#嵌入式应用" class="headerlink" title="嵌入式应用"></a>嵌入式应用</h3><h1 id="XShell"><a href="#XShell" class="headerlink" title="XShell"></a>XShell</h1><p>ctrl l清屏</p>
-<h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><p>tab键会对Linux命令进行补全。</p>
-<p>两下tab会以该命令开头的所有命令打印出</p>
-<h2 id="命令基本格式"><a href="#命令基本格式" class="headerlink" title="命令基本格式"></a>命令基本格式</h2><p>命令提示符</p>
-<p>[root@localhost ~]#</p>
+<h3 id="嵌入式应用"><a href="#嵌入式应用" class="headerlink" title="嵌入式应用"></a>嵌入式应用</h3><h1 id="Linux文件基本属性"><a href="#Linux文件基本属性" class="headerlink" title="Linux文件基本属性"></a>Linux文件基本属性</h1><p>不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。在Linux中我们可以使用ll或者ls –l命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>root：当前登录用户</li>
-<li>localhost：主机名</li>
-<li>~：当前所在目录<ul>
-<li>用户登录的家目录。root用户在/root</li>
-<li>普通用户在/home/user1/</li>
+<li>第一个字符代表这个文件是目录、文件或链接文件等：<ul>
+<li>d：目录，-：文件，l：链接文档，b：装置文件里面的可供储存的接口设备(可随机存取装置)，c：装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
 </ul>
 </li>
-<li>#（$）：超级（普通）用户的提示符</li>
-</ul>
-<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><p>命令 [选项] [参数]</p>
-<p>注意：</p>
-<ul>
-<li>个别命令使用不遵循此格式。</li>
-<li>当有多个选项时，可以写在一起</li>
-<li>简化选项与完整选项<ul>
-<li>-a在一些目录当中等于–all</li>
+<li>接下来的字符3个为一组，且均为rwx的组合。<ul>
+<li>r：可读，w：可写，x：可执行。若没有权限：-。</li>
+<li>1-3位：属主拥有该文件的权限，即该文件的所有者。</li>
+<li>4-6位：确定属主，即所有者的同组用户所有该文件的权限。</li>
+<li>7-9位：确定其他用户拥有该文件的权限。</li>
 </ul>
 </li>
 </ul>
-<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h3><p>显示当前所在目录：print working directory</p>
-<h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>查询目录中的内容。ls [选项] [文件或目录]</p>
-<p>选项</p>
-<ul>
-<li><p>-a 显示所有文件，包括隐藏文件</p>
-</li>
-<li><p>-l 显示详细属性</p>
-<ul>
-<li><p>第一列代表权限。默认为10位 -rw-r–r–。</p>
-<ul>
-<li>第一位：文件类型（- 文件 d 目录 I 软链接文件，即快捷方式）</li>
-<li>2-4件：文件的所有者，u。r：读，w：写，x：执行。</li>
-<li>5-7位：文件的所属组，g。相同用户相同权限的人放到一组。</li>
-<li>8-10位：其他人，o，不能使用。</li>
-</ul>
-</li>
-<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rwxr-xr-x  1 root root      347472 Jun 29  2017 xfs_copy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>1 代表引用该文件的次数</p>
-</li>
-<li><p>347472是字节</p>
-</li>
-<li><p>Jun 29  2017代表最后修改的时间</p>
-</li>
-</ul>
-</li>
-<li><p>-d 查看目录属性</p>
-</li>
-<li><p>-h 人性化显示文件大小</p>
-</li>
-<li><p>-i 显示inode</p>
-</li>
-</ul>
-<h2 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h2><p><strong><em>目录处理命令</em></strong></p>
-<h3 id="mkdir建立目录"><a href="#mkdir建立目录" class="headerlink" title="mkdir建立目录"></a>mkdir建立目录</h3><p>建立目录：mkdir -p [目录名]</p>
-<ul>
-<li>-p 递归创建</li>
-<li>英文名 make directory</li>
-</ul>
-<h3 id="cd切换目录"><a href="#cd切换目录" class="headerlink" title="cd切换目录"></a>cd切换目录</h3><p>切换目录：cd [目录]change directory</p>
-<ul>
-<li>cd ~ 回到家目录</li>
-<li>cd - 进入上次所在目录</li>
-<li>cd .. 进入上级目录</li>
-<li>cd . 进入当前目录</li>
-</ul>
-<p>相对路径进行查找 cd ../usr/local</p>
-<p>绝对路径：要从根目录进行制定，cd /etc/</p>
-<h3 id="rmdir删除空白目录"><a href="#rmdir删除空白目录" class="headerlink" title="rmdir删除空白目录"></a>rmdir删除空白目录</h3><p>只能删除空白目录：remove empty directory</p>
-<h3 id="rm-删除文件"><a href="#rm-删除文件" class="headerlink" title="rm 删除文件"></a>rm 删除文件</h3><p>删除文件或目录：rm [选项] [文件或目录]：remove</p>
-<ul>
-<li>-r：删除目录</li>
-<li>-f：强制执行 false</li>
-</ul>
-<h3 id="cp-复制命令"><a href="#cp-复制命令" class="headerlink" title="cp 复制命令"></a>cp 复制命令</h3><p>cp [选项] [原文件或目录] [目标目录]：复制命令copy</p>
-<ul>
-<li>-r 复制目录</li>
-<li>-p 连带文件属性复制</li>
-<li>-d 若源文件是链接文件，则复制链接属性</li>
-<li>-a 相当于-pdr</li>
-</ul>
-<h3 id="mv-移动"><a href="#mv-移动" class="headerlink" title="mv 移动"></a>mv 移动</h3><p>mv [源文件或目录] [目标目录]。剪切或改名命令：move</p>
-<p><strong><em>文件处理命令</em></strong></p>
-<h3 id="链接命令ln"><a href="#链接命令ln" class="headerlink" title="链接命令ln"></a>链接命令ln</h3><p>ln</p>
-<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><h2 id="压缩命令"><a href="#压缩命令" class="headerlink" title="压缩命令"></a>压缩命令</h2><h2 id="关机命令"><a href="#关机命令" class="headerlink" title="关机命令"></a>关机命令</h2><h2 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h2><h1 id="Linux常见目录作用"><a href="#Linux常见目录作用" class="headerlink" title="Linux常见目录作用"></a>Linux常见目录作用</h1><ul>
+<h2 id="文件属主和属组"><a href="#文件属主和属组" class="headerlink" title="文件属主和属组"></a>文件属主和属组</h2><p>对于文件来说，都有一个特定的所有者，也就是对该文件具有所有权的用户。在Linux系统中用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，mysql文件是一个目录文件，属主和属组都为mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
+<p>对于root用户来说，一般情况下，文件的权限对其不起作用。</p>
+<h1 id="Linux常见目录作用"><a href="#Linux常见目录作用" class="headerlink" title="Linux常见目录作用"></a>Linux常见目录作用</h1><ul>
 <li>/：根目录</li>
 <li>/bin，是命令保存目录，任何用户都可以执行<ul>
 <li>/user/bin</li>
@@ -790,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux发展史"><span class="nav-number">1.</span> <span class="nav-text">Linux发展史</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发行版本"><span class="nav-number">1.1.1.</span> <span class="nav-text">发行版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开源软件"><span class="nav-number">2.</span> <span class="nav-text">开源软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux应用领域"><span class="nav-number">3.</span> <span class="nav-text">Linux应用领域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于Linux的企业服务器"><span class="nav-number">3.0.1.</span> <span class="nav-text">基于Linux的企业服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌入式应用"><span class="nav-number">3.0.2.</span> <span class="nav-text">嵌入式应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XShell"><span class="nav-number">4.</span> <span class="nav-text">XShell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常用命令"><span class="nav-number">5.</span> <span class="nav-text">Linux常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令基本格式"><span class="nav-number">5.1.</span> <span class="nav-text">命令基本格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令格式"><span class="nav-number">5.1.1.</span> <span class="nav-text">命令格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">5.2.</span> <span class="nav-text">基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd命令"><span class="nav-number">5.2.1.</span> <span class="nav-text">pwd命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls"><span class="nav-number">5.2.2.</span> <span class="nav-text">ls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件处理命令"><span class="nav-number">5.3.</span> <span class="nav-text">文件处理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mkdir建立目录"><span class="nav-number">5.3.1.</span> <span class="nav-text">mkdir建立目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd切换目录"><span class="nav-number">5.3.2.</span> <span class="nav-text">cd切换目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rmdir删除空白目录"><span class="nav-number">5.3.3.</span> <span class="nav-text">rmdir删除空白目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rm-删除文件"><span class="nav-number">5.3.4.</span> <span class="nav-text">rm 删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cp-复制命令"><span class="nav-number">5.3.5.</span> <span class="nav-text">cp 复制命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv-移动"><span class="nav-number">5.3.6.</span> <span class="nav-text">mv 移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接命令ln"><span class="nav-number">5.3.7.</span> <span class="nav-text">链接命令ln</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件搜索命令"><span class="nav-number">5.4.</span> <span class="nav-text">文件搜索命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">5.4.1.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grep"><span class="nav-number">5.4.2.</span> <span class="nav-text">grep</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助命令"><span class="nav-number">5.5.</span> <span class="nav-text">帮助命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩命令"><span class="nav-number">5.6.</span> <span class="nav-text">压缩命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关机命令"><span class="nav-number">5.7.</span> <span class="nav-text">关机命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他常用命令"><span class="nav-number">5.8.</span> <span class="nav-text">其他常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常见目录作用"><span class="nav-number">6.</span> <span class="nav-text">Linux常见目录作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux发展史"><span class="nav-number">1.</span> <span class="nav-text">Linux发展史</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发行版本"><span class="nav-number">1.1.1.</span> <span class="nav-text">发行版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开源软件"><span class="nav-number">2.</span> <span class="nav-text">开源软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux应用领域"><span class="nav-number">3.</span> <span class="nav-text">Linux应用领域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于Linux的企业服务器"><span class="nav-number">3.0.1.</span> <span class="nav-text">基于Linux的企业服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌入式应用"><span class="nav-number">3.0.2.</span> <span class="nav-text">嵌入式应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux文件基本属性"><span class="nav-number">4.</span> <span class="nav-text">Linux文件基本属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件属主和属组"><span class="nav-number">4.1.</span> <span class="nav-text">文件属主和属组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux常见目录作用"><span class="nav-number">5.</span> <span class="nav-text">Linux常见目录作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -826,7 +757,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:52</span>
+    <span title="站点阅读时长">36:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

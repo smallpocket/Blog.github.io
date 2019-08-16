@@ -57,20 +57,22 @@
   };
 </script>
 
-  <meta name="description" content="了解Web及网络基础web是建立在何种技术上，HTTP协议是如何诞生并发展的 使用HTTP协议访问web HTTP超文本传输协议（HYperText Transfer Protocol） 概述 由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。 HTTP定义了这些报文的结构以及客户和服务器进行报文交换的方式 HTTP定义了web客户向web服务器请">
+  <meta name="description" content="了解Web及网络基础web是建立在何种技术上，HTTP协议是如何诞生并发展的。 使用HTTP协议访问web。 HTTP超文本传输协议（HYperText Transfer Protocol）  支持CS模式，简单快速、灵活、无连接、无状态。  概述 由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。 HTTP定义了这些报文的结构以及客户和服务器进行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络：HTTP协议">
 <meta property="og:url" content="http://yoursite.com/2019/02/26/计算机网络/计算机网络：HTTP协议/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="了解Web及网络基础web是建立在何种技术上，HTTP协议是如何诞生并发展的 使用HTTP协议访问web HTTP超文本传输协议（HYperText Transfer Protocol） 概述 由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。 HTTP定义了这些报文的结构以及客户和服务器进行报文交换的方式 HTTP定义了web客户向web服务器请">
+<meta property="og:description" content="了解Web及网络基础web是建立在何种技术上，HTTP协议是如何诞生并发展的。 使用HTTP协议访问web。 HTTP超文本传输协议（HYperText Transfer Protocol）  支持CS模式，简单快速、灵活、无连接、无状态。  概述 由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。 HTTP定义了这些报文的结构以及客户和服务器进行">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/assets/1565927108581.png">
+<meta property="og:image" content="http://yoursite.com/assets/1565927126178.png">
 <meta property="og:image" content="http://yoursite.com/assets/1555161443581.png">
 <meta property="og:image" content="http://yoursite.com/assets/1555161432557.png">
-<meta property="og:updated_time" content="2019-08-13T07:10:38.086Z">
+<meta property="og:updated_time" content="2019-08-16T04:00:35.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络：HTTP协议">
-<meta name="twitter:description" content="了解Web及网络基础web是建立在何种技术上，HTTP协议是如何诞生并发展的 使用HTTP协议访问web HTTP超文本传输协议（HYperText Transfer Protocol） 概述 由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。 HTTP定义了这些报文的结构以及客户和服务器进行报文交换的方式 HTTP定义了web客户向web服务器请">
-<meta name="twitter:image" content="http://yoursite.com/assets/1555161443581.png">
+<meta name="twitter:description" content="了解Web及网络基础web是建立在何种技术上，HTTP协议是如何诞生并发展的。 使用HTTP协议访问web。 HTTP超文本传输协议（HYperText Transfer Protocol）  支持CS模式，简单快速、灵活、无连接、无状态。  概述 由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。 HTTP定义了这些报文的结构以及客户和服务器进行">
+<meta name="twitter:image" content="http://yoursite.com/assets/1565927108581.png">
   <link rel="canonical" href="http://yoursite.com/2019/02/26/计算机网络/计算机网络：HTTP协议/">
 
 
@@ -326,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-13 15:10:38" itemprop="dateModified" datetime="2019-08-13T15:10:38+08:00">2019-08-13</time>
+                <time title="修改时间：2019-08-16 12:00:35" itemprop="dateModified" datetime="2019-08-16T12:00:35+08:00">2019-08-16</time>
               </span>
             
           
@@ -354,7 +356,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">5.6k</span>
+              <span title="本文字数">6.5k</span>
             </span>
           
             <span class="post-meta-item">
@@ -364,7 +366,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">10 分钟</span>
+              <span title="阅读时长">12 分钟</span>
             </span>
           
 
@@ -377,17 +379,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="了解Web及网络基础"><a href="#了解Web及网络基础" class="headerlink" title="了解Web及网络基础"></a>了解Web及网络基础</h1><p>web是建立在何种技术上，HTTP协议是如何诞生并发展的</p>
-<p>使用HTTP协议访问web</p>
+        <h1 id="了解Web及网络基础"><a href="#了解Web及网络基础" class="headerlink" title="了解Web及网络基础"></a>了解Web及网络基础</h1><p>web是建立在何种技术上，HTTP协议是如何诞生并发展的。</p>
+<p>使用HTTP协议访问web。</p>
 <h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><p>超文本传输协议（HYperText Transfer Protocol）</p>
+<ul>
+<li>支持CS模式，简单快速、灵活、无连接、无状态。</li>
+</ul>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
 <li>由两个程序实现：一个客户程序和一个服务器程序。运行在不同的端系统当中，通过交换HTTP报文进行会话。</li>
-<li>HTTP定义了这些报文的结构以及客户和服务器进行报文交换的方式</li>
-<li>HTTP定义了web客户向web服务器请求web页面的方式，以及服务器向客户传送web页面的方式</li>
-<li>HTTP使用TCP作为支撑运输协议。一旦连接建立，即可以通过套接字接口访问TCP</li>
-<li>HTTP是无状态协议。不会存储任何关于客户的状态信息<ul>
-<li>即使一个客户在短时间内两次请求同一个对象，服务器不会因为刚为该客户提供了对象而不再做出反应，而是重新发送该对象</li>
-<li>简化了服务器设计，允许工程师开发可以同时处理数千TCP连接的高性能web服务器</li>
+<li>HTTP定义了这些报文的结构以及客户和服务器进行报文交换的方式。</li>
+<li>HTTP定义了web客户向web服务器请求web页面的方式，以及服务器向客户传送web页面的方式。</li>
+<li>HTTP使用TCP作为支撑运输协议。一旦连接建立，即可以通过套接字接口访问TCP。</li>
+<li>HTTP是无状态协议。不会存储任何关于客户的状态信息。<ul>
+<li>即使一个客户在短时间内两次请求同一个对象，服务器不会因为刚为该客户提供了对象而不再做出反应，而是重新发送该对象。</li>
+<li>简化了服务器设计，允许工程师开发可以同时处理数千TCP连接的高性能web服务器。</li>
 </ul>
 </li>
 </ul>
@@ -395,41 +400,44 @@
 <p>web页面是由对象组成的。</p>
 <ul>
 <li>一个对象只是一个文件。如HTML文件、JPEG图形、Java小程序、一个视频片段这样的文件。且它们可通过一个URL地址寻址。<ul>
-<li>多数web页面含有一个<strong>HTML基本文件</strong>，以及几个引用对象</li>
-<li>如一个Web页面包含HTML文本和5个JPEG图形，则拥有6个对象。HTML基本文件通过对象的URL地址引用页面的其他对象<ul>
-<li>URL组成：存放对象的服务器主机名和对象的路径名。<a href="http://www.someSchool.edu(主机名)/someDepartment/picture.gif（路径名）" target="_blank" rel="noopener">http://www.someSchool.edu(主机名)/someDepartment/picture.gif（路径名）</a></li>
+<li>多数web页面含有一个<strong>HTML基本文件</strong>，以及几个引用对象。</li>
+<li>如一个Web页面包含HTML文本和5个JPEG图形，则拥有6个对象。HTML基本文件通过对象的URL地址引用页面的其他对象。<ul>
+<li>URL组成：存放对象的服务器主机名和对象的路径名。<a href="http://www.someSchool.edu(主机名)/someDepartment/picture.gif（路径名）。" target="_blank" rel="noopener">http://www.someSchool.edu(主机名)/someDepartment/picture.gif（路径名）。</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>web浏览器实现了HTTP的客户端</li>
-<li>web服务器实现了HTTP的服务器端，用于存储web对象，每个对象由URL寻址。流行的服务器由Apache和IIS</li>
+<li>web浏览器实现了HTTP的客户端。</li>
+<li>web服务器实现了HTTP的服务器端，用于存储web对象，每个对象由URL寻址。流行的服务器由Apache和IIS。</li>
 </ul>
-<h2 id="非持续连接与持续连接"><a href="#非持续连接与持续连接" class="headerlink" title="非持续连接与持续连接"></a>非持续连接与持续连接</h2><p>非持续连接：每个<strong>请求\响应对</strong>是经一个单独的TCP连接发送，即传输一个请求报文和一个响应报文</p>
-<p>持续连接：所有的请求及响应经相同的TCP连接发送</p>
+<h2 id="非持续连接与持续连接"><a href="#非持续连接与持续连接" class="headerlink" title="非持续连接与持续连接"></a>非持续连接与持续连接</h2><p>非持续连接：每个<strong>请求\响应对</strong>是经一个单独的TCP连接发送，即传输一个请求报文和一个响应报文。</p>
+<p>持续连接：所有的请求及响应经相同的TCP连接发送。</p>
 <p><strong>采用非持续连接的HTTP</strong></p>
-<p>当服务器向客户传送一个web页面（包含1个HTML与10个JPEG，并存储在一台服务器上）</p>
+<p>当服务器向客户传送一个web页面（包含1个HTML与10个JPEG，并存储在一台服务器上）。</p>
 <ul>
 <li>HTTP客户进程在端口80（HTTP的默认端口，在客户和服务器上分别有一个套接字与该连接相关联）发起一个到服务器www,someSchool.edu的TCP连接。</li>
-<li>HTTP客户经它的套接字向该服务器发送一个HTTP请求报文。报文包含路径名/someDepartment/home.index</li>
-<li>HTTP服务器进程经套接字接受该请求报文，从存储器中检索出该对象home.index，在一个HTTP相应报文中封装对象，并通过其套接字发送响应报文</li>
+<li>HTTP客户经它的套接字向该服务器发送一个HTTP请求报文。报文包含路径名/someDepartment/home.index。</li>
+<li>HTTP服务器进程经套接字接受该请求报文，从存储器中检索出该对象home.index，在一个HTTP相应报文中封装对象，并通过其套接字发送响应报文。</li>
 <li>HTTP服务器进程通知TCP断开该TCP连接。</li>
-<li>HTTP客户接受响应报文，TCP连接关闭。报文指出封装的是一个HTML文件，客户从响应报文中提取出文件，检查文件，得到10个JPEG的图形引用</li>
-<li>对每个引用的JPEG重复前步骤（可能串行，可能并行）</li>
+<li>HTTP客户接受响应报文，TCP连接关闭。报文指出封装的是一个HTML文件，客户从响应报文中提取出文件，检查文件，得到10个JPEG的图形引用。</li>
+<li>对每个引用的JPEG重复前步骤（可能串行，可能并行）。</li>
 </ul>
 <p>缺陷：</p>
 <ul>
 <li>每一个新的请求都要建立和维护一个全新的连接，针对每个链接，在客户和服务器中都要分配TCP的缓冲区和保持TCP变量。</li>
-<li>每一个对象经受2倍的RTT交付时延</li>
+<li>每一个对象经受2倍的RTT交付时延。</li>
 </ul>
 <p><strong>持续连接的HTTP</strong></p>
 <p>服务器在发送响应后，保持该TCP连接打开，在相同的客户与服务器之间的后续请求和响应报文能够通过相同的连接进行传送。</p>
 <ul>
-<li>带流水线的持续连接：一个接一个地发出对对象的请求，而不必等待对未决请求的回答</li>
-<li>不带流水线的</li>
+<li>带流水线的持续连接：一个接一个地发出对对象的请求，而不必等待对未决请求的回答。</li>
+<li>不带流水线的。</li>
 </ul>
-<h2 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h2><p><strong>请求报文</strong></p>
+<h2 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h2><p>以HTTP1.1为例子：</p>
+<p><strong>请求报文</strong></p>
+<p><img src="/assets/1565927108581.png" alt="1565927108581"></p>
 <p><strong>响应报文</strong></p>
+<p><img src="/assets/1565927126178.png" alt="1565927126178"></p>
 <h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><p>用户与服务器的交互：cookie</p>
 <p><strong>作用</strong></p>
 <ul>
@@ -468,10 +476,10 @@
 <li>和响应报文一起返回的各种状态码</li>
 <li>各种各样的HTTP首部都是用来干什么的</li>
 </ul>
-<h2 id="报文流"><a href="#报文流" class="headerlink" title="报文流"></a>报文流</h2><p>HTTP报文是在HTTP应用程序间发送的数据块。报文在客户端、服务器和代理间流动。“流出”、“流入”、“上游”、“下游”都是描述报文方向的</p>
+<h2 id="报文流"><a href="#报文流" class="headerlink" title="报文流"></a>报文流</h2><p>HTTP报文是在HTTP应用程序间发送的数据块。报文在客户端、服务器和代理间流动。“流出”、“流入”、“上游”、“下游”都是描述报文方向的。</p>
 <ul>
-<li>数据块以一些文本形式的<strong>元信息</strong>开头，描述了报文的内容和含义</li>
-<li>后面跟着可选的数据部分</li>
+<li>数据块以一些文本形式的<strong>元信息</strong>开头，描述了报文的内容和含义。</li>
+<li>后面跟着可选的数据部分。</li>
 </ul>
 <h3 id="报文流入源端服务器"><a href="#报文流入源端服务器" class="headerlink" title="报文流入源端服务器"></a>报文流入源端服务器</h3><p>HTTP使用术语流入、流出描述事务处理的方向。</p>
 <p>报文流入源端服务器，工作完成后，会流回用户的Agent代理中。</p>
@@ -505,14 +513,20 @@
 <p>通常用于支持表单。</p>
 <p><strong><em>使用post请求的情况</em></strong></p>
 <ul>
-<li><p>无法使用缓存文件（更新服务器上的文件或数据库）</p>
+<li>无法使用缓存文件（更新服务器上的文件或数据库）</li>
+<li>向服务器发送大量数据</li>
+<li>发送包含未知字符的用户输入时，post比Get更稳定可靠</li>
+<li>Post比Get安全性更高</li>
+</ul>
+<p><strong><em>Get与Post区别</em></strong></p>
+<ul>
+<li>HTTP报文层面：Get将请求放在URL当中，POST将请求放在保文体中。</li>
+<li>数据库层面：GET符合幂等性和安全性。POST不符合。<ul>
+<li>幂等：对数据库一次操作与多次操作结果一致。</li>
+<li>安全性：对数据库不会改变。</li>
+</ul>
 </li>
-<li><p>向服务器发送大量数据</p>
-</li>
-<li><p>发送包含未知字符的用户输入时，post比Get更稳定可靠</p>
-</li>
-<li><p>Post比Get安全性更高</p>
-</li>
+<li>其他层面：GET可以<strong>被缓存、被存储</strong>，POST不可以。</li>
 </ul>
 <h3 id="TRACE"><a href="#TRACE" class="headerlink" title="TRACE"></a>TRACE</h3><p>TRACE方法允许客户端在最终将请求发送给服务器时，看看它变成了什么样子</p>
 <ul>
@@ -530,15 +544,34 @@
 <li>Post请求不能被缓存</li>
 <li>post请求相对于Get是安全的</li>
 </ul>
-<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><h2 id="1XX-信息"><a href="#1XX-信息" class="headerlink" title="1XX 信息"></a>1XX 信息</h2><ul>
+<h2 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><ul>
+<li>是由服务发送给客户端的特殊信息，以文本的形式存放在客户端。</li>
+<li>客户端再次请求时，会将Cokkie回发。</li>
+<li>服务器接收后，会解析Cookie生成与客户端相对应的内容。</li>
+</ul>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><ul>
+<li>服务器端的机制，在服务器上保存的信息。</li>
+<li>解析客户端请求并操作session id，按需保存状态信息。</li>
+</ul>
+<p>实现方式：</p>
+<ul>
+<li>Cookie来实现。</li>
+<li>URL回写实现，返回给浏览器的地址都带着Session。</li>
+</ul>
+<p><strong><em>Session与Cookie区别</em></strong></p>
+<ul>
+<li>Session更安全。</li>
+<li>Cookie在浏览器，Session在服务器，并对服务器有一定压力。</li>
+</ul>
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><h3 id="1XX-信息"><a href="#1XX-信息" class="headerlink" title="1XX 信息"></a>1XX 信息</h3><ul>
 <li><strong>100 Continue</strong> ：表明到目前为止都很正常，客户端可以继续发送请求或者忽略这个响应。</li>
 </ul>
-<h2 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a>2XX 成功</h2><ul>
+<h3 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a>2XX 成功</h3><ul>
 <li><strong>200 OK</strong></li>
 <li><strong>204 No Content</strong> ：请求已经成功处理，但是返回的响应报文不包含实体的主体部分。一般在只需要从客户端往服务器发送信息，而不需要返回数据时使用。</li>
 <li><strong>206 Partial Content</strong> ：表示客户端进行了范围请求，响应报文包含由 Content-Range 指定范围的实体内容。</li>
 </ul>
-<h2 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a>3XX 重定向</h2><ul>
+<h3 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a>3XX 重定向</h3><ul>
 <li><strong>301 Moved Permanently</strong> ：永久性重定向</li>
 <li><strong>302 Found</strong> ：临时性重定向</li>
 <li><strong>303 See Other</strong> ：和 302 有着相同的功能，但是 303 明确要求客户端应该采用 GET 方法获取资源。</li>
@@ -546,14 +579,14 @@
 <li><strong>304 Not Modified</strong> ：如果请求报文首部包含一些条件，例如：If-Match，If-Modified-Since，If-None-Match，If-Range，If-Unmodified-Since，如果不满足条件，则服务器会返回 304 状态码。</li>
 <li><strong>307 Temporary Redirect</strong> ：临时重定向，与 302 的含义类似，但是 307 要求浏览器不会把重定向请求的 POST 方法改成 GET 方法。</li>
 </ul>
-<h2 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h2><ul>
+<h3 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX 客户端错误"></a>4XX 客户端错误</h3><ul>
 <li><strong>400 Bad Request</strong> ：请求报文中存在语法错误。</li>
 <li><strong>401 Unauthorized</strong> ：该状态码表示发送的请求需要有认证信息（BASIC 认证、DIGEST 认证）。如果之前已进行过一次请求，则表示用户认证失败。</li>
-<li><strong>403 Forbidden</strong> ：请求被拒绝。</li>
-<li><strong>404 Not Found</strong></li>
+<li><strong>403 Forbidden</strong> ：服务器受到请求，但是请求被拒绝。</li>
+<li><strong>404 Not Found</strong>：找不到资源。</li>
 </ul>
-<h2 id="5XX-服务器错误"><a href="#5XX-服务器错误" class="headerlink" title="5XX 服务器错误"></a>5XX 服务器错误</h2><ul>
-<li><strong>500 Internal Server Error</strong> ：服务器正在执行请求时发生错误。</li>
+<h3 id="5XX-服务器错误"><a href="#5XX-服务器错误" class="headerlink" title="5XX 服务器错误"></a>5XX 服务器错误</h3><ul>
+<li><strong>500 Internal Server Error</strong> ：服务器正在执行请求时发生错误，可能是代码抛出异常。</li>
 <li><strong>503 Service Unavailable</strong> ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。</li>
 </ul>
 <h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><p>HTTP协议中有可能存在信息窃听或身份伪装等安全问题。</p>
@@ -628,7 +661,32 @@
 <li>HTTPS是身披SSL外壳的HTTP。</li>
 <li>当使用SSL，HTTP先和SSL通信，SSL再和TCP通信。</li>
 </ul>
-<h1 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h1><h2 id="加密方式"><a href="#加密方式" class="headerlink" title="加密方式"></a>加密方式</h2><p>混合加密机制</p>
+<h3 id="数据传输流程"><a href="#数据传输流程" class="headerlink" title="数据传输流程"></a>数据传输流程</h3><ul>
+<li>浏览器将支持的加密算法信息发送给服务器。</li>
+<li>服务器选择一套浏览器支持的加密算法，以证书的形式回发浏览器。</li>
+<li>浏览器验证证书合法性，并结合证书公钥加密信息发送给服务器。</li>
+<li>服务器使用私钥解密信息，验证哈希，加密响应消息回发浏览器。</li>
+<li>浏览器解密响应消息，并对消息进行验证，之后进行加密交互数据。 </li>
+</ul>
+<h3 id="与HTTP区别"><a href="#与HTTP区别" class="headerlink" title="与HTTP区别"></a>与HTTP区别</h3><ul>
+<li>HTTPS需要到CA申请证书</li>
+<li>HTTPS密文传输</li>
+<li>HTTPS默认443端口，HTTP是80端口</li>
+<li>HTTP+加密+认证+完整性保护=HTTPS，安全一些</li>
+</ul>
+<h3 id="HTTPS真正安全吗"><a href="#HTTPS真正安全吗" class="headerlink" title="HTTPS真正安全吗"></a>HTTPS真正安全吗</h3><p>浏览器默认填充http://，请求需要进行跳转时有被劫持的风险。</p>
+<h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><ul>
+<li>为网络通信提供安全及数据完整性的一种安全协议。</li>
+<li>是OS对外的API，SSL3.0后更名为TLS。</li>
+<li>采用身份验证和数据加密保证网络通信的安全和数据的完整性。</li>
+</ul>
+<h3 id="加密方式"><a href="#加密方式" class="headerlink" title="加密方式"></a>加密方式</h3><ul>
+<li>对称加密。</li>
+<li>非对称加密。</li>
+<li>哈希算法。</li>
+<li>数字签名。</li>
+</ul>
+<p>SSL采用混合加密机制</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -888,7 +946,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#了解Web及网络基础"><span class="nav-number">1.</span> <span class="nav-text">了解Web及网络基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP"><span class="nav-number">2.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非持续连接与持续连接"><span class="nav-number">2.2.</span> <span class="nav-text">非持续连接与持续连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP报文格式"><span class="nav-number">2.3.</span> <span class="nav-text">HTTP报文格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie"><span class="nav-number">2.4.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web缓存"><span class="nav-number">2.5.</span> <span class="nav-text">web缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN"><span class="nav-number">2.5.1.</span> <span class="nav-text">CDN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP报文"><span class="nav-number">3.</span> <span class="nav-text">HTTP报文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#报文流"><span class="nav-number">3.1.</span> <span class="nav-text">报文流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#报文流入源端服务器"><span class="nav-number">3.1.1.</span> <span class="nav-text">报文流入源端服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报文向下游流动"><span class="nav-number">3.1.2.</span> <span class="nav-text">报文向下游流动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">3.2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全方法"><span class="nav-number">3.2.1.</span> <span class="nav-text">安全方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get"><span class="nav-number">3.2.2.</span> <span class="nav-text">Get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HEAD"><span class="nav-number">3.2.3.</span> <span class="nav-text">HEAD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUT"><span class="nav-number">3.2.4.</span> <span class="nav-text">PUT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST"><span class="nav-number">3.2.5.</span> <span class="nav-text">POST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TRACE"><span class="nav-number">3.2.6.</span> <span class="nav-text">TRACE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OPTIONS"><span class="nav-number">3.2.7.</span> <span class="nav-text">OPTIONS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE"><span class="nav-number">3.2.8.</span> <span class="nav-text">DELETE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#综述"><span class="nav-number">3.2.9.</span> <span class="nav-text">综述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态码"><span class="nav-number">3.3.</span> <span class="nav-text">状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1XX-信息"><span class="nav-number">3.4.</span> <span class="nav-text">1XX 信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2XX-成功"><span class="nav-number">3.5.</span> <span class="nav-text">2XX 成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3XX-重定向"><span class="nav-number">3.6.</span> <span class="nav-text">3XX 重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4XX-客户端错误"><span class="nav-number">3.7.</span> <span class="nav-text">4XX 客户端错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5XX-服务器错误"><span class="nav-number">3.8.</span> <span class="nav-text">5XX 服务器错误</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS"><span class="nav-number">4.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP的缺点"><span class="nav-number">4.1.</span> <span class="nav-text">HTTP的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS定义"><span class="nav-number">4.2.</span> <span class="nav-text">HTTPS定义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSL"><span class="nav-number">5.</span> <span class="nav-text">SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#加密方式"><span class="nav-number">5.1.</span> <span class="nav-text">加密方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#了解Web及网络基础"><span class="nav-number">1.</span> <span class="nav-text">了解Web及网络基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP"><span class="nav-number">2.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非持续连接与持续连接"><span class="nav-number">2.2.</span> <span class="nav-text">非持续连接与持续连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP报文格式"><span class="nav-number">2.3.</span> <span class="nav-text">HTTP报文格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie"><span class="nav-number">2.4.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web缓存"><span class="nav-number">2.5.</span> <span class="nav-text">web缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN"><span class="nav-number">2.5.1.</span> <span class="nav-text">CDN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP报文"><span class="nav-number">3.</span> <span class="nav-text">HTTP报文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#报文流"><span class="nav-number">3.1.</span> <span class="nav-text">报文流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#报文流入源端服务器"><span class="nav-number">3.1.1.</span> <span class="nav-text">报文流入源端服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报文向下游流动"><span class="nav-number">3.1.2.</span> <span class="nav-text">报文向下游流动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">3.2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全方法"><span class="nav-number">3.2.1.</span> <span class="nav-text">安全方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get"><span class="nav-number">3.2.2.</span> <span class="nav-text">Get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HEAD"><span class="nav-number">3.2.3.</span> <span class="nav-text">HEAD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUT"><span class="nav-number">3.2.4.</span> <span class="nav-text">PUT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST"><span class="nav-number">3.2.5.</span> <span class="nav-text">POST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TRACE"><span class="nav-number">3.2.6.</span> <span class="nav-text">TRACE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OPTIONS"><span class="nav-number">3.2.7.</span> <span class="nav-text">OPTIONS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE"><span class="nav-number">3.2.8.</span> <span class="nav-text">DELETE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#综述"><span class="nav-number">3.2.9.</span> <span class="nav-text">综述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-number">3.3.</span> <span class="nav-text">状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie"><span class="nav-number">3.3.1.</span> <span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session"><span class="nav-number">3.3.2.</span> <span class="nav-text">Session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态码"><span class="nav-number">3.4.</span> <span class="nav-text">状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1XX-信息"><span class="nav-number">3.4.1.</span> <span class="nav-text">1XX 信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2XX-成功"><span class="nav-number">3.4.2.</span> <span class="nav-text">2XX 成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3XX-重定向"><span class="nav-number">3.4.3.</span> <span class="nav-text">3XX 重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4XX-客户端错误"><span class="nav-number">3.4.4.</span> <span class="nav-text">4XX 客户端错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5XX-服务器错误"><span class="nav-number">3.4.5.</span> <span class="nav-text">5XX 服务器错误</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS"><span class="nav-number">4.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP的缺点"><span class="nav-number">4.1.</span> <span class="nav-text">HTTP的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS定义"><span class="nav-number">4.2.</span> <span class="nav-text">HTTPS定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传输流程"><span class="nav-number">4.2.1.</span> <span class="nav-text">数据传输流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与HTTP区别"><span class="nav-number">4.2.2.</span> <span class="nav-text">与HTTP区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS真正安全吗"><span class="nav-number">4.2.3.</span> <span class="nav-text">HTTPS真正安全吗</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL"><span class="nav-number">4.3.</span> <span class="nav-text">SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加密方式"><span class="nav-number">4.3.1.</span> <span class="nav-text">加密方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -924,7 +982,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:52</span>
+    <span title="站点阅读时长">36:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -69,7 +69,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1565689676372.png">
 <meta property="og:image" content="http://yoursite.com/assets/44c93e93d6fd642815a539369a1bc228">
 <meta property="og:image" content="http://yoursite.com/assets/46ea294c619f83564eaa2962d0267ae3">
-<meta property="og:updated_time" content="2019-08-13T09:55:13.885Z">
+<meta property="og:updated_time" content="2019-08-16T13:12:11.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaBase：IO">
 <meta name="twitter:description" content="AIO、BIO、NIO">
@@ -329,7 +329,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-13 17:55:13" itemprop="dateModified" datetime="2019-08-13T17:55:13+08:00">2019-08-13</time>
+                <time title="修改时间：2019-08-16 21:12:11" itemprop="dateModified" datetime="2019-08-16T21:12:11+08:00">2019-08-16</time>
               </span>
             
           
@@ -357,7 +357,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">9.8k</span>
+              <span title="本文字数">9.9k</span>
             </span>
           
             <span class="post-meta-item">
@@ -457,7 +457,8 @@
 <p>首先通常有一个独立的Accepter线程负责监听客户端的连接，一般通过<code>while(true)</code>的方式调用<code>accept()</code>方法等待接收客户端的连接方式监听请求。请求一旦接收到一个连接请求，就可以建立通信套接字在这个通信套接字上进行读写操作，此时不能再接收其他客户端连接请求，只能等待同当前连接的客户端的操作执行完成。</p>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> port = <span class="number">4343</span>; <span class="comment">//端口号</span></span><br><span class="line"><span class="comment">// Socket 服务器端（简单的发送信息）</span></span><br><span class="line">Thread sThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(port);</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="comment">// 等待连接</span></span><br><span class="line">                Socket socket = serverSocket.accept();</span><br><span class="line">                Thread sHandlerThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">try</span> (PrintWriter printWriter = <span class="keyword">new</span> PrintWriter(socket.getOutputStream())) &#123;</span><br><span class="line">                            printWriter.println(<span class="string">"hello world！"</span>);</span><br><span class="line">                            printWriter.flush();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">                sHandlerThread.start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">sThread.start();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Socket 客户端（接收信息并打印）</span></span><br><span class="line"><span class="keyword">try</span> (Socket cSocket = <span class="keyword">new</span> Socket(InetAddress.getLocalHost(), port)) &#123;</span><br><span class="line">    BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(cSocket.getInputStream()));</span><br><span class="line">    bufferedReader.lines().forEach(s -&gt; System.out.println(<span class="string">"客户端："</span> + s));&#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="NIO-同步非阻塞"><a href="#NIO-同步非阻塞" class="headerlink" title="NIO 同步非阻塞"></a>NIO 同步非阻塞</h1><h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>NIO本身是基于事件驱动的思想来实现的，其目的就是解决BIO的大并发问题，而在BIO模型中，如果需要并发处理多个I/O请求，那就需要多线程来支持。</p>
+<h1 id="NIO-同步非阻塞"><a href="#NIO-同步非阻塞" class="headerlink" title="NIO 同步非阻塞"></a>NIO 同步非阻塞</h1><h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>NIO本身是基于事件驱动的思想来实现的，采用Reactor模式，其目的就是解决BIO的大并发问题，而在BIO模型中，如果需要并发处理多个I/O请求，那就需要多线程来支持。</p>
+<p>NIO不需要位每个Socket套接字分配一个线程，而可以在一个线程当中处理多个Socket套接字相关的工作。</p>
 <p>NIO的创建目的是为了让Java程序员可以实现高速I/O而无需编写自定义的本机代码。NIO将最耗时的I/O操作(即填充和提取缓冲区)转移回操作系统，因而可以极大地提高速度。</p>
 <h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h3><p>NIO中提供了<code>Channel</code>，<code>Selector</code>，<code>Buffer</code>等抽象。支持面向缓冲的，基于通道的IO操作方法。</p>
 <p>NIO提供了与传统BIO模型中的<code>Socket</code>和<code>ServerSocket</code>相对应的<code>SocketChannel</code>和<code>ServerSocketChannel</code>两种不同的套接字通道实现，两种通道都支持阻塞和非阻塞两种模式。阻塞模式使用就像传统中的支持一样，比较简单，但是性能和可靠性都不好；非阻塞模式正好与之相反。对于低负载、低并发的应用程序，可以使用同步阻塞I/O来提升开发速率和更好的维护性；对于高负载、高并发的（网络）应用，应使用 NIO 的非阻塞模式来开发。</p>
@@ -859,7 +860,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:52</span>
+    <span title="站点阅读时长">36:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

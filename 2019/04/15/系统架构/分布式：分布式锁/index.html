@@ -60,17 +60,17 @@
   <meta name="description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。  正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。   分布式锁的一些特点当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式：分布式锁">
-<meta property="og:url" content="http://yoursite.com/2019/04/15/Java/框架/分布式：分布式锁/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/04/15/系统架构/分布式：分布式锁/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。  正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。   分布式锁的一些特点当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/16653450d45a2a96">
-<meta property="og:updated_time" content="2019-08-01T11:51:27.755Z">
+<meta property="og:updated_time" content="2019-08-17T09:50:48.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式：分布式锁">
 <meta name="twitter:description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。  正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。   分布式锁的一些特点当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁">
 <meta name="twitter:image" content="http://yoursite.com/assets/16653450d45a2a96">
-  <link rel="canonical" href="http://yoursite.com/2019/04/15/Java/框架/分布式：分布式锁/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/15/系统架构/分布式：分布式锁/">
 
 
 <script id="page.configurations">
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/Java/框架/分布式：分布式锁/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/系统架构/分布式：分布式锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heper">
@@ -325,7 +325,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 19:51:27" itemprop="dateModified" datetime="2019-08-01T19:51:27+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-17 17:50:48" itemprop="dateModified" datetime="2019-08-17T17:50:48+08:00">2019-08-17</time>
               </span>
             
           
@@ -518,7 +518,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -676,7 +676,9 @@
         
           
         
-        <span class="site-state-item-count">42</span>
+          
+        
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -733,7 +735,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:35</span>
+    <span title="站点阅读时长">36:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

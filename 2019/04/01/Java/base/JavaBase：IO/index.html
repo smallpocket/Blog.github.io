@@ -66,10 +66,11 @@
 <meta property="og:description" content="AIO、BIO、NIO">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/v2-60266a1b62d38c452ff7d544640ef7e5_hd.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/1566007549450.png">
 <meta property="og:image" content="http://yoursite.com/assets/1565689676372.png">
 <meta property="og:image" content="http://yoursite.com/assets/44c93e93d6fd642815a539369a1bc228">
 <meta property="og:image" content="http://yoursite.com/assets/46ea294c619f83564eaa2962d0267ae3">
-<meta property="og:updated_time" content="2019-08-16T13:12:11.635Z">
+<meta property="og:updated_time" content="2019-08-17T02:07:40.991Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaBase：IO">
 <meta name="twitter:description" content="AIO、BIO、NIO">
@@ -329,7 +330,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-16 21:12:11" itemprop="dateModified" datetime="2019-08-16T21:12:11+08:00">2019-08-16</time>
+                <time title="修改时间：2019-08-17 10:07:40" itemprop="dateModified" datetime="2019-08-17T10:07:40+08:00">2019-08-17</time>
               </span>
             
           
@@ -357,7 +358,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">9.9k</span>
+              <span title="本文字数">10k</span>
             </span>
           
             <span class="post-meta-item">
@@ -481,6 +482,7 @@
 <li>Selectors</li>
 </ul>
 <p>NIO有选择器，而IO没有。选择器用于使用单个线程处理多个通道。因此，它需要较少的线程来处理这些通道。线程之间的切换对于操作系统来说是昂贵的。 因此，为了提高系统效率选择器是有用的。</p>
+<p><img src="/assets/1566007549450.png" alt="1566007549450"></p>
 <h3 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h3><ul>
 <li>Channel(通道)</li>
 <li>Buffer(缓冲区)</li>
@@ -555,6 +557,7 @@
 <p>Netty 的出现很大程度上改善了 JDK 原生 NIO 所存在的一些让人难以忍受的问题。</p>
 <h1 id="AIO-异步非阻塞"><a href="#AIO-异步非阻塞" class="headerlink" title="AIO 异步非阻塞"></a>AIO 异步非阻塞</h1><p>Java AIO就是Java作为对异步IO提供支持的NIO.2 ，Java NIO2 (JSR 203)定义了更多的 New I/O APIs， 提案2003提出，直到2011年才发布， 最终在JDK 7中才实现。JSR 203除了提供更多的文件系统操作API(包括可插拔的自定义的文件系统)， 还提供了对socket和文件的异步 I/O操作。 同时实现了JSR-51提案中的socket channel全部功能,包括对绑定， option配置的支持以及多播multicast的实现。</p>
 <h1 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h1><h3 id="是什么-2"><a href="#是什么-2" class="headerlink" title="是什么"></a>是什么</h3><p>AIO的异步IO是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。</p>
+<p>AIO采用Proactor模式，在读写时，只需要调用相应的<code>read/write</code>方法，并且需要传入CompletionHandler，动作完成后会调用CompetionHandler。</p>
 <p>AIO是异步IO的缩写，虽然NIO在网络操作中，提供了非阻塞的方法，但是NIO的IO行为还是同步的。对于 NIO 来说，我们的业务线程是在IO操作准备好时，得到通知，接着就由这个线程自行进行IO操作，IO操作本身是同步的。</p>
 <p>从编程模式上来看AIO相对于NIO的区别在于，NIO需要使用者线程不停的轮询IO对象，来确定是否有数据准备好可以读了，而AIO则是在数据准备好之后，才会通知数据使用者，这样使用者就不需要不停地轮询了。当然AIO的异步特性并不是Java实现的伪异步，而是使用了系统底层API的支持，在Unix系统下，采用了epoll IO模型，而windows便是使用了IOCP模型。关于Java AIO，本篇只做一个抛砖引玉的介绍，如果你在实际工作中用到了，那么可以参考Netty在高并发下使用AIO的相关技术。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>IO实质上与线程没有太多的关系，但是不同的IO模型改变了应用程序使用线程的方式，NIO与AIO的出现解决了很多BIO无法解决的并发问题，当然任何技术抛开适用场景都是耍流氓，复杂的技术往往是为了解决简单技术无法解决的问题而设计的，在系统开发中能用常规技术解决的问题，绝不用复杂技术，否则大大增加系统代码的维护难度，学习IT技术不是为了炫技，而是要实实在在解决问题。</p>
@@ -645,7 +648,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -803,7 +806,9 @@
         
           
         
-        <span class="site-state-item-count">42</span>
+          
+        
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -860,7 +865,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:35</span>
+    <span title="站点阅读时长">36:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -65,13 +65,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的  数据库键总是一个字符串对象 数据库键的值可以是 字符串对象 列表对象 哈希对象 集合对象（set） 有序集合对象    单机数据库的实现 数据库 Redis数据库的实现原理 说明了服务器保存键值对的方法 服务器保存键值对过期时间的方法 服务器自动删除过期键值对的方法   RDB持久化、AOF持久化 Redis两种持久化方法的实现原理">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/assets/1566050509148.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552978943031.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552980709600.png">
-<meta property="og:updated_time" content="2019-08-15T09:14:45.335Z">
+<meta property="og:updated_time" content="2019-08-17T14:16:26.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis：概述">
 <meta name="twitter:description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的  数据库键总是一个字符串对象 数据库键的值可以是 字符串对象 列表对象 哈希对象 集合对象（set） 有序集合对象    单机数据库的实现 数据库 Redis数据库的实现原理 说明了服务器保存键值对的方法 服务器保存键值对过期时间的方法 服务器自动删除过期键值对的方法   RDB持久化、AOF持久化 Redis两种持久化方法的实现原理">
-<meta name="twitter:image" content="http://yoursite.com/assets/1552978943031.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1566050509148.png">
   <link rel="canonical" href="http://yoursite.com/2019/03/04/数据库/Redis：概述/">
 
 
@@ -327,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-15 17:14:45" itemprop="dateModified" datetime="2019-08-15T17:14:45+08:00">2019-08-15</time>
+                <time title="修改时间：2019-08-17 22:16:26" itemprop="dateModified" datetime="2019-08-17T22:16:26+08:00">2019-08-17</time>
               </span>
             
           
@@ -355,7 +356,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.3k</span>
+              <span title="本文字数">2.5k</span>
             </span>
           
             <span class="post-meta-item">
@@ -365,7 +366,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">2 分钟</span>
+              <span title="阅读时长">5 分钟</span>
             </span>
           
 
@@ -424,8 +425,7 @@
 </ul>
 <h1 id="缓存使用"><a href="#缓存使用" class="headerlink" title="缓存使用"></a>缓存使用</h1><p>如何利用有限的资源提供尽可能大的吞吐量</p>
 <p>请求直接从缓存中获取数据，直接返回</p>
-<p><strong>缓存特征</strong></p>
-<ul>
+<h3 id="缓存特征"><a href="#缓存特征" class="headerlink" title="缓存特征"></a>缓存特征</h3><ul>
 <li>命中率：命中数/（命中数+没有命中数）<ul>
 <li>没有命中，缓存过期，需要从数据库当中重新获取</li>
 <li>影响因素<ul>
@@ -441,22 +441,88 @@
 <li>最大元素（空间）：缓存中可以存放的最大数量</li>
 <li>清空策略：FIFO、LFU、LRU，过期时间、随机等</li>
 </ul>
-<p><strong>缓存分类和应用场景</strong></p>
-<p>根据缓存与应用的耦合度</p>
+<h3 id="缓存命中率影响因素"><a href="#缓存命中率影响因素" class="headerlink" title="缓存命中率影响因素"></a>缓存命中率影响因素</h3><ul>
+<li><p>业务场景和业务需求。</p>
 <ul>
-<li>本地缓存<ul>
-<li>编程实现，成员变量、局部变量、静态变量、Guava Cache</li>
-<li>无法共享</li>
+<li>业务场景：缓存适合读多写少的场景。</li>
+<li>业务需求：决定对实时性的要求，直接影响缓存的更新策略与更新时间，实时性要求越低就越适合缓存。</li>
 </ul>
 </li>
-<li>分布式缓存<ul>
-<li>Memcache、Redis</li>
+<li><p>缓存的设计（粒度和策略）</p>
+<ul>
+<li><p>缓存的粒度越小，命中率越高。如果只缓存一个用户信息，此时当用户更新才需要更新缓存；如果缓存了一个集合，则集合当中任一个值更新都要更新缓存。</p>
+</li>
+<li><p>当数据发生变化时，更新缓存的值比移除缓存或缓存更新的命中率更高。</p>
+</li>
+</ul>
+</li>
+<li><p>缓存容量和基础设施。</p>
+<ul>
+<li>缓存容量有限，则容易导致缓存被淘汰，多数缓存使用LRU。</li>
+<li>使用本地缓存容易出现单机瓶颈，分布式缓存更容易扩展。</li>
+<li>不同的缓存框架的效率与稳定性各不相同。</li>
+</ul>
+</li>
+<li><p>缓存节点故障需要避免缓存失效并最大程度降低影响。</p>
+<ul>
+<li>通过一致性哈希或节点冗余方式。</li>
+</ul>
+</li>
+<li><p>并发越高，缓存受益越高。</p>
+</li>
+</ul>
+<p><strong><em>缓存设计</em></strong></p>
+<ul>
+<li>尽可能地通过缓存获取数据，并避免缓存失效。<ul>
+<li>需要从业务需求、缓存粒度、缓存策略、技术选型等各方面进行权衡，需要聚焦在高频访问且时效性要求不高的热点业务上。</li>
+<li>通过缓存预热、增加缓存容量、调整缓存粒度、更新缓存等手段来提高命中率。</li>
 </ul>
 </li>
 </ul>
-<h1 id="Guava-Cache"><a href="#Guava-Cache" class="headerlink" title="Guava Cache"></a>Guava Cache</h1><h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p><img src="/assets/1552978943031.png" alt="1552978943031"></p>
-<p>Redis所有操作都是原子性的。</p>
-<p>使用场景</p>
+<h3 id="缓存分类和应用场景"><a href="#缓存分类和应用场景" class="headerlink" title="缓存分类和应用场景"></a>缓存分类和应用场景</h3><p>根据缓存与应用的耦合度：</p>
+<ul>
+<li>本地缓存：<ul>
+<li>编程实现，成员变量、局部变量、静态变量</li>
+<li>Guava Cache。设计灵感来自于ConcurrentHashMap。</li>
+<li>无法共享。</li>
+</ul>
+</li>
+<li>分布式缓存。自身是一个独立的应用，与应用程序隔离。<ul>
+<li>Memcache。本身不提供分布式解决方案，分布式通过客户端实现路由实现分布式。</li>
+<li>Redis。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Memcache"><a href="#Memcache" class="headerlink" title="Memcache"></a>Memcache</h1><p>在服务端，Memcache的集群环境就是服务器节点的堆积。</p>
+<p>通过一致性hash算法实现路由，除了计算key的哈希值还会计算每一个对应Server的哈希值，然后将哈希值映射到一个有限的值域中。</p>
+<p>通过寻找server hash&gt;key hash的最小server作为目标server，如果找不到，则直接将最小hash值的server作为目标server，增加或删除单个节点对于集群不会有大的影响。</p>
+<h2 id="内存结构图"><a href="#内存结构图" class="headerlink" title="内存结构图"></a>内存结构图</h2><ul>
+<li>stab_class：</li>
+<li>stab：Memcache将内存空间分为了一组stab，有相同大小的chunk被组织为一个stab。LRU针对stab而不是整体</li>
+<li>page：每个stab拥有一组page，申请内存以page为单位。page大小1M，不会有1M大小的value，不会有256字节的key。</li>
+<li>chunk：chunk是存放数据的地方，一组chunk大小是一样的。<ul>
+<li>value总会被存放在与chunk大小最接近的地方。即总会有内存浪费</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/1566050509148.png" alt="1566050509148"></p>
+<p>Memcache不能遍历它内部的item。</p>
+<p>高性能：</p>
+<ul>
+<li>一致性哈希找到server。</li>
+<li>通过hash算法找到item。</li>
+</ul>
+<p>Memcache是一个非阻塞的基于事件的服务器程序，</p>
+<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p><img src="/assets/1552978943031.png" alt="1552978943031"></p>
+<p>Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，<strong>所有操作都是原子性的</strong>，支持合并多个操作为原子性。</p>
+<p>使用场景：</p>
+<ul>
+<li>取单个最新数据的操作。</li>
+<li>排行榜类似应用。</li>
+<li>精准设定过期时间。</li>
+<li>实时系统、垃圾系统、实时消息系统、队列系统。</li>
+<li>唯一性检查应用。</li>
+</ul>
 <h1 id="高并发场景下缓存常见问题"><a href="#高并发场景下缓存常见问题" class="headerlink" title="高并发场景下缓存常见问题"></a>高并发场景下缓存常见问题</h1><ul>
 <li>缓存一致性<ul>
 <li>当数据时效要求很高，要保证缓存中的数据与数据库中的数据保持一致。并且缓存结点与副本中的数据也保持一致。</li>
@@ -575,7 +641,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -733,7 +799,9 @@
         
           
         
-        <span class="site-state-item-count">42</span>
+          
+        
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -754,7 +822,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">1.</span> <span class="nav-text">数据结构与对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单机数据库的实现"><span class="nav-number">2.</span> <span class="nav-text">单机数据库的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存使用"><span class="nav-number">3.</span> <span class="nav-text">缓存使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Guava-Cache"><span class="nav-number">4.</span> <span class="nav-text">Guava Cache</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">5.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高并发场景下缓存常见问题"><span class="nav-number">6.</span> <span class="nav-text">高并发场景下缓存常见问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">1.</span> <span class="nav-text">数据结构与对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单机数据库的实现"><span class="nav-number">2.</span> <span class="nav-text">单机数据库的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存使用"><span class="nav-number">3.</span> <span class="nav-text">缓存使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存特征"><span class="nav-number">3.0.1.</span> <span class="nav-text">缓存特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存命中率影响因素"><span class="nav-number">3.0.2.</span> <span class="nav-text">缓存命中率影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存分类和应用场景"><span class="nav-number">3.0.3.</span> <span class="nav-text">缓存分类和应用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcache"><span class="nav-number">4.</span> <span class="nav-text">Memcache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构图"><span class="nav-number">4.1.</span> <span class="nav-text">内存结构图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">5.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高并发场景下缓存常见问题"><span class="nav-number">6.</span> <span class="nav-text">高并发场景下缓存常见问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -790,7 +858,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:35</span>
+    <span title="站点阅读时长">36:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

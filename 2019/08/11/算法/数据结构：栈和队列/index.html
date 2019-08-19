@@ -57,17 +57,18 @@
   };
 </script>
 
-  <meta name="description" content="优先队列参考">
+  <meta name="description" content="队列分类 普通队列。 优先队列。 以广义队列的角度来看，栈也可以理解为一个队列。  优先队列普通队列是FIFO的。优先队列的出队顺序与入队顺序无关，和优先级相关。 为什么要用动态选择优先级最高的任务执行。 概述与普通队列的最大区别是出队的操作。 实现接口：  入队与其他队列无区别。 出队需要找出优先级最高的元素。  底层数据结构 普通线性结构。入队O(1)出队O(N)。 顺序线性结构。使用排序好的">
+<meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构：栈和队列">
 <meta property="og:url" content="http://yoursite.com/2019/08/11/算法/数据结构：栈和队列/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="优先队列参考">
+<meta property="og:description" content="队列分类 普通队列。 优先队列。 以广义队列的角度来看，栈也可以理解为一个队列。  优先队列普通队列是FIFO的。优先队列的出队顺序与入队顺序无关，和优先级相关。 为什么要用动态选择优先级最高的任务执行。 概述与普通队列的最大区别是出队的操作。 实现接口：  入队与其他队列无区别。 出队需要找出优先级最高的元素。  底层数据结构 普通线性结构。入队O(1)出队O(N)。 顺序线性结构。使用排序好的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-16T08:53:29.408Z">
+<meta property="og:updated_time" content="2019-08-18T12:01:49.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构：栈和队列">
-<meta name="twitter:description" content="优先队列参考">
+<meta name="twitter:description" content="队列分类 普通队列。 优先队列。 以广义队列的角度来看，栈也可以理解为一个队列。  优先队列普通队列是FIFO的。优先队列的出队顺序与入队顺序无关，和优先级相关。 为什么要用动态选择优先级最高的任务执行。 概述与普通队列的最大区别是出队的操作。 实现接口：  入队与其他队列无区别。 出队需要找出优先级最高的元素。  底层数据结构 普通线性结构。入队O(1)出队O(N)。 顺序线性结构。使用排序好的">
   <link rel="canonical" href="http://yoursite.com/2019/08/11/算法/数据结构：栈和队列/">
 
 
@@ -323,9 +324,24 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-16 16:53:29" itemprop="dateModified" datetime="2019-08-16T16:53:29+08:00">2019-08-16</time>
+                <time title="修改时间：2019-08-18 20:01:49" itemprop="dateModified" datetime="2019-08-18T20:01:49+08:00">2019-08-18</time>
               </span>
             
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           <br>
@@ -336,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">9</span>
+              <span title="本文字数">326</span>
             </span>
           
             <span class="post-meta-item">
@@ -359,7 +375,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+        <h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li>普通队列。</li>
+<li>优先队列。</li>
+<li>以广义队列的角度来看，栈也可以理解为一个队列。</li>
+</ul>
+<h1 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h1><p>普通队列是FIFO的。优先队列的出队顺序与入队顺序无关，和优先级相关。</p>
+<h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p><strong>动态</strong>选择<strong>优先级最高</strong>的任务执行。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>与普通队列的最大区别是<strong>出队</strong>的操作。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><strong><em>接口</em></strong>：</p>
+<ul>
+<li>入队与其他队列无区别。</li>
+<li>出队需要找出优先级最高的元素。</li>
+</ul>
+<h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><ul>
+<li>普通线性结构。入队O(1)出队O(N)。</li>
+<li>顺序线性结构。使用排序好的线性结构，入队O(lg n)出队O(1)。</li>
+<li>堆。入队O(lg n)出队O(lg n)。</li>
+</ul>
+<h2 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h2><p>在N个元素选出前M个元素。在1000000个元素选出前100名。</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><p>Java当中的优先队列：PriorityQueue&lt;E&gt;。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -370,6 +406,12 @@
     
 
     <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
               <a href="/2019/08/11/算法/数据结构：数组/" rel="next" title="数据结构：数组">
@@ -381,8 +423,8 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2019/08/11/算法/常用算法：递归/" rel="prev" title="常用算法：递归">
-                常用算法：递归 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/11/算法/数据结构：概述/" rel="prev" title="数据结构：概述">
+                数据结构：概述 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -439,7 +481,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">201</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -620,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#优先队列"><span class="nav-number">1.</span> <span class="nav-text">优先队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#队列"><span class="nav-number">1.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优先队列"><span class="nav-number">2.</span> <span class="nav-text">优先队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">2.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">2.3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#底层数据结构"><span class="nav-number">2.3.1.</span> <span class="nav-text">底层数据结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用性"><span class="nav-number">2.4.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">2.5.</span> <span class="nav-text">Java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -656,7 +698,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:57</span>
+    <span title="站点阅读时长">36:47</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

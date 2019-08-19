@@ -79,8 +79,8 @@
 <meta property="og:image" content="http://yoursite.com/assets/ff396233-1bb1-4e74-8bc2-d7c90146f5dd.png">
 <meta property="og:image" content="http://yoursite.com/assets/7f38a583-2f2e-4738-97af-510e6fb403a7.png">
 <meta property="og:image" content="http://yoursite.com/assets/ef280699-da36-4b38-9735-9b048a3c7fe0.png">
-<meta property="og:image" content="http://yoursite.com/assets/450px-Red-black_tree_example.svg.png">
-<meta property="og:image" content="http://yoursite.com/assets/2011120116425251.png">
+<meta property="og:image" content="http://yoursite.com/assets/4f48e806-f90b-4c09-a55f-ac0cd641c047.png">
+<meta property="og:image" content="http://yoursite.com/assets/3086c248-b552-499e-b101-9cffe5c2773e.png">
 <meta property="og:image" content="http://yoursite.com/assets/Red-black_tree_insert_case_5.png">
 <meta property="og:image" content="http://yoursite.com/assets/Red-black_tree_insert_case_4.png">
 <meta property="og:image" content="http://yoursite.com/assets/Red-black_tree_delete_case_2.png">
@@ -88,8 +88,6 @@
 <meta property="og:image" content="http://yoursite.com/assets/Red-black_tree_delete_case_4.png">
 <meta property="og:image" content="http://yoursite.com/assets/Red-black_tree_delete_case_5.png">
 <meta property="og:image" content="http://yoursite.com/assets/Red-black_tree_delete_case_6.png">
-<meta property="og:image" content="http://yoursite.com/assets/4f48e806-f90b-4c09-a55f-ac0cd641c047.png">
-<meta property="og:image" content="http://yoursite.com/assets/3086c248-b552-499e-b101-9cffe5c2773e.png">
 <meta property="og:image" content="http://yoursite.com/assets/9110c1a0-8a54-4145-a814-2477d0128114.png">
 <meta property="og:image" content="http://yoursite.com/assets/e2f0d889-2330-424c-8193-198edebecff7.png">
 <meta property="og:image" content="http://yoursite.com/assets/af4639f9-af54-4400-aaf5-4e261d96ace7.png">
@@ -99,7 +97,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/21/算法/数据结构：树/assets/Bplustreebuild.gif">
 <meta property="og:image" content="http://yoursite.com/assets/1554189709939.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554190074278.png">
-<meta property="og:updated_time" content="2019-08-15T05:16:16.773Z">
+<meta property="og:updated_time" content="2019-08-19T02:55:54.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构：树">
 <meta name="twitter:description" content="二叉树">
@@ -359,7 +357,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-15 13:16:16" itemprop="dateModified" datetime="2019-08-15T13:16:16+08:00">2019-08-15</time>
+                <time title="修改时间：2019-08-19 10:55:54" itemprop="dateModified" datetime="2019-08-19T10:55:54+08:00">2019-08-19</time>
               </span>
             
           
@@ -397,7 +395,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">30 分钟</span>
+              <span title="阅读时长">28 分钟</span>
             </span>
           
             <div class="post-description">二叉树</div>
@@ -412,7 +410,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><ul>
+        <h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li>完全二叉树。</li>
+<li>满二叉树。</li>
+<li>二叉搜索树。</li>
+<li>AVL树。<ul>
+<li>红黑树。</li>
+<li>线段树。</li>
+</ul>
+</li>
+</ul>
+<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><ul>
 <li>左子树的键值总是小于根的键值。右子树的键值总是大于根的键值。即没有键值相等的节点。</li>
 <li>中序遍历结果有序。</li>
 </ul>
@@ -492,13 +500,13 @@
 <p><img src="/assets/4d741402-344d-4b7c-be01-e57184bcad0e.png" alt="img"></p>
 <p>在最坏的情况下，树的高度为 N。</p>
 <p><img src="/assets/be7dca03-12ec-456b-8b54-b1b3161f5531.png" alt="img"></p>
-<h2 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h2><p>平衡二叉树（Balanced Binary Tree）<strong>又被称为AVL树</strong>（有别于AVL算法），且具有以下性质：</p>
+<h2 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h2><p>平衡二叉树（Balanced Binary Tree）<strong>又被称为AVL树</strong>（有别于AVL算法），且具有以下性质：</p>
 <ul>
-<li>它是一 棵空树或它的左右两个子树的高度差的绝对值不超过1</li>
+<li>它是一棵空树或它的左右两个子树的高度差的绝对值不超过1。</li>
 <li>并且左右两个子树都是一棵平衡二叉树。</li>
 </ul>
 <p>平衡二叉树的常用算法有红黑树、AVL树等。在平衡二叉搜索树中，我们可以看到，其高度一般都良好地维持在O(log2n)，大大降低了操作的时间复杂度。</p>
-<h2 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h2><p><strong>AVL树定义：</strong>AVL树是最先发明的自平衡二叉查找树。AVL树得名于它的发明者 G.M. Adelson-Velsky 和 E.M. Landis，他们在 1962 年的论文 “An algorithm for the organization of information” 中发表了它。在AVL中任何节点的两个儿子子树的高度最大差别为1，所以它也被称为高度平衡树，n个结点的AVL树最大深度约1.44log2n。查找、插入和删除在平均和最坏情况下都是O(logn)。增加和删除可能需要通过一次或多次树旋转来重新平衡这个树。<strong>这个方案很好的解决了二叉查找树退化成链表的问题，把插入，查找，删除的时间复杂度最好情况和最坏情况都维持在O(logN)。但是频繁旋转会使插入和删除牺牲掉O(logN)左右的时间，不过相对二叉查找树来说，时间上稳定了很多。</strong></p>
+<p><strong>AVL树定义：</strong>AVL树是最先发明的自平衡二叉查找树。AVL树得名于它的发明者 G.M. Adelson-Velsky 和 E.M. Landis，他们在 1962 年的论文 “An algorithm for the organization of information” 中发表了它。在AVL中任何节点的两个儿子子树的高度最大差别为1，所以它也被称为高度平衡树，n个结点的AVL树最大深度约1.44log2n。查找、插入和删除在平均和最坏情况下都是O(logn)。增加和删除可能需要通过一次或多次树旋转来重新平衡这个树。<strong>这个方案很好的解决了二叉查找树退化成链表的问题，把插入，查找，删除的时间复杂度最好情况和最坏情况都维持在O(logN)。但是频繁旋转会使插入和删除牺牲掉O(logN)左右的时间，不过相对二叉查找树来说，时间上稳定了很多。</strong></p>
 <h3 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h3><p><strong>AVL树的自平衡操作——旋转：</strong></p>
 <p>AVL树最关键的也是最难的一步操作就是<strong>旋转</strong>。旋转主要是为了实现AVL树在实施了插入和删除操作以后，树重新回到平衡的方法。下面我们重点研究一下AVL树的旋转。</p>
 <p>对于一个平衡的节点，由于任意节点最多有两个儿子，因此高度不平衡时，此节点的两颗子树的高度差2.容易看出，这种不平衡出现在下面四种情况：</p>
@@ -519,61 +527,97 @@
 <p>对于左右和右左这两种情况，单旋转不能使它达到一个平衡状态，要经过两次旋转。双旋转是针对于这两种情况的解决方案，同样的，这样两种情况也是对称的，只要解决了左右这种情况，右左就很好办了。图4是左右情况的解决方案，节点k3不满足平衡特性，因为它的左子树k1比右子树Z深2层，而且k1子树中，更深的一层的是k1的右子树k2子树，所以属于左右情况。</p>
 <p><img src="/assets/2012082016534455.jpg" alt="img"></p>
 <p>为使树恢复平衡，我们需要进行两步，第一步，把k1作为根，进行一次右右旋转，旋转之后就变成了左左情况，所以第二步再进行一次左左旋转，最后得到了一棵以k2为根的平衡二叉树。</p>
-<h1 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h1><p>2-3 查找树引入了2-节点和 3- 节点，目的是为了让树平衡。一颗完美平衡的 2-3 查找树的所有空链接到根节点的距离应该是相同的。</p>
+<h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><p>堆是一颗完全二叉树。</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><ul>
+<li>插入节点</li>
+<li>删除元素。</li>
+<li>删除最大(最小元素)</li>
+</ul>
+<p>其存在一部分的私有方法：</p>
+<ul>
+<li>上浮/下沉。</li>
+</ul>
+<h2 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h2><h3 id="数组堆"><a href="#数组堆" class="headerlink" title="数组堆"></a>数组堆</h3><p>可以看<a href="https://smallpocket.github.io/2019/03/21/算法/常用算法：排序算法/" target="_blank" rel="noopener">常用算法：排序算法</a>。</p>
+<p>假设以数组0位开始存储。则假设节点的index为i，其父类节点的<code>index=(i-1)/2</code>其左孩子的<code>index=2*i+1</code></p>
+<h3 id="二-d-叉堆"><a href="#二-d-叉堆" class="headerlink" title="二(d)叉堆"></a>二(d)叉堆</h3><p>d叉堆在下沉时需要考虑d次。</p>
+<h3 id="索引堆"><a href="#索引堆" class="headerlink" title="索引堆"></a>索引堆</h3><p>数组堆只能看到堆首的元素，而不能看到堆中间的元素。</p>
+<p>如果需要看到堆中间的元素，或需要对中间的元素进行修改。则需要使用索引堆，其维护了一个元素的索引。</p>
+<h1 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h1><p>2-3查找树引入了2-节点和3-节点，目的是为了让树平衡。即一个节点可以存放一个元素或两个元素，其具有2/3个孩子，也是其名称的原因。</p>
+<p>一颗完美平衡的2-3查找树的所有空链接到根节点的距离应该是相同的。2-3树是一颗绝对平衡的树。</p>
 <p><img src="/assets/ff396233-1bb1-4e74-8bc2-d7c90146f5dd.png" alt="img"></p>
+<h2 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h2><h3 id="算法操作"><a href="#算法操作" class="headerlink" title="算法操作"></a>算法操作</h3><p><strong><em>维持平衡</em></strong>：对于2-3树而言，添加节点永远<strong>不会添加到一个空的位置</strong>，即它会和最后找到的叶子节点进行融合。</p>
 <p>常用操作有：</p>
 <ul>
-<li>插入操作</li>
+<li>插入操作。</li>
+<li>删除操作。</li>
 </ul>
 <p><strong><em>插入操作</em></strong></p>
-<p>插入操作和 BST 的插入操作有很大区别，BST 的插入操作是先进行一次未命中的查找，然后再将节点插入到对应的空链接上。但是 2-3 查找树如果也这么做的话，那么就会破坏了平衡性。它是将新节点插入到叶子节点上。</p>
+<p>插入操作和BST的插入操作有很大区别，BST 的插入操作是先进行一次未命中的查找，然后再将节点插入到对应的空链接上。但是2-3查找树如果也这么做的话，那么就会破坏了平衡性。它是将新节点插入到叶子节点上。</p>
 <p>根据叶子节点的类型不同，有不同的处理方式：</p>
 <ul>
-<li>如果插入到 2- 节点上，那么直接将新节点和原来的节点组成 3- 节点即可。</li>
+<li>如果插入到2-节点上，那么直接将新节点和原来的节点组成3-节点即可。</li>
 </ul>
 <p><img src="/assets/7f38a583-2f2e-4738-97af-510e6fb403a7.png" alt="img"></p>
 <ul>
-<li>如果是插入到 3- 节点上，就会产生一个临时 4- 节点时，需要将 4- 节点分裂成 3 个 2- 节点，并将中间的 2- 节点移到上层节点中。如果上移操作继续产生临时 4- 节点则一直进行分裂上移，直到不存在临时 4- 节点。</li>
+<li>如果是插入到3-节点上，就会产生一个临时4-节点时，需要将4-节点分裂成3个2-节点，并将中间的2-节点移到上层节点中。如果上移操作继续产生临时4-节点则一直进行分裂上移，直到不存在临时4-节点。</li>
 </ul>
 <p><img src="/assets/ef280699-da36-4b38-9735-9b048a3c7fe0.png" alt="img"></p>
-<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>2-3 查找树插入操作的变换都是局部的，除了相关的节点和链接之外不必修改或者检查树的其它部分，而这些局部变换不会影响树的全局有序性和平衡性。</p>
-<p>2-3 查找树的查找和插入操作复杂度和插入顺序无关，在最坏的情况下查找和插入操作访问的节点必然不超过 logN 个，含有 10 亿个节点的 2-3 查找树最多只需要访问 30 个节点就能进行任意的查找和插入操作。</p>
-<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><p><strong>红黑树的定义：</strong>红黑树是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它是在1972年由鲁道夫·贝尔发明的，称之为”对称二叉B树”，它现代的名字是在 Leo J. Guibas 和 Robert Sedgewick 于1978年写的一篇论文中获得的。<strong>它是复杂的，但它的操作有着良好的最坏情况运行时间，并且在实践中是高效的: 它可以在O(logn)时间内做查找，插入和删除，这里的n是树中元素的数目。</strong></p>
-<p>红黑树和AVL树一样都对插入时间、删除时间和查找时间提供了最好可能的最坏情况担保。这不只是使它们在时间敏感的应用如实时应用（real time application）中有价值，而且使它们有在提供最坏情况担保的其他数据结构中作为建造板块的价值；例如，在计算几何中使用的很多数据结构都可以基于红黑树。此外，红黑树还是2-3-4树的一种等同，它们的思想是一样的，只不过红黑树是2-3-4树用二叉树的形式表示的。</p>
-<p><strong>红黑树的性质：</strong></p>
-<p>红黑树是每个节点都带有颜色属性的二叉查找树，颜色为红色或黑色。在二叉查找树强制的一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求:</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>2-3查找树插入操作的变换都是局部的，除了相关的节点和链接之外不必修改或者检查树的其它部分，而这些局部变换不会影响树的全局有序性和平衡性。</p>
+<p>2-3查找树的查找和插入操作复杂度和插入顺序无关，在最坏的情况下查找和插入操作访问的节点必然不超过logN个，含有10亿个节点的2-3查找树最多只需要访问30个节点就能进行任意的查找和插入操作。</p>
+<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>红黑树是2-3查找树，但它不需要分别定义2-节点和3-节点，而是在普通的二叉查找树之上，为节点添加颜色。指向一个节点的链接颜色如果为红色，那么这个节点和上层节点表示的是一个3-节点，而黑色则是普通链接。</p>
+<p><img src="/assets/4f48e806-f90b-4c09-a55f-ac0cd641c047.png" alt="img"></p>
+<h3 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h3><p>红黑树是每个节点都带有颜色属性的二叉查找树，颜色为红色或黑色。在二叉查找树强制的一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求：</p>
 <ol>
 <li>节点是红色或黑色。</li>
 <li>根是黑色。</li>
 <li>所有叶子都是黑色（叶子是NIL节点）。</li>
-<li>每个红色节点必须有两个黑色的子节点。(从每个叶子到根的所有路径上不能有两个连续的红色节点。)</li>
-<li>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
+<li>如果一个节点是红色的，那么它的孩子节点都是黑色的。</li>
+<li>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。<ul>
+<li>则没有路径能多于任何其他路径的两倍长。</li>
+</ul>
+</li>
 </ol>
-<p>下面是一个具体的红黑树的图例：</p>
-<p><img src="/assets/450px-Red-black_tree_example.svg.png" alt="An example of a red-black tree"></p>
-<p>这些约束确保了红黑树的关键特性: 从根到叶子的最长的可能路径不多于最短的可能路径的两倍长。结果是这个树大致上是平衡的。因为操作比如插入、删除和查找某个值的最坏情况时间都要求与树的高度成比例，这个在高度上的理论上限允许红黑树在最坏情况下都是高效的，而不同于普通的二叉查找树。</p>
-<p>要知道为什么这些性质确保了这个结果，注意到性质4导致了路径不能有两个毗连的红色节点就足够了。最短的可能路径都是黑色节点，最长的可能路径有交替的红色和黑色节点。因为根据性质5所有最长的路径都有相同数目的黑色节点，这就表明了没有路径能多于任何其他路径的两倍长。</p>
-<p>以下内容整理自<a href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91" target="_blank" rel="noopener">wiki百科之红黑树</a>。</p>
+<p>其性质有：</p>
+<ul>
+<li>红链接都为左链接；</li>
+<li>完美黑色平衡，即任意空链接到根节点的路径上的黑链接数量相同。</li>
+<li>它可以在O(logn)时间内做查找，插入和删除，这里的n是树中元素的数目。</li>
+</ul>
+<p>画红黑树时可以将红链接画平。</p>
+<p><img src="/assets/3086c248-b552-499e-b101-9cffe5c2773e.png" alt="img"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedBlackBST</span>&lt;<span class="title">Key</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">Key</span>&gt;, <span class="title">Value</span>&gt; <span class="keyword">extends</span> <span class="title">BST</span>&lt;<span class="title">Key</span>, <span class="title">Value</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> RED = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> BLACK = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isRed</span><span class="params">(Node x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> x.color == RED;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>以下内容整理自<a href="https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91" target="_blank" rel="noopener">wiki百科之红黑树</a>。</p>
 <p><strong>红黑树的自平衡操作：</strong></p>
-<p>因为每一个红黑树也是一个特化的二叉查找树，因此红黑树上的只读操作与普通二叉查找树上的只读操作相同。然而，在红黑树上进行插入操作和删除操作会导致不再符合红黑树的性质。恢复红黑树的性质需要少量(O(logn))的颜色变更(实际是非常快速的)和不超过三次树旋转(对于插入操作是两次)。虽然插入和删除很复杂，但操作时间仍可以保持为O(logn) 次。</p>
-<p><strong>我们首先以二叉查找树的方法增加节点并标记它为红色。如果设为黑色，就会导致根到叶子的路径上有一条路上，多一个额外的黑节点，这个是很难调整的（违背性质5）。</strong>但是设为红色节点后，可能会导致出现两个连续红色节点的冲突，那么可以通过颜色调换（color flips）和树旋转来调整。下面要进行什么操作取决于其他临近节点的颜色。同人类的家族树中一样，我们将使用术语叔父节点来指一个节点的父节点的兄弟节点。注意:</p>
+<p>因为每一个红黑树也是一个特化的二叉查找树，因此红黑树上的只读操作与普通二叉查找树上的只读操作相同。然而，在红黑树上进行插入操作和删除操作会导致不再符合红黑树的性质。恢复红黑树的性质需要少量(O(logn))的颜色变更(实际是非常快速的)和不超过三次树旋转(对于插入操作是两次)。虽然插入和删除很复杂，但操作时间仍可以保持为O(logn)次。</p>
+<p><strong>我们首先以二叉查找树的方法增加节点并标记它为红色。如果设为黑色，就会导致根到叶子的路径上有一条路上，多一个额外的黑节点，这个是很难调整的（违背性质5）。</strong>但是设为红色节点后，可能会导致出现两个连续红色节点的冲突，那么可以通过颜色调换（color flips）和树旋转来调整。下面要进行什么操作取决于其他临近节点的颜色。同人类的家族树中一样，我们将使用术语叔父节点来指一个节点的父节点的兄弟节点。注意：</p>
 <ul>
 <li>性质1和性质3总是保持着。</li>
 <li>性质4只在增加红色节点、重绘黑色节点为红色，或做旋转时受到威胁。</li>
 <li>性质5只在增加黑色节点、重绘红色节点为黑色，或做旋转时受到威胁。</li>
 </ul>
-<h3 id="插入操作："><a href="#插入操作：" class="headerlink" title="插入操作："></a><strong>插入操作：</strong></h3><p>假设，将要插入的节点标为<strong>N</strong>，N的父节点标为<strong>P</strong>，N的祖父节点标为<strong>G</strong>，N的叔父节点标为<strong>U</strong>。在图中展示的任何颜色要么是由它所处情形这些所作的假定，要么是假定所暗含的。</p>
+<h2 id="算法-1"><a href="#算法-1" class="headerlink" title="算法"></a>算法</h2><p>红黑树的操作思想与2-3树的思想完全一致，只是变为了一颗二叉树而已。</p>
+<p>在操作方面，红黑树不同的地方主要在于<strong>插入操作</strong>与<strong>删除操作</strong>。其他操作与一般2-3树并无太大不同。</p>
+<p>并且由于其插入操作与删除操作，额外带来了<strong>颜色转换</strong>操作，以及更为复杂的<strong>旋转操作</strong>。</p>
+<h3 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h3><p>插入的节点一定为红色，红色的节点代表它要和它的父亲节点做融合。</p>
 <p><strong>情形1:</strong> 该树为空树，直接插入根结点的位置，违反性质1，把节点颜色有红改为黑即可。</p>
-<p><strong>情形2:</strong> 插入节点N的父节点P为黑色，不违反任何性质，无需做任何修改。在这种情形下，树仍是有效的。性质5也未受到威胁，尽管新节点N有两个黑色叶子子节点；但由于新节点N是红色，通过它的每个子节点的路径就都有同通过它所取代的黑色的叶子的路径同样数目的黑色节点，所以依然满足这个性质。</p>
-<p>注： 情形1很简单，情形2中P为黑色，一切安然无事，但P为红就不一样了，下边是P为红的各种情况，也是真正难懂的地方。</p>
-<p><strong>情形3:</strong> 如果父节点P和叔父节点U二者都是红色，(此时新插入节点N做为P的左子节点或右子节点都属于情形3,这里右图仅显示N做为P左子的情形)则我们可以将它们两个重绘为黑色并重绘祖父节点G为红色(用来保持性质4)。现在我们的新节点N有了一个黑色的父节点P。因为通过父节点P或叔父节点U的任何路径都必定通过祖父节点G，在这些路径上的黑节点数目没有改变。但是，红色的祖父节点G的父节点也有可能是红色的，这就违反了性质4。为了解决这个问题，我们在祖父节点G上递归地进行上述情形的整个过程（把G当成是新加入的节点进行各种情形的检查）。比如，G为根节点，那我们就直接将G变为黑色（情形1）；如果G不是根节点，而它的父节点为黑色，那符合所有的性质，直接插入即可（情形2）；如果G不是根节点，而它的父节点为红色，则递归上述过程（情形3）。</p>
-<p><img src="/assets/2011120116425251.png" alt="img"></p>
-<p><strong>情形4:</strong> 父节点P是红色而叔父节点U是黑色或缺少，新节点N是其父节点的左子节点，而父节点P又是其父节点G的左子节点。在这种情形下，我们进行针对祖父节点G的一次右旋转; 在旋转产生的树中，以前的父节点P现在是新节点N和以前的祖父节点G的父节点。我们知道以前的祖父节点G是黑色，否则父节点P就不可能是红色(如果P和G都是红色就违反了性质4，所以G必须是黑色)。我们切换以前的父节点P和祖父节点G的颜色，结果的树满足性质4。性质5也仍然保持满足，因为通过这三个节点中任何一个的所有路径以前都通过祖父节点G，现在它们都通过以前的父节点P。在各自的情形下，这都是三个节点中唯一的黑色节点。</p>
+<p><strong>情形2</strong>：Black Root，并拥有一个Red left，插入Red Right。</p>
+<ul>
+<li>则此时Root是一个4-节点，为将其分裂，使得子节点颜色为Black，父节点转为Red Root。</li>
+</ul>
+<p><strong>情形3</strong>：Black Root，拥有一个Red Left1，Red Left1拥有一个Red Left2。</p>
+<ul>
+<li>此时Root依然是一个4-节点，为将其分裂，进行右旋转操作。</li>
+<li><code>G.left = 3;</code>，<code>P.right = G;</code>，<code>P.color = G.color;</code>，<code>G.color=Red</code></li>
+</ul>
 <p><img src="/assets/Red-black_tree_insert_case_5.png" alt="情形5 示意图"></p>
-<p><strong>情形5:</strong> 父节点P是红色而叔父节点U是黑色或缺少，并且新节点N是其父节点P的右子节点而父节点P又是其父节点的左子节点。在这种情形下，我们进行一次左旋转调换新节点和其父节点的角色; 接着，我们按<strong>情形4</strong>处理以前的父节点P以解决仍然失效的性质4。注意这个改变会导致某些路径通过它们以前不通过的新节点N（比如图中1号叶子节点）或不通过节点P（比如图中3号叶子节点），但由于这两个节点都是红色的，所以性质5仍有效。</p>
+<p><strong>情形4</strong>：Black Root，拥有一个Red Left，Red Left拥有Red Right。</p>
+<ul>
+<li>由于红链接都是左链接，因此首先需要进行左旋转操作。</li>
+<li>之后转变为了情形3，即需要右旋转。</li>
+</ul>
 <p><img src="/assets/Red-black_tree_insert_case_4.png" alt="情形4 示意图"></p>
-<p><strong>注: 插入实际上是原地算法，因为上述所有调用都使用了尾部递归。</strong></p>
-<h3 id="删除操作："><a href="#删除操作：" class="headerlink" title="删除操作："></a><strong>删除操作：</strong></h3><p><strong>如果需要删除的节点有两个儿子，那么问题可以被转化成删除另一个只有一个儿子的节点的问题</strong>。对于二叉查找树，在删除带有两个非叶子儿子的节点的时候，我们找到要么在它的左子树中的最大元素、要么在它的右子树中的最小元素，并把它的值转移到要删除的节点中。我们接着删除我们从中复制出值的那个节点，它必定有少于两个非叶子的儿子。因为只是复制了一个值，不违反任何性质，这就把问题简化为如何删除最多有一个儿子的节点的问题。它不关心这个节点是最初要删除的节点还是我们从中复制出值的那个节点。</p>
+<h3 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h3><p><strong>如果需要删除的节点有两个儿子，那么问题可以被转化成删除另一个只有一个儿子的节点的问题</strong>。对于二叉查找树，在删除带有两个非叶子儿子的节点的时候，我们找到要么在它的左子树中的最大元素、要么在它的右子树中的最小元素，并把它的值转移到要删除的节点中。我们接着删除我们从中复制出值的那个节点，它必定有少于两个非叶子的儿子。因为只是复制了一个值，不违反任何性质，这就把问题简化为如何删除最多有一个儿子的节点的问题。它不关心这个节点是最初要删除的节点还是我们从中复制出值的那个节点。</p>
 <p><strong>我们只需要讨论删除只有一个儿子的节点</strong>(如果它两个儿子都为空，即均为叶子，我们任意将其中一个看作它的儿子)。如果我们删除一个红色节点（此时该节点的儿子将都为叶子节点），它的父亲和儿子一定是黑色的。所以我们可以简单的用它的黑色儿子替换它，并不会破坏性质3和性质4。通过被删除节点的所有路径只是少了一个红色节点，这样可以继续保证性质5。另一种简单情况是在被删除节点是黑色而它的儿子是红色的时候。如果只是去除这个黑色节点，用它的红色儿子顶替上来的话，会破坏性质5，但是如果我们重绘它的儿子为黑色，则曾经通过它的所有路径将通过它的黑色儿子，这样可以继续保持性质5。</p>
 <p><strong>需要进一步讨论的是在要删除的节点和它的儿子二者都是黑色的时候</strong>，这是一种复杂的情况。我们首先把要删除的节点替换为它的儿子。出于方便，称呼这个儿子为<strong>N</strong>(在新的位置上)，称呼它的兄弟(它父亲的另一个儿子)为<strong>S</strong>。在下面的示意图中，我们还是使用<strong>P</strong>称呼N的父亲，<strong>SL</strong>称呼S的左儿子，<strong>SR</strong>称呼S的右儿子。</p>
 <p>如果N和它初始的父亲是黑色，则删除它的父亲导致通过N的路径都比不通过它的路径少了一个黑色节点。因为这违反了性质5，树需要被重新平衡。有几种情形需要考虑:</p>
@@ -595,30 +639,23 @@
 </ul>
 <p>在任何情况下，在这些路径上的黑色节点数目都没有改变。所以我们恢复了性质4。在示意图中的白色节点可以是红色或黑色，但是在变换前后都必须指定相同的颜色。</p>
 <p><img src="/assets/Red-black_tree_delete_case_6.png" alt="情形6 示意图"></p>
-<h2 id="红黑树-1"><a href="#红黑树-1" class="headerlink" title="红黑树"></a>红黑树</h2><p>红黑树是 2-3 查找树，但它不需要分别定义 2- 节点和 3- 节点，而是在普通的二叉查找树之上，为节点添加颜色。指向一个节点的链接颜色如果为红色，那么这个节点和上层节点表示的是一个 3- 节点，而黑色则是普通链接。</p>
-<p><img src="/assets/4f48e806-f90b-4c09-a55f-ac0cd641c047.png" alt="img"></p>
-<p>红黑树具有以下性质：</p>
-<ul>
-<li>红链接都为左链接；</li>
-<li>完美黑色平衡，即任意空链接到根节点的路径上的黑链接数量相同。</li>
-</ul>
-<p>画红黑树时可以将红链接画平。</p>
-<p><img src="/assets/3086c248-b552-499e-b101-9cffe5c2773e.png" alt="img"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedBlackBST</span>&lt;<span class="title">Key</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">Key</span>&gt;, <span class="title">Value</span>&gt; <span class="keyword">extends</span> <span class="title">BST</span>&lt;<span class="title">Key</span>, <span class="title">Value</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> RED = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> BLACK = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isRed</span><span class="params">(Node x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> x.color == RED;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="左旋转"><a href="#左旋转" class="headerlink" title="左旋转"></a>左旋转</h2><p>因为合法的红链接都为左链接，如果出现右链接为红链接，那么就需要进行左旋转操作。</p>
+<h2 id="操作-2"><a href="#操作-2" class="headerlink" title="操作"></a>操作</h2><h3 id="左旋转"><a href="#左旋转" class="headerlink" title="左旋转"></a>左旋转</h3><p>因为合法的红链接都为左链接，如果出现右链接为红链接，那么就需要进行左旋转操作。</p>
 <p><img src="/assets/9110c1a0-8a54-4145-a814-2477d0128114.png" alt="img"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">rotateLeft</span><span class="params">(Node h)</span> </span>&#123;</span><br><span class="line">    Node x = h.right;</span><br><span class="line">    h.right = x.left;</span><br><span class="line">    x.left = h;</span><br><span class="line">    x.color = h.color;</span><br><span class="line">    h.color = RED;</span><br><span class="line">    x.N = h.N;</span><br><span class="line">    recalculateSize(h);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">rotateLeft</span><span class="params">(Node root)</span> </span>&#123;</span><br><span class="line">    Node B = root.right;</span><br><span class="line">    toot.right = B.left;</span><br><span class="line">    B.left = root;</span><br><span class="line">    B.color = root.color;</span><br><span class="line">    root.color = RED;</span><br><span class="line">    B.N = root.N;</span><br><span class="line">    recalculateSize(toot);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="右旋转"><a href="#右旋转" class="headerlink" title="右旋转"></a>右旋转</h2><p>进行右旋转是为了转换两个连续的左红链接，这会在之后的插入过程中探讨。</p>
+<h3 id="右旋转"><a href="#右旋转" class="headerlink" title="右旋转"></a>右旋转</h3><p>进行右旋转是为了转换两个连续的左红链接，这会在之后的插入过程中探讨。</p>
 <p><img src="/assets/e2f0d889-2330-424c-8193-198edebecff7.png" alt="img"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">rotateRight</span><span class="params">(Node h)</span> </span>&#123;</span><br><span class="line">    Node x = h.left;</span><br><span class="line">    h.left = x.right;</span><br><span class="line">    x.color = h.color;</span><br><span class="line">    h.color = RED;</span><br><span class="line">    x.N = h.N;</span><br><span class="line">    recalculateSize(h);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">rotateRight</span><span class="params">(Node root)</span> </span>&#123;</span><br><span class="line">    Node A = root.left;</span><br><span class="line">    root.left = A.right;</span><br><span class="line">    A.color = root.color;</span><br><span class="line">    root.color = RED;</span><br><span class="line">    A.size = root.size;</span><br><span class="line">    recalculateSize(root);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="颜色转换"><a href="#颜色转换" class="headerlink" title="颜色转换"></a>颜色转换</h2><p>一个 4- 节点在红黑树中表现为一个节点的左右子节点都是红色的。分裂 4- 节点除了需要将子节点的颜色由红变黑之外，同时需要将父节点的颜色由黑变红，从 2-3 树的角度看就是将中间节点移到上层节点。</p>
+<h3 id="颜色转换"><a href="#颜色转换" class="headerlink" title="颜色转换"></a>颜色转换</h3><p>维护颜色的时机：与AVL树一样。</p>
+<ul>
+<li><p>一个4-节点在红黑树中表现为一个节点的左右子节点都是红色的。分裂4-节点除了需要将子节点的颜色由红变黑之外，同时需要将父节点的颜色由黑变红，从2-3树的角度看就是将中间节点移到上层节点。</p>
+</li>
+</ul>
 <p><img src="/assets/af4639f9-af54-4400-aaf5-4e261d96ace7.png" alt="img"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flipColors</span><span class="params">(Node h)</span> </span>&#123;</span><br><span class="line">    h.color = RED;</span><br><span class="line">    h.left.color = BLACK;</span><br><span class="line">    h.right.color = BLACK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>先将一个节点按二叉查找树的方法插入到正确位置，然后再进行如下颜色操作：</p>
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>先将一个节点按二叉查找树的方法插入到正确位置，然后再进行如下颜色操作：</p>
 <ul>
 <li>如果右子节点是红色的而左子节点是黑色的，进行左旋转；</li>
 <li>如果左子节点是红色的，而且左子节点的左子节点也是红色的，进行右旋转；</li>
@@ -629,8 +666,17 @@
 
 <p>可以看到该插入操作和二叉查找树的插入操作类似，只是在最后加入了旋转和颜色变换操作即可。</p>
 <p>根节点一定为黑色，因为根节点没有上层节点，也就没有上层节点的左链接指向根节点。flipColors() 有可能会使得根节点的颜色变为红色，每当根节点由红色变成黑色时树的黑链接高度加 1.</p>
-<h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><p>一颗大小为 N 的红黑树的高度不会超过 2logN。最坏的情况下是它所对应的 2-3 树，构成最左边的路径节点全部都是 3- 节点而其余都是 2- 节点。</p>
+<h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><p>一颗大小为N的红黑树的高度不会超过2logN。最坏的情况下是它所对应的2-3树，构成最左边的路径节点全部都是3-节点而其余都是2-节点。</p>
 <p>红黑树大多数的操作所需要的时间都是对数级别的。</p>
+<ul>
+<li>对于完全随机的数据，普通二分搜索树更有效。<ul>
+<li>缺点：极端情况退化为链表。</li>
+</ul>
+</li>
+<li>对于查询较多的情况，AVL有效。</li>
+<li>红黑树一定程度上牺牲了平衡性。</li>
+<li>统计性能更优（综合增删改查所有操作）。</li>
+</ul>
 <h1 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h1><h2 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h2><p>B树也是一种用于查找的平衡树，但是它不是二叉树。</p>
 <p><strong>B树的定义：</strong>B树（B-tree）是一种树状数据结构，能够用来存储排序后的数据。这种数据结构能够让查找数据、循序存取、插入数据及删除的动作，都在对数时间内完成。B树，概括来说是一个一般化的二叉查找树，可以拥有多于2个子节点。与自平衡二叉查找树不同，B-树为系统最优化大块数据的读和写操作。B-tree算法减少定位记录时所经历的中间过程，从而加快存取速度。这种数据结构常被应用在数据库和文件系统的实作上。</p>
 <p>在B树中查找给定关键字的方法是，首先把根结点取来，在根结点所包含的关键字K1,…,Kn查找给定的关键字（可用顺序查找或二分查找法），若找到等于给定值的关键字，则查找成功；否则，一定可以确定要查找的关键字在Ki与Ki+1之间，Pi为指向子树根节点的指针，此时取指针Pi所指的结点继续查找，直至找到，或指针Pi为空时查找失败。</p>
@@ -680,7 +726,7 @@
 <p>B+树的分裂：当一个结点满时，分配一个新的结点，并将原结点中1/2的数据复制到新结点，最后在父结点中增加新结点的指针；B+树的分裂只影响原结点和父结点，而不会影响兄弟结点，所以它不需要指向兄弟的指针；</p>
 <p>B*树的分裂：当一个结点满时，如果它的下一个兄弟结点未满，那么将一部分数据移到兄弟结点中，再在原结点插入关键字，最后修改父结点中兄弟结点的关键字（因为兄弟结点的关键字范围改变了）；如果兄弟也满了，则在原结点与兄弟结点之间增加新结点，并各复制1/3的数据到新结点，最后在父结点增加新结点的指针；</p>
 <p>所以，B*树分配新结点的概率比B+树要低，空间使用率更高。</p>
-<h1 id="线段树Segment-Tree"><a href="#线段树Segment-Tree" class="headerlink" title="线段树Segment Tree"></a>线段树Segment Tree</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong><em>为什么要用</em></strong></p>
+<h1 id="线段树Segment-Tree"><a href="#线段树Segment-Tree" class="headerlink" title="线段树Segment Tree"></a>线段树Segment Tree</h1><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p><strong><em>为什么要用</em></strong></p>
 <ul>
 <li>有一种问题只关注一个<strong>区间</strong></li>
 <li>是一个动态的问题，数据是不断变化的。</li>
@@ -800,7 +846,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">201</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -981,7 +1027,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树"><span class="nav-number">1.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树"><span class="nav-number">1.1.</span> <span class="nav-text">二叉查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构与操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">数据结构与操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">1.1.2.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平衡二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">平衡二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL树"><span class="nav-number">1.3.</span> <span class="nav-text">AVL树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构与算法"><span class="nav-number">1.3.1.</span> <span class="nav-text">数据结构与算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-3查找树"><span class="nav-number">2.</span> <span class="nav-text">2-3查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">2.1.</span> <span class="nav-text">性质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑树"><span class="nav-number">3.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入操作："><span class="nav-number">3.0.1.</span> <span class="nav-text">插入操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除操作："><span class="nav-number">3.0.2.</span> <span class="nav-text">删除操作：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树-1"><span class="nav-number">3.1.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#左旋转"><span class="nav-number">3.2.</span> <span class="nav-text">左旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#右旋转"><span class="nav-number">3.3.</span> <span class="nav-text">右旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#颜色转换"><span class="nav-number">3.4.</span> <span class="nav-text">颜色转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">3.5.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析-1"><span class="nav-number">3.6.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B树"><span class="nav-number">4.</span> <span class="nav-text">B树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树"><span class="nav-number">4.1.</span> <span class="nav-text">B-树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特征"><span class="nav-number">4.1.1.</span> <span class="nav-text">特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树-1"><span class="nav-number">4.2.</span> <span class="nav-text">B+树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的插入"><span class="nav-number">4.2.1.</span> <span class="nav-text">B+树的插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">4.2.2.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树-2"><span class="nav-number">4.3.</span> <span class="nav-text">B*树</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树Segment-Tree"><span class="nav-number">5.</span> <span class="nav-text">线段树Segment Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与操作-1"><span class="nav-number">5.2.</span> <span class="nav-text">数据结构与操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Trie树"><span class="nav-number">6.</span> <span class="nav-text">Trie树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">6.1.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并查集"><span class="nav-number">7.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树"><span class="nav-number">1.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树"><span class="nav-number">1.2.</span> <span class="nav-text">二叉查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构与操作"><span class="nav-number">1.2.1.</span> <span class="nav-text">数据结构与操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">1.2.2.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL树"><span class="nav-number">1.3.</span> <span class="nav-text">AVL树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构与算法"><span class="nav-number">1.3.1.</span> <span class="nav-text">数据结构与算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#堆"><span class="nav-number">2.</span> <span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作"><span class="nav-number">2.1.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类-1"><span class="nav-number">2.2.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组堆"><span class="nav-number">2.2.1.</span> <span class="nav-text">数组堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-d-叉堆"><span class="nav-number">2.2.2.</span> <span class="nav-text">二(d)叉堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引堆"><span class="nav-number">2.2.3.</span> <span class="nav-text">索引堆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-3查找树"><span class="nav-number">3.</span> <span class="nav-text">2-3查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作-1"><span class="nav-number">3.1.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法操作"><span class="nav-number">3.1.1.</span> <span class="nav-text">算法操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">3.2.</span> <span class="nav-text">性质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑树"><span class="nav-number">4.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">4.1.2.</span> <span class="nav-text">算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法-1"><span class="nav-number">4.2.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入操作"><span class="nav-number">4.2.1.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除操作"><span class="nav-number">4.2.2.</span> <span class="nav-text">删除操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作-2"><span class="nav-number">4.3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#左旋转"><span class="nav-number">4.3.1.</span> <span class="nav-text">左旋转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右旋转"><span class="nav-number">4.3.2.</span> <span class="nav-text">右旋转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色转换"><span class="nav-number">4.3.3.</span> <span class="nav-text">颜色转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入"><span class="nav-number">4.3.4.</span> <span class="nav-text">插入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析-1"><span class="nav-number">4.4.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B树"><span class="nav-number">5.</span> <span class="nav-text">B树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树"><span class="nav-number">5.1.</span> <span class="nav-text">B-树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特征"><span class="nav-number">5.1.1.</span> <span class="nav-text">特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树-1"><span class="nav-number">5.2.</span> <span class="nav-text">B+树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的插入"><span class="nav-number">5.2.1.</span> <span class="nav-text">B+树的插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">5.2.2.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树-2"><span class="nav-number">5.3.</span> <span class="nav-text">B*树</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树Segment-Tree"><span class="nav-number">6.</span> <span class="nav-text">线段树Segment Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-1"><span class="nav-number">6.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与操作-1"><span class="nav-number">6.2.</span> <span class="nav-text">数据结构与操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Trie树"><span class="nav-number">7.</span> <span class="nav-text">Trie树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">7.1.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并查集"><span class="nav-number">8.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1017,7 +1063,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:57</span>
+    <span title="站点阅读时长">36:47</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

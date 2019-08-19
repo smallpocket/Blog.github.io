@@ -57,13 +57,13 @@
   };
 </script>
 
-  <meta name="description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的  数据库键总是一个字符串对象 数据库值可以是 字符串对象 列表对象 哈希对象 集合对象（set） 有序集合对象    简单动态字符串SDSRedis的字符串与传统字符串（以空字符结尾的字符数组，C字符串）不同，Redis自己构建了一种简单动态字符串（SDS）的抽象类型，并用作默认字符串表示。  传统字符串在Redis当中只会作为字符串">
+  <meta name="description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的：  数据库键总是一个字符串对象。 数据库值是一个对象，对象的实现可以是各种数据结构。 字符串对象。 列表对象。 哈希对象。-  集合对象（set）。 intset、hashtable。   有序集合对象。 ziplist、skiplist。      简单动态字符串SDSRedis的字符串与传统字符串（以空字符结尾的字符数组，C字符串">
 <meta name="keywords" content="NoSQL,Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis：数据结构与对象">
 <meta property="og:url" content="http://yoursite.com/2019/03/04/数据库/Redis：数据结构与对象/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的  数据库键总是一个字符串对象 数据库值可以是 字符串对象 列表对象 哈希对象 集合对象（set） 有序集合对象    简单动态字符串SDSRedis的字符串与传统字符串（以空字符结尾的字符数组，C字符串）不同，Redis自己构建了一种简单动态字符串（SDS）的抽象类型，并用作默认字符串表示。  传统字符串在Redis当中只会作为字符串">
+<meta property="og:description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的：  数据库键总是一个字符串对象。 数据库值是一个对象，对象的实现可以是各种数据结构。 字符串对象。 列表对象。 哈希对象。-  集合对象（set）。 intset、hashtable。   有序集合对象。 ziplist、skiplist。      简单动态字符串SDSRedis的字符串与传统字符串（以空字符结尾的字符数组，C字符串">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1551695057543.png">
 <meta property="og:image" content="http://yoursite.com/assets/1551695070215.png">
@@ -77,10 +77,10 @@
 <meta property="og:image" content="http://yoursite.com/assets/1552033129986.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552033987495.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552034120684.png">
-<meta property="og:updated_time" content="2019-08-15T09:14:38.700Z">
+<meta property="og:updated_time" content="2019-08-19T03:12:37.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis：数据结构与对象">
-<meta name="twitter:description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的  数据库键总是一个字符串对象 数据库值可以是 字符串对象 列表对象 哈希对象 集合对象（set） 有序集合对象    简单动态字符串SDSRedis的字符串与传统字符串（以空字符结尾的字符数组，C字符串）不同，Redis自己构建了一种简单动态字符串（SDS）的抽象类型，并用作默认字符串表示。  传统字符串在Redis当中只会作为字符串">
+<meta name="twitter:description" content="数据结构与对象Redis数据库里面的每个键值对都是由对象组成的：  数据库键总是一个字符串对象。 数据库值是一个对象，对象的实现可以是各种数据结构。 字符串对象。 列表对象。 哈希对象。-  集合对象（set）。 intset、hashtable。   有序集合对象。 ziplist、skiplist。      简单动态字符串SDSRedis的字符串与传统字符串（以空字符结尾的字符数组，C字符串">
 <meta name="twitter:image" content="http://yoursite.com/assets/1551695057543.png">
   <link rel="canonical" href="http://yoursite.com/2019/03/04/数据库/Redis：数据结构与对象/">
 
@@ -337,7 +337,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-15 17:14:38" itemprop="dateModified" datetime="2019-08-15T17:14:38+08:00">2019-08-15</time>
+                <time title="修改时间：2019-08-19 11:12:37" itemprop="dateModified" datetime="2019-08-19T11:12:37+08:00">2019-08-19</time>
               </span>
             
           
@@ -365,7 +365,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">7.7k</span>
+              <span title="本文字数">7.8k</span>
             </span>
           
             <span class="post-meta-item">
@@ -388,76 +388,82 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="数据结构与对象"><a href="#数据结构与对象" class="headerlink" title="数据结构与对象"></a>数据结构与对象</h1><p>Redis数据库里面的每个键值对都是由对象组成的</p>
+        <h1 id="数据结构与对象"><a href="#数据结构与对象" class="headerlink" title="数据结构与对象"></a>数据结构与对象</h1><p>Redis数据库里面的每个键值对都是由对象组成的：</p>
 <ul>
-<li>数据库键总是一个字符串对象</li>
-<li>数据库值可以是<ul>
-<li>字符串对象</li>
-<li>列表对象</li>
-<li>哈希对象</li>
-<li>集合对象（set）</li>
-<li>有序集合对象</li>
+<li>数据库键总是一个字符串对象。</li>
+<li>数据库值是一个对象，对象的实现可以是各种数据结构。<ul>
+<li>字符串对象。</li>
+<li>列表对象。</li>
+<li>哈希对象。<br>- </li>
+<li>集合对象（set）。<ul>
+<li>intset、hashtable。</li>
+</ul>
+</li>
+<li>有序集合对象。<ul>
+<li>ziplist、skiplist。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <h1 id="简单动态字符串SDS"><a href="#简单动态字符串SDS" class="headerlink" title="简单动态字符串SDS"></a>简单动态字符串SDS</h1><p>Redis的字符串与传统字符串（以空字符结尾的字符数组，C字符串）不同，Redis自己构建了一种简单动态字符串（SDS）的抽象类型，并用作默认字符串表示。</p>
 <ul>
 <li>传统字符串在Redis当中只会作为字符串字面量用在一些无须对字符串进行修改的地方。</li>
-<li>当需要一个可以被修改的字符串值时，就会使用SDS来表示字符串值</li>
+<li>当需要一个可以被修改的字符串值时，就会使用SDS来表示字符串值。</li>
 </ul>
-<p>SDS使用</p>
+<p>SDS使用：</p>
 <ul>
-<li>保存数据库的字符串值</li>
-<li>用作缓冲区<ul>
-<li>AOF模块中的AOF缓冲区</li>
-<li>客户端状态中的输入缓冲区</li>
+<li>保存数据库的可变字符串值。</li>
+<li>用作缓冲区：<ul>
+<li>AOF模块中的AOF缓冲区。</li>
+<li>客户端状态中的输入缓冲区。</li>
 </ul>
 </li>
 </ul>
-<h2 id="SDS定义"><a href="#SDS定义" class="headerlink" title="SDS定义"></a>SDS定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span>&#123;</span></span><br><span class="line"><span class="comment">//记录buf数组已经使用的字节的数量</span></span><br><span class="line">    <span class="keyword">int</span> len;</span><br><span class="line">    <span class="comment">//记录未被使用字节的数量</span></span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">free</span>;</span><br><span class="line">    <span class="comment">//保存字符串</span></span><br><span class="line">    <span class="comment">//最后一个字节保存空字符'\0'，不记在len当中</span></span><br><span class="line">    <span class="keyword">char</span> buf[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SDS定义"><a href="#SDS定义" class="headerlink" title="SDS定义"></a>SDS定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sdshdr</span>&#123;</span></span><br><span class="line">	<span class="comment">//记录buf数组已经使用的字节的数量</span></span><br><span class="line">    <span class="keyword">int</span> len;</span><br><span class="line">    <span class="comment">//记录未被使用字节的数量</span></span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">free</span>;</span><br><span class="line">    <span class="comment">//保存字符串</span></span><br><span class="line">    <span class="comment">//最后一个字节保存空字符'\0'，不记在len当中</span></span><br><span class="line">    <span class="keyword">char</span> buf[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="与C字符串的区别"><a href="#与C字符串的区别" class="headerlink" title="与C字符串的区别"></a>与C字符串的区别</h2><p>C字符串：以长度N+1的字符数组来表示长度为N的字符串，并且字符数组的最后一个元素总是空元素’\0’</p>
-<p>C字符串的字符串表示方法不能满足Redis对字符串在安全性、效率以及功能方面的要求</p>
+<p>C字符串的字符串表示方法不能满足Redis对字符串在安全性、效率以及功能方面的要求：</p>
 <ul>
 <li>C字符串需要常数复杂度获取字符串长度。<ul>
-<li>它不记录自身长度，程序必须遍历整个字符串才能获取长度</li>
+<li>它不记录自身长度，程序必须遍历整个字符串才能获取长度。</li>
 </ul>
 </li>
 <li>C字符串容易造成缓冲区溢出。<ul>
-<li>C语言字符串拼接函数strcat，假定用户在执行函数时分字符串分配了足够多的内存，如果内存不够，则会缓冲区溢出<ul>
-<li>这是因为字符串本身不记录其本身的内存信息</li>
+<li>C语言字符串拼接函数strcat，假定用户在执行函数时分字符串分配了足够多的内存，如果内存不够，则会缓冲区溢出。<ul>
+<li>这是因为字符串本身不记录其本身的内存信息。</li>
 </ul>
 </li>
-<li>SDS有free与len，可以知道自身剩余内存大小</li>
+<li>SDS有free与len，可以知道自身剩余内存大小。</li>
 </ul>
 </li>
-<li>减少修改字符串时带来的内存重分配次数<ul>
-<li>C字符串每次修改时，都要对保存字符串的数组进行一次内存重分配操作<ul>
+<li>减少修改字符串时带来的内存重分配次数：<ul>
+<li>C字符串每次修改时，都要对保存字符串的数组进行一次内存重分配操作。<ul>
 <li>如果扩展字符串，则需要先分配内存；如果截断，则需要释放不适用的空间，否则会内存泄露。</li>
-<li>也因此需要进行系统调用，较为费时</li>
+<li>也因此需要进行系统调用，较为费时。</li>
 </ul>
 </li>
-<li>SDS空间预分配优化策略<ul>
-<li>优化字符串增长操作，当需要对SDS进行空间扩展时，程序不仅会为SDS分配必要空间，还会为SDS分配额外的未使用空间<ul>
-<li>如果SDS修改后，len&lt;1MB，则程序分配和len同样大小的未使用空间</li>
-<li>如果len&gt;=1MB，则分配1MB的未使用空间</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>SDS惰性空间释放优化策略<ul>
-<li>优化缩短操作，程序并不立即使用内存重分配来回收多出来的字节，而是使用free记录下来，等待将来使用</li>
-<li>同时提供了相应API，在需要时刻真正释放空间</li>
+<li>SDS空间预分配优化策略：<ul>
+<li>优化字符串增长操作，当需要对SDS进行空间扩展时，程序不仅会为SDS分配必要空间，还会为SDS分配额外的未使用空间。<ul>
+<li>如果SDS修改后，len&lt;1MB，则程序分配和len同样大小的未使用空间。</li>
+<li>如果len&gt;=1MB，则分配1MB的未使用空间。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>二进制安全<ul>
-<li>C字符串的字符必须包含某种编码，并且不能有空字符。因此只能保存文本，不能保存图片等二进制数据</li>
-<li>SDS的API都以处理二进制的方式来处理SDS里的数据</li>
+<li>SDS惰性空间释放优化策略：<ul>
+<li>优化缩短操作，程序并不立即使用内存重分配来回收多出来的字节，而是使用free记录下来，等待将来使用。</li>
+<li>同时提供了相应API，在需要时刻真正释放空间。</li>
 </ul>
 </li>
-<li>兼容<strong>部分</strong>C字符串函数</li>
+</ul>
+</li>
+<li>二进制安全：<ul>
+<li>C字符串的字符必须包含某种编码，并且不能有空字符。因此只能保存文本，不能保存图片等二进制数据。</li>
+<li>SDS的API都以处理二进制的方式来处理SDS里的数据。</li>
+</ul>
+</li>
+<li>兼容<strong>部分</strong>C字符串函数。</li>
 </ul>
 <h2 id="SDS的主要操作API"><a href="#SDS的主要操作API" class="headerlink" title="SDS的主要操作API"></a>SDS的主要操作API</h2><p><img src="/assets/1551695057543.png" alt="1551695057543"></p>
 <p><img src="/assets/1551695070215.png" alt="1551695070215"></p>
@@ -560,7 +566,7 @@
 
 <h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p><img src="/assets/1552029291744.png" alt="1552029291744"></p>
 <h2 id="API-2"><a href="#API-2" class="headerlink" title="API"></a>API</h2><p><img src="/assets/1552029490765.png" alt="1552029490765"></p>
-<h1 id="整数集合"><a href="#整数集合" class="headerlink" title="整数集合"></a>整数集合</h1><h2 id="应用-3"><a href="#应用-3" class="headerlink" title="应用"></a>应用</h2><ul>
+<h1 id="整数集合intset"><a href="#整数集合intset" class="headerlink" title="整数集合intset"></a>整数集合intset</h1><h2 id="应用-3"><a href="#应用-3" class="headerlink" title="应用"></a>应用</h2><ul>
 <li>集合键的底层实现之一。当一个集合只包含整数值元素，并且这个结合数量不多。</li>
 </ul>
 <h2 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">intset</span>&#123;</span></span><br><span class="line">	<span class="comment">//编码方式</span></span><br><span class="line">    <span class="keyword">uint32_t</span> encoding;</span><br><span class="line">    <span class="comment">//集合包含的元素数量</span></span><br><span class="line">    <span class="keyword">uint32_t</span> length;</span><br><span class="line">    <span class="comment">//保存元素的数组</span></span><br><span class="line">    <span class="comment">//从小到大有序排列，并不包含重复项</span></span><br><span class="line">    <span class="comment">//真正类型取决于encoding的值</span></span><br><span class="line">    <span class="keyword">int8_t</span> contents[];</span><br><span class="line">&#125;intset;</span><br></pre></td></tr></table></figure>
@@ -803,7 +809,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">201</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -984,7 +990,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">1.</span> <span class="nav-text">数据结构与对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单动态字符串SDS"><span class="nav-number">2.</span> <span class="nav-text">简单动态字符串SDS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SDS定义"><span class="nav-number">2.1.</span> <span class="nav-text">SDS定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与C字符串的区别"><span class="nav-number">2.2.</span> <span class="nav-text">与C字符串的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDS的主要操作API"><span class="nav-number">2.3.</span> <span class="nav-text">SDS的主要操作API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表"><span class="nav-number">3.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">3.3.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字典"><span class="nav-number">4.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">4.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-1"><span class="nav-number">4.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希算法"><span class="nav-number">4.3.</span> <span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决键冲突"><span class="nav-number">4.4.</span> <span class="nav-text">解决键冲突</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rehash"><span class="nav-number">4.5.</span> <span class="nav-text">rehash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐进式rehash"><span class="nav-number">4.6.</span> <span class="nav-text">渐进式rehash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-1"><span class="nav-number">4.7.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跳跃表"><span class="nav-number">5.</span> <span class="nav-text">跳跃表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-2"><span class="nav-number">5.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-2"><span class="nav-number">5.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">5.3.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-2"><span class="nav-number">5.4.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整数集合"><span class="nav-number">6.</span> <span class="nav-text">整数集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-3"><span class="nav-number">6.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-3"><span class="nav-number">6.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级"><span class="nav-number">6.3.</span> <span class="nav-text">升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-3"><span class="nav-number">6.4.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩列表"><span class="nav-number">7.</span> <span class="nav-text">压缩列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-4"><span class="nav-number">7.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-4"><span class="nav-number">7.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连锁更新"><span class="nav-number">7.3.</span> <span class="nav-text">连锁更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-4"><span class="nav-number">7.4.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象"><span class="nav-number">8.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的类型与编码"><span class="nav-number">8.1.</span> <span class="nav-text">对象的类型与编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串对象"><span class="nav-number">8.2.</span> <span class="nav-text">字符串对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表对象"><span class="nav-number">8.3.</span> <span class="nav-text">列表对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希对象"><span class="nav-number">8.4.</span> <span class="nav-text">哈希对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合对象"><span class="nav-number">8.5.</span> <span class="nav-text">集合对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序集合对象"><span class="nav-number">8.6.</span> <span class="nav-text">有序集合对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型检查与命令多态"><span class="nav-number">8.7.</span> <span class="nav-text">类型检查与命令多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存回收"><span class="nav-number">8.8.</span> <span class="nav-text">内存回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象共享"><span class="nav-number">8.9.</span> <span class="nav-text">对象共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的空转时长"><span class="nav-number">8.10.</span> <span class="nav-text">对象的空转时长</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">1.</span> <span class="nav-text">数据结构与对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单动态字符串SDS"><span class="nav-number">2.</span> <span class="nav-text">简单动态字符串SDS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SDS定义"><span class="nav-number">2.1.</span> <span class="nav-text">SDS定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与C字符串的区别"><span class="nav-number">2.2.</span> <span class="nav-text">与C字符串的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDS的主要操作API"><span class="nav-number">2.3.</span> <span class="nav-text">SDS的主要操作API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链表"><span class="nav-number">3.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">3.3.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字典"><span class="nav-number">4.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">4.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-1"><span class="nav-number">4.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希算法"><span class="nav-number">4.3.</span> <span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决键冲突"><span class="nav-number">4.4.</span> <span class="nav-text">解决键冲突</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rehash"><span class="nav-number">4.5.</span> <span class="nav-text">rehash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐进式rehash"><span class="nav-number">4.6.</span> <span class="nav-text">渐进式rehash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-1"><span class="nav-number">4.7.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跳跃表"><span class="nav-number">5.</span> <span class="nav-text">跳跃表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-2"><span class="nav-number">5.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-2"><span class="nav-number">5.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">5.3.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-2"><span class="nav-number">5.4.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整数集合intset"><span class="nav-number">6.</span> <span class="nav-text">整数集合intset</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-3"><span class="nav-number">6.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-3"><span class="nav-number">6.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级"><span class="nav-number">6.3.</span> <span class="nav-text">升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-3"><span class="nav-number">6.4.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩列表"><span class="nav-number">7.</span> <span class="nav-text">压缩列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-4"><span class="nav-number">7.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现-4"><span class="nav-number">7.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连锁更新"><span class="nav-number">7.3.</span> <span class="nav-text">连锁更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-4"><span class="nav-number">7.4.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象"><span class="nav-number">8.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的类型与编码"><span class="nav-number">8.1.</span> <span class="nav-text">对象的类型与编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串对象"><span class="nav-number">8.2.</span> <span class="nav-text">字符串对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表对象"><span class="nav-number">8.3.</span> <span class="nav-text">列表对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希对象"><span class="nav-number">8.4.</span> <span class="nav-text">哈希对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合对象"><span class="nav-number">8.5.</span> <span class="nav-text">集合对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序集合对象"><span class="nav-number">8.6.</span> <span class="nav-text">有序集合对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型检查与命令多态"><span class="nav-number">8.7.</span> <span class="nav-text">类型检查与命令多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存回收"><span class="nav-number">8.8.</span> <span class="nav-text">内存回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象共享"><span class="nav-number">8.9.</span> <span class="nav-text">对象共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的空转时长"><span class="nav-number">8.10.</span> <span class="nav-text">对象的空转时长</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1020,7 +1026,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:57</span>
+    <span title="站点阅读时长">36:47</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

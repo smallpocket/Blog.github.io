@@ -57,19 +57,20 @@
   };
 </script>
 
-  <meta name="description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。  正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。   分布式锁的一些特点当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁">
+  <meta name="description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。 数据一致性：不同的机器对共享的数据进行访问，会导致数据的不一致性。而分布式锁可以实现数据的最终一致性。 该模型与并发模型一致，但由于在不同的机器上，因此加锁的难度较大。 正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式：分布式锁">
 <meta property="og:url" content="http://yoursite.com/2019/04/15/系统架构/分布式：分布式锁/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。  正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。   分布式锁的一些特点当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁">
+<meta property="og:description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。 数据一致性：不同的机器对共享的数据进行访问，会导致数据的不一致性。而分布式锁可以实现数据的最终一致性。 该模型与并发模型一致，但由于在不同的机器上，因此加锁的难度较大。 正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/assets/1566278710599.png">
 <meta property="og:image" content="http://yoursite.com/assets/16653450d45a2a96">
-<meta property="og:updated_time" content="2019-08-20T05:15:05.300Z">
+<meta property="og:updated_time" content="2019-08-20T05:26:31.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式：分布式锁">
-<meta name="twitter:description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。  正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。   分布式锁的一些特点当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁">
-<meta name="twitter:image" content="http://yoursite.com/assets/16653450d45a2a96">
+<meta name="twitter:description" content="分布式锁为什么需要 效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。 数据一致性：不同的机器对共享的数据进行访问，会导致数据的不一致性。而分布式锁可以实现数据的最终一致性。 该模型与并发模型一致，但由于在不同的机器上，因此加锁的难度较大。 正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个">
+<meta name="twitter:image" content="http://yoursite.com/assets/1566278710599.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/15/系统架构/分布式：分布式锁/">
 
 
@@ -325,7 +326,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-20 13:15:05" itemprop="dateModified" datetime="2019-08-20T13:15:05+08:00">2019-08-20</time>
+                <time title="修改时间：2019-08-20 13:26:31" itemprop="dateModified" datetime="2019-08-20T13:26:31+08:00">2019-08-20</time>
               </span>
             
           
@@ -338,7 +339,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">6k</span>
+              <span title="本文字数">6.1k</span>
             </span>
           
             <span class="post-meta-item">
@@ -362,9 +363,11 @@
 
       
         <h1 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h1><h2 id="为什么需要"><a href="#为什么需要" class="headerlink" title="为什么需要"></a>为什么需要</h2><ul>
-<li><p>效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。</p>
-</li>
-<li><p>正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。</p>
+<li>效率：使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。比如用户付了钱之后有可能不同节点会发出多封短信。</li>
+<li>数据一致性：不同的机器对共享的数据进行访问，会导致数据的不一致性。而分布式锁可以实现数据的最终一致性。<ul>
+<li>该模型与并发模型一致，但由于在不同的机器上，因此加锁的难度较大。</li>
+<li>正确性：加分布式锁同样可以避免破坏正确性的发生，如果两个节点在同一条数据上面操作，比如多个节点机器对同一个订单操作不同的流程有可能会导致该笔订单最后状态出现错误，造成损失。</li>
+</ul>
 </li>
 </ul>
 <h2 id="分布式锁的一些特点"><a href="#分布式锁的一些特点" class="headerlink" title="分布式锁的一些特点"></a>分布式锁的一些特点</h2><p>当我们确定了在不同节点上需要分布式锁，那么我们需要了解分布式锁到底应该有哪些特点:</p>
@@ -412,7 +415,10 @@
 <li>另一种分布式事务在存储引擎与插件间，或者存在于存储引擎与存储引擎间，称为内部XA事务。</li>
 </ul>
 <p>常见的为binlog与InnoDB存储引擎间。</p>
-<h1 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h1><h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h1 id="分布式锁的安全问题"><a href="#分布式锁的安全问题" class="headerlink" title="分布式锁的安全问题"></a>分布式锁的安全问题</h1><p>上面我们介绍过红锁，但是Martin Kleppmann认为其依然不安全。有关于Martin反驳的几点，我认为其实不仅仅局限于RedLock,前面说的算法基本都有这个问题，下面我们来讨论一下这些问题:</p>
+<h1 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h1><p>流程图：</p>
+<p><img src="/assets/1566278710599.png" alt="1566278710599"></p>
+<p>该锁是一个临时节点。</p>
+<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h1 id="分布式锁的安全问题"><a href="#分布式锁的安全问题" class="headerlink" title="分布式锁的安全问题"></a>分布式锁的安全问题</h1><p>上面我们介绍过红锁，但是Martin Kleppmann认为其依然不安全。有关于Martin反驳的几点，我认为其实不仅仅局限于RedLock,前面说的算法基本都有这个问题，下面我们来讨论一下这些问题：</p>
 <ul>
 <li><p>长时间的GC pause:熟悉Java的同学肯定对GC不陌生，在GC的时候会发生STW(stop-the-world),例如CMS垃圾回收器，他会有两个阶段进行STW防止引用继续进行变化。那么有可能会出现下面图(引用至Martin反驳Redlock的文章)中这个情况： </p>
 <p><img src="/assets/16653450d45a2a96" alt="img"></p>
@@ -733,7 +739,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:01</span>
+    <span title="站点阅读时长">37:02</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -67,7 +67,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1621e4da347ed640">
 <meta property="og:image" content="http://yoursite.com/assets/1621e4da3492d633">
-<meta property="og:updated_time" content="2019-08-17T09:58:18.735Z">
+<meta property="og:updated_time" content="2019-08-19T11:44:57.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring：入门">
 <meta name="twitter:description" content="Spring介绍Spring诞生：  创建Spring的目的就是用来替代更加重量级的的企业级Java技术 简化Java的开发 基于POJO轻量级和最小侵入式开发 通过依赖注入和面向接口实现松耦合 基于切面和惯例进行声明式编程 通过切面和模板*减少样板式代码 *    侵入式概念 侵入式框架  对于EJB、Struts2等一些传统的框架， 通常是要实现特定的接口，继承特定的类才能增强功能  改变了j">
@@ -327,7 +327,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-17 17:58:18" itemprop="dateModified" datetime="2019-08-17T17:58:18+08:00">2019-08-17</time>
+                <time title="修改时间：2019-08-19 19:44:57" itemprop="dateModified" datetime="2019-08-19T19:44:57+08:00">2019-08-19</time>
               </span>
             
           
@@ -355,7 +355,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">7.3k</span>
+              <span title="本文字数">7.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -365,7 +365,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">13 分钟</span>
+              <span title="阅读时长">14 分钟</span>
             </span>
           
 
@@ -426,17 +426,48 @@
 <li>Struts2的拦截器也是面向切面编程【在执行Action业务方法之前执行拦截器】</li>
 </ul>
 <p>Spring也为我们<strong>提供更好地方式来实现面向切面编程</strong>！</p>
-<h2 id="Spring概述"><a href="#Spring概述" class="headerlink" title="Spring概述"></a>Spring概述</h2><p>Spring 是个java企业级应用的开源开发框架。Spring主要用来开发Java应用，但是有些扩展是针对构建J2EE平台的web应用。Spring 框架目标是简化Java企业级应用开发，并通过POJO为基础的编程模型促进良好的编程习惯。</p>
+<h2 id="Spring概述"><a href="#Spring概述" class="headerlink" title="Spring概述"></a>Spring概述</h2><p>Spring框架目标是简化Java企业级应用开发，并通过POJO为基础的编程模型促进良好的编程习惯。</p>
+<p>Spring是分层的Java SE/EE应用一站式的轻量级开源框架，以IOC和AOP为内核，提供了展现层Spring MVC、持久层Spring JDBC以及业务层事务管理等一站式的企业级应用技术。</p>
 <h3 id="spring优点"><a href="#spring优点" class="headerlink" title="spring优点"></a>spring优点</h3><ul>
-<li><strong>轻量：</strong>Spring 是轻量的，基本的版本大约2MB。</li>
-<li><strong>控制反转：</strong>Spring通过控制反转实现了松散耦合，对象们给出它们的依赖，而不是创建或查找依赖的对象们。</li>
-<li><strong>面向切面的编程(AOP)：</strong>Spring支持面向切面的编程，并且把应用业务逻辑和系统服务分开。</li>
-<li><strong>容器：</strong>Spring 包含并管理应用中对象的生命周期和配置。</li>
-<li><strong>MVC框架</strong>：Spring的WEB框架是个精心设计的框架，是Web框架的一个很好的替代品。</li>
-<li><strong>事务管理：</strong>Spring 提供一个持续的事务管理接口，可以扩展到上至本地事务下至全局事务（JTA）。</li>
-<li><strong>异常处理：</strong>Spring 提供方便的API把具体技术相关的异常（比如由JDBC，Hibernate or JDO抛出的）转化为一致的unchecked 异常。</li>
+<li>轻量：Spring 是轻量的，基本的版本大约2MB。</li>
+<li>方便解耦，简化开发。通过IOC容器，用户可以将对象间的依赖关系交由Spring进行控制，避免硬编码造成的过度耦合。<ul>
+<li>Ioc使得用户不必再为单例模式类、属性文件解析等底层需求编写代码，可以更专注于上层应用。</li>
 </ul>
-<h3 id="Spring模块组成"><a href="#Spring模块组成" class="headerlink" title="Spring模块组成"></a>Spring模块组成</h3><ul>
+</li>
+<li>面向切面的编程(AOP)：Spring支持面向切面的编程，并且把应用业务逻辑和系统服务分开。</li>
+<li>容器：Spring 包含并管理应用中对象的生命周期和配置。</li>
+<li>MVC框架：Spring的WEB框架是个精心设计的框架，是Web框架的一个很好的替代品。</li>
+<li>声明式事务的支持：Spring支持用户以声明的方式进行事务，Spring支持事务管理，提供一个持续的事务管理接口，可以扩展到上至本地事务下至全局事务（JTA）。</li>
+<li>异常处理：Spring 提供方便的API把具体技术相关的异常（比如由JDBC，Hibernate or JDO抛出的）转化为一致的unchecked 异常。</li>
+</ul>
+<h3 id="Spring模块组成"><a href="#Spring模块组成" class="headerlink" title="Spring模块组成"></a>Spring模块组成</h3><p><img src="/assets/1621e4da3492d633" alt="这里写图片描述"></p>
+<p>Spring可以分为6大模块：</p>
+<ul>
+<li><p>Spring Core：Spring的核心功能： IOC容器, 解决对象创建及依赖关系。</p>
+</li>
+<li><p>Spring Web：Spring对web模块的支持。 </p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以与struts整合,让struts的action创建交给spring</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring mvc模式</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Spring DAO：Spring 对jdbc操作的支持  【JdbcTemplate模板工具类】</p>
+</li>
+<li><p>Spring ORM：spring对orm的支持： </p>
+<ul>
+<li>既可以与hibernate整合，【session】。</li>
+<li>也可以使用spring的对hibernate操作的封装。</li>
+</ul>
+</li>
+<li><p>Spring AOP：切面编程。</p>
+</li>
+<li><p>SpringEE：spring 对javaEE其他模块的支持。</p>
+</li>
+</ul>
+<p>并且</p>
+<ul>
 <li>核心容器<ul>
 <li>Core module</li>
 <li>Bean module</li>
@@ -484,6 +515,9 @@
 <li>用于远程使用。</li>
 <li>作为企业级 Java Bean，它可以包装现有的 POJO（Plain Old Java Objects）。</li>
 </ul>
+<h2 id="模块概述"><a href="#模块概述" class="headerlink" title="模块概述"></a>模块概述</h2><h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>Spring核心模块实现了IOC的功能，它将类与类之间的依赖从代码中脱离出来，用配置的方式进行依赖关系描述，由IOC容器负责依赖类间的创建、拼接、管理、获取等工作。</p>
+<p>BeanFactory接口是Spring框架的核心接口，实现了容器的许多核心功能。</p>
+<p>Context模块构建于核心模块上，扩展了BeanFactory的功能，添加了il8n国际化、Bean生命周期控制、框架事件体系、资源架子啊透明化等多项功能。并提供许多企业级服务的支持，如邮件服务、任务调度、JNDI获取、EJB集成、远程访问等，ApplicationContext是Context模块的核心接口。</p>
 <h1 id="引出Spring"><a href="#引出Spring" class="headerlink" title="引出Spring"></a>引出Spring</h1><p>我们试着回顾一下没学Spring的时候，是怎么开发Web项目的</p>
 <ul>
 <li><ol>
@@ -577,33 +611,6 @@
 <li>统一配置，便于修改。</li>
 </ol>
 <hr>
-<h2 id="Spring模块"><a href="#Spring模块" class="headerlink" title="Spring模块"></a>Spring模块</h2><p><strong>Spring可以分为6大模块：</strong></p>
-<ul>
-<li><p>Spring Core  spring的核心功能： IOC容器, 解决对象创建及依赖关系</p>
-</li>
-<li><p>Spring Web  Spring对web模块的支持。 </p>
-<ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以与struts整合,让struts的action创建交给spring</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring mvc模式</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Spring DAO  Spring 对jdbc操作的支持  【JdbcTemplate模板工具类】</p>
-</li>
-<li><p>Spring ORM  spring对orm的支持： </p>
-<ul>
-<li>既可以与hibernate整合，【session】</li>
-<li>也可以使用spring的对hibernate操作的封装</li>
-</ul>
-</li>
-<li><p>Spring AOP  切面编程</p>
-</li>
-<li><p>SpringEE   spring 对javaEE其他模块的支持</p>
-</li>
-</ul>
-<p><img src="/assets/1621e4da3492d633" alt="这里写图片描述"></p>
-<p>上面文主要引出了为啥我们需要使用Spring框架，以及大致了解了Spring是分为六大模块的….<strong>下面主要讲解Spring的core模块！</strong></p>
 <h1 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h1><h2 id="事务的七种传播属性"><a href="#事务的七种传播属性" class="headerlink" title="事务的七种传播属性"></a>事务的七种传播属性</h2><p>所谓事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。Spring支持以下7种事务传播行为。 </p>
 <p>传播行为</p>
 <p>含义</p>
@@ -710,7 +717,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -868,9 +875,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -891,7 +896,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring介绍"><span class="nav-number">1.</span> <span class="nav-text">Spring介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring概述"><span class="nav-number">1.1.</span> <span class="nav-text">Spring概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring优点"><span class="nav-number">1.1.1.</span> <span class="nav-text">spring优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring模块组成"><span class="nav-number">1.1.2.</span> <span class="nav-text">Spring模块组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Spring-配置文件？"><span class="nav-number">1.1.3.</span> <span class="nav-text">什么是 Spring 配置文件？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-应用程序有哪些不同组件？"><span class="nav-number">1.1.4.</span> <span class="nav-text">Spring 应用程序有哪些不同组件？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Spring-有哪些方式？"><span class="nav-number">1.1.5.</span> <span class="nav-text">使用 Spring 有哪些方式？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引出Spring"><span class="nav-number">2.</span> <span class="nav-text">引出Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC控制反转"><span class="nav-number">2.1.</span> <span class="nav-text">IOC控制反转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring模块"><span class="nav-number">2.2.</span> <span class="nav-text">Spring模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring事务"><span class="nav-number">3.</span> <span class="nav-text">Spring事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的七种传播属性"><span class="nav-number">3.1.</span> <span class="nav-text">事务的七种传播属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring介绍"><span class="nav-number">1.</span> <span class="nav-text">Spring介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring概述"><span class="nav-number">1.1.</span> <span class="nav-text">Spring概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring优点"><span class="nav-number">1.1.1.</span> <span class="nav-text">spring优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring模块组成"><span class="nav-number">1.1.2.</span> <span class="nav-text">Spring模块组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Spring-配置文件？"><span class="nav-number">1.1.3.</span> <span class="nav-text">什么是 Spring 配置文件？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-应用程序有哪些不同组件？"><span class="nav-number">1.1.4.</span> <span class="nav-text">Spring 应用程序有哪些不同组件？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Spring-有哪些方式？"><span class="nav-number">1.1.5.</span> <span class="nav-text">使用 Spring 有哪些方式？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块概述"><span class="nav-number">1.2.</span> <span class="nav-text">模块概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">1.2.1.</span> <span class="nav-text">IOC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引出Spring"><span class="nav-number">2.</span> <span class="nav-text">引出Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC控制反转"><span class="nav-number">2.1.</span> <span class="nav-text">IOC控制反转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring事务"><span class="nav-number">3.</span> <span class="nav-text">Spring事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的七种传播属性"><span class="nav-number">3.1.</span> <span class="nav-text">事务的七种传播属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -927,7 +932,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:47</span>
+    <span title="站点阅读时长">37:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

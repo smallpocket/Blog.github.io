@@ -68,15 +68,14 @@
 <meta property="og:image" content="http://yoursite.com/assets/1566180926318.png">
 <meta property="og:image" content="http://yoursite.com/assets/c0874e0a-dba3-467e-9c86-dd9313e0843e.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/83d466bd-946b-4430-854a-cf7b0696d4c8.jpg">
-<meta property="og:image" content="http://yoursite.com/assets/379444c9-f1d1-45cd-b7aa-b0c18427d388.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/a3e4dc62-0da5-4d22-94f2-140078281812.jpg">
-<meta property="og:image" content="http://yoursite.com/assets/20121123111.jpg">
+<meta property="og:image" content="http://yoursite.com/assets/379444c9-f1d1-45cd-b7aa-b0c18427d388.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/a0ce43b7-afa8-4397-a96e-5c12a070f2ae.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/2012112319.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/6a88a398-c494-41f5-bb62-9f7fb811df7c.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/20121123110.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/85ffc9034b489a2fcc51ce7e332d03ba.png">
-<meta property="og:updated_time" content="2019-08-19T02:30:08.940Z">
+<meta property="og:updated_time" content="2019-08-19T05:08:31.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="系统设计：UML建模">
 <meta name="twitter:description" content="UML静态建模静态建模定义了系统中重要对象的属性和操作以及这些对象间的相互关系。主要包括类图、对象图、包图、构件图、部署图。 UML基础类的表示： 第一行：类的名字，如果是接口&amp;lt;接口名&amp;gt;，如果是抽象方法则是斜体的 第二行：类的属性：  [开放程度][属性名称]:[类型] +：public，-：private，#：protected，~：包权限，下划线：static  第三行：类的方法。">
@@ -336,7 +335,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-19 10:30:08" itemprop="dateModified" datetime="2019-08-19T10:30:08+08:00">2019-08-19</time>
+                <time title="修改时间：2019-08-19 13:08:31" itemprop="dateModified" datetime="2019-08-19T13:08:31+08:00">2019-08-19</time>
               </span>
             
           
@@ -364,7 +363,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">3.3k</span>
+              <span title="本文字数">2.9k</span>
             </span>
           
             <span class="post-meta-item">
@@ -374,7 +373,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">6 分钟</span>
+              <span title="阅读时长">5 分钟</span>
             </span>
           
 
@@ -400,52 +399,50 @@
 <li>[开放程度][方法名称](参数):返回类型</li>
 <li>斜体：抽象方法</li>
 </ul>
-<h1 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h1><p><img src="/assets/1566180926318.png" alt="1566180926318"></p>
+<h1 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h1><p>只有知道对方信息，箭头才能指向对方。</p>
+<p><img src="/assets/1566180926318.png" alt="1566180926318"></p>
 <h3 id="泛化关系"><a href="#泛化关系" class="headerlink" title="泛化关系"></a>泛化关系</h3><p><strong><em>抽象语义</em></strong>：</p>
-<p>用来描述继承关系，在 Java 中使用 extends 关键字。</p>
+<p>用来描述继承关系，在Java中使用extends关键字。</p>
 <p><img src="/assets/c0874e0a-dba3-467e-9c86-dd9313e0843e.jpg" alt="img"></p>
 <p><strong><em>代码语义</em></strong>：</p>
 <ul>
 <li>继承extends关系。</li>
 </ul>
 <h3 id="实现关系"><a href="#实现关系" class="headerlink" title="实现关系"></a>实现关系</h3><p><strong><em>抽象语义</em></strong>：</p>
-<p>用来实现一个接口，在 Java 中使用 implements 关键字。或者可以说是接口的一个实现</p>
+<p>用来实现一个接口，在 Java 中使用implements关键字。或者可以说是接口的一个实现</p>
 <p><img src="/assets/83d466bd-946b-4430-854a-cf7b0696d4c8.jpg" alt="img"></p>
 <p><strong><em>代码语义</em></strong>：</p>
+<ul>
+<li>implements</li>
+</ul>
 <h3 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h3><p><strong><em>抽象语义</em></strong>：</p>
+<p>表示不同类对象之间有关联，这是一种静态关系，与运行过程的状态无关，在最开始就可以确定。因此也可以用1对1、多对1、多对多这种关联关系来表示。比如学生和学校就是一种关联关系，一个学校可以有很多学生，但是一个学生只属于一个学校，因此这是一种多对一的关系，在运行开始之前就可以确定。</p>
+<p>双向关联有两个箭头或者没有箭头。而单向关联有一个箭头，表示关联的方向</p>
+<p><img src="/assets/a3e4dc62-0da5-4d22-94f2-140078281812.jpg" alt="img"></p>
 <p><strong><em>代码语义</em></strong>：</p>
+<p>关联是实打实的关系，因此是实线，并且其作为一个实例属性存在。</p>
+<p>它们存在业务的联系，用来表示无法用聚合和组合表示的关系,因此不是组合或者聚合。</p>
+<ul>
+<li>一个类当中，有另外一个类作为属性。用来表示无法用聚合和组合表示的关系。如学生与老师的关系</li>
+<li>关联是一种拥有的关系, 它使一个类知道另一个类的属性和方法，其暗示了依赖关系。<ul>
+<li>例如企鹅与气候，企鹅是需要知道气候的变化，需要了解气候规律的。即一个类知道另一个类。</li>
+</ul>
+</li>
+</ul>
 <h3 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h3><p><strong><em>抽象语义</em></strong>：</p>
 <p>一个类要借助另一个类来实现功能。</p>
 <p>和关联关系不同的是，依赖关系是在运行过程中起作用的，是一种使用的关系,  即一个类的实现需要另一个类的协助, 所以要尽量不使用双向的互相依赖。A 类和 B 类是依赖关系主要有三种形式：</p>
 <p><img src="/assets/379444c9-f1d1-45cd-b7aa-b0c18427d388.jpg" alt="img"></p>
 <p><strong><em>代码语义</em></strong>：</p>
+<p>依赖是虚拟的，只在使用时关注，因此是虚线并在方法当中作为变量使用。</p>
 <ul>
 <li>A类是B类方法的局部变量。</li>
 <li>A类是B类方法当中的一个参数。</li>
 <li>依赖通常体现为调用一个其他所依赖类的方法，A类向B类发送消息，从而影响B类发生变化。</li>
 </ul>
 <h3 id="聚合关系"><a href="#聚合关系" class="headerlink" title="聚合关系"></a>聚合关系</h3><p><strong><em>抽象语义</em></strong>：</p>
-<p><strong><em>代码语义</em></strong>：</p>
-<h3 id="组合关系"><a href="#组合关系" class="headerlink" title="组合关系"></a>组合关系</h3><p><strong><em>抽象语义</em></strong>：</p>
-<p><strong><em>代码语义</em></strong>：</p>
-<h2 id="UML时序图"><a href="#UML时序图" class="headerlink" title="UML时序图"></a>UML时序图</h2><h2 id="UML类关系"><a href="#UML类关系" class="headerlink" title="UML类关系"></a>UML类关系</h2><h2 id="UML记忆技巧"><a href="#UML记忆技巧" class="headerlink" title="UML记忆技巧"></a>UML记忆技巧</h2><h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><h3 id="关联与直接关联"><a href="#关联与直接关联" class="headerlink" title="关联与直接关联"></a>关联与直接关联</h3><p>表示不同类对象之间有关联，这是一种静态关系，与运行过程的状态无关，在最开始就可以确定。因此也可以用 1 对 1、多对 1、多对多这种关联关系来表示。比如学生和学校就是一种关联关系，一个学校可以有很多学生，但是一个学生只属于一个学校，因此这是一种多对一的关系，在运行开始之前就可以确定。</p>
-<ul>
-<li>关联是一种拥有的关系, 它使一个类知道另一个类的属性和方法；<ul>
-<li>例如企鹅与气候，企鹅是需要知道气候的变化，需要了解气候规律的。即一个类知道另一个类</li>
-</ul>
-</li>
-<li>关联暗示了依赖。关联类通常作为一个类成员变量存在</li>
-<li>关联用来表示无法用聚合和组合表示的关系。如学生与老师的关系</li>
-</ul>
-<p>双向关联有两个箭头或者没有箭头。而单向关联有一个箭头，表示关联的方向</p>
-<p><img src="/assets/a3e4dc62-0da5-4d22-94f2-140078281812.jpg" alt="img"></p>
-<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>依赖(Dependency)关系是一种使用关系，特定事物的改变有可能会影响到使用该事物的其他事物，在需要表示一个事物使用另一个事物时使用依赖关系。大多数情况下，依赖关系体现在某个类的方法使用另一个类的对象作为参数。在UML中，依赖关系用带箭头的虚线表示，由依赖的一方指向被依赖的一方。例如：驾驶员开车，在Driver类的drive()方法中将Car类型的对象car作为一个参数传递，以便在drive()方法中能够调用car的move()方法，且驾驶员的drive()方法依赖车的move()方法，因此类Driver依赖类Car，如图1所示：</p>
-<p><img src="/assets/20121123111.jpg" alt="img"></p>
-<p>图1 依赖关系实例</p>
-<p>在系统实施阶段，依赖关系通常通过三种方式来实现，第一种也是最常用的一种方式是如图1所示的将一个类的对象作为另一个类中方法的参数，第二种方式是在一个类的方法中将另一个类的对象作为其局部变量，第三种方式是在一个类的方法中调用另一个类的静态方法。图1对应的Java代码片段如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Driver</span> </span>&#123; 	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drive</span><span class="params">(Car car)</span> </span>&#123; 		</span><br><span class="line">        car.move(); 	</span><br><span class="line">    &#125;     </span><br><span class="line">…… &#125;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123; 	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">move</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...... 	</span><br><span class="line">    &#125;     </span><br><span class="line">…… &#125;  `</span><br></pre></td></tr></table></figure>
-
-<h3 id="聚合与组合"><a href="#聚合与组合" class="headerlink" title="聚合与组合"></a>聚合与组合</h3><p>聚合：是整体与部分的关系, 且部分可以离开整体而单独存在. 如车和轮胎是整体和部分的关系, 轮胎离开车仍然可以存在.</p>
+<p>聚合：是整体与部分的关系, 且部分可以离开整体而单独存在. 如车和轮胎是整体和部分的关系, 轮胎离开车仍然可以存在.</p>
+<p>两者具有独立的生命周期。</p>
 <p><img src="/assets/a0ce43b7-afa8-4397-a96e-5c12a070f2ae.jpg" alt="img"></p>
 <ul>
 <li>成员可独立。班级与学生</li>
@@ -453,8 +450,14 @@
 <p>聚合(Aggregation)关系表示整体与部分的关系。在聚合关系中，成员对象是整体对象的一部分，但是成员对象可以脱离整体对象独立存在。在UML中，聚合关系用带空心菱形的直线表示。例如：汽车发动机(Engine)是汽车(Car)的组成部分，但是汽车发动机可以独立存在，因此，汽车和发动机是聚合关系，如图6所示：</p>
 <p><img src="/assets/2012112319.jpg" alt="img"></p>
 <p>在代码实现聚合关系时，成员对象通常作为构造方法、Setter方法或业务方法的参数注入到整体对象中，图6对应的Java代码片段如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123; 	<span class="keyword">private</span> Engine engine;      <span class="comment">//构造注入 	public Car(Engine engine) &#123; 		this.engine = engine; 	&#125;          //设值注入 public void setEngine(Engine engine) &#123;     this.engine = engine; &#125; …… &#125;  public class Engine &#123; 	…… &#125; `</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123; 	</span><br><span class="line">    <span class="keyword">private</span> Engine engine;      <span class="comment">//构造注入 	</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">(Engine engine)</span> </span>&#123; 		</span><br><span class="line">        <span class="keyword">this</span>.engine = engine; 	</span><br><span class="line">    &#125;          <span class="comment">//设值注入 </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEngine</span><span class="params">(Engine engine)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.engine = engine; </span><br><span class="line">    &#125; </span><br><span class="line">    …… </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Engine</span> </span>&#123; 	</span><br><span class="line">    …… </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p><strong><em>代码语义</em></strong>：</p>
+<ul>
+<li>一个成员变量。</li>
+</ul>
+<h3 id="组合关系"><a href="#组合关系" class="headerlink" title="组合关系"></a>组合关系</h3><p><strong><em>抽象语义</em></strong>：</p>
+<p>两个对象具有相同的生命周期。</p>
 <p><strong>组合</strong>：是整体与部分的关系, 但部分不能离开整体而单独存在. 如公司和部门是整体和部分的关系, 没有公司就不存在部门.</p>
 <p><img src="/assets/6a88a398-c494-41f5-bb62-9f7fb811df7c.jpg" alt="img"></p>
 <ul>
@@ -463,15 +466,19 @@
 <p>组合(Composition)关系也表示类之间整体和部分的关系，但是在组合关系中整体对象可以控制成员对象的生命周期，一旦整体对象不存在，成员对象也将不存在，成员对象与整体对象之间具有同生共死的关系。在UML中，组合关系用带实心菱形的直线表示。例如：人的头(Head)与嘴巴(Mouth)，嘴巴是头的组成部分之一，而且如果头没了，嘴巴也就没了，因此头和嘴巴是组合关系，如图7所示：</p>
 <p><img src="/assets/20121123110.jpg" alt="img"></p>
 <p>在代码实现组合关系时，通常在整体类的构造方法中直接实例化成员类，图7对应的Java代码片段如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Head</span> </span>&#123; 	<span class="keyword">private</span> Mouth mouth;  	<span class="function"><span class="keyword">public</span> <span class="title">Head</span><span class="params">()</span> </span>&#123; 		mouth = <span class="keyword">new</span> Mouth(); <span class="comment">//实例化成员类 	&#125; …… &#125;  public class Mouth &#123; 	…… &#125; `</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Head</span> </span>&#123; 	</span><br><span class="line">    <span class="keyword">private</span> Mouth mouth;  	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Head</span><span class="params">()</span> </span>&#123; 		</span><br><span class="line">        mouth = <span class="keyword">new</span> Mouth(); <span class="comment">//实例化成员类 	</span></span><br><span class="line">    &#125; </span><br><span class="line">    …… </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mouth</span> </span>&#123; 	</span><br><span class="line">    …… </span><br><span class="line">&#125; `</span><br></pre></td></tr></table></figure>
 
-<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><p><strong>泛化 = 实现 &gt; 组合 &gt; 聚合 &gt; 关联 &gt; 依赖</strong></p>
+<p><strong><em>代码语义</em></strong>：</p>
+<ul>
+<li>作为成员变量。</li>
+</ul>
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><p><strong>泛化 = 实现 &gt; 组合 &gt; 聚合 &gt; 关联 &gt; 依赖</strong></p>
 <p><img src="/assets/85ffc9034b489a2fcc51ce7e332d03ba.png" alt="image.png"></p>
 <p>下面围绕类Library类分析下这个图，首先library通过组合方式关联到了Catalog类目类，这说明类目不能独立存在要依赖图书馆存在，所以这里没有使用聚合而使用了组合。另外library通过聚合关联到了Book Item 类和Account账号类，这说明图书馆是有0个或者多个图书和账户组成，这里使用聚合而不是用组合是因为书和账号可以独立于图书馆存在，比如我有学号账号，但是图书馆里面不是必然有你的账号。</p>
 <p>下面围绕Catalog分析，类目通过双向关联关联到bookitem，说明一个类目里面可能会有0个或者多个书籍，一个书籍对应着一个类目。另外类目有通过realization实现了search类和manage类的接口，让类目有搜索和管理功能。Search类搜索时候会依赖Patron类图书捐赠人的姓名地址或者Libraian类图书管理员的姓名地址，职位。 图书管理类时候会依赖图书管理员类的信息。</p>
 <p>而Patron图书捐赠人有可能是一个学生，学生有自己的账号，所以patron类会聚合到Account.<br>bookItem类通过泛化继承Book中书的共性部分信息。有通过关联关联到了account,说明一个账户只能接到0本和最多12本书，最多可以预定3本书。</p>
 <p>最后Book类双向关联到Author类，数目一个作者至少写了1本书（严格说应该是0），一本书至少有一个作者编写，<br>Account账户类有依赖一个AccountState的枚举值的类用来存放账号状态。</p>
-<h1 id="设计模式–类图"><a href="#设计模式–类图" class="headerlink" title="设计模式–类图"></a>设计模式–类图</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -557,7 +564,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -715,9 +722,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -738,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UML静态建模"><span class="nav-number">1.</span> <span class="nav-text">UML静态建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML基础"><span class="nav-number">2.</span> <span class="nav-text">UML基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML类图"><span class="nav-number">3.</span> <span class="nav-text">UML类图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#泛化关系"><span class="nav-number">3.0.1.</span> <span class="nav-text">泛化关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现关系"><span class="nav-number">3.0.2.</span> <span class="nav-text">实现关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联关系"><span class="nav-number">3.0.3.</span> <span class="nav-text">关联关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖关系"><span class="nav-number">3.0.4.</span> <span class="nav-text">依赖关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合关系"><span class="nav-number">3.0.5.</span> <span class="nav-text">聚合关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合关系"><span class="nav-number">3.0.6.</span> <span class="nav-text">组合关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UML时序图"><span class="nav-number">3.1.</span> <span class="nav-text">UML时序图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UML类关系"><span class="nav-number">3.2.</span> <span class="nav-text">UML类关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UML记忆技巧"><span class="nav-number">3.3.</span> <span class="nav-text">UML记忆技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象与类"><span class="nav-number">4.</span> <span class="nav-text">对象与类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类图"><span class="nav-number">4.1.</span> <span class="nav-text">类图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关联与直接关联"><span class="nav-number">4.1.1.</span> <span class="nav-text">关联与直接关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖"><span class="nav-number">4.1.2.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合与组合"><span class="nav-number">4.1.3.</span> <span class="nav-text">聚合与组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战"><span class="nav-number">4.1.4.</span> <span class="nav-text">实战</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式–类图"><span class="nav-number">5.</span> <span class="nav-text">设计模式–类图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UML静态建模"><span class="nav-number">1.</span> <span class="nav-text">UML静态建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML基础"><span class="nav-number">2.</span> <span class="nav-text">UML基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML类图"><span class="nav-number">3.</span> <span class="nav-text">UML类图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#泛化关系"><span class="nav-number">3.0.1.</span> <span class="nav-text">泛化关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现关系"><span class="nav-number">3.0.2.</span> <span class="nav-text">实现关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联关系"><span class="nav-number">3.0.3.</span> <span class="nav-text">关联关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖关系"><span class="nav-number">3.0.4.</span> <span class="nav-text">依赖关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合关系"><span class="nav-number">3.0.5.</span> <span class="nav-text">聚合关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合关系"><span class="nav-number">3.0.6.</span> <span class="nav-text">组合关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战"><span class="nav-number">4.</span> <span class="nav-text">实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -774,7 +779,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:47</span>
+    <span title="站点阅读时长">37:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

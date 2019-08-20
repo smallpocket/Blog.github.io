@@ -68,7 +68,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1566050509148.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552978943031.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552980709600.png">
-<meta property="og:updated_time" content="2019-08-19T03:20:13.784Z">
+<meta property="og:updated_time" content="2019-08-19T03:54:49.998Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis：概述">
 <meta name="twitter:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 分布式内存key-value的数据库。 事件循环Redis服务在启动后会陷入一个巨大的while循环，不停处理文件事件和时间事件。 所有的事件都存在于一个队列当中。  文件事件：在多个客户端实现多路复用，文件事件在一个有序队列当中，其排列规则是文件事件建立的规则。 时间事件：记录那些要在">
@@ -328,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-19 11:20:13" itemprop="dateModified" datetime="2019-08-19T11:20:13+08:00">2019-08-19</time>
+                <time title="修改时间：2019-08-19 11:54:49" itemprop="dateModified" datetime="2019-08-19T11:54:49+08:00">2019-08-19</time>
               </span>
             
           
@@ -356,7 +356,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">3.3k</span>
+              <span title="本文字数">4.6k</span>
             </span>
           
             <span class="post-meta-item">
@@ -366,7 +366,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">6 分钟</span>
+              <span title="阅读时长">8 分钟</span>
             </span>
           
 
@@ -438,6 +438,88 @@
 <p>将创建一个列表对象，key为<code>fruits</code>，value为列表。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpush fruits <span class="string">"apple"</span> <span class="string">"banana"</span> <span class="string">"cherry"</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h2><p><strong><em>pipeline</em></strong></p>
+<p>client：将多个命令缓存起来，缓冲区满了就发送。</p>
+<p>redis：处理一个tcp连接法来的多个命令，处理完一个就发一个。</p>
+<p>twemproxy：既要处理一个client连接法来的多个命令，又要将到同一个下游redis server的命令缓存起来一起发送。</p>
+<ul>
+<li>节省往返时间。</li>
+<li>减少了proxy、redis server的IO次数。</li>
+</ul>
+<p><strong><em>mget</em></strong> 弱于pipline</p>
+<p>client：使用mget。</p>
+<p>redis：一个命令中处理多个key，等所有key处理完组装完后组装恢复一起发送。</p>
+<p>twmproxy：拆key分发到不同redis server，需要等待、缓存mget中全部恢复。</p>
+<ul>
+<li>节省往返时间。</li>
+<li>proxy缓存</li>
+</ul>
+<h1 id="延迟删除"><a href="#延迟删除" class="headerlink" title="延迟删除"></a>延迟删除</h1><h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>cache与db数据不一致问题。</p>
+<p>产生原因：请求回源时，由于DB主从延迟导致用DB从节点的老数据更新了cache。</p>
+<p>解决方案：cache延迟多次删除，当前删除一次，过几秒(大于DB主从延迟)后再次删除一次。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong><em>读取操作</em></strong>：先redis，redis没有就读db。</p>
+<p><strong><em>写操作</em></strong>：</p>
+<ol>
+<li>先更新redis再更新db。</li>
+<li>先更新db再更新redis。</li>
+<li>先更新DB再删除redis。</li>
+<li>先删除redis再更新DB。</li>
+<li>延迟双删。</li>
+<li>延迟删除等变种。</li>
+</ol>
+<h3 id="非一致性"><a href="#非一致性" class="headerlink" title="非一致性"></a>非一致性</h3><p><strong><em>先更新redis再更新db</em></strong>。AB为两个线程，则此时db最终为a值，但redis为b值：</p>
+<ul>
+<li>A_update_redis。</li>
+<li>B_update_redis。</li>
+<li>B_update_db。</li>
+<li>A_update_db。</li>
+</ul>
+<p><strong><em>先更新db再更新redis</em></strong>。最终db是b值但是redis是a值：</p>
+<ul>
+<li>A_update_db。</li>
+<li>B_update_db。</li>
+<li>B_update_redis。</li>
+<li>A_update_redis。</li>
+</ul>
+<p><strong><em>先更新DB再删除redis</em></strong>。</p>
+<ul>
+<li>A_update_db。</li>
+<li>B_update_db。</li>
+<li>B_rm_redis。</li>
+<li>A_rm_redis。</li>
+</ul>
+<p>不一致的原因为：</p>
+<ul>
+<li>A_get_data。</li>
+<li>redis_cache_miss。</li>
+<li>A_get_db。</li>
+<li>B_update_db。</li>
+<li>B_rm_redis。(此时如果拿db是b值，但是redis没有值)。</li>
+<li>A_update_redis。</li>
+</ul>
+<p>依赖于A_update_redis在B_update_db之后，极端情况此时redis是old，db是new。</p>
+<p><strong><em>先删除redis再更新DB</em></strong>。此时redis是old值，db是new值</p>
+<ul>
+<li>A_rm_redis。</li>
+<li>B_get_data。</li>
+<li>B_redis_miss。</li>
+<li>B_get_db。</li>
+<li>B_update_redis。</li>
+<li>A_update_db。</li>
+</ul>
+<h3 id="最终一致性"><a href="#最终一致性" class="headerlink" title="最终一致性"></a>最终一致性</h3><p><strong><em>延迟双删</em></strong>。最后一次sleep一段时间再rm_redis保证再次读请求回溯打到db，用最新值写redis。</p>
+<ul>
+<li>rm_redis。</li>
+<li>update_db。</li>
+<li>sleep xxx ms。</li>
+<li>rm_redis。</li>
+</ul>
+<p><strong><em>变种</em></strong>。解决了3中的极端情况（靠sleep解决），并且减少5中第一次不必要的rm redis请求。当然，这个rm_redis还可以考虑异步化（提高吞吐）以及重试（避免异步处理失败）。</p>
+<ul>
+<li>update_db。</li>
+<li>sleep xxx ms。</li>
+<li>rm_redis。</li>
+</ul>
 <h1 id="单机数据库的实现"><a href="#单机数据库的实现" class="headerlink" title="单机数据库的实现"></a>单机数据库的实现</h1><ul>
 <li>数据库：<ul>
 <li>Redis数据库的实现原理。</li>
@@ -688,7 +770,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-count">202</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -846,9 +928,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -869,7 +949,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">1.1.</span> <span class="nav-text">事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逐出"><span class="nav-number">1.2.</span> <span class="nav-text">逐出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">2.</span> <span class="nav-text">数据结构与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">2.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单机数据库的实现"><span class="nav-number">3.</span> <span class="nav-text">单机数据库的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存使用"><span class="nav-number">4.</span> <span class="nav-text">缓存使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存特征"><span class="nav-number">4.0.1.</span> <span class="nav-text">缓存特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存命中率影响因素"><span class="nav-number">4.0.2.</span> <span class="nav-text">缓存命中率影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存分类和应用场景"><span class="nav-number">4.0.3.</span> <span class="nav-text">缓存分类和应用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcache"><span class="nav-number">5.</span> <span class="nav-text">Memcache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构图"><span class="nav-number">5.1.</span> <span class="nav-text">内存结构图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-1"><span class="nav-number">6.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高并发场景下缓存常见问题"><span class="nav-number">7.</span> <span class="nav-text">高并发场景下缓存常见问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">1.1.</span> <span class="nav-text">事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逐出"><span class="nav-number">1.2.</span> <span class="nav-text">逐出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">2.</span> <span class="nav-text">数据结构与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">2.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量操作"><span class="nav-number">2.2.</span> <span class="nav-text">批量操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#延迟删除"><span class="nav-number">3.</span> <span class="nav-text">延迟删除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">3.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">3.2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非一致性"><span class="nav-number">3.2.1.</span> <span class="nav-text">非一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终一致性"><span class="nav-number">3.2.2.</span> <span class="nav-text">最终一致性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单机数据库的实现"><span class="nav-number">4.</span> <span class="nav-text">单机数据库的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存使用"><span class="nav-number">5.</span> <span class="nav-text">缓存使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存特征"><span class="nav-number">5.0.1.</span> <span class="nav-text">缓存特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存命中率影响因素"><span class="nav-number">5.0.2.</span> <span class="nav-text">缓存命中率影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存分类和应用场景"><span class="nav-number">5.0.3.</span> <span class="nav-text">缓存分类和应用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcache"><span class="nav-number">6.</span> <span class="nav-text">Memcache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构图"><span class="nav-number">6.1.</span> <span class="nav-text">内存结构图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-1"><span class="nav-number">7.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高并发场景下缓存常见问题"><span class="nav-number">8.</span> <span class="nav-text">高并发场景下缓存常见问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -905,7 +985,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:47</span>
+    <span title="站点阅读时长">37:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

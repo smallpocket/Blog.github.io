@@ -57,22 +57,22 @@
   };
 </script>
 
-  <meta name="description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 分布式内存key-value的数据库。 事件循环Redis服务在启动后会陷入一个巨大的while循环，不停处理文件事件和时间事件。 所有的事件都存在于一个队列当中。  文件事件：在多个客户端实现多路复用，文件事件在一个有序队列当中，其排列规则是文件事件建立的规则。 时间事件：记录那些要在">
+  <meta name="description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 适">
 <meta name="keywords" content="NoSQL,Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis：概述">
 <meta property="og:url" content="http://yoursite.com/2019/03/04/数据库/Redis：概述/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 分布式内存key-value的数据库。 事件循环Redis服务在启动后会陷入一个巨大的while循环，不停处理文件事件和时间事件。 所有的事件都存在于一个队列当中。  文件事件：在多个客户端实现多路复用，文件事件在一个有序队列当中，其排列规则是文件事件建立的规则。 时间事件：记录那些要在">
+<meta property="og:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 适">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/assets/1566050509148.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552978943031.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552980709600.png">
-<meta property="og:updated_time" content="2019-08-19T03:54:49.998Z">
+<meta property="og:image" content="http://yoursite.com/assets/1566050509148.png">
+<meta property="og:updated_time" content="2019-08-21T01:20:37.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis：概述">
-<meta name="twitter:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 分布式内存key-value的数据库。 事件循环Redis服务在启动后会陷入一个巨大的while循环，不停处理文件事件和时间事件。 所有的事件都存在于一个队列当中。  文件事件：在多个客户端实现多路复用，文件事件在一个有序队列当中，其排列规则是文件事件建立的规则。 时间事件：记录那些要在">
-<meta name="twitter:image" content="http://yoursite.com/assets/1566050509148.png">
+<meta name="twitter:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 适">
+<meta name="twitter:image" content="http://yoursite.com/assets/1552978943031.png">
   <link rel="canonical" href="http://yoursite.com/2019/03/04/数据库/Redis：概述/">
 
 
@@ -328,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-19 11:54:49" itemprop="dateModified" datetime="2019-08-19T11:54:49+08:00">2019-08-19</time>
+                <time title="修改时间：2019-08-21 09:20:37" itemprop="dateModified" datetime="2019-08-21T09:20:37+08:00">2019-08-21</time>
               </span>
             
           
@@ -356,7 +356,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">4.6k</span>
+              <span title="本文字数">4.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -366,7 +366,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">8 分钟</span>
+              <span title="阅读时长">9 分钟</span>
             </span>
           
 
@@ -380,7 +380,84 @@
 
       
         <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p>起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。</p>
-<p>分布式内存key-value的数据库。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>高性能Key-Value服务器。分布式内存key-value的数据库。</li>
+<li>多种数据结构。</li>
+<li>丰富的功能。慢查询、发布订阅等</li>
+<li>高可用分布式支持。</li>
+</ul>
+<p><img src="/assets/1552978943031.png" alt="1552978943031"></p>
+<p>Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，<strong>所有操作都是原子性的</strong>，支持合并多个操作为原子性。</p>
+<h2 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h2><ul>
+<li>取单个最新数据的操作。</li>
+<li>排行榜类似应用。</li>
+<li>精准设定过期时间。</li>
+<li>实时系统、垃圾系统、实时消息系统、队列系统。</li>
+<li>唯一性检查应用。</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
+<li>daemonize：是否为守护进程，如果为yes会将日志打印到文件当中。</li>
+<li>port：对外端口，6379。</li>
+<li>logfile：系统日志。</li>
+<li>dir：Redis工作目录。</li>
+</ul>
+<h2 id="数据结构与对象"><a href="#数据结构与对象" class="headerlink" title="数据结构与对象"></a>数据结构与对象</h2><p>Redis数据库里面的每个键值对都是由对象组成的</p>
+<ul>
+<li>数据库键总是一个字符串对象。</li>
+<li>数据库键的值可以是：<ul>
+<li>字符串对象。</li>
+<li>列表对象。</li>
+<li>哈希对象。</li>
+<li>集合对象（set）。</li>
+<li>有序集合对象。</li>
+</ul>
+</li>
+</ul>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><p><strong><em>set</em></strong></p>
+<p>Redis将在数据库创建一个新的键值对，键值为<code>msg</code>，值为<code>helloworld</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> msg <span class="string">"helloworld"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><em>rpush</em></strong></p>
+<p>将创建一个列表对象，key为<code>fruits</code>，value为列表。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpush fruits <span class="string">"apple"</span> <span class="string">"banana"</span> <span class="string">"cherry"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="高并发场景下缓存常见问题"><a href="#高并发场景下缓存常见问题" class="headerlink" title="高并发场景下缓存常见问题"></a>高并发场景下缓存常见问题</h1><ul>
+<li>缓存一致性：<ul>
+<li>当数据时效要求很高，要保证缓存中的数据与数据库中的数据保持一致。并且缓存结点与副本中的数据也保持一致。</li>
+<li>依赖缓存的过期与更新策略。在数据发生更改时，主动更改缓存中的数据，或移除对应的缓存：<ul>
+<li>更新数据库成功，更新缓存失败，数据不一致。</li>
+<li>更新缓存成功，更新数据库失败，数据不一致。</li>
+<li>更新数据库成功，淘汰缓存失败，数据不一致。</li>
+<li>淘汰缓存成功，更新数据库失败，查询缓存miss。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缓存并发问题：<ul>
+<li>缓存过期后，将尝试从后端数据库获取数据。在高并发下，可能多个请求同时向数据库请求获取。</li>
+<li><img src="/assets/1552980709600.png" alt="1552980709600"></li>
+</ul>
+</li>
+<li>缓存穿透问题：<ul>
+<li>某个key在高并发的访问下没有被命中，出于容错率的情况，尝试去后端数据库中获取，导致大量的请求到达数据库本身。当该key对应的数据本身为空，就会导致数据库中并发执行很多不必要的操作。</li>
+<li>缓存空对象，对查询结果为空的对象也进行缓存。</li>
+</ul>
+</li>
+<li>缓存的雪崩现象：<ul>
+<li>缓存抖动（颠簸），缓存结点故障，通过一致性哈希算法解决。</li>
+<li>由于缓存的原因，导致大量请求到达后端数据库，导致数据库崩溃，系统崩溃。</li>
+<li>可能由于缓存抖动、缓存并发、或者部分缓存集体失效过期导致。</li>
+<li>通过限流、降级、熔断手段降低影响，通过多级缓存。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Redis原理"><a href="#Redis原理" class="headerlink" title="Redis原理"></a>Redis原理</h1><h2 id="单线程"><a href="#单线程" class="headerlink" title="单线程"></a>单线程</h2><p>可以想为Redis的所有命令都在一个阻塞队列当中，每一个瞬间只会执行一个命令。</p>
+<p>原因：</p>
+<ul>
+<li>纯内存，内存是1000W/s。</li>
+<li>非阻塞IO，并使用epoll作为IO多路复用的一个是实现，并Redis自身实现了一个事件处理，将epoll的连接、读写、关闭转化为自身的一个事件，不在IO上花费太多的时间。</li>
+<li>避免线程切换和竞态消耗。</li>
+</ul>
 <h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p>Redis服务在启动后会陷入一个巨大的while循环，不停处理文件事件和时间事件。</p>
 <p>所有的事件都存在于一个队列当中。</p>
 <ul>
@@ -418,46 +495,10 @@
 <li>逐出时阻塞请求的。</li>
 </ul>
 <p>逐出的QPS过高会影响正常请求。</p>
-<h1 id="数据结构与对象"><a href="#数据结构与对象" class="headerlink" title="数据结构与对象"></a>数据结构与对象</h1><p>Redis数据库里面的每个键值对都是由对象组成的</p>
-<ul>
-<li>数据库键总是一个字符串对象。</li>
-<li>数据库键的值可以是：<ul>
-<li>字符串对象。</li>
-<li>列表对象。</li>
-<li>哈希对象。</li>
-<li>集合对象（set）。</li>
-<li>有序集合对象，</li>
-</ul>
-</li>
-</ul>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p><strong><em>set</em></strong></p>
-<p>Redis将在数据库创建一个新的键值对，键值为<code>msg</code>，值为<code>helloworld</code>。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> msg <span class="string">"helloworld"</span></span><br></pre></td></tr></table></figure>
-
-<p><strong><em>rpush</em></strong></p>
-<p>将创建一个列表对象，key为<code>fruits</code>，value为列表。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpush fruits <span class="string">"apple"</span> <span class="string">"banana"</span> <span class="string">"cherry"</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h2><p><strong><em>pipeline</em></strong></p>
-<p>client：将多个命令缓存起来，缓冲区满了就发送。</p>
-<p>redis：处理一个tcp连接法来的多个命令，处理完一个就发一个。</p>
-<p>twemproxy：既要处理一个client连接法来的多个命令，又要将到同一个下游redis server的命令缓存起来一起发送。</p>
-<ul>
-<li>节省往返时间。</li>
-<li>减少了proxy、redis server的IO次数。</li>
-</ul>
-<p><strong><em>mget</em></strong> 弱于pipline</p>
-<p>client：使用mget。</p>
-<p>redis：一个命令中处理多个key，等所有key处理完组装完后组装恢复一起发送。</p>
-<p>twmproxy：拆key分发到不同redis server，需要等待、缓存mget中全部恢复。</p>
-<ul>
-<li>节省往返时间。</li>
-<li>proxy缓存</li>
-</ul>
-<h1 id="延迟删除"><a href="#延迟删除" class="headerlink" title="延迟删除"></a>延迟删除</h1><h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>cache与db数据不一致问题。</p>
+<h2 id="延迟删除"><a href="#延迟删除" class="headerlink" title="延迟删除"></a>延迟删除</h2><h3 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h3><p>cache与db数据不一致问题。</p>
 <p>产生原因：请求回源时，由于DB主从延迟导致用DB从节点的老数据更新了cache。</p>
 <p>解决方案：cache延迟多次删除，当前删除一次，过几秒(大于DB主从延迟)后再次删除一次。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong><em>读取操作</em></strong>：先redis，redis没有就读db。</p>
+<h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p><strong><em>读取操作</em></strong>：先redis，redis没有就读db。</p>
 <p><strong><em>写操作</em></strong>：</p>
 <ol>
 <li>先更新redis再更新db。</li>
@@ -520,6 +561,10 @@
 <li>sleep xxx ms。</li>
 <li>rm_redis。</li>
 </ul>
+<h2 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h2><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><ul>
+<li>拒绝长(慢)命令。keys、flushshall、slow lua script。</li>
+<li>其实不是单线程，在AOF等是给另一个线程去做，它会fysnc file descriptor。</li>
+</ul>
 <h1 id="单机数据库的实现"><a href="#单机数据库的实现" class="headerlink" title="单机数据库的实现"></a>单机数据库的实现</h1><ul>
 <li>数据库：<ul>
 <li>Redis数据库的实现原理。</li>
@@ -552,7 +597,7 @@
 <li>客户端。</li>
 <li>服务器。</li>
 </ul>
-<h1 id="缓存使用"><a href="#缓存使用" class="headerlink" title="缓存使用"></a>缓存使用</h1><p>如何利用有限的资源提供尽可能大的吞吐量。</p>
+<h2 id="缓存使用"><a href="#缓存使用" class="headerlink" title="缓存使用"></a>缓存使用</h2><p>如何利用有限的资源提供尽可能大的吞吐量。</p>
 <p>请求直接从缓存中获取数据，直接返回。</p>
 <h3 id="缓存特征"><a href="#缓存特征" class="headerlink" title="缓存特征"></a>缓存特征</h3><ul>
 <li>命中率：命中数/（命中数+没有命中数）：<ul>
@@ -642,46 +687,6 @@
 <li>通过hash算法找到item。</li>
 </ul>
 <p>Memcache是一个非阻塞的基于事件的服务器程序，</p>
-<h1 id="Redis-1"><a href="#Redis-1" class="headerlink" title="Redis"></a>Redis</h1><p><img src="/assets/1552978943031.png" alt="1552978943031"></p>
-<p>Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，<strong>所有操作都是原子性的</strong>，支持合并多个操作为原子性。</p>
-<p>使用场景：</p>
-<ul>
-<li>取单个最新数据的操作。</li>
-<li>排行榜类似应用。</li>
-<li>精准设定过期时间。</li>
-<li>实时系统、垃圾系统、实时消息系统、队列系统。</li>
-<li>唯一性检查应用。</li>
-</ul>
-<h1 id="高并发场景下缓存常见问题"><a href="#高并发场景下缓存常见问题" class="headerlink" title="高并发场景下缓存常见问题"></a>高并发场景下缓存常见问题</h1><ul>
-<li>缓存一致性：<ul>
-<li>当数据时效要求很高，要保证缓存中的数据与数据库中的数据保持一致。并且缓存结点与副本中的数据也保持一致。</li>
-<li>依赖缓存的过期与更新策略。在数据发生更改时，主动更改缓存中的数据，或移除对应的缓存：<ul>
-<li>更新数据库成功，更新缓存失败，数据不一致。</li>
-<li>更新缓存成功，更新数据库失败，数据不一致。</li>
-<li>更新数据库成功，淘汰缓存失败，数据不一致。</li>
-<li>淘汰缓存成功，更新数据库失败，查询缓存miss。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>缓存并发问题：<ul>
-<li>缓存过期后，将尝试从后端数据库获取数据。在高并发下，可能多个请求同时向数据库请求获取。</li>
-<li><img src="/assets/1552980709600.png" alt="1552980709600"></li>
-</ul>
-</li>
-<li>缓存穿透问题：<ul>
-<li>某个key在高并发的访问下没有被命中，出于容错率的情况，尝试去后端数据库中获取，导致大量的请求到达数据库本身。当该key对应的数据本身为空，就会导致数据库中并发执行很多不必要的操作。</li>
-<li>缓存空对象，对查询结果为空的对象也进行缓存。</li>
-</ul>
-</li>
-<li>缓存的雪崩现象：<ul>
-<li>缓存抖动（颠簸），缓存结点故障，通过一致性哈希算法解决。</li>
-<li>由于缓存的原因，导致大量请求到达后端数据库，导致数据库崩溃，系统崩溃。</li>
-<li>可能由于缓存抖动、缓存并发、或者部分缓存集体失效过期导致。</li>
-<li>通过限流、降级、熔断手段降低影响，通过多级缓存。</li>
-</ul>
-</li>
-</ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -770,7 +775,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -821,9 +826,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -926,9 +929,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -949,7 +950,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">1.1.</span> <span class="nav-text">事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逐出"><span class="nav-number">1.2.</span> <span class="nav-text">逐出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">2.</span> <span class="nav-text">数据结构与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令"><span class="nav-number">2.1.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量操作"><span class="nav-number">2.2.</span> <span class="nav-text">批量操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#延迟删除"><span class="nav-number">3.</span> <span class="nav-text">延迟删除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">3.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">3.2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非一致性"><span class="nav-number">3.2.1.</span> <span class="nav-text">非一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终一致性"><span class="nav-number">3.2.2.</span> <span class="nav-text">最终一致性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单机数据库的实现"><span class="nav-number">4.</span> <span class="nav-text">单机数据库的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存使用"><span class="nav-number">5.</span> <span class="nav-text">缓存使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存特征"><span class="nav-number">5.0.1.</span> <span class="nav-text">缓存特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存命中率影响因素"><span class="nav-number">5.0.2.</span> <span class="nav-text">缓存命中率影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存分类和应用场景"><span class="nav-number">5.0.3.</span> <span class="nav-text">缓存分类和应用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcache"><span class="nav-number">6.</span> <span class="nav-text">Memcache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构图"><span class="nav-number">6.1.</span> <span class="nav-text">内存结构图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-1"><span class="nav-number">7.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高并发场景下缓存常见问题"><span class="nav-number">8.</span> <span class="nav-text">高并发场景下缓存常见问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用性"><span class="nav-number">1.2.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">1.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">1.4.</span> <span class="nav-text">数据结构与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高并发场景下缓存常见问题"><span class="nav-number">2.</span> <span class="nav-text">高并发场景下缓存常见问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis原理"><span class="nav-number">3.</span> <span class="nav-text">Redis原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程"><span class="nav-number">3.1.</span> <span class="nav-text">单线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">3.2.</span> <span class="nav-text">事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逐出"><span class="nav-number">3.3.</span> <span class="nav-text">逐出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延迟删除"><span class="nav-number">3.4.</span> <span class="nav-text">延迟删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用"><span class="nav-number">3.4.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-1"><span class="nav-number">3.4.2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非一致性"><span class="nav-number">3.4.3.</span> <span class="nav-text">非一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终一致性"><span class="nav-number">3.4.4.</span> <span class="nav-text">最终一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel"><span class="nav-number">3.5.</span> <span class="nav-text">Sentinel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化"><span class="nav-number">3.6.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单机数据库的实现"><span class="nav-number">4.</span> <span class="nav-text">单机数据库的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存使用"><span class="nav-number">4.1.</span> <span class="nav-text">缓存使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存特征"><span class="nav-number">4.1.1.</span> <span class="nav-text">缓存特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存命中率影响因素"><span class="nav-number">4.1.2.</span> <span class="nav-text">缓存命中率影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存分类和应用场景"><span class="nav-number">4.1.3.</span> <span class="nav-text">缓存分类和应用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcache"><span class="nav-number">5.</span> <span class="nav-text">Memcache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构图"><span class="nav-number">5.1.</span> <span class="nav-text">内存结构图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -985,7 +986,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:02</span>
+    <span title="站点阅读时长">35:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

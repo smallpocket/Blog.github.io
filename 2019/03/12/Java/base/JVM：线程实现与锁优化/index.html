@@ -68,7 +68,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1564554481522.png">
 <meta property="og:image" content="http://yoursite.com/assets/1564554816857.png">
 <meta property="og:image" content="http://yoursite.com/assets/bb6a49be-00f2-4f27-a0ce-4ed764bc605c.png">
-<meta property="og:updated_time" content="2019-08-11T07:54:40.467Z">
+<meta property="og:updated_time" content="2019-08-20T13:21:25.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：线程实现与锁优化">
 <meta name="twitter:description" content="Java">
@@ -328,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-11 15:54:40" itemprop="dateModified" datetime="2019-08-11T15:54:40+08:00">2019-08-11</time>
+                <time title="修改时间：2019-08-20 21:21:25" itemprop="dateModified" datetime="2019-08-20T21:21:25+08:00">2019-08-20</time>
               </span>
             
           
@@ -381,86 +381,86 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Java与线程"><a href="#Java与线程" class="headerlink" title="Java与线程"></a>Java与线程</h1><h2 id="线程的实现"><a href="#线程的实现" class="headerlink" title="线程的实现"></a>线程的实现</h2><p>Java语言提供了在不同硬件和OS下对线程操作的统一处理，Thread类中的关键方法都是Native的，即方法没有使用或无法使用平台无关的手段来实现。即平台相关，因此是线程的实现，而不是Java线程的实现</p>
+        <h1 id="Java与线程"><a href="#Java与线程" class="headerlink" title="Java与线程"></a>Java与线程</h1><h2 id="线程的实现"><a href="#线程的实现" class="headerlink" title="线程的实现"></a>线程的实现</h2><p>Java语言提供了在不同硬件和OS下对线程操作的统一处理，Thread类中的关键方法都是Native的，即方法没有使用或无法使用平台无关的手段来实现。即平台相关，因此是线程的实现，而不是Java线程的实现。</p>
 <h3 id="内核线程实现"><a href="#内核线程实现" class="headerlink" title="内核线程实现"></a>内核线程实现</h3><p>内核线程KLT：直接由操作系统内核支持的线程，内核通过操纵调度器对线程进行调度，并负责将线程的任务映射到各个处理器上。</p>
-<p>程序一般不会直接使用内核线程，而是使用内核线程的一种高级接口：轻量级进程LWP，即线程。每个轻量级进程都由一个内核线程支持，这种轻量级进程与内核线程的1：1关系称为一对一的线程模型</p>
+<p>程序一般不会直接使用内核线程，而是使用内核线程的一种高级接口：轻量级进程LWP，即线程。每个轻量级进程都由一个内核线程支持，这种轻量级进程与内核线程的1：1关系称为一对一的线程模型。</p>
 <p><img src="/assets/1564554481522.png" alt="1564554481522"></p>
 <ul>
 <li>每个轻量级进程都成为一个独立的调度单元，即使由一个轻量级进程在系统调用中阻塞了，也不会影响整个进程继续工作。</li>
-<li>基于内核线程实现，所以各自操作都需要系统调用，需要在用户态与内核态间相互切换，代价高</li>
-<li>每个轻量级线程都有一个内核线程支持，因此需要消耗一定内核资源，如栈空间，因此一个系统可支持的线程数量有限</li>
+<li>基于内核线程实现，所以各自操作都需要系统调用，需要在用户态与内核态间相互切换，代价高。</li>
+<li>每个轻量级线程都有一个内核线程支持，因此需要消耗一定内核资源，如栈空间，因此一个系统可支持的线程数量有限。</li>
 </ul>
 <h3 id="使用用户线程实现"><a href="#使用用户线程实现" class="headerlink" title="使用用户线程实现"></a>使用用户线程实现</h3><p>广义：一个线程只要不是内核线程，就可以认为是用户线程。</p>
 <p>狭义：完全建立在用户空间的线程库，内核不能感知线程的存在。</p>
 <ul>
 <li>不需要系统内核支援，操作快速，低消耗，可以支持规模更大的并发</li>
-<li>没有系统内核支援，所有线程操作都需要用户自己考虑</li>
-<li>操作系统只把CPU分配给进程，阻塞处理、映射等问题解决非常困难</li>
+<li>没有系统内核支援，所有线程操作都需要用户自己考虑。</li>
+<li>操作系统只把CPU分配给进程，阻塞处理、映射等问题解决非常困难。</li>
 </ul>
-<p>这种进程与用户线程间1：N的关系称为1对多的线程模型</p>
+<p>这种进程与用户线程间1：N的关系称为1对多的线程模型。</p>
 <p><strong>使用用户线程加轻量级进程实现</strong></p>
 <p><img src="/assets/1564554816857.png" alt="1564554816857"></p>
 <h3 id="Java线程的实现"><a href="#Java线程的实现" class="headerlink" title="Java线程的实现"></a>Java线程的实现</h3><p>依据平台而定，windows与linux是一对一的线程模型实现，一条Java线程就映射到一条轻量级进程中。</p>
 <h3 id="Java线程调度"><a href="#Java线程调度" class="headerlink" title="Java线程调度"></a>Java线程调度</h3><p><strong>协同式线程调度</strong></p>
 <p>线程的执行时间由线程本身控制，线程在自己的工作<strong>执行完</strong>后，主动通知系统切换到另一个线程，没有同步问题。</p>
-<p>线程的执行时间不可控制，可能出现线程永久阻塞，使得整个系统不稳定</p>
+<p>线程的执行时间不可控制，可能出现线程永久阻塞，使得整个系统不稳定。</p>
 <p><strong>抢占式线程调度</strong></p>
-<p>线程由系统分配执行时间，线程的切换不由线程本身决定（yield让出执行时间）</p>
-<p>设置线程优先级可以建议系统给某些线程多分配时间，但是并不可靠，因为Java的线程是通过映射到系统的原生线程实现的，所有线程的调度还是取决于操作系统</p>
+<p>线程由系统分配执行时间，线程的切换不由线程本身决定（yield让出执行时间）。</p>
+<p>设置线程优先级可以建议系统给某些线程多分配时间，但是并不可靠，因为Java的线程是通过映射到系统的原生线程实现的，所有线程的调度还是取决于操作系统。</p>
 <h1 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h1><h2 id="自旋锁与自适应自旋"><a href="#自旋锁与自适应自旋" class="headerlink" title="自旋锁与自适应自旋"></a>自旋锁与自适应自旋</h2><p>通常一些情况共享数据的锁定只持续很短时间，为此进行挂起与恢复并不值得。</p>
-<p>让后面请求锁的线程稍等一会，但不放弃处理器执行时间，看持有锁的线程是否会释放锁。使线程执行一个忙循环（自旋，默认10次），JDK1.6当中默认开启</p>
+<p>让后面请求锁的线程稍等一会，但不放弃处理器执行时间，看持有锁的线程是否会释放锁。使线程执行一个忙循环（自旋，默认10次），JDK1.6当中默认开启。</p>
 <p>自适应自旋：由前一次在同一个锁上的自选时间以及锁拥有者状态决定。</p>
 <ul>
 <li>如果同一个锁，自旋刚刚成功获得锁，那么此次自旋也有可能成功，允许自旋等待持续相对更长的时间。</li>
-<li>如果这个锁自旋很少成功获得，那么以后可能忽略掉自旋过程</li>
+<li>如果这个锁自旋很少成功获得，那么以后可能忽略掉自旋过程。</li>
 </ul>
-<h2 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h2><p>虚拟机即时编译器允许时，对一些代码上要求同步，但被检测到不可能存在共享数据竞争的锁进行消除</p>
+<h2 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h2><p>虚拟机即时编译器允许时，对一些代码上要求同步，但被检测到不可能存在共享数据竞争的锁进行消除。</p>
 <p>判定依据：逃逸分析的数据支持，如果判断一段代码中，堆上所有的数据都不会逃逸出去从而被其他线程访问到，那就可以把它们当做栈上数据对待，认为它们是线程私有的，同步加锁就无须进行了。</p>
 <p>对于一些看起来没有加锁的代码，其实隐式的加了很多锁。例如下面的字符串拼接代码就隐式加了锁：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">concatString</span><span class="params">(String s1, String s2, String s3)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> s1 + s2 + s3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>String 是一个不可变的类，编译器会对 String 的拼接自动优化。在 JDK 1.5 之前，会转化为 StringBuffer 对象的连续 append() 操作：</p>
+<p>String是一个不可变的类，编译器会对String的拼接自动优化。在JDK 1.5之前，会转化为StringBuffer对象的连续<code>append()</code>操作：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">concatString</span><span class="params">(String s1, String s2, String s3)</span> </span>&#123;</span><br><span class="line">    StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    sb.append(s1);</span><br><span class="line">    sb.append(s2);</span><br><span class="line">    sb.append(s3);</span><br><span class="line">    <span class="keyword">return</span> sb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>每个 append() 方法中都有一个同步块。虚拟机观察变量 sb，很快就会发现它的动态作用域被限制在 concatString() 方法内部。也就是说，sb 的所有引用永远不会逃逸到 concatString() 方法之外，其他线程无法访问到它，因此可以进行消除。</p>
+<p>每个<code>append()</code>方法中都有一个同步块。虚拟机观察变量sb，很快就会发现它的动态作用域被限制在<code>concatString()</code>方法内部。也就是说，sb的所有引用永远不会逃逸到<code>concatString()</code>方法之外，其他线程无法访问到它，因此可以进行消除。</p>
 <h2 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h2><p>推荐同步块的作用范围限制尽量小，但如果一系列连续操作都对同一个对象反复加锁和解锁。这时虚拟机探测到这些时，将会将加锁同步的范围扩展到整个操作序列的外部。</p>
 <h2 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h2><p>JDK 1.6引入了偏向锁和轻量级锁，从而让锁拥有了四个状态：无锁状态（unlocked）、偏向锁状态（biasble）、轻量级锁状态（lightweight locked）和重量级锁状态（inflated）。</p>
 <p>在没有多线程竞争的前提下，减少传统的重量级锁使用操作系统互斥量产生的性能消耗。</p>
-<p>无竞争下使用CAS操作去消除同步使用的互斥量</p>
+<p>无竞争下使用CAS操作去消除同步使用的互斥量：</p>
 <ul>
-<li>HotSpot虚拟机的对象内存布局：对象头包括两部分<ul>
-<li>存储对象自身的运行时数据，如哈希码，GC分代年龄等，在64位虚拟机中为64Bits，称为Mark Word，是轻量级锁与偏向锁的关键</li>
+<li>HotSpot虚拟机的对象内存布局：对象头包括两部分：<ul>
+<li>存储对象自身的运行时数据，如哈希码，GC分代年龄等，在64位虚拟机中为64Bits，称为Mark Word，是轻量级锁与偏向锁的关键。</li>
 <li>存储指向方法区对象类型数据的指针，如果是数组对象，则还会存储数组长度。</li>
 <li><img src="/assets/bb6a49be-00f2-4f27-a0ce-4ed764bc605c.png" alt="img"></li>
 </ul>
 </li>
 <li>轻量级锁执行过程：<ul>
-<li>代码进入同步块时，如果此同步对象没有被锁定（标志位01），虚拟机将在当前线程的栈帧建立一个名为锁记录的空间，存储锁对象目前的Mark Word拷贝</li>
-<li>虚拟机将使用CAS操作尝试将对象的Mark Word更新为指向Lock Record的指针<ul>
-<li>如果更新成功，则线程拥有了该对象的锁，锁标志位变为00</li>
-<li>更新失败，虚拟机首先检查对象的Mark Word是否指向当前线程的栈帧，<ul>
+<li>代码进入同步块时，如果此同步对象没有被锁定（标志位01），虚拟机将在当前线程的栈帧建立一个名为锁记录的空间，存储锁对象目前的Mark Word拷贝。</li>
+<li>虚拟机将使用CAS操作尝试将对象的Mark Word更新为指向Lock Record的指针：<ul>
+<li>如果更新成功，则线程拥有了该对象的锁，锁标志位变为00。</li>
+<li>更新失败，虚拟机首先检查对象的Mark Word是否指向当前线程的栈帧。<ul>
 <li>如果只说明当前线程已经拥有了这个对象的锁，那么就可以直接进入同步块继续执行。</li>
-<li>否则说明这个锁对象已经被其他线程抢占</li>
+<li>否则说明这个锁对象已经被其他线程抢占。</li>
 </ul>
 </li>
-<li>如果两条以上的线程争用同一个锁，则锁膨胀为重量级锁，标志位为10，Mark Word存放指向重量级锁的指针</li>
+<li>如果两条以上的线程争用同一个锁，则锁膨胀为重量级锁，标志位为10，Mark Word存放指向重量级锁的指针。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>依据：对于绝大部分锁，整个同步周期内是不存在竞争的<ul>
-<li>如果存在竞争，则额外CAS操作</li>
-<li>不存在竞争，则避免了开销</li>
+<li>依据：对于绝大部分锁，整个同步周期内是不存在竞争的：<ul>
+<li>如果存在竞争，则额外CAS操作。</li>
+<li>不存在竞争，则避免了开销。</li>
 </ul>
 </li>
 </ul>
 <h2 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h2><p>消除数据在无竞争情况下的同步原语，进一步提高程序的运行性能。在无竞争的情况下，把整个同步都消除掉。</p>
 <p>锁会偏向于第一个获得它的线程，在接下来执行过程中，该锁没有被其他线程获取，则持有偏向锁的线程永远不需要再进行同步。</p>
 <ul>
-<li>当锁第一次被线程获取时，会把对象头中的标志设置为01。使用CAS操作把获取到这个锁的线程的ID记录在对象的Mark Word中</li>
-<li>如果CAS操作成功，持有偏向锁的线程每次进入这个锁相关的同步块时，虚拟机都可以不再进行任何同步操作</li>
+<li>当锁第一次被线程获取时，会把对象头中的标志设置为01。使用CAS操作把获取到这个锁的线程的ID记录在对象的Mark Word中。</li>
+<li>如果CAS操作成功，持有偏向锁的线程每次进入这个锁相关的同步块时，虚拟机都可以不再进行任何同步操作。</li>
 <li>当另一个线程尝试获取这个锁，偏向模式宣告结束。</li>
-<li>转为轻量级锁</li>
+<li>转为轻量级锁。</li>
 </ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
@@ -550,7 +550,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -601,9 +601,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -706,9 +704,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -765,7 +761,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:02</span>
+    <span title="站点阅读时长">35:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

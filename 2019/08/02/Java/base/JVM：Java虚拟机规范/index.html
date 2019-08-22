@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-11T07:52:24.895Z">
+<meta property="og:updated_time" content="2019-08-20T12:42:26.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：Java虚拟机规范">
 <meta name="twitter:description" content="JVM结构要正确地实现一台JVM，只需要能正确读取class文件中地每一条字节码指令，并且能正确地执行这些指令所蕴含的操作即可。 对于设计者，可以完全自主决定所有规范中不曾描述的虚拟机内部细节，例如运行时数据区的内存如何布局、选择哪种垃圾收集算法、是否对虚拟机字节码指令进行一些内部的优化操作等。 class文件格式编译后被JVM所执行的代码使用了一种平台中立(不依赖于特定硬件与OS)的二进制格式来">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-11 15:52:24" itemprop="dateModified" datetime="2019-08-11T15:52:24+08:00">2019-08-11</time>
+                <time title="修改时间：2019-08-20 20:42:26" itemprop="dateModified" datetime="2019-08-20T20:42:26+08:00">2019-08-20</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">5.1k</span>
+              <span title="本文字数">5.2k</span>
             </span>
           
             <span class="post-meta-item">
@@ -420,11 +420,11 @@
 <p>在某条线程执行过程中的某个时间点上，只有目前正在执行的那个方法的栈帧是活动的。当方法返回时，当前栈帧会传回此方法的执行结果给前一个栈帧，然后JVM丢弃该栈帧。</p>
 <h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h3><p>每个栈帧内部都包含一组称为局部变量表的变量列表（<strong>其中包括基础数据类型，例如boolean等、对象的引用或returnAddress</strong>），栈帧内的局部变量表的长度由编译器决定，并且存储于类或接口的二进制表示中，即存储在方法的<code>Code</code>属性当中，并提供给栈帧使用。</p>
 <p>局部变量表需要的内存空间在编译期间完成分配，当进入一个方法时这个需要分配多大的局部变量空间时完全确定的，运行期间不会改变局部变量表的大小，64位的<code>long</code>和<code>double</code>会占据两个局部变量空间。</p>
-<p>局部变量使用索引来进行访问定位，<code>0=&lt;index=&lt;length</code>。当调用实例方法时，<code>index=0</code>的变量一定是this引用，之后是方法的参数。</p>
+<p>局部变量使用索引来进行访问定位，<code>0 =&lt; index =&lt; length</code>。当调用实例方法时，<code>index = 0</code>的变量一定是this引用，之后是方法的参数。</p>
 <h3 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h3><p>JVM底层字节码指令集是基于栈类型的，索引的操作码都是对操作数栈上的数据进行操作。对每一个方法调用，JVM会建立一个操作数栈，以供计算使用。栈的深度在源码编译成class文件后就已经确定，保存在方法的<code>Code</code>属性中。</p>
 <p>在开始时操作数栈是空的，JVM提供了一些字节码指令来从局部变量表或对象实例的字段中复制常量值到操作数栈中，以及从操作数栈中取走数据、操作数据以及将操作结果重新入栈。在方法调用时，也用来准备调用方法的参数以及接收方法返回的结果。</p>
 <p><code>iadd</code>指令要求执行前操作数栈的栈顶已经存在两个由前面其他指令放入的int类型数值，执行<code>iadd</code>时将两个int值出栈，相加求和并将求和结果重新入栈。</p>
-<p>对于一部分指令可以不关注操作数的具体数据类型，将所有在运行时数据区中的数据当作裸类型数据来操作，例如<code>swap</code>。它们的操作的正确性会通过class文件的<strong>校验过程来强制保障</strong></p>
+<p>对于一部分指令可以不关注操作数的具体数据类型，将所有在运行时数据区中的数据当作裸类型数据来操作，例如<code>swap</code>。它们的操作的正确性会通过class文件的<strong>校验过程来强制保障</strong>。</p>
 <h3 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h3><p>包含一个指向当前方法所在类型的运行时常量池的引用，以支持对当前方法的代码实现动态链接。</p>
 <p>在class文件中，一个方法若调用其他方法或访问成员变量，则需要通过符号引用来表示，动态链接的作用就是将这些符号引用所表示的方法转换为对实际方法的直接引用。类加载过程中将要解析尚未被解析的符号引用，并且将对变量的访问转化为变量在程序运行时，位于数据结构中的正确偏移量。</p>
 <h3 id="方法调用正常完成"><a href="#方法调用正常完成" class="headerlink" title="方法调用正常完成"></a>方法调用正常完成</h3><p>若方法正常返回，当前栈帧承担着恢复调用者状态的责任，其状态包括调用者的局部变量表、操作数栈和正确增加过来表示执行了该方法调用指令的程序计数器等。使得调用者的代码能在被调用的方法返回并且返回值被推入调用者栈帧的操作数栈后继续正常执行。</p>
@@ -433,30 +433,30 @@
 <p>句柄与直接引用。</p>
 <h2 id="浮点算法"><a href="#浮点算法" class="headerlink" title="浮点算法"></a>浮点算法</h2><h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h2><p>在JVM层面上，对于对象，Java中的构造器是以应该名为&lt;init&gt;的特殊实例初始化方法的形式出现的，其是由编译器命名的，因为无法通过程序编码的方式实现。实例初始化方法只能在实例的初始化期间，通过JVM的<code>invokespecial</code>指令调用，并且只能在尚未初始化的实例上调用该指令。</p>
 <p>对于类或接口，则最多可以包含不超过应该类或接口的初始化方法，该方法是一个不包含参数的、返回类型为void的方法&lt;clinit&gt;。类或接口的初始化方法由JVM自身隐式调用，没有任何JVM字节码指令可以调用这个方法，只会在类的初始化阶段中由JVM自身调用。</p>
-<p>当一个方法具有<strong>签名多态性</strong>则意味着这个方法满足以下全部条件</p>
+<p>当一个方法具有<strong>签名多态性</strong>则意味着这个方法满足以下全部条件：</p>
 <ul>
-<li>通过java.lang.invoke.MethodHandle类声明</li>
-<li>只有一个类型为Object[]的形参</li>
-<li>返回值为Object</li>
-<li>ACC_VARAGS和ACC_NATIVE标志被设置</li>
+<li>通过java.lang.invoke.MethodHandle类声明。</li>
+<li>只有一个类型为Object[]的形参。</li>
+<li>返回值为Object。</li>
+<li>ACC_VARAGS和ACC_NATIVE标志被设置。</li>
 </ul>
 <p>Java8中，只有<code>java.lang.invoke.MethodHandle</code>的<code>invoke</code>和<code>invokeExact</code>是签名多态性方法。invokevirtual指令会对具有签名多态性的方法进行特殊处理。</p>
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>异常使用Throwable或其子类的实例来表示，抛异常本质实际上是程序控制权的一种即时的、非局部的转换，从异常排除的地方转换至处理异常的地方。</p>
 <p>绝大部分异常的产生是由于当前线程执行的某个操作导致的，即<strong>同步异常</strong>。而<strong>异步异常</strong>可以在程序执行过程中随时发生。JVM中异常的出现总是由以下三种原因之一导致的</p>
 <ul>
-<li>athrow字节码指令被执行，即代码中写了throw</li>
-<li>虚拟机同步检测到程序发生了非正常的执行情况，这时异常必将紧接着发生非正常执行情况的字节码指令后抛出，而不会在执行程序的过程中随时抛出<ul>
-<li>程序所执行的操作可能会引发异常。<ul>
-<li>字节码指令所蕴含的操作违反了Java语言的语义，例如访问一个超出数组边界范围的元素</li>
-<li>当程序在加载或链接时出错</li>
+<li>athrow字节码指令被执行，即代码中写了throw。</li>
+<li>虚拟机同步检测到程序发生了非正常的执行情况，这时异常必将紧接着发生非正常执行情况的字节码指令后抛出，而不会在执行程序的过程中随时抛出。<ul>
+<li>程序所执行的操作可能会引发异常：<ul>
+<li>字节码指令所蕴含的操作违反了Java语言的语义，例如访问一个超出数组边界范围的元素。</li>
+<li>当程序在加载或链接时出错。</li>
 </ul>
 </li>
-<li>使用某些资源的时候产生资源限制，例如使用了太多内存</li>
+<li>使用某些资源的时候产生资源限制，例如使用了太多内存。</li>
 </ul>
 </li>
-<li>异步异常的发生<ul>
+<li>异步异常的发生：<ul>
 <li>调用了Thread或者ThreadGroup的stop方法。则此时该线程会影响到其他线程，此时其他线程中出现的异常就是异步异常，因为它可能出现在线程执行过程中的任何位置。</li>
-<li>JVM发生了内部错误</li>
+<li>JVM发生了内部错误。</li>
 </ul>
 </li>
 </ul>
@@ -472,17 +472,17 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;index&gt;&lt;opcode&gt; [&lt;operand1&gt;[&lt;operand2&gt;...]] [&lt;comment]</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>&lt;index&gt;是指令操作码在数组中的下表，该数组以字节形式来存储当前方法的JVM代码。也可以认为是相对于方法起始处的字节偏移量</li>
-<li>&lt;opcode&gt;为指令的操作数，一条指令可以有0-N个操作数</li>
-<li>&lt;comment&gt;为行尾注释，器部分内容为javap加入，其余为作者添加。</li>
+<li>&lt;index&gt;是指令操作码在数组中的下表，该数组以字节形式来存储当前方法的JVM代码。也可以认为是相对于方法起始处的字节偏移量。</li>
+<li>&lt;opcode&gt;为指令的操作数，一条指令可以有0-N个操作数。</li>
+<li>&lt;comment&gt;为行尾注释，其部分内容为javap加入，其余为作者添加。</li>
 </ul>
 <p>每条指令前的&lt;index&gt;可以作为控制转移指令的跳转目标。</p>
 <h2 id="访问运行时常量池"><a href="#访问运行时常量池" class="headerlink" title="访问运行时常量池"></a>访问运行时常量池</h2><p>很多数值常量、对象、字段和方法，都是通过当前类的运行时常量池进行访问的。</p>
-<p><code>ldc</code>、<code>ldc_w</code>、<code>ldc2_w</code></p>
+<p><code>ldc</code>、<code>ldc_w</code>、<code>ldc2_w</code>。</p>
 <h2 id="接收参数"><a href="#接收参数" class="headerlink" title="接收参数"></a>接收参数</h2><h2 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h2><p>普通实例方法调用时在运行时根据对象类型进行分派的，这类方法调用通过<code>invokevirtual</code>指令实现，<code>invokevirtual</code>指令都会带有一个表示索引的参数，运行时常量池在该索引处的项为某个方法的符号引用，这个符号引用可以提供方法所在对象的类型的内部二进制名称、方法名称和方法描述符。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add12and13</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> addTwo(<span class="number">12</span>, <span class="number">13</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>编译后如下</p>
+<p>编译后如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Method <span class="keyword">int</span> <span class="title">add12and13</span><span class="params">()</span></span></span><br><span class="line"><span class="function">0 aload_0</span></span><br><span class="line"><span class="function">1 bipush 12</span></span><br><span class="line"><span class="function">3 bipush 13</span></span><br><span class="line">5 invokevirtual #4</span><br><span class="line"><span class="number">8</span> ireturn</span><br></pre></td></tr></table></figure>
 
 <h2 id="使用类实例"><a href="#使用类实例" class="headerlink" title="使用类实例"></a>使用类实例</h2><h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><p>JVM中的synchronization是由monitor的进入和退出来实现的，无论是显式同步还是隐式同步。</p>
@@ -572,7 +572,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -623,9 +623,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -728,9 +726,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -787,7 +783,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:02</span>
+    <span title="站点阅读时长">35:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -57,20 +57,21 @@
   };
 </script>
 
-  <meta name="description" content="装饰者模式提出问题 将对象包装起来，赋予他们新的职责  为什么要用（作用） 为对象动态添加功能。  应用场景基础概述是什么装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者">
+  <meta name="description" content="装饰者模式提出问题 动态地给一个对象添加一些额外的职责。  问题案例想买一个加糖的饮料：  则需要实现饮料类。 其次实现加糖的饮料，并继承自饮料类，即一个加糖的饮料类。 如果还想加可可，则需要再次实现一个类，是一个加糖、加可可的类。  对于这种动态的增加，并且增加的数目不确定，使用继承实现会出现太多的类。 基础概述是什么 定义：动态地将责任附加到对象上，想要扩展功能，装饰者提供有别于继承的另一种选">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式：装饰者模式">
 <meta property="og:url" content="http://yoursite.com/2019/04/19/Java/设计模式/设计模式：装饰者模式/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="装饰者模式提出问题 将对象包装起来，赋予他们新的职责  为什么要用（作用） 为对象动态添加功能。  应用场景基础概述是什么装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者">
+<meta property="og:description" content="装饰者模式提出问题 动态地给一个对象添加一些额外的职责。  问题案例想买一个加糖的饮料：  则需要实现饮料类。 其次实现加糖的饮料，并继承自饮料类，即一个加糖的饮料类。 如果还想加可可，则需要再次实现一个类，是一个加糖、加可可的类。  对于这种动态的增加，并且增加的数目不确定，使用继承实现会出现太多的类。 基础概述是什么 定义：动态地将责任附加到对象上，想要扩展功能，装饰者提供有别于继承的另一种选">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png">
+<meta property="og:image" content="http://yoursite.com/assets/1566438131434.png">
 <meta property="og:image" content="http://yoursite.com/assets/c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg">
-<meta property="og:updated_time" content="2019-08-01T12:03:22.835Z">
+<meta property="og:updated_time" content="2019-08-22T02:12:25.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：装饰者模式">
-<meta name="twitter:description" content="装饰者模式提出问题 将对象包装起来，赋予他们新的职责  为什么要用（作用） 为对象动态添加功能。  应用场景基础概述是什么装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者">
+<meta name="twitter:description" content="装饰者模式提出问题 动态地给一个对象添加一些额外的职责。  问题案例想买一个加糖的饮料：  则需要实现饮料类。 其次实现加糖的饮料，并继承自饮料类，即一个加糖的饮料类。 如果还想加可可，则需要再次实现一个类，是一个加糖、加可可的类。  对于这种动态的增加，并且增加的数目不确定，使用继承实现会出现太多的类。 基础概述是什么 定义：动态地将责任附加到对象上，想要扩展功能，装饰者提供有别于继承的另一种选">
 <meta name="twitter:image" content="http://yoursite.com/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/19/Java/设计模式/设计模式：装饰者模式/">
 
@@ -327,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 20:03:22" itemprop="dateModified" datetime="2019-08-01T20:03:22+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-22 10:12:25" itemprop="dateModified" datetime="2019-08-22T10:12:25+08:00">2019-08-22</time>
               </span>
             
           
@@ -355,7 +356,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">2k</span>
+              <span title="本文字数">3.1k</span>
             </span>
           
             <span class="post-meta-item">
@@ -365,7 +366,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">4 分钟</span>
+              <span title="阅读时长">6 分钟</span>
             </span>
           
 
@@ -379,40 +380,100 @@
 
       
         <h1 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><ul>
-<li>将对象包装起来，赋予他们新的职责</li>
+<li>动态地给一个对象添加一些额外的职责。</li>
 </ul>
-<h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><ul>
-<li>为对象动态添加功能。</li>
-</ul>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者的功能。装饰者的方法有一部分是自己的，这属于它的功能，然后调用被装饰者的方法实现，从而也保留了被装饰者的功能。可以看到，具体组件应当是装饰层次的最低层，因为只有具体组件的方法实现不需要依赖于其它对象。</p>
-<p><img src="/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png" alt="img"></p>
-<h3 id="分类，各个分类是什么"><a href="#分类，各个分类是什么" class="headerlink" title="分类，各个分类是什么"></a>分类，各个分类是什么</h3><p>以饮料为例</p>
+<h3 id="问题案例"><a href="#问题案例" class="headerlink" title="问题案例"></a>问题案例</h3><p>想买一个加糖的饮料：</p>
 <ul>
-<li>装饰者：调料。Decorator</li>
-<li>具体组件：饮料。ConcreteCompoent</li>
+<li>则需要实现饮料类。</li>
+<li>其次实现加糖的饮料，并继承自饮料类，即一个加糖的饮料类。</li>
+<li>如果还想加可可，则需要再次实现一个类，是一个加糖、加可可的类。</li>
+</ul>
+<p>对于这种动态的增加，并且增加的数目不确定，使用继承实现会出现太多的类。</p>
+<h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><blockquote>
+<p>定义：动态地将责任附加到对象上，想要扩展功能，装饰者提供有别于继承的另一种选择。</p>
+</blockquote>
+<p>装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者的功能。装饰者的方法有一部分是自己的，这属于它的功能，然后调用被装饰者的方法实现，从而也保留了被装饰者的功能。可以看到，具体组件应当是装饰层次的最低层，因为只有具体组件的方法实现不需要依赖于其它对象。</p>
+<p><img src="/assets/137c593d-0a9e-47b8-a9e6-b71f540b82dd.png" alt="img"></p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>以饮料为例：</p>
+<ul>
+<li>装饰者：调料，Decorator。</li>
+<li>具体组件：饮料，ConcreteCompoent。</li>
 </ul>
 <p>饮料可以动态添加新的调料，添加新的功能并不需要修改代码。</p>
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h3><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><ul>
-<li>设计父类<strong>接口</strong>Component<ul>
-<li>有着公有的一个方法</li>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
+<li>在不影响其他对象的情况下，以动态、透明的方式给单个对象添加职责。<ul>
+<li>通过使用不同装饰类以及这些装饰类的排列组合，可以实现不同的效果。</li>
 </ul>
 </li>
-<li>设计装饰者<strong>类</strong>Decorator实现接口Component</li>
-<li>设计具体组件<strong>抽象类</strong>ConcreteComponet实现接口Component</li>
-<li>实现具体组件<strong>类</strong>继承自抽象类<ul>
-<li>类可以自由添加Decorator，可通过set或者构造器注入</li>
+<li>这些职责还可以动态地撤销。</li>
+<li>提供了比继承更有弹性的替代方案。<ul>
+<li>继承在实现时就已经确定了。</li>
+</ul>
+</li>
+<li>当不能采用生成子类的方法进行扩充时。<ul>
+<li>如可能有大量独立的扩展，每一种组合将产生大量的子类，使得子类数目爆炸增长。</li>
+<li>可能因为类定义被隐藏或类定义不能用来生成子类。</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><h2 id="协作"><a href="#协作" class="headerlink" title="协作"></a>协作</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="/assets/1566438131434.png" alt="1566438131434"></p>
+<h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><ul>
+<li>Component。定义一个对象接口，可以给这些对象动态地添加职责。</li>
+<li>ConcreteComponent。定义一个对象，可以给这个对象添加就一些职责。</li>
+<li>Decorator。维持一个指向Compinent对象的指针，并定义一个与Component接口一致的接口。</li>
+<li>ConcreteDecorator。向组件添加职责。</li>
+</ul>
+<h3 id="协作-1"><a href="#协作-1" class="headerlink" title="协作"></a>协作</h3><ul>
+<li>类关系。</li>
+<li>逻辑关系。<ul>
+<li>Decorator将请求转发给它的Component对象，并有可能在转发请求前后执行一些附加的动作。</li>
+</ul>
+</li>
+</ul>
+<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><p>优点：</p>
+<ul>
+<li>比静态继承更为灵活，提供了更灵活的向对象添加职责的方式，可以采用添加和分离的方式，用装饰在运行时刻增加和删除职责。<ul>
+<li>继承要求为每个添加的职责创建一个新的子类，增加了系统复杂性。</li>
+</ul>
+</li>
+<li>避免在层次结构高层具有太多的特征。Decorator模式提供了一种即用即付的方式添加职责。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>会出现更多的代码，更多的类，增加程序复杂性。</li>
+<li>动态装饰时，多层装饰时会更复杂。<ul>
+<li>比继承而言，类可能会少但对象会更多。</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>接口的一致性。装饰对象的接口必须与它所装饰的Component的接口是一致的，因此所有的ConcreteDecorator类都必须有一个公共的父类。</li>
+<li>省略抽象的Decorator。如果只添加一个职责，则没有必要定义抽象。</li>
+<li>保持Component类的简单性。</li>
+<li>改变对象外壳与改变对象内核。可以将Decorator看作一个对象的外壳，它可以改变这个对象的行为。另一种方式是改变对象的内核，即Strategy。<ul>
+<li>当Component很庞大，则使用Decorator代价太高，此时应该使用Strategy模式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><ul>
+<li>设计父类<strong>接口</strong>Component：<ul>
+<li>有着公有的一个方法。</li>
+</ul>
+</li>
+<li>设计装饰者<strong>类</strong>Decorator实现接口Component。</li>
+<li>设计具体组件<strong>抽象类</strong>ConcreteComponet实现接口Component。</li>
+<li>实现具体组件<strong>类</strong>继承自抽象类：<ul>
+<li>类可以自由添加Decorator，可通过set或者构造器注入。</li>
 </ul>
 </li>
 </ul>
 <p>装饰者即与需要装饰的对象实现同一个接口，并且在装饰者当中留有一个接口的引用用于引用被装饰对象。</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>设计不同种类的饮料，饮料可以添加配料，比如可以添加牛奶，并且支持动态添加新配料。每增加一种配料，该饮料的价格就会增加，要求计算一种饮料的价格。</p>
-<p>下图表示在 DarkRoast 饮料上新增新添加 Mocha 配料，之后又添加了 Whip 配料。DarkRoast 被 Mocha 包裹，Mocha 又被 Whip 包裹。它们都继承自相同父类，都有 cost() 方法，外层类的 cost() 方法调用了内层类的 cost() 方法。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>设计不同种类的饮料，饮料可以添加配料，比如可以添加牛奶，并且支持动态添加新配料。每增加一种配料，该饮料的价格就会增加，要求计算一种饮料的价格。</p>
+<p>下图表示在DarkRoast饮料上新增新添加Mocha配料，之后又添加了Whip配料。DarkRoast被Mocha包裹，Mocha又被Whip包裹。它们都继承自相同父类，都有<code>cost()</code>方法，外层类的<code>cost()</code>方法调用了内层类的<code>cost()</code>方法。</p>
 <p><img src="/assets/c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg" alt="img"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//最上层统一接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//装饰者</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DarkRoast</span> <span class="keyword">implements</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HouseBlend</span> <span class="keyword">implements</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//装饰者</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HouseBlend</span> <span class="keyword">implements</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">cost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//组件抽象类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">CondimentDecorator</span> <span class="keyword">implements</span> <span class="title">Beverage</span> </span>&#123;</span><br><span class="line">    <span class="comment">//需要包装的装饰者</span></span><br><span class="line">    <span class="keyword">protected</span> Beverage beverage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -422,7 +483,12 @@
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Beverage beverage = <span class="keyword">new</span> HouseBlend();</span><br><span class="line">        beverage = <span class="keyword">new</span> Mocha(beverage);</span><br><span class="line">        beverage = <span class="keyword">new</span> Milk(beverage);</span><br><span class="line">        System.out.println(beverage.cost());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">3.0</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><h4 id="与其他的区别"><a href="#与其他的区别" class="headerlink" title="与其他的区别"></a>与其他的区别</h4><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<h1 id="相关模式"><a href="#相关模式" class="headerlink" title="相关模式"></a>相关模式</h1><ul>
+<li>Adapter。装饰只改变对象的职责而不改变接口，适配器将给对象一个全新的接口。</li>
+<li>Composite。可以将装饰视为一个退化的，仅有一个组件的组合，装饰仅给对象添加一些额外的职责，它的目标不在于对象聚集。</li>
+<li>Strategy。策略模式使得可以改变对象的内核，装饰使得可以改变对象的外表。</li>
+</ul>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -508,7 +574,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -559,9 +625,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -664,9 +728,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -687,7 +749,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#装饰者模式"><span class="nav-number">1.</span> <span class="nav-text">装饰者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用（作用）"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要用（作用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概述"><span class="nav-number">1.4.</span> <span class="nav-text">基础概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.4.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类，各个分类是什么"><span class="nav-number">1.4.2.</span> <span class="nav-text">分类，各个分类是什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.5.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺"><span class="nav-number">1.5.1.</span> <span class="nav-text">优缺</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">1.5.2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现步骤"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底层原理"><span class="nav-number">1.5.3.</span> <span class="nav-text">底层原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与其他的区别"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">与其他的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思想"><span class="nav-number">1.5.4.</span> <span class="nav-text">设计思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶"><span class="nav-number">1.6.</span> <span class="nav-text">进阶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反省总结"><span class="nav-number">1.7.</span> <span class="nav-text">反省总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#装饰者模式"><span class="nav-number">1.</span> <span class="nav-text">装饰者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题案例"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概述"><span class="nav-number">1.2.</span> <span class="nav-text">基础概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.2.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性"><span class="nav-number">1.3.1.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.3.2.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协作"><span class="nav-number">1.4.</span> <span class="nav-text">协作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构"><span class="nav-number">1.4.1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参与者"><span class="nav-number">1.4.2.</span> <span class="nav-text">参与者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协作-1"><span class="nav-number">1.4.3.</span> <span class="nav-text">协作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权衡"><span class="nav-number">1.5.</span> <span class="nav-text">权衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">1.6.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.6.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">1.6.2.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.6.3.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关模式"><span class="nav-number">2.</span> <span class="nav-text">相关模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶"><span class="nav-number">2.1.</span> <span class="nav-text">进阶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反省总结"><span class="nav-number">2.2.</span> <span class="nav-text">反省总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -723,7 +785,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:02</span>
+    <span title="站点阅读时长">35:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

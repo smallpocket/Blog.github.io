@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="模板方法模式提出问题当多个类当中存在共同或相似的算法，因此有一些重复的代码块（方法）时，因此在这些类当中就有着重复的代码。 为什么要用（作用） 封装算法块，使得子类可以在任何时候都可以将自己挂接进运算里。  应用场景基础概述是什么 模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤  模板方法 骨架prepa">
+  <meta name="description" content="模板方法模式提出问题当多个类当中存在共同或相似的算法，因此有一些重复的代码块（方法）时，因此在这些类当中就有着重复的代码。 希望定义一个操作中的算法骨架，而将一些步骤延迟到子类中。 基础概述是什么 模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤  模板方法 骨架prepareRecipe()，步骤即是算法">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式：模板方法模式">
 <meta property="og:url" content="http://yoursite.com/2019/04/17/Java/设计模式/设计模式：模板方法模式/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="模板方法模式提出问题当多个类当中存在共同或相似的算法，因此有一些重复的代码块（方法）时，因此在这些类当中就有着重复的代码。 为什么要用（作用） 封装算法块，使得子类可以在任何时候都可以将自己挂接进运算里。  应用场景基础概述是什么 模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤  模板方法 骨架prepa">
+<meta property="og:description" content="模板方法模式提出问题当多个类当中存在共同或相似的算法，因此有一些重复的代码块（方法）时，因此在这些类当中就有着重复的代码。 希望定义一个操作中的算法骨架，而将一些步骤延迟到子类中。 基础概述是什么 模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤  模板方法 骨架prepareRecipe()，步骤即是算法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1559632429677.png">
-<meta property="og:updated_time" content="2019-08-01T12:01:53.098Z">
+<meta property="og:updated_time" content="2019-08-22T02:07:57.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：模板方法模式">
-<meta name="twitter:description" content="模板方法模式提出问题当多个类当中存在共同或相似的算法，因此有一些重复的代码块（方法）时，因此在这些类当中就有着重复的代码。 为什么要用（作用） 封装算法块，使得子类可以在任何时候都可以将自己挂接进运算里。  应用场景基础概述是什么 模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤  模板方法 骨架prepa">
+<meta name="twitter:description" content="模板方法模式提出问题当多个类当中存在共同或相似的算法，因此有一些重复的代码块（方法）时，因此在这些类当中就有着重复的代码。 希望定义一个操作中的算法骨架，而将一些步骤延迟到子类中。 基础概述是什么 模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤  模板方法 骨架prepareRecipe()，步骤即是算法">
 <meta name="twitter:image" content="http://yoursite.com/assets/1559632429677.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/17/Java/设计模式/设计模式：模板方法模式/">
 
@@ -326,7 +326,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 20:01:53" itemprop="dateModified" datetime="2019-08-01T20:01:53+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-22 10:07:57" itemprop="dateModified" datetime="2019-08-22T10:07:57+08:00">2019-08-22</time>
               </span>
             
           
@@ -354,7 +354,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.6k</span>
+              <span title="本文字数">1.9k</span>
             </span>
           
             <span class="post-meta-item">
@@ -378,10 +378,8 @@
 
       
         <h1 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><p>当多个类当中存在共同或相似的算法，因此有一些重复的代码块（方法）时，因此在这些类当中就有着重复的代码。</p>
-<h2 id="为什么要用（作用）"><a href="#为什么要用（作用）" class="headerlink" title="为什么要用（作用）"></a>为什么要用（作用）</h2><ul>
-<li>封装算法块，使得子类可以在任何时候都可以将自己挂接进运算里。</li>
-</ul>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><blockquote>
+<p>希望定义一个操作中的算法骨架，而将一些步骤延迟到子类中。</p>
+<h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><blockquote>
 <p>模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法结构的情况下，重新定义算法中的某些步骤</p>
 </blockquote>
 <p><strong><em>模板方法</em></strong></p>
@@ -396,12 +394,42 @@
 </ul>
 <p>一些方法由超类处理，即这个类，例如boilWater()</p>
 <p>而另一些方法由子类处理，这些方法加上abstract标识，如addConiments()</p>
-<h3 id="分类，各个分类是什么"><a href="#分类，各个分类是什么" class="headerlink" title="分类，各个分类是什么"></a>分类，各个分类是什么</h3><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="优缺"><a href="#优缺" class="headerlink" title="优缺"></a>优缺</h3><ul>
-<li>算法存在与模板方法类当中，拥有算法并保护算法，并且容易修改。专注于算法本身</li>
-<li>模板方法对于子类而言可以将代码的复用最大化。</li>
-<li>提供了算法框架，新增添的类型可以容易加入</li>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
+<li><p>封装算法块，使得子类可以在任何时候都可以将自己挂接进运算里。</p>
+</li>
+<li><p>一次性实现一个算法的不变的部分，并将可变的行为留给子类来实现。</p>
+</li>
+<li><p>各子类中的公共的行为应该被提取出来并集中到一个父类中以避免代码重复。</p>
+</li>
+<li><p>控制子类扩展，模板方法只在特定点调用“hook”操作，这样就只允许在这些点进行扩展。</p>
+</li>
 </ul>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模板方法的模板类，作为基类，子类必须事先其操作</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">//模板方法，final避免子类改变算法顺序</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">templateMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义算法步骤，每个步骤由一个方法代表</span></span><br><span class="line">        primitiveOperation1();</span><br><span class="line">        primitiveOperation2();</span><br><span class="line">        concreteOperation1();</span><br><span class="line">        hook();</span><br><span class="line">        <span class="comment">//利用钩子做判断影响算法流程</span></span><br><span class="line">        <span class="comment">//if(hook())&#123;</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//子类需要事先的操作</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">primitiveOperation1</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">primitiveOperation2</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//由超类进行的实现</span></span><br><span class="line">    <span class="comment">//算法的默认流程</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">concreteOperation1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//一个空的方法，作为钩子，子类视情况决定是否覆盖。</span></span><br><span class="line">    <span class="comment">//子类有能力在算法的不同点进行挂钩</span></span><br><span class="line">    <span class="comment">//当然也可以不是空的</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hook</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h3><h2 id="协作"><a href="#协作" class="headerlink" title="协作"></a>协作</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>UML类图</p>
+<p><img src="/assets/1559632429677.png" alt="1559632429677"></p>
+<h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><ul>
+<li>AbstractClass。抽象类，定义抽象的原语操作，具体的子类将重定义它们以实现一个算法的各步骤。<ul>
+<li>实现一个模板方法，定义一个算法的骨架，该模板方法不仅调用原语操作，也调用定义在AbstractClass或其他对象中的操作。</li>
+</ul>
+</li>
+<li>ConcreteClass。具体类，实现原语操作以完成算法中与特定子类相关的步骤。</li>
+</ul>
+<h3 id="协作-1"><a href="#协作-1" class="headerlink" title="协作"></a>协作</h3><ul>
+<li>类关系</li>
+<li>逻辑关系：<ul>
+<li>ConcreteClass靠Abstract来实现算法中不变的步骤。</li>
+</ul>
+</li>
+</ul>
+<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><ul>
+<li>算法存在与模板方法类当中，拥有算法并保护算法，并且容易修改。专注于算法本身。</li>
+<li>模板方法对于子类而言可以将代码的复用最大化。</li>
+<li>提供了算法框架，新增添的类型可以容易加入。</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>尽量减少原语操作。</li>
+<li>命名约定。</li>
+</ul>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模板方法的模板类，作为基类，子类必须事先其操作</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">//模板方法，final避免子类改变算法顺序</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">templateMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义算法步骤，每个步骤由一个方法代表</span></span><br><span class="line">        primitiveOperation1();</span><br><span class="line">        primitiveOperation2();</span><br><span class="line">        concreteOperation1();</span><br><span class="line">        hook();</span><br><span class="line">        <span class="comment">//利用钩子做判断影响算法流程</span></span><br><span class="line">        <span class="comment">//if(hook())&#123;</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//子类需要事先的操作</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">primitiveOperation1</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">primitiveOperation2</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//由超类进行的实现</span></span><br><span class="line">    <span class="comment">//算法的默认流程</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">concreteOperation1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//一个空的方法，作为钩子，子类视情况决定是否覆盖。</span></span><br><span class="line">    <span class="comment">//子类有能力在算法的不同点进行挂钩</span></span><br><span class="line">    <span class="comment">//当然也可以不是空的</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hook</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong><em>钩子</em></strong></p>
 <ul>
@@ -409,9 +437,8 @@
 <li>钩子对子类实现并不重要时可以忽略</li>
 <li>钩子可以让子类能够有机会对模板方法中某些即将发生的步骤做出反应</li>
 </ul>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><h4 id="与其他的区别"><a href="#与其他的区别" class="headerlink" title="与其他的区别"></a>与其他的区别</h4><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><p>UML类图</p>
-<p><img src="/assets/1559632429677.png" alt="1559632429677"></p>
-<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="使用Lambda"><a href="#使用Lambda" class="headerlink" title="使用Lambda"></a>使用Lambda</h3><h2 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h2 id="相关模式"><a href="#相关模式" class="headerlink" title="相关模式"></a>相关模式</h2><h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p>使用Lambda</p>
+<h3 id="反省总结"><a href="#反省总结" class="headerlink" title="反省总结"></a>反省总结</h3><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -497,7 +524,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -548,9 +575,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -653,9 +678,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -676,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模板方法模式"><span class="nav-number">1.</span> <span class="nav-text">模板方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用（作用）"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要用（作用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概述"><span class="nav-number">1.4.</span> <span class="nav-text">基础概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.4.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类，各个分类是什么"><span class="nav-number">1.4.2.</span> <span class="nav-text">分类，各个分类是什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.5.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺"><span class="nav-number">1.5.1.</span> <span class="nav-text">优缺</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">1.5.2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现步骤"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底层原理"><span class="nav-number">1.5.3.</span> <span class="nav-text">底层原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与其他的区别"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">与其他的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思想"><span class="nav-number">1.5.4.</span> <span class="nav-text">设计思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶"><span class="nav-number">1.6.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Lambda"><span class="nav-number">1.6.1.</span> <span class="nav-text">使用Lambda</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反省总结"><span class="nav-number">1.7.</span> <span class="nav-text">反省总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模板方法模式"><span class="nav-number">1.</span> <span class="nav-text">模板方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概述"><span class="nav-number">1.2.</span> <span class="nav-text">基础概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么"><span class="nav-number">1.2.1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性"><span class="nav-number">1.3.1.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例1"><span class="nav-number">1.3.2.</span> <span class="nav-text">案例1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协作"><span class="nav-number">1.4.</span> <span class="nav-text">协作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构"><span class="nav-number">1.4.1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参与者"><span class="nav-number">1.4.2.</span> <span class="nav-text">参与者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协作-1"><span class="nav-number">1.4.3.</span> <span class="nav-text">协作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权衡"><span class="nav-number">1.5.</span> <span class="nav-text">权衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">1.6.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.6.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">1.6.2.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.6.3.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关模式"><span class="nav-number">1.7.</span> <span class="nav-text">相关模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶"><span class="nav-number">1.7.1.</span> <span class="nav-text">进阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反省总结"><span class="nav-number">1.7.2.</span> <span class="nav-text">反省总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -712,7 +735,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:02</span>
+    <span title="站点阅读时长">35:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

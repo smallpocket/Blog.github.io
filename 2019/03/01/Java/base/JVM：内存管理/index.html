@@ -74,7 +74,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1552120022744.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552121101706.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552131024681.png">
-<meta property="og:updated_time" content="2019-08-11T07:52:33.331Z">
+<meta property="og:updated_time" content="2019-08-20T13:12:12.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM：内存管理">
 <meta name="twitter:description" content="java内存区域与内存溢出异常Java将内存扩展的权利交给了JVM，虚拟机自动内存管理机制的帮助下，不再需要为每个new操作写配对的delete/free代码，不容易出现内存泄露与内存溢出问题。如果出现问题，如果不了解JVM如何使用内存，那么排查错误将会成为一项异常艰难的工作。 运行时数据区域 Java虚拟机在执行Java程序的过程中，会将它管理的内存划分为若干个不同的数据区域。 区域有各自的用途">
@@ -334,7 +334,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-11 15:52:33" itemprop="dateModified" datetime="2019-08-11T15:52:33+08:00">2019-08-11</time>
+                <time title="修改时间：2019-08-20 21:12:12" itemprop="dateModified" datetime="2019-08-20T21:12:12+08:00">2019-08-20</time>
               </span>
             
           
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">11k</span>
+              <span title="本文字数">12k</span>
             </span>
           
             <span class="post-meta-item">
@@ -391,16 +391,17 @@
 <li>区域有各自的用途、创建时间、销毁时间。</li>
 <li>有的区域随着虚拟机进程的启动而存在，有的区域随着用户线程的启动和结束而建立和销毁。</li>
 </ul>
-<p>区域包括</p>
+<p>区域包括：</p>
 <p><img src="/assets/1564413541987.png" alt="1564413541987"></p>
 <blockquote>
 <p>对于JVM的内存区域，其实远远不止堆内存、栈内存，这种方式的流行只是说明大多数程序员最关注的、与对象内存分配关系最密切的内存区域是这两块。</p>
 </blockquote>
 <p><img src="/assets/1564713632072.png" alt="1564713632072"></p>
-<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><ul>
-<li>各个线程共享的内存区域，存储了每一个类的结构信息，它存储了已被虚拟机加载的<strong>类信息、常量、静态变量、class文件、即时编译器编译后的代码、方法的字节码内容等数据</strong></li>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>与堆相对，堆存储实例对象，而方法区存储除实例以外的全部静态资源、其他资源，并且是会被多个线程访问的。</p>
+<ul>
+<li>各个线程共享的内存区域，存储了每一个类的结构信息，它存储了已被虚拟机加载的<strong>类信息、常量、静态变量、class文件、即时编译器编译后的代码、方法的字节码内容等数据</strong>。</li>
 <li>垃圾回收器也会对这部分进行回收，如常量池的清理和类型的卸载。是Non-Heap、永久代。</li>
-<li>可以支持动态扩展与收缩，当无法满足内存分配需求时，OutOfMemoryError异常</li>
+<li>可以支持动态扩展与收缩，当无法满足内存分配需求时，OutOfMemoryError异常。</li>
 </ul>
 <p>可以以方法区只有一个类的角度去思考。</p>
 <p><strong><em>运行时常量池</em></strong></p>
@@ -411,8 +412,8 @@
 <li>对其他类型、字段和方法的符号引用，以索引进行访问。对于该类型的字段可能必须在运行期解析后才能获得直接引用，即多态的实现。</li>
 </ul>
 </li>
-<li>相对于Class文件常量池的另一个重要特征时具备动态性，Java并不要求常量一定在编译期才能产生，即并非Class文件中常量池的内容才能进入该区域。运行期间也可以将新的常量放入池中，例如String的intern()</li>
-<li>当无法满足内存分配需求时，OutOfMemoryError异常</li>
+<li>相对于Class文件常量池的另一个重要特征时具备动态性，Java并不要求常量一定在编译期才能产生，即并非Class文件中常量池的内容才能进入该区域。运行期间也可以将新的常量放入池中，例如String的intern()。</li>
+<li>当无法满足内存分配需求时，OutOfMemoryError异常。</li>
 </ul>
 <p><strong><em>类型信息</em></strong></p>
 <p>类型的全限定名、类型直接超类的全限定名、直接接口的全限定名列表、该类型是类信息还是接口类型、类型的访问修饰符。</p>
@@ -434,68 +435,68 @@
 <p>是为了提高访问效率，JVM对每个加载的非虚拟类的类型信息中都添加了一个方法表，方法表是一组对类实例方法的直接引用（包括从父类继承的方法），JVM通过方法表快速激活实例方法。</p>
 <p><img src="/assets/20170818151037199.png" alt></p>
 <h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><ul>
-<li>虚拟机管理的内存中最大的一块，在虚拟机启动时创建，所有线程共享<ul>
+<li>虚拟机管理的内存中最大的一块，在虚拟机启动时创建，所有线程共享。<ul>
 <li>可以处于物理上不连续的内存空间中，只要逻辑上时连续的即可。</li>
 </ul>
 </li>
-<li><strong>存放对象实例</strong>，几乎所有对象实例都在这里分配内存<ul>
+<li><strong>存放对象实例</strong>，几乎所有对象实例都在这里分配内存。<ul>
 <li>随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术会导致一部分对象不会分配到堆上。</li>
 </ul>
 </li>
-<li>垃圾收集器管理的主要区域，也称为GC堆<ul>
-<li>从内存回收的角度，使用分代收集算法</li>
-<li>堆可分为新生代和老年代</li>
-<li>Eden空间、From Survivor空间、To Survivor空间</li>
-<li>从内存分配的角度，划分出多个线程私有的分配缓冲区TLAB</li>
+<li>垃圾收集器管理的主要区域，也称为GC堆。<ul>
+<li>从内存回收的角度，使用分代收集算法。</li>
+<li>堆可分为新生代和老年代。</li>
+<li>Eden空间、From Survivor空间、To Survivor空间。</li>
+<li>从内存分配的角度，划分出多个线程私有的分配缓冲区TLAB。</li>
 </ul>
 </li>
-<li>可以支持动态扩展，并在不需要过多空间时自动收缩，其使用的内存不需要保证是连续的。当堆无法再扩展OutOfMemoryError</li>
+<li>可以支持动态扩展，并在不需要过多空间时自动收缩，其使用的内存不需要保证是连续的。当堆无法再扩展OutOfMemoryError。</li>
 </ul>
 <h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><ul>
-<li><p>线程私有，生命周期与线程相同。描述Java方法执行的内存模型（栈内存）。每个方法在执行的同时都会<strong>创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息</strong>。</p>
+<li><p>线程私有，生命周期与线程相同。描述Java方法执行的内存模型（栈内存），每个方法在执行的同时都会<strong>创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息</strong>。</p>
 </li>
-<li><p>一个方法从调用至完成则对应一个栈帧在虚拟机栈入栈到出栈。除了栈帧的出栈与入栈外，JVM不会再受其他因素的影响，因此<strong>栈帧可以在堆中分配</strong>，JVM栈使用的内存不需要保证是连续的</p>
+<li><p>一个方法从调用至完成则对应一个栈帧在虚拟机栈入栈到出栈。除了栈帧的出栈与入栈外，JVM不会再受其他因素的影响，因此<strong>栈帧可以在堆中分配</strong>，JVM栈使用的内存不需要保证是连续的。</p>
 </li>
-<li><p>线程请求栈深度大于虚拟机允许深度，StackOverflowError异常</p>
+<li><p>线程请求栈深度大于虚拟机允许深度，StackOverflowError异常。</p>
 </li>
-<li><p>大部分虚拟机允许动态扩展，如果扩展无法申请到足够内存，则OutOfMemoryError</p>
+<li><p>大部分虚拟机允许动态扩展，如果扩展无法申请到足够内存，则OutOfMemoryError。</p>
 </li>
 </ul>
 <p><strong><em>栈帧的组成</em></strong></p>
-<p>参见JVM：Java虚拟机规范  </p>
+<p>参见JVM：Java虚拟机规范。  </p>
 <p>  <img src="/assets/ff5b89ac-798e-4fbc-b0ce-da2fc2358570.jpg" alt="img"></p>
-<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>其功能与虚拟机栈发挥作用非常类似，虚拟机使用到的Native方法服务，不一定是Java实现的。结构也于虚拟机栈一致</p>
-<p>本地方法栈会抛出StackOverflawError和OutOfMemoryError异常</p>
+<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>其功能与虚拟机栈发挥作用非常类似，虚拟机使用到的Native方法服务，不一定是Java实现的。结构也于虚拟机栈一致。</p>
+<p>本地方法栈会抛出StackOverflawError和OutOfMemoryError异常。</p>
 <h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>程序计数器是一块较小的内存空间（线程私有），<strong>可以看作时当前线程所执行的字节码的行号指示器</strong>。如果共享，则无法准确的执行当前线程需要执行的语句。</p>
-<p>在JVM的概念模型当中（实际虚拟机可能以更高效的方式实现），字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令。例如分支、循环、跳转、异常处理、线程恢复等基本功能</p>
-<p>当执行Java方法时，其记录的是JVM正在执行的字节码指向的地址。如果执行本地方法时，值为undefined</p>
+<p>在JVM的概念模型当中（实际虚拟机可能以更高效的方式实现），字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令。例如分支、循环、跳转、异常处理、线程恢复等基本功能。</p>
+<p>当执行Java方法时，其记录的是JVM正在执行的字节码指向的地址。如果执行本地方法时，值为undefined。</p>
 <p>CPU通过时分复用实现多线程，对确定时刻，一个CPU只会执行一条线程中的指令。每个线程都有一个独立的程序计数器。</p>
 <h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><ul>
-<li>不是虚拟机运行时数据区的一部分，也不是JVM定义的内存区域，但是可能导致OutOfMemoryError</li>
-<li>NIO，基于通道与缓冲区的IO方式，使用Native函数库直接分配堆外内存，通过一个堆中的对象引用<ul>
-<li>避免了在Java堆与native堆中来回复制</li>
+<li>不是虚拟机运行时数据区的一部分，也不是JVM定义的内存区域，但是可能导致OutOfMemoryError。</li>
+<li>NIO，基于通道与缓冲区的IO方式，使用Native函数库直接分配堆外内存，通过一个堆中的对象引用。<ul>
+<li>避免了在Java堆与native堆中来回复制。</li>
 </ul>
 </li>
-<li>不受Java堆大小限制，受本机总内存等限制</li>
+<li>不受Java堆大小限制，受本机总内存等限制。</li>
 </ul>
-<h2 id="Hotspot虚拟机对象揭秘"><a href="#Hotspot虚拟机对象揭秘" class="headerlink" title="Hotspot虚拟机对象揭秘"></a>Hotspot虚拟机对象揭秘</h2><p>虚拟机内存中的数据如何创建、如何布局、如何访问等问题</p>
-<p>揭秘Hotspot虚拟机在Java堆中对象分配、布局和访问全过程</p>
-<h3 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h3><p>对于普通的Java对象，不包括数组和Class对象</p>
+<h2 id="Hotspot虚拟机对象揭秘"><a href="#Hotspot虚拟机对象揭秘" class="headerlink" title="Hotspot虚拟机对象揭秘"></a>Hotspot虚拟机对象揭秘</h2><p>虚拟机内存中的数据如何创建、如何布局、如何访问等问题。</p>
+<p>揭秘Hotspot虚拟机在Java堆中对象分配、布局和访问全过程。</p>
+<h3 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h3><p>对于普通的Java对象，不包括数组和Class对象。</p>
 <ul>
-<li>虚拟机遇到一条new指令，检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查一个符号引用代表的类是否已经被加载、解析和初始化过<ul>
-<li>如果没有，则必须先执行相应的类加载过程</li>
+<li>虚拟机遇到一条new指令，检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查一个符号引用代表的类是否已经被加载、解析和初始化过。<ul>
+<li>如果没有，则必须先执行相应的类加载过程。</li>
 </ul>
 </li>
-<li>为新生对象分配内存，所需内存在类加载完成后便可完全确定。将一块大小确定的内存从Java堆当中划分出来<ul>
-<li>划分内存的方法</li>
-<li>指针碰撞：Java堆中<strong>内存绝对规整</strong>（所有已用在一边，空闲在另一边），中间一个指针作为分界点的知识点，即将指针向空闲移动一段距离</li>
-<li>空闲列表：<strong>内存不规整</strong>，维护一个记录可用内存的列表，分配一个足够大的空间</li>
+<li>为新生对象分配内存，所需内存在类加载完成后便可完全确定。将一块大小确定的内存从Java堆当中划分出来。<ul>
+<li>划分内存的方法。</li>
+<li>指针碰撞：Java堆中<strong>内存绝对规整</strong>（所有已用在一边，空闲在另一边），中间一个指针作为分界点的知识点，即将指针向空闲移动一段距离。</li>
+<li>空闲列表：<strong>内存不规整</strong>，维护一个记录可用内存的列表，分配一个足够大的空间。</li>
 <li>内存是否规整<strong>由垃圾收集器是否带有压缩整理的功能决定</strong>，例如Serial、ParNew等带Compact则采用指针碰撞，而CMS这种基于Mark-Sweep的通常采用空闲列表。</li>
 </ul>
 </li>
 <li>分配内存空间可能存在线程安全问题，对象创建在虚拟机中是非常频繁的行为。<ul>
-<li>对分配内存空间的动作做同步处理，虚拟机采用CAS搭配失败重试的方法</li>
-<li>把内存分配的动作按线程划分在不同的空间中进行。设定-XX:+/-UseTLAB以开启<ul>
+<li>对分配内存空间的动作做同步处理，虚拟机采用CAS搭配失败重试的方法。</li>
+<li>把内存分配的动作按线程划分在不同的空间中进行。设定-XX:+/-UseTLAB以开启。<ul>
 <li>每个线程在Java堆中预先分配一小块内存，称为本地线程分配缓冲（TLAB），线程在各自的TLAB上分配内存。当TLAB用完，才需要同步锁定。</li>
 </ul>
 </li>
@@ -503,51 +504,51 @@
 </li>
 <li>虚拟机将分配到的内存空间初始化为0（不包括对象头），此时读取实例字段值为0。如果使用TLAB，则可以提前到TLAB分配时进行。</li>
 <li>对对象进行必要的设置，<strong>存放在对象头中</strong>。如对象是哪个类的实例、如何找到类的元数据信息、对象的哈希码、对象的GC分代年龄等信息。根据JVM当前运行状态不同，是否启用偏向锁等。</li>
-<li>从虚拟机视角看，对象已经产生。从程序视角看，对象刚刚开始，即对象进行init，进行构造</li>
+<li>从虚拟机视角看，对象已经产生。从程序视角看，对象刚刚开始，即对象进行init，进行构造。</li>
 </ul>
 <h3 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h3><p>对象内存中存储的布局分为三部分</p>
 <ul>
-<li>对象头Header<ul>
-<li>Mark Word存储对象自身的运行时数据。哈希码、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳等。在32位、64位虚拟机长度为32bit、64bit<ul>
+<li>对象头Header：<ul>
+<li>Mark Word存储对象自身的运行时数据。哈希码、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳等。在32位、64位虚拟机长度为32bit、64bit。<ul>
 <li>Mark Word时一个非固定的数据结构，以便在极小的空间内存储尽量多的信息。会根据对象的状态复用自己的存储空间。</li>
 <li><img src="/assets/1564449805149.png" alt="1564449805149"></li>
 </ul>
 </li>
-<li>类型指针。对象指向它类元数据的指针，JVM通过这个指针来确定这个对象是那个类的实例<ul>
-<li>并不是所有JVM实现都必须在对象数据上保留类型指针，即查找对象的元数据不一定经过对象本身</li>
-<li>如果是数组，则记录数组长度的数据</li>
+<li>类型指针。对象指向它类元数据的指针，JVM通过这个指针来确定这个对象是那个类的实例。<ul>
+<li>并不是所有JVM实现都必须在对象数据上保留类型指针，即查找对象的元数据不一定经过对象本身。</li>
+<li>如果是数组，则记录数组长度的数据。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>实例数据Instance Data<ul>
-<li>对象真正存储的有效信息</li>
-<li>存储顺序受虚拟机分配策略参数与字段在Java源码中定义顺序的影响<ul>
-<li>longs/double、ints、shorts/chars、bytes/booleans、oops。相同宽度的字段被分配到一起</li>
-<li>父类变量会出现在子类前（CompactFields为true（默认），子类中较窄的变量也可能插入到父类变量的空隙中）</li>
+<li>实例数据Instance Data：<ul>
+<li>对象真正存储的有效信息。</li>
+<li>存储顺序受虚拟机分配策略参数与字段在Java源码中定义顺序的影响。<ul>
+<li>longs/double、ints、shorts/chars、bytes/booleans、oops。相同宽度的字段被分配到一起。</li>
+<li>父类变量会出现在子类前（CompactFields为true（默认），子类中较窄的变量也可能插入到父类变量的空隙中）。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>对齐填充Padding<ul>
-<li>并不必然存在，起到占位符作用</li>
-<li>Hotspot自动内存管理相同要求对象的其实对这必须为8字节的整数倍</li>
+<li>对齐填充Padding：<ul>
+<li>并不必然存在，起到占位符作用。</li>
+<li>Hotspot自动内存管理相同要求对象的其实对这必须为8字节的整数倍。</li>
 </ul>
 </li>
 </ul>
-<h3 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h3><p>Java程序需要通过栈上的reference数据来操作堆上的具体对象。解释引用通过何种方式去定位、访问堆中的对象的具体位置。依据JVM实现而定</p>
+<h3 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h3><p>Java程序需要通过栈上的reference数据来操作堆上的具体对象。解释引用通过何种方式去定位、访问堆中的对象的具体位置。依据JVM实现而定。</p>
 <ul>
-<li>句柄<ul>
-<li>Java堆当中划分一块内存作为句柄池，reference中存储的是对象的句柄地址</li>
-<li>句柄中包含了对象实例数据域类型数据各自的地址信息</li>
-<li>稳定的句柄地址，即使对象被移动（垃圾收集时，非常普遍），也不会修改reference</li>
+<li>句柄：<ul>
+<li>Java堆当中划分一块内存作为句柄池，reference中存储的是对象的句柄地址。</li>
+<li>句柄中包含了对象实例数据域类型数据各自的地址信息。</li>
+<li>稳定的句柄地址，即使对象被移动（垃圾收集时，非常普遍），也不会修改reference。</li>
 <li><img src="/assets/1552120017803.png" alt="1552120017803"></li>
 </ul>
 </li>
-<li>直接指针<ul>
-<li>reference存储的就是对象地址</li>
-<li>Java堆对象的布局中需要考虑如何放置访问类型数据的相关信息</li>
-<li>速度快，节约一次指针定位，对于非常频繁的对象访问有较好的提升。Hotspot使用的方式</li>
+<li>直接指针：<ul>
+<li>reference存储的就是对象地址。</li>
+<li>Java堆对象的布局中需要考虑如何放置访问类型数据的相关信息。</li>
+<li>速度快，节约一次指针定位，对于非常频繁的对象访问有较好的提升。<strong>Hotspot</strong>使用的方式。</li>
 <li><img src="/assets/1552120022744.png" alt="1552120022744"></li>
 </ul>
 </li>
@@ -555,79 +556,78 @@
 <h1 id="垃圾收集器与内存分配策略"><a href="#垃圾收集器与内存分配策略" class="headerlink" title="垃圾收集器与内存分配策略"></a>垃圾收集器与内存分配策略</h1><p>当需要排查各种内存溢出、内存泄漏问题时，当垃圾收集成为系统达到更高并发量的瓶颈是，就需要对垃圾回收技术实施必要的监控和调节。</p>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>垃圾收集GC需要完成的三件事情：</p>
 <ul>
-<li>哪些内存需要回收</li>
-<li>什么时候回收</li>
-<li>如何回收</li>
+<li>哪些内存需要回收。</li>
+<li>什么时候回收。</li>
+<li>如何回收。</li>
 </ul>
 <p>无需关注的内存：对于程序计数器、虚拟机栈、本地方法栈。随线程而生灭，一个栈帧内分配多少内存基本上在类结果确定下来就已知，因此内存分配与回收都具备确定性。并且方法结束或者线程线束，内存就回收了。</p>
 <p><strong>GC关注的内存</strong>：对于Java堆和方法区，一个接口中的多个实现类需要的内存可能不一样，一个方法中多个分支需要的内存也可能不一样，只能在程序运行期间才能知道会创建哪些对象，分配与回收都是动态的。</p>
-<h2 id="对象是否存活"><a href="#对象是否存活" class="headerlink" title="对象是否存活"></a>对象是否存活</h2><p>GC在对堆进行回收前，要确定这些对象中哪些还存活着，哪些已经死去（不可能再被任何途径使用的对象）</p>
-<h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>定义：为对象添加一个计数器，每当有一个地方引用它时，计数器就++，引用失效时，计数器–</p>
-<p>优点：实现简单、判定效率高</p>
-<p>缺陷：难以解决对象间相互循环引用的问题</p>
+<h2 id="对象是否存活"><a href="#对象是否存活" class="headerlink" title="对象是否存活"></a>对象是否存活</h2><p>GC在对堆进行回收前，要确定这些对象中哪些还存活着，哪些已经死去（不可能再被任何途径使用的对象）。</p>
+<h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>定义：为对象添加一个计数器，每当有一个地方引用它时，计数器就++，引用失效时，计数器–。</p>
+<p>优点：实现简单、判定效率高。</p>
+<p>缺陷：难以解决对象间相互循环引用的问题。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objA.instance=objB;</span><br><span class="line">objB.instance=objA;</span><br><span class="line"><span class="comment">//相互引用，导致无法回收</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><p>Java等语言的主流实现</p>
-<p>基本思想：</p>
+<h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><p>Java等语言的主流实现，其基本思想：</p>
 <ul>
-<li><p>通过一系列称为GC Roots的对象作为起始点，从这些结点开始向下搜索，走过的路径称为引用链</p>
+<li><p>通过一系列称为GC Roots的对象作为起始点，从这些结点开始向下搜索，走过的路径称为引用链。</p>
 </li>
-<li><p>一个对象到GC Roots没有任何引用链，即不可达，则对象不可用</p>
+<li><p>一个对象到GC Roots没有任何引用链，即不可达，则对象不可用。</p>
 </li>
 <li><p>GC Roots对象：</p>
 <ul>
-<li>虚拟机栈中引用的对象</li>
-<li>方法区中类静态属性引用的对象</li>
-<li>方法区中常量引用的对象</li>
-<li>本地方法栈中Native方法引用的对象</li>
+<li>虚拟机栈中引用的对象。</li>
+<li>方法区中类静态属性引用的对象。</li>
+<li>方法区中常量引用的对象。</li>
+<li>本地方法栈中Native方法引用的对象。</li>
 </ul>
 </li>
 <li><p><img src="/assets/1552121101706.png" alt="1552121101706"></p>
 </li>
 </ul>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>判断对象是否存活均与引用有关。对于引用我们希望描述这样一类对象：当内存空间还足够时，则能保留在内存中；如果内存空间在进行垃圾回收后还是非常紧张，则可以抛弃这些对象。很多对象的缓存功能都符合这样的场景</p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>判断对象是否存活均与引用有关。对于引用我们希望描述这样一类对象：当内存空间还足够时，则能保留在内存中；如果内存空间在进行垃圾回收后还是非常紧张，则可以抛弃这些对象。很多对象的缓存功能都符合这样的场景：</p>
 <ul>
-<li>强引用<ul>
-<li>指在程序代码中还普遍存在，类似“Object o=new Object()”的引用，只要强引用还存在，则永不回收</li>
+<li>强引用：<ul>
+<li>指在程序代码中还普遍存在，类似“Object o=new Object()”的引用，只要强引用还存在，则永不回收。</li>
 </ul>
 </li>
-<li>软引用<ul>
+<li>软引用：<ul>
 <li>描述还有用，但并非必须的对象。在系统将内存溢出异常前，会将这些对象进行第二次回收。如果还没有足够内存，才会异常。</li>
-<li>以SoftReference类实现软引用</li>
+<li>以SoftReference类实现软引用。</li>
 </ul>
 </li>
-<li>弱引用<ul>
-<li>描述非必须对象，强度弱于软引用只能生存到下一次垃圾回收前</li>
-<li>WeafReference实现</li>
+<li>弱引用：<ul>
+<li>描述非必须对象，强度弱于软引用只能生存到下一次垃圾回收前。</li>
+<li>WeafReference实现。</li>
 </ul>
 </li>
-<li>虚引用<ul>
-<li>最弱的引用关系，无法通过虚引用获得一个对象的实例。唯一目的是能在这个对象被回收时收到一个系统通知</li>
-<li>PhantomReference实现</li>
+<li>虚引用：<ul>
+<li>最弱的引用关系，无法通过虚引用获得一个对象的实例。唯一目的是能在这个对象被回收时收到一个系统通知。</li>
+<li>PhantomReference实现。</li>
 </ul>
 </li>
 </ul>
 <h3 id="生存还是死亡"><a href="#生存还是死亡" class="headerlink" title="生存还是死亡"></a>生存还是死亡</h3><p>即使时不可达的对象，也并非会立即死亡，此时处于缓刑阶段。而要宣告一个对象死亡，至少要经历两次标记过程。</p>
 <ul>
-<li><p>如果在可达性分析中，发现无连接，则进行第一次标记以及进行一次筛选</p>
+<li><p>如果在可达性分析中，发现无连接，则进行第一次标记以及进行一次筛选。</p>
 </li>
 <li><p>第一次筛选，条件为此对象是否有必要执行finalize方法。</p>
 <ul>
 <li><p>没有必要执行的情况：</p>
 <ul>
-<li>对象没有覆盖finalize方法</li>
-<li>finalize方法已经被虚拟机调用过</li>
+<li>对象没有覆盖finalize方法。</li>
+<li>finalize方法已经被虚拟机调用过。</li>
 </ul>
 </li>
-<li><p>有必要执行</p>
+<li><p>有必要执行：</p>
 <ul>
-<li>将对象放置在一个F-Queue队列，并在稍后由一个虚拟机自动建立，低优先级的finalizer线程去执行</li>
+<li>将对象放置在一个F-Queue队列，并在稍后由一个虚拟机自动建立，低优先级的finalizer线程去执行。</li>
 <li>执行：虚拟机会触发这个方法，但并不承诺会等待它运行结束。为了防止一个对象在finalize执行缓慢，或者死循环，使得其他对象等待。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>GC对F-Queue中对象进行第二次小规模标记，</p>
+<li><p>GC对F-Queue中对象进行第二次小规模标记。</p>
 <ul>
 <li>finalize是对象最后一次自救机会，如果对象此时与引用链上一个对象建立关联，则此时将被移出“即将回收”集合。否则就可以确定被回收了。</li>
 </ul>
@@ -635,61 +635,61 @@
 </ul>
 <h3 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h3><p>永久代的垃圾回收效率非常低，回收内容：</p>
 <ul>
-<li>废弃常量<ul>
-<li>常量池存在“abc”，无String引用引用，并无其他地方引用该字面量，则为废弃常量</li>
-<li>常量池当中的其他类(接口)方法、字段的符号引用也与此类似</li>
+<li>废弃常量：<ul>
+<li>常量池存在“abc”，无String引用引用，并无其他地方引用该字面量，则为废弃常量。</li>
+<li>常量池当中的其他类(接口)方法、字段的符号引用也与此类似。</li>
 </ul>
 </li>
 <li>无用的类，但只是可以被回收，而不是一定被回收，是否回收需要进行JVM参数控制。对于大量使用反射、动态代理等框架会频繁自定义ClassLoader，需要虚拟机具备类卸载功能，保证永久代不溢出。<ul>
-<li>该类所有实例都被回收</li>
-<li>加载该类的ClassLoader被回收</li>
-<li>该类对应的Class对象没有被引用，无法通过反射访问该类的方法</li>
+<li>该类所有实例都被回收。</li>
+<li>加载该类的ClassLoader被回收。</li>
+<li>该类对应的Class对象没有被引用，无法通过反射访问该类的方法。</li>
 </ul>
 </li>
 </ul>
-<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><h3 id="标记-清除算法-Mark-Sweep"><a href="#标记-清除算法-Mark-Sweep" class="headerlink" title="标记-清除算法 Mark-Sweep"></a>标记-清除算法 Mark-Sweep</h3><p>最基础的算法，算法分为标记与清除两个阶段</p>
+<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><h3 id="标记-清除算法-Mark-Sweep"><a href="#标记-清除算法-Mark-Sweep" class="headerlink" title="标记-清除算法 Mark-Sweep"></a>标记-清除算法 Mark-Sweep</h3><p>最基础的算法，算法分为标记与清除两个阶段：</p>
 <ul>
-<li>标记出所有需要回收的对象，在标记完成后统一回收被标记的对象</li>
+<li>标记出所有需要回收的对象，在标记完成后统一回收被标记的对象。</li>
 </ul>
 <p>不足：</p>
 <ul>
-<li>效率低下</li>
-<li>清除后会产生大量不连续的内存碎片</li>
+<li>效率低下。</li>
+<li>清除后会产生大量不连续的内存碎片。</li>
 </ul>
-<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>解决效率问题</p>
-<p>将可用内存按容量划分为两块，每次使用一块，一块内存使用完后，将其复制到另一块，然后回收</p>
-<p>用于回收新生代</p>
+<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>解决效率问题。</p>
+<p>将可用内存按容量划分为两块，每次使用一块，一块内存使用完后，将其复制到另一块，然后回收。</p>
+<p>用于回收新生代。</p>
 <ul>
 <li>新生代对象98%朝生夕死，因此将内存分为一块较大的Eden空间与两块较小的Survivor空间（8：1）。</li>
-<li>每次使用Eden空间与一块Survivor空间</li>
-<li>当Survivor空间不够时，依赖其他内存（老年代）进行分配担保</li>
+<li>每次使用Eden空间与一块Survivor空间。</li>
+<li>当Survivor空间不够时，依赖其他内存（老年代）进行分配担保。</li>
 </ul>
-<h3 id="标记-整理算法-Mark-Compact"><a href="#标记-整理算法-Mark-Compact" class="headerlink" title="标记-整理算法 Mark-Compact"></a>标记-整理算法 Mark-Compact</h3><p>标记过后，让所有存活的对象都向一端移动，然后清理端边界外的内存</p>
+<h3 id="标记-整理算法-Mark-Compact"><a href="#标记-整理算法-Mark-Compact" class="headerlink" title="标记-整理算法 Mark-Compact"></a>标记-整理算法 Mark-Compact</h3><p>标记过后，让所有存活的对象都向一端移动，然后清理端边界外的内存。</p>
 <h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p><strong>实际采用的算法</strong></p>
-<p>根据对象存活周期的不同将内存划分为几块：新生代、老年代</p>
-<p>根据各个年代的特点采用适当的收集算法，新生代：复制算法，老年代：标记-清理（整理）算法</p>
-<h2 id="HotSpot算法实现"><a href="#HotSpot算法实现" class="headerlink" title="HotSpot算法实现"></a>HotSpot算法实现</h2><p>以上是理论实现，而虚拟机高效允许需要对算法的执行效率进行严格的考量</p>
-<h3 id="枚举根节点"><a href="#枚举根节点" class="headerlink" title="枚举根节点"></a>枚举根节点</h3><p>帮助快速准确完成GC Roots枚举，其<strong>困难</strong>有</p>
+<p>根据对象存活周期的不同将内存划分为几块：新生代、老年代。</p>
+<p>根据各个年代的特点采用适当的收集算法，新生代：复制算法，老年代：标记-清理（整理）算法。</p>
+<h2 id="HotSpot算法实现"><a href="#HotSpot算法实现" class="headerlink" title="HotSpot算法实现"></a>HotSpot算法实现</h2><p>以上是理论实现，而虚拟机高效允许需要对算法的执行效率进行严格的考量。</p>
+<h3 id="枚举根节点"><a href="#枚举根节点" class="headerlink" title="枚举根节点"></a>枚举根节点</h3><p>帮助快速准确完成GC Roots枚举，其<strong>困难</strong>有：</p>
 <ul>
-<li>GC Roots的节点非常多，逐个检查引用需要消耗非常多的时间。并且对于很多应用仅仅方法区就有数百兆</li>
-<li>GC停顿问题（GC进行时必须停顿所有执行线程），必须在一个确保一致性（整个执行系统冻结在某个时间节点，不可以出现在分析过程中，引用关系还在不断变化）的快照中进行</li>
+<li>GC Roots的节点非常多，逐个检查引用需要消耗非常多的时间。并且对于很多应用仅仅方法区就有数百兆。</li>
+<li>GC停顿问题（GC进行时必须停顿所有执行线程），必须在一个确保一致性（整个执行系统冻结在某个时间节点，不可以出现在分析过程中，引用关系还在不断变化）的快照中进行。</li>
 </ul>
-<p>主流JVM使用准确式GC，当执行系统停顿下来，并不需要一个不漏检查完所有的引用位置，应当有办法直接得知哪些地方存放着对象引用</p>
+<p>主流JVM使用准确式GC，当执行系统停顿下来，并不需要一个不漏检查完所有的引用位置，应当有办法直接得知哪些地方存放着对象引用。</p>
 <p>HotSpot使用OopMap达到目的，在类加载完成时，HotSpot将对象内什么偏移量是什么类型数据计算出来，在JIT编译时也会在特点位置记录栈和寄存器哪些位置是引用。</p>
-<p><strong>OopMap数据解构</strong>： 保存<code>GC Roots</code> 节点，避免全局扫描去一一查找。</p>
+<p><strong>OopMap数据解构</strong>： 保存<code>GC Roots</code>节点，避免全局扫描去一一查找。</p>
 <h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><ul>
-<li>引用关系可能变化，OopMap内容变化指令非常多，如果为每一条指令生成对应的OopMap则需要大量空间<ul>
+<li>引用关系可能变化，OopMap内容变化指令非常多，如果为每一条指令生成对应的OopMap则需要大量空间。<ul>
 <li>程序执行时只有在到达<strong>安全点</strong>时才能暂停，进行GC。</li>
 <li><strong>安全点的选择</strong>：以是否具有让程序长时间执行的特征为标准选定。即指令序列复用，如方法调用、循环跳转、异常跳转等。安全点的选定不能太少以致于让GC等待时间太长，也不能过于频繁过分增大运行时的负荷。</li>
 </ul>
 </li>
-<li>如何在GC发生时，让所有线程都跑到最近的安全点再停顿<ul>
-<li>抢先式中断（几乎没有JVM使用）<ul>
-<li>GC发生时，首先把所有线程中断，如果线程不在安全点，就恢复线程，让它跑到安全点</li>
+<li>如何在GC发生时，让所有线程都跑到最近的安全点再停顿：<ul>
+<li>抢先式中断（几乎没有JVM使用）。<ul>
+<li>GC发生时，首先把所有线程中断，如果线程不在安全点，就恢复线程，让它跑到安全点。</li>
 </ul>
 </li>
-<li>主动式中断<ul>
-<li>当GC需要中断时，不直接对线程操作，设置一个标志（与安全点重合），各个线程执行时轮询这个标志，如果为真则自己中断挂起</li>
+<li>主动式中断：<ul>
+<li>当GC需要中断时，不直接对线程操作，设置一个标志（与安全点重合），各个线程执行时轮询这个标志，如果为真则自己中断挂起。</li>
 </ul>
 </li>
 </ul>
@@ -698,8 +698,8 @@
 <h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>安全点机制保证了程序执行时在不太长时间内就会遇到可进入GC的安全点，但是无法解决程序不执行的时候进入安全点。</p>
 <ul>
 <li>对于不执行的程序，如挂起或者blocked状态，无法响应中断请求，走到安全点。<ul>
-<li>安全区域：在一段代码片段中，引用关系不会发生变化。则在这个区域的任意地方开始GC都是安全的</li>
-<li>当线程执行到安全区域时，标识自己已经进入安全区域，当JVM发生GC时，不用管已经标识的线程。当线程离开时，需要检查系统是否完成GC，如果完成则继续执行，否则继续等待</li>
+<li>安全区域：在一段代码片段中，引用关系不会发生变化。则在这个区域的任意地方开始GC都是安全的。</li>
+<li>当线程执行到安全区域时，标识自己已经进入安全区域，当JVM发生GC时，不用管已经标识的线程。当线程离开时，需要检查系统是否完成GC，如果完成则继续执行，否则继续等待。</li>
 </ul>
 </li>
 </ul>
@@ -708,7 +708,7 @@
 <li><strong>并行（Parallel）</strong> ：指多条垃圾收集线程并行工作，但此时用户线程仍然处于等待状态。</li>
 <li><strong>并发（Concurrent）</strong>：指用户线程与垃圾收集线程同时执行（但不一定是并行，可能会交替执行），用户程序在继续运行，而垃圾收集器运行在另一个CPU上。</li>
 </ul>
-<p>内存回收的具体实现</p>
+<p>内存回收的具体实现：</p>
 <p><img src="/assets/1552131024681.png" alt="1552131024681"></p>
 <p>存在连线，则说明可以搭配使用。所处区域，说明属于新生代还是老年代收集器。为了对具体应用最合适的收集器。</p>
 <h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3><p>Serial （Old）收集器是最基本最古老的收集器，是一个单线程收集器，并且在它进行垃圾回收时，必须暂停所有的用户线程。</p>
@@ -723,42 +723,42 @@
 </ul>
 </li>
 </ul>
-<h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>是Seial收集器的多线程版本</p>
+<h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>是Seial收集器的多线程版本：</p>
 <ul>
-<li>是许多运行在Server模式下的虚拟机中的首选新生代收集器。重要原因是除了serial收集器外，只有它可以与CMS收集器配合工作</li>
+<li>是许多运行在Server模式下的虚拟机中的首选新生代收集器。重要原因是除了serial收集器外，只有它可以与CMS收集器配合工作。</li>
 <li>在单CPU环境中不会比Serial更好，由于线程开销，在两个CPU环境下都未必超越Serial，默认开启的收集线程数与CPU数量相同，可以通过-XX:ParallelGCThreads限制其线程数。</li>
-<li>ParNew Old是老年代版本，采用Mark-Compact<ul>
-<li>搭配Parallel Scavenge</li>
+<li>ParNew Old是老年代版本，采用Mark-Compact：<ul>
+<li>搭配Parallel Scavenge。</li>
 </ul>
 </li>
 </ul>
-<h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>是新生代的多线程收集器，<strong>吞吐量优先</strong>收集器，它在回收期间不需要暂停其他用户线程，采用Copying算法，它主要是为了<strong>达到一个可控的吞吐量</strong>。吞吐量=运行用户代码时间/(用户代码+垃圾收集)而停顿时间与吞吐量是矛盾的</p>
+<h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>是新生代的多线程收集器，<strong>吞吐量优先</strong>收集器，它在回收期间不需要暂停其他用户线程，采用Copying算法，它主要是为了<strong>达到一个可控的吞吐量</strong>。吞吐量=运行用户代码时间/(用户代码+垃圾收集)而停顿时间与吞吐量是矛盾的。</p>
 <ul>
-<li>GC时，垃圾回收的工作总量是不变的<ul>
-<li>停顿时间减少，就越适合与用户交互的程序，提高用户体验，但是GC频率提高，</li>
+<li>GC时，垃圾回收的工作总量是不变的：<ul>
+<li>停顿时间减少，就越适合与用户交互的程序，提高用户体验，但是GC频率提高。</li>
 <li>频率提高，则频繁进行GC，即吞吐量降低，性能降低，因此是以牺牲吞吐量和新生代空间换取的。</li>
 <li>吞吐量提高，则高效率利用CPU时间，尽快完成程序运算，适合在后台运算而不需要太多交互的任务。</li>
 </ul>
 </li>
-<li>对于注重吞吐量和CPU资源敏感的场合，优先考虑Parallel Scavenge与Parallel Old</li>
+<li>对于注重吞吐量和CPU资源敏感的场合，优先考虑Parallel Scavenge与Parallel Old。</li>
 </ul>
 <p>-XX:MaxGCPauseMillis设置最大垃圾收集停顿时间，-XX:GCTimeRatio设置吞吐量大小（垃圾收集时间占总时间的比率，值为0-100）。</p>
-<h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>以<strong>获取最短回收停顿时间为目标</strong>的收集器，重视服务的响应速度，希望系统停顿时间最短，给用户带来体验，是一种并发收集器，采用Mark-Sweep（标记清除）算法</p>
-<p>运作过程</p>
+<h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p>以<strong>获取最短回收停顿时间为目标</strong>的收集器，重视服务的响应速度，希望系统停顿时间最短，给用户带来体验，是一种并发收集器，采用Mark-Sweep（标记清除）算法。</p>
+<p>运作过程：</p>
 <ul>
-<li>初始标记<ul>
-<li>需要stop the world。仅仅只标记一下GC Roots能<strong>直接关联</strong>到的对象，速度较快</li>
+<li>初始标记：<ul>
+<li>需要stop the world。仅仅只标记一下GC Roots能<strong>直接关联</strong>到的对象，速度较快。</li>
 </ul>
 </li>
-<li>并发标记<ul>
-<li>进行GC Roots Tracing。耗时长，但可以与用户线程一起工作，但是会占用一定CPU资源，使得程序变慢</li>
+<li>并发标记：<ul>
+<li>进行GC Roots Tracing。耗时长，但可以与用户线程一起工作，但是会占用一定CPU资源，使得程序变慢。</li>
 </ul>
 </li>
-<li>重新标记<ul>
-<li>需要stop the world。修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录</li>
+<li>重新标记：<ul>
+<li>需要stop the world。修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录。</li>
 </ul>
 </li>
-<li>并发清除</li>
+<li>并发清除。</li>
 </ul>
 <p>缺点：</p>
 <ul>
@@ -766,34 +766,34 @@
 <li>会占用CPU资源，使得程序变慢，总吞吐量降低。默认线程数是(CPU数+3)/4，即在CPU4个以上，获得至少25%的CPU资源，当CPU不足4时，对用户程序影响较大。当CPU负载比较大，则分出一半运算能力会使得用户程序执行速度降低一半。</li>
 </ul>
 </li>
-<li>无法处理浮动垃圾，可能出现Concurrent Mode Failure失败(预留的内存空间不足以程序运行)而导致另一次Full GC（进行全部GC，老年代临时使用Serial Old收集器）的产生<ul>
-<li>由于用户线程依然运行，可能产生新的垃圾。这部分垃圾产生在标记过程后，只能在下一次GC清理，即浮动垃圾</li>
+<li>无法处理浮动垃圾，可能出现Concurrent Mode Failure失败(预留的内存空间不足以程序运行)而导致另一次Full GC（进行全部GC，老年代临时使用Serial Old收集器）的产生。<ul>
+<li>由于用户线程依然运行，可能产生新的垃圾。这部分垃圾产生在标记过程后，只能在下一次GC清理，即浮动垃圾。</li>
 <li>由于在垃圾收集时，用户线程依然需要运行，则需要预留足够的内存给用户线程。设定合理的阈值，减少FULL GC出现的机会。设定-XX:CMSInitiatingOccupancyFraction的值来确定阈值。</li>
-<li>空间碎片。-XX:UseCMSCompactAtFullCollection开关参数，默认开启，在CMS即将进行FullGC时开启内存碎片的合并整理，该过程无法并发，但是时间不会太长。-XX:CMSFullGCsBeforeCompaction设定执行多少次不压缩的FullGC后跟着来一次带压缩的。</li>
+<li>空间碎片。-XX:UseCMSCompactAtFullCollection开关参数，默认开启，在CMS即将进行FullGC时开启内存碎片的合并整理，该过程无法并发，但是时间不会太长。XX:CMSFullGCsBeforeCompaction设定执行多少次不压缩的FullGC后跟着来一次带压缩的。</li>
 </ul>
 </li>
 </ul>
 <h3 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h3><p>当前收集器最前沿的成果，面向服务端应用的收集器，能充分利用多CPU、多核环境。因此是一款并行和并发收集器，并能建立可预测的停顿时间模型。</p>
 <p>G1特点：</p>
 <ul>
-<li>并行与并发<ul>
-<li>能充分利用CPU、多核环境下的硬件优势，缩短Stop The World停顿时间，可以以并发使得Java程序继续执行</li>
+<li>并行与并发：<ul>
+<li>能充分利用CPU、多核环境下的硬件优势，缩短Stop The World停顿时间，可以以并发使得Java程序继续执行。</li>
 </ul>
 </li>
-<li>分代收集</li>
-<li>空间整合<ul>
-<li>整体上是标记整理算法实现，局部（两个区域Region间）上是基于复制算法，不会产生内存碎片，导致提前GC</li>
+<li>分代收集。</li>
+<li>空间整合：<ul>
+<li>整体上是标记整理算法实现，局部（两个区域Region间）上是基于复制算法，不会产生内存碎片，导致提前GC。</li>
 </ul>
 </li>
-<li>可预测的停顿<ul>
-<li>低停顿，并可建立可预测的停顿时间模型，能让使用者明确指定一个长度为M毫秒的时间片段内，消耗在垃圾收集上的时间不得超过N毫秒</li>
-<li>实时Java的垃圾回收器特征</li>
+<li>可预测的停顿：<ul>
+<li>低停顿，并可建立可预测的停顿时间模型，能让使用者明确指定一个长度为M毫秒的时间片段内，消耗在垃圾收集上的时间不得超过N毫秒。</li>
+<li>实时Java的垃圾回收器特征。</li>
 <li>原因：<ul>
-<li>可以有计划地避免在整个Java堆当中进行全区域的垃圾收集。跟踪各个Region的垃圾堆积的价值大小（回收所获得的空间大小以及需要的时间），在后台维护一个优先列表，根据允许的时间，优先回收价值最大的Region</li>
+<li>可以有计划地避免在整个Java堆当中进行全区域的垃圾收集。跟踪各个Region的垃圾堆积的价值大小（回收所获得的空间大小以及需要的时间），在后台维护一个优先列表，根据允许的时间，优先回收价值最大的Region。</li>
 </ul>
 </li>
-<li>Region困难<ul>
-<li>垃圾回收不能真的以Region为单位，因为一个对象存放在Region中，它可以与整个Java堆中任意对象发生引用关系。在可达性判断时，扫描困难，需要对整个堆扫描</li>
+<li>Region困难：<ul>
+<li>垃圾回收不能真的以Region为单位，因为一个对象存放在Region中，它可以与整个Java堆中任意对象发生引用关系。在可达性判断时，扫描困难，需要对整个堆扫描。</li>
 <li>使用Remembered Set避免全堆扫描，每个Region都有一个与之对应的Remembered Set，对引用类型数据进行写操作时，产生一个Write Barrier暂时中断，判断是否引用的对象处于不同的Region中，如果是，则通过CardTable把相关引用信息记录到该Region的Remembered Set中，在可达性分析中加入该Remembered Set。</li>
 </ul>
 </li>
@@ -801,51 +801,51 @@
 </li>
 </ul>
 <p>G1将Java堆的内存布局划分为多个大小相等的独立区域（Region），保留新生代、老年代概念，但是不物理隔离，都是一部分Region的集合。</p>
-<p>G1的步骤（不考虑Remembered Set操作）</p>
+<p>G1的步骤（不考虑Remembered Set操作）：</p>
 <ul>
-<li>初始标记</li>
-<li>并发标记</li>
-<li>最终标记<ul>
+<li>初始标记。</li>
+<li>并发标记。</li>
+<li>最终标记：<ul>
 <li>JVM将在并发标记期间因用户程序继续运作而导致标记产生变动的那一部分标记记录，记录在Remembered Set Logs中，最终标记阶段需要将Logs的数据合到Rembbered Set当中。</li>
 </ul>
 </li>
-<li>筛选回收<ul>
+<li>筛选回收：<ul>
 <li>对各个Region的回收价值和成本进行排序，根据用户期望的GC停顿时间指定回收计划。</li>
 </ul>
 </li>
 </ul>
-<h2 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h2><p>Java的自动内存管理自动化解决了两个问题</p>
+<h2 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h2><p>Java的自动内存管理自动化解决了两个问题：</p>
 <ul>
-<li>给对象分配内存。（在堆上分配，也可能经过JIT编译后被拆散为标量类型并间接地栈上分配）<ul>
-<li>主要分配在新生代的Eden区。如果启动了本地线程分配缓冲，将线程优先在TLAB上分配</li>
-<li>少数情况直接分配到老年代中</li>
-<li>分配规则取决于当前使用哪一种垃圾回收器组合，还要虚拟机中与内存相关的参数的设置</li>
+<li>给对象分配内存。（在堆上分配，也可能经过JIT编译后被拆散为标量类型并间接地栈上分配）：<ul>
+<li>主要分配在新生代的Eden区。如果启动了本地线程分配缓冲，将线程优先在TLAB上分配。</li>
+<li>少数情况直接分配到老年代中。</li>
+<li>分配规则取决于当前使用哪一种垃圾回收器组合，还要虚拟机中与内存相关的参数的设置。</li>
 </ul>
 </li>
-<li>回收分配给对象的内存</li>
+<li>回收分配给对象的内存。</li>
 </ul>
-<h3 id="什么时候进行GC"><a href="#什么时候进行GC" class="headerlink" title="什么时候进行GC"></a>什么时候进行GC</h3><p>Minor GC</p>
+<h3 id="什么时候进行GC"><a href="#什么时候进行GC" class="headerlink" title="什么时候进行GC"></a>什么时候进行GC</h3><p>Minor GC：</p>
 <ul>
-<li>新生代当中的垃圾收集动作，采用复制算法</li>
-<li>对于较大的对象，在Minor GC时候，直接进入老年代</li>
+<li>新生代当中的垃圾收集动作，采用复制算法。</li>
+<li>对于较大的对象，在Minor GC时候，直接进入老年代。</li>
 </ul>
-<p>Full GC</p>
-<h3 id="对象优先在Eden分配"><a href="#对象优先在Eden分配" class="headerlink" title="对象优先在Eden分配"></a>对象优先在Eden分配</h3><p>大多数情况，对象在新生代Eden区分配。当Eden区没有足够空间进行分配时，虚拟机将发起一次Minor GC</p>
+<p>Full GC。</p>
+<h3 id="对象优先在Eden分配"><a href="#对象优先在Eden分配" class="headerlink" title="对象优先在Eden分配"></a>对象优先在Eden分配</h3><p>大多数情况，对象在新生代Eden区分配。当Eden区没有足够空间进行分配时，虚拟机将发起一次Minor GC。</p>
 <ul>
-<li>新生代GC（Minor GC）指发生在新生代的垃圾回收动作，因为Java对象大多具备朝生夕死的特性，所以该GC频繁，且速度快</li>
-<li>老年代GC（Major GC/Full GC）指发生在老年代GC，比新生代GC慢10倍以上</li>
+<li>新生代GC（Minor GC）指发生在新生代的垃圾回收动作，因为Java对象大多具备朝生夕死的特性，所以该GC频繁，且速度快。</li>
+<li>老年代GC（Major GC/Full GC）指发生在老年代GC，比新生代GC慢10倍以上。</li>
 </ul>
-<h3 id="大对象直接进入老年代"><a href="#大对象直接进入老年代" class="headerlink" title="大对象直接进入老年代"></a>大对象直接进入老年代</h3><p>大对象：需要大量连续内存空间的Java对象，例如很长的字符串与数组</p>
-<p>经常出现大对象容易导致内存还有不少空间时就需要提前触发垃圾收集以获得连续空间</p>
-<h3 id="长期存活的对象进入老年代"><a href="#长期存活的对象进入老年代" class="headerlink" title="长期存活的对象进入老年代"></a>长期存活的对象进入老年代</h3><p>虚拟机为每个对象定义了一个对象年龄Age计数器，每经过一次Minor GC则age+1，当达到15（MaxTenuringThreshold设置）则升级到老年代</p>
-<h3 id="动态对象年龄判定"><a href="#动态对象年龄判定" class="headerlink" title="动态对象年龄判定"></a>动态对象年龄判定</h3><p>为了更好适应不同程序内存情况，并不是永远要求年龄到达阈值才能晋升老年代，如果在Survivor空间中相同年龄所有对象大小总和大于空间的一般，年龄大于等于该年龄的对象就可以直接进入老年代</p>
+<h3 id="大对象直接进入老年代"><a href="#大对象直接进入老年代" class="headerlink" title="大对象直接进入老年代"></a>大对象直接进入老年代</h3><p>大对象：需要大量连续内存空间的Java对象，例如很长的字符串与数组。</p>
+<p>经常出现大对象容易导致内存还有不少空间时就需要提前触发垃圾收集以获得连续空间。</p>
+<h3 id="长期存活的对象进入老年代"><a href="#长期存活的对象进入老年代" class="headerlink" title="长期存活的对象进入老年代"></a>长期存活的对象进入老年代</h3><p>虚拟机为每个对象定义了一个对象年龄Age计数器，每经过一次Minor GC则age+1，当达到15（MaxTenuringThreshold设置）则升级到老年代。</p>
+<h3 id="动态对象年龄判定"><a href="#动态对象年龄判定" class="headerlink" title="动态对象年龄判定"></a>动态对象年龄判定</h3><p>为了更好适应不同程序内存情况，并不是永远要求年龄到达阈值才能晋升老年代，如果在Survivor空间中相同年龄所有对象大小总和大于空间的一般，年龄大于等于该年龄的对象就可以直接进入老年代。</p>
 <h3 id="空间分配担保"><a href="#空间分配担保" class="headerlink" title="空间分配担保"></a>空间分配担保</h3><ul>
-<li>在发生Minor GC前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间。<ul>
-<li>如果大于，则Minor GC可以确保安全</li>
-<li>如果不大于，则虚拟机查看HandlePromotionFailure设置值是否允许担保失败<ul>
-<li>允许，则继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小<ul>
-<li>如果大于则尝试进行Minor GC,尽管有风险</li>
-<li>如果小于，或者HandlePromotionFailure不允许冒险，则进行一次Full GC</li>
+<li>在发生Minor GC前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间：<ul>
+<li>如果大于，则Minor GC可以确保安全。</li>
+<li>如果不大于，则虚拟机查看HandlePromotionFailure设置值是否允许担保失败。<ul>
+<li>允许，则继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小。<ul>
+<li>如果大于则尝试进行Minor GC,尽管有风险。</li>
+<li>如果小于，或者HandlePromotionFailure不允许冒险，则进行一次Full GC。</li>
 </ul>
 </li>
 </ul>
@@ -940,7 +940,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -991,9 +991,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1096,9 +1094,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -1155,7 +1151,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:02</span>
+    <span title="站点阅读时长">35:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

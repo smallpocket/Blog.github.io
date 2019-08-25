@@ -57,20 +57,23 @@
   };
 </script>
 
-  <meta name="description" content="bean的生命周期   Spring对bean进行实例化； Spring将值和bean的引用注入到bean对应的属性中； 如果bean实现了BeanNameAware接口，Spring将bean的ID传递给setBean-Name()方法； 如果bean实现了BeanFactoryAware接口，Spring将调setBeanFactory()方法，将BeanFactory容器实例传入； 如果be">
+  <meta name="description" content="bean的生命周期Bean生命周期由多个特定的生命周期阶段组成，每个生命阶段都开放了接口，允许外界对Bean施加控制。 在Spring中可以从两个层面定义Spring的生命周期：  Bean的作用范围。 实例化Bean时所经历的一系列阶段。  BeanFactory了解BeanFactory当中的Bean生命周期：   当调用者通过getBean(beanName)向容器请求某一个Bean时，如果">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring：Beans">
 <meta property="og:url" content="http://yoursite.com/2019/04/20/Java/框架/Spring：Beans/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="bean的生命周期   Spring对bean进行实例化； Spring将值和bean的引用注入到bean对应的属性中； 如果bean实现了BeanNameAware接口，Spring将bean的ID传递给setBean-Name()方法； 如果bean实现了BeanFactoryAware接口，Spring将调setBeanFactory()方法，将BeanFactory容器实例传入； 如果be">
+<meta property="og:description" content="bean的生命周期Bean生命周期由多个特定的生命周期阶段组成，每个生命阶段都开放了接口，允许外界对Bean施加控制。 在Spring中可以从两个层面定义Spring的生命周期：  Bean的作用范围。 实例化Bean时所经历的一系列阶段。  BeanFactory了解BeanFactory当中的Bean生命周期：   当调用者通过getBean(beanName)向容器请求某一个Bean时，如果">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/assets/1566524237041.png">
+<meta property="og:image" content="http://yoursite.com/assets/1566526661839.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552554776007.png">
-<meta property="og:updated_time" content="2019-08-11T02:14:19.025Z">
+<meta property="og:image" content="http://yoursite.com/assets/1566653709900.png">
+<meta property="og:updated_time" content="2019-08-24T15:45:15.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring：Beans">
-<meta name="twitter:description" content="bean的生命周期   Spring对bean进行实例化； Spring将值和bean的引用注入到bean对应的属性中； 如果bean实现了BeanNameAware接口，Spring将bean的ID传递给setBean-Name()方法； 如果bean实现了BeanFactoryAware接口，Spring将调setBeanFactory()方法，将BeanFactory容器实例传入； 如果be">
-<meta name="twitter:image" content="http://yoursite.com/assets/1552554776007.png">
+<meta name="twitter:description" content="bean的生命周期Bean生命周期由多个特定的生命周期阶段组成，每个生命阶段都开放了接口，允许外界对Bean施加控制。 在Spring中可以从两个层面定义Spring的生命周期：  Bean的作用范围。 实例化Bean时所经历的一系列阶段。  BeanFactory了解BeanFactory当中的Bean生命周期：   当调用者通过getBean(beanName)向容器请求某一个Bean时，如果">
+<meta name="twitter:image" content="http://yoursite.com/assets/1566524237041.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/20/Java/框架/Spring：Beans/">
 
 
@@ -326,7 +329,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-11 10:14:19" itemprop="dateModified" datetime="2019-08-11T10:14:19+08:00">2019-08-11</time>
+                <time title="修改时间：2019-08-24 23:45:15" itemprop="dateModified" datetime="2019-08-24T23:45:15+08:00">2019-08-24</time>
               </span>
             
           
@@ -354,7 +357,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">704</span>
+              <span title="本文字数">8.2k</span>
             </span>
           
             <span class="post-meta-item">
@@ -364,7 +367,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">15 分钟</span>
             </span>
           
 
@@ -377,7 +380,99 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>bean的生命周期</strong></p>
+        <h1 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h1><p>Bean生命周期由多个特定的生命周期阶段组成，每个生命阶段都开放了接口，允许外界对Bean施加控制。</p>
+<p>在Spring中可以从两个层面定义Spring的生命周期：</p>
+<ul>
+<li>Bean的作用范围。</li>
+<li>实例化Bean时所经历的一系列阶段。</li>
+</ul>
+<h2 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h2><p>了解BeanFactory当中的Bean生命周期：</p>
+<p><img src="/assets/1566524237041.png" alt="1566524237041"></p>
+<ol>
+<li>当调用者通过<code>getBean(beanName)</code>向容器请求某一个Bean时，如果容器注册了<code>org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor</code>接口，则在实例化Bean前，调用<code>postProcessBeforeInstantiation()</code></li>
+<li>根据配置情况调用Bean构造函数或工厂方法实例化Bean。</li>
+<li>如果容器注册了<code>InstantiationAwareBeanPostProcessor</code>接口，那么在实例化Bean之后，调用该接口的<code>postProcessAfterInstantiation()</code>方法，可在这里对已经实例化的对象进行装饰。</li>
+<li>如果Bean配置了属性信息，那么容器将在这一步将配置值设置到Bean对应的属性中，不过在设置每个属性前将先调用<code>InstntiationAwareBeanPostProcessor</code>接口的<code>postProcessPropertyValues()</code>。</li>
+<li>调用Bean的属性设置方法设置属性值。</li>
+<li>如果Bean实现了<code>org.springframework.beans.factory.BeanNameAware</code>接口，则将调用<code>setBeanName()</code>接口方法，将配置文件中该Bean对应的名称设置到Bean中。</li>
+<li>如果Bean实现了<code>org.springframework.beans.factory.BeanFactoryAware</code>接口，则将调用<code>setBeanFactory()</code>，将BeanFactory容器实例设置到Bean中。</li>
+<li>如果BeanFactory装配了<code>org.springframework.beans.factory.config.BeanPostProcessor</code>后处理器，则将调用BeanPostProcess的<code>Object postProcessBeforeInitialization(Object bean,string beanName)</code>对Bean进行加工操作。<ul>
+<li>入参bean是当前正在处理的Bean，beanName是当前Bean的配置名。返回加工处理后的Bean。</li>
+<li>该操作可以对某些Bean进行特殊的处理甚至改变Bean的行为，其为容器提供对Bean进行后续加工处理的切入点。<strong>AOP、动态代理</strong>都通过BeanPostProcessor实现。</li>
+</ul>
+</li>
+<li>如果Bean实现了InitializingBean接口，则将调用接口的afterPropertiesSet()方法。</li>
+<li>如果在&lt;bean&gt;中通过init-method属性定义了初始化方法，则将执行该方法。</li>
+<li>BeanPostProcessor后处理器的<code>Object postProcessAfterInitialization(Object bean,String beanName)</code>，这个方法此时调用容器再次获得对Bean进行加工处理的机会。</li>
+<li>如果在&lt;bean&gt;中指定Bean的作用范围为<code>prototype</code>，则将Bean返回给调用者，调用者负责Bean后续生命的管理，Spring不再管理这个Bean的生命周期。如果作用范围为<code>singleton</code>则将Bean放入Spring IOC的缓冲池中并将Bean引用返回给调用者，Spring继续对这些Bean进行后续的生命管理。</li>
+<li>对于<code>singleton</code>的Bean，当容器关闭时将触发Spring对Bean后续生命周期的管理工作。如果Bean实现了DisposableBean接口，则将调用接口的<code>destory()</code>，可以在此编写释放资源、记录日志等操作。</li>
+<li>对于<code>singleton</code>的Bean，如果通过&lt;bean&gt;的destroy-method属性指定了Bean的销毁方法，则Spring会执行Bean的这个方法，完成资源的释放等操作。</li>
+</ol>
+<h3 id="Spring对Bean的影响"><a href="#Spring对Bean的影响" class="headerlink" title="Spring对Bean的影响"></a>Spring对Bean的影响</h3><p>在Spring的完整生命周期当中，经过许多关键点，每个关键点涉及特定的方法调用，可大概划分为：</p>
+<ul>
+<li>Bean自身的方法。<ul>
+<li>Bean自身的构造函数实例化、Setter设置Bean的属性值，init-method与destroy-method。</li>
+</ul>
+</li>
+<li>Bean级生命周期接口方法。由Bean类直接实现：<ul>
+<li>BeanNameAware。BeanFactory。InitializingBean。DisposableBean。等。</li>
+</ul>
+</li>
+<li>容器级生命周期接口方法。<ul>
+<li>InstantiationAwareBeanPostProcessor与BeanPostProcessor接口，它们的实现类一般称为后处理器。</li>
+<li>后处理器接口一般不由Bean自身实现，它们独立于Bean，实现类以容器附加装置的形式注册到Spring容器，通过接口反射为Spring容器扫描识别，在创建任何Bean时后处理器都会发生作用，即是全局范围影响。</li>
+<li>也可以限定其对某一部分的Bean处理。</li>
+</ul>
+</li>
+<li>工厂后处理器接口方法。<ul>
+<li>AspectJWeavingEnabler、CustomAutowrieConfigurer、ConfigurationClassPostProcessor等方法。</li>
+<li>也是容器级，在应用上下文装载配置文件后立即调用。</li>
+</ul>
+</li>
+</ul>
+<p>在整个生命周期当中，Spring对Bean产生的影响主要是在<strong>两个级别上：</strong>即容器处理与类本身处理。</p>
+<ul>
+<li>容器级别。<ul>
+<li>InstantiationAwareBeanPostProcessor。</li>
+<li>BeanPostProcessor。<ul>
+<li>可以像插件一样注册到Spring容器，为容器提供额外的功能。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>类本身级别。<ul>
+<li>Constructor。</li>
+<li>init-method。<ul>
+<li>通过bean的init-method指定的初始化方法。需要在bean的配置文件中配置。</li>
+</ul>
+</li>
+<li>setter。</li>
+<li>destroy-method。</li>
+</ul>
+</li>
+<li>类实现接口级别。需要Bean自身去实现这些接口。<ul>
+<li>BeanNameAware。将配置文件中该Bean对应的名称设置到Bean中。</li>
+<li>BeanFactory。将BeanFactory容器实例设置到Bean中。</li>
+<li>InitializingBean。</li>
+<li>DisposableBean。在容器销毁后，对Bean进行后续处理操作。</li>
+<li><strong>其实不会使用这个东西。</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="容器级"><a href="#容器级" class="headerlink" title="容器级"></a>容器级</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyInstantiationAwareBeanPostProcessor</span> <span class="keyword">extends</span> <span class="title">InstantiationAwareBeanPostProcessorAdapter</span></span>&#123;</span><br><span class="line">	<span class="comment">//接口方法，在实例化Bean前调用。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">postProcessBeforeInstantiation</span><span class="params">(Class beanClass,String beanName)</span> <span class="keyword">throws</span> BeansException</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"cars"</span>.equals(beanName))&#123;</span><br><span class="line">            sout(<span class="string">"bean cars"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//在设置某个属性时调用。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PropertyValues <span class="title">postProcessPropertyValues</span><span class="params">(PropertyValues pvs,PropertyDescriptor[] pds,Object bean,String beanName)</span> <span class="keyword">throws</span> BeansException</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"cars"</span>.equals(beanName))&#123;</span><br><span class="line">            sout(propervalues);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pvs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Bean生命周期接口"><a href="#Bean生命周期接口" class="headerlink" title="Bean生命周期接口"></a>Bean生命周期接口</h3><p>使用Bean生命周期接口对Bean进行额外控制，虽然让Bean具有了更细致的生命周期阶段，但也使得Bean和Spring框架紧密地绑定在一起。</p>
+<p>因此如果用户希望将业务完全POJO化，则可以只实现自己的业务接口，不需要与某个特定框架的接口关联。</p>
+<p>可以通过&lt;bean&gt;的init-method和destroy-method属性配置方式为Bean指定初始化和销毁的方法。该方法与通过实现InitializingBean和DisposableBean接口达到的效果是完全相同的。</p>
+<p>前者的实现方式可以使得Bean不需要与特定的Spring框架接口绑定，使得框架解耦。</p>
+<p>后置处理器InitDestroyAnnotationBeanPostProcessor负责对标注了@PostConstruct、@PreDestroy的Bean进行处理</p>
+<h2 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h2><p>了解ApplicationContext当中的Bean生命周期：</p>
+<p><img src="/assets/1566526661839.png" alt="1566526661839"></p>
+<p>其与BeanFactory类似，不同点有：</p>
+<ul>
+<li>如果Bean实现了org.springframework.context.ApplicationContext.Aware接口，则会增加应该调用该接口方法setApplicationContext()的步骤。</li>
+<li>ApplicationContexthi利用Java反射自动识别出配置文件中定义的BeanPostProcessor、InstantiationAwareBeanPostProcessor和BeanFactoryPostProcessor，并自动将它们注册到应用上下文。而BeanFactory需要手动调用注册。</li>
+</ul>
 <p><img src="/assets/1552554776007.png" alt="1552554776007"></p>
 <ol>
 <li>Spring对bean进行实例化；</li>
@@ -391,7 +486,96 @@
 <li>此时，bean已经准备就绪，可以被应用程序使用了，它们将一直驻留在应用上下文中，直到该应用上下文被销毁；</li>
 <li>如果bean实现了DisposableBean接口，Spring将调用它的destroy()接口方法。同样，如果bean使用destroy-method声明了销毁方法，该方法也会被调用。</li>
 </ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<h1 id="Spring配置概述"><a href="#Spring配置概述" class="headerlink" title="Spring配置概述"></a>Spring配置概述</h1><p>在使用Spring提供的各项丰富而神奇的功能前，必须在SpringIOC容器中装配好Bean，并建立Bean和Bean间的关联关系。</p>
+<h2 id="Spring容器高层视图"><a href="#Spring容器高层视图" class="headerlink" title="Spring容器高层视图"></a>Spring容器高层视图</h2><p>要使得应用程序中的Spring容器成功启动，需要同时具备以下三方面的条件：</p>
+<ul>
+<li>Spring框架的类包都已经放到应用程序的类路径下。</li>
+<li>应用程序为Spring提供了完备的Bean配置信息。</li>
+<li>Bean的类都已经放到应用程序的类路径下。</li>
+</ul>
+<p>Spring启动时读取应用程序提供的Bean配置信息，并在Spring容器中生成一份相应的Bean配置注册表，然后根据这张注册表实例化Bean，装配好Bean间的依赖关系，为上层应用提供准备就绪的运行环境。</p>
+<p>Bean配置信息是Bean的元数据信息，由以下4个方面组成：</p>
+<ul>
+<li>Bean的实现类。</li>
+<li>Bean的属性信息。</li>
+<li>Bean的依赖关系。Spring根据依赖关系配置完成Bean之间的装配。</li>
+<li>Bean的行为配置。如生命周期范围以及生命周期各过程的回调函数等。</li>
+</ul>
+<p>Spring元数据信息在Spring容器中的内部对应物是由一个个的BeanDefinition形成的Bean注册表，Spring实现了Bean元数据信息内部表示和外部定义的解耦。Spring支持多种形式的Bean定义：</p>
+<ul>
+<li>XML配置。</li>
+<li>注解配置。</li>
+<li>Java类配置。</li>
+<li>Groovy动态语言配置。</li>
+</ul>
+<p><img src="/assets/1566653709900.png" alt="1566653709900"></p>
+<h1 id="Bean基本配置"><a href="#Bean基本配置" class="headerlink" title="Bean基本配置"></a>Bean基本配置</h1><p>一个简单的Bean的配置如这样：<code>&lt;bean id = &quot;Foo&quot; class =&quot;com.smart.Foo&quot;/&gt;</code></p>
+<p>一般情况下一个Bean对应配置文件当中一个&lt;bean&gt;，通过容器的<code>getBean(&quot;foo&quot;)</code>即可获得对应的bean，而class指定了实现类。</p>
+<h2 id="Bean的命名"><a href="#Bean的命名" class="headerlink" title="Bean的命名"></a>Bean的命名</h2><p>一般情况下id在IOC容器中必须是唯一的，但是可以定义多个不同的name，如果不指定id与name之一，则会将全限定名作为Bean的名称。</p>
+<h1 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h1><ul>
+<li>属性注入、构造函数注入、工厂注入。</li>
+</ul>
+<h2 id="注入方式"><a href="#注入方式" class="headerlink" title="注入方式"></a>注入方式</h2><h3 id="属性注入"><a href="#属性注入" class="headerlink" title="属性注入"></a>属性注入</h3><p>属性注入要求Bean提供一个默认的构造函数，并为需要注入的属性提供对应的Setter方法。Spring首先调用Bean默认的构造函数实例化Bean，然后通过反射的方式调用Setter方法注入属性值。</p>
+<p>例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> =<span class="string">""</span> <span class="attr">class</span> =<span class="string">""</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> =<span class="string">"maxSpeed"</span>&gt;</span><span class="tag">&lt;<span class="name">value</span>&gt;</span>200<span class="tag">&lt;/<span class="name">value</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="构造函数注入"><a href="#构造函数注入" class="headerlink" title="构造函数注入"></a>构造函数注入</h3><p>保证一些必要的属性在Bean实例化时就得到设置，确保Bean在实例化后就可以使用。</p>
+<h3 id="工厂方法注入"><a href="#工厂方法注入" class="headerlink" title="工厂方法注入"></a>工厂方法注入</h3><p>是DI和单实例设计思想的主要实现方法。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"carFactory"</span> <span class="attr">class</span> = <span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"xx"</span> <span class="attr">factory-method</span> = <span class="string">"carFactory"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="注入参数详解"><a href="#注入参数详解" class="headerlink" title="注入参数详解"></a>注入参数详解</h2><h3 id="引用其他Bean"><a href="#引用其他Bean" class="headerlink" title="引用其他Bean"></a>引用其他Bean</h3><p>bean可以通过&lt;ref&gt;元素引用其他Bean，建立起对其他bean的依赖。</p>
+<p>当实例化时，Spring保证该Bean依赖的其他Bean已经初始化。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"boss"</span> <span class="attr">class</span> = <span class="string">""</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"car"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"car"</span>&gt;</span><span class="tag">&lt;/<span class="name">ref</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>ref可以通过以下三个属性引用容器中的其他Bean：</p>
+<ul>
+<li>bean：通过该属性可以引用同意容器或父容器中的Bean，是最常见的方式。</li>
+<li>local：只能引用同一配置文件中定义的bean。</li>
+<li>parent：引用父容器中的Bean。</li>
+</ul>
+<h3 id="内部Bean"><a href="#内部Bean" class="headerlink" title="内部Bean"></a>内部Bean</h3><p>内部Bean不能被其他Bean引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id = &quot;boss&quot; class = &quot;&quot;&gt;</span><br><span class="line">	&lt;property name = &quot;car&quot;&gt;</span><br><span class="line">        &lt;bean class = &quot;&quot;&gt;</span><br><span class="line">        &lt;/bean&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法注入"><a href="#方法注入" class="headerlink" title="方法注入"></a>方法注入</h2><h2 id="bean间的关系"><a href="#bean间的关系" class="headerlink" title="bean间的关系"></a>bean间的关系</h2><p>&lt;bean&gt;元素标签间也可以建立类似于ref间的依赖关系。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>如果多个类拥有相同的方法和属性，则可以引入一个父类，在父类中定义这些类的共同的方法和属性，以消除重复的代码。即多个bean当中存在同样的配置信息，允许定义一个父bean。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">""</span> <span class="attr">class</span> = <span class="string">""</span> <span class="attr">parent</span> = <span class="string">""</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>在某些情况下，Bean间依赖关系并没有那么明显，因此使用ref并不合适。</p>
+<p>某些情况下Bean A希望在Bean B加载并完成系统参数设置后再启动，则必须保证Bean B在Bean A前初始化。可以depends-on属性显式指定Bean前置依赖的Bean。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"manag"</span> <span class="attr">class</span> = <span class="string">""</span> <span class="attr">depends-on</span> = <span class="string">"otherBean"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>如果一个bean要引用另一个bean的id值则可以如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"car"</span> <span class="attr">p:userId</span> = <span class="string">"user"</span> <span class="attr">scope</span> = <span class="string">"prototype"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如此设置没有建立依赖关系。</p>
+<h2 id="整合多个配置文件"><a href="#整合多个配置文件" class="headerlink" title="整合多个配置文件"></a>整合多个配置文件</h2><h2 id="基于注解的配置"><a href="#基于注解的配置" class="headerlink" title="基于注解的配置"></a>基于注解的配置</h2><p>如<code>@Component</code>等价于&lt;bean id = “userDao” class = “ “&gt;</p>
+<h3 id="Component"><a href="#Component" class="headerlink" title="@Component"></a>@Component</h3><h3 id="Service"><a href="#Service" class="headerlink" title="@Service"></a>@Service</h3><h3 id="Controller"><a href="#Controller" class="headerlink" title="@Controller"></a>@Controller</h3><h3 id="自动装配Autowired"><a href="#自动装配Autowired" class="headerlink" title="自动装配Autowired"></a>自动装配Autowired</h3><p>@Autowired实现Bean的依赖注入，其默认按类型匹配的方式在容器中查找匹配的Bean，当有且仅有一个匹配的Bean，则将其注入@Autowired标注的变量。</p>
+<p><code>required</code>属性，如果当Autowired找不到相应的Bean，则会抛出NoSuchBeanDefinitionException，如果希望不要抛出异常，则设置<code>@Autowired(required = false)</code></p>
+<p>@Qualifier指定注入Bean的名称。</p>
+<p>@Autowired可以标注类的方法入参：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span><span class="comment">//注入LogDao</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLogDao</span><span class="params">(LogDao log)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.logDao = log;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(@Qualifier(<span class="string">"userDao"</span>)</span>UserDao user)</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以标注集合类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span><span class="comment">//注入所有类型为Plugin的类。</span></span><br><span class="line"><span class="keyword">private</span> List&lt;Plugin&gt; plugins;</span><br></pre></td></tr></table></figure>
+
+<p>也可以延迟加载，即配置注解@Lazy。</p>
+<h3 id="作用范围Scope"><a href="#作用范围Scope" class="headerlink" title="作用范围Scope"></a>作用范围Scope</h3><p>@Scope(“prototype”)标注在类上。</p>
+<h2 id="Bean作用域"><a href="#Bean作用域" class="headerlink" title="Bean作用域"></a>Bean作用域</h2><p>作用域对Bean的生命周期和创建方式产生影响。</p>
+<ul>
+<li>singleton。单例作用域，Spring环境下使用AOP和LocalThread对非线程安全的变量进行了特殊处理，使得这些非线程安全的类变成了线程安全的类，因此在实际应用中，大部分Bean都能以单实例的方式运行。</li>
+<li>prototype。非单例作用域的Bean。<ul>
+<li><code>&lt;bean id = &quot;boss&quot; class = &quot;Boss&quot; scope = &quot;prototype&quot;&gt;</code>如此引用下每次通过<code>getBean(&quot;boss&quot;)</code>获得的都是一个全新的实例。</li>
+<li>Spring启动时不初始化，并在初始化后不再管理其生命周期。</li>
+</ul>
+</li>
+</ul>
+<p>与Web相关，使用WebApplication时可用，并需要一些额外的配置：</p>
+<ul>
+<li>request。对应一个Http请求和生命周期，每次调用完成后即销毁。</li>
+<li>session。作用域跨越整个HTTP session，所有HTTP共享。</li>
+<li>globalSession。</li>
+</ul>
+<h1 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a>FactoryBean</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -477,7 +661,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -652,7 +836,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bean的生命周期"><span class="nav-number">1.</span> <span class="nav-text">bean的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory"><span class="nav-number">1.1.</span> <span class="nav-text">BeanFactory</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring对Bean的影响"><span class="nav-number">1.1.1.</span> <span class="nav-text">Spring对Bean的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器级"><span class="nav-number">1.1.2.</span> <span class="nav-text">容器级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean生命周期接口"><span class="nav-number">1.1.3.</span> <span class="nav-text">Bean生命周期接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationContext"><span class="nav-number">1.2.</span> <span class="nav-text">ApplicationContext</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring配置概述"><span class="nav-number">2.</span> <span class="nav-text">Spring配置概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring容器高层视图"><span class="nav-number">2.1.</span> <span class="nav-text">Spring容器高层视图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bean基本配置"><span class="nav-number">3.</span> <span class="nav-text">Bean基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean的命名"><span class="nav-number">3.1.</span> <span class="nav-text">Bean的命名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DI"><span class="nav-number">4.</span> <span class="nav-text">DI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注入方式"><span class="nav-number">4.1.</span> <span class="nav-text">注入方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性注入"><span class="nav-number">4.1.1.</span> <span class="nav-text">属性注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数注入"><span class="nav-number">4.1.2.</span> <span class="nav-text">构造函数注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法注入"><span class="nav-number">4.1.3.</span> <span class="nav-text">工厂方法注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入参数详解"><span class="nav-number">4.2.</span> <span class="nav-text">注入参数详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用其他Bean"><span class="nav-number">4.2.1.</span> <span class="nav-text">引用其他Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部Bean"><span class="nav-number">4.2.2.</span> <span class="nav-text">内部Bean</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法注入"><span class="nav-number">4.3.</span> <span class="nav-text">方法注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean间的关系"><span class="nav-number">4.4.</span> <span class="nav-text">bean间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">4.4.1.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖"><span class="nav-number">4.4.2.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">4.4.3.</span> <span class="nav-text">引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合多个配置文件"><span class="nav-number">4.5.</span> <span class="nav-text">整合多个配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于注解的配置"><span class="nav-number">4.6.</span> <span class="nav-text">基于注解的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Component"><span class="nav-number">4.6.1.</span> <span class="nav-text">@Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service"><span class="nav-number">4.6.2.</span> <span class="nav-text">@Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller"><span class="nav-number">4.6.3.</span> <span class="nav-text">@Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动装配Autowired"><span class="nav-number">4.6.4.</span> <span class="nav-text">自动装配Autowired</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用范围Scope"><span class="nav-number">4.6.5.</span> <span class="nav-text">作用范围Scope</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean作用域"><span class="nav-number">4.7.</span> <span class="nav-text">Bean作用域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FactoryBean"><span class="nav-number">5.</span> <span class="nav-text">FactoryBean</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -688,7 +872,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">35:38</span>
+    <span title="站点阅读时长">36:04</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

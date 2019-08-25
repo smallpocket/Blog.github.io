@@ -57,13 +57,13 @@
   };
 </script>
 
-  <meta name="description" content="问题并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战。  性能与可伸缩性 上下文切换的问题、锁的竞争   活跃性危险 死锁、饥饿、糟糕的响应性、活锁   受限于硬件和软件的资源限制问题  概述 性能与可伸缩性首先要保证程序能正常运行，然后仅当程序的性能需求和测试结果要求程序执行的更快时，才应">
+  <meta name="description" content="问题并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战。  性能与可伸缩性： 上下文切换的问题、锁的竞争。   活跃性危险： 死锁、饥饿、糟糕的响应性、活锁。   受限于硬件和软件的资源限制问题。  概述 性能与可伸缩性首先要保证程序能正常运行，然后仅当程序的性能需求和测试结果要求程序执行的更">
 <meta name="keywords" content="并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发：并发编程的挑战">
 <meta property="og:url" content="http://yoursite.com/2019/04/11/Java/base/Java并发：并发编程的挑战/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="问题并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战。  性能与可伸缩性 上下文切换的问题、锁的竞争   活跃性危险 死锁、饥饿、糟糕的响应性、活锁   受限于硬件和软件的资源限制问题  概述 性能与可伸缩性首先要保证程序能正常运行，然后仅当程序的性能需求和测试结果要求程序执行的更快时，才应">
+<meta property="og:description" content="问题并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战。  性能与可伸缩性： 上下文切换的问题、锁的竞争。   活跃性危险： 死锁、饥饿、糟糕的响应性、活锁。   受限于硬件和软件的资源限制问题。  概述 性能与可伸缩性首先要保证程序能正常运行，然后仅当程序的性能需求和测试结果要求程序执行的更">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/162a01b71ebc4842">
 <meta property="og:image" content="http://yoursite.com/assets/1565230366029.png">
@@ -71,10 +71,10 @@
 <meta property="og:image" content="http://yoursite.com/assets/1554969302239.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554969314949.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554969499806.png">
-<meta property="og:updated_time" content="2019-08-20T13:46:50.237Z">
+<meta property="og:updated_time" content="2019-08-22T11:41:44.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：并发编程的挑战">
-<meta name="twitter:description" content="问题并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战。  性能与可伸缩性 上下文切换的问题、锁的竞争   活跃性危险 死锁、饥饿、糟糕的响应性、活锁   受限于硬件和软件的资源限制问题  概述 性能与可伸缩性首先要保证程序能正常运行，然后仅当程序的性能需求和测试结果要求程序执行的更快时，才应">
+<meta name="twitter:description" content="问题并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战。  性能与可伸缩性： 上下文切换的问题、锁的竞争。   活跃性危险： 死锁、饥饿、糟糕的响应性、活锁。   受限于硬件和软件的资源限制问题。  概述 性能与可伸缩性首先要保证程序能正常运行，然后仅当程序的性能需求和测试结果要求程序执行的更">
 <meta name="twitter:image" content="http://yoursite.com/assets/162a01b71ebc4842">
   <link rel="canonical" href="http://yoursite.com/2019/04/11/Java/base/Java并发：并发编程的挑战/">
 
@@ -331,7 +331,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-20 21:46:50" itemprop="dateModified" datetime="2019-08-20T21:46:50+08:00">2019-08-20</time>
+                <time title="修改时间：2019-08-22 19:41:44" itemprop="dateModified" datetime="2019-08-22T19:41:44+08:00">2019-08-22</time>
               </span>
             
           
@@ -384,34 +384,34 @@
       
         <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>并发编程的目的是为了让程序运行得更快，但是，并不是启动更多的线程就能让程序最大限度地并发执行。如果希望通过多线程执行任务让程序运行得更快，会面临非常多的挑战。</p>
 <ul>
-<li>性能与可伸缩性<ul>
-<li>上下文切换的问题、锁的竞争</li>
+<li>性能与可伸缩性：<ul>
+<li>上下文切换的问题、锁的竞争。</li>
 </ul>
 </li>
-<li>活跃性危险<ul>
-<li>死锁、饥饿、糟糕的响应性、活锁</li>
+<li>活跃性危险：<ul>
+<li>死锁、饥饿、糟糕的响应性、活锁。</li>
 </ul>
 </li>
-<li>受限于硬件和软件的资源限制问题</li>
+<li>受限于硬件和软件的资源限制问题。</li>
 </ul>
 <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><img src="/assets/162a01b71ebc4842" alt="思维导图"></p>
 <h1 id="性能与可伸缩性"><a href="#性能与可伸缩性" class="headerlink" title="性能与可伸缩性"></a>性能与可伸缩性</h1><p>首先要保证程序能正常运行，然后仅当程序的性能需求和测试结果要求程序执行的更快时，才应该设法提高它的运行速度。</p>
 <h2 id="对性能的思考"><a href="#对性能的思考" class="headerlink" title="对性能的思考"></a>对性能的思考</h2><p>提升性能意味着用更少的资源做更多的事情。<strong>资源</strong>指CPU时钟周期、内存、网络带宽、IO带宽、数据库请求、磁盘空间以及其他资源。</p>
 <p>当操作性能由于某种特定的资源而受限时，通常称为<strong>资源密集型操作</strong>，例如CPU密集型、数据库密集型。</p>
-<p>使用多个线程相比于单个线程总会引入一些额外的性能开销</p>
+<p>使用多个线程相比于单个线程总会引入一些额外的性能开销：</p>
 <ul>
-<li>线程间的协调，例如加锁、触发信号以及内存同步等</li>
-<li>上下文切换、线程的创建和销毁</li>
+<li>线程间的协调，例如加锁、触发信号以及内存同步等。</li>
+<li>上下文切换、线程的创建和销毁。</li>
 <li>线程的调度等。</li>
 </ul>
 <p>因此想要通过并发获得更好的性能，就需要努力做好两件事情：更有效地利用现有处理资源、在出现新的处理资源时使程序尽可能利用这些新资源。</p>
-<h3 id="性能与可伸缩性-1"><a href="#性能与可伸缩性-1" class="headerlink" title="性能与可伸缩性"></a>性能与可伸缩性</h3><p>应用程序的性能可以使用多个指标来衡量：服务时间、延迟时间、吞吐率、效率、可伸缩性、容量等</p>
+<h3 id="性能与可伸缩性-1"><a href="#性能与可伸缩性-1" class="headerlink" title="性能与可伸缩性"></a>性能与可伸缩性</h3><p>应用程序的性能可以使用多个指标来衡量：服务时间、延迟时间、吞吐率、效率、可伸缩性、容量等：</p>
 <ul>
-<li>运行速度：某个指定的任务单元需要多块才能处理完成，用于衡量程序的运行速度。例如服务时间、等待时间</li>
+<li>运行速度：某个指定的任务单元需要多块才能处理完成，用于衡量程序的运行速度。例如服务时间、等待时间。</li>
 <li>处理能力：计算资源一定的情况下，能完成多少工作。例如生产量、吞吐量。</li>
 </ul>
 <blockquote>
-<p>可伸缩性：当增加计算资源时(CPU、内存、存储或IO带宽)，程序的吞吐量或者处理能力能相应地增加</p>
+<p>可伸缩性：当增加计算资源时(CPU、内存、存储或IO带宽)，程序的吞吐量或者处理能力能相应地增加。</p>
 </blockquote>
 <p><strong><em>性能调优</em></strong></p>
 <p>通常目的时用更小的代价完成相同的工作，例如通过缓存重用之前的结果，或更换算法。</p>
@@ -434,7 +434,10 @@
 <blockquote>
 <p>以测试为基准，不要猜测。</p>
 </blockquote>
-<h2 id="Amdahl定律"><a href="#Amdahl定律" class="headerlink" title="Amdahl定律"></a>Amdahl定律</h2><p>大多数并发程序都是由一系列的并行工作和串行工作组成的。Amdahl定律描述的是：在增加计算资源的情况下，程序在理论上能够实现最高加速比，这个值取决于程序中可并行组件与串行组件所占的比重。假设F是必须被串行执行的部分，则在包含N个处理器的机器中，最高加速比为：<br>$$<br>Speedup&lt;1/(F+(1-F)/N)<br>$$<br>即如果程序有50%的计算需要串行执行，那么最高加速比只能是2。该理论还量化了串行化的效率</p>
+<h2 id="Amdahl定律"><a href="#Amdahl定律" class="headerlink" title="Amdahl定律"></a>Amdahl定律</h2><blockquote>
+<p>明确并行部分的代码与串行部分的代码后再进行优化。</p>
+</blockquote>
+<p>大多数并发程序都是由一系列的并行工作和串行工作组成的。Amdahl定律描述的是：在增加计算资源的情况下，程序在理论上能够实现最高加速比，这个值取决于程序中可并行组件与串行组件所占的比重。假设F是必须被串行执行的部分，则在包含N个处理器的机器中，最高加速比为：<br>$$<br>Speedup&lt;1/(F+(1-F)/N)<br>$$<br>即如果程序有50%的计算需要串行执行，那么最高加速比只能是2。该理论还量化了串行化的效率。</p>
 <p><img src="/assets/1565230366029.png" alt="1554968889175"></p>
 <h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>当代多核CPU成为主流，系统可能拥有数百个处理器，一些在4路系统中看似具有可伸缩性的算法，可能存在一些隐含的可伸缩瓶颈。</p>
 <h2 id="线程引入的开销"><a href="#线程引入的开销" class="headerlink" title="线程引入的开销"></a>线程引入的开销</h2><h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p>如果可运行的线程大于CPU的数量，那么OS最终会将某个正在运行的线程调度出来，从而使其他线程能够使用CPU，这将导致一次上下文切换。</p>
@@ -460,25 +463,25 @@
 </ul>
 </li>
 </ul>
-<h4 id="如何减少上下文切换"><a href="#如何减少上下文切换" class="headerlink" title="如何减少上下文切换"></a>如何减少上下文切换</h4><p>上下文切换又分为2种：让步式上下文切换和抢占式上下文切换。前者是指执行线程主动释放CPU，与锁竞争严重程度成正比，可通过减少锁竞争和使用CAS算法来避免；后者是指线程因分配的时间片用尽而被迫放弃CPU或者被其他优先级更高的线程所抢占，一般由于线程数大于CPU可用核心数引起，可通过适当减少线程数和使用协程来避免。</p>
-<p>如果线程频繁发生阻塞，它们将无法使用完整的调度时间片。在程序上发生越多的阻塞，与CPU密集型的程序就会发生越多的上下文切换，从而增加调度开销，因此降低吞吐量</p>
+<h4 id="如何减少上下文切换"><a href="#如何减少上下文切换" class="headerlink" title="如何减少上下文切换"></a>如何减少上下文切换</h4><p>上下文切换又分为2种：让步式上下文切换和<strong>抢占式上下文切换</strong>。前者是指执行线程主动释放CPU，与锁竞争严重程度成正比，可通过减少锁竞争和使用CAS算法来避免；后者是指线程因分配的时间片用尽而被迫放弃CPU或者被其他优先级更高的线程所抢占，一般由于<strong>线程数大于CPU可用核心数引起</strong>，可通过适当减少线程数和使用协程来避免。</p>
+<p>如果线程频繁发生阻塞，它们将无法使用完整的调度时间片。在程序上发生越多的阻塞，与CPU密集型的程序就会发生越多的上下文切换，从而增加调度开销，因此降低吞吐量。</p>
 <p><strong>方法</strong></p>
 <ul>
-<li>无锁并发编程<ul>
-<li>避免使用锁，如将数据ID按照HASH算法取模分段，不同线程处理不同段的数据</li>
+<li>无锁并发编程：<ul>
+<li>避免使用锁，如将数据ID按照HASH算法取模分段，不同线程处理不同段的数据。</li>
 </ul>
 </li>
-<li>CAS算法</li>
-<li>使用最少线程<ul>
-<li>避免创造太多的线程，使得大量线程处于等待</li>
+<li>CAS算法。</li>
+<li>使用最少线程。<ul>
+<li>避免创造太多的线程，使得大量线程处于等待。</li>
 </ul>
 </li>
-<li>使用协程<ul>
-<li>单线程当中实现多任务的调度，并在单个线程里维持多个任务的切换</li>
+<li>使用协程。<ul>
+<li>单线程当中实现多任务的调度，并在单个线程里维持多个任务的切换。</li>
 </ul>
 </li>
 </ul>
-<h4 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h4><p>通过减少大量waiting线程来减少上下文切换</p>
+<h4 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h4><p>通过减少大量waiting线程来减少上下文切换：</p>
 <p><img src="/assets/1554969302239.png" alt="1554969302239"></p>
 <p><img src="/assets/1554969314949.png" alt="1554969314949"></p>
 <h3 id="内存同步"><a href="#内存同步" class="headerlink" title="内存同步"></a>内存同步</h3><p>内存操作的性能开销包括多个方面，例如<code>volatile</code>提供的可见性会使用到一些特殊指令，即内存栅栏(<code>Memory Barrier</code>)内存栅栏可以刷新缓存，使得缓存无效，刷新硬件写缓存，以及停止执行管道。并且会对性能带来间接影响，因为将抑制一些优化操作。</p>
@@ -491,8 +494,8 @@
 <p>减少锁发生竞争的可能性有:</p>
 <ul>
 <li>锁的请求频率。</li>
-<li>每次持有该锁的时间。<ul>
-<li>即缩小锁的范围</li>
+<li>每次持有该锁的时间：<ul>
+<li>即缩小锁的范围。</li>
 <li>降低线程请求锁的频率，可以通过<strong>锁分解</strong>和<strong>锁分段</strong>等技术实现，使得不同线程在不同的数据或一个数据的不同部分上操作。<ul>
 <li>锁分段一定要表现出在锁上的竞争频率高于在锁保护的数据上发生的频率。</li>
 </ul>
@@ -501,17 +504,17 @@
 </li>
 <li>也可以使用带有协调机制的独占锁，这些机制允许更高的并发性。</li>
 </ul>
-<p>当每个请求都请求多个变量时，锁的粒度将很难降低，</p>
+<p>当每个请求都请求多个变量时，锁的粒度将很难降低。</p>
 <h2 id="监测CPU的利用率"><a href="#监测CPU的利用率" class="headerlink" title="监测CPU的利用率"></a>监测CPU的利用率</h2><p>当测试可伸缩性时，通常要确保处理器得到充分利用。UNIX上的vmstat可以查看CPU的忙碌状态。如果所有的CPU利用率并不均匀，那么首要目标就是进一步找出程序中的并行性，不均匀的利用率表明大多数计算都是由一小组线程完成的。通常有以下几种原因:</p>
 <ul>
 <li>负载不充足。测试的程序中可能没有足够多的负载，因而可以在测试时增加负载，并检查利用率、响应时间、服务时间等指标的变化。</li>
-<li>IO密集。可以通过iostat或perfmon判断某个程序是否磁盘IO密集的，或通过监测网络的通信流量判断是否需要高带宽</li>
-<li>外部限制。如果应用程序依赖于外部服务，可能性能瓶颈是在外部服务中</li>
-<li>锁竞争。使用分析工具可以找到程序中存在何种程度的锁竞争，以及在哪些锁上存在激烈的竞争。如果因为激烈的竞争，<strong>则在线程转储中会频繁出现</strong></li>
+<li>IO密集。可以通过iostat或perfmon判断某个程序是否磁盘IO密集的，或通过监测网络的通信流量判断是否需要高带宽。</li>
+<li>外部限制。如果应用程序依赖于外部服务，可能性能瓶颈是在外部服务中。</li>
+<li>锁竞争。使用分析工具可以找到程序中存在何种程度的锁竞争，以及在哪些锁上存在激烈的竞争。如果因为激烈的竞争，<strong>则在线程转储中会频繁出现</strong>。</li>
 </ul>
 <h2 id="资源限制"><a href="#资源限制" class="headerlink" title="资源限制"></a>资源限制</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>资源限制是指在进行并发编程时，程序的执行速度受限于计算机硬件资源或软件资源。所以在进行并发编程时，要考虑这些资源的限制。</p>
 <ul>
-<li>服务器的带宽只有2Mb/s，某个资源的下载速度是1Mb/s每秒，系统启动10个线程下载资源，下载速度不会变成10Mb/s</li>
+<li>服务器的带宽只有2Mb/s，某个资源的下载速度是1Mb/s每秒，系统启动10个线程下载资源，下载速度不会变成10Mb/s。</li>
 <li>硬件资源限制有带宽的上传/下载速度、硬盘读写速度和CPU的处理速度。</li>
 <li>软件资源限制有数据库的连接数和socket连接数等。</li>
 </ul>
@@ -523,7 +526,7 @@
 </ul>
 <h3 id="在资源限制情况下进行并发编程"><a href="#在资源限制情况下进行并发编程" class="headerlink" title="在资源限制情况下进行并发编程"></a>在资源限制情况下进行并发编程</h3><p>如何在资源限制的情况下，让程序执行得更快呢？</p>
 <ul>
-<li>方法就是，根据不同的资源限制调整程序的并发度<ul>
+<li>方法就是，根据不同的资源限制调整程序的并发度：<ul>
 <li>比如下载文件程序依赖于两个资源——带宽和硬盘读写速度。</li>
 <li>有数据库操作时，涉及数据库连接数，如果SQL语句执行非常快，而线程的数量比数据库连接数大很多，则某些线程会被阻塞，等待数据库连接。</li>
 </ul>
@@ -531,19 +534,19 @@
 </ul>
 <h1 id="活跃性危险"><a href="#活跃性危险" class="headerlink" title="活跃性危险"></a>活跃性危险</h1><p>在安全性与活跃性间通常存在某种制衡，我们使用加锁确保线程安全，但如果过度使用加锁，则可能导致锁顺序死锁。</p>
 <p>如果使用线程池和信号量来限制对资源的使用，可能导致资源死锁。<strong>Java程序无法从死锁中恢复过来</strong>，因此设计时一定要排除可能导致死锁的条件。</p>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>死锁的必要条件</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h3><p>死锁的必要条件：</p>
 <ul>
-<li>互斥条件</li>
-<li>请求和保持条件</li>
-<li>不剥夺条件</li>
-<li>环路等待条件</li>
+<li>互斥条件。</li>
+<li>请求和保持条件。</li>
+<li>不剥夺条件。</li>
+<li>环路等待条件。</li>
 </ul>
-<p>解决锁</p>
+<p>解决锁：</p>
 <ul>
 <li>持有锁一定时间，依然在等待的话，则释放持有的所有锁。</li>
 </ul>
 <p><strong>死锁示例</strong></p>
-<p>A、B锁互相等待</p>
+<p>A、B锁互相等待：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** A锁 */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String A = <span class="string">"A"</span>;</span><br><span class="line">    <span class="comment">/** B锁 */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String B = <span class="string">"B"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> DeadLockDemo().deadLock();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">deadLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (A) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">synchronized</span> (B) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"1"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (B) &#123;</span><br><span class="line">                    <span class="keyword">synchronized</span> (A) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"2"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="出现的场景"><a href="#出现的场景" class="headerlink" title="出现的场景"></a>出现的场景</h3><ul>
@@ -560,7 +563,7 @@
 <p>假设一个转账的场景，需要获得转账的账户A以及被转账的账户B的锁，那么假设同时发生A-&gt;B转账与B-&gt;A转账。则会产生死锁。</p>
 <p>可以通过定义锁的顺序，并在整个应用程序中都按照这个顺序来获取锁。</p>
 <p><strong><em>在协作对象间发生的死锁</em></strong></p>
-<p>在协作对象间，很容易出现锁的获取顺序不同的问题，因为作为两个不同的业务场景，它们最开始需要的锁很可能是不同的</p>
+<p>在协作对象间，很容易出现锁的获取顺序不同的问题，因为作为两个不同的业务场景，它们最开始需要的锁很可能是不同的。</p>
 <blockquote>
 <p>如果在持有锁时调用某个外部方法，那么将出现活跃性问题。在这个外部方法中可能或获取其他锁(可能产生死锁)，或者阻塞时间过长，导致其他线程无法及时获得当前被持有的锁。</p>
 </blockquote>
@@ -573,7 +576,7 @@
 <p>在相同的资源集合上等待时也会出现死锁，例如等待数据库连接。</p>
 <p>另一种形式就是线程饥饿死锁，例如单线程的线程池中一个任务提交另一个任务，则第一个任务永远等待，另一个任务永远在队列中等待。</p>
 <h3 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h3><p>在使用细粒度锁的程序中，可以通过使用一种两阶段策略来检查代码中的死锁：首先找出在什么地方将获取多个锁(使这个集合尽量小)，然后对所有这些示例进行全局分析，从而确保它们在整个程序中获取锁的顺序都保持一致。</p>
-<p>利用dump线程查看到底哪个线程出现了问题，可见是42行、31行出现死锁</p>
+<p>利用dump线程查看到底哪个线程出现了问题，可见是42行、31行出现死锁：</p>
 <p><img src="/assets/1554969499806.png" alt="1554969499806"></p>
 <h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p>当必须获取多个锁，那么在设计时必须考虑锁的顺序，尽量减少潜在的加锁交互数量，将获取锁需要遵守的协议写入文档。</p>
 <p>常见方法：</p>
@@ -588,34 +591,34 @@
 </ul>
 <h2 id="饥饿"><a href="#饥饿" class="headerlink" title="饥饿"></a>饥饿</h2><p>当线程由于无法访问它所需要的资源而不能继续执行时就发生了饥饿。</p>
 <p>最常见的资源时CPU时钟周期。例如线程优先级（OS相关，增加平台依赖性）使用不当，或者持有锁时进行一些无法结束的结构，也会导致饥饿。</p>
-<h2 id="丢失信号"><a href="#丢失信号" class="headerlink" title="丢失信号"></a>丢失信号</h2><h2 id="糟糕的响应性"><a href="#糟糕的响应性" class="headerlink" title="糟糕的响应性"></a>糟糕的响应性</h2><p>如果某个线程长时间占有一个锁，而其他想要访问整个容器的线程就需要等待很长时间</p>
+<h2 id="丢失信号"><a href="#丢失信号" class="headerlink" title="丢失信号"></a>丢失信号</h2><h2 id="糟糕的响应性"><a href="#糟糕的响应性" class="headerlink" title="糟糕的响应性"></a>糟糕的响应性</h2><p>如果某个线程长时间占有一个锁，而其他想要访问整个容器的线程就需要等待很长时间。</p>
 <h2 id="活锁"><a href="#活锁" class="headerlink" title="活锁"></a>活锁</h2><p>活锁是另一种活跃性问题，该问题尽管不会阻塞线程，但也不能继续执行，因为线程将不断重复执行相同的操，而且总会失败。</p>
 <p>例如处理事务消息的程序，如果不能成功处理某个消息，则回滚整个事务，并将其重新放到队列的开头，如果消息处理器处理某种特定类型的消息存在错误并导致事务失败，那么由于消息在队列开头，处理器将反复调用并一直失败。</p>
 <h1 id="并发编程模型的两个关键问题"><a href="#并发编程模型的两个关键问题" class="headerlink" title="并发编程模型的两个关键问题"></a>并发编程模型的两个关键问题</h1><ol>
-<li>线程间如何通信。通信指线程间以何种机制交换信息</li>
-<li>线程间如何同步</li>
+<li>线程间如何通信。通信指线程间以何种机制交换信息。</li>
+<li>线程间如何同步。</li>
 </ol>
 <p>在命令式编程中，线程通信机制有两种：</p>
 <ul>
 <li>共享内存。<ul>
-<li>线程间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信</li>
-<li>同步是显式进行的，程序员必须显式指定某个方法或某段代码需要在线程间互斥执行</li>
+<li>线程间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信。</li>
+<li>同步是显式进行的，程序员必须显式指定某个方法或某段代码需要在线程间互斥执行。</li>
 </ul>
 </li>
 <li>消息传递。<ul>
-<li>线程间没有公共状态，必须通过发送消息来显式进行通信</li>
-<li>同步是隐式进行的，消息的发送必须在消息的接受前</li>
+<li>线程间没有公共状态，必须通过发送消息来显式进行通信。</li>
+<li>同步是隐式进行的，消息的发送必须在消息的接受前。</li>
 </ul>
 </li>
 </ul>
 <p><strong>Java并发采用的是共享内存模型</strong></p>
-<p>Java线程间通信总是隐式进行，整个通信过程对程序员完全透明</p>
+<p>Java线程间通信总是隐式进行，整个通信过程对程序员完全透明。</p>
 <h1 id="多线程开发良好的实践"><a href="#多线程开发良好的实践" class="headerlink" title="多线程开发良好的实践"></a>多线程开发良好的实践</h1><ul>
 <li>给线程起个有意义的名字，这样可以方便找 Bug。</li>
-<li>缩小同步范围，从而减少锁争用。例如对于 synchronized，应该尽量使用同步块而不是同步方法。</li>
-<li>多用同步工具少用 wait() 和 notify()。首先，CountDownLatch, CyclicBarrier, Semaphore 和 Exchanger 这些同步类简化了编码操作，而用 wait() 和 notify() 很难实现复杂控制流；其次，这些同步类是由最好的企业编写和维护，在后续的 JDK 中还会不断优化和完善。</li>
-<li>使用 BlockingQueue 实现生产者消费者问题。</li>
-<li>多用并发集合少用同步集合，例如应该使用 ConcurrentHashMap 而不是 Hashtable。</li>
+<li>缩小同步范围，从而减少锁争用。例如对于synchronized，应该尽量使用同步块而不是同步方法。</li>
+<li>多用同步工具少用<code>wait()</code>和<code>notify()</code>。首先，CountDownLatch, CyclicBarrier, Semaphore 和 Exchanger这些同步类简化了编码操作，而用<code>wait()</code>和<code>notify()</code>很难实现复杂控制流；其次，这些同步类是由最好的企业编写和维护，在后续的JDK中还会不断优化和完善。</li>
+<li>使用BlockingQueue实现生产者消费者问题。</li>
+<li>多用并发集合少用同步集合，例如应该使用ConcurrentHashMap而不是Hashtable。</li>
 <li>使用本地变量和不可变类来保证线程安全。</li>
 <li>使用线程池而不是直接创建线程，这是因为创建线程代价很高，线程池可以有效地利用有限的线程来启动任务。</li>
 </ul>
@@ -706,7 +709,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -917,7 +920,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">35:38</span>
+    <span title="站点阅读时长">36:04</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

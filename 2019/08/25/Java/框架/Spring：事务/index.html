@@ -57,18 +57,20 @@
   };
 </script>
 
-  <meta name="description" content="Spring事务管理参考">
+  <meta name="description" content="Spring事务管理Spring不但提供了与底层代码无关的事务抽象，还提供了声明性事务的功能，可以让程序从事务代码中解放出来。 基础知识JDBC对事务的支持JDBC2.0中事务只能提交和回滚，在JDBC3.0中引入了Save Point特性。 ThreadLocalSpring通过各种模板类降低开发者使用各种数据持久化技术的难度，而模板类需要绑定数据连接或会话的资源，这些资源不是线程安全的，即不能">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring：事务">
 <meta property="og:url" content="http://yoursite.com/2019/08/25/Java/框架/Spring：事务/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Spring事务管理参考">
+<meta property="og:description" content="Spring事务管理Spring不但提供了与底层代码无关的事务抽象，还提供了声明性事务的功能，可以让程序从事务代码中解放出来。 基础知识JDBC对事务的支持JDBC2.0中事务只能提交和回滚，在JDBC3.0中引入了Save Point特性。 ThreadLocalSpring通过各种模板类降低开发者使用各种数据持久化技术的难度，而模板类需要绑定数据连接或会话的资源，这些资源不是线程安全的，即不能">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-25T02:54:00.344Z">
+<meta property="og:image" content="http://yoursite.com/assets/1566717004974.png">
+<meta property="og:updated_time" content="2019-08-25T15:27:51.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring：事务">
-<meta name="twitter:description" content="Spring事务管理参考">
+<meta name="twitter:description" content="Spring事务管理Spring不但提供了与底层代码无关的事务抽象，还提供了声明性事务的功能，可以让程序从事务代码中解放出来。 基础知识JDBC对事务的支持JDBC2.0中事务只能提交和回滚，在JDBC3.0中引入了Save Point特性。 ThreadLocalSpring通过各种模板类降低开发者使用各种数据持久化技术的难度，而模板类需要绑定数据连接或会话的资源，这些资源不是线程安全的，即不能">
+<meta name="twitter:image" content="http://yoursite.com/assets/1566717004974.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/25/Java/框架/Spring：事务/">
 
 
@@ -311,7 +313,7 @@
                 
               
 
-              <time title="创建时间：2019-08-25 10:52:45 / 修改时间：10:54:00" itemprop="dateCreated datePublished" datetime="2019-08-25T10:52:45+08:00">2019-08-25</time>
+              <time title="创建时间：2019-08-25 10:52:45 / 修改时间：23:27:51" itemprop="dateCreated datePublished" datetime="2019-08-25T10:52:45+08:00">2019-08-25</time>
             </span>
           
             
@@ -342,7 +344,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">15</span>
+              <span title="本文字数">4.2k</span>
             </span>
           
             <span class="post-meta-item">
@@ -352,7 +354,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">8 分钟</span>
             </span>
           
 
@@ -365,7 +367,107 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Spring事务管理"><a href="#Spring事务管理" class="headerlink" title="Spring事务管理"></a>Spring事务管理</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+        <h1 id="Spring事务管理"><a href="#Spring事务管理" class="headerlink" title="Spring事务管理"></a>Spring事务管理</h1><p>Spring不但提供了与底层代码无关的事务抽象，还提供了声明性事务的功能，可以让程序从事务代码中解放出来。</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="JDBC对事务的支持"><a href="#JDBC对事务的支持" class="headerlink" title="JDBC对事务的支持"></a>JDBC对事务的支持</h3><p>JDBC2.0中事务只能提交和回滚，在JDBC3.0中引入了Save Point特性。</p>
+<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>Spring通过各种模板类降低开发者使用各种数据持久化技术的难度，而模板类需要绑定数据连接或会话的资源，这些资源不是线程安全的，即不能在同一时刻被多个线程共享。</p>
+<p>Spring使用ThreadLocal实现资源的线程安全，并且在管理request作用域的Bean、事务任务调度、AOP等模块都有应用。</p>
+<h1 id="Spring对事务管理的支持"><a href="#Spring对事务管理的支持" class="headerlink" title="Spring对事务管理的支持"></a>Spring对事务管理的支持</h1><p>Spring为事务管理提供了一致的编程模板，在高层次建立了统一的事务抽象，即无论是JDBC、,MyBatis都可以让用户用统一的编程模型进行事务管理。</p>
+<p>Spring事务管理也提供了事务模板类TransactionTemplate，通过TransactionTemplate并配合使用事务回调TransactionCallback指定具体的持久化操作，就可以通过编程方式实现事务管理，而无须关注资源获取、复用释放、事务同步和异常处理等操作。</p>
+<p>Spring事务优势：</p>
+<ul>
+<li>声明式事务管理。<ul>
+<li>允许通过声明方式，在IOC配置中指定事务的边界和事务属性，Spring自动在指定的事务边界上应用事务属性。</li>
+</ul>
+</li>
+</ul>
+<h2 id="事务管理关键抽象"><a href="#事务管理关键抽象" class="headerlink" title="事务管理关键抽象"></a>事务管理关键抽象</h2><p>Spring的事务管理的抽象层主要包括3个接口：PlatformTransactionManager、TransactionDefinition、TransactionStatus。</p>
+<p><img src="/assets/1566717004974.png" alt="1566717004974"></p>
+<p>TransactionDefinition描述事务的隔离级别、超时时间、是否为只读事务和事务的传播规则等控制事务具体行为的事务属性。</p>
+<p>PlatformTransactionManager根据TransactionDefinition提供的事务属性配置信息创建事务，并用TransactionStatus描述这个激活事务的状态。</p>
+<h3 id="TransactionDefinition"><a href="#TransactionDefinition" class="headerlink" title="TransactionDefinition"></a>TransactionDefinition</h3><ul>
+<li>事务隔离。定义当前事务与其他事务的隔离程度<ul>
+<li>Isolation_read_uncommited。</li>
+<li>Isolation_read_commited。</li>
+<li>Isolation_repeatable_read。</li>
+<li>Isolation_serializable。</li>
+<li>Isolation_default。表示运用底层数据库的默认事务隔离级别。</li>
+</ul>
+</li>
+<li>事务传播。通常在一个事务中执行的所有代码都会运行在同一事务上下文当中，但是Spring也提供了几个可选的事务传播类型。<ul>
+<li>简单地参与到现有的事务中。</li>
+<li>挂起当前的事务，创建一个新的事务。等</li>
+</ul>
+</li>
+<li>事务超时。事务在超时前能运行多久，超时后事务被回滚。</li>
+<li>只读状态。不修改任何数据，可用针对可读事务应用一些优化措施，提高运行性能。</li>
+</ul>
+<h3 id="TransactionStatus"><a href="#TransactionStatus" class="headerlink" title="TransactionStatus"></a>TransactionStatus</h3><p>TransactionStatus代表一个事务的具体运行状态，事务管理器可以通过该接口获取事务运行期的状态信息，也可以通过该接口间接地回滚事务。</p>
+<p>相比于在抛出异常时回滚事务的方式更具有可控性，该接口继承自SavePointManager接口，其提供的方法有：</p>
+<ul>
+<li>Object createSavepoint()。创建一个保存点对象，以便在后面可以利用rollbackToSavepoint(Object savepoint)方法使事务回滚到特定的保存点上，也可以通过releaseSavepoint()释放一个已经不用的保存点。</li>
+<li>void rollbackToSavepoint(Object savepoint)。</li>
+<li>void releaseSavepoint()。</li>
+</ul>
+<p>TransactionStatus扩展支持了以下方法：</p>
+<ul>
+<li>boolean hasSavepoint()。判断事务释放在内部创建了一个保存点，该保存点是为了支持Spring的嵌套事务而创建的。</li>
+<li>boolean isNewTransaction()。判断当前事务是否是一个新的事务，如果返回false，则表示事务是一个已经存在的事务，或当前操作未运行在事务环境中。</li>
+<li>boolean isCompleted()。判断当前事务是否已经结束。</li>
+<li>void setRollbackOnly()。将当前事务设置未rollback-only，通过该标识通知事务管理器只能将事务回滚，事务管理器将通过显式调用回滚命令或抛出异常来回滚事务。</li>
+</ul>
+<h3 id="PlatformTransactionManager"><a href="#PlatformTransactionManager" class="headerlink" title="PlatformTransactionManager"></a>PlatformTransactionManager</h3><p>提供了事务管理的抽象。</p>
+<ul>
+<li>TransactionStatus getTransaction(TransactionDefinition definition)。根据事务定义信息从事务环境中返回一个已存在的事务，或创建一个新的事务。</li>
+<li>commit(TransactionStatus status)。根据事务的状态提交事务，如果事务状态被设置未rollback-only，则执行回滚事务的操作。</li>
+<li>rollback(TransactionStatus status)。将事务回滚，当commit抛出异常，则将隐式调用rollback。</li>
+</ul>
+<h2 id="事务同步管理器"><a href="#事务同步管理器" class="headerlink" title="事务同步管理器"></a>事务同步管理器</h2><p>Spring将JDBC的Connection的Session等访问数据库的连接或会话对象统称为资源，这些资源在同一时刻是不能多线程共享的。</p>
+<p>Spring的事务同步管理器类使用ThreadLocal为不同事务线程提供了独立的资源副本，同时维护事务配置的属性和运行状态信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">TransactionSynchronizationManager</span></span>&#123;</span><br><span class="line">    <span class="comment">//用于保存每个事务线程对应的Connection或Session等类型的资源</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal resources = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line">	<span class="comment">//用于保存每个事务线程对应的事务的名称</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal currentTransactionName = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line">    <span class="comment">//用于保存每个事务线程对应事务的read-only状态</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal currentTransactionReadOnly = <span class="keyword">new</span> ThreadLocal。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TransactionSynchronizationManager将DAO、Service中影响线程安全的所有状态统一抽取到该类当中，并且使用ThreadLocal进行替换，因此它们都将是线程安全的。</p>
+<h2 id="事务传播行为"><a href="#事务传播行为" class="headerlink" title="事务传播行为"></a>事务传播行为</h2><p>当我们调用一个基于Spring的Service接口方法时，它将运行于Spring管理的事务环境中，Service接口方法可能会在内部调用其他的Service接口方法以共同完成一个完整的业务操作，因此就会产生服务接口方法嵌套调用的情况。</p>
+<p>Spring通过<strong>事务传播行为</strong>控制当前的事务如何传播到被嵌套调用的目标服务接口方法中。</p>
+<h3 id="事务传播行为类型"><a href="#事务传播行为类型" class="headerlink" title="事务传播行为类型"></a>事务传播行为类型</h3><p>在TransactionDefinition接口中定义，规定了事务方法和事务方法间发生嵌套调用时，事务如何进行传播：</p>
+<ul>
+<li>Propagation_Required。如果当前没有事务，则新建一个事务，如果已经存在一个事务，则加入到这个事务。<ul>
+<li>是最常见的选择。</li>
+</ul>
+</li>
+<li>Propagation_Supports。支持当前事务，如果当前没有事务，则以非事务方式运行。</li>
+<li>Propagation_Mandatory。使用当前的事务，如果当前没有事务，则抛出异常。</li>
+<li>Propagation_Requires_New。新建事务，如果当前存在事务，则将当前事务挂起。</li>
+<li>Propagation_Not_Supported。以非事务方式执行操作， 如果当前存在事务，则将当前事务挂起。</li>
+<li>Propagation_Never。以非事务的方式执行，如果当前存在事务，则抛出异常。</li>
+<li>Propagation_Nested。如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与Propagation_Required类似的操作。<ul>
+<li>需要JDBC3.0，且数据源支持保存点事务机制。</li>
+</ul>
+</li>
+</ul>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>@Transaction默认属性：</p>
+<ul>
+<li>事务传播行为：Progation_Required。</li>
+<li>事务隔离级别：Isolation_Default。</li>
+<li>读写事务属性：读/写事务。</li>
+<li>超时时间：依赖于底层的事务系统的默认值。</li>
+<li>回滚设置：任何运行期异常引发回滚，任何检查型异常不会引发回滚。</li>
+</ul>
+<p><strong>何处标注</strong></p>
+<ul>
+<li>接口定义。</li>
+<li>接口方法。</li>
+<li>类定义。</li>
+<li>类的public方法。</li>
+</ul>
+<p>使用不同的事务管理器：</p>
+<p>@Transactional(“topic”)。即使用名为topic的事务管理器。</p>
+<h1 id="事务管理难点"><a href="#事务管理难点" class="headerlink" title="事务管理难点"></a>事务管理难点</h1><h2 id="事务方法嵌套调用"><a href="#事务方法嵌套调用" class="headerlink" title="事务方法嵌套调用"></a>事务方法嵌套调用</h2><h3 id="Spring事务传播机制回顾"><a href="#Spring事务传播机制回顾" class="headerlink" title="Spring事务传播机制回顾"></a>Spring事务传播机制回顾</h3><p>Spring事务一个被讹传的说法是：一个事务方法不应该调用另一个事务方法，否则将产生两个事务。</p>
+<p>Spring独立实现了事务传播行为，而通过事务传播属性，例如Propagation_Required操作，如果多个ServiceX#method1()-&gt;Service2#method2()-&gt;Service3#method3()则3个服务的3个方法读将通过Spring的事务传播机制工作在同一个事务中。</p>
+<h3 id="相互嵌套的服务方法"><a href="#相互嵌套的服务方法" class="headerlink" title="相互嵌套的服务方法"></a>相互嵌套的服务方法</h3><p>当UserService@login()调用ScoreService#addScore()则二者分别通过AOP进行了事务增强，使得它们工作在同一事务中：</p>
+<p>即原理是通过AOP将代码作为了一个切面，将addScore()插入了login方法当中，从而实现二者共享同一个事务，因此它们最终工作在同一个事务当中。</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>在相同线程中进行相互嵌套调用的事务方法工作在相同的事务中。</p>
+<p>如果这些相互嵌套调用的方法工作在不同的线程中，则不同线程下的事务方法工作在独立的事务中。它们被ThreadLocal隔离了。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -393,6 +495,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+              <a href="/2019/08/26/Java/框架/Spring：Bean生命周期/" rel="prev" title="Spring：Bean生命周期">
+                Spring：Bean生命周期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
     </footer>
@@ -447,7 +553,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -622,7 +728,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring事务管理"><span class="nav-number">1.</span> <span class="nav-text">Spring事务管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring事务管理"><span class="nav-number">1.</span> <span class="nav-text">Spring事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC对事务的支持"><span class="nav-number">1.1.1.</span> <span class="nav-text">JDBC对事务的支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal"><span class="nav-number">1.1.2.</span> <span class="nav-text">ThreadLocal</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring对事务管理的支持"><span class="nav-number">2.</span> <span class="nav-text">Spring对事务管理的支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务管理关键抽象"><span class="nav-number">2.1.</span> <span class="nav-text">事务管理关键抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TransactionDefinition"><span class="nav-number">2.1.1.</span> <span class="nav-text">TransactionDefinition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransactionStatus"><span class="nav-number">2.1.2.</span> <span class="nav-text">TransactionStatus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PlatformTransactionManager"><span class="nav-number">2.1.3.</span> <span class="nav-text">PlatformTransactionManager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务同步管理器"><span class="nav-number">2.2.</span> <span class="nav-text">事务同步管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务传播行为"><span class="nav-number">2.3.</span> <span class="nav-text">事务传播行为</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务传播行为类型"><span class="nav-number">2.3.1.</span> <span class="nav-text">事务传播行为类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解"><span class="nav-number">2.4.</span> <span class="nav-text">注解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务管理难点"><span class="nav-number">3.</span> <span class="nav-text">事务管理难点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务方法嵌套调用"><span class="nav-number">3.1.</span> <span class="nav-text">事务方法嵌套调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring事务传播机制回顾"><span class="nav-number">3.1.1.</span> <span class="nav-text">Spring事务传播机制回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相互嵌套的服务方法"><span class="nav-number">3.1.2.</span> <span class="nav-text">相互嵌套的服务方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">3.2.</span> <span class="nav-text">多线程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -658,7 +764,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">36:04</span>
+    <span title="站点阅读时长">37:08</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

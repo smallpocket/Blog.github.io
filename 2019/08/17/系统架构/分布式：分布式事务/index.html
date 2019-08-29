@@ -57,24 +57,28 @@
   };
 </script>
 
-  <meta name="description" content="分布式事务提出问题数据的一致性：  数据的并发访问、修改。 多个服务共同完成一个业务请求，保证都完成或失败。发生异常时的数据回滚。  基础概述 分布式事务就是将多个节点的事务看成一个整体处理。 分布式事务由事务参与者、资源服务器、事务管理器等组成。 事务参与者：例如下订单、扣除库存、支付的机器。 资源服务器：控制我们在用的订单状态、库存数量等。 事务管理器：帮助协调等功能。如果一个事务参与者挂掉了">
+  <meta name="description" content="分布式事务提出问题数据的一致性：  数据的并发访问、修改。 多个服务共同完成一个业务请求，保证都完成或失败。发生异常时的数据回滚。 在分布式系统中，为了保证数据的高可用，通常，我们会将数据保留多个副本(replica)，这些副本会放置在不同的物理机器上。为了对用户提供正确的CRUD等语义，我们需要保证这些放置在不同物理机器上的副本是一致的。  是什么 分布式事务就是将多个节点的事务看成一个整体处理">
 <meta name="keywords" content="分布式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式：分布式事务">
 <meta property="og:url" content="http://yoursite.com/2019/08/17/系统架构/分布式：分布式事务/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="分布式事务提出问题数据的一致性：  数据的并发访问、修改。 多个服务共同完成一个业务请求，保证都完成或失败。发生异常时的数据回滚。  基础概述 分布式事务就是将多个节点的事务看成一个整体处理。 分布式事务由事务参与者、资源服务器、事务管理器等组成。 事务参与者：例如下订单、扣除库存、支付的机器。 资源服务器：控制我们在用的订单状态、库存数量等。 事务管理器：帮助协调等功能。如果一个事务参与者挂掉了">
+<meta property="og:description" content="分布式事务提出问题数据的一致性：  数据的并发访问、修改。 多个服务共同完成一个业务请求，保证都完成或失败。发生异常时的数据回滚。 在分布式系统中，为了保证数据的高可用，通常，我们会将数据保留多个副本(replica)，这些副本会放置在不同的物理机器上。为了对用户提供正确的CRUD等语义，我们需要保证这些放置在不同物理机器上的副本是一致的。  是什么 分布式事务就是将多个节点的事务看成一个整体处理">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/assets/1566042387298.png">
+<meta property="og:image" content="http://yoursite.com/assets/CAP.png">
+<meta property="og:image" content="http://yoursite.com/assets/consistency.png">
+<meta property="og:image" content="http://yoursite.com/assets/cap-sumarry.png">
+<meta property="og:image" content="http://yoursite.com/assets/2pc_process.png">
+<meta property="og:image" content="http://yoursite.com/assets/Three-phase_commit_diagram.png">
 <meta property="og:image" content="http://yoursite.com/assets/1566042767502.png">
 <meta property="og:image" content="http://yoursite.com/assets/1566042853331.png">
 <meta property="og:image" content="http://yoursite.com/assets/1566042997606.png">
 <meta property="og:image" content="http://yoursite.com/assets/1566043225537.png">
-<meta property="og:updated_time" content="2019-08-27T15:38:59.506Z">
+<meta property="og:updated_time" content="2019-08-29T01:37:29.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式：分布式事务">
-<meta name="twitter:description" content="分布式事务提出问题数据的一致性：  数据的并发访问、修改。 多个服务共同完成一个业务请求，保证都完成或失败。发生异常时的数据回滚。  基础概述 分布式事务就是将多个节点的事务看成一个整体处理。 分布式事务由事务参与者、资源服务器、事务管理器等组成。 事务参与者：例如下订单、扣除库存、支付的机器。 资源服务器：控制我们在用的订单状态、库存数量等。 事务管理器：帮助协调等功能。如果一个事务参与者挂掉了">
-<meta name="twitter:image" content="http://yoursite.com/assets/1566042387298.png">
+<meta name="twitter:description" content="分布式事务提出问题数据的一致性：  数据的并发访问、修改。 多个服务共同完成一个业务请求，保证都完成或失败。发生异常时的数据回滚。 在分布式系统中，为了保证数据的高可用，通常，我们会将数据保留多个副本(replica)，这些副本会放置在不同的物理机器上。为了对用户提供正确的CRUD等语义，我们需要保证这些放置在不同物理机器上的副本是一致的。  是什么 分布式事务就是将多个节点的事务看成一个整体处理">
+<meta name="twitter:image" content="http://yoursite.com/assets/CAP.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/17/系统架构/分布式：分布式事务/">
 
 
@@ -330,7 +334,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-27 23:38:59" itemprop="dateModified" datetime="2019-08-27T23:38:59+08:00">2019-08-27</time>
+                <time title="修改时间：2019-08-29 09:37:29" itemprop="dateModified" datetime="2019-08-29T09:37:29+08:00">2019-08-29</time>
               </span>
             
           
@@ -358,7 +362,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.1k</span>
+              <span title="本文字数">8k</span>
             </span>
           
             <span class="post-meta-item">
@@ -368,7 +372,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">2 分钟</span>
+              <span title="阅读时长">14 分钟</span>
             </span>
           
 
@@ -385,8 +389,9 @@
 <ul>
 <li>数据的并发访问、修改。</li>
 <li>多个服务共同完成一个业务请求，保证都完成或失败。发生异常时的数据回滚。</li>
+<li>在分布式系统中，为了保证数据的高可用，通常，我们会将数据保留多个副本(replica)，这些副本会放置在不同的物理机器上。为了对用户提供正确的CRUD等语义，我们需要保证这些放置在不同物理机器上的副本是一致的。</li>
 </ul>
-<h2 id="基础概述"><a href="#基础概述" class="headerlink" title="基础概述"></a>基础概述</h2><ul>
+<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><ul>
 <li>分布式事务就是将多个节点的事务看成一个整体处理。</li>
 <li>分布式事务由事务参与者、资源服务器、事务管理器等组成。<ul>
 <li>事务参与者：例如下订单、扣除库存、支付的机器。</li>
@@ -395,18 +400,186 @@
 </ul>
 </li>
 </ul>
-<h2 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h2><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="两段式事务-2PC-与三段式事务-3PC"><a href="#两段式事务-2PC-与三段式事务-3PC" class="headerlink" title="两段式事务(2PC)与三段式事务(3PC)"></a>两段式事务(2PC)与三段式事务(3PC)</h3><p>实际上很少有在用，都是在用变形</p>
-<p><strong><em>2PC</em></strong>：</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><h2 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h2><h3 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h3><p>CAP定理，又被叫作布鲁尔定理。对于设计分布式系统来说(不仅仅是分布式事务)的架构师来说，CAP就是你的入门理论。</p>
 <ul>
-<li>预备</li>
+<li>C (一致性)：对某个指定的客户端来说，读操作能返回最新的写操作。对于数据分布在不同节点上的数据上来说，如果在某个节点更新了数据，那么在其他节点如果都能读取到这个最新的数据，那么就称为强一致，如果有某个节点没有读取到，那就是分布式不一致。</li>
+<li>A (可用性)：非故障的节点在合理的时间内返回合理的响应(不是错误和超时的响应)。可用性的两个关键一个是合理的时间，一个是合理的响应。合理的时间指的是请求不能无限被阻塞，应该在合理的时间给出返回。合理的响应指的是系统应该明确返回结果并且结果是正确的，这里的正确指的是比如应该返回50，而不是返回40。</li>
+<li>P (分区容错性)：当出现网络分区后，系统能够继续工作。打个比方，这里个集群有多台机器，有台机器网络出现了问题，但是这个集群仍然可以正常工作。<ul>
+<li>网络分区：即分区间的机器无法进行网络通信的情况是必然会发生的。</li>
+<li>一个分布式系统里面，节点组成的网络本来应该是连通的。然而可能因为一些故障，使得有些节点之间不连通了，整个网络就分成了几块区域。数据就散布在了这些不连通的区域中。这就叫分区。</li>
+<li>当你一个数据项只在一个节点中保存，那么分区出现后，和这个节点不连通的部分就访问不到这个数据了。这时分区就是无法容忍的。</li>
+<li>提高分区容忍性的办法就是一个数据项复制到多个节点上，那么出现分区之后，这一数据项就可能分布到各个区里，容忍性就提高了。</li>
+<li>然而，要把数据复制到多个节点，就会带来一致性的问题，就是多个节点上面的数据可能是不一致的。</li>
+<li>要保证一致，每次写操作就都要等待全部节点写成功，而这等待又会带来可用性的问题。</li>
+<li>总的来说就是，数据存在的节点越多，分区容忍性越高，但要复制更新的数据就越多，一致性就越难保证。为了保证一致性，更新所有节点数据所需要的时间就越长，可用性就会降低。</li>
 </ul>
-<p><img src="/assets/1566042387298.png" alt="1566042387298"></p>
+</li>
+</ul>
+<p>熟悉CAP的人都知道，三者不能共有，如果感兴趣可以搜索CAP的证明，在分布式系统中，网络无法100%可靠，分区其实是一个必然现象，如果我们选择了CA而放弃了P，那么当发生分区现象时，为了保证一致性，这个时候必须拒绝请求，但是A又不允许，所以分布式系统理论上不可能选择CA架构，只能选择CP或者AP架构。</p>
+<p>对于CP来说，放弃可用性，追求一致性和分区容错性，我们的zookeeper其实就是追求的强一致。</p>
+<p>对于AP来说，放弃一致性(这里说的一致性是强一致性)，追求分区容错性和可用性，这是很多分布式系统设计时的选择，后面的BASE也是根据AP来扩展。</p>
+<p>顺便一提，CAP理论中是忽略网络延迟，也就是当事务提交时，从节点A复制到节点B，但是在现实中这个是明显不可能的，所以总会有一定的时间是不一致。同时CAP中选择两个，比如你选择了CP，并不是叫你放弃A。因为P出现的概率实在是太小了，大部分的时间你仍然需要保证CA。就算分区出现了你也要为后来的A做准备，比如通过一些日志的手段，是其他机器回复至可用。</p>
+<p><img src="/assets/CAP.png" alt="CAP çè®ºåç"></p>
+<h3 id="BASE"><a href="#BASE" class="headerlink" title="BASE"></a>BASE</h3><p>BASE 是 Basically Available(基本可用)、Soft state(软状态)和 Eventually consistent (最终一致性)三个短语的缩写。是对CAP中AP的一个扩展：</p>
+<ol>
+<li>基本可用：分布式系统在出现故障时，允许损失部分可用功能，保证核心功能可用。</li>
+<li>软状态：允许系统中存在中间状态，这个状态不影响系统可用性，这里指的是CAP中的不一致。</li>
+<li>最终一致：最终一致是指经过一段时间后，所有节点数据都将会达到一致。</li>
+</ol>
+<p>BASE解决了CAP中理论没有网络延迟，在BASE中用软状态和最终一致，保证了延迟后的一致性。BASE和 ACID 是相反的，它完全不同于ACID的强一致性模型，而是通过牺牲强一致性来获得可用性，并允许数据在一段时间内是不一致的，但最终达到一致状态。</p>
+<h2 id="一致性模型"><a href="#一致性模型" class="headerlink" title="一致性模型"></a>一致性模型</h2><h3 id="强一致性"><a href="#强一致性" class="headerlink" title="强一致性"></a>强一致性</h3><p>当更新操作完成之后，任何多个后续进程或者线程的访问都会返回最新的更新过的值，直到这个数据被其他数据更新为止。</p>
+<p>但是这种实现对性能影响较大，因为这意味着，只要上次的操作没有处理完，就不能让用户读取数据。</p>
+<h3 id="弱一致性"><a href="#弱一致性" class="headerlink" title="弱一致性"></a>弱一致性</h3><p>系统并不保证进程或者线程的访问都会返回最新更新过的值。系统在数据写入成功之后，不承诺立即可以读到最新写入的值，也不会具体的承诺多久之后可以读到。但会尽可能保证在某个时间级别（比如秒级别）之后，可以让数据达到一致性状态。</p>
+<h3 id="最终一致性"><a href="#最终一致性" class="headerlink" title="最终一致性"></a>最终一致性</h3><p>最终一致性也是弱一致性的一种，它无法保证数据更新后，所有后续的访问都能看到最新数值，而是需要一个时间，在这个时间之后可以保证这一点，而在这个时间内，数据也许是不一致的，这个系统无法保证强一致性的时间片段被称为「不一致窗口」。不一致窗口的时间长短取决于很多因素，比如备份数据的个数、网络传输延迟速度、系统负载等。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>因果一致性</td>
+<td>如果 A 进程在更新之后向 B 进程通知更新的完成，那么 B 的访问操作将会返回更新的值。而没有因果关系的 C 进程将会遵循最终一致性的规则（C 在不一致窗口内还是看到是旧值）。</td>
+</tr>
+<tr>
+<td>读你所写一致性</td>
+<td>因果一致性的特定形式。一个进程进行数据更新后，会给自己发送一条通知，该进程后续的操作都会以最新值作为基础，而其他的进程还是只能在不一致窗口之后才能看到最新值。</td>
+</tr>
+<tr>
+<td>会话一致性</td>
+<td>读你所写一致性的特定形式。进程在访问存储系统同一个会话内，系统保证该进程可以读取到最新之，但如果会话终止，重新连接后，如果此时还在不一致窗口内，还是可嫩读取到旧值。</td>
+</tr>
+<tr>
+<td>单调读一致性</td>
+<td>如果一个进程已经读取到一个特定值，那么该进程不会读取到该值以前的任何值。</td>
+</tr>
+<tr>
+<td>单调写一致性</td>
+<td>系统保证对同一个进程的写操作串行化。</td>
+</tr>
+</tbody></table>
+<p><img src="/assets/consistency.png" alt="ä¸è´æ§æ¨¡åä¹é´å³ç³»"></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>第一行表头代表了分布式系统中通用的一致性方案，包括冷备、Master/Slave、Master/Master、两阶段提交以及基于Paxos算法的解决方案。</li>
+<li>第一列表头代表了分布式系统大家所关心的各项指标，包括一致性、事务支持程度、数据延迟、系统吞吐量、数据丢失可能性、故障自动恢复方式。</li>
+</ul>
+<p><img src="/assets/cap-sumarry.png" alt="CAP çè®ºå¨å·¥ä¸ççå®è·µ"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>分布式事务主要的关注是资源与网络问题。</p>
+<p>2PC、3PC实际上很少有在用，都是在用变形。</p>
+<h2 id="两段式事务-2PC"><a href="#两段式事务-2PC" class="headerlink" title="两段式事务(2PC)"></a>两段式事务(2PC)</h2><ul>
+<li>保证在分布式事务中，要么所有参与进程都提交事务，要么都取消事务。</li>
+<li>在数据一致性中，它的含义是：要么所有副本（备份数据）同时修改某个数值，要么都不更改，以此来保证数据的强一致性。</li>
+</ul>
+<p>2PC的<strong>思路</strong>是：参与者将操作结果通知协调者，再由协调者根据所有参与者的反馈情报决定各参与者是否要提交操作还是中止操作。从而使得节点知道其他节点的操作状态。</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><ol>
+<li>表决阶段：此时Coordinator（协调者）向所有的参与者发送一个vote request，参与者在收到这请求后，如果准备好了就会向Coordinator发送一个<code>VOTE_COMMIT</code>消息作为回应，告知Coordinator自己已经做好了准备，否则会返回一个<code>VOTE_ABORT</code>消息。</li>
+<li>提交阶段：Coordinator收到所有参与者的表决信息，如果所有参与者一致认为可以提交事务，那么Coordinator就会发送<code>GLOBAL_COMMIT</code>消息，否则发送<code>GLOBAL_ABORT</code>消息；对于参与者而言，如果收到<code>GLOBAL_COMMIT</code>消息，就会提交本地事务，否则就会取消本地事务。</li>
+</ol>
+<p><img src="/assets/2pc_process.png" alt="ä¸¤é¶æ®µæäº¤è¿ç¨"></p>
 <p>如果都就绪了，但是其中一个事务提交了之后立即宕机了，即对事务处理器而言是不知道事务是否处理成功了。</p>
-<p><strong><em>3PC</em></strong>：</p>
+<h3 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h3><p>网络角度考虑：</p>
+<p>可能发生 Coordinator 或者参与者突然宕机的情况，在不同时期宕机可能有不同的现象：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>分析及解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Coordinator 挂了，参与者没挂</td>
+<td>这种情况其实比较好解决，只要找一个Coordinator的替代者。当他成为新的Coordinator的时候，询问所有参与者的最后那条事务的执行情况，他就可以知道是应该做什么样的操作了。所以，这种情况不会导致数据不一致。</td>
+</tr>
+<tr>
+<td>参与者挂了（无法恢复），Coordinator 没挂</td>
+<td>如果挂了之后没有恢复，那么是不会导致数据一致性问题。</td>
+</tr>
+<tr>
+<td>参与者挂了（后来恢复），Coordinator 没挂</td>
+<td>恢复后参与者如果发现有未执行完的事务操作，直接取消，然后再询问Coordinator目前我应该怎么做，协调者就会比对自己的事务执行记录和该参与者的事务执行记录，告诉他应该怎么做来保持数据的一致性。</td>
+</tr>
+</tbody></table>
+<p>参与者挂了，Coordinator 也挂了，需要再细分为几种类型来讨论：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>分析及解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Coordinator 和参与者在第一阶段挂了</td>
+<td>由于这时还没有执行commit操作，新选出来的Coordinator可以询问各个参与者的情况，再决定是进行commit还是roolback。因为还没有commit，所以不会导致数据一致性问题。</td>
+</tr>
+<tr>
+<td>Coordinator 和参与者在第二阶段挂了，但是挂的这个参与者在挂之前还没有做相关操作</td>
+<td>这种情况下，当新的Coordinator被选出来之后，他同样是询问所有参与者的情况。只要有机器执行了abort（roolback）操作或者第一阶段返回的信息是No的话，那就直接执行roolback操作。如果没有人执行abort操作，但是有机器执行了commit操作，那么就直接执行commit操作。这样，当挂掉的参与者恢复之后，只要按照Coordinator的指示进行事务的commit还是roolback操作就可以了。因为挂掉的机器并没有做commit 或者roolback操作，而没有挂掉的机器们和新的Coordinator又执行了同样的操作，那么这种情况不会导致数据不一致现象。</td>
+</tr>
+<tr>
+<td>Coordinator 和参与者在第二阶段挂了，挂的这个参与者在挂之前已经执行了操作。但是由于他挂了，没有人知道他执行了什么操作</td>
+<td>这种情况下，新的Coordinator被选出来之后，如果他想负起Coordinator的责任的话他就只能按照之前那种情况来执行commit或者roolback操作。这样新的Coordinator和所有没挂掉的参与者就保持了数据的一致性，我们假定他们执行了commit。但是，这个时候，那个挂掉的参与者恢复了怎么办，因为他已经执行完了之前的事务，如果他执行的是commit那还好，和其他的机器保持一致了，万一他执行的是roolback操作呢？这不就导致数据的不一致性了么？虽然这个时候可以再通过手段让他和Coordinator通信，再想办法把数据搞成一致的，但是，这段时间内他的数据状态已经是不一致的了！</td>
+</tr>
+</tbody></table>
+<ul>
+<li>单点问题:事务管理器在整个流程中扮演的角色很关键，如果其宕机，比如在第一阶段已经完成，在第二阶段正准备提交的时候事务管理器宕机，资源管理器就会一直阻塞，导致数据库无法使用。<ul>
+<li>实际生产应用中，Coordinator 都会有相应的备选节点。</li>
+</ul>
+</li>
+<li>同步阻塞:在准备就绪之后，资源管理器中的资源一直处于阻塞，直到提交完成，释放资源。<ul>
+<li>超时判断机制来解决的，但并不能完全解决同步阻塞问题。</li>
+</ul>
+</li>
+<li>数据不一致:两阶段提交协议虽然为分布式数据强一致性所设计，但仍然存在数据不一致性的可能，比如在第二阶段中，假设协调者发出了事务commit的通知，但是因为网络问题该通知仅被一部分参与者所收到并执行了commit操作，其余的参与者则因为没有收到通知一直处于阻塞状态，这时候就产生了数据的不一致性。</li>
+</ul>
+<h3 id="适用性-1"><a href="#适用性-1" class="headerlink" title="适用性"></a>适用性</h3><p>XA协议比较简单，成本较低，但是其单点问题，以及不能支持高并发(由于同步阻塞)依然是其最大的弱点。</p>
+<h2 id="三段式事务-3PC"><a href="#三段式事务-3PC" class="headerlink" title="三段式事务(3PC)"></a>三段式事务(3PC)</h2><p>如果出现协调者和参与者都挂了的情况，有可能导致数据不一致。<strong>为了解决这个问题</strong>，衍生出了3PC。</p>
 <p>在准备提交与已经提交中间加入了一个预备提交的阶段。</p>
-<h3 id="基于XA的分布式事务"><a href="#基于XA的分布式事务" class="headerlink" title="基于XA的分布式事务"></a>基于XA的分布式事务</h3><p>本质上也是一种两段式提交，MySQL、Oracle等基本都支持该XA事务。</p>
+<h3 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h3><p><strong><em>阶段一 CanCommit</em></strong></p>
+<ol>
+<li>事务询问：Coordinator向各参与者发送CanCommit的请求，询问是否可以执行事务提交操作，并开始等待各参与者的响应。</li>
+<li>参与者向Coordinator反馈询问的响应：参与者收到CanCommit请求后，正常情况下，如果自身认为可以顺利执行事务，那么会反馈Yes响应，并进入预备状态，否则反馈No。</li>
+</ol>
+<p><strong><em>阶段二 PreCommit</em></strong></p>
+<p><strong>执行事务预提交</strong>：如果Coordinator接收到各参与者反馈都是Yes，那么执行事务预提交。</p>
+<ol>
+<li>发送预提交请求：Coordinator向各参与者发送preCommit请求，并进入prepared阶段。</li>
+<li>事务预提交：参与者接收到preCommit请求后，会执行事务操作，并将Undo和Redo信息记录到事务日记中。</li>
+<li>各参与者向Coordinator反馈事务执行的响应：如果各参与者都成功执行了事务操作，那么反馈给协调者ACK响应，同时等待最终指令，提交commit或者终止abort，结束流程。</li>
+</ol>
+<p><strong>中断事务</strong>：如果任何一个参与者向Coordinator反馈了No响应，或者在等待超时后，Coordinator无法接收到所有参与者的反馈，那么就会中断事务。</p>
+<ol>
+<li>发送中断请求：Coordinator向所有参与者发送abort请求。</li>
+<li>中断事务：无论是收到来自Coordinator的abort请求，还是等待超时，参与者都中断事务。</li>
+</ol>
+<p><strong><em>阶段三 doCommit</em></strong></p>
+<p><strong>执行提交</strong></p>
+<ol>
+<li>发送提交请求：假设Coordinator正常工作，接收到了所有参与者的ack响应，那么它将从预提交阶段进入提交状态，并向所有参与者发送doCommit请求。</li>
+<li>事务提交：参与者收到doCommit请求后，正式提交事务，并在完成事务提交后释放占用的资源。</li>
+<li>反馈事务提交结果：参与者完成事务提交后，向Coordinator发送ACK信息。</li>
+<li>完成事务：Coordinator接收到所有参与者ack信息，完成事务。</li>
+</ol>
+<p><strong>中断事务</strong>：假设 Coordinator 正常工作，并且有任一参与者反馈 No，或者在等待超时后无法接收所有参与者的反馈，都会中断事务：</p>
+<ol>
+<li>发送中断请求：Coordinator向所有参与者节点发送abort请求。</li>
+<li>事务回滚：参与者接收到abort请求后，利用undo日志执行事务回滚，并在完成事务回滚后释放占用的资源。</li>
+<li>反馈事务回滚结果：参与者在完成事务回滚之后，向Coordinator发送ack信息。</li>
+<li>中断事务：Coordinator接收到所有参与者反馈的ack信息后，中断事务。</li>
+</ol>
+<p><img src="/assets/Three-phase_commit_diagram.png" alt="ä¸èç¹æäº¤è¿ç¨"></p>
+<h3 id="存在的问题-1"><a href="#存在的问题-1" class="headerlink" title="存在的问题"></a>存在的问题</h3><p>3PC依然带来其他问题：在阶段三时，协调者出现问题、协调者与参与者之间网络出现故障。不论出现哪种情况，最终都会导致参与者无法及时接收到来自协调者的doCommit或是abort请求，针对这种情况，参与者都会在等待超时后，继续进行事务提交（timeout后中断事务）。</p>
+<p>而且由于3PC 的设计过于复杂，在解决2PC 问题的同时也引入了新的问题，所以在实际上应用不是很广泛。</p>
+<h2 id="基于XA的分布式事务"><a href="#基于XA的分布式事务" class="headerlink" title="基于XA的分布式事务"></a>基于XA的分布式事务</h2><p>本质上也是一种两段式提交，MySQL、Oracle等基本都支持该XA事务。</p>
 <p><img src="/assets/1566042767502.png" alt="1566042767502"></p>
-<h3 id="基于消息的最终一致性方案"><a href="#基于消息的最终一致性方案" class="headerlink" title="基于消息的最终一致性方案"></a>基于消息的最终一致性方案</h3><p>常见场景：</p>
+<h2 id="Paxos（解决单点问题）"><a href="#Paxos（解决单点问题）" class="headerlink" title="Paxos（解决单点问题）"></a>Paxos（解决单点问题）</h2><h3 id="提出问题-1"><a href="#提出问题-1" class="headerlink" title="提出问题"></a>提出问题</h3><p>如果对多个副本执行的操作序列[op1, op2, …, opn]不进行任何控制，那网络延迟、超时等各种故障都会导致各个副本之间的更新操作是不同的，这样很难保证副本间的一致性。所以为了保证分布式存储系统数据的一致性，我们希望在各个副本之间的更新操作序列是相同的、不变的，即每个副本执行[op1, op2, …, opn]顺序是相同的。我们通过Paxos算法依次来确定不可变变量opi的取值，即第i个操作是什么。每次确定完opi之后，可以让各个副本来执行opi，依次类推。</p>
+<h3 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h3><p>基于消息传递且具有高度容错性的<strong>一致性</strong>算法。Paxos算法要解决的问题就是如何在可能发生几起宕机或网络异常的分布式系统中，快速且正确地在集群内部对某个数据的值达成一致，并且保证不论发生以上任何异常，都不会破坏整个系统的一致性。</p>
+<p>其解决的问题是：Paxos如何确定一个不可变变量的取值。取值可以是任意二进制数据，并且一旦确定将不再更改，并且可以被获取到（不可变性、可读取性）。</p>
+<h3 id="适用性-2"><a href="#适用性-2" class="headerlink" title="适用性"></a>适用性</h3><ul>
+<li>与2PC、3PC是互补关系。</li>
+<li>Paxos协议用于保证同一个数据分片在多个副本的<strong>一致性</strong>。2PC用于保证多个数据分片上事务的<strong>原子性</strong>。</li>
+</ul>
+<h2 id="基于消息的最终一致性方案"><a href="#基于消息的最终一致性方案" class="headerlink" title="基于消息的最终一致性方案"></a>基于消息的最终一致性方案</h2><p>常见场景：</p>
 <ul>
 <li>扫码下单后，支付成功了，钱已经到了支付宝。此时要下单，然而下单失败了。</li>
 <li>先下单，然后sleep，已经准备提交了。然后告诉订单去修改状态。如果订单状态修改成功了，则支付成功；否则支付失败。</li>
@@ -421,7 +594,7 @@
 <li>发送预备消息：</li>
 </ul>
 <p><img src="/assets/1566042997606.png" alt="1566042997606"></p>
-<h3 id="TCC编程式补偿式事务"><a href="#TCC编程式补偿式事务" class="headerlink" title="TCC编程式补偿式事务"></a>TCC编程式补偿式事务</h3><p>Try-Confirm-Cancel。最优？</p>
+<h2 id="TCC编程式补偿式事务"><a href="#TCC编程式补偿式事务" class="headerlink" title="TCC编程式补偿式事务"></a>TCC编程式补偿式事务</h2><p>Try-Confirm-Cancel。最优？</p>
 <ul>
 <li>启动事务：业务系统执行任务。</li>
 <li>Try：尝试进行事务操作，根据返回结果，确定是否Confirm。</li>
@@ -429,7 +602,18 @@
 </ul>
 <p>对于APP与业务系统，不需要关心接口的实现。并且通过Cancel进行补偿事务的错误。</p>
 <p><img src="/assets/1566043225537.png" alt="1566043225537"></p>
-<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><ul>
+<h3 id="适用性-3"><a href="#适用性-3" class="headerlink" title="适用性"></a>适用性</h3><p>功能：</p>
+<ul>
+<li>解决了协调者单点，由主业务方发起并完成这个业务活动。业务活动管理器也变成多点，引入集群。</li>
+<li>同步阻塞:引入超时，超时后进行补偿，并且不会锁定整个资源，将资源转换为业务逻辑形式，粒度变小。 </li>
+<li>数据一致性，有了补偿机制之后，由业务活动管理器控制一致性。</li>
+</ul>
+<p>场景：</p>
+<ul>
+<li>强隔离性，严格一致性要求的活动业务。</li>
+<li>执行时间较短的业务。</li>
+</ul>
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><ul>
 <li>基于消息的事务是<strong>强一致性事务</strong>，存在资源浪费。<ul>
 <li>解决支付宝等支付问题，是非常有效的解决方案。即解决无法补偿的任务。</li>
 <li>线程需要等待，如果很多基于消息的事务，则会很慢。</li>
@@ -443,7 +627,10 @@
 <p>开源TCC框架（TCC-transaction）</p>
 <p>开源TCC框架（ByteTCC）</p>
 <h2 id="TCC-transaction"><a href="#TCC-transaction" class="headerlink" title="TCC-transaction"></a>TCC-transaction</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li></li>
+<li><a href="https://juejin.im/post/5b5a0bf9f265da0f6523913b#heading-10" target="_blank" rel="noopener">再有人问你分布式事务，把这篇扔给他</a></li>
+<li><a href="https://matt33.com/2018/07/08/distribute-system-consistency-protocol/" target="_blank" rel="noopener">分布式系统的一致性协议之 2PC 和 3PC</a></li>
+<li><a href="https://item.jd.com/11540991.html" target="_blank" rel="noopener">《大数据日知录：架构与算法》</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Three-phase_commit_protocol" target="_blank" rel="noopener">维基百科：三阶段提交</a></li>
 </ol>
 
     </div>
@@ -703,7 +890,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式事务"><span class="nav-number">1.</span> <span class="nav-text">分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概述"><span class="nav-number">1.2.</span> <span class="nav-text">基础概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用性"><span class="nav-number">1.3.</span> <span class="nav-text">适用性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">1.3.1.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">1.4.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两段式事务-2PC-与三段式事务-3PC"><span class="nav-number">1.4.1.</span> <span class="nav-text">两段式事务(2PC)与三段式事务(3PC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于XA的分布式事务"><span class="nav-number">1.4.2.</span> <span class="nav-text">基于XA的分布式事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于消息的最终一致性方案"><span class="nav-number">1.4.3.</span> <span class="nav-text">基于消息的最终一致性方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCC编程式补偿式事务"><span class="nav-number">1.4.4.</span> <span class="nav-text">TCC编程式补偿式事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比"><span class="nav-number">1.4.5.</span> <span class="nav-text">对比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式事务的前世今生"><span class="nav-number">2.</span> <span class="nav-text">分布式事务的前世今生</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式事务框架"><span class="nav-number">3.</span> <span class="nav-text">分布式事务框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCC-transaction"><span class="nav-number">3.1.</span> <span class="nav-text">TCC-transaction</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式事务"><span class="nav-number">1.</span> <span class="nav-text">分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么"><span class="nav-number">1.2.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性"><span class="nav-number">1.3.1.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.3.2.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理论"><span class="nav-number">1.4.</span> <span class="nav-text">理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CAP"><span class="nav-number">1.4.1.</span> <span class="nav-text">CAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BASE"><span class="nav-number">1.4.2.</span> <span class="nav-text">BASE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性模型"><span class="nav-number">1.5.</span> <span class="nav-text">一致性模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强一致性"><span class="nav-number">1.5.1.</span> <span class="nav-text">强一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弱一致性"><span class="nav-number">1.5.2.</span> <span class="nav-text">弱一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终一致性"><span class="nav-number">1.5.3.</span> <span class="nav-text">最终一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.6.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.6.1.</span> <span class="nav-text">分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#两段式事务-2PC"><span class="nav-number">2.1.</span> <span class="nav-text">两段式事务(2PC)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过程"><span class="nav-number">2.1.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在的问题"><span class="nav-number">2.1.2.</span> <span class="nav-text">存在的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">适用性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三段式事务-3PC"><span class="nav-number">2.2.</span> <span class="nav-text">三段式事务(3PC)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过程-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在的问题-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">存在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于XA的分布式事务"><span class="nav-number">2.3.</span> <span class="nav-text">基于XA的分布式事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Paxos（解决单点问题）"><span class="nav-number">2.4.</span> <span class="nav-text">Paxos（解决单点问题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提出问题-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是什么-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性-2"><span class="nav-number">2.4.3.</span> <span class="nav-text">适用性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于消息的最终一致性方案"><span class="nav-number">2.5.</span> <span class="nav-text">基于消息的最终一致性方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCC编程式补偿式事务"><span class="nav-number">2.6.</span> <span class="nav-text">TCC编程式补偿式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性-3"><span class="nav-number">2.6.1.</span> <span class="nav-text">适用性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比"><span class="nav-number">2.7.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式事务的前世今生"><span class="nav-number">3.</span> <span class="nav-text">分布式事务的前世今生</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式事务框架"><span class="nav-number">4.</span> <span class="nav-text">分布式事务框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCC-transaction"><span class="nav-number">4.1.</span> <span class="nav-text">TCC-transaction</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -739,7 +926,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:21</span>
+    <span title="站点阅读时长">37:46</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

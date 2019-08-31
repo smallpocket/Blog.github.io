@@ -57,13 +57,13 @@
   };
 </script>
 
-  <meta name="description" content="并发机制的底层原理Java代码在编译后会变成Java字节码，字节码被类加载器加载到JVM里，JVM执行字节码，最终需要转化为汇编指令在CPU上执行，Java中所使用的并发机制依赖于JVM的实现和CPU的指令。 Volatile概述定义 Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下">
+  <meta name="description" content="并发机制的底层原理Java代码在编译后会变成Java字节码，字节码被类加载器加载到JVM里，JVM执行字节码，最终需要转化为汇编指令在CPU上执行，Java中所使用的并发机制依赖于JVM的实现和CPU的指令。 Volatile提出问题是什么Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情">
 <meta name="keywords" content="并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发：并发机制的底层原理">
 <meta property="og:url" content="http://yoursite.com/2019/04/11/Java/base/Java并发：并发机制的底层原理/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="并发机制的底层原理Java代码在编译后会变成Java字节码，字节码被类加载器加载到JVM里，JVM执行字节码，最终需要转化为汇编指令在CPU上执行，Java中所使用的并发机制依赖于JVM的实现和CPU的指令。 Volatile概述定义 Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下">
+<meta property="og:description" content="并发机制的底层原理Java代码在编译后会变成Java字节码，字节码被类加载器加载到JVM里，JVM执行字节码，最终需要转化为汇编指令在CPU上执行，Java中所使用的并发机制依赖于JVM的实现和CPU的指令。 Volatile提出问题是什么Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1554972512576.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554975016754.png">
@@ -74,10 +74,10 @@
 <meta property="og:image" content="http://yoursite.com/assets/1554976291901.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554976411243.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554976466843.png">
-<meta property="og:updated_time" content="2019-08-01T06:23:24.503Z">
+<meta property="og:updated_time" content="2019-08-30T07:16:25.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：并发机制的底层原理">
-<meta name="twitter:description" content="并发机制的底层原理Java代码在编译后会变成Java字节码，字节码被类加载器加载到JVM里，JVM执行字节码，最终需要转化为汇编指令在CPU上执行，Java中所使用的并发机制依赖于JVM的实现和CPU的指令。 Volatile概述定义 Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下">
+<meta name="twitter:description" content="并发机制的底层原理Java代码在编译后会变成Java字节码，字节码被类加载器加载到JVM里，JVM执行字节码，最终需要转化为汇编指令在CPU上执行，Java中所使用的并发机制依赖于JVM的实现和CPU的指令。 Volatile提出问题是什么Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情">
 <meta name="twitter:image" content="http://yoursite.com/assets/1554972512576.png">
   <link rel="canonical" href="http://yoursite.com/2019/04/11/Java/base/Java并发：并发机制的底层原理/">
 
@@ -334,7 +334,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-01 14:23:24" itemprop="dateModified" datetime="2019-08-01T14:23:24+08:00">2019-08-01</time>
+                <time title="修改时间：2019-08-30 15:16:25" itemprop="dateModified" datetime="2019-08-30T15:16:25+08:00">2019-08-30</time>
               </span>
             
           
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">7.7k</span>
+              <span title="本文字数">8.5k</span>
             </span>
           
             <span class="post-meta-item">
@@ -372,7 +372,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">14 分钟</span>
+              <span title="阅读时长">16 分钟</span>
             </span>
           
 
@@ -386,45 +386,49 @@
 
       
         <h1 id="并发机制的底层原理"><a href="#并发机制的底层原理" class="headerlink" title="并发机制的底层原理"></a>并发机制的底层原理</h1><p>Java代码在编译后会变成Java字节码，字节码被类加载器加载到JVM里，JVM执行字节码，最终需要转化为汇编指令在CPU上执行，Java中所使用的并发机制依赖于JVM的实现和CPU的指令。</p>
-<h1 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>定义</strong></p>
-<p>Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下比锁要更加方便。如果一个字段被声明成volatile，Java线程内存模型确保所有线程看到这个变量的值是一致的。</p>
-<p><strong>特性</strong></p>
-<ul>
-<li>轻量级synchronized<ul>
-<li>在使用恰当情况下，比synchronized的使用和执行成本更低。它不会引起线程的上下文切换与调度</li>
+<h1 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p>Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下比锁要更加方便。如果一个字段被声明成volatile，Java线程内存模型确保所有线程看到这个变量的值是一致的。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
+<li>轻量级synchronized：<ul>
+<li>在使用恰当情况下，比synchronized的使用和执行成本更低。它不会引起线程的上下文切换与调度。</li>
 </ul>
 </li>
-<li>保证共享变量的<strong>可见性</strong><ul>
-<li>可见性：当一个线程修改一个共享变量的值，另外一个线程能读到这个修改的值</li>
+<li>保证共享变量的<strong>可见性</strong>：<ul>
+<li>可见性：当一个线程修改一个共享变量的值，另外一个线程能读到这个修改的值。</li>
 </ul>
 </li>
 </ul>
-<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><h3 id="CPU术语"><a href="#CPU术语" class="headerlink" title="CPU术语"></a>CPU术语</h3><p><img src="/assets/1554972512576.png" alt="1554972512576"></p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><p>某些情况下，volatile的同步机制的性能确实要优于锁(synchronized、JUC)等，但是虚拟机对锁实行了许多消除和优化，使得我们很难量化认为volatile比synchronized快多少。</p>
+<p>如果volatile与自己比较，则volatile读操作的性能消耗与普通变量几乎没有什么差别。而写操作会慢一些，因为它需要在本地代码中插入很多内存屏障指令保证不会乱序执行。</p>
+<p>在volatile与锁之间<strong>选择的唯一依据</strong>仅仅是volatile的语义能否满足场景的需求。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="CPU术语"><a href="#CPU术语" class="headerlink" title="CPU术语"></a>CPU术语</h3><p><img src="/assets/1554972512576.png" alt="1554972512576"></p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><h3 id="共享变量写回主存流程"><a href="#共享变量写回主存流程" class="headerlink" title="共享变量写回主存流程"></a>共享变量写回主存流程</h3><p>处理器在执行内存写操作的时候，往往是<strong>先将数据写入其写缓冲器中，而不是直接写入高速缓存</strong>。一个处理器上的写缓冲器中的内容无法被其他处理器所读取，因此写线程必须确保其对volatile变量所做的更新以及其更新volatile变量前对其他共享变量所做的更新到达该处理器的高速缓存（而不是仍然停留在写缓冲器中）。这样，写线程的这些更新<strong>通过缓存一致性协议被其他处理器上的线程所读取</strong>才成为可能。为此，Java虚拟机（JIT编译器）会在volatile变量写操作之后插入一个StoreLoad内存屏障。这个内存屏障的其中一个作用就是将其执行处理器的写缓冲器中的当前内容写入高速缓存，并将高速缓存的内容写回主存。</p>
+<p>同时，由于无效化队列（<strong>暂存无效化消息的硬件，使得修改了某个共享变量之后借以通知其他处理器其对共享变量的更新，以便其他处理器能够将其高速缓存中的相应缓存行置为无效</strong>）的存在，处理器从其高速缓存中读取到的共享变量值可能是过时的。因此，为了确保读线程能够读取到写线程对共享变量所做的更新（包括volatile变量），读线程的执行处理器必须在读取volatile变量前确保无效化队列中内容被应用到该处理器的高速缓存中，即<strong>根据无效化队列中的内容将该处理器中相应的缓存行设置为无效，从而使写线程对共享变量所做的更新能够被反映到该处理器的高速缓存上</strong>。</p>
+<p>若对声明了volatile的变量进行<strong>写操作</strong>，<strong>JVM会向处理器发送一条Lock前缀的指令，将这个变量所在缓存行的数据写会主存</strong>。但是，就算回到主存，还要保证其他处理器的缓存是一致的。<strong>每个处理器通过嗅探在总线上传播的数据来检查自己的缓存值是否过期了</strong>，当处理器发现自己<strong>缓存行对应的内存地址被修改</strong>时，就会设置当前缓存行为无效，需要对数据进行修改的时候会重新从主存中加载。</p>
 <h3 id="volatile如何保证可见性"><a href="#volatile如何保证可见性" class="headerlink" title="volatile如何保证可见性"></a>volatile如何保证可见性</h3><p>在X86处理器下通过工具获取JIT编译器生成的汇编指令来查看对volatile进行写操作时，CPU会做什么事情。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Java代码：</span></span><br><span class="line"><span class="keyword">volatile</span> instance = <span class="keyword">new</span> Singleton();</span><br><span class="line"><span class="comment">//汇编代码</span></span><br><span class="line"><span class="number">0x01a3de1d</span>: movb $<span class="number">0</span>×<span class="number">0</span>,<span class="number">0</span>×<span class="number">1104800</span>(%esi);</span><br><span class="line"><span class="number">0x01a3de24</span>: lock addl $<span class="number">0</span>×<span class="number">0</span>,(%esp);<span class="comment">//由于volatile而多出</span></span><br></pre></td></tr></table></figure>
 
-<p>Lock前缀的指令在多核处理器下会引发了两件事情</p>
+<p>Lock前缀的指令在多核处理器下会引发了两件事情：</p>
 <ul>
 <li>将当前处理器缓存行的数据写回到系统内存。</li>
 <li>这个写回内存的操作会使在其他CPU里缓存了该内存地址的数据无效。</li>
 </ul>
-<h4 id="JMM内存模型"><a href="#JMM内存模型" class="headerlink" title="JMM内存模型"></a>JMM内存模型</h4><ul>
+<h3 id="JMM内存模型"><a href="#JMM内存模型" class="headerlink" title="JMM内存模型"></a>JMM内存模型</h3><ul>
 <li>为了提高处理速度，处理器不直接和内存进行通信，而是先将系统内存的数据读到内部缓存（L1，L2或其他）后再进行操作，但操作完不知道何时会写到内存。</li>
 <li>如果对声明了volatile的变量进行写操作，JVM就会向处理器发送一条Lock前缀的指令，将这个变量所在缓存行的数据写回到系统内存。但是，就算写回到内存，如果其他处理器缓存的值还是旧的，再执行计算操作就会有问题。所以，</li>
 <li>在多处理器下，为了保证各个处理器的缓存是一致的，就会实现缓存一致性协议，每个处理器通过<strong>嗅探在总线上传播的数据来检查自己缓存的值是不是过期了</strong>，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行设置成无效状态，当处理器对这个数据进行修改操作的时候，会重新从系统内存中把数据读到处理器缓存里。</li>
 </ul>
-<h4 id="volatile的两条实现原则"><a href="#volatile的两条实现原则" class="headerlink" title="volatile的两条实现原则"></a>volatile的两条实现原则</h4><h5 id="处理器缓存回写到内存。"><a href="#处理器缓存回写到内存。" class="headerlink" title="处理器缓存回写到内存。"></a>处理器缓存回写到内存。</h5><ul>
+<h3 id="volatile的两条实现原则"><a href="#volatile的两条实现原则" class="headerlink" title="volatile的两条实现原则"></a>volatile的两条实现原则</h3><h4 id="处理器缓存回写到内存。"><a href="#处理器缓存回写到内存。" class="headerlink" title="处理器缓存回写到内存。"></a>处理器缓存回写到内存。</h4><ul>
 <li><p>Lock前缀指令会引起处理器缓存回写到内存。</p>
 <ul>
 <li>Lock前缀指令导致在执行指令期间，声言处理器的LOCK#信号。在多处理器环境中，LOCK#信号确保在声言该信号期间，处理器可以独占任何共享内存。但是，在最近的处理器里，LOCK＃信号一般不锁总线，而是锁缓存，毕竟锁总线开销的比较大。<ul>
-<li>处理器可以独占任何共享内存 ：因为它会锁住总线，导致其他CPU不能访问总线，不能访问总线就意味着不能访问系统内存。</li>
+<li>处理器可以独占任何共享内存，因为它会锁住总线，导致其他CPU不能访问总线，不能访问总线就意味着不能访问系统内存。</li>
 </ul>
 </li>
 <li>在8.1.4节有详细说明锁定操作对处理器缓存的影响，对于Intel486和Pentium处理器，在锁操作时，总是在总线上声言LOCK#信号。但在P6和目前的处理器中，如果访问的内存区域已经缓存在处理器内部，则不会声言LOCK#信号。相反，它会锁定这块内存区域的缓存并回写到内存，并使用缓存一致性机制来确保修改的原子性，此操作被称为“<strong>缓存锁定</strong>”，缓存一致性机制会阻止同时修改由两个以上处理器缓存的内存区域数据。</li>
 </ul>
 </li>
 </ul>
-<h5 id="缓存无效。"><a href="#缓存无效。" class="headerlink" title="缓存无效。"></a>缓存无效。</h5><ul>
+<h4 id="缓存无效。"><a href="#缓存无效。" class="headerlink" title="缓存无效。"></a>缓存无效。</h4><ul>
 <li><p>一个处理器的缓存回写到内存会导致其他处理器的缓存无效。</p>
 <ul>
 <li>IA-32处理器和Intel 64处理器使用<strong>MESI（修改、独占、共享、无效）控制协议</strong>去维护内部缓存和其他处理器缓存的一致性。在多核处理器系统中进行操作的时候，IA-32和Intel 64处理器能嗅探其他处理器访问系统内存和它们的内部缓存。</li>
@@ -432,7 +436,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="嗅探技术"><a href="#嗅探技术" class="headerlink" title="嗅探技术"></a>嗅探技术</h4><p>这是一个跟踪每个缓存行的状态的缓存子系统。该系统使用一个称为 <em>“总线动态监视”</em> 或者称为<em>“总线嗅探”</em> 的技术来监视在系统总线上发生的所有事务，以检测缓存中的某个地址上何时发生了读取或写入操作。</p>
+<h3 id="嗅探技术"><a href="#嗅探技术" class="headerlink" title="嗅探技术"></a>嗅探技术</h3><p>这是一个跟踪每个缓存行的状态的缓存子系统。该系统使用一个称为 <em>“总线动态监视”</em> 或者称为<em>“总线嗅探”</em> 的技术来监视在系统总线上发生的所有事务，以检测缓存中的某个地址上何时发生了读取或写入操作。</p>
 <p>当这个缓存子系统在系统总线上检测到对缓存中加载的内存区域进行的读取操作时，它会将该缓存行的状态更改为 <strong>“shared”</strong>。如果它检测到对该地址的写入操作时，会将缓存行的状态更改为 <strong>“invalid”</strong>。</p>
 <p>该缓存子系统想知道，当该系统在监视系统总线时，系统是否在其缓存中包含数据的惟一副本。如果数据由它自己的 CPU 进行了更新，那么这个缓存子系统会将缓存行的状态从 <strong>“exclusive”</strong> 更改为 <strong>“modified”</strong>。如果该缓存子系统检测到另一个处理器对该地址的读取，它会阻止访问，更新系统内存中的数据，然后允许该处理的访问继续进行。它还允许将该缓存行的状态标记为 <strong>shared</strong>。</p>
 <h2 id="volatile使用优化"><a href="#volatile使用优化" class="headerlink" title="volatile使用优化"></a>volatile使用优化</h2><h3 id="追加字节"><a href="#追加字节" class="headerlink" title="追加字节"></a>追加字节</h3><p>著名的Java并发编程大师Doug lea在JDK 7的并发包里新增一个队列集合类Linked-TransferQueue，它在使用volatile变量时，用一种追加字节的方式来优化队列出队和入队的性能。LinkedTransferQueue的代码如下。</p>
@@ -456,12 +460,9 @@
 </ul>
 <p><strong>Java7下可能不生效</strong></p>
 <p>不过这种追加字节的方式在Java 7下可能不生效，因为Java 7变得更加智慧，它会淘汰或重新排列无用字段，需要使用其他追加字节的方式。除了volatile，Java并发编程中应用较多的是synchronized，下面一起来看一下。</p>
-<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>某些情况下，volatile的同步机制的性能确实要优于锁(synchronized、JUC)等，但是虚拟机对锁实行了许多消除和优化，使得我们很难量化认为volatile比synchronized快多少。</p>
-<p>如果volatile与自己比较，则volatile读操作的性能消耗与普通变量几乎没有什么差别。而写操作会慢一些，因为它需要在本地代码中插入很多内存屏障指令保证不会乱序执行。</p>
-<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>在volatile与锁之间选择的唯一依据仅仅是volatile的语义能否满足场景的需求</p>
-<h1 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h1><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p>重量级锁，在Java SE1.6后进行了各种优化，显得并没有那么重了。</p>
+<h1 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h1><h2 id="提出问题-1"><a href="#提出问题-1" class="headerlink" title="提出问题"></a>提出问题</h2><h2 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h2><p>重量级锁，在Java SE1.6后进行了各种优化，显得并没有那么重了。</p>
 <p>Java SE 1.6中为了减少获得锁和释放锁带来的性能消耗而引入的偏向锁和轻量级锁，以及锁的存储结构和升级过程。</p>
-<h2 id="实现原理与应用"><a href="#实现原理与应用" class="headerlink" title="实现原理与应用"></a>实现原理与应用</h2><p>synchronized实现同步的基础：Java中的每一个对象都可以作为锁</p>
+<h2 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性-1"><a href="#适用性-1" class="headerlink" title="适用性"></a>适用性</h3><h3 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h3><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p>synchronized实现同步的基础：Java中的每一个对象都可以作为锁：</p>
 <ul>
 <li>对于普通同步方法，锁是当前实例对象。</li>
 <li>对于静态同步方法，锁是当前类的Class对象。  </li>
@@ -469,11 +470,11 @@
 </ul>
 <p>当一个线程试图访问同步代码块时，它首先必须得到锁，退出或抛出异常时必须释放锁。那么锁到底存在哪里呢？锁里面会存储什么信息呢？</p>
 <ul>
-<li>锁存放在Java对象头当中</li>
+<li>锁存放在Java对象头当中。</li>
 </ul>
-<h3 id="synchronized在JVM当中的实现原理"><a href="#synchronized在JVM当中的实现原理" class="headerlink" title="synchronized在JVM当中的实现原理"></a>synchronized在JVM当中的实现原理</h3><p>JVM基于进入和退出Monitor对象来实现方法同步和代码块同步，但两者的实现细节不一样。</p>
+<h2 id="实现原理与应用"><a href="#实现原理与应用" class="headerlink" title="实现原理与应用"></a>实现原理与应用</h2><h3 id="synchronized在JVM当中的实现原理"><a href="#synchronized在JVM当中的实现原理" class="headerlink" title="synchronized在JVM当中的实现原理"></a>synchronized在JVM当中的实现原理</h3><p>JVM基于进入和退出Monitor对象来实现方法同步和代码块同步，但两者的实现细节不一样。</p>
 <ul>
-<li>代码块同步是使用monitorenter和monitorexit指令实现的<ul>
+<li>代码块同步是使用monitorenter和monitorexit指令实现的：<ul>
 <li>monitorenter指令是在编译后插入到同步代码块的开始位置，而monitorexit是插入到方法结束处和异常处，JVM要保证每个monitorenter必须有对应的monitorexit与之配对。</li>
 <li>任何对象都有一个monitor与之关联，当且一个monitor被持有后，它将处于锁定状态。线程执行到monitorenter指令时，将会尝试获取对象所对应的monitor的所有权，即尝试获得对象的锁。</li>
 </ul>
@@ -481,34 +482,35 @@
 <li>而方法同步是使用另外一种方式实现的，细节在JVM规范里并没有详细说明。但是，方法的同步同样可以使用这两个指令来实现。</li>
 </ul>
 <h3 id="Java对象头"><a href="#Java对象头" class="headerlink" title="Java对象头"></a>Java对象头</h3><p>如果对象是数组类型，则虚拟机用3个字宽（Word）存储对象头，如果对象是非数组类型，则用2字宽存储对象头。在32位虚拟机中，1字宽等于4字节，即32bit。</p>
-<p><strong>Java对象头</strong></p>
+<p><strong>Java对象头</strong>：</p>
 <p><img src="/assets/1554975016754.png" alt="1554975016754"></p>
-<p><strong>Mark Word</strong>32位机默认存储结构</p>
+<p><strong>Mark Word</strong>32位机默认存储结构：</p>
 <p><img src="/assets/1554975039230.png" alt="1554975039230"></p>
-<p>结构随着锁标志位变化而变化</p>
+<p>结构随着锁标志位变化而变化：</p>
 <p><img src="/assets/1554975085461.png" alt="1554975085461"></p>
-<p>Mark Word <strong>64位机</strong>，大小64bit</p>
+<p>Mark Word<strong>64位机</strong>，大小64bit：</p>
 <p><img src="/assets/1554975120307.png" alt="1554975120307"></p>
-<h2 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h2><p>Java SE 1.6为了减少获得锁和释放锁带来的性能消耗，引入了“偏向锁”和“轻量级锁”</p>
+<h2 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h2><p>Java SE 1.6为了减少获得锁和释放锁带来的性能消耗，引入了“偏向锁”和“轻量级锁”。</p>
 <p>锁的四种状态：无锁状态、偏向锁状态、轻量级锁状态和重量级锁状态。随着竞争情况逐渐升级。</p>
-<p>锁只可升级不可降级</p>
-<h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a><strong>概念</strong></h4><p>HotSpot [1] 的作者经过研究发现，大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，为了让线程获得锁的代价更低而引入了偏向锁。</p>
+<p>锁只可升级不可降级。</p>
+<h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3><p><strong>概念</strong></p>
+<p>HotSpot的作者经过研究发现，大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，为了让线程获得锁的代价更低而引入了偏向锁。</p>
 <ul>
-<li>当一个线程访问同步块并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的线程ID，以后该线程在进入和退出同步块时不需要进行CAS操作来加锁和解锁，只需简单地测试一下对象头的Mark Word里是否存储着指向当前线程的偏向锁。<ul>
+<li>当一个线程访问同步块并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的<strong>线程ID</strong>，以后该线程在进入和退出同步块时不需要进行CAS操作来加锁和解锁，只需简单地测试一下对象头的Mark Word里是否存储着指向当前线程的偏向锁。<ul>
 <li>如果测试成功，表示线程已经获得了锁。</li>
 <li>如果测试失败，则需要再测试一下Mark Word中偏向锁的标识是否设置成1（表示当前是偏向锁）：<ul>
-<li>如果没有设置，则使用CAS竞争锁；</li>
+<li>如果没有设置，则使用CAS竞争锁。</li>
 <li>如果设置了，则尝试使用CAS将对象头的偏向锁指向当前线程。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h4 id="偏向锁的撤销"><a href="#偏向锁的撤销" class="headerlink" title="偏向锁的撤销"></a><strong>偏向锁的撤销</strong></h4><p>偏向锁使用了一种等到竞争出现才释放锁的机制，所以当其他线程尝试竞争偏向锁时，持有偏向锁的线程才会释放锁。</p>
+<h4 id="偏向锁的撤销"><a href="#偏向锁的撤销" class="headerlink" title="偏向锁的撤销"></a>偏向锁的撤销</h4><p>偏向锁使用了一种等到竞争出现才释放锁的机制，所以当其他线程尝试竞争偏向锁时，持有偏向锁的线程才会释放锁。</p>
 <ul>
 <li>偏向锁的撤销，需要等待全局安全点（在这个时间点上没有正在执行的字节码）。</li>
-<li>它会首先暂停拥有偏向锁的线程，然后检查持有偏向锁的线程是否活着。<ul>
-<li>如果线程不处于活动状态，则将对象头设置成无锁状态；</li>
+<li>它会首先暂停拥有偏向锁的线程，然后检查持有偏向锁的线程是否活着：<ul>
+<li>如果线程不处于活动状态，则将对象头设置成无锁状态。</li>
 <li>如果线程仍然活着，拥有偏向锁的栈会被执行，遍历偏向对象的锁记录，栈中的锁记录和对象头的Mark Word要么重新偏向于其他线程，要么恢复到无锁或者标记对象不适合作为偏向锁，最后唤醒暂停的线程。</li>
 </ul>
 </li>
@@ -523,15 +525,15 @@
 <h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><p><strong>加锁</strong></p>
 <ul>
 <li>线程在执行同步块之前，JVM会先在当前线程的栈桢中创建用于存储锁记录的空间，并将对象头中的Mark Word复制到锁记录中，官方称为Displaced Mark Word。</li>
-<li>然后线程尝试使用CAS将对象头中的Mark Word替换为指向锁记录的指针。<ul>
-<li>如果成功，当前线程获得锁</li>
-<li>如果失败，表示其他线程竞争锁，当前线程便尝试使用<strong>自旋来获取锁。</strong></li>
+<li>然后线程尝试使用CAS将对象头中的Mark Word替换为指向锁记录的指针：<ul>
+<li>如果成功，当前线程获得锁。</li>
+<li>如果失败，表示其他线程竞争锁，当前线程便尝试使用<strong>自旋来获取锁</strong>。</li>
 </ul>
 </li>
 </ul>
 <p><strong>解锁</strong></p>
 <ul>
-<li><p>轻量级解锁时，会使用原子的CAS操作将Displaced Mark Word替换回到对象头，</p>
+<li><p>轻量级解锁时，会使用原子的CAS操作将Displaced Mark Word替换回到对象头：</p>
 <ul>
 <li><p>如果成功，则表示没有竞争发生。</p>
 </li>
@@ -544,7 +546,7 @@
 <p><img src="/assets/1554976291901.png" alt="1554976291901"></p>
 <p>因为自旋会消耗CPU，为了避免无用的自旋（比如获得锁的线程被阻塞住了），一旦锁升级成重量级锁，就不会再恢复到轻量级锁状态。当锁处于这个状态下，其他线程试图获取锁时，都会被阻塞住，当持有锁的线程释放锁之后会唤醒这些线程，被唤醒的线程就会进行新一轮的夺锁之争。</p>
 <h2 id="锁优缺点对比"><a href="#锁优缺点对比" class="headerlink" title="锁优缺点对比"></a>锁优缺点对比</h2><p><img src="/assets/1554976411243.png" alt="1554976411243"></p>
-<h1 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h1><p>原子操作（atomic operation）意为“不可被中断的一个或一系列操作”。在多处理器上实现原子操作就变得有点复杂。</p>
+<h1 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h1><h2 id="提出问题-2"><a href="#提出问题-2" class="headerlink" title="提出问题"></a>提出问题</h2><h2 id="是什么-2"><a href="#是什么-2" class="headerlink" title="是什么"></a>是什么</h2><p>原子操作（atomic operation）意为“不可被中断的一个或一系列操作”。在多处理器上实现原子操作就变得有点复杂。</p>
 <p>让我们一起来聊一聊在Intel处理器和Java里是如何实现原子操作的。</p>
 <h2 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h2><h3 id="CPU术语定义"><a href="#CPU术语定义" class="headerlink" title="CPU术语定义"></a>CPU术语定义</h3><p><img src="/assets/1554976466843.png" alt="1554976466843"></p>
 <h3 id="CPU如何实现原子操作"><a href="#CPU如何实现原子操作" class="headerlink" title="CPU如何实现原子操作"></a>CPU如何实现原子操作</h3><p>32位IA-32处理器使用<strong>基于对缓存加锁</strong>或<strong>总线加锁</strong>的方式来实现多处理器之间的原子操作。</p>
@@ -562,7 +564,7 @@
 <p>保证了CPU1读改写共享变量的时候，CPU2不能操作缓存了该共享变量内存地址的缓存。</p>
 <p><strong>缺陷：</strong></p>
 <p>但总线锁定<strong>把CPU和内存之间的通信</strong>锁住了，这使得锁定期间，其他处理器不能操作其他内存地址的数据，所以总线锁定的开销比较大，目前处理器在某些场合下使用缓存锁定代替总线锁定来进行优化。</p>
-<h4 id="缓存锁"><a href="#缓存锁" class="headerlink" title="缓存锁"></a>缓存锁</h4><p>在同一时刻，我们只需保证对某个内存地址的操作是原子性即可</p>
+<h4 id="缓存锁"><a href="#缓存锁" class="headerlink" title="缓存锁"></a>缓存锁</h4><p>在同一时刻，我们只需保证对某个内存地址的操作是原子性即可。</p>
 <p><strong>概述</strong></p>
 <p>所谓“缓存锁定”是指内存区域如果被缓存在处理器的缓存行中，并且在Lock操作期间被锁定，那么当它执行锁操作回写到内存时，处理器不在总线上声言LOCK＃信号，而是修改内部的内存地址，并允许它的缓存一致性机制来保证操作的原子性，因为<strong>缓存一致性机制会阻止同时修改由两个以上处理器缓存的内存区域数据</strong>，当其他处理器回写已被锁定的缓存行的数据时，会使缓存行无效。</p>
 <p><strong>有两种情况下处理器不会使用缓存锁定</strong></p>
@@ -571,27 +573,27 @@
 <li>有些处理器不支持缓存锁定。对于Intel 486和Pentium处理器，就算锁定的内存区域在处理器的缓存行中也会调用总线锁定。</li>
 </ul>
 <p>针对以上两个机制，我们通过Intel处理器提供了很多Lock前缀的指令来实现。例如，位测试和修改指令：BTS、BTR、BTC；交换指令XADD、CMPXCHG，以及其他一些操作数和逻辑指令（如ADD、OR）等，被这些指令操作的内存区域就会加锁，导致其他处理器不能同时访问它。</p>
-<h2 id="Java原子操作"><a href="#Java原子操作" class="headerlink" title="Java原子操作"></a>Java原子操作</h2><h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>锁机制有：偏向锁、轻量级锁和互斥锁</p>
+<h2 id="Java原子操作"><a href="#Java原子操作" class="headerlink" title="Java原子操作"></a>Java原子操作</h2><h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><p>锁机制有：偏向锁、轻量级锁和互斥锁。</p>
 <p>除了偏向锁，JVM实现锁的方式都用了循环CAS，即当一个线程想进入同步块的时候使用循环CAS的方式来获取锁，当它退出同步块的时候使用循环CAS释放锁。</p>
-<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>基于处理器提供的CMPXCHG指令实现的</p>
-<p>Atomic包下的很多类支持原子操作</p>
+<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>基于处理器提供的CMPXCHG指令实现的：</p>
+<p>Atomic包下的很多类支持原子操作。</p>
 <p><strong>问题</strong></p>
 <ul>
-<li>ABA问题<ul>
-<li>使用版本号解决</li>
-<li>AtomicStampedReference可解决</li>
+<li>ABA问题：<ul>
+<li>使用版本号解决。</li>
+<li>AtomicStampedReference可解决。</li>
 </ul>
 </li>
-<li>循环时间长开销大<ul>
-<li>自旋的执行开销</li>
-<li>如果JVM支持pause指令，会有一定的效率提升<ul>
-<li>它可以延迟流水线执行指令（de-pipeline），使CPU不会消耗过多的执行资源，延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零</li>
+<li>循环时间长开销大：<ul>
+<li>自旋的执行开销。</li>
+<li>如果JVM支持pause指令，会有一定的效率提升：<ul>
+<li>它可以延迟流水线执行指令（de-pipeline），使CPU不会消耗过多的执行资源，延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零。</li>
 <li>它可以避免在退出循环的时候因内存顺序冲突（Memory Order Violation）而引起CPU流水线被清空（CPU Pipeline Flush），从而提高CPU的执行效率。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>只能保证一个共享变量的原子操作<ul>
+<li>只能保证一个共享变量的原子操作：<ul>
 <li>AtomicReference类来保证引用对象之间的原子性，就可以把多个变量放在一个对象里来进行CAS操作。</li>
 </ul>
 </li>
@@ -857,7 +859,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发机制的底层原理"><span class="nav-number">1.</span> <span class="nav-text">并发机制的底层原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Volatile"><span class="nav-number">2.</span> <span class="nav-text">Volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理"><span class="nav-number">2.2.</span> <span class="nav-text">实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU术语"><span class="nav-number">2.2.1.</span> <span class="nav-text">CPU术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile如何保证可见性"><span class="nav-number">2.2.2.</span> <span class="nav-text">volatile如何保证可见性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JMM内存模型"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">JMM内存模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile的两条实现原则"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">volatile的两条实现原则</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#处理器缓存回写到内存。"><span class="nav-number">2.2.2.2.1.</span> <span class="nav-text">处理器缓存回写到内存。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缓存无效。"><span class="nav-number">2.2.2.2.2.</span> <span class="nav-text">缓存无效。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嗅探技术"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">嗅探技术</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile使用优化"><span class="nav-number">2.3.</span> <span class="nav-text">volatile使用优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#追加字节"><span class="nav-number">2.3.1.</span> <span class="nav-text">追加字节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能"><span class="nav-number">2.4.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择"><span class="nav-number">2.5.</span> <span class="nav-text">选择</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized"><span class="nav-number">3.</span> <span class="nav-text">synchronized</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-1"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理与应用"><span class="nav-number">3.2.</span> <span class="nav-text">实现原理与应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized在JVM当中的实现原理"><span class="nav-number">3.2.1.</span> <span class="nav-text">synchronized在JVM当中的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java对象头"><span class="nav-number">3.2.2.</span> <span class="nav-text">Java对象头</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁升级"><span class="nav-number">3.3.</span> <span class="nav-text">锁升级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#偏向锁"><span class="nav-number">3.3.1.</span> <span class="nav-text">偏向锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#偏向锁的撤销"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">偏向锁的撤销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭偏向锁"><span class="nav-number">3.3.1.3.</span> <span class="nav-text">关闭偏向锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轻量级锁"><span class="nav-number">3.3.2.</span> <span class="nav-text">轻量级锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁优缺点对比"><span class="nav-number">3.4.</span> <span class="nav-text">锁优缺点对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原子操作"><span class="nav-number">4.</span> <span class="nav-text">原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-2"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU术语定义"><span class="nav-number">4.1.1.</span> <span class="nav-text">CPU术语定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU如何实现原子操作"><span class="nav-number">4.1.2.</span> <span class="nav-text">CPU如何实现原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总线锁"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">总线锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存锁"><span class="nav-number">4.1.2.2.</span> <span class="nav-text">缓存锁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java原子操作"><span class="nav-number">4.2.</span> <span class="nav-text">Java原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#锁"><span class="nav-number">4.2.1.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS"><span class="nav-number">4.2.2.</span> <span class="nav-text">CAS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发机制的底层原理"><span class="nav-number">1.</span> <span class="nav-text">并发机制的底层原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Volatile"><span class="nav-number">2.</span> <span class="nav-text">Volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">2.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么"><span class="nav-number">2.2.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">2.3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性"><span class="nav-number">2.3.1.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">2.3.2.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权衡"><span class="nav-number">2.4.</span> <span class="nav-text">权衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.5.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU术语"><span class="nav-number">2.5.1.</span> <span class="nav-text">CPU术语</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理"><span class="nav-number">2.6.</span> <span class="nav-text">实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#共享变量写回主存流程"><span class="nav-number">2.6.1.</span> <span class="nav-text">共享变量写回主存流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile如何保证可见性"><span class="nav-number">2.6.2.</span> <span class="nav-text">volatile如何保证可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMM内存模型"><span class="nav-number">2.6.3.</span> <span class="nav-text">JMM内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile的两条实现原则"><span class="nav-number">2.6.4.</span> <span class="nav-text">volatile的两条实现原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#处理器缓存回写到内存。"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">处理器缓存回写到内存。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存无效。"><span class="nav-number">2.6.4.2.</span> <span class="nav-text">缓存无效。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嗅探技术"><span class="nav-number">2.6.5.</span> <span class="nav-text">嗅探技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile使用优化"><span class="nav-number">2.7.</span> <span class="nav-text">volatile使用优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#追加字节"><span class="nav-number">2.7.1.</span> <span class="nav-text">追加字节</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized"><span class="nav-number">3.</span> <span class="nav-text">synchronized</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题-1"><span class="nav-number">3.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么-1"><span class="nav-number">3.2.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">3.3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-1"><span class="nav-number">3.4.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理与应用"><span class="nav-number">3.5.</span> <span class="nav-text">实现原理与应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized在JVM当中的实现原理"><span class="nav-number">3.5.1.</span> <span class="nav-text">synchronized在JVM当中的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java对象头"><span class="nav-number">3.5.2.</span> <span class="nav-text">Java对象头</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁升级"><span class="nav-number">3.6.</span> <span class="nav-text">锁升级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#偏向锁"><span class="nav-number">3.6.1.</span> <span class="nav-text">偏向锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#偏向锁的撤销"><span class="nav-number">3.6.1.1.</span> <span class="nav-text">偏向锁的撤销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭偏向锁"><span class="nav-number">3.6.1.2.</span> <span class="nav-text">关闭偏向锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轻量级锁"><span class="nav-number">3.6.2.</span> <span class="nav-text">轻量级锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁优缺点对比"><span class="nav-number">3.7.</span> <span class="nav-text">锁优缺点对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原子操作"><span class="nav-number">4.</span> <span class="nav-text">原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题-2"><span class="nav-number">4.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么-2"><span class="nav-number">4.2.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述-2"><span class="nav-number">4.3.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU术语定义"><span class="nav-number">4.3.1.</span> <span class="nav-text">CPU术语定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU如何实现原子操作"><span class="nav-number">4.3.2.</span> <span class="nav-text">CPU如何实现原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总线锁"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">总线锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存锁"><span class="nav-number">4.3.2.2.</span> <span class="nav-text">缓存锁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java原子操作"><span class="nav-number">4.4.</span> <span class="nav-text">Java原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#锁"><span class="nav-number">4.4.1.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS"><span class="nav-number">4.4.2.</span> <span class="nav-text">CAS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -886,14 +888,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:46</span>
+    <span title="站点阅读时长">38:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

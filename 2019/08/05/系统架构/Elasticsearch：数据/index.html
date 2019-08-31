@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="数据无论程序怎么写，意图都是一样的：组织数据为我们的目标所服务。但数据并不只是由随机的比特和字节组成，我们在数据节点间建立关联来表示现实世界中的实体或某些东西。属于同一个人的名字和Email会有更多的意义。 现实世界中，并不是所有相同类型的实体看起来都是一样的，一个人可能有一个家庭电话，另一个人可能只有一个手机号码，有些人可能都有，甚至有多个。 面向对象编程流行的原因之一，是我们可以用对象来表示和">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-20T09:45:20.450Z">
+<meta property="og:updated_time" content="2019-08-29T14:46:03.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch：数据">
 <meta name="twitter:description" content="数据无论程序怎么写，意图都是一样的：组织数据为我们的目标所服务。但数据并不只是由随机的比特和字节组成，我们在数据节点间建立关联来表示现实世界中的实体或某些东西。属于同一个人的名字和Email会有更多的意义。 现实世界中，并不是所有相同类型的实体看起来都是一样的，一个人可能有一个家庭电话，另一个人可能只有一个手机号码，有些人可能都有，甚至有多个。 面向对象编程流行的原因之一，是我们可以用对象来表示和">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-20 17:45:20" itemprop="dateModified" datetime="2019-08-20T17:45:20+08:00">2019-08-20</time>
+                <time title="修改时间：2019-08-29 22:46:03" itemprop="dateModified" datetime="2019-08-29T22:46:03+08:00">2019-08-29</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">2.7k</span>
+              <span title="本文字数">5.4k</span>
             </span>
           
             <span class="post-meta-item">
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">5 分钟</span>
+              <span title="阅读时长">10 分钟</span>
             </span>
           
 
@@ -383,7 +383,7 @@
 <h2 id="分布式文档存储引擎"><a href="#分布式文档存储引擎" class="headerlink" title="分布式文档存储引擎"></a>分布式文档存储引擎</h2><p>Elasticsearch是一个分布式的文档存储引擎，它可以实时存储并检索复杂数据结构——序列化的JSON文档，即文档一旦被存储在ES上，就可以在集群的任一节点上被搜索。</p>
 <p>当存储了数据后，我们还需要快速的批量查询，虽然很多NoSQL的解决方案允许我们以文档的形式存储数据，但它们依然需要考虑如何查询这些数据，以及哪些字段需要被索引以便检索时更加快速。</p>
 <p>在Elasticsearch中，每一个字段的数据都是默认被索引的。也就是说，每个字段专门有一个反向索引用于快速检索。而且，与其它数据库不同，它可以在同一个查询中利用所有的这些反向索引，以惊人的速度返回结果。</p>
-<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>程序中大多的实体或对象能够被序列化为包含键值对的JSON对象。通常我们可以认为对象与文档时等价相通的。</p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p>程序中大多的实体或对象能够被序列化为包含键值对的JSON对象。通常我们可以认为对象与文档时等价相通的。</p>
 <ul>
 <li>对象时应该JSON结构体，类似于HashMap等，内部还可能包含其他对象</li>
 <li>文档在Elasticsearch当中特指最顶层结构或者跟对象序列化成的JSON数据，以唯一ID标识并存储在ES中</li>
@@ -405,6 +405,60 @@
 </ul>
 </li>
 </ul>
+<h3 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h3><ul>
+<li>text。文本类型，十分常用的类型。<ul>
+<li>通常作用于需要被全文检索的字段上。这样的字段内容会被分词器拆成词项后生成倒排索引。</li>
+<li>它不用于排序，也很少用于聚合。</li>
+</ul>
+</li>
+<li>keyword。关键字类型，通常用于索引结构化的字段（通常意义明确，用于过滤）。<ul>
+<li>这样的字段只能被精确搜索。</li>
+</ul>
+</li>
+<li>number。数字类型，这是一个概括。其中包含了 <code>byte</code>，<code>short</code>，<code>integer</code>，<code>long</code>，<code>float</code>，<code>double</code>，<code>half_float</code>，<code>scaled_float</code>。<ul>
+<li>除了和Java类似的数字类型以外，还有相对于<code>float</code>精度折半的<code>half_float</code>，以及将浮点数进行缩放后存储的<code>scaled_float</code>。<strong>字段长度越短，空间分配越合理，搜索效率越高</strong>。注意在浮点数中<code>+0.0</code>与<code>-0.0</code>是<strong>不同</strong>的存在。</li>
+<li>设置某字段为scaling_float，缩放因子100，适合存储精确至小数点后两位的数字，底层对数字扩大100做整形存储，而对API为float型。</li>
+</ul>
+</li>
+<li>date。日期类型，ES 支持日期格式化后的字符串、从 epoch 开始的毫秒数（长整型）、从 epoch 开始的秒数（整形）<ul>
+<li>在 ES 内部，<strong>日期都会转化为 UTC 时间并存储为从 epoch 开始的毫秒数</strong>。在开启动态映射的时候如果有新的字段被添加，默认会自动进行日期检测以判断是否该字段为日期类型（可以被关闭，将某类型的 <code>date_detection</code> 选项设置为 <em>false<em>）。同时日期格式也支持自定义（通过制定字段的 <code>format</code> 选项，默认为 *strict_date_optional_time || epoch_millis</em>），除了 *yyyy-MM-dd HH:mm:ss</em> 这样的个性格式，</li>
+</ul>
+</li>
+<li>boolean。布尔类型，只接受 <code>true</code> 和 <code>false</code>。</li>
+<li>binary。二进制类型，该类型字段仅接受 <strong>Base64</strong> 编码后的字符串。<ul>
+<li>字段默认不存储（store=false）也不搜索。</li>
+</ul>
+</li>
+<li>array。数组类型，其本身是其他类型。<ul>
+<li>数组中的所有值<strong>必须为统一类型</strong>（可以包含 null），而空数组由于无法确定类型会被作为 missing field 对待。在动态映射时，第一个加入数组的元素会决定整个数组的数据类型。</li>
+</ul>
+</li>
+<li>object。对象类型。在 JSON 中，对象是可以包含层级关系的，但是在 ES 中复合的对象会被<strong>扁平化处理</strong>，成为简单的 k-v 键值对。<ul>
+<li>如果需要在建立索引时进行静态映射，mappings 支持 object 的显示映射。</li>
+</ul>
+</li>
+<li>nested。嵌套对象，这是 object 类型的特例，支持 object 对象数据的独立索引和查询（ES 在使用对象类型的数组时由于扁平化处理会导致一些索引问题）。<ul>
+<li>当指定了 nested 类型进行索引某个字段时，该字段会内容会作为<strong>独立的隐藏文档</strong>存在。这样支持了嵌套对象的索引，但是由于类似结构化数据的关联查询一般，<strong>nested 字段越多，搜索越复杂</strong>，所以每个索引可以使用嵌套对象被限制在 50。</li>
+</ul>
+</li>
+<li>geo_point。地理坐标，用来精确存储地理经纬信息的类型，支持 4 中写入方式：<ul>
+<li>经纬坐标字符串，如：<code>&quot;40.3,116.17&quot;</code></li>
+<li>经纬坐标键值对，如：<code>{&quot;lat&quot;: 40.3, &quot;lon&quot;: 116.17}</code></li>
+<li>地理位置哈希值，如：<code>&quot;drm3btev3e86&quot;</code></li>
+<li>经纬坐标数组，如：<code>[40.3, 116.17]</code></li>
+</ul>
+</li>
+<li>geo_shape。地理区块，使用 GeoJSON 对区块进行编码，描述一块地理区域，支持点线面等多种特征。</li>
+<li>ip。ip 类型，可以保存 ip 地址，支持 IPv4 及 IPv6，以及无类型域间选路格式</li>
+<li>range。范围类型，支持 <code>integer_range</code>，<code>long_range</code>，<code>float_range</code>，<code>double_range</code>，<code>date_rage</code>。<ul>
+<li>其中日期区间以毫秒计时。在某字段使用 rage 类型之后，插入数据需要<strong>指定对应的范围</strong>，可以使用 <code>gt</code>、<code>lte</code> 等关键字描述。</li>
+</ul>
+</li>
+<li>token_count。词项统计类型，其本身是一个整形。<ul>
+<li>一般用来给某个属性增加附加字段并指定 token_count 来统计词项长度。词项长度取决于具体内容和指定的分词器。</li>
+</ul>
+</li>
+</ul>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
 <li>created指同索引、同类型下是否已经存在同ID的文档</li>
 <li>version代表版本号，如果原来已经有一个版本，则会将之前的版本覆盖<ul>
@@ -412,6 +466,7 @@
 </ul>
 </li>
 </ul>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>mget允许一次检索多个文档。</p>
 <h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>文档在ES中是不可变的，即我们不能修改它们，如果需要更新已存在的文档，我们可以使用<code>index</code>API重建索引或替换它。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PUT /website/blog/123&#123;</span><br><span class="line">	“title”： “doit”,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -435,20 +490,39 @@
 <li>每一行的数据不能包含未被转义的换行符，它们会干扰分析——这意味着JSON不能被美 化打印。</li>
 <li>request body由文档的_source组成——文档所包含的一些字段以及其值。</li>
 </ul>
-<p>action类型</p>
+<p>action类型：</p>
 <ul>
-<li>create</li>
-<li>index</li>
-<li>update</li>
-<li>delete</li>
+<li>create。</li>
+<li>index。</li>
+<li>update。</li>
+<li>delete。</li>
 </ul>
-<p>以delete为例:</p>
+<p>以delete为例：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"delete"</span>:&#123;<span class="attr">"_index"</span>:<span class="string">"website"</span>,<span class="attr">"_type"</span>:<span class="string">"blog"</span>,<span class="attr">"_id"</span>:<span class="string">"123"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 
-<p>update:</p>
+<p>update：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"update"</span>:&#123;<span class="attr">"_index"</span>:<span class="string">"website"</span>,<span class="attr">"_type"</span>:<span class="string">"blog"</span>,<span class="attr">"_id"</span>:<span class="string">"123"</span>,	<span class="attr">"_retry_on_conflict"</span>:<span class="string">"11"</span>&#125;&#125;</span><br><span class="line">&#123;<span class="attr">"doc"</span>:&#123;<span class="attr">"title"</span>:<span class="string">"My updated blog post"</span>&#125;	&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><h1 id="Java-API"><a href="#Java-API" class="headerlink" title="Java API"></a>Java API</h1><p>QueryBuilder是es中提供的一个查询接口, 可以对其进行参数设置来进行操作。</p>
+<p><strong><em>限制</em></strong></p>
+<p>整个批量请求需要被加载到接受我们请求节点的内存里，所以请求越大，给其它请求可用的内存就越小。有一个最佳的bulk请求大小。超过这个大小，性能不再提升而且可能降低。</p>
+<p>最佳大小，当然并不是一个固定的数字。它完全取决于你的硬件、你文档的大小和复杂度以及索引和搜索的负载。幸运的是，这个最佳点(sweetspot)还是容易找到的：</p>
+<ul>
+<li>试着批量索引标准的文档，随着大小的增长，当性能开始降低，说明你每个批次的大小太大了。开始的数量可以在1000~5000个文档之间，如果你的文档非常大，可以使用较小的批次。</li>
+<li>通常着眼于你请求批次的物理大小是非常有用的。一千个1kB的文档和一千个1MB的文档大不相同。一个好的批次最好保持在5-15MB大小间。</li>
+</ul>
+<h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><p>ES使用乐观并发控制，假设冲突不经常发生，也不区块化访问。如果在读写过程中数据发生了变化，更新操作将失败。</p>
+<p>这时候由程序决定在失败后如何解决冲突，实际情况中可以重新尝试更新、重新读取或直接反馈给用户。</p>
+<h3 id="乐观并发控制"><a href="#乐观并发控制" class="headerlink" title="乐观并发控制"></a>乐观并发控制</h3><p>ES是分布式的，当文档被创建、更新或删除，文档的新版本会被复制到集群的其他节点。</p>
+<ul>
+<li>ES既是同步的也是异步的。复制请求都是平行发送的，并无序地到达目的地。即需要一种方法确保老版本的文档永远不会覆盖新版本。<ul>
+<li>_version保证了索引修改都被正确的进行排序，如果旧版本出行在新版本后则会被简单地忽略。因此保证数据不会因为修改冲突而丢失。</li>
+<li>指定文档的版本号来做想要的更改，如果不匹配则请求失败。</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用外部版本控制系统"><a href="#使用外部版本控制系统" class="headerlink" title="使用外部版本控制系统"></a>使用外部版本控制系统</h3><p>一种常见的结构是使用一些其他的数据库做为主数据库，然后使用Elasticsearch搜索数据，这意味着所有主数据库发生变化，就要将其拷贝到Elasticsearch中。如果有多个进程负责这些数据的同步，就会遇到上面提到的并发问题。</p>
+<p>如果主数据库有版本字段，或时间戳，则可以在ES的查询字符串中添加<code>version_type=external</code>来使用这些版本号，此时对于<strong>外部版本号</strong>它不会再检查<code>_version</code>是否与请求中指定的一致，而是检查是否小于指定版本，如果请求成功则外部版本号将存储到<code>_version</code>中。</p>
+<h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><h2 id="多索引和多类型"><a href="#多索引和多类型" class="headerlink" title="多索引和多类型"></a>多索引和多类型</h2><h1 id="Java-API"><a href="#Java-API" class="headerlink" title="Java API"></a>Java API</h1><p>QueryBuilder是es中提供的一个查询接口, 可以对其进行参数设置来进行操作。</p>
 <p><a href="https://www.cnblogs.com/xxx0624/p/4306226.html" target="_blank" rel="noopener">https://www.cnblogs.com/xxx0624/p/4306226.html</a></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
@@ -711,7 +785,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据"><span class="nav-number">1.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式文档存储引擎"><span class="nav-number">1.1.</span> <span class="nav-text">分布式文档存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文档"><span class="nav-number">1.1.1.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档元数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">文档元数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">1.2.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新"><span class="nav-number">1.3.</span> <span class="nav-text">更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部更新"><span class="nav-number">1.3.1.</span> <span class="nav-text">局部更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">批量操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发控制"><span class="nav-number">1.4.</span> <span class="nav-text">并发控制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-API"><span class="nav-number">2.</span> <span class="nav-text">Java API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据"><span class="nav-number">1.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式文档存储引擎"><span class="nav-number">1.1.</span> <span class="nav-text">分布式文档存储引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">1.2.</span> <span class="nav-text">文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文档元数据"><span class="nav-number">1.2.1.</span> <span class="nav-text">文档元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段类型"><span class="nav-number">1.2.2.</span> <span class="nav-text">字段类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">1.3.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">1.4.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新"><span class="nav-number">1.5.</span> <span class="nav-text">更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部更新"><span class="nav-number">1.5.1.</span> <span class="nav-text">局部更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量操作"><span class="nav-number">1.5.2.</span> <span class="nav-text">批量操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发控制"><span class="nav-number">1.6.</span> <span class="nav-text">并发控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#乐观并发控制"><span class="nav-number">1.6.1.</span> <span class="nav-text">乐观并发控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用外部版本控制系统"><span class="nav-number">1.6.2.</span> <span class="nav-text">使用外部版本控制系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搜索"><span class="nav-number">2.</span> <span class="nav-text">搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多索引和多类型"><span class="nav-number">2.1.</span> <span class="nav-text">多索引和多类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-API"><span class="nav-number">3.</span> <span class="nav-text">Java API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -740,14 +814,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:46</span>
+    <span title="站点阅读时长">38:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

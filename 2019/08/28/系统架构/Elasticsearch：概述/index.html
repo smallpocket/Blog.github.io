@@ -57,18 +57,23 @@
   };
 </script>
 
-  <meta name="description" content="DOC数据的基本操作CURDBULK读写文档的并发操作Search API结构化查询join复合查询全文检索地理信息查询控制相关度Mapping对数据建模对索引建模对文档建模Mapping &amp;amp; Setting倒排索引修复数据文本Analysis索引管理Search运行机制分布式特性核心架构搜索引擎聚合聚合Bucket AggregationTerms Data Histogram Rang">
+  <meta name="description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建 Elasticsearch是面向文档的">
 <meta name="keywords" content="Elasticsearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticsearch：概述">
 <meta property="og:url" content="http://yoursite.com/2019/08/28/系统架构/Elasticsearch：概述/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="DOC数据的基本操作CURDBULK读写文档的并发操作Search API结构化查询join复合查询全文检索地理信息查询控制相关度Mapping对数据建模对索引建模对文档建模Mapping &amp;amp; Setting倒排索引修复数据文本Analysis索引管理Search运行机制分布式特性核心架构搜索引擎聚合聚合Bucket AggregationTerms Data Histogram Rang">
+<meta property="og:description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建 Elasticsearch是面向文档的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-28T16:23:40.960Z">
+<meta property="og:image" content="http://yoursite.com/assets/1567147497368.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567147531015.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567067619776.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567067688072.png">
+<meta property="og:updated_time" content="2019-08-30T07:13:42.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch：概述">
-<meta name="twitter:description" content="DOC数据的基本操作CURDBULK读写文档的并发操作Search API结构化查询join复合查询全文检索地理信息查询控制相关度Mapping对数据建模对索引建模对文档建模Mapping &amp;amp; Setting倒排索引修复数据文本Analysis索引管理Search运行机制分布式特性核心架构搜索引擎聚合聚合Bucket AggregationTerms Data Histogram Rang">
+<meta name="twitter:description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建 Elasticsearch是面向文档的">
+<meta name="twitter:image" content="http://yoursite.com/assets/1567147497368.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/28/系统架构/Elasticsearch：概述/">
 
 
@@ -324,7 +329,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-29 00:23:40" itemprop="dateModified" datetime="2019-08-29T00:23:40+08:00">2019-08-29</time>
+                <time title="修改时间：2019-08-30 15:13:42" itemprop="dateModified" datetime="2019-08-30T15:13:42+08:00">2019-08-30</time>
               </span>
             
           
@@ -352,7 +357,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">219</span>
+              <span title="本文字数">10k</span>
             </span>
           
             <span class="post-meta-item">
@@ -362,7 +367,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">19 分钟</span>
             </span>
           
 
@@ -375,7 +380,339 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="DOC"><a href="#DOC" class="headerlink" title="DOC"></a>DOC</h1><h2 id="数据的基本操作"><a href="#数据的基本操作" class="headerlink" title="数据的基本操作"></a>数据的基本操作</h2><h3 id="CURD"><a href="#CURD" class="headerlink" title="CURD"></a>CURD</h3><h3 id="BULK"><a href="#BULK" class="headerlink" title="BULK"></a>BULK</h3><h3 id="读写文档的并发操作"><a href="#读写文档的并发操作" class="headerlink" title="读写文档的并发操作"></a>读写文档的并发操作</h3><h2 id="Search-API"><a href="#Search-API" class="headerlink" title="Search API"></a>Search API</h2><h2 id="结构化查询"><a href="#结构化查询" class="headerlink" title="结构化查询"></a>结构化查询</h2><h2 id="join"><a href="#join" class="headerlink" title="join"></a>join</h2><h2 id="复合查询"><a href="#复合查询" class="headerlink" title="复合查询"></a>复合查询</h2><h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><h2 id="地理信息查询"><a href="#地理信息查询" class="headerlink" title="地理信息查询"></a>地理信息查询</h2><h2 id="控制相关度"><a href="#控制相关度" class="headerlink" title="控制相关度"></a>控制相关度</h2><h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><h2 id="对数据建模"><a href="#对数据建模" class="headerlink" title="对数据建模"></a>对数据建模</h2><h3 id="对索引建模"><a href="#对索引建模" class="headerlink" title="对索引建模"></a>对索引建模</h3><h3 id="对文档建模"><a href="#对文档建模" class="headerlink" title="对文档建模"></a>对文档建模</h3><h3 id="Mapping-amp-Setting"><a href="#Mapping-amp-Setting" class="headerlink" title="Mapping &amp; Setting"></a>Mapping &amp; Setting</h3><h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><h2 id="修复数据"><a href="#修复数据" class="headerlink" title="修复数据"></a>修复数据</h2><h2 id="文本Analysis"><a href="#文本Analysis" class="headerlink" title="文本Analysis"></a>文本Analysis</h2><h2 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h2><h1 id="Search运行机制"><a href="#Search运行机制" class="headerlink" title="Search运行机制"></a>Search运行机制</h1><h1 id="分布式特性"><a href="#分布式特性" class="headerlink" title="分布式特性"></a>分布式特性</h1><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h2 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h2><h1 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h1><h2 id="聚合-1"><a href="#聚合-1" class="headerlink" title="聚合"></a>聚合</h2><h3 id="Bucket-Aggregation"><a href="#Bucket-Aggregation" class="headerlink" title="Bucket Aggregation"></a>Bucket Aggregation</h3><p>Terms</p>
+        <h1 id="DOC"><a href="#DOC" class="headerlink" title="DOC"></a>DOC</h1><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><h3 id="面向文档"><a href="#面向文档" class="headerlink" title="面向文档"></a>面向文档</h3><p>应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。</p>
+<p>而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建</p>
+<p>Elasticsearch是面向文档的，意味着它可以存储整个对象或文档，然而它不仅仅时存储，还会索引每个文档的内容使之可以被搜索。再Elasticsearch中，你可以对文档(并非表结构)进行索引、搜索、排序、过滤。这种理解数据的方式与MySQL完全不同，也是Elasticsearch能够进行复杂的全文搜索的原因之一。</p>
+<p><strong>Elasticsearch使用JSON作为文档序列化格式。</strong></p>
+<p>程序中大多的实体或对象能够被序列化为包含键值对的JSON对象。通常我们可以认为对象与文档时等价相通的。</p>
+<ul>
+<li>对象时应该JSON结构体，类似于HashMap等，内部还可能包含其他对象。</li>
+<li>文档在Elasticsearch当中特指最顶层结构或者跟对象序列化成的JSON数据，以唯一ID标识并存储在ES中。</li>
+</ul>
+<h3 id="文档元数据"><a href="#文档元数据" class="headerlink" title="文档元数据"></a>文档元数据</h3><p>文档不仅仅只有数据，还包含了元数据–关于文档的信息，其中三个必须的元数据节点时：</p>
+<ul>
+<li><code>_index</code>：文档存储的地方：<ul>
+<li>在ES当中index类似于数据库，是存储和索引关联数据的地方。</li>
+<li>实际上数据被存储和索引在<strong>分片</strong>中，索引只是一个把一个或多个分片分组在一起的逻辑空间。</li>
+</ul>
+</li>
+<li><code>_type</code>：文档代表的对象的类：<ul>
+<li>应用中，使用对象表示一些事物，每个对象都属于一个类，类定义了属性或与对象关联的数据。在关联数据库中，相同类的对象被存在一个表中。</li>
+<li>ES当中，使用相同<code>type</code>的文档表示相同的事物，因为它们的数据结构也是相同的。每个<code>type</code>都有自己的mapping或结构定义，类型的mapping会告诉ES不同的文档如何被索引。</li>
+</ul>
+</li>
+<li><code>_id</code>：文档的唯一标识：<ul>
+<li>与index和type组合时，就可以唯一标识一个文档。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><p>在Elasticsearch中，文档归属于一种类型(type),而这些类型存在于索引(index)中，我们可以画一些简单的对比图来类比传统关系型数据库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Relational	DB	-&gt;	Databases	-&gt;	Tables	-&gt;	Rows	-&gt;	Columns </span><br><span class="line">Elasticsearch	-&gt;	Indices		-&gt;	Types	-&gt;	Documents	-&gt;	Fields</span><br></pre></td></tr></table></figure>
+
+<p>Elasticsearch集群可以包含多个索引(indices)（数据库），每一个索引可以包含多个类型 (types)（表），每一个类型包含多个文档(documents)（行），然后每个文档包含多个字段 (Fields)（列）。</p>
+<p>在Elasticsearch中<strong>索引具有不同的涵义</strong>：</p>
+<ul>
+<li>索引(名词)：一个索引就像时传统关系数据库中的数据库，它时相关文档存储的地方</li>
+<li>索引(动词)：索引一个文档，表示把一个文档存储到索引(名词n)中。以便它可以被检索或者查询，很像SQL的<code>insert</code>，但差别是如果文档已经存在，新的文档将覆盖旧的文档</li>
+<li>倒排索引：传统数据库为特定列增加一个索引，例如B-Tree索引来加速检索。而Elasticsearch和Lucene使用倒排索引的数据结构达到目的。</li>
+</ul>
+<p>默认情况下，文档中的所有字段都会被索引(拥有一个倒排索引)，只有这样他们才是可被搜索的。</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>索引index实际上是一个用来指向一个或多个shard的逻辑命名空间。</p>
+<p>一个shard是一个最小级别工作单元，它只是保存了索引中所有数据的一部分。</p>
+<h2 id="数据的基本操作"><a href="#数据的基本操作" class="headerlink" title="数据的基本操作"></a>数据的基本操作</h2><h3 id="CURD"><a href="#CURD" class="headerlink" title="CURD"></a>CURD</h3><h3 id="BULK"><a href="#BULK" class="headerlink" title="BULK"></a>BULK</h3><h3 id="读写文档的并发操作"><a href="#读写文档的并发操作" class="headerlink" title="读写文档的并发操作"></a>读写文档的并发操作</h3><h2 id="Search-API"><a href="#Search-API" class="headerlink" title="Search API"></a>Search API</h2><h2 id="结构化查询"><a href="#结构化查询" class="headerlink" title="结构化查询"></a>结构化查询</h2><h2 id="join"><a href="#join" class="headerlink" title="join"></a>join</h2><h2 id="复合查询"><a href="#复合查询" class="headerlink" title="复合查询"></a>复合查询</h2><h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><h2 id="地理信息查询"><a href="#地理信息查询" class="headerlink" title="地理信息查询"></a>地理信息查询</h2><h2 id="控制相关度"><a href="#控制相关度" class="headerlink" title="控制相关度"></a>控制相关度</h2><h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><p>mapping机制用于进行字段类型确认，将每个字段匹配为一种确定的数据类型(String、number、boolean、date等)。</p>
+<p>ES的Mapping也称为模式定义，即对数据建模。</p>
+<h2 id="Mapping-1"><a href="#Mapping-1" class="headerlink" title="Mapping"></a>Mapping</h2><h3 id="数据类型差异"><a href="#数据类型差异" class="headerlink" title="数据类型差异"></a>数据类型差异</h3><p>当在索引中处理数据时，会有一些东西似乎被破坏了。</p>
+<p>假设索引中存在12个tweets，只有应该包含日期2014-09-15，进行查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=2014 //12个结果</span><br><span class="line">GET /search?q=2014-09-15 //12个结果</span><br><span class="line">GET /search?q=date:2014-09-15 //1个结果</span><br><span class="line">GET /search?q=date:2014 //0个结果</span><br></pre></td></tr></table></figure>
+
+<p>当进行全日期的查询时，得到12个tweets，而针对date字段进行年度查询却什么都不返回。即我们针对_all字段进行查询可全部返回，但是针对date字段却不能返回。</p>
+<p>这是因为数据在_all字段的索引方式与在date字段的索引方式不同而导致。</p>
+<h3 id="数据类型与字段信息"><a href="#数据类型与字段信息" class="headerlink" title="数据类型与字段信息"></a>数据类型与字段信息</h3><p>为了将日期字段处理成日期，将数字字段处理为数字等，ES需要找到每个字段都包含了什么类型，这些类型和字段的信息<strong>存储在mapping</strong>中。</p>
+<p>索引中每个文档都有一个类型(type)。每个类型拥有自己的映射(mapping)或者模式定义(schema definition)。一个映射定义了字段类型，每个字段的数据类型，以及字段被Elasticsearch处理的方式。映射还用于设置关联到类型上的元数据。</p>
+<p>支持的<strong>简单字段类型</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>表示的数据类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>string</td>
+</tr>
+<tr>
+<td>Whole number</td>
+<td>byte、short、integer、long</td>
+</tr>
+<tr>
+<td>Floating point</td>
+<td>float、double</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>date</td>
+</tr>
+</tbody></table>
+<p>当你索引一个包含新字段的文档，即一个之前没有的字段，ES将使用动态映射猜测字段类型，其来自于JSON基本数据类型：</p>
+<table>
+<thead>
+<tr>
+<th>JSON type</th>
+<th>Field type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Boolean</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>Whole number:123</td>
+<td>long</td>
+</tr>
+<tr>
+<td>Floating point:1123.4</td>
+<td>double</td>
+</tr>
+<tr>
+<td>String,valid date:”2014-12-15”</td>
+<td>date</td>
+</tr>
+<tr>
+<td>String:”FOO”</td>
+<td>string</td>
+</tr>
+</tbody></table>
+<h3 id="自定义字段映射"><a href="#自定义字段映射" class="headerlink" title="自定义字段映射"></a>自定义字段映射</h3><p>某些时候需要自定义一些特殊类型，尤其是字符串字段类型，自定义类型可以帮助：</p>
+<ul>
+<li>区分全文字符串字段和准确字符串字段，即分词与不分词。</li>
+<li>使用特定语言的分析器。</li>
+<li>优化部分匹配字段。</li>
+<li>指定自定义日期格式。</li>
+<li>等。</li>
+</ul>
+<p>对于mapping而言最重要的字段参数是type。</p>
+<p>对于string字段，最重要的映射参数是index和analyer。</p>
+<ul>
+<li>index，控制字符串以何种方式被索引：<ul>
+<li>analyzed，默认值。首先分析这个字符串，然后索引，即进行全文形式的索引。</li>
+<li>not_analyzed。索引这个字段，使其可以被搜索，但是索引内容与指定值一样，不分析此字段。</li>
+<li>no。不索引这个字段。</li>
+</ul>
+</li>
+<li>analyzer，只当哪一种分析器将在搜索和索引时使用。<ul>
+<li>standard，默认值。</li>
+<li>whitespace等。</li>
+</ul>
+</li>
+</ul>
+<h3 id="更新mapping"><a href="#更新mapping" class="headerlink" title="更新mapping"></a>更新mapping</h3><p>可以在第一次创建索引的时候指定映射的类型。此外，你也可以晚些时候为新类型添加映射（或者为已有的类型更新映射）。</p>
+<p>可以向已有映射中增加字段，但你不能修改它。如果一个字段在映射中已经存在，这可能意味着那个字段的数据已经被索引。如果你改变了字段映射，那已经被索引的数据将错误并且不能被正确的搜索到。</p>
+<h3 id="复合核心字段类型"><a href="#复合核心字段类型" class="headerlink" title="复合核心字段类型"></a>复合核心字段类型</h3><p>JSON还有null值，数组和对象，所有这些Elasticsearch都支持：</p>
+<p><strong><em>多值字段</em></strong></p>
+<p>若想让tag字段包含多个值，我们可以索引一个标签数组来代替单一字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;tag&quot;: [&quot;search&quot;, &quot;nosql&quot;]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于数组不需要特殊的映射，任何一个字段可以包含0-N个值，同样对于全文字段将被分析并产生多个词。</p>
+<p>即数组中的所有值必须为同一类型，若使用字段索引一个数组，ES将使用第一个值的类型来确定这个新字段的类型。</p>
+<p>数组是<strong>作为多值字段</strong>被索引的，它们没有顺序。在搜索阶段你<strong>不能指定“第一个值”或者“最后一个值”</strong>。倒不如把数组当作一个值集合(bag of values)</p>
+<p><strong><em>空字段</em></strong></p>
+<p>数组可以为空，即等价为0个值，而Lucene无法存储null，因此这个字段被认为是空字段而不被索引。</p>
+<p><strong><em>多层对象</em></strong></p>
+<p>即JSON object，即hashmap。内部对象经常用于在另一个对中嵌入一个实体或对象。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"user"</span>:&#123;</span><br><span class="line">        <span class="attr">"name"</span>:&#123;</span><br><span class="line">            <span class="attr">"full"</span>: <span class="string">"Jo sh"</span>,</span><br><span class="line">            <span class="attr">"first"</span>: <span class="string">"jo"</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>内部对象的映射</em></strong></p>
+<p>ES会动态检测新对象的字段，并映射它们为object类型，将每个字段加到properties字段下。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"user"</span>:&#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"object"</span>,</span><br><span class="line">        "propertiex"：&#123;</span><br><span class="line">        	"name":&#123;</span><br><span class="line">        		"type": "object",</span><br><span class="line">        		"properties":&#123;</span><br><span class="line">            	"full": &#123;"type": "string"&#125;,</span><br><span class="line">            	"first": &#123;"type": "string"&#125;</span><br><span class="line">    			&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>内部对象是怎样被索引的</em></strong></p>
+<p>Lucene并不会去了解内部对象，一个Lucene文件包含一个键-值对应的扁平表单，因此ES为了有效索引内部对象，则转换了文件的格式：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"user.name.full"</span>:[jo,sh],</span><br><span class="line">    <span class="attr">"user.name.first"</span>:[jo]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>对象-数组</em></strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"followers"</span>:[</span><br><span class="line">		&#123;	</span><br><span class="line">			<span class="attr">"age"</span>: <span class="number">35</span>,	</span><br><span class="line">			<span class="attr">"name"</span>:	<span class="string">"Mary	White"</span></span><br><span class="line">		&#125;,								</span><br><span class="line">    	&#123;	</span><br><span class="line">        	<span class="attr">"age"</span>:	<span class="number">26</span>,	</span><br><span class="line">        	<span class="attr">"name"</span>:	<span class="string">"Alex	Jones"</span></span><br><span class="line">    	&#125;,								</span><br><span class="line">    	&#123;	</span><br><span class="line">        	<span class="attr">"age"</span>:	<span class="number">19</span>,	</span><br><span class="line">        	<span class="attr">"name"</span>:	<span class="string">"Lisa	Smith"</span></span><br><span class="line">    	&#125;				</span><br><span class="line">	] </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>则此时由于文件被扁平化，值之间的关联被消除了。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;				</span><br><span class="line">	<span class="attr">"followers.age"</span>: [<span class="number">19</span>,	<span class="number">26</span>,	<span class="number">35</span>],				</span><br><span class="line">	<span class="attr">"followers.name"</span>: [alex,jones,lisa,smith,mary,white] </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时需要使用<strong>嵌套对象</strong>。</p>
+<h2 id="对数据建模"><a href="#对数据建模" class="headerlink" title="对数据建模"></a>对数据建模</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=2014 //12个结果  使用_all，索引类型是string</span><br></pre></td></tr></table></figure>
+
+<p>ES将对字段类型进行猜测，动态生成了字段和类型的映射关系。_all字段是默认字段，其类型为string。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=date:2014-09-15 //1个结果 索引类型为date，</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>因此string与date字段的索引方式是不同的。在ES当中每一种核心数据类型是以不同的方式进行索引的。</li>
+<li>最大的差别在于确切值与全文文本间的区别对待。是区分<strong>搜索引擎与数据库的根本差异</strong>。</li>
+</ul>
+<h3 id="确切值与全文文本"><a href="#确切值与全文文本" class="headerlink" title="确切值与全文文本"></a>确切值与全文文本</h3><p>ES的数据类型分为确切值与全文文本。</p>
+<ul>
+<li>确切值是确定的，例如Date与Id等。即“FOO”与“Foo”就不同。</li>
+<li>全文文本，是文本化的数据，是一种非结构化数据。<ul>
+<li>对于全文文本的查询，我们会询问这篇文章与查询的匹配度如何，即对于查询条件，文档的相关性有多高。</li>
+<li>即想查询在全文中包含文本的部分。以及针对UK将返回United Kingdom，针对jump能够匹配jumps等。</li>
+</ul>
+</li>
+<li>针对全文查询，ES首先对文本Analyzes，然后使用结果建立一个倒排索引。</li>
+</ul>
+<h3 id="对索引建模"><a href="#对索引建模" class="headerlink" title="对索引建模"></a>对索引建模</h3><h3 id="对文档建模"><a href="#对文档建模" class="headerlink" title="对文档建模"></a>对文档建模</h3><h3 id="Mapping-amp-Setting"><a href="#Mapping-amp-Setting" class="headerlink" title="Mapping &amp; Setting"></a>Mapping &amp; Setting</h3><h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><p>ES使用倒排索引结构做快速的全文搜索，倒排索引由在文档中出行的唯一的单词列表以及对于每个单词在文档中的位置组成。</p>
+<p>为了建立倒排索引，我们首先切分每个文档的content字段为单独的单词，我们将它们叫做<strong>词(terms)或表征(tokens)</strong>。</p>
+<p>假设存在两个文档：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The quick brown fox jumped over the lazy dog</span><br><span class="line">Quick brown foxes leap over lazy dos in summer</span><br></pre></td></tr></table></figure>
+
+<p>将所有的唯一词放入列表并排序。</p>
+<p><img src="/assets/1567147497368.png" alt="1567147497368"></p>
+<p>当搜索<code>quick brown</code>，则只需要找到每个词在哪个文档出现即可：</p>
+<p><img src="/assets/1567147531015.png" alt="1567147531015"></p>
+<p>此时加入相似度算法，则可以所Doc1具有更高的匹配度。</p>
+<h2 id="修复数据"><a href="#修复数据" class="headerlink" title="修复数据"></a>修复数据</h2><h2 id="文本Analysis"><a href="#文本Analysis" class="headerlink" title="文本Analysis"></a>文本Analysis</h2><p>Analysis用于进行全文文本的分词，以建立供搜索用的反向索引。</p>
+<p>由于你只可以找到确实存在于索引中的词，因此索引文本和查询字符串都要标准化成相同的形式。</p>
+<p>标准化和标记化的过程叫做分词Analysis。分析的过程：</p>
+<ul>
+<li>首先标记化一个文本块为适用于倒排索引单独的词。</li>
+<li>标准化这些词为标准形式，提高可搜索性。</li>
+</ul>
+<p>这个工作是分析器(analyzer)完成的。一个分析器(analyzer)只是一个包装用于将三个功能放到一个包里。</p>
+<h2 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h2><h1 id="Search运行机制"><a href="#Search运行机制" class="headerlink" title="Search运行机制"></a>Search运行机制</h1><h1 id="分布式特性"><a href="#分布式特性" class="headerlink" title="分布式特性"></a>分布式特性</h1><h2 id="集群和节点"><a href="#集群和节点" class="headerlink" title="集群和节点"></a>集群和节点</h2><p>节点node是一个运行着地Elasticsearch实例，集群cluster是一组具有相同<code>cluster.name</code>的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能。</p>
+<p>修改<code>cluster.name</code>可以通过修改<code>config/</code>目录下的<code>elasticsearch.yml</code>文件，然后重启Elasticsearch来实现。</p>
+<h3 id="天然分布式"><a href="#天然分布式" class="headerlink" title="天然分布式"></a>天然分布式</h3><p>Elasticsearch可以扩展到上百、千的服务器来处理PB级的数据，Elasticsearch的设计隐藏了分布式本身的复杂性。</p>
+<p>Elasticsearch在分布式概念上做了很大程度上的透明化，在教程中你不需要知道任何关于分布式系统、分片、集群发现或者其他大量的分布式概念。所有的教程你既可以运行在你的笔记本上，也可以运行在拥有100个节点的集群上，其工作方式是一样的。</p>
+<p>Elasticsearch致力于隐藏分布式系统的复杂性。以下这些操作都是在底层自动完成的：</p>
+<ul>
+<li>将你的文档分区到不同的容器或者分片(shards)中，它们可以存在于一个或多个节点中。 </li>
+<li>将分片均匀的分配到各个节点，对索引和搜索做负载均衡。 </li>
+<li>冗余每一个分片，防止硬件故障造成的数据丢失。 </li>
+<li>将集群中任意一个节点上的请求路由到相应数据所在的节点。 </li>
+<li>无论是增加节点，还是移除节点，分片都可以做到无缝的扩展和迁移。</li>
+</ul>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="空集群"><a href="#空集群" class="headerlink" title="空集群"></a>空集群</h3><p>一个节点就是一个ElasticSearch实例，而一个集群由一个或多个节点组成，它们具有相同的<code>cluster.name</code>，它们协同工作，分析数据和负载。</p>
+<p>当加入新的节点或删除一个节点，集群就会感知到并平衡数据。</p>
+<p><strong><em>主节点</em></strong></p>
+<p>集群中一个节点会被选举为<strong>主节点</strong>，它将临时管理集群级别的一些变更，例如新建或删除索引，增加或移除节点等。</p>
+<p>主节点不参与文档级别的变更或搜索，意味着在流量增长时，主节点不会称为集群的瓶颈，且任意节点都可以成为主节点。</p>
+<p>作为用户我们可以与集群中的任何节点通信，包括主节点。每一个节点都知道文档存在于哪个节点上，它们可以转发请求到相应的节点，我们访问的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切由ES处理。</p>
+<h3 id="Shard"><a href="#Shard" class="headerlink" title="Shard"></a>Shard</h3><p>分片就是一个Lucene实例，并且它本身就是一个完整的搜索引擎，我们的文档存储在分片中，并且在分片中被索引，但是我们的应用程序不会直接与shards通信，而是与索引直接通信。</p>
+<p>Shard是ES集群中分发数据的关键，把分片类比成数据的容器，文档存储在分片中，然后分片分配到你集群的节点上。当集群扩容或缩小，ES将会自动在你的节点间迁移分片，以使得集群保持平衡。</p>
+<p>Shard分类：</p>
+<ul>
+<li>主分片。索引中的每个文档属于一个单独的主分片，所以主分片的数量决定了索引最多能够存储多少数据。<ul>
+<li>理论上能够存储的大小没有限制，限制取决于实际的使用情况，硬件存储的大小、文档的大小和复杂度，如何索引和查询你的文档，以及期望的响应时间。</li>
+<li>当index创建后，主分片的数量就确定了。</li>
+<li>number_of_shards参数。</li>
+</ul>
+</li>
+<li>复制分片。是主分片的副本，防止硬件故障导致数据丢失。<ul>
+<li>可提供读请求，例如搜索或从其他shard取回文档。</li>
+<li>index创建后复制分片的数量可随时调整。</li>
+<li>number_of_replicas参数。</li>
+</ul>
+</li>
+</ul>
+<h3 id="集群健康"><a href="#集群健康" class="headerlink" title="集群健康"></a>集群健康</h3><p>集群健康有三种状态：</p>
+<ul>
+<li>green。所有主要分片和复制分片都可用。</li>
+<li>yellow。所有主要分片可用，但不是所有复制分片都可用。</li>
+<li>red。不是所有主要分片都可用。</li>
+</ul>
+<p>查询集群信息：<code>GET /_cluster/health</code>，status表示集群的服务状况。</p>
+<p>在索引建立后，集群首先是yellow状态，因为所有的复制分片还是没有unassigned的，它们不会被分配到节点上，在同一个节点上保存相同的数据副本是不必要的。</p>
+<h3 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h3><p>单节点上运行有单点故障风险，即没有数据备份。为了防止则启动另一个节点。</p>
+<p>可以使用同样的命令行在同样的目录下进行创建，一个节点可以启动多个ES实例。</p>
+<p>只要第二个节点与第一个节点具有相同的<code>cluster.name</code>，具体值查看./config/elasticsearch.yml，它就能自动发现并加入第一个节点所在的集群。其原理是进行网络广播。</p>
+<p>当第二个节点加入集群，则三个复制分片也将被分配，分别对应三个主分片。文档将首先被存储在主分片中，然后并发复制到对应的复制节点上。</p>
+<p>此时的集群状态为green。</p>
+<h3 id="横向扩展"><a href="#横向扩展" class="headerlink" title="横向扩展"></a>横向扩展</h3><p>当启动第三个节点，集群会重新组织。</p>
+<p>在原有情况下，两个节点各自拥有3个分片。此时将进行分片的移动，将其中一个主分片和一个复制分片移动到节点3上。</p>
+<p>分片本身是一个完整的搜索引擎，它可以使用单一节点的所有资源。主分片或者复制分片都可以处理读请求——搜索或文档检索，所以数据的冗余越多，我们能处理的搜索吞吐量就越大。</p>
+<p>当然在相同数量节点上增加更多的复制分片并不能提高性能，因为对硬件资源占用减少。</p>
+<h3 id="应对故障"><a href="#应对故障" class="headerlink" title="应对故障"></a>应对故障</h3><p>对于这样一个集群：</p>
+<p><img src="/assets/1567067619776.png" alt="1567067619776"></p>
+<p>若杀死Node1，则由于杀死了主节点Master，而一个<strong>集群必须拥有主节点才能使得其功能正常</strong>，因此各个节点选举了一个新的主节点。</p>
+<p><img src="/assets/1567067688072.png" alt="1567067688072"></p>
+<p>此时，主分片1与2丢失，而<strong>索引在丢失主分片时不可用</strong>，则此时状态为red。因此新的主节点负责将复制分片升级为主分片，此时集群健康回到yellow。但是不是green，因为复制分片没有全部分配。</p>
+<p>如果我们重启了Node1，集群能够重新分配丢失的复制分片，并将只从主分片上复制在故障期间有数据变更的那一部分。</p>
+<h2 id="分布式增删改查"><a href="#分布式增删改查" class="headerlink" title="分布式增删改查"></a>分布式增删改查</h2><p>考虑数据是如何在集群中分布和获取的相关技术细节。</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ul>
+<li>当你索引一个文档，它被存储在单独一个主分片上。ES是如何知道文档属于哪个分片的呢？</li>
+<li>当你创建一个新文档，它是如何知道是应该存储在分片1还是分片2上呢？</li>
+</ul>
+<p>进程不能是随机的，因为将来要检索文档，因此根据算法进行决定：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//routing值是一个任意字符串，默认是_id，但也可以自定义。</span></span><br><span class="line"><span class="comment">//这个routing字符串通过哈希函数生产一个数字，然后除以主切片数量得到一个余数</span></span><br><span class="line">shard = hash(routing) % number_of_primary_shards</span><br></pre></td></tr></table></figure>
+
+<p>因此主分片的数量只能在创建索引时定义且不能修改，如果主分片的数量在未来改变了，所有先前的路由就失效了，文档无法找到。</p>
+<p>所有的文档API都接收一个<code>routing</code>参数，用来自定义文档到分片的映射，自定义路由值可以确保所有的相关文档都保存在同一个分片中。</p>
+<h3 id="分片交互"><a href="#分片交互" class="headerlink" title="分片交互"></a>分片交互</h3><p>假设有3个节点的集群，它包含一个叫做bblogs的索引并拥有两个主分片，每个主分片有两个复制分片。</p>
+<p>我们能够发送请求给集群中任意一个节点，每个节点都有能力处理任意请求，每个节点都知道任意文档所在的节点，所以也能将请求转发到需要的节点。</p>
+<p>接收请求的节点称为<strong>请求节点</strong>。</p>
+<h3 id="新建、索引和删除"><a href="#新建、索引和删除" class="headerlink" title="新建、索引和删除"></a>新建、索引和删除</h3><p>新建、索引和删除请求都是写操作，它们必须在主分片（Node1）上成功完成才能复制到相关的复制分片上。其步骤是：</p>
+<ul>
+<li>客户端给Node1发送新建、索引和删除请求。</li>
+<li>节点使用文档_id确定文档属于分片0，因此将请求转发到Node3，分片0位于这个节点上。</li>
+<li>Node3在主分片上执行请求，如果成功，它转发请求到相应的位于Node1、Node2的复制节点上。<ul>
+<li>当所有的复制节点报告成功，Node3报告成功到请求的节点，请求的节点再报告给客户端。</li>
+<li>即当客户端收到响应时，文档的修改已经应用到了主分片和所有复制分片上。</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>同步/异步复制</em></strong></p>
+<ul>
+<li>复制的默认值是sync，导致主分片得到复制分片的成功响应后才返回。<ul>
+<li>sync更优，因为允许ES强制反馈传输。</li>
+</ul>
+</li>
+<li>可以设置<code>replication</code>为async，请求在主分片上被执行后就会返回给客户端。它依然会转发请求给复制节点，但你不知道成功与否。<ul>
+<li>async可能会因为在不等待其他分片就绪的情况下发送太多请求而使得ES过载。</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>可用分片数</em></strong></p>
+<ul>
+<li>默认主分片在尝试写入时需要规定数量或过半的分片可用。这是为了防止数据被写入到错误的网络分区。<ul>
+<li>int ((primary + number_of_replicas) / 2) + 1</li>
+<li>consistency允许的值为：<ul>
+<li>one，即只有一个主分片。</li>
+<li>all，所有的主分片和复制分片。</li>
+<li>quorum，默认，或过半分片。</li>
+</ul>
+</li>
+<li>number_of_replicas是在索引中的设置，用于<strong>定义</strong>复制分片的数量，而不是现在<strong>活动</strong>的复制节点的数量。</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>timeout</em></strong></p>
+<p>当分片副本不足时，ES会等待更多的分片出现，默认等待一分钟，如果需要则可设置更早。</p>
+<p>新索引默认有1个复制分片，这意味着为了满足quorum的要求需要两个活动的分片。 当然，这个默认设置将阻止我们在单一节点集群中进行操作。为了避开这个问题，规定数量只有在number_of_replicas大于一时才生效。</p>
+<h3 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h3><p>文档能够从主分片或任意一个复制分片被检索。在主分片或复制分片上检索一个文档必要的顺序步骤：</p>
+<ul>
+<li>客户端给Node1发送get请求。</li>
+<li>节点使用文档的_id确定文档属于分片0，分片0对应的复制分片在3个节点上都有，此时它转发到Node2。</li>
+<li>Node2返回文档给Node1然后返回客户端。</li>
+</ul>
+<p>可能情况时一个被索引的文档已经存在于主分片上，却没有来得及同步到复制分片上，这时复制分片会报告文档未找到，主分片会成功返回文档。</p>
+<p>一旦索引请求成功返回给用户，文档则在主切片和复制分片都是可用的。</p>
+<h3 id="批量更新"><a href="#批量更新" class="headerlink" title="批量更新"></a>批量更新</h3><p>为什么bulk使用\n，则是因为批量中每个引用的文档属于不同的主分片，每个分片可能被分布于集群中的某个节点上。</p>
+<p>意味着批量中的每个操作需要被转发到对应的分片和节点上。</p>
+<p>而如果使用JSON，则需要：</p>
+<ul>
+<li>解析JSON为数组，包括文档数据，可能非常大。</li>
+<li>检查每个请求决定应该到哪个分片上。</li>
+<li>为每个分片创建应该请求的数组。</li>
+<li>序列化这些数组为内部传输格式。</li>
+<li>发送请求到每个分片。</li>
+</ul>
+<p>即使可行，也会使得大量RAM承载本质上相同的数据，并需要JVM进行回收。因此ES使用网络缓冲区中一行行读取数据，使用换行符识别并进行解析，然后决定哪些分片来处理这个请求。</p>
+<p>因此ES使用最小内存在进行。</p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h2 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h2><h1 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h1><p>ES的聚合(aggregations)允许你在数据上生成复杂的分析统计，类似于<code>Group by</code>但是功能更强大。</p>
+<p>例如找到所有职员中最大的共同点(兴趣爱好)是什么：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;&#123;</span><br><span class="line">	&quot;aggs&quot;:&#123;</span><br><span class="line">		&quot;all_interests&quot;:&#123;</span><br><span class="line">			&quot;terms&quot;:&#123;&quot;field&quot;: &quot;interests&quot;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>聚合也允许分级汇总。例如，让我们统计每种兴趣下职员的平均年龄。</p>
+<h2 id="聚合-1"><a href="#聚合-1" class="headerlink" title="聚合"></a>聚合</h2><h3 id="Bucket-Aggregation"><a href="#Bucket-Aggregation" class="headerlink" title="Bucket Aggregation"></a>Bucket Aggregation</h3><p>Terms</p>
 <p>Data Histogram</p>
 <p>Range</p>
 <p>Sampler</p>
@@ -636,7 +973,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOC"><span class="nav-number">1.</span> <span class="nav-text">DOC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的基本操作"><span class="nav-number">1.1.</span> <span class="nav-text">数据的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CURD"><span class="nav-number">1.1.1.</span> <span class="nav-text">CURD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BULK"><span class="nav-number">1.1.2.</span> <span class="nav-text">BULK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写文档的并发操作"><span class="nav-number">1.1.3.</span> <span class="nav-text">读写文档的并发操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-API"><span class="nav-number">1.2.</span> <span class="nav-text">Search API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构化查询"><span class="nav-number">1.3.</span> <span class="nav-text">结构化查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join"><span class="nav-number">1.4.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合查询"><span class="nav-number">1.5.</span> <span class="nav-text">复合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文检索"><span class="nav-number">1.6.</span> <span class="nav-text">全文检索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地理信息查询"><span class="nav-number">1.7.</span> <span class="nav-text">地理信息查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制相关度"><span class="nav-number">1.8.</span> <span class="nav-text">控制相关度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mapping"><span class="nav-number">2.</span> <span class="nav-text">Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对数据建模"><span class="nav-number">2.1.</span> <span class="nav-text">对数据建模</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对索引建模"><span class="nav-number">2.1.1.</span> <span class="nav-text">对索引建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对文档建模"><span class="nav-number">2.1.2.</span> <span class="nav-text">对文档建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapping-amp-Setting"><span class="nav-number">2.1.3.</span> <span class="nav-text">Mapping &amp; Setting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#倒排索引"><span class="nav-number">2.2.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复数据"><span class="nav-number">2.3.</span> <span class="nav-text">修复数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本Analysis"><span class="nav-number">2.4.</span> <span class="nav-text">文本Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引管理"><span class="nav-number">2.5.</span> <span class="nav-text">索引管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Search运行机制"><span class="nav-number">3.</span> <span class="nav-text">Search运行机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式特性"><span class="nav-number">4.</span> <span class="nav-text">分布式特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心"><span class="nav-number">4.1.</span> <span class="nav-text">核心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">4.2.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索引擎"><span class="nav-number">4.3.</span> <span class="nav-text">搜索引擎</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚合"><span class="nav-number">5.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合-1"><span class="nav-number">5.1.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bucket-Aggregation"><span class="nav-number">5.1.1.</span> <span class="nav-text">Bucket Aggregation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合分析"><span class="nav-number">5.2.</span> <span class="nav-text">聚合分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOC"><span class="nav-number">1.</span> <span class="nav-text">DOC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">1.1.</span> <span class="nav-text">文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向文档"><span class="nav-number">1.1.1.</span> <span class="nav-text">面向文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档元数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">文档元数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">1.2.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">1.2.1.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的基本操作"><span class="nav-number">1.3.</span> <span class="nav-text">数据的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CURD"><span class="nav-number">1.3.1.</span> <span class="nav-text">CURD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BULK"><span class="nav-number">1.3.2.</span> <span class="nav-text">BULK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写文档的并发操作"><span class="nav-number">1.3.3.</span> <span class="nav-text">读写文档的并发操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-API"><span class="nav-number">1.4.</span> <span class="nav-text">Search API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构化查询"><span class="nav-number">1.5.</span> <span class="nav-text">结构化查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join"><span class="nav-number">1.6.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合查询"><span class="nav-number">1.7.</span> <span class="nav-text">复合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文检索"><span class="nav-number">1.8.</span> <span class="nav-text">全文检索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地理信息查询"><span class="nav-number">1.9.</span> <span class="nav-text">地理信息查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制相关度"><span class="nav-number">1.10.</span> <span class="nav-text">控制相关度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mapping"><span class="nav-number">2.</span> <span class="nav-text">Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mapping-1"><span class="nav-number">2.1.</span> <span class="nav-text">Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型差异"><span class="nav-number">2.1.1.</span> <span class="nav-text">数据类型差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型与字段信息"><span class="nav-number">2.1.2.</span> <span class="nav-text">数据类型与字段信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义字段映射"><span class="nav-number">2.1.3.</span> <span class="nav-text">自定义字段映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新mapping"><span class="nav-number">2.1.4.</span> <span class="nav-text">更新mapping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合核心字段类型"><span class="nav-number">2.1.5.</span> <span class="nav-text">复合核心字段类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数据建模"><span class="nav-number">2.2.</span> <span class="nav-text">对数据建模</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确切值与全文文本"><span class="nav-number">2.2.1.</span> <span class="nav-text">确切值与全文文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对索引建模"><span class="nav-number">2.2.2.</span> <span class="nav-text">对索引建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对文档建模"><span class="nav-number">2.2.3.</span> <span class="nav-text">对文档建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapping-amp-Setting"><span class="nav-number">2.2.4.</span> <span class="nav-text">Mapping &amp; Setting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#倒排索引"><span class="nav-number">2.3.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复数据"><span class="nav-number">2.4.</span> <span class="nav-text">修复数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本Analysis"><span class="nav-number">2.5.</span> <span class="nav-text">文本Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引管理"><span class="nav-number">2.6.</span> <span class="nav-text">索引管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Search运行机制"><span class="nav-number">3.</span> <span class="nav-text">Search运行机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式特性"><span class="nav-number">4.</span> <span class="nav-text">分布式特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集群和节点"><span class="nav-number">4.1.</span> <span class="nav-text">集群和节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#天然分布式"><span class="nav-number">4.1.1.</span> <span class="nav-text">天然分布式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">4.2.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#空集群"><span class="nav-number">4.2.1.</span> <span class="nav-text">空集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shard"><span class="nav-number">4.2.2.</span> <span class="nav-text">Shard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群健康"><span class="nav-number">4.2.3.</span> <span class="nav-text">集群健康</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#故障转移"><span class="nav-number">4.2.4.</span> <span class="nav-text">故障转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#横向扩展"><span class="nav-number">4.2.5.</span> <span class="nav-text">横向扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应对故障"><span class="nav-number">4.2.6.</span> <span class="nav-text">应对故障</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式增删改查"><span class="nav-number">4.3.</span> <span class="nav-text">分布式增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">4.3.1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分片交互"><span class="nav-number">4.3.2.</span> <span class="nav-text">分片交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建、索引和删除"><span class="nav-number">4.3.3.</span> <span class="nav-text">新建、索引和删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检索"><span class="nav-number">4.3.4.</span> <span class="nav-text">检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量更新"><span class="nav-number">4.3.5.</span> <span class="nav-text">批量更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心"><span class="nav-number">4.4.</span> <span class="nav-text">核心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">4.5.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索引擎"><span class="nav-number">4.6.</span> <span class="nav-text">搜索引擎</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚合"><span class="nav-number">5.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合-1"><span class="nav-number">5.1.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bucket-Aggregation"><span class="nav-number">5.1.1.</span> <span class="nav-text">Bucket Aggregation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合分析"><span class="nav-number">5.2.</span> <span class="nav-text">聚合分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -665,14 +1002,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:46</span>
+    <span title="站点阅读时长">38:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

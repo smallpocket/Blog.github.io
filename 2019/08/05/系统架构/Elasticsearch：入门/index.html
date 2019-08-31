@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。 但是它们能够进行全">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T09:11:59.890Z">
+<meta property="og:updated_time" content="2019-08-29T07:59:36.164Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch：入门">
 <meta name="twitter:description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。 但是它们能够进行全">
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-19 17:11:59" itemprop="dateModified" datetime="2019-08-19T17:11:59+08:00">2019-08-19</time>
+                <time title="修改时间：2019-08-29 15:59:36" itemprop="dateModified" datetime="2019-08-29T15:59:36+08:00">2019-08-29</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">10k</span>
+              <span title="本文字数">9.6k</span>
             </span>
           
             <span class="post-meta-item">
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">19 分钟</span>
+              <span title="阅读时长">17 分钟</span>
             </span>
           
 
@@ -375,8 +375,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="ElasticSearch概念"><a href="#ElasticSearch概念" class="headerlink" title="ElasticSearch概念"></a>ElasticSearch概念</h1><p>ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。</p>
-<p>它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。</p>
+        <h1 id="ElasticSearch概念"><a href="#ElasticSearch概念" class="headerlink" title="ElasticSearch概念"></a>ElasticSearch概念</h1><p>ElasticSearch是一个<strong>实时分布式搜索和分析引擎</strong>，能够让你以前所未有的速度处理大数据成为可能。</p>
+<p>它用于<strong>全文搜索、结构化搜索、分析</strong>以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。</p>
 <h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。</p>
 <p>但是它们能够进行全文搜索，处理同义词和根据相关性给文档打分吗？它们能根据同一份数据生成分析和聚合的结果吗？最重要的是，它们在没有大量工作进程（线程）的情况下能做到对数据的实时处理吗？</p>
 <p>ElasticSearch鼓励你浏览并利用你的数据，而不是烂在数据库里，因为在数据库里太难查询了。</p>
@@ -389,14 +389,10 @@
 <li>分布式的实时分析搜索引擎</li>
 <li>可以扩展到上百台服务器，处理PB级结构化或非结构化数据。</li>
 </ul>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://www.elastic.co/cn/" target="_blank" rel="noopener">elasticsearch</a>安装后解压到相应目录即可</p>
-<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>进入bin目录后：<code>elasticsearch-service start</code></p>
-<p>关闭服务：<code>elasticsearch-service stop</code></p>
-<p>如果是第一次启动则需要：<code>elasticsearch-service install</code></p>
-<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>安装插件Marvel，Marvel是Elasticsearch的管理和监控工具，包含一个sense的交互控制台，使用户方便地通过浏览器直接于Elasticsearch进行交互。</p>
-<p><code>./bin/elasticsearch-plugin install elasticsearch/marvel/latest</code></p>
-<p>禁用监控，通过命令关闭Marvel：<code>echo    &#39;marvel.agent.enabled:    false&#39;    &gt;&gt;    ./config/elasticsearch.yml</code></p>
-<p><a href="http://localhost:9200/_plugin/marvel" target="_blank" rel="noopener">查看Marvel</a></p>
+<h3 id="面向文档"><a href="#面向文档" class="headerlink" title="面向文档"></a>面向文档</h3><p>应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。</p>
+<p>而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建</p>
+<p>Elasticsearch是面向文档的，意味着它可以存储整个对象或文档，然而它不仅仅时存储，还会索引每个文档的内容使之可以被搜索。再Elasticsearch中，你可以对文档(并非表结构)进行索引、搜索、排序、过滤。这种理解数据的方式与MySQL完全不同，也是Elasticsearch能够进行复杂的全文搜索的原因之一。</p>
+<p><strong>Elasticsearch使用JSON作为文档序列化格式。</strong></p>
 <h2 id="集群和节点"><a href="#集群和节点" class="headerlink" title="集群和节点"></a>集群和节点</h2><p>节点node是一个运行着地Elasticsearch实例，集群cluster是一组具有相同<code>cluster.name</code>的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能。</p>
 <p>修改<code>cluster.name</code>可以通过修改<code>config/</code>目录下的<code>elasticsearch.yml</code>文件，然后重启Elasticsearch来实现。</p>
 <h2 id="与Elasticsearch交互"><a href="#与Elasticsearch交互" class="headerlink" title="与Elasticsearch交互"></a>与Elasticsearch交互</h2><h3 id="JavaAPI"><a href="#JavaAPI" class="headerlink" title="JavaAPI"></a>JavaAPI</h3><p>Elasticsearch为Java用户提供了两种内置客户端</p>
@@ -432,10 +428,14 @@
 <p><strong><em>一个put的示例</em></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl </span><br><span class="line">-H &quot;Content-Type: application/json&quot; </span><br><span class="line">-XPUT &quot;http://localhost:9200/megacorp/employee/1&quot; </span><br><span class="line">-d&apos;&#123;&quot;first_name&quot;: &quot;John&quot;,&quot;last_name&quot;: &quot;Smith&quot;,&quot;age&quot;: 25,&quot;about&quot;: &quot;rock&quot;,&quot;interests&quot;: [&quot;sports&quot;, &quot;music&quot;]&#125;&apos;</span><br></pre></td></tr></table></figure>
 
-<h2 id="面向文档"><a href="#面向文档" class="headerlink" title="面向文档"></a>面向文档</h2><p>应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。</p>
-<p>而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建</p>
-<p>Elasticsearch是面向文档的，意味着它可以存储整个对象或文档，然而它不仅仅时存储，还会索引每个文档的内容使之可以被搜索。再Elasticsearch中，你可以对文档(并非表结构)进行索引、搜索、排序、过滤。这种理解数据的方式与MySQL完全不同，也是Elasticsearch能够进行复杂的全文搜索的原因之一。</p>
-<p><strong>Elasticsearch使用JSON作为文档序列化格式。</strong></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><a href="https://www.elastic.co/cn/" target="_blank" rel="noopener">elasticsearch</a>安装后解压到相应目录即可</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>进入bin目录后：<code>elasticsearch-service start</code></p>
+<p>关闭服务：<code>elasticsearch-service stop</code></p>
+<p>如果是第一次启动则需要：<code>elasticsearch-service install</code></p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>安装插件Marvel，Marvel是Elasticsearch的管理和监控工具，包含一个sense的交互控制台，使用户方便地通过浏览器直接于Elasticsearch进行交互。</p>
+<p><code>./bin/elasticsearch-plugin install elasticsearch/marvel/latest</code></p>
+<p>禁用监控，通过命令关闭Marvel：<code>echo    &#39;marvel.agent.enabled:    false&#39;    &gt;&gt;    ./config/elasticsearch.yml</code></p>
+<p><a href="http://localhost:9200/_plugin/marvel" target="_blank" rel="noopener">查看Marvel</a></p>
 <h1 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>在Elasticsearch中索引具有不同的涵义</p>
 <ul>
 <li>索引(名词)：一个索引就像时传统关系数据库中的数据库，它时相关文档存储的地方</li>
@@ -508,20 +508,6 @@
 <p>在返回语句中会增加一个新的部分<code>highlight</code>，内部会包含来自about字段中的文本，并且用&lt;em&gt;和&lt;/em&gt;来标识匹配到的单词</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"took"</span> : <span class="number">111</span>,</span><br><span class="line">  <span class="attr">"timed_out"</span> : <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"_shards"</span> : &#123;</span><br><span class="line">    <span class="attr">"total"</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"successful"</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"skipped"</span> : <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"failed"</span> : <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"hits"</span> : &#123;</span><br><span class="line">    <span class="attr">"total"</span> : &#123;</span><br><span class="line">      <span class="attr">"value"</span> : <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"relation"</span> : <span class="string">"eq"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"max_score"</span> : <span class="number">0.2876821</span>,</span><br><span class="line">    <span class="attr">"hits"</span> : [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"_index"</span> : <span class="string">"megacorp"</span>,</span><br><span class="line">        <span class="attr">"_type"</span> : <span class="string">"employee"</span>,</span><br><span class="line">        <span class="attr">"_id"</span> : <span class="string">"1"</span>,</span><br><span class="line">        <span class="attr">"_score"</span> : <span class="number">0.2876821</span>,</span><br><span class="line">        <span class="attr">"_source"</span> : &#123;</span><br><span class="line">          <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">          <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">          <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">          <span class="attr">"about"</span> : <span class="string">"rock"</span>,</span><br><span class="line">          <span class="attr">"interests"</span> : [</span><br><span class="line">            <span class="string">"sports"</span>,</span><br><span class="line">            <span class="string">"music"</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"highlight"</span> : &#123;</span><br><span class="line">          <span class="attr">"about"</span> : [</span><br><span class="line">            <span class="string">"&lt;em&gt;rock&lt;/em&gt;"</span></span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p>ES的聚合(aggregations)允许你在数据上生成复杂的分析统计，类似于<code>Group by</code>但是功能更强大。</p>
-<p>例如找到所有职员中最大的共同点(兴趣爱好)是什么：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;&#123;</span><br><span class="line">	&quot;aggs&quot;:&#123;</span><br><span class="line">		&quot;all_interests&quot;:&#123;</span><br><span class="line">			&quot;terms&quot;:&#123;&quot;field&quot;: &quot;interests&quot;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h2><p>Elasticsearch可以扩展到上百、千的服务器来处理PB级的数据，Elasticsearch的设计隐藏了分布式本身的复杂性。</p>
-<p>Elasticsearch在分布式概念上做了很大程度上的透明化，在教程中你不需要知道任何关于分布式系统、分片、集群发现或者其他大量的分布式概念。所有的教程你既可以运行在你的笔记本上，也可以运行在拥有100个节点的集群上，其工作方式是一样的。</p>
-<p>Elasticsearch致力于隐藏分布式系统的复杂性。以下这些操作都是在底层自动完成的：</p>
-<ul>
-<li>将你的文档分区到不同的容器或者分片(shards)中，它们可以存在于一个或多个节点中。 </li>
-<li>将分片均匀的分配到各个节点，对索引和搜索做负载均衡。 </li>
-<li>冗余每一个分片，防止硬件故障造成的数据丢失。 </li>
-<li>将集群中任意一个节点上的请求路由到相应数据所在的节点。 </li>
-<li>无论是增加节点，还是移除节点，分片都可以做到无缝的扩展和迁移。</li>
-</ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -783,7 +769,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ElasticSearch概念"><span class="nav-number">1.</span> <span class="nav-text">ElasticSearch概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">1.3.1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">1.3.2.</span> <span class="nav-text">插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群和节点"><span class="nav-number">1.4.</span> <span class="nav-text">集群和节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与Elasticsearch交互"><span class="nav-number">1.5.</span> <span class="nav-text">与Elasticsearch交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaAPI"><span class="nav-number">1.5.1.</span> <span class="nav-text">JavaAPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.5.2.</span> <span class="nav-text">HTTP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向文档"><span class="nav-number">1.6.</span> <span class="nav-text">面向文档</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Start"><span class="nav-number">2.</span> <span class="nav-text">Start</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">2.1.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">2.1.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">2.2.</span> <span class="nav-text">搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单搜索"><span class="nav-number">2.2.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#query-string"><span class="nav-number">2.2.2.</span> <span class="nav-text">query string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSL"><span class="nav-number">2.2.3.</span> <span class="nav-text">DSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更复杂的搜索"><span class="nav-number">2.2.4.</span> <span class="nav-text">更复杂的搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全文搜索"><span class="nav-number">2.2.5.</span> <span class="nav-text">全文搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#短语搜索"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">短语搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高亮搜索"><span class="nav-number">2.2.6.</span> <span class="nav-text">高亮搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合"><span class="nav-number">2.3.</span> <span class="nav-text">聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式"><span class="nav-number">2.4.</span> <span class="nav-text">分布式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ElasticSearch概念"><span class="nav-number">1.</span> <span class="nav-text">ElasticSearch概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.2.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向文档"><span class="nav-number">1.2.1.</span> <span class="nav-text">面向文档</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群和节点"><span class="nav-number">1.3.</span> <span class="nav-text">集群和节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与Elasticsearch交互"><span class="nav-number">1.4.</span> <span class="nav-text">与Elasticsearch交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaAPI"><span class="nav-number">1.4.1.</span> <span class="nav-text">JavaAPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP"><span class="nav-number">1.4.2.</span> <span class="nav-text">HTTP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">2.0.1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">2.0.2.</span> <span class="nav-text">插件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Start"><span class="nav-number">3.</span> <span class="nav-text">Start</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">3.1.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">3.1.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">3.2.</span> <span class="nav-text">搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单搜索"><span class="nav-number">3.2.1.</span> <span class="nav-text">简单搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#query-string"><span class="nav-number">3.2.2.</span> <span class="nav-text">query string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DSL"><span class="nav-number">3.2.3.</span> <span class="nav-text">DSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更复杂的搜索"><span class="nav-number">3.2.4.</span> <span class="nav-text">更复杂的搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全文搜索"><span class="nav-number">3.2.5.</span> <span class="nav-text">全文搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#短语搜索"><span class="nav-number">3.2.5.1.</span> <span class="nav-text">短语搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高亮搜索"><span class="nav-number">3.2.6.</span> <span class="nav-text">高亮搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -812,14 +798,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">37:46</span>
+    <span title="站点阅读时长">38:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

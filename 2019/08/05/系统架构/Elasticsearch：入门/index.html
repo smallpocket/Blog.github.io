@@ -57,18 +57,18 @@
   };
 </script>
 
-  <meta name="description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。 但是它们能够进行全">
+  <meta name="description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。  但是它们能够进行">
 <meta name="keywords" content="Elasticsearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticsearch：入门">
 <meta property="og:url" content="http://yoursite.com/2019/08/05/系统架构/Elasticsearch：入门/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。 但是它们能够进行全">
+<meta property="og:description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。  但是它们能够进行">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-29T07:59:36.164Z">
+<meta property="og:updated_time" content="2019-09-05T11:03:09.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch：入门">
-<meta name="twitter:description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。 但是它们能够进行全">
+<meta name="twitter:description" content="ElasticSearch概念ElasticSearch是一个实时分布式搜索和分析引擎，能够让你以前所未有的速度处理大数据成为可能。 它用于全文搜索、结构化搜索、分析以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。 为什么要用大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。  但是它们能够进行">
   <link rel="canonical" href="http://yoursite.com/2019/08/05/系统架构/Elasticsearch：入门/">
 
 
@@ -324,7 +324,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-29 15:59:36" itemprop="dateModified" datetime="2019-08-29T15:59:36+08:00">2019-08-29</time>
+                <time title="修改时间：2019-09-05 19:03:09" itemprop="dateModified" datetime="2019-09-05T19:03:09+08:00">2019-09-05</time>
               </span>
             
           
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">9.6k</span>
+              <span title="本文字数">9.5k</span>
             </span>
           
             <span class="post-meta-item">
@@ -378,19 +378,21 @@
         <h1 id="ElasticSearch概念"><a href="#ElasticSearch概念" class="headerlink" title="ElasticSearch概念"></a>ElasticSearch概念</h1><p>ElasticSearch是一个<strong>实时分布式搜索和分析引擎</strong>，能够让你以前所未有的速度处理大数据成为可能。</p>
 <p>它用于<strong>全文搜索、结构化搜索、分析</strong>以及将三者混用。并且可以在单机以及集群上运行。ES将三个功能整合成为一个一体化的、实时的应用，其对新用户的门槛很低。</p>
 <h2 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h2><p>大部分数据库在提取可用知识方面显得异常无能。尽管它们能够通过时间戳或者精确匹配做过滤。</p>
-<p>但是它们能够进行全文搜索，处理同义词和根据相关性给文档打分吗？它们能根据同一份数据生成分析和聚合的结果吗？最重要的是，它们在没有大量工作进程（线程）的情况下能做到对数据的实时处理吗？</p>
-<p>ElasticSearch鼓励你浏览并利用你的数据，而不是烂在数据库里，因为在数据库里太难查询了。</p>
+<ul>
+<li>但是它们能够进行全文搜索，处理同义词和根据相关性给文档打分吗？</li>
+<li>它们能根据同一份数据生成分析和聚合的结果吗？</li>
+<li>它们在没有大量工作进程（线程）的情况下能做到对数据的实时处理吗？</li>
+</ul>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>ElasticSearch是一个基于Apache Lucene的开源搜索引擎，Apache Lucene可以被认为是迄今为止最先进、性能最好的、功能最全的搜索引擎库。</p>
 <p>但是Lucene只是一个库，如果想要使用，则必须使用Java作为开发语言进行集成，而且Lucene非常复杂，需要深入了解检索的相关知识理解它是如何工作的。</p>
 <p>ElasticSearch使用Java开发，并使用Lucene作为核心来实现所有索引和搜索的功能，但是它的目的是通过简单的RESTful API来隐藏Lucene的复杂性，从而让全文搜索变得简单。</p>
 <p>ElasticSearch还可以这样描述：</p>
 <ul>
-<li>分布式的实时文件存储，每个字段都被索引并可被搜索</li>
-<li>分布式的实时分析搜索引擎</li>
+<li>分布式的实时文件存储，每个字段都被索引并可被搜索。</li>
+<li>分布式的实时分析搜索引擎。</li>
 <li>可以扩展到上百台服务器，处理PB级结构化或非结构化数据。</li>
 </ul>
-<h3 id="面向文档"><a href="#面向文档" class="headerlink" title="面向文档"></a>面向文档</h3><p>应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。</p>
-<p>而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建</p>
+<h3 id="面向文档"><a href="#面向文档" class="headerlink" title="面向文档"></a>面向文档</h3><p>应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建</p>
 <p>Elasticsearch是面向文档的，意味着它可以存储整个对象或文档，然而它不仅仅时存储，还会索引每个文档的内容使之可以被搜索。再Elasticsearch中，你可以对文档(并非表结构)进行索引、搜索、排序、过滤。这种理解数据的方式与MySQL完全不同，也是Elasticsearch能够进行复杂的全文搜索的原因之一。</p>
 <p><strong>Elasticsearch使用JSON作为文档序列化格式。</strong></p>
 <h2 id="集群和节点"><a href="#集群和节点" class="headerlink" title="集群和节点"></a>集群和节点</h2><p>节点node是一个运行着地Elasticsearch实例，集群cluster是一组具有相同<code>cluster.name</code>的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能。</p>
@@ -805,7 +807,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">38:44</span>
+    <span title="站点阅读时长">38:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

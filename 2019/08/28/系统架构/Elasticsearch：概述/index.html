@@ -67,9 +67,16 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1567147497368.png">
 <meta property="og:image" content="http://yoursite.com/assets/1567147531015.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567564294197.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567566224758.png">
 <meta property="og:image" content="http://yoursite.com/assets/1567067619776.png">
 <meta property="og:image" content="http://yoursite.com/assets/1567067688072.png">
-<meta property="og:updated_time" content="2019-08-30T07:13:42.985Z">
+<meta property="og:image" content="http://yoursite.com/assets/1567604324720.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567669526235.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567606295972.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567607118204.png">
+<meta property="og:image" content="http://yoursite.com/assets/1567676617810.png">
+<meta property="og:updated_time" content="2019-09-05T11:22:35.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch：概述">
 <meta name="twitter:description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建 Elasticsearch是面向文档的">
@@ -329,7 +336,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-30 15:13:42" itemprop="dateModified" datetime="2019-08-30T15:13:42+08:00">2019-08-30</time>
+                <time title="修改时间：2019-09-05 19:22:35" itemprop="dateModified" datetime="2019-09-05T19:22:35+08:00">2019-09-05</time>
               </span>
             
           
@@ -357,7 +364,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">10k</span>
+              <span title="本文字数">18k</span>
             </span>
           
             <span class="post-meta-item">
@@ -367,7 +374,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">19 分钟</span>
+              <span title="阅读时长">32 分钟</span>
             </span>
           
 
@@ -419,7 +426,76 @@
 <p>默认情况下，文档中的所有字段都会被索引(拥有一个倒排索引)，只有这样他们才是可被搜索的。</p>
 <h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>索引index实际上是一个用来指向一个或多个shard的逻辑命名空间。</p>
 <p>一个shard是一个最小级别工作单元，它只是保存了索引中所有数据的一部分。</p>
-<h2 id="数据的基本操作"><a href="#数据的基本操作" class="headerlink" title="数据的基本操作"></a>数据的基本操作</h2><h3 id="CURD"><a href="#CURD" class="headerlink" title="CURD"></a>CURD</h3><h3 id="BULK"><a href="#BULK" class="headerlink" title="BULK"></a>BULK</h3><h3 id="读写文档的并发操作"><a href="#读写文档的并发操作" class="headerlink" title="读写文档的并发操作"></a>读写文档的并发操作</h3><h2 id="Search-API"><a href="#Search-API" class="headerlink" title="Search API"></a>Search API</h2><h2 id="结构化查询"><a href="#结构化查询" class="headerlink" title="结构化查询"></a>结构化查询</h2><h2 id="join"><a href="#join" class="headerlink" title="join"></a>join</h2><h2 id="复合查询"><a href="#复合查询" class="headerlink" title="复合查询"></a>复合查询</h2><h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><h2 id="地理信息查询"><a href="#地理信息查询" class="headerlink" title="地理信息查询"></a>地理信息查询</h2><h2 id="控制相关度"><a href="#控制相关度" class="headerlink" title="控制相关度"></a>控制相关度</h2><h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><p>mapping机制用于进行字段类型确认，将每个字段匹配为一种确定的数据类型(String、number、boolean、date等)。</p>
+<h3 id="索引设置"><a href="#索引设置" class="headerlink" title="索引设置"></a>索引设置</h3><ul>
+<li>number_of_shards。定义一个索引的主分片个数，默认值是<code>5</code>。这个配置在索引创建后不能修改。</li>
+<li>number_of_replicas。每个主分片的复制分片个数，默认是<code>1</code>。这个配置可以随时在活跃的索引上修改。</li>
+<li>analysis。配置已经存在的分析器或创建自定义分析器来定制化你的索引。</li>
+</ul>
+<h3 id="type和mapping"><a href="#type和mapping" class="headerlink" title="type和mapping"></a>type和mapping</h3><p>类型在Elasticsearch中表示一组相似的文档。类型由一个名称（比如user或blogpost）和一个类似数据库表结构的映射组成，描述了文档中可能包含的每个字段的属性，数据类型（比如string，integer或date），和是否这些字段需要被Lucene索引或储存。</p>
+<p><strong><em>Lucene如何处理文档</em></strong></p>
+<p>Lucene中，一个文档由一组简单的键值对组成，一个字段至少需要有一个值，但是任何字段都可以有多个值。类似的，一个单独的字符串可能在分析过程中被转换为多个值。</p>
+<p>Lucene不关心这些值是字符串、数字或日期，所有的值都被当成不透明字节。当我们在Lucene中索引一个文档时，每个字段的值都被加到相关字段的倒排索引中。</p>
+<p><strong><em>类型是如何实现的</em></strong></p>
+<p>每个类型有各自的Mapping和文档，保存在index当中。</p>
+<p>Lucene没有文档类型的概念，每个文档的类型名被储存在一个叫_type的元数据字段上。当我们搜索一种特殊类型的文档时，Elasticsearch简单的通过_type字段来过滤出这些文档。</p>
+<p>Lucene同样没有映射的概念。映射是Elasticsearch将复杂JSON文档映射成Lucene需要的扁平化数据的方式。</p>
+<ul>
+<li>即当一个字段声明为了string，则加入索引前数据会被analyzer进行分析。</li>
+</ul>
+<h3 id="根对象"><a href="#根对象" class="headerlink" title="根对象"></a>根对象</h3><p>映射的最高层即根对象，其可能包含：</p>
+<ul>
+<li>一个properties节点。列出文档可能包含的每个字段的映射。</li>
+<li>多个元数据字段。每一个都以下划线开头，例如_type等。</li>
+<li>设置项。入analyzer等。</li>
+<li>其他设置，可以同时时应用在根对象和其他object类型的字段上，例如enabled，dynamic和include_in_all。</li>
+</ul>
+<h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><p><strong><em>_source</em></strong></p>
+<p>ES用JSON字符串表示文档主题保存在_source字段中，_source字段在写入磁盘前会被压缩。</p>
+<p>这几乎始终是需要的功能，因为：</p>
+<ul>
+<li>搜索结果中能够得到完整的文档，不需要额外去别的数据源查找文档。</li>
+<li>如果缺失_source，则部分更新请求不起作用。</li>
+<li>当你的映射有变化，而且你需要重新索引数据时，你可以直接在Elasticsearch中操作而不需要重新从别的数据源中取回数据。</li>
+<li>你可以从_source中通过get或search请求取回部分字段，而不是整个文档。</li>
+<li>样更容易排查错误，因为你可以准确的看到每个文档中包含的内容，而不是只能从一堆ID中猜测他们的内容。</li>
+</ul>
+<p><strong><em>_all</em></strong></p>
+<p><strong><em>_id</em></strong></p>
+<p>文档的唯一标识由四个元数据字段组成：</p>
+<ul>
+<li>_id。文档的字符串ID。</li>
+<li>_type。文档的类型名。</li>
+<li>_index。文档所在的索引。</li>
+<li>_uid。_type与_id连接成的type#id。</li>
+</ul>
+<h3 id="动态映射"><a href="#动态映射" class="headerlink" title="动态映射"></a>动态映射</h3><p>当Elasticsearch处理一个位置的字段时，它通过【动态映射】来确定字段的数据类型且自动将该字段加到类型映射中。</p>
+<p>有时这是理想的行为，有时却不是。或许你不知道今后会有哪些字段加到文档中，但是你希望它们能自动被索引。或许你仅仅想忽略它们。特别是当你使用Elasticsearch作为主数据源时，你希望未知字段能抛出一个异常来警示你。</p>
+<p>通过dynamic可以控制这些行为，它接受下面几个选项：</p>
+<ul>
+<li>true。自动添加字段(默认)。</li>
+<li>false。忽略字段。</li>
+<li>strict。遇到未知字段抛出异常。</li>
+</ul>
+<h3 id="重建索引"><a href="#重建索引" class="headerlink" title="重建索引"></a>重建索引</h3><p>虽然你可以给索引添加新的类型，或给类型添加新的字段，但是你不能添加新的分析器或修改已有字段。否则已被索引的数据会变得不正确而你的搜索也不会正常工作。</p>
+<p>修改在已存在的数据最简单的方法是重新索引：创建一个新配置好的索引，然后将所有的文 档从旧的索引复制到新的上。</p>
+<h2 id="数据的基本操作"><a href="#数据的基本操作" class="headerlink" title="数据的基本操作"></a>数据的基本操作</h2><h3 id="Search-响应"><a href="#Search-响应" class="headerlink" title="Search 响应"></a>Search 响应</h3><ul>
+<li>hits。表示匹配到的文档总数。<ul>
+<li>_score。相关性得分。</li>
+</ul>
+</li>
+<li>took。搜索花费的毫秒数。</li>
+<li>shards。参与查询的分片数有多少成功与失败。<ul>
+<li>分片可能失败，如果一些故障导致主分片与复制分片都故障，那么这个分片的数据无法响应搜索请求。</li>
+<li>此时仍然会返回剩余分片的结果。</li>
+</ul>
+</li>
+<li>timeout。查询超时与否。<ul>
+<li>不会停止执行查询，它仅仅告诉你目前顺利返回结果的节点然后关闭连接。在后台，其他分片可能依旧执行查询，尽管结果已经被发送。</li>
+<li>使用超时是因为对于你的业务需求来说非常重要，而不是因为你想中断执行长时间运行的查询。</li>
+</ul>
+</li>
+</ul>
+<h3 id="CURD"><a href="#CURD" class="headerlink" title="CURD"></a>CURD</h3><h3 id="BULK"><a href="#BULK" class="headerlink" title="BULK"></a>BULK</h3><h3 id="读写文档的并发操作"><a href="#读写文档的并发操作" class="headerlink" title="读写文档的并发操作"></a>读写文档的并发操作</h3><h2 id="Search-API"><a href="#Search-API" class="headerlink" title="Search API"></a>Search API</h2><h2 id="结构化查询"><a href="#结构化查询" class="headerlink" title="结构化查询"></a>结构化查询</h2><h2 id="join"><a href="#join" class="headerlink" title="join"></a>join</h2><h2 id="复合查询"><a href="#复合查询" class="headerlink" title="复合查询"></a>复合查询</h2><h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><h2 id="地理信息查询"><a href="#地理信息查询" class="headerlink" title="地理信息查询"></a>地理信息查询</h2><h2 id="控制相关度"><a href="#控制相关度" class="headerlink" title="控制相关度"></a>控制相关度</h2><h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><p>mapping机制用于进行字段类型确认，将每个字段匹配为一种确定的数据类型(String、number、boolean、date等)。</p>
 <p>ES的Mapping也称为模式定义，即对数据建模。</p>
 <h2 id="Mapping-1"><a href="#Mapping-1" class="headerlink" title="Mapping"></a>Mapping</h2><h3 id="数据类型差异"><a href="#数据类型差异" class="headerlink" title="数据类型差异"></a>数据类型差异</h3><p>当在索引中处理数据时，会有一些东西似乎被破坏了。</p>
 <p>假设索引中存在12个tweets，只有应该包含日期2014-09-15，进行查询：</p>
@@ -578,7 +654,92 @@
 <li>标准化这些词为标准形式，提高可搜索性。</li>
 </ul>
 <p>这个工作是分析器(analyzer)完成的。一个分析器(analyzer)只是一个包装用于将三个功能放到一个包里。</p>
-<h2 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h2><h1 id="Search运行机制"><a href="#Search运行机制" class="headerlink" title="Search运行机制"></a>Search运行机制</h1><h1 id="分布式特性"><a href="#分布式特性" class="headerlink" title="分布式特性"></a>分布式特性</h1><h2 id="集群和节点"><a href="#集群和节点" class="headerlink" title="集群和节点"></a>集群和节点</h2><p>节点node是一个运行着地Elasticsearch实例，集群cluster是一组具有相同<code>cluster.name</code>的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能。</p>
+<h2 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h2><h1 id="Search运行机制"><a href="#Search运行机制" class="headerlink" title="Search运行机制"></a>Search运行机制</h1><p>对于ES，你可以根据ID进行检索，但是其真正的强大在于可以从混乱的数据中找出有意义的信息。</p>
+<p>ES不仅会存储文档，也会索引(indexes)文档内容以使得它可以被搜索。每个文档里的字段都会被索引并被查询。在简单查询时，ES可以使用索引的索引。</p>
+<p>搜索可以：</p>
+<ul>
+<li>类似于age这样的字段上使用结构化查询，join_date这样的字段上进行排序，与SQL的结构化查询一样。</li>
+<li>全文检索，使用所有字段来匹配关键字，然后按照关联性排序返回结果。</li>
+</ul>
+<p>在ES当中：</p>
+<ul>
+<li>Mapping。数据在每个字段中的解释说明。</li>
+<li>Analysis。全文是如何处理的可被搜索的。</li>
+<li>Query DSL。ES使用的灵活的、强大的查询语言。</li>
+</ul>
+<h2 id="分布式搜索方式"><a href="#分布式搜索方式" class="headerlink" title="分布式搜索方式"></a>分布式搜索方式</h2><p>搜索是如何在分布式环境中执行的。</p>
+<p>一个CRUD操作只处理一个单独的文档。文档的唯一性由_index，_type和routing-value（通常默认是该文档的_id）的组合来确定。这意味着我们可以准确知道集群中的哪个分片持有这个文档。</p>
+<p>由于不知道哪个文档会匹配查询（文档可能存放在集群中的任意分片上），所以搜索需要一个更复杂的模型。一个搜索不得不通过查询每一个我们感兴趣的索引的分片副本，来看是否含有任何匹配的文档。</p>
+<p>但是，找到所有匹配的文档只完成了这件事的一半。在搜索（search）API返回一页结果前，来自多个分片的结果必须被组合放到一个有序列表中。因此，搜索的执行过程分两个阶段：</p>
+<ul>
+<li>查询。</li>
+<li>然后取回（query then fetch）。</li>
+</ul>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p><img src="/assets/1567564294197.png" alt="1567564294197"></p>
+<ul>
+<li>客户端发送应该search到Node3。<ul>
+<li>Node3首先接受到请求，成为协调节点。即向所有相关的分片广播搜索请求并且把它们的响应整合成一个全局的有序结果集，将结果集返回给客户端。<ul>
+<li>搜索请求可以被每个分片的原本或任意副本处理，因此当更多的副本时可以提高搜索吞吐量，对于后续请求，协调节点会轮询所有的分片副本以分摊负载。</li>
+</ul>
+</li>
+<li>Node3创建了应该长度为from+size的空优先级队列。</li>
+</ul>
+</li>
+<li>Node3转发这个搜索请求到索引中每个分片的原本或副本。<ul>
+<li>每个分片在本地执行这个查询并且将结果存到一个大小为from+size的有序本地优先队列中。</li>
+</ul>
+</li>
+<li>每个分片分会Doc的<strong>ID</strong>和它优先队列中所有Doc的<strong>排序值</strong>给协调节点Node3。<ul>
+<li>Node3将这些值合并到自己的优先队列中产生全局排序结果。</li>
+<li>类似于归并。</li>
+</ul>
+</li>
+</ul>
+<h3 id="取回"><a href="#取回" class="headerlink" title="取回"></a>取回</h3><p>查询阶段辨别出那些满足搜索请求的Doc，但我们仍然要取回那些Doc本身，即取回阶段。</p>
+<p><img src="/assets/1567566224758.png" alt="1567566224758"></p>
+<ul>
+<li>协调节点辨别出哪个Doc需要取回，并向相关分片发出Get请求。<ul>
+<li>协调节点为每个持有Doc的分片简历多点Get然后发送请求到处理查询阶段的分页副本。</li>
+</ul>
+</li>
+<li>每个分片加载Doc并且根据需要丰富它们，然后将Doc返回协调节点。<ul>
+<li>加载Doc主体_source，如果需要，还会根据元数据丰富结果和高亮搜索片断。</li>
+</ul>
+</li>
+<li>一旦所有的Doc被取回，则将结果返回给客户端。</li>
+</ul>
+<h3 id="深分页"><a href="#深分页" class="headerlink" title="深分页"></a>深分页</h3><p>查询然后取回过程虽然支持通过使用from和size参数进行分页，但是它使得所有的分片都要保留一个优先队列，如果是很大的size，或足够大的from，则排序将非常繁重，占用很高的性能。</p>
+<p>如果你确实需要从集群里获取大量documents，你可以通过设置搜索类型scan禁用排序，来高效地做这件事。</p>
+<h2 id="搜索选项"><a href="#搜索选项" class="headerlink" title="搜索选项"></a>搜索选项</h2><p>一些Query String可选参数能够影响搜索过程。</p>
+<h3 id="preference"><a href="#preference" class="headerlink" title="preference"></a>preference</h3><p>preference参数允许你控制使用哪个分片或哪个节点来处理搜索请求。</p>
+<p>使用随机字符串可以避免<strong>结果震荡问题</strong>。</p>
+<ul>
+<li>当你按照timestamp字段进行结果排序，并且两个Doc有相应的timestamp，由于搜索请求是在所有有效的分片副本间轮询的，这两个Doc可能在原始分片中是一种顺序，在副本分片中是另一种顺序。</li>
+<li>因此用户每次刷新页面，第一次Doc1，Doc2，第二次Doc2，Doc1。<ul>
+<li>可以使用用户的SessionID设置preference参数。</li>
+</ul>
+</li>
+</ul>
+<h3 id="timeout"><a href="#timeout" class="headerlink" title="timeout"></a>timeout</h3><p>通常，协调节点会等待接收所有分片的回答。如果有一个节点遇到问题，它会拖慢整个搜索请求。</p>
+<p>timeout告诉协调节点最多等待多久，就可以放弃等待而将已有结果返回。返回部分结果总比什么都没有好。</p>
+<p>_shards参数将指出搜索是否超时，所有分片是否成功答复。</p>
+<h3 id="routing"><a href="#routing" class="headerlink" title="routing"></a>routing</h3><p>反映路由选择。</p>
+<p>可以在建立索引时提供一个自定义的routing参数来保证所有相关的document（如属于单个用户的document）被存放在一个单独的分片中。在搜索时，你可以指定一个或多个routing值来限制只搜索那些分片而不是搜索index里的全部分片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /search?routing=user_1</span><br></pre></td></tr></table></figure>
+
+<p>在设计非常大的搜索系统时非常有效。</p>
+<h3 id="search-type"><a href="#search-type" class="headerlink" title="search_type"></a>search_type</h3><p>可以指定搜索类型，虽然query_then_fetch是默认的搜索类型。</p>
+<ul>
+<li>count。只有query阶段，没有取回阶段。</li>
+<li>query_and_fetch。将查询与取回合并为一个步骤，是一个内部优化选项。</li>
+<li>dfs_query_then_fetch和dfs_query_and_fetch。dfs是一个预查询阶段，会从全部相关的分片里取回项目频数来计算全局的项目频数。</li>
+<li>scan。与scroll滚屏一起使用，可以高效地取回巨大数量的结果，它通过禁用排序来实现的。</li>
+</ul>
+<h2 id="扫描与滚屏"><a href="#扫描与滚屏" class="headerlink" title="扫描与滚屏"></a>扫描与滚屏</h2><p>可以高效地取回巨大数量的结果，它通过禁用排序来实现的，不需要付出深分页的代价。</p>
+<h3 id="scroll"><a href="#scroll" class="headerlink" title="scroll"></a>scroll</h3><p>一个滚屏搜索允许我们做一个初始阶段搜索并且持续批量从Elasticsearch里拉取结果直到没有结果剩下。这有点像传统数据库里的cursors（游标）。</p>
+<p>滚屏搜索会及时制作快照。这个快照不会包含任何在初始阶段搜索请求后对index做的修改。它通过将旧的数据文件保存在手边，所以可以保护index的样子看起来像搜索开始时的样子。</p>
+<h3 id="scan"><a href="#scan" class="headerlink" title="scan"></a>scan</h3><p>禁用排序，并传递一个scroll告诉ES应该scroll多久。</p>
+<h1 id="分布式特性"><a href="#分布式特性" class="headerlink" title="分布式特性"></a>分布式特性</h1><h2 id="集群和节点"><a href="#集群和节点" class="headerlink" title="集群和节点"></a>集群和节点</h2><p>节点node是一个运行着地Elasticsearch实例，集群cluster是一组具有相同<code>cluster.name</code>的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能。</p>
 <p>修改<code>cluster.name</code>可以通过修改<code>config/</code>目录下的<code>elasticsearch.yml</code>文件，然后重启Elasticsearch来实现。</p>
 <h3 id="天然分布式"><a href="#天然分布式" class="headerlink" title="天然分布式"></a>天然分布式</h3><p>Elasticsearch可以扩展到上百、千的服务器来处理PB级的数据，Elasticsearch的设计隐藏了分布式本身的复杂性。</p>
 <p>Elasticsearch在分布式概念上做了很大程度上的透明化，在教程中你不需要知道任何关于分布式系统、分片、集群发现或者其他大量的分布式概念。所有的教程你既可以运行在你的笔记本上，也可以运行在拥有100个节点的集群上，其工作方式是一样的。</p>
@@ -707,6 +868,107 @@
 </ul>
 <p>即使可行，也会使得大量RAM承载本质上相同的数据，并需要JVM进行回收。因此ES使用网络缓冲区中一行行读取数据，使用换行符识别并进行解析，然后决定哪些分片来处理这个请求。</p>
 <p>因此ES使用最小内存在进行。</p>
+<h2 id="深入分片"><a href="#深入分片" class="headerlink" title="深入分片"></a>深入分片</h2><p>分片是底层的工作单元。但分片到底是什么，它怎样工作？</p>
+<ul>
+<li>为什么搜索是近实时的？</li>
+<li>为什么文档的CRUD操作是实时的？</li>
+<li>ES怎样保证更新持久化，即使断电也不会丢失？</li>
+<li>为什么删除文档不会立即释放空间？</li>
+<li>什么是refresh，flush，optimize API，以及什么时候你该使用它们？</li>
+</ul>
+<h3 id="使文本可以被搜索"><a href="#使文本可以被搜索" class="headerlink" title="使文本可以被搜索"></a>使文本可以被搜索</h3><p>为了使得文本可以被全文搜索，一种可行的方案是使用倒排索引。倒排索引包含了出现在所有文档中唯一的词值或词的有序列表，以及每个词所属的文档列表。</p>
+<p>倒排索引存储了比包含一个特定term的文档列表多的多的信息，它可能存储包含每个term的文档数量、一个term出现在指定文档中的频次，每个文档中term的顺序，每个文档的长度、平均长度。</p>
+<p>这些统计信息使得ES知道哪些term更重要，哪些文档更重要，即<strong>相关性</strong>。即为了实现倒排索引，必须要找到集合中所有的文档。</p>
+<p>在全文检索的早些时候，会为整个文档集合建立一个大索引，并且写入磁盘。只有新的索引准备好了，它就会替代旧的索引，最近的修改才可以被检索。</p>
+<p><strong><em>不可变性</em></strong></p>
+<p>写入磁盘的倒排索引是不可变的，其拥有如下好处：</p>
+<ul>
+<li>不需要锁。如果从来不需要更新一个索引，就不必担心多个程序同时尝试修改。 </li>
+<li>一旦索引被读入文件系统的缓存(译者:在内存)，它就一直在那儿，因为不会改变。只要文件系统缓存有足够的空间，大部分的读会直接访问内存而不是磁盘。这有助于性能提升。 </li>
+<li>在索引的声明周期内，所有的其他缓存都可用。它们不需要在每次数据变化了都重建，因为数据不会变。 </li>
+<li>写入单个大的倒排索引，可以压缩数据，较少磁盘IO和需要缓存索引的内存大小。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>不可变，因此<strong>如果想建立一个新的文档，则必须重建整个索引</strong>。</li>
+</ul>
+<h3 id="动态索引"><a href="#动态索引" class="headerlink" title="动态索引"></a>动态索引</h3><p>是如何在<strong>保持不可变好处的同时更新倒排索引</strong>？即使用多个索引。</p>
+<p>不是重写整个倒排索引，而是<strong>增加额外的索引反映最近的变化</strong>，每个倒排索引都可以按照顺序查询，从最老的开始，最后把结果聚合。</p>
+<p>ES底层依赖的Lucene，引入了per-segment search的概念。一个<strong>段</strong>是有完整功能的倒排索引，但是现在<strong>Lucene中的索引指的是段的集合，再加上提交点</strong>(commit point，包含所有段的文件)。</p>
+<p><img src="/assets/1567604324720.png" alt="1567604324720"></p>
+<p>新的文档，在被写入磁盘的段前，首先写入内存区的索引缓存，即内存缓冲区有即将提交文档的Lucene索引：</p>
+<p><img src="/assets/1567669526235.png" alt="1567669526235"></p>
+<p><strong><em>索引 VS 分片</em></strong></p>
+<p>Lucene索引是ES中的分片，ES中的索引是分片的集合。在ES搜索索引时，它发送查询请求给该索引下的所有分片，然后过滤这些结果，聚合成全局的结果。</p>
+<p>一个per-segment search如下工作：</p>
+<ul>
+<li>新的文档首先写入内存区的索引缓存。</li>
+<li>不时，这些buffer被提交。<ul>
+<li>一个新的段-额外的倒排索引-写入磁盘。</li>
+<li>新的提交点写入磁盘，包含新段的名称。</li>
+<li>磁盘时fsynced(文件同步)，所有写操作等待文件系统缓存同步到磁盘，确保它们可以被物理写入。</li>
+</ul>
+</li>
+<li>新段被打开，它包含的文档可以被检索。</li>
+<li>内存的缓存被清除，等待接收新的文档。</li>
+</ul>
+<p><img src="/assets/1567606295972.png" alt="1567606295972"></p>
+<p>当一个请求被接受，所有段依次查询。所有段上的Term统计信息被聚合，确保每个term和文档的相关性被正确计算。通过这种方式，新的文档以较小的代价加入索引。</p>
+<p><strong><em>删除和更新</em></strong></p>
+<p>段是不可变的，即文档既不能从旧的段中移除，旧的段也不能更新以反映文档最新的版本。相反，每一个提交点包括一个.del文件，包含了段上已经被删除的文档。</p>
+<p>当一个文档被删除，它实际上只是在.del文件中被标记为删除，依然可以匹配查询，但是最终返回之前会被从结果中删除。</p>
+<p>文档的更新操作是类似的：当一个文档被更新，旧版本的文档被标记为删除，新版本的文档在新的段中索引。也许该文档的不同版本都会匹配一个查询，但是更老版本会从结果中删除。</p>
+<h3 id="近实时搜索"><a href="#近实时搜索" class="headerlink" title="近实时搜索"></a>近实时搜索</h3><p>由于per-segment search机制，索引和搜索一个文档之间是有延迟的，新的文档会在几分钟内被搜索，但这个时间太久。</p>
+<p>由于一个新的段到磁盘需要fsync操作，确保段能够被物理地写入磁盘中，即时电源失效也不会丢失数据，但fsync是昂贵的，不能在每个文档被索引时就触发。因此需要一种更轻量级的方式使得新的文档可以被搜索。</p>
+<p>在ES与磁盘中间加入<strong>缓存</strong>，即使用内存。在内存索引缓存中的文档被写入新的段，先将新的段首先写入缓存，之后在一段时间后同步到磁盘。即缓存内容写入了段中，但是uncommited。</p>
+<p>Lucene允许新段写入打开，好让它们包括的文档可搜索，而不用执行一次全量提交。这是比提交更轻量的过程，可以经常操作，而不会影响性能：</p>
+<p><img src="/assets/1567607118204.png" alt="1567607118204"></p>
+<p><strong><em>refresh API</em></strong></p>
+<p><strong>refresh是写入打开一个新段的轻量级过程</strong>。默认情况下，每个分片<strong>每秒</strong>自动刷新一次。因此ES是近实时的搜索，文档的改动一般在1s内可见。</p>
+<h3 id="持久化变更"><a href="#持久化变更" class="headerlink" title="持久化变更"></a>持久化变更</h3><p>没用fsync同步文件系统缓存到磁盘，我们不能确保电源失效，甚至正常退出应用后，数据的安全。为了ES的可靠性，需要确保变更持久化到磁盘。</p>
+<p>全提交同步段到磁盘，写提交点，这会列出所有的已知的段。在重启，或重新打开索引时，ES使用这次提交点决定哪些段属于当前的分片。</p>
+<p>当我们通过每秒的刷新获得近实时的搜索，我们依然需要定时地执行全提交确保能从失败中恢复。但是提交之间的文档怎么办？我们也不想丢失它们。</p>
+<p>ES增加了事务日志（translog），来记录每次操作。</p>
+<ul>
+<li>当一个文档被索引，它被加入到内存缓存，同时加到事务日志。</li>
+<li>refresh使得分片的进入如下状态，每秒分片都进行refresh。<ul>
+<li>内存缓冲段的文档写入段中，但没有fsync。</li>
+<li>段被打开，使得新的文档可以被搜索。</li>
+<li>缓存被清除，但事务日志依然在。</li>
+</ul>
+</li>
+<li>更多的文档加入到缓冲区，重复过程2。</li>
+<li>当日志很大的时候，新的日志会创建，会进行一次全提交：<ul>
+<li>内存缓冲区的所有文档会写入到新段中。</li>
+<li>清除缓存。</li>
+<li>一个提交点写入硬盘。</li>
+<li>文件系统缓存通过fsync操作flush到硬盘。</li>
+<li>事务日志被清除。</li>
+</ul>
+</li>
+</ul>
+<p>事务日志记录了没有flush到硬盘的所有操作。当故障重启后，ES会用最近一次提交点从硬盘恢复所有已知的段，并且从日志里恢复所有的操作。</p>
+<p>事务日志还用来提供实时的CRUD操作。当你尝试用ID进行CRUD时，它在检索相关段内的文档前会首先检查日志最新的改动。这意味着ES可以实时地获取文档的最新版本。 </p>
+<p><strong><em>flush API</em></strong></p>
+<p>在ES中，进行一次提交并删除事务日志的操作叫做flush。分片每30分钟，或事务日志过大会进行一次flush操作。</p>
+<p>当你要重启或关闭一个索引，flush该索引是很有用的。当ES尝试恢复或者重新打开一个索引时，它必须重放所有事务日志中的操作，所以日志越小，恢复速度越快。</p>
+<h3 id="合并段"><a href="#合并段" class="headerlink" title="合并段"></a>合并段</h3><p>通过每秒自动刷新创建新的段，用不了多久段的数量就爆炸了。有太多的段是一个问题。每个段消费文件句柄，内存，cpu资源。更重要的是，每次搜索请求都需要依次检查每个段。段越多，查询越慢。</p>
+<p>ES通过后台合并段解决该问题，小段被合并为大段，再合并为更大的段。以两个提交的段和一个未提交的段合并为了一个更大的段所示：</p>
+<ul>
+<li>索引过程中，refresh会创建新的段，并打开它。</li>
+<li>合并过程会在后台选择一些小的段合并成大的段，这个过程不会中断索引和搜索。</li>
+<li>合并大的段会消耗很多IO和CPU，如果不检查会影响到搜索性能。默认情况下，ES会限制合并过程，这样搜索就可以有足够的资源进行。</li>
+</ul>
+<p><img src="/assets/1567676617810.png" alt="1567676617810"></p>
+<p>合并后：</p>
+<ul>
+<li>新的段flush到了硬盘。</li>
+<li>新的提交点写入新的段，排除旧的段。</li>
+<li>新的段打开供搜索。</li>
+<li>旧的段被删除。</li>
+</ul>
+<p><strong><em>optimize API</em></strong></p>
+<p>optimize API描述为强制合并段API。它强制分片合并段以达到指定max_num_segments参数。这是为了减少段的数量（通常为1）达到提高搜索性能的目的。</p>
 <h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h2 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h2><h1 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h1><p>ES的聚合(aggregations)允许你在数据上生成复杂的分析统计，类似于<code>Group by</code>但是功能更强大。</p>
 <p>例如找到所有职员中最大的共同点(兴趣爱好)是什么：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Content-Type: application/json&quot; -XGET &quot;http://localhost:9200/megacorp/employee/_search?pretty&quot; -d&apos;&#123;</span><br><span class="line">	&quot;aggs&quot;:&#123;</span><br><span class="line">		&quot;all_interests&quot;:&#123;</span><br><span class="line">			&quot;terms&quot;:&#123;&quot;field&quot;: &quot;interests&quot;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -973,7 +1235,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOC"><span class="nav-number">1.</span> <span class="nav-text">DOC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">1.1.</span> <span class="nav-text">文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向文档"><span class="nav-number">1.1.1.</span> <span class="nav-text">面向文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档元数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">文档元数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">1.2.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">1.2.1.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的基本操作"><span class="nav-number">1.3.</span> <span class="nav-text">数据的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CURD"><span class="nav-number">1.3.1.</span> <span class="nav-text">CURD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BULK"><span class="nav-number">1.3.2.</span> <span class="nav-text">BULK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写文档的并发操作"><span class="nav-number">1.3.3.</span> <span class="nav-text">读写文档的并发操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-API"><span class="nav-number">1.4.</span> <span class="nav-text">Search API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构化查询"><span class="nav-number">1.5.</span> <span class="nav-text">结构化查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join"><span class="nav-number">1.6.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合查询"><span class="nav-number">1.7.</span> <span class="nav-text">复合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文检索"><span class="nav-number">1.8.</span> <span class="nav-text">全文检索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地理信息查询"><span class="nav-number">1.9.</span> <span class="nav-text">地理信息查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制相关度"><span class="nav-number">1.10.</span> <span class="nav-text">控制相关度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mapping"><span class="nav-number">2.</span> <span class="nav-text">Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mapping-1"><span class="nav-number">2.1.</span> <span class="nav-text">Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型差异"><span class="nav-number">2.1.1.</span> <span class="nav-text">数据类型差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型与字段信息"><span class="nav-number">2.1.2.</span> <span class="nav-text">数据类型与字段信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义字段映射"><span class="nav-number">2.1.3.</span> <span class="nav-text">自定义字段映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新mapping"><span class="nav-number">2.1.4.</span> <span class="nav-text">更新mapping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合核心字段类型"><span class="nav-number">2.1.5.</span> <span class="nav-text">复合核心字段类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数据建模"><span class="nav-number">2.2.</span> <span class="nav-text">对数据建模</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确切值与全文文本"><span class="nav-number">2.2.1.</span> <span class="nav-text">确切值与全文文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对索引建模"><span class="nav-number">2.2.2.</span> <span class="nav-text">对索引建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对文档建模"><span class="nav-number">2.2.3.</span> <span class="nav-text">对文档建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapping-amp-Setting"><span class="nav-number">2.2.4.</span> <span class="nav-text">Mapping &amp; Setting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#倒排索引"><span class="nav-number">2.3.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复数据"><span class="nav-number">2.4.</span> <span class="nav-text">修复数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本Analysis"><span class="nav-number">2.5.</span> <span class="nav-text">文本Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引管理"><span class="nav-number">2.6.</span> <span class="nav-text">索引管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Search运行机制"><span class="nav-number">3.</span> <span class="nav-text">Search运行机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式特性"><span class="nav-number">4.</span> <span class="nav-text">分布式特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集群和节点"><span class="nav-number">4.1.</span> <span class="nav-text">集群和节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#天然分布式"><span class="nav-number">4.1.1.</span> <span class="nav-text">天然分布式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">4.2.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#空集群"><span class="nav-number">4.2.1.</span> <span class="nav-text">空集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shard"><span class="nav-number">4.2.2.</span> <span class="nav-text">Shard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群健康"><span class="nav-number">4.2.3.</span> <span class="nav-text">集群健康</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#故障转移"><span class="nav-number">4.2.4.</span> <span class="nav-text">故障转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#横向扩展"><span class="nav-number">4.2.5.</span> <span class="nav-text">横向扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应对故障"><span class="nav-number">4.2.6.</span> <span class="nav-text">应对故障</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式增删改查"><span class="nav-number">4.3.</span> <span class="nav-text">分布式增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">4.3.1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分片交互"><span class="nav-number">4.3.2.</span> <span class="nav-text">分片交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建、索引和删除"><span class="nav-number">4.3.3.</span> <span class="nav-text">新建、索引和删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检索"><span class="nav-number">4.3.4.</span> <span class="nav-text">检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量更新"><span class="nav-number">4.3.5.</span> <span class="nav-text">批量更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心"><span class="nav-number">4.4.</span> <span class="nav-text">核心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">4.5.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索引擎"><span class="nav-number">4.6.</span> <span class="nav-text">搜索引擎</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚合"><span class="nav-number">5.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合-1"><span class="nav-number">5.1.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bucket-Aggregation"><span class="nav-number">5.1.1.</span> <span class="nav-text">Bucket Aggregation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合分析"><span class="nav-number">5.2.</span> <span class="nav-text">聚合分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOC"><span class="nav-number">1.</span> <span class="nav-text">DOC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">1.1.</span> <span class="nav-text">文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向文档"><span class="nav-number">1.1.1.</span> <span class="nav-text">面向文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档元数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">文档元数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">1.2.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">1.2.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引设置"><span class="nav-number">1.2.2.</span> <span class="nav-text">索引设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#type和mapping"><span class="nav-number">1.2.3.</span> <span class="nav-text">type和mapping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根对象"><span class="nav-number">1.2.4.</span> <span class="nav-text">根对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据"><span class="nav-number">1.2.5.</span> <span class="nav-text">元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态映射"><span class="nav-number">1.2.6.</span> <span class="nav-text">动态映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重建索引"><span class="nav-number">1.2.7.</span> <span class="nav-text">重建索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的基本操作"><span class="nav-number">1.3.</span> <span class="nav-text">数据的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Search-响应"><span class="nav-number">1.3.1.</span> <span class="nav-text">Search 响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CURD"><span class="nav-number">1.3.2.</span> <span class="nav-text">CURD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BULK"><span class="nav-number">1.3.3.</span> <span class="nav-text">BULK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写文档的并发操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">读写文档的并发操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search-API"><span class="nav-number">1.4.</span> <span class="nav-text">Search API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构化查询"><span class="nav-number">1.5.</span> <span class="nav-text">结构化查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join"><span class="nav-number">1.6.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复合查询"><span class="nav-number">1.7.</span> <span class="nav-text">复合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全文检索"><span class="nav-number">1.8.</span> <span class="nav-text">全文检索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地理信息查询"><span class="nav-number">1.9.</span> <span class="nav-text">地理信息查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制相关度"><span class="nav-number">1.10.</span> <span class="nav-text">控制相关度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mapping"><span class="nav-number">2.</span> <span class="nav-text">Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mapping-1"><span class="nav-number">2.1.</span> <span class="nav-text">Mapping</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型差异"><span class="nav-number">2.1.1.</span> <span class="nav-text">数据类型差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型与字段信息"><span class="nav-number">2.1.2.</span> <span class="nav-text">数据类型与字段信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义字段映射"><span class="nav-number">2.1.3.</span> <span class="nav-text">自定义字段映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新mapping"><span class="nav-number">2.1.4.</span> <span class="nav-text">更新mapping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合核心字段类型"><span class="nav-number">2.1.5.</span> <span class="nav-text">复合核心字段类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数据建模"><span class="nav-number">2.2.</span> <span class="nav-text">对数据建模</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确切值与全文文本"><span class="nav-number">2.2.1.</span> <span class="nav-text">确切值与全文文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对索引建模"><span class="nav-number">2.2.2.</span> <span class="nav-text">对索引建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对文档建模"><span class="nav-number">2.2.3.</span> <span class="nav-text">对文档建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapping-amp-Setting"><span class="nav-number">2.2.4.</span> <span class="nav-text">Mapping &amp; Setting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#倒排索引"><span class="nav-number">2.3.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复数据"><span class="nav-number">2.4.</span> <span class="nav-text">修复数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本Analysis"><span class="nav-number">2.5.</span> <span class="nav-text">文本Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引管理"><span class="nav-number">2.6.</span> <span class="nav-text">索引管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Search运行机制"><span class="nav-number">3.</span> <span class="nav-text">Search运行机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式搜索方式"><span class="nav-number">3.1.</span> <span class="nav-text">分布式搜索方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询"><span class="nav-number">3.1.1.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取回"><span class="nav-number">3.1.2.</span> <span class="nav-text">取回</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深分页"><span class="nav-number">3.1.3.</span> <span class="nav-text">深分页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索选项"><span class="nav-number">3.2.</span> <span class="nav-text">搜索选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#preference"><span class="nav-number">3.2.1.</span> <span class="nav-text">preference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#timeout"><span class="nav-number">3.2.2.</span> <span class="nav-text">timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#routing"><span class="nav-number">3.2.3.</span> <span class="nav-text">routing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#search-type"><span class="nav-number">3.2.4.</span> <span class="nav-text">search_type</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扫描与滚屏"><span class="nav-number">3.3.</span> <span class="nav-text">扫描与滚屏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scroll"><span class="nav-number">3.3.1.</span> <span class="nav-text">scroll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scan"><span class="nav-number">3.3.2.</span> <span class="nav-text">scan</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式特性"><span class="nav-number">4.</span> <span class="nav-text">分布式特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集群和节点"><span class="nav-number">4.1.</span> <span class="nav-text">集群和节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#天然分布式"><span class="nav-number">4.1.1.</span> <span class="nav-text">天然分布式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">4.2.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#空集群"><span class="nav-number">4.2.1.</span> <span class="nav-text">空集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shard"><span class="nav-number">4.2.2.</span> <span class="nav-text">Shard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群健康"><span class="nav-number">4.2.3.</span> <span class="nav-text">集群健康</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#故障转移"><span class="nav-number">4.2.4.</span> <span class="nav-text">故障转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#横向扩展"><span class="nav-number">4.2.5.</span> <span class="nav-text">横向扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应对故障"><span class="nav-number">4.2.6.</span> <span class="nav-text">应对故障</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式增删改查"><span class="nav-number">4.3.</span> <span class="nav-text">分布式增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">4.3.1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分片交互"><span class="nav-number">4.3.2.</span> <span class="nav-text">分片交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建、索引和删除"><span class="nav-number">4.3.3.</span> <span class="nav-text">新建、索引和删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检索"><span class="nav-number">4.3.4.</span> <span class="nav-text">检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量更新"><span class="nav-number">4.3.5.</span> <span class="nav-text">批量更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入分片"><span class="nav-number">4.4.</span> <span class="nav-text">深入分片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使文本可以被搜索"><span class="nav-number">4.4.1.</span> <span class="nav-text">使文本可以被搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态索引"><span class="nav-number">4.4.2.</span> <span class="nav-text">动态索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#近实时搜索"><span class="nav-number">4.4.3.</span> <span class="nav-text">近实时搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久化变更"><span class="nav-number">4.4.4.</span> <span class="nav-text">持久化变更</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并段"><span class="nav-number">4.4.5.</span> <span class="nav-text">合并段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心"><span class="nav-number">4.5.</span> <span class="nav-text">核心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">4.6.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索引擎"><span class="nav-number">4.7.</span> <span class="nav-text">搜索引擎</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚合"><span class="nav-number">5.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合-1"><span class="nav-number">5.1.</span> <span class="nav-text">聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bucket-Aggregation"><span class="nav-number">5.1.1.</span> <span class="nav-text">Bucket Aggregation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合分析"><span class="nav-number">5.2.</span> <span class="nav-text">聚合分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1009,7 +1271,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">38:44</span>
+    <span title="站点阅读时长">38:57</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -57,13 +57,13 @@
   };
 </script>
 
-  <meta name="description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建 Elasticsearch是面向文档的">
+  <meta name="description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建。 Elasticsearch是面向文档">
 <meta name="keywords" content="Elasticsearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticsearch：概述">
 <meta property="og:url" content="http://yoursite.com/2019/08/28/系统架构/Elasticsearch：概述/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建 Elasticsearch是面向文档的">
+<meta property="og:description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建。 Elasticsearch是面向文档">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1567147497368.png">
 <meta property="og:image" content="http://yoursite.com/assets/1567147531015.png">
@@ -76,10 +76,10 @@
 <meta property="og:image" content="http://yoursite.com/assets/1567606295972.png">
 <meta property="og:image" content="http://yoursite.com/assets/1567607118204.png">
 <meta property="og:image" content="http://yoursite.com/assets/1567676617810.png">
-<meta property="og:updated_time" content="2019-09-05T11:22:35.416Z">
+<meta property="og:updated_time" content="2019-09-09T04:01:07.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch：概述">
-<meta name="twitter:description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建 Elasticsearch是面向文档的">
+<meta name="twitter:description" content="DOC文档面向文档应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。 而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建。 Elasticsearch是面向文档">
 <meta name="twitter:image" content="http://yoursite.com/assets/1567147497368.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/28/系统架构/Elasticsearch：概述/">
 
@@ -336,7 +336,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-05 19:22:35" itemprop="dateModified" datetime="2019-09-05T19:22:35+08:00">2019-09-05</time>
+                <time title="修改时间：2019-09-09 12:01:07" itemprop="dateModified" datetime="2019-09-09T12:01:07+08:00">2019-09-09</time>
               </span>
             
           
@@ -388,7 +388,7 @@
 
       
         <h1 id="DOC"><a href="#DOC" class="headerlink" title="DOC"></a>DOC</h1><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><h3 id="面向文档"><a href="#面向文档" class="headerlink" title="面向文档"></a>面向文档</h3><p>应用中的对象很少只是简单的键值列表，例如MySQL数据库那样，更多的时候它拥有复杂的数据结构，例如包含日期、地理位置、另一个对象或数组。</p>
-<p>而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建</p>
+<p>而数据库是行列组成的表格，如果要将一个对象存储到MySQL当中，则就像是将一个丰富、信息表现力强的对象拆散了放入一个非常大的表格中。你不得不拆散对象以适应表模式(一列对应一个字段)，然后在查询时再进行重建。</p>
 <p>Elasticsearch是面向文档的，意味着它可以存储整个对象或文档，然而它不仅仅时存储，还会索引每个文档的内容使之可以被搜索。再Elasticsearch中，你可以对文档(并非表结构)进行索引、搜索、排序、过滤。这种理解数据的方式与MySQL完全不同，也是Elasticsearch能够进行复杂的全文搜索的原因之一。</p>
 <p><strong>Elasticsearch使用JSON作为文档序列化格式。</strong></p>
 <p>程序中大多的实体或对象能够被序列化为包含键值对的JSON对象。通常我们可以认为对象与文档时等价相通的。</p>
@@ -413,7 +413,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><p>在Elasticsearch中，文档归属于一种类型(type),而这些类型存在于索引(index)中，我们可以画一些简单的对比图来类比传统关系型数据库：</p>
+<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><p>在Elasticsearch中，文档归属于一种类型(type)，而这些类型存在于索引(index)中，我们可以画一些简单的对比图来类比传统关系型数据库：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Relational	DB	-&gt;	Databases	-&gt;	Tables	-&gt;	Rows	-&gt;	Columns </span><br><span class="line">Elasticsearch	-&gt;	Indices		-&gt;	Types	-&gt;	Documents	-&gt;	Fields</span><br></pre></td></tr></table></figure>
 
 <p>Elasticsearch集群可以包含多个索引(indices)（数据库），每一个索引可以包含多个类型 (types)（表），每一个类型包含多个文档(documents)（行），然后每个文档包含多个字段 (Fields)（列）。</p>
@@ -446,8 +446,8 @@
 <ul>
 <li>一个properties节点。列出文档可能包含的每个字段的映射。</li>
 <li>多个元数据字段。每一个都以下划线开头，例如_type等。</li>
-<li>设置项。入analyzer等。</li>
-<li>其他设置，可以同时时应用在根对象和其他object类型的字段上，例如enabled，dynamic和include_in_all。</li>
+<li>设置项。如analyzer等。</li>
+<li>其他设置，可以同时应用在根对象和其他object类型的字段上，例如enabled，dynamic和include_in_all。</li>
 </ul>
 <h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><p><strong><em>_source</em></strong></p>
 <p>ES用JSON字符串表示文档主题保存在_source字段中，_source字段在写入磁盘前会被压缩。</p>
@@ -477,7 +477,7 @@
 <li>strict。遇到未知字段抛出异常。</li>
 </ul>
 <h3 id="重建索引"><a href="#重建索引" class="headerlink" title="重建索引"></a>重建索引</h3><p>虽然你可以给索引添加新的类型，或给类型添加新的字段，但是你不能添加新的分析器或修改已有字段。否则已被索引的数据会变得不正确而你的搜索也不会正常工作。</p>
-<p>修改在已存在的数据最简单的方法是重新索引：创建一个新配置好的索引，然后将所有的文 档从旧的索引复制到新的上。</p>
+<p>修改在已存在的数据最简单的方法是重新索引：创建一个新配置好的索引，然后将所有的文档从旧的索引复制到新的上。</p>
 <h2 id="数据的基本操作"><a href="#数据的基本操作" class="headerlink" title="数据的基本操作"></a>数据的基本操作</h2><h3 id="Search-响应"><a href="#Search-响应" class="headerlink" title="Search 响应"></a>Search 响应</h3><ul>
 <li>hits。表示匹配到的文档总数。<ul>
 <li>_score。相关性得分。</li>
@@ -617,10 +617,10 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;				</span><br><span class="line">	<span class="attr">"followers.age"</span>: [<span class="number">19</span>,	<span class="number">26</span>,	<span class="number">35</span>],				</span><br><span class="line">	<span class="attr">"followers.name"</span>: [alex,jones,lisa,smith,mary,white] </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>此时需要使用<strong>嵌套对象</strong>。</p>
-<h2 id="对数据建模"><a href="#对数据建模" class="headerlink" title="对数据建模"></a>对数据建模</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=2014 //12个结果  使用_all，索引类型是string</span><br></pre></td></tr></table></figure>
+<h2 id="对数据建模"><a href="#对数据建模" class="headerlink" title="对数据建模"></a>对数据建模</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=<span class="number">2014</span> <span class="comment">//12个结果  使用_all，索引类型是string</span></span><br></pre></td></tr></table></figure>
 
 <p>ES将对字段类型进行猜测，动态生成了字段和类型的映射关系。_all字段是默认字段，其类型为string。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=date:2014-09-15 //1个结果 索引类型为date，</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=date:<span class="number">2014</span>-<span class="number">09</span>-<span class="number">15</span> <span class="comment">//1个结果 索引类型为date，</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>因此string与date字段的索引方式是不同的。在ES当中每一种核心数据类型是以不同的方式进行索引的。</li>
@@ -742,7 +742,7 @@
 <h1 id="分布式特性"><a href="#分布式特性" class="headerlink" title="分布式特性"></a>分布式特性</h1><h2 id="集群和节点"><a href="#集群和节点" class="headerlink" title="集群和节点"></a>集群和节点</h2><p>节点node是一个运行着地Elasticsearch实例，集群cluster是一组具有相同<code>cluster.name</code>的节点集合，他们协同工作，共享数据并提供故障转移和扩展功能。</p>
 <p>修改<code>cluster.name</code>可以通过修改<code>config/</code>目录下的<code>elasticsearch.yml</code>文件，然后重启Elasticsearch来实现。</p>
 <h3 id="天然分布式"><a href="#天然分布式" class="headerlink" title="天然分布式"></a>天然分布式</h3><p>Elasticsearch可以扩展到上百、千的服务器来处理PB级的数据，Elasticsearch的设计隐藏了分布式本身的复杂性。</p>
-<p>Elasticsearch在分布式概念上做了很大程度上的透明化，在教程中你不需要知道任何关于分布式系统、分片、集群发现或者其他大量的分布式概念。所有的教程你既可以运行在你的笔记本上，也可以运行在拥有100个节点的集群上，其工作方式是一样的。</p>
+<p>Elasticsearch在分布式概念上做了很大程度上的透明化，在教程中你不需要知道任何关于分布式系统、分片、集群发现或者其他大量的分布式概念。所有的节点既可以运行在你的笔记本上，也可以运行在拥有100个节点的集群上，其工作方式是一样的。</p>
 <p>Elasticsearch致力于隐藏分布式系统的复杂性。以下这些操作都是在底层自动完成的：</p>
 <ul>
 <li>将你的文档分区到不同的容器或者分片(shards)中，它们可以存在于一个或多个节点中。 </li>
@@ -758,7 +758,7 @@
 <p>主节点不参与文档级别的变更或搜索，意味着在流量增长时，主节点不会称为集群的瓶颈，且任意节点都可以成为主节点。</p>
 <p>作为用户我们可以与集群中的任何节点通信，包括主节点。每一个节点都知道文档存在于哪个节点上，它们可以转发请求到相应的节点，我们访问的节点负责收集各节点返回的数据，最后一起返回给客户端。这一切由ES处理。</p>
 <h3 id="Shard"><a href="#Shard" class="headerlink" title="Shard"></a>Shard</h3><p>分片就是一个Lucene实例，并且它本身就是一个完整的搜索引擎，我们的文档存储在分片中，并且在分片中被索引，但是我们的应用程序不会直接与shards通信，而是与索引直接通信。</p>
-<p>Shard是ES集群中分发数据的关键，把分片类比成数据的容器，文档存储在分片中，然后分片分配到你集群的节点上。当集群扩容或缩小，ES将会自动在你的节点间迁移分片，以使得集群保持平衡。</p>
+<p>Shard是ES集群中分发数据的关键，把分片类比成数据的容器，文档存储在分片中，然后分片分配到你集群的节点上。当集群扩容或缩小，<strong>ES将会自动在你的节点间迁移分片</strong>，以使得集群保持平衡。</p>
 <p>Shard分类：</p>
 <ul>
 <li>主分片。索引中的每个文档属于一个单独的主分片，所以主分片的数量决定了索引最多能够存储多少数据。<ul>
@@ -785,8 +785,7 @@
 <h3 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h3><p>单节点上运行有单点故障风险，即没有数据备份。为了防止则启动另一个节点。</p>
 <p>可以使用同样的命令行在同样的目录下进行创建，一个节点可以启动多个ES实例。</p>
 <p>只要第二个节点与第一个节点具有相同的<code>cluster.name</code>，具体值查看./config/elasticsearch.yml，它就能自动发现并加入第一个节点所在的集群。其原理是进行网络广播。</p>
-<p>当第二个节点加入集群，则三个复制分片也将被分配，分别对应三个主分片。文档将首先被存储在主分片中，然后并发复制到对应的复制节点上。</p>
-<p>此时的集群状态为green。</p>
+<p>当第二个节点加入集群，则三个复制分片也将被分配，分别对应三个主分片。文档将首先被存储在主分片中，然后并发复制到对应的复制节点上。此时的集群状态为green。</p>
 <h3 id="横向扩展"><a href="#横向扩展" class="headerlink" title="横向扩展"></a>横向扩展</h3><p>当启动第三个节点，集群会重新组织。</p>
 <p>在原有情况下，两个节点各自拥有3个分片。此时将进行分片的移动，将其中一个主分片和一个复制分片移动到节点3上。</p>
 <p>分片本身是一个完整的搜索引擎，它可以使用单一节点的所有资源。主分片或者复制分片都可以处理读请求——搜索或文档检索，所以数据的冗余越多，我们能处理的搜索吞吐量就越大。</p>
@@ -807,7 +806,7 @@
 
 <p>因此主分片的数量只能在创建索引时定义且不能修改，如果主分片的数量在未来改变了，所有先前的路由就失效了，文档无法找到。</p>
 <p>所有的文档API都接收一个<code>routing</code>参数，用来自定义文档到分片的映射，自定义路由值可以确保所有的相关文档都保存在同一个分片中。</p>
-<h3 id="分片交互"><a href="#分片交互" class="headerlink" title="分片交互"></a>分片交互</h3><p>假设有3个节点的集群，它包含一个叫做bblogs的索引并拥有两个主分片，每个主分片有两个复制分片。</p>
+<h3 id="分片交互"><a href="#分片交互" class="headerlink" title="分片交互"></a>分片交互</h3><p>假设有3个节点的集群，它包含一个叫做blogs的索引并拥有两个主分片，每个主分片有两个复制分片。</p>
 <p>我们能够发送请求给集群中任意一个节点，每个节点都有能力处理任意请求，每个节点都知道任意文档所在的节点，所以也能将请求转发到需要的节点。</p>
 <p>接收请求的节点称为<strong>请求节点</strong>。</p>
 <h3 id="新建、索引和删除"><a href="#新建、索引和删除" class="headerlink" title="新建、索引和删除"></a>新建、索引和删除</h3><p>新建、索引和删除请求都是写操作，它们必须在主分片（Node1）上成功完成才能复制到相关的复制分片上。其步骤是：</p>
@@ -1006,6 +1005,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+              <a href="/2019/09/07/Java/base/Java并发：Disruptor/" rel="prev" title="Java并发：Disruptor">
+                Java并发：Disruptor <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
     </footer>
@@ -1060,7 +1063,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">196</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1271,7 +1274,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">38:57</span>
+    <span title="站点阅读时长">39:10</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

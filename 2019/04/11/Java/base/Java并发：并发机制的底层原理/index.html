@@ -74,7 +74,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1554976291901.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554976411243.png">
 <meta property="og:image" content="http://yoursite.com/assets/1554976466843.png">
-<meta property="og:updated_time" content="2019-08-30T07:16:25.370Z">
+<meta property="og:updated_time" content="2019-09-07T10:52:06.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发：并发机制的底层原理">
 <meta name="twitter:description" content="并发机制的底层原理Java代码在编译后会变成Java字节码，字节码被类加载器加载到JVM里，JVM执行字节码，最终需要转化为汇编指令在CPU上执行，Java中所使用的并发机制依赖于JVM的实现和CPU的指令。 Volatile提出问题是什么Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情">
@@ -334,7 +334,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-30 15:16:25" itemprop="dateModified" datetime="2019-08-30T15:16:25+08:00">2019-08-30</time>
+                <time title="修改时间：2019-09-07 18:52:06" itemprop="dateModified" datetime="2019-09-07T18:52:06+08:00">2019-09-07</time>
               </span>
             
           
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">8.5k</span>
+              <span title="本文字数">8.6k</span>
             </span>
           
             <span class="post-meta-item">
@@ -396,8 +396,15 @@
 <li>可见性：当一个线程修改一个共享变量的值，另外一个线程能读到这个修改的值。</li>
 </ul>
 </li>
+<li>阻止指令重排序。</li>
 </ul>
-<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><p>某些情况下，volatile的同步机制的性能确实要优于锁(synchronized、JUC)等，但是虚拟机对锁实行了许多消除和优化，使得我们很难量化认为volatile比synchronized快多少。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li>自动热部署的参数配置、动态更新等，使用Volatile修饰。<ul>
+<li>单元化<strong>内部</strong>的服务，最好使用Volatile。如果是Zookeeper做公用的外部配置，则使用Wather。</li>
+</ul>
+</li>
+</ul>
+<h2 id="权衡"><a href="#权衡" class="headerlink" title="权衡"></a>权衡</h2><p>某些情况下，volatile的同步机制的性能确实要优于锁(synchronized、JUC)等，但是虚拟机对锁实行了许多消除和优化，使得我们很难量化认为volatile比synchronized快多少。</p>
 <p>如果volatile与自己比较，则volatile读操作的性能消耗与普通变量几乎没有什么差别。而写操作会慢一些，因为它需要在本地代码中插入很多内存屏障指令保证不会乱序执行。</p>
 <p>在volatile与锁之间<strong>选择的唯一依据</strong>仅仅是volatile的语义能否满足场景的需求。</p>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="CPU术语"><a href="#CPU术语" class="headerlink" title="CPU术语"></a>CPU术语</h3><p><img src="/assets/1554972512576.png" alt="1554972512576"></p>
@@ -684,7 +691,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">196</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -895,7 +902,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">38:57</span>
+    <span title="站点阅读时长">39:10</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -57,21 +57,21 @@
   };
 </script>
 
-  <meta name="description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 适">
+  <meta name="description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 应">
 <meta name="keywords" content="NoSQL,Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis：概述">
 <meta property="og:url" content="http://yoursite.com/2019/03/04/数据库/Redis：概述/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 适">
+<meta property="og:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 应">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1552978943031.png">
 <meta property="og:image" content="http://yoursite.com/assets/1552980709600.png">
 <meta property="og:image" content="http://yoursite.com/assets/1566050509148.png">
-<meta property="og:updated_time" content="2019-08-21T01:20:37.795Z">
+<meta property="og:updated_time" content="2019-09-09T09:31:13.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis：概述">
-<meta name="twitter:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 适">
+<meta name="twitter:description" content="Redis起源：为了实现一个访客信息追踪网站，展示网站最近的n条访问记录。而当时数据库在负载高时无法很好满足。 概述 高性能Key-Value服务器。分布式内存key-value的数据库。 多种数据结构。 丰富的功能。慢查询、发布订阅等 高可用分布式支持。   Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，所有操作都是原子性的，支持合并多个操作为原子性。 应">
 <meta name="twitter:image" content="http://yoursite.com/assets/1552978943031.png">
   <link rel="canonical" href="http://yoursite.com/2019/03/04/数据库/Redis：概述/">
 
@@ -328,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-21 09:20:37" itemprop="dateModified" datetime="2019-08-21T09:20:37+08:00">2019-08-21</time>
+                <time title="修改时间：2019-09-09 17:31:13" itemprop="dateModified" datetime="2019-09-09T17:31:13+08:00">2019-09-09</time>
               </span>
             
           
@@ -356,7 +356,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">4.7k</span>
+              <span title="本文字数">4.9k</span>
             </span>
           
             <span class="post-meta-item">
@@ -388,12 +388,16 @@
 </ul>
 <p><img src="/assets/1552978943031.png" alt="1552978943031"></p>
 <p>Redis具有复制特性扩展读性能，使用分片扩展写性能，可以持久化到硬盘，支持主从备份，<strong>所有操作都是原子性的</strong>，支持合并多个操作为原子性。</p>
-<h2 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h2><ul>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
 <li>取单个最新数据的操作。</li>
 <li>排行榜类似应用。</li>
 <li>精准设定过期时间。</li>
 <li>实时系统、垃圾系统、实时消息系统、队列系统。</li>
 <li>唯一性检查应用。</li>
+</ul>
+<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
+<li>由于阉割了数据表、字段等特性，所有查询都依赖于Key，Redis无法提供常规数据库所具备的多列查询、区段查询等复杂查询功能。</li>
+<li>Redis需要把数据存在内存中，这也大大限制了Redis可存储的数据量，这也决定了Redis难以用在数据规模很大的应用场景中。</li>
 </ul>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
 <li>daemonize：是否为守护进程，如果为yes会将日志打印到文件当中。</li>
@@ -775,7 +779,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">205</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -826,7 +830,9 @@
         
           
         
-        <span class="site-state-item-count">16</span>
+          
+        
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -929,7 +935,9 @@
         
           
         
-        <span class="site-state-item-count">41</span>
+          
+        
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -950,7 +958,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用性"><span class="nav-number">1.2.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">1.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">1.4.</span> <span class="nav-text">数据结构与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高并发场景下缓存常见问题"><span class="nav-number">2.</span> <span class="nav-text">高并发场景下缓存常见问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis原理"><span class="nav-number">3.</span> <span class="nav-text">Redis原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程"><span class="nav-number">3.1.</span> <span class="nav-text">单线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">3.2.</span> <span class="nav-text">事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逐出"><span class="nav-number">3.3.</span> <span class="nav-text">逐出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延迟删除"><span class="nav-number">3.4.</span> <span class="nav-text">延迟删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用"><span class="nav-number">3.4.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-1"><span class="nav-number">3.4.2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非一致性"><span class="nav-number">3.4.3.</span> <span class="nav-text">非一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终一致性"><span class="nav-number">3.4.4.</span> <span class="nav-text">最终一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel"><span class="nav-number">3.5.</span> <span class="nav-text">Sentinel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化"><span class="nav-number">3.6.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单机数据库的实现"><span class="nav-number">4.</span> <span class="nav-text">单机数据库的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存使用"><span class="nav-number">4.1.</span> <span class="nav-text">缓存使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存特征"><span class="nav-number">4.1.1.</span> <span class="nav-text">缓存特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存命中率影响因素"><span class="nav-number">4.1.2.</span> <span class="nav-text">缓存命中率影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存分类和应用场景"><span class="nav-number">4.1.3.</span> <span class="nav-text">缓存分类和应用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcache"><span class="nav-number">5.</span> <span class="nav-text">Memcache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构图"><span class="nav-number">5.1.</span> <span class="nav-text">内存结构图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.2.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性"><span class="nav-number">1.2.1.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺陷"><span class="nav-number">1.2.2.</span> <span class="nav-text">缺陷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">1.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与对象"><span class="nav-number">1.4.</span> <span class="nav-text">数据结构与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高并发场景下缓存常见问题"><span class="nav-number">2.</span> <span class="nav-text">高并发场景下缓存常见问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis原理"><span class="nav-number">3.</span> <span class="nav-text">Redis原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程"><span class="nav-number">3.1.</span> <span class="nav-text">单线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">3.2.</span> <span class="nav-text">事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逐出"><span class="nav-number">3.3.</span> <span class="nav-text">逐出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延迟删除"><span class="nav-number">3.4.</span> <span class="nav-text">延迟删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用"><span class="nav-number">3.4.1.</span> <span class="nav-text">为什么要用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-1"><span class="nav-number">3.4.2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非一致性"><span class="nav-number">3.4.3.</span> <span class="nav-text">非一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终一致性"><span class="nav-number">3.4.4.</span> <span class="nav-text">最终一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel"><span class="nav-number">3.5.</span> <span class="nav-text">Sentinel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化"><span class="nav-number">3.6.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单机数据库的实现"><span class="nav-number">4.</span> <span class="nav-text">单机数据库的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存使用"><span class="nav-number">4.1.</span> <span class="nav-text">缓存使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存特征"><span class="nav-number">4.1.1.</span> <span class="nav-text">缓存特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存命中率影响因素"><span class="nav-number">4.1.2.</span> <span class="nav-text">缓存命中率影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存分类和应用场景"><span class="nav-number">4.1.3.</span> <span class="nav-text">缓存分类和应用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcache"><span class="nav-number">5.</span> <span class="nav-text">Memcache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构图"><span class="nav-number">5.1.</span> <span class="nav-text">内存结构图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -986,7 +994,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">39:10</span>
+    <span title="站点阅读时长">40:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

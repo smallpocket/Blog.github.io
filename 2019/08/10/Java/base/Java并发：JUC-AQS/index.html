@@ -60,16 +60,16 @@
   <meta name="description" content="J.U.C - AQS提出问题 synchronized提供了便捷性的隐式获取锁释放锁机制（基于JVM机制），但是它却缺少了获取锁与释放锁的可操作性，可中断、超时获取锁，且它为独占式在高并发场景下性能大打折扣。  是什么java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同">
 <meta name="keywords" content="并发编程,源码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java并发：JUC-AQS">
+<meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/2019/08/10/Java/base/Java并发：JUC-AQS/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="J.U.C - AQS提出问题 synchronized提供了便捷性的隐式获取锁释放锁机制（基于JVM机制），但是它却缺少了获取锁与释放锁的可操作性，可中断、超时获取锁，且它为独占式在高并发场景下性能大打折扣。  是什么java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/1567929745906.png">
 <meta property="og:image" content="http://yoursite.com/assets/1567218377378.png">
-<meta property="og:updated_time" content="2019-09-08T08:04:17.669Z">
+<meta property="og:updated_time" content="2019-09-10T09:37:10.319Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java并发：JUC-AQS">
+<meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="J.U.C - AQS提出问题 synchronized提供了便捷性的隐式获取锁释放锁机制（基于JVM机制），但是它却缺少了获取锁与释放锁的可操作性，可中断、超时获取锁，且它为独占式在高并发场景下性能大打折扣。  是什么java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是J.U.C的核心。 AQS：AbstractQueuedSynchronizer，即队列同">
 <meta name="twitter:image" content="http://yoursite.com/assets/1567929745906.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/10/Java/base/Java并发：JUC-AQS/">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>Java并发：JUC-AQS | Hexo</title>
+  <title> | Hexo</title>
   
 
 
@@ -294,7 +294,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">Java并发：JUC-AQS
+          <h1 class="post-title" itemprop="name headline">
 
               
             
@@ -327,7 +327,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-08 16:04:17" itemprop="dateModified" datetime="2019-09-08T16:04:17+08:00">2019-09-08</time>
+                <time title="修改时间：2019-09-10 17:37:10" itemprop="dateModified" datetime="2019-09-10T17:37:10+08:00">2019-09-10</time>
               </span>
             
           
@@ -389,7 +389,7 @@
 </ul>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
 <li>AQS解决了实现同步器时涉及当的大量细节问题，例如获取同步状态、FIFO同步队列。<ul>
-<li>基于AQS构建同步器能够极大减少实现工作，而且也不必处理在多个位置上发生的竞争问题。在一般的同步器实现当中，获取许可的操作可能在两个时刻阻塞–当锁保护信号量状态时，以及当许可不可用时</li>
+<li>基于AQS构建同步器能够极大减少实现工作，而且也不必处理在多个位置上发生的竞争问题。在一般的同步器实现当中，获取许可的操作可能在两个时刻阻塞–当锁保护信号量状态时，以及当许可不可用。</li>
 <li><strong>LockSupport</strong>。JDK描述为构建锁和其他同步类的基本<strong>线程阻塞</strong>原语，构建更高级别的同步工具集。LockSupport提供的park/unpark从线程的粒度上进行阻塞和唤醒，park/unpark模型真正解耦了线程之间的同步，线程之间不再需要一个Object或者其它变量来存储状态。</li>
 <li>基于AQS构建的同步器只可能在一个时刻发生阻塞，从而降低上下文切换的开销，并提高吞吐量。</li>
 </ul>
@@ -435,7 +435,7 @@
 <li>releaseShared(int arg)：共享式释放同步状态。</li>
 </ul>
 <h3 id="获取-释放操作"><a href="#获取-释放操作" class="headerlink" title="获取\释放操作"></a>获取\释放操作</h3><p>获取操作是一种依赖状态的操作，并且通常会阻塞。当使用锁或信号量时，获取操作的含义就是获取锁或者许可，并且调用者可能会抑制等待直到同步器类处于可被获取的状态。对于CountDownLatch，意味着等待并直到闭锁到达结束状态。对于FutureTask意味着等待并直到任务以及完成。</p>
-<p>根据同步器不同，获取操作可能是独占的，也可能时非独占的。一个获取操作包括两部分</p>
+<p>根据同步器不同，获取操作可能是独占的，也可能时非独占的。一个获取操作包括两部分：</p>
 <ul>
 <li>同步器判断当前状态是否允许获得操作。</li>
 <li>如果是则允许线程执行，否则获取操作将阻塞或失败，这由同步器的语义决定。</li>
@@ -451,7 +451,7 @@
 <h3 id="入列"><a href="#入列" class="headerlink" title="入列"></a>入列</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">addWaiter</span><span class="params">(Node mode)</span></span>&#123;        <span class="comment">//新建Node</span></span><br><span class="line">        Node node=<span class="keyword">new</span> Node(Thread.currentThread(),mode);        <span class="comment">//快速尝试添加尾节点</span></span><br><span class="line">        Node pred=tail;</span><br><span class="line">        <span class="keyword">if</span>(pred!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            node.prev=pred;            <span class="comment">//CAS设置尾节点</span></span><br><span class="line">            <span class="keyword">if</span>(compareAndSetTail(pred,node))&#123;</span><br><span class="line">                pred.next=node;<span class="keyword">return</span> node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;        <span class="comment">//多次尝试</span></span><br><span class="line">        enq(node);<span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>addWaiter(Node node)先通过快速尝试设置尾节点，如果失败，则调用enq(Node node)方法设置尾节点。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private Node enq(final Node node)&#123;        //多次尝试，直到成功为止</span><br><span class="line">        for(;;)&#123;</span><br><span class="line">            Node t=tail;            //tail不存在，设置为首节点</span><br><span class="line">            if(t==null)&#123;</span><br><span class="line">                if(compareAndSetHead(new Node()))&#123;</span><br><span class="line">                    tail=head;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else&#123;                //设置为尾节点</span><br><span class="line">                node.prev=t;</span><br><span class="line">                if(compareAndSetTail(t,node))&#123;</span><br><span class="line">                    t.next=node;</span><br><span class="line">                    return t;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">enq</span><span class="params">(<span class="keyword">final</span> Node node)</span></span>&#123;        <span class="comment">//多次尝试，直到成功为止</span></span><br><span class="line">        <span class="keyword">for</span>(;;)&#123;</span><br><span class="line">            Node t=tail;            <span class="comment">//tail不存在，设置为首节点</span></span><br><span class="line">            <span class="keyword">if</span>(t==<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(compareAndSetHead(<span class="keyword">new</span> Node()))&#123;</span><br><span class="line">                    tail=head;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;                <span class="comment">//设置为尾节点</span></span><br><span class="line">                node.prev=t;</span><br><span class="line">                <span class="keyword">if</span>(compareAndSetTail(t,node))&#123;</span><br><span class="line">                    t.next=node;</span><br><span class="line">                    <span class="keyword">return</span> t;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在上面代码中，两个方法都是通过一个CAS方法compareAndSetTail(Node expect, Node update)来设置尾节点，该方法可以确保节点是线程安全添加的。在enq(Node node)方法中，AQS通过“死循环”的方式来保证节点可以正确添加，只有成功添加后，当前线程才会从该方法返回，否则会一直执行下去。</p>
 <h3 id="出列"><a href="#出列" class="headerlink" title="出列"></a>出列</h3><p>CLH同步队列遵循FIFO，首节点的线程释放同步状态后，将会唤醒它的后继节点（next），而后继节点将会在获取同步状态成功时将自己设置为首节点，这个过程非常简单，head执行该节点并断开原首节点的next和当前节点的prev即可，注意在这个过程是不需要使用CAS来保证的，因为只有一个线程能够成功获取到同步状态。</p>
@@ -484,17 +484,28 @@
 <blockquote>
 <p>LockSupport是用来创建锁和其他同步类的基本线程阻塞原语</p>
 </blockquote>
-<p>每个使用LockSupport的线程都会与一个许可关联，如果该许可可用，并且可在进程中使用，则调用park()将会立即返回，否则可能阻塞。如果许可尚不可用，则可以调用 unpark 使其可用。但是注意许可不可重入，也就是说只能调用一次park()方法，否则会一直阻塞。</p>
+<p>每个使用LockSupport的线程都会与一个许可关联，如果该许可可用，并且可在进程中使用，则调用<code>park()</code>将会立即返回，否则可能阻塞。如果许可尚不可用，则可以调用<code>unpark()</code>使其可用。但是注意许可不可重入，也就是说只能调用一次<code>park()</code>方法，否则会一直阻塞。</p>
+<ul>
+<li>park/unpark模型真正解耦了线程之间的同步，线程之间不再需要一个Object或者其它变量来存储状态，不再需要关心对方的状态。<ul>
+<li>即是<strong>线程粒度</strong>的。</li>
+</ul>
+</li>
+<li>wait/notify机制有个很蛋疼的地方，比如线程B要用notify通知线程A，那么线程B要确保线程A已经在wait调用上等待了，否则线程A可能永远都在等待。<ul>
+<li><strong>对象粒度</strong>。</li>
+</ul>
+</li>
+</ul>
 <p>LockSupport定义了一系列以park开头的方法来阻塞当前线程，unpark(Thread thread)方法来唤醒一个被阻塞的线程。如下：</p>
 <ul>
-<li>park()。阻塞当前线程，如果调用unpark(Thread thread)或该线程被中断才会返回</li>
-<li>park(Object blocker)。为了线程调度，在许可可用钱禁用当前线程。</li>
+<li>park()。阻塞当前线程，如果调用unpark(Thread thread)或该线程被中断才会返回。</li>
+<li>park(Object blocker)。为了线程调度，在许可可用前禁用当前线程。</li>
 <li>parkNanos(long nanos)。为了线程调度禁用当前线程，最多等待指定的等待时间，除非许可可用。</li>
 <li>parkNanos(Object blocker, long nanos)。为了线程调度在许可可用前禁用当前线程，并最大等待指定的等待时间。</li>
 <li>parkUntil(long deadline)。为了线程调度，在指定的时限前禁用当前线程，除非许可可用。</li>
 <li>parkUntil(Object blocker, long deadline)。为了线程调度，在指定的时限前禁用当前线程，除非许可可用。</li>
 <li>unpark(Thread thread)。如果给定的线程许可尚不可用，则使其可用。<ul>
 <li>unpark必须要在park执行之后执行。</li>
+<li>如果线程在park上受阻塞，则它将解除其阻塞状态。否则，保证下一次调用park不会受阻塞。如果给定线程尚未启动，则无法保证此操作有任何效果。</li>
 </ul>
 </li>
 </ul>
@@ -509,7 +520,7 @@
 
 <h2 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">tryAcquireShard</span><span class="params">(<span class="keyword">int</span> acquires)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> available = getState();</span><br><span class="line">        <span class="keyword">int</span> remaining = available - acquires;</span><br><span class="line">        <span class="keyword">if</span>(remaining &lt; <span class="number">0</span> || compareAndSetState(available, remaining))&#123;</span><br><span class="line">            <span class="keyword">return</span> remaining;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryReleaseShared</span><span class="params">(<span class="keyword">int</span> release)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> p = getState();</span><br><span class="line">        <span class="keyword">if</span>(compareAndSetState(p, p+releases))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h2><h2 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h2><p><code>FutureTask.get</code>的语义类似于闭锁(<code>CountDownLatch</code>)的语义，如果发生了某个事件(由FutureTask表示的任务执行完成或被取消)，那么线程就可以恢复执行，否则将停留在队列中并直到该事件发生，</p>
+<h2 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h2><h2 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h2><p><code>FutureTask.get</code>的语义类似于闭锁(<code>CountDownLatch</code>)的语义，如果发生了某个事件(由FutureTask表示的任务执行完成或被取消)，那么线程就可以恢复执行，否则将停留在队列中并直到该事件发生。</p>
 <p><code>FutureTask</code>使用AQS保存任务的状态。</p>
 <h2 id="ReentrantReadWriteLock"><a href="#ReentrantReadWriteLock" class="headerlink" title="ReentrantReadWriteLock"></a>ReentrantReadWriteLock</h2><p>使用单个AQS子类同时管理读锁与写锁，前16为状态表示写锁计数，后16为表示读锁计数。 </p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
@@ -600,7 +611,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">205</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -651,7 +662,9 @@
         
           
         
-        <span class="site-state-item-count">16</span>
+          
+        
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -754,7 +767,9 @@
         
           
         
-        <span class="site-state-item-count">41</span>
+          
+        
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -811,7 +826,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">39:10</span>
+    <span title="站点阅读时长">40:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

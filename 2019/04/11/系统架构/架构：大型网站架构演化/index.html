@@ -81,7 +81,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/1555050083322.png">
 <meta property="og:image" content="http://yoursite.com/assets/1555050317233.png">
 <meta property="og:image" content="http://yoursite.com/assets/1566022529950.png">
-<meta property="og:updated_time" content="2019-08-19T15:45:31.504Z">
+<meta property="og:updated_time" content="2019-09-22T13:57:06.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="架构：大型网站架构演化">
 <meta name="twitter:description" content="概述如何打造一个高性能、高可用、易扩展、可伸缩且安全的网站。 如何让网站随应用所需灵活变动。 随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。  架构单一应用架构当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关">
@@ -341,7 +341,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-19 23:45:31" itemprop="dateModified" datetime="2019-08-19T23:45:31+08:00">2019-08-19</time>
+                <time title="修改时间：2019-09-22 21:57:06" itemprop="dateModified" datetime="2019-09-22T21:57:06+08:00">2019-09-22</time>
               </span>
             
           
@@ -369,7 +369,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">7.4k</span>
+              <span title="本文字数">8.3k</span>
             </span>
           
             <span class="post-meta-item">
@@ -379,7 +379,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">13 分钟</span>
+              <span title="阅读时长">15 分钟</span>
             </span>
           
 
@@ -405,53 +405,53 @@
 <h1 id="大型网站软件系统的特点"><a href="#大型网站软件系统的特点" class="headerlink" title="大型网站软件系统的特点"></a>大型网站软件系统的特点</h1><p>对大型网站而言，访问量于数据量缺一不可。</p>
 <p>与传统企业应用系统相比，大型网站软件系统的特点有：</p>
 <ul>
-<li>高并发、大流量<ul>
-<li>需要面对高并发用户，大流量访问</li>
+<li>高并发、大流量。<ul>
+<li>需要面对高并发用户，大流量访问。</li>
 </ul>
 </li>
-<li>高可用<ul>
-<li>系统7*24小时不间断服务，大型网站的宕机事件会成为新闻焦点</li>
+<li>高可用。<ul>
+<li>系统7*24小时不间断服务，大型网站的宕机事件会成为新闻焦点。</li>
 </ul>
 </li>
-<li>海量数据<ul>
-<li>需要存储、管理海量数据，需要使用大量服务器</li>
+<li>海量数据。<ul>
+<li>需要存储、管理海量数据，需要使用大量服务器。</li>
 </ul>
 </li>
-<li>用户分布广泛，网络情况复杂<ul>
-<li>需要为全球用户提供服务，各地网络情况千差万别</li>
-<li>国内，各个运营商网络互通难的问题</li>
-<li>中美光缆的数次故障，需要一些对国外用户依赖大的网站考虑建立海外数据中心</li>
+<li>用户分布广泛，网络情况复杂。<ul>
+<li>需要为全球用户提供服务，各地网络情况千差万别。</li>
+<li>国内，各个运营商网络互通难的问题。</li>
+<li>中美光缆的数次故障，需要一些对国外用户依赖大的网站考虑建立海外数据中心。</li>
 </ul>
 </li>
-<li>安全环境恶劣<ul>
-<li>互联网的开放型，容易受到攻击</li>
+<li>安全环境恶劣。<ul>
+<li>互联网的开放型，容易受到攻击。</li>
 </ul>
 </li>
-<li>需求快速变更，发布频繁</li>
-<li>渐进式发展<ul>
-<li>从一个小网站渐进的发展过来</li>
+<li>需求快速变更，发布频繁。</li>
+<li>渐进式发展。<ul>
+<li>从一个小网站渐进的发展过来。</li>
 </ul>
 </li>
 </ul>
-<h1 id="大型网站架构演化发展历程"><a href="#大型网站架构演化发展历程" class="headerlink" title="大型网站架构演化发展历程"></a>大型网站架构演化发展历程</h1><p>任何简单的业务一旦需要处理数以P计的数据和面对数以亿计的用户，问题就会很棘手。大型网站架构主要解决这类问题</p>
+<h1 id="大型网站架构演化发展历程"><a href="#大型网站架构演化发展历程" class="headerlink" title="大型网站架构演化发展历程"></a>大型网站架构演化发展历程</h1><p>任何简单的业务一旦需要处理数以P计的数据和面对数以亿计的用户，问题就会很棘手。大型网站架构主要解决这类问题。</p>
 <h2 id="初始阶段的网站架构"><a href="#初始阶段的网站架构" class="headerlink" title="初始阶段的网站架构"></a>初始阶段的网站架构</h2><ul>
-<li>一台服务器即可</li>
+<li>一台服务器即可。</li>
 <li>应用程序、数据库、文件等所有资源都在一台服务器上。</li>
 </ul>
 <p><img src="/assets/1554990959181.png" alt="1554990959181"></p>
 <h2 id="应用服务与数据服务分离"><a href="#应用服务与数据服务分离" class="headerlink" title="应用服务与数据服务分离"></a>应用服务与数据服务分离</h2><p><strong>问题</strong></p>
 <ul>
-<li>一台服务逐渐不能满足需求，越来越多的用户导致性能越来越差，越来越多的数据导致存储空间不足</li>
+<li>一台服务逐渐不能满足需求，越来越多的用户导致性能越来越差，越来越多的数据导致存储空间不足。</li>
 </ul>
-<p><strong>解决方案</strong>：将数据和应用分离</p>
+<p><strong>解决方案</strong>：将数据和应用分离：</p>
 <p>三台服务器：</p>
 <ul>
-<li>应用服务器：需要处理大量业务逻辑，需要更强CPU</li>
-<li>数据库服务器：快速磁盘检索和数据缓存，因此需要更快的磁盘和更大的内存</li>
-<li>文件服务器：存储大量用户上传的文件，需要更大的硬盘</li>
+<li>应用服务器：需要处理大量业务逻辑，需要更强CPU。</li>
+<li>数据库服务器：快速磁盘检索和数据缓存，因此需要更快的磁盘和更大的内存。</li>
+<li>文件服务器：存储大量用户上传的文件，需要更大的硬盘。</li>
 </ul>
 <p><img src="/assets/1563719826873.png" alt="1563719826873"></p>
-<p>不同的服务器承担不同的服务角色，网站的并发处理能力、数据存储空间得到很大改善</p>
+<p>不同的服务器承担不同的服务角色，网站的并发处理能力、数据存储空间得到很大改善。</p>
 <h2 id="使用缓存改善网站性能"><a href="#使用缓存改善网站性能" class="headerlink" title="使用缓存改善网站性能"></a>使用缓存改善网站性能</h2><p><strong>问题</strong></p>
 <ul>
 <li>数据库压力太大导致访问延迟，进而影响整个系统的性能。</li>
@@ -476,12 +476,12 @@
 <p><img src="/assets/1554991453473.png" alt="1554991453473"></p>
 <h2 id="使用应用服务器集群改善网站的并发处理能力"><a href="#使用应用服务器集群改善网站的并发处理能力" class="headerlink" title="使用应用服务器集群改善网站的并发处理能力"></a>使用应用服务器集群改善网站的并发处理能力</h2><p><strong>问题</strong></p>
 <ul>
-<li>单一应用服务器能够处理的请求连接有限，在网站访问高峰期，应用服务器成为瓶颈</li>
+<li>单一应用服务器能够处理的请求连接有限，在网站访问高峰期，应用服务器成为瓶颈。</li>
 </ul>
-<p><strong>解决方案：</strong></p>
+<p><strong>解决方案</strong></p>
 <p>增加服务器分担压力，并可以以此方式不断提升系统性能。实现系统的可伸缩性。</p>
 <p><img src="/assets/1555049101516.png" alt="1555049101516"></p>
-<p><strong>负载均衡调度服务器</strong>：将来自用户的访问请求分发到应用服务器集群的任何一台服务器中，若有更多的用户，则在集群中增加更多的服务器，使应用服务器的负载压力不再成为整个网站的瓶颈</p>
+<p><strong>负载均衡调度服务器</strong>：将来自用户的访问请求分发到应用服务器集群的任何一台服务器中，若有更多的用户，则在集群中增加更多的服务器，使应用服务器的负载压力不再成为整个网站的瓶颈。</p>
 <h3 id="解决集群后的Session问题"><a href="#解决集群后的Session问题" class="headerlink" title="解决集群后的Session问题"></a>解决集群后的Session问题</h3><p>当使用集群后，当第一次访问在服务器A上，则Session就建立在了服务器A上，如果不做处理，则无法保证接下来的请求每次都落在服务器A上，则存在Session问题，会话数据无法保存在单机上。</p>
 <p>解决方案有：</p>
 <ul>
@@ -596,7 +596,7 @@
 <li>将一个网站拆分为许多不同的应用，每个应用独立部署维护。<ul>
 <li>应用间通过超链接建立关系。</li>
 <li>也可以通过消息队列进行数据分发。</li>
-<li>最多的是通过访问同一个数据存储系统来构成一个关联的完整系统</li>
+<li>最多的是通过访问同一个数据存储系统来构成一个关联的完整系统。</li>
 </ul>
 </li>
 </ul>
@@ -606,44 +606,45 @@
 <p>即使一个订单表，也可以拆分为家电订单、图书订单。</p>
 <p>也可以依据时间拆分，即2018年的订单，2019年的订单。</p>
 <p>此时自增字段等不可用。</p>
-<h2 id="分布式服务"><a href="#分布式服务" class="headerlink" title="分布式服务"></a>分布式服务</h2><p><strong>问题：</strong></p>
+<h2 id="分布式服务"><a href="#分布式服务" class="headerlink" title="分布式服务"></a>分布式服务</h2><p><strong>问题</strong></p>
 <ul>
-<li>随着业务拆分越来越小，存储系统越来越大，应用系统的复杂性指数级增大，部署维护越来越困难</li>
-<li>所有应用都要与数据库系统相连接，数万台服务器中，连接的数目是服务器^2，导致数据库资源不足，拒绝服务</li>
+<li>随着业务拆分越来越小，存储系统越来越大，应用系统的复杂性指数级增大，部署维护越来越困难。</li>
+<li>所有应用都要与数据库系统相连接，数万台服务器中，连接的数目是服务器^2，导致数据库资源不足，拒绝服务。</li>
 </ul>
-<p><strong>解决方案：</strong></p>
+<p><strong>解决方案</strong></p>
 <ul>
-<li>将每一个应用系统需要执行的相同业务操作提取出来独立部署</li>
+<li>将每一个应用系统需要执行的相同业务操作提取出来独立部署。</li>
 <li>由这些可复用的业务连接数据库，提供公共的业务服务。</li>
-<li>应用系统只需要管理用户界面，通过分布式服务调用共用业务服务完成具体业务操作</li>
+<li>应用系统只需要管理用户界面，通过分布式服务调用共用业务服务完成具体业务操作。</li>
 </ul>
 <p><img src="/assets/1555050317233.png" alt="1555050317233"></p>
 <h2 id="云计算平台"><a href="#云计算平台" class="headerlink" title="云计算平台"></a>云计算平台</h2><p>当大型网站架构解决了海量数据管理和高并发事务的处理，就可以将这些解决方案应用到网站自身以外的业务上，即建设云计算平台，将计算作为一种基础资源出售。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="/assets/1566022529950.png" alt="1566022529950"></p>
-<h1 id="大型网站架构演化的价值观"><a href="#大型网站架构演化的价值观" class="headerlink" title="大型网站架构演化的价值观"></a>大型网站架构演化的价值观</h1><p>网站的价值在于它能够为用户提供什么样的价值，在于能做什么，而不是怎么做的</p>
-<p>因此在小网站上追求架构是舍本逐末的，需要做的就是为用户提供更好的服务创造价值</p>
+<h1 id="大型网站架构演化的价值观"><a href="#大型网站架构演化的价值观" class="headerlink" title="大型网站架构演化的价值观"></a>大型网站架构演化的价值观</h1><p>网站的价值在于它能够为用户提供什么样的价值，在于能做什么，而不是怎么做的。</p>
+<p>因此在小网站上追求架构是舍本逐末的，需要做的就是为用户提供更好的服务创造价值。</p>
 <p><strong>核心价值观：随网站所需灵活应对</strong></p>
-<p>核心价值是随着小型网站业务的逐步发展，慢慢演化为一个大型网站</p>
+<p>核心价值是随着小型网站业务的逐步发展，慢慢演化为一个大型网站。</p>
 <p><strong>驱动大型网站技术发展的主要力量：网站的业务发展</strong></p>
 <p>创新的业务发展模式对网站架构逐步提出了更高的要求，才使得创新的网站架构得以发展成熟。</p>
-<p>业务成就了技术，后努力提高技术回馈业务</p>
+<p>业务成就了技术，后努力提高技术回馈业务。</p>
 <h1 id="网站架构设计的误区"><a href="#网站架构设计的误区" class="headerlink" title="网站架构设计的误区"></a>网站架构设计的误区</h1><p><strong>一味追求大公司的解决方案</strong></p>
 <p><strong>为了技术而技术</strong></p>
 <p>网站技术是为业务而存在的，除此毫无意义。</p>
-<p>在技术选型和架构设计中，脱离网站业务发展的实际，一味追求技术，会使得架构之路越走越难</p>
+<p>在技术选型和架构设计中，脱离网站业务发展的实际，一味追求技术，会使得架构之路越走越难。</p>
 <p><strong>企图用技术解决所有问题</strong></p>
-<p>12306的故障问题</p>
+<p>12306的故障问题：</p>
 <ul>
-<li>真正的问题是在于业务架构<ul>
-<li>在几亿中国人一票难求的情况下进行窗口售票模式在网上售票（0点后出售若干天后的车票）</li>
-<li>是一种促销秒杀</li>
+<li>真正的问题是在于业务架构。<ul>
+<li>在几亿中国人一票难求的情况下进行窗口售票模式在网上售票（0点后出售若干天后的车票）。</li>
+<li>是一种促销秒杀。</li>
 </ul>
 </li>
-<li>进行分时段售票、排队机制等，控制并发访问的量</li>
+<li>进行分时段售票、排队机制等，控制并发访问的量。</li>
 </ul>
-<p>技术是解决业务问题，业务手段也可以解决业务问题</p>
+<p>技术是解决业务问题，业务手段也可以解决业务问题。</p>
+<p><strong>没有一劳永逸的解决方案</strong>，不当的解决方案只会带来更棘手的问题，真正的方案是在对问题的深刻理解上的创造和创建。</p>
 <h1 id="大型网站架构模式"><a href="#大型网站架构模式" class="headerlink" title="大型网站架构模式"></a>大型网站架构模式</h1><p>高并发下的方案选择需要依靠业务场景，进行方案的组合。</p>
-<h2 id="跨越JVM的一致性问题"><a href="#跨越JVM的一致性问题" class="headerlink" title="跨越JVM的一致性问题"></a>跨越JVM的一致性问题</h2><p><strong><em>强一致性</em></strong>：指分布式事务</p>
+<h2 id="跨越JVM的一致性问题"><a href="#跨越JVM的一致性问题" class="headerlink" title="跨越JVM的一致性问题"></a>跨越JVM的一致性问题</h2><p><strong><em>强一致性</em></strong>：指分布式事务。</p>
 <p><strong><em>最终一致性</em></strong>：通过补偿和记录的方式实现，在做所有不确定的事情前，先将事情记录下来，再去做不确定的事情。其结果有：</p>
 <ul>
 <li>成功：清除记录。</li>
@@ -667,7 +668,23 @@
 <td>提供数据存储访问服务，如数据库、缓存、文件等</td>
 </tr>
 </tbody></table>
-<p>各层之间具有一定的独立性，只要维持调用接口不变，各层可以根据具体问题独立发展演化，而不需要其它层做出调整</p>
+<p>各层之间具有一定的独立性，只要维持调用接口不变，各层可以根据具体问题独立发展演化，而不需要其它层做出调整。</p>
+<h2 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h2><p>分层与分割的一个主要目的是为了切分后的模块便于分布式部署，即将不同模块部署在不同的服务器上，通过远程协同工作。但是分布式带来了其他的问题：</p>
+<ul>
+<li>分布式意味着服务调用必须通过网络，这可能会对性能造成比较严重的影响。</li>
+<li>服务器越多，服务宕机的概率也就越大，一台服务器宕机可能导致很多应用不可访问，使得网站的可用性降低。</li>
+<li>数据在分布式环境下保持数据一致性也比较困难，分布式事务也难以保证，对网站业务正确性和业务流程有可能造成影响。</li>
+<li>分布式导致网络依赖错综复杂，开发管理维护困难。</li>
+</ul>
+<p>常见分布式应用方案：</p>
+<ul>
+<li>分布式应用和服务。</li>
+<li>分布式静态资源。</li>
+<li>分布式数据和存储。</li>
+<li>分布式计算。</li>
+<li>分布式配置、分布式锁、分布式文件系统等。</li>
+</ul>
+<h2 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h2><p>对于用户访问集中的模块，还需要将独立部署的服务器集群化，即多台服务器部署相同应用构成一个集群，通过负载均衡设备共同对外提供服务。</p>
 <h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><p>占用内存大小取决于工作内存内变量的多少与大小。</p>
 <p>单个线程占用的内存不会很大，但是很多线程占用内存就会很多。</p>
 <ul>
@@ -693,7 +710,21 @@
 <li>Cassandra。</li>
 <li>Hbase等。</li>
 </ul>
-<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存可以使用在APP端、网络转发端、服务端、存储端等位置，而不仅仅是在服务端。</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存可以使用在APP端、网络转发端、服务端、存储端等位置，而不仅仅是在服务端。现代CPU越来越快的一个重要因素就是使用了更多的缓存。</p>
+<ul>
+<li>CDN。内容分发网络，部署在距离终端用户最近的网络服务商，用户的网络请求总是先到达他的网络服务商那里，在这里缓存网站的一些静态资源或变化较少的数据，就可以以最快的速度返回给用户。<ul>
+<li>直播、门户网站、新闻APP。</li>
+</ul>
+</li>
+<li>反向代理。反向代理属于网站前端架构的一部分，部署在网站的前端，当用户请求到达网站的数据中心时，最先访问到的就是反向代理服务器，这里缓存网站的静态资源。</li>
+<li>本地缓存。在应用服务器本地缓存着热点数据，应用程序可以在本机内存中直接访问数据，而无需访问数据库。</li>
+<li>分布式缓存。大型网站的数据量非常大，即使只缓存一小部分，需要的内存空间也不是单机能够承受的。</li>
+</ul>
+<p>使用缓存有两个<strong>前提条件</strong>：</p>
+<ul>
+<li>数据访问热点不均衡，某些数据会被更频繁的访问，这些数据应该放在缓存中。</li>
+<li>数据在某个时间段内有效，不会很快过期，否则缓存的数据就会因已经失效而产生脏读。</li>
+</ul>
 <h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>开始流程A-&gt;发送消息A1到队列-&gt;消息A1被处理-&gt;处理消息A1。</p>
 <p><strong><em>特性</em></strong></p>
 <ul>
@@ -716,8 +747,8 @@
 <li>错峰、流控。将短板效应进行一定的弥补，针对延迟不敏感的服务可以实现错峰。</li>
 </ul>
 <h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><ul>
-<li>Kafka</li>
-<li>RabbitMQ</li>
+<li>Kafka。</li>
+<li>RabbitMQ。</li>
 </ul>
 <h2 id="应用拆分"><a href="#应用拆分" class="headerlink" title="应用拆分"></a>应用拆分</h2><p>从整体将一个应用拆分为多个应用。</p>
 <p><strong><em>原则</em></strong></p>
@@ -752,7 +783,7 @@
 <li>系统的守护线程一直在向令牌桶内部丢令牌。</li>
 <li>当请求到达时，桶内存在令牌，则执行业务。如果没有令牌则根据处理策略处理请求，但一定不会让你执行。</li>
 </ul>
-<p>对业务峰值有一定承担能力</p>
+<p>对业务峰值有一定承担能力。</p>
 <h2 id="服务降级与熔断"><a href="#服务降级与熔断" class="headerlink" title="服务降级与熔断"></a>服务降级与熔断</h2><h3 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h3><p>流量对一些服务和页面做有策略的降级，以此缓解保证部分或大部分的客户得到正确的响应。</p>
 <p>如果当前服务处理不了或请求出错了，则给出一个默认的返回。</p>
 <p>服务降级可以根据不同的接口做不同的或默认的定级。</p>
@@ -810,7 +841,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="高可用手段"><a href="#高可用手段" class="headerlink" title="高可用手段"></a>高可用手段</h2><ul>
+<h2 id="高可用手段"><a href="#高可用手段" class="headerlink" title="高可用手段"></a>高可用手段</h2><p>高可用的手段是数据和服务的冗余备份及失效转移，一旦某些服务器宕机，就将服务切换到其他可用的服务器上。</p>
+<ul>
 <li>任务调度系统分布式：elastic-job + zookeeper。</li>
 <li>主备切换：apache curator + zookeeper分布式锁实现。</li>
 <li>监控报警机制。</li>
@@ -905,7 +937,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">205</span>
+          <span class="site-state-item-count">209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1084,7 +1116,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">1.1.</span> <span class="nav-text">架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单一应用架构"><span class="nav-number">1.1.1.</span> <span class="nav-text">单一应用架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垂直应用架构"><span class="nav-number">1.1.2.</span> <span class="nav-text">垂直应用架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式服务架构"><span class="nav-number">1.1.3.</span> <span class="nav-text">分布式服务架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流动计算架构"><span class="nav-number">1.1.4.</span> <span class="nav-text">流动计算架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">1.2.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#雪崩"><span class="nav-number">1.2.1.</span> <span class="nav-text">雪崩</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站软件系统的特点"><span class="nav-number">2.</span> <span class="nav-text">大型网站软件系统的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构演化发展历程"><span class="nav-number">3.</span> <span class="nav-text">大型网站架构演化发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始阶段的网站架构"><span class="nav-number">3.1.</span> <span class="nav-text">初始阶段的网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用服务与数据服务分离"><span class="nav-number">3.2.</span> <span class="nav-text">应用服务与数据服务分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用缓存改善网站性能"><span class="nav-number">3.3.</span> <span class="nav-text">使用缓存改善网站性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用应用服务器集群改善网站的并发处理能力"><span class="nav-number">3.4.</span> <span class="nav-text">使用应用服务器集群改善网站的并发处理能力</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决集群后的Session问题"><span class="nav-number">3.4.1.</span> <span class="nav-text">解决集群后的Session问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库读写分离"><span class="nav-number">3.5.</span> <span class="nav-text">数据库读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用反向代理和CDN加速网站响应"><span class="nav-number">3.6.</span> <span class="nav-text">使用反向代理和CDN加速网站响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用分布式存储系统和分布式数据库系统"><span class="nav-number">3.7.</span> <span class="nav-text">使用分布式存储系统和分布式数据库系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用NoSQL和搜索引擎"><span class="nav-number">3.8.</span> <span class="nav-text">使用NoSQL和搜索引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分库分表"><span class="nav-number">3.9.</span> <span class="nav-text">分库分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式服务"><span class="nav-number">3.10.</span> <span class="nav-text">分布式服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云计算平台"><span class="nav-number">3.11.</span> <span class="nav-text">云计算平台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.12.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构演化的价值观"><span class="nav-number">4.</span> <span class="nav-text">大型网站架构演化的价值观</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网站架构设计的误区"><span class="nav-number">5.</span> <span class="nav-text">网站架构设计的误区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构模式"><span class="nav-number">6.</span> <span class="nav-text">大型网站架构模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#跨越JVM的一致性问题"><span class="nav-number">6.1.</span> <span class="nav-text">跨越JVM的一致性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分层"><span class="nav-number">6.2.</span> <span class="nav-text">分层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容"><span class="nav-number">6.3.</span> <span class="nav-text">扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扩容-数据库"><span class="nav-number">6.3.1.</span> <span class="nav-text">扩容-数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存"><span class="nav-number">6.4.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息队列"><span class="nav-number">6.5.</span> <span class="nav-text">消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优势"><span class="nav-number">6.5.1.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-number">6.5.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用拆分"><span class="nav-number">6.6.</span> <span class="nav-text">应用拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限流"><span class="nav-number">6.7.</span> <span class="nav-text">限流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限流算法"><span class="nav-number">6.7.1.</span> <span class="nav-text">限流算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务降级与熔断"><span class="nav-number">6.8.</span> <span class="nav-text">服务降级与熔断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务降级"><span class="nav-number">6.8.1.</span> <span class="nav-text">服务降级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务熔断"><span class="nav-number">6.8.2.</span> <span class="nav-text">服务熔断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库分库分表"><span class="nav-number">6.9.</span> <span class="nav-text">数据库分库分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高可用手段"><span class="nav-number">6.10.</span> <span class="nav-text">高可用手段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结-1"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">1.1.</span> <span class="nav-text">架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单一应用架构"><span class="nav-number">1.1.1.</span> <span class="nav-text">单一应用架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垂直应用架构"><span class="nav-number">1.1.2.</span> <span class="nav-text">垂直应用架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式服务架构"><span class="nav-number">1.1.3.</span> <span class="nav-text">分布式服务架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流动计算架构"><span class="nav-number">1.1.4.</span> <span class="nav-text">流动计算架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">1.2.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#雪崩"><span class="nav-number">1.2.1.</span> <span class="nav-text">雪崩</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站软件系统的特点"><span class="nav-number">2.</span> <span class="nav-text">大型网站软件系统的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构演化发展历程"><span class="nav-number">3.</span> <span class="nav-text">大型网站架构演化发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始阶段的网站架构"><span class="nav-number">3.1.</span> <span class="nav-text">初始阶段的网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用服务与数据服务分离"><span class="nav-number">3.2.</span> <span class="nav-text">应用服务与数据服务分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用缓存改善网站性能"><span class="nav-number">3.3.</span> <span class="nav-text">使用缓存改善网站性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用应用服务器集群改善网站的并发处理能力"><span class="nav-number">3.4.</span> <span class="nav-text">使用应用服务器集群改善网站的并发处理能力</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决集群后的Session问题"><span class="nav-number">3.4.1.</span> <span class="nav-text">解决集群后的Session问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库读写分离"><span class="nav-number">3.5.</span> <span class="nav-text">数据库读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用反向代理和CDN加速网站响应"><span class="nav-number">3.6.</span> <span class="nav-text">使用反向代理和CDN加速网站响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用分布式存储系统和分布式数据库系统"><span class="nav-number">3.7.</span> <span class="nav-text">使用分布式存储系统和分布式数据库系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用NoSQL和搜索引擎"><span class="nav-number">3.8.</span> <span class="nav-text">使用NoSQL和搜索引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分库分表"><span class="nav-number">3.9.</span> <span class="nav-text">分库分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式服务"><span class="nav-number">3.10.</span> <span class="nav-text">分布式服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云计算平台"><span class="nav-number">3.11.</span> <span class="nav-text">云计算平台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.12.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构演化的价值观"><span class="nav-number">4.</span> <span class="nav-text">大型网站架构演化的价值观</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网站架构设计的误区"><span class="nav-number">5.</span> <span class="nav-text">网站架构设计的误区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大型网站架构模式"><span class="nav-number">6.</span> <span class="nav-text">大型网站架构模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#跨越JVM的一致性问题"><span class="nav-number">6.1.</span> <span class="nav-text">跨越JVM的一致性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分层"><span class="nav-number">6.2.</span> <span class="nav-text">分层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式"><span class="nav-number">6.3.</span> <span class="nav-text">分布式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群"><span class="nav-number">6.4.</span> <span class="nav-text">集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩容"><span class="nav-number">6.5.</span> <span class="nav-text">扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扩容-数据库"><span class="nav-number">6.5.1.</span> <span class="nav-text">扩容-数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存"><span class="nav-number">6.6.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息队列"><span class="nav-number">6.7.</span> <span class="nav-text">消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优势"><span class="nav-number">6.7.1.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-number">6.7.2.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用拆分"><span class="nav-number">6.8.</span> <span class="nav-text">应用拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限流"><span class="nav-number">6.9.</span> <span class="nav-text">限流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限流算法"><span class="nav-number">6.9.1.</span> <span class="nav-text">限流算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务降级与熔断"><span class="nav-number">6.10.</span> <span class="nav-text">服务降级与熔断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务降级"><span class="nav-number">6.10.1.</span> <span class="nav-text">服务降级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务熔断"><span class="nav-number">6.10.2.</span> <span class="nav-text">服务熔断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库分库分表"><span class="nav-number">6.11.</span> <span class="nav-text">数据库分库分表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高可用手段"><span class="nav-number">6.12.</span> <span class="nav-text">高可用手段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结-1"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1120,7 +1152,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">40:17</span>
+    <span title="站点阅读时长">40:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

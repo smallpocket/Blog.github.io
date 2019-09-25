@@ -57,13 +57,13 @@
   };
 </script>
 
-  <meta name="description" content="运输层概述与运输层服务目的  两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信 控制运输层实体的传输速率以避免网络拥塞，或从拥塞中恢复  运输层与网络层的关系 网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘 网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供">
+  <meta name="description" content="运输层提出问题 两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信。  是什么运输层与网络层的关系 网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘 网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节">
 <meta name="keywords" content="计算机网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络：运输层">
 <meta property="og:url" content="http://yoursite.com/2019/04/08/计算机网络/计算机网络：运输层/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="运输层概述与运输层服务目的  两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信 控制运输层实体的传输速率以避免网络拥塞，或从拥塞中恢复  运输层与网络层的关系 网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘 网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供">
+<meta property="og:description" content="运输层提出问题 两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信。  是什么运输层与网络层的关系 网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘 网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/assets/d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/55dc4e84-573d-4c13-a765-52ed1dd251f9.png">
@@ -75,10 +75,10 @@
 <meta property="og:image" content="http://yoursite.com/assets/51e2ed95-65b8-4ae9-8af3-65602d452a25-1553268328299.jpg">
 <meta property="og:image" content="http://yoursite.com/assets/910f613f-514f-4534-87dd-9b4699d59d31.png">
 <meta property="og:image" content="http://yoursite.com/assets/f61b5419-c94a-4df1-8d4d-aed9ae8cc6d5.png">
-<meta property="og:updated_time" content="2019-08-16T03:41:54.234Z">
+<meta property="og:updated_time" content="2019-09-24T09:36:06.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络：运输层">
-<meta name="twitter:description" content="运输层概述与运输层服务目的  两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信 控制运输层实体的传输速率以避免网络拥塞，或从拥塞中恢复  运输层与网络层的关系 网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘 网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供">
+<meta name="twitter:description" content="运输层提出问题 两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信。  是什么运输层与网络层的关系 网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘 网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节">
 <meta name="twitter:image" content="http://yoursite.com/assets/d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg">
   <link rel="canonical" href="http://yoursite.com/2019/04/08/计算机网络/计算机网络：运输层/">
 
@@ -335,7 +335,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-16 11:41:54" itemprop="dateModified" datetime="2019-08-16T11:41:54+08:00">2019-08-16</time>
+                <time title="修改时间：2019-09-24 17:36:06" itemprop="dateModified" datetime="2019-09-24T17:36:06+08:00">2019-09-24</time>
               </span>
             
           
@@ -363,7 +363,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">6.3k</span>
+              <span title="本文字数">8.8k</span>
             </span>
           
             <span class="post-meta-item">
@@ -373,7 +373,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">12 分钟</span>
+              <span title="阅读时长">16 分钟</span>
             </span>
           
 
@@ -386,171 +386,232 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h1><h1 id="概述与运输层服务"><a href="#概述与运输层服务" class="headerlink" title="概述与运输层服务"></a>概述与运输层服务</h1><p>目的</p>
-<ul>
-<li>两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信</li>
-<li>控制运输层实体的传输速率以避免网络拥塞，或从拥塞中恢复</li>
+        <h1 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><ul>
+<li>两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信。</li>
 </ul>
-<p><strong>运输层与网络层的关系</strong></p>
-<p>网络层提供了主机之间逻辑通信，运输层为运行在不同主机上的进程之间提供了逻辑通信。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘</p>
+<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p><strong><em>运输层与网络层的关系</em></strong></p>
+<p>网络层提供了<strong>主机之间逻辑通信</strong>，运输层为<strong>运行在不同主机上的进程之间提供了逻辑通信</strong>。运输层协议只工作在端系统中，将来自应用进程的报文移动到网络边缘</p>
 <p>网络层只把分组发送到目的主机，但是真正通信的并不是主机而是主机中的进程。传输层提供了进程间的逻辑通信，传输层向高层用户屏蔽了下面网络层的核心细节，使应用程序看起来像是在两个传输层实体之间有一条端到端的逻辑通信信道。</p>
-<h2 id="服务模型"><a href="#服务模型" class="headerlink" title="服务模型"></a>服务模型</h2><p>最基本的责任是将两个端系统间IP的交付服务扩展到运行在端系统上的两个进程的交付服务，被称为是运输层的<strong>多路复用与多路分解</strong></p>
-<h3 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h3><p>进程拥有一个或多个套接字socket，相当于从网络向进程传递数据和进程向网络传递信息的门户，运输层与进程通信，是运输层将数据传递给socket。</p>
+<p><strong><em>运行</em></strong></p>
+<p>运输层协议是在端系统当中实现的，在发送端运输层将从发送应用程序进程接收到的报文转换成运输层分组；在发送端系统运输层将这些报文段传递给网络层，网络层将其封装成网络层数据报并发送向目的地。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ul>
+<li>为运行在不同主机上的应用进程提供直接的通信服务起着至关重要的作用。</li>
+<li>两个实体怎么样才能在一种会丢失或损坏数据的媒体上建立可靠的通信。</li>
+<li>控制运输层实体的传输速率以避免网络拥塞，或从拥塞中恢复。</li>
+</ul>
+<p>可提供的功能：</p>
+<ul>
+<li>可靠数据传输。</li>
+<li>拥塞控制。</li>
+</ul>
+<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>运输层协议为运行在不同主机上的应用进程之间提供了<strong>逻辑通信功能</strong>。从应用程序的角度看，通过逻辑通信，运行在不同进程的主机好像直接相连一样。应用进程使用运输层提供的逻辑通信功能彼此发送报文，而无需考虑承载这些报文的物理基础设施的细节。</p>
+<h2 id="服务模型"><a href="#服务模型" class="headerlink" title="服务模型"></a>服务模型</h2><p>最基本的责任是将两个端系统间IP的交付服务扩展到运行在端系统上的两个进程的交付服务，被称为是运输层的<strong>多路复用与多路分解</strong>。</p>
+<h3 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h3><p>进程拥有一个或多个套接字socket（TCP、UDP等），相当于从网络向进程传递数据和进程向网络传递信息的门户，运输层与进程通信，是运输层将数据传递给socket。</p>
 <p>多路分解：将运输层报文段中的数据交付到正确的套接字的工作。运输层检查达运输层的报文，标识出接收套接字，将报文段定向到该套接字。</p>
 <p>多路复用：在源主机从不同的套接字收集数据块，并未每个数据块装上首部信息，生成报文段传递到网络层。</p>
-<p>分解与复用依据：源IP，源端口，目的IP，目的端口</p>
-<p>UDP套接字：目的IP,目的端口。但是报文依然有着源IP与端口，两个不同源的报文会被定向到同一进程</p>
-<p>TCP：源IP，源端口，目的IP，目的端口。两个不同源的报文会被定向到<strong>不同</strong>进程</p>
-<h1 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h1><p><strong>提供的运输层服务</strong></p>
-<p>最低限度的运输层服务</p>
+<p>分解与复用依据：源IP，源端口，目的IP，目的端口（端口号是16比特的）。</p>
+<p>UDP套接字：目的IP,目的端口。但是报文依然有着源IP与端口，两个不同源的报文会被定向到同一进程。</p>
+<p>TCP：源IP，源端口，目的IP，目的端口。两个不同源的报文会被定向到<strong>不同</strong>进程。</p>
+<h2 id="可靠数据传输机制"><a href="#可靠数据传输机制" class="headerlink" title="可靠数据传输机制"></a>可靠数据传输机制</h2><p>对于IP服务，数据报能够溢出路由器缓存而永远不能到达目的地，数据报也可能是乱序到达，而且数据报中的比特可能损坏。由于运输层报文段是被IP数据报携带着在网络中传输的，因此运输层的报文段也会带来这种问题。</p>
 <ul>
-<li>检查报文段首部差错字段而提供完整性检查</li>
-<li>数据交付</li>
+<li>检验和。用于检测在一个传输分组中的比特错误。</li>
+<li>定时器。用于超时/重传一个分组，可能因为该分组或其ACK在信道中丢失了。由于当一个分组延时但未丢失，或当一个分组已经被接收方收到但ACK丢失时，可能产生超时事件，所以接收方可能会收到一个分组的多个冗余副本。</li>
+<li>序号。用于为从发送方流向接收方的数据分组按序号编号。所接收分组的序号间的空隙可使得接收方检测出丢失的分组。具有相同序号的分组可使得接收方检测出一个分组的冗余副本。</li>
+<li>确认。接收方用于告诉发送方一个分组或一组分组已被正确地接收到了。确认报文通常携带着被确认的分组或多个分组的序号。确认可以是逐个的或累积的，这取决于协议。</li>
+<li>否定确认。接收方用于告诉发送方某个分组未被正确地接收。否定确认报文通常携带着未被正确接收的分组的序号。</li>
+<li>窗口、流水线。发送方也许被限制仅发送那些序号落在一个指定范围内的分组。通过允许一次发送多个分组但未被确认，发送方的利用率可在停等操作模式的基础上得到增加。窗口长度可根据接收方接收和缓存报文的能力、网络中的拥塞程度或两者情况来进行设置。</li>
 </ul>
-<p>即 用户数据报协议</p>
+<h1 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h1><p><strong>提供的运输层服务</strong>。</p>
+<p>最低限度的运输层服务，只是做了运输协议能够做的最少工作，使用UDP即类似直接与IP协议交互：</p>
+<ul>
+<li>检查报文段首部差错字段而提供完整性检查。</li>
+<li>数据交付。</li>
+</ul>
+<p>即用户数据报协议。</p>
 <blockquote>
 <ol>
-<li>属于 传输层通信协议</li>
-<li>基于<code>UDP</code>的应用层协议有 <code>TFTP</code>、<code>SNMP</code> 与 <code>DNS</code></li>
+<li>属于传输层通信协议。</li>
+<li>基于<code>UDP</code>的应用层协议有<code>TFTP</code>、<code>SNMP</code>与<code>DNS</code>。</li>
 </ol>
 </blockquote>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
-<li>UDP 是无连接的；</li>
-<li>UDP 使用尽最大努力交付，即不保证可靠交付，因此主机不需要维持复杂的链接状态（这里面有许多参数），因此可以支持更多的用户；</li>
-<li>UDP 是面向报文的；（对于应用程序传下来的报文不合并也不拆分，只是添加 UDP 首部）<ul>
+<li>UDP是无连接的。</li>
+<li>UDP使用尽最大努力交付，即不保证可靠交付，因此主机不需要维持复杂的链接状态（这里面有许多参数），因此可以支持更多的用户。</li>
+<li>UDP是面向报文的（对于应用程序传下来的报文不合并也不拆分，只是添加UDP首部）。<ul>
 <li>因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小。UDP对应用层交下来的报文，既不合并，也不拆分，而是保留这些报文的边界。这也就是说，应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。</li>
 </ul>
 </li>
-<li>UDP 没有拥塞控制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如 直播，实时视频会议等）；</li>
-<li>UDP 支持一对一、一对多、多对一和多对多的交互通信；</li>
-<li>UDP 的首部开销小，只有8个字节，比TCP的20个字节的首部要短。</li>
+<li>UDP没有拥塞控制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如直播，实时视频会议等）。</li>
+<li>UDP支持一对一、一对多、多对一和多对多的交互通信。</li>
+<li>UDP的首部开销小，只有8个字节，比TCP的20个字节的首部要短。</li>
 </ul>
-<h2 id="为什么使用UDP"><a href="#为什么使用UDP" class="headerlink" title="为什么使用UDP"></a>为什么使用UDP</h2><ol>
-<li>UDP关于何时、发送什么数据控制更为精细。UDP的效率更高，速度更快。而TCP还有拥堵</li>
-<li>UDP不引入连接握手，不引入时延</li>
-</ol>
+<h2 id="为什么使用UDP"><a href="#为什么使用UDP" class="headerlink" title="为什么使用UDP"></a>为什么使用UDP</h2><ul>
+<li>UDP关于何时、发送什么数据控制更为精细。只要应用进程将数据传递给UDP，UDP就回将此数据打包金UDP报文并立即将其传递给网络层。<ul>
+<li>UDP的效率更高，速度更快；而TCP还有拥堵，TCP依然需要确认目的主机真实收到了报文。</li>
+<li>实时应用通常要求最小的发送速率，不希望过分地延迟报文段的传送，且能容忍一些数据丢失。</li>
+</ul>
+</li>
+<li>UDP不引入连接握手，不引入时延。</li>
+<li>无连接状态。不需要维护过多的状态参数，使用UDP的应用程序一般能支持更多的活跃客户。</li>
+<li>首部字节开销小。</li>
+</ul>
 <h2 id="UDP-首部格式"><a href="#UDP-首部格式" class="headerlink" title="UDP 首部格式"></a>UDP 首部格式</h2><p><img src="/assets/d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg" alt="d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg"></p>
-<p>首部字段只有 8 个字节，包括源端口、目的端口、长度、检验和。12 字节的伪首部是为了计算检验和临时添加的。</p>
-<p>UDP<strong>的差错检验</strong></p>
-<p>​    由UDP检验和提供，即对报文段的所有16位比特字的和进行反码运算，求和时候遇到的溢出进行回卷，即结果。在接受方的正确结果应该是1111111111111111，如果有一个0，则出现了差错。</p>
-<p>​    设计原因：端到端原则，某种功能必须基于端到端实现，在低级别设置功能可能是冗余的甚至完全没有价值的。即使网络中间进行了检测，但依然无法确保链路与路由器内存的可靠性。</p>
-<h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p>即 传输控制协议</p>
+<p>首部字段只有8个字节，包括源端口、目的端口、长度、检验和。12字节的伪首部是为了计算检验和临时添加的。</p>
+<ul>
+<li>端口号可以使得目的主机进行多路分解。</li>
+<li>长度指示了在UDP报文中的字节数（首部加数据）。接收方使用检验和来检查报文段是否出现了差错。</li>
+</ul>
+<p>UDP<strong>的差错检验</strong>：</p>
+<p>由UDP检验和提供，发送方的UDP对报文段的所有16位比特字的和进行反码运算。求和时候遇到的溢出进行回卷（最高位换到最低位，低位继续向高位进），对求和得到的结果进行反码，并放在UDP报文段中的检验和字段。</p>
+<p>因此在接受方的计算结果与检验和相加的结果应该是1111111111111111，如果有一个0，则出现了差错。</p>
+<p>设计原因：端到端原则，某种功能必须基于端到端实现，在低级别设置功能可能是冗余的甚至完全没有价值的。即使网络中间进行了检测，但依然无法确保链路与路由器内存的可靠性。</p>
+<h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p>即传输控制协议：</p>
 <blockquote>
 <ol>
-<li>属于 传输层通信协议</li>
-<li>基于<code>TCP</code>的应用层协议有<code>HTTP</code>、<code>SMTP</code>、<code>FTP</code>、<code>Telnet</code> 和 <code>POP3</code></li>
+<li>属于传输层通信协议。</li>
+<li>基于<code>TCP</code>的应用层协议有<code>HTTP</code>、<code>SMTP</code>、<code>FTP</code>、<code>Telnet</code>和<code>POP3</code>。</li>
 </ol>
 </blockquote>
+<p>TCP有差错检测、重传、累积确认、定时器以及用于序号和确认号的首部字段。</p>
 <h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
-<li>TCP 是面向连接的。（就好像打电话一样，通话前需要先拨号建立连接，通话结束后要挂机释放连接）；</li>
-<li>每一条 TCP 连接只能有两个端点，每一条TCP连接只能是点对点的（一对一）；</li>
-<li>TCP 提供可靠交付的服务。通过TCP连接传送的数据，无差错、不丢失、不重复、并且按序到达；</li>
-<li>TCP 提供全双工通信。TCP 允许通信双方的应用进程在任何时候都能发送数据。TCP 连接的两端都设有发送缓存和接收缓存，用来临时存放双方通信的数据；</li>
-<li>面向字节流。TCP 中的“流”（Stream）指的是流入进程或从进程流出的字节序列。“面向字节流”的含义是：虽然应用程序和 TCP 的交互是一次一个数据块（大小不等），但 TCP 把应用程序交下来的数据仅仅看成是一连串的无结构的字节流。<ul>
+<li>TCP是面向连接的。（就好像打电话一样，通话前需要先拨号建立连接，通话结束后要挂机释放连接）。</li>
+<li>每一条TCP连接只能有两个端点，每一条TCP连接只能是点对点的（一对一）。<ul>
+<li>TCP提供全双工通信。TCP允许通信双方的应用进程在任何时候都能发送数据。TCP连接的两端都设有发送缓存和接收缓存，用来临时存放双方通信的数据。</li>
+</ul>
+</li>
+<li>TCP提供可靠交付的服务。通过TCP连接传送的数据，无差错、不丢失、不重复、并且按序到达。</li>
+<li>面向字节流。TCP中的“流”（Stream）指的是流入进程或从进程流出的字节序列。“面向字节流”的含义是：虽然应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序交下来的数据仅仅看成是一连串的无结构的字节流。<ul>
 <li>TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送。如果应用程序一次只发送一个字节，TCP也可以等待积累有足够多的字节后再构成报文段发送出去。</li>
 </ul>
 </li>
 </ul>
-<p>进程将数据发送到缓存当中，TCP在方便时候取出缓存数据发送</p>
+<p>进程将数据发送到缓存当中，TCP在方便时候取出缓存数据发送。</p>
 <h3 id="TCP-首部格式"><a href="#TCP-首部格式" class="headerlink" title="TCP 首部格式"></a>TCP 首部格式</h3><p><img src="/assets/55dc4e84-573d-4c13-a765-52ed1dd251f9.png" alt="55dc4e84-573d-4c13-a765-52ed1dd251f9.png"></p>
 <ul>
-<li><strong>序号</strong> ：用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。</li>
-<li><strong>确认号</strong> ：期望收到的下一个报文段的序号。例如 B 正确收到 A 发送来的一个报文段，序号为 501，携带的数据长度为 200 字节，因此 B 期望下一个报文段的序号为 701，B 发送给 A 的确认报文段中确认号就为 701。</li>
-<li><strong>数据偏移</strong> ：指的是数据部分距离报文段起始处的偏移量，实际上指的是首部的长度。</li>
-<li><strong>确认 ACK</strong> ：当 ACK=1 时确认号字段有效，否则无效。TCP 规定，在连接建立后所有传送的报文段都必须把 ACK 置 1。</li>
-<li><strong>同步 SYN</strong> ：在连接建立时用来同步序号。当 SYN=1，ACK=0 时表示这是一个连接请求报文段。若对方同意建立连接，则响应报文中 SYN=1，ACK=1。</li>
-<li><strong>终止 FIN</strong> ：用来释放一个连接，当 FIN=1 时，表示此报文段的发送方的数据已发送完毕，并要求释放连接。</li>
-<li><strong>窗口</strong> ：窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。</li>
+<li><strong>序号</strong>：用于对字节流进行编号，例如序号为301，表示第一个字节的编号为301，如果携带的数据长度为100字节，那么下一个报文段的序号应为401。<ul>
+<li>TCP连接双方可以随机地选择初始序号，可以减少将那些仍在网络中存在的来自两台主机间先前已终止的连接的报文段，误认为是新建立连接所产生的有效报文段的可能性。</li>
+<li>TCP将数据看作是无结构的、有序的字节流。序号是建立在传送的字节流上的，而不是建立在传送的报文段的序列上。一个报文段的序号因此是该报文段首字节的字节流编号。</li>
+<li>当主机A通过TCP连接向主机B传输一个数据流，A使用的TCP连接将隐式地对数据流中的每一个字节编号。假定有500000字节，MSS为1000，则数据流的首字节编号为0，第二个报文序号为1000。</li>
+</ul>
+</li>
+<li><strong>确认号</strong>：期望收到的下一个报文段的序号。例如B正确收到A发送来的一个报文段，序号为501，携带的数据长度为200字节，因此B期望下一个报文段的序号为701，B发送给A的确认报文段中确认号就为701。<ul>
+<li>TCP是全双工的，因此主机A向主机B发送数据的同时，也许会接收到来自B的数据。A填充进报文段的确认号是主机A期望从B收到的下一字节的序号。</li>
+</ul>
+</li>
+<li><strong>数据偏移</strong>：指的是数据部分距离报文段起始处的偏移量，实际上指的是首部的长度。由于TCP选项字段的原因，TCP首部的长度是可变的，通常该值为空，即为20字节。</li>
+<li><strong>确认ACK</strong>：当ACK = 1时确认号字段有效，否则无效。TCP规定，在连接建立后所有传送的报文段都必须把ACK置1。</li>
+<li><strong>同步SYN</strong>：在连接建立时用来同步序号。当SYN = 1，ACK = 0时表示这是一个连接请求报文段。若对方同意建立连接，则响应报文中SYN = 1，ACK = 1。</li>
+<li><strong>终止FIN</strong>：用来释放一个连接，当FIN = 1时，表示此报文段的发送方的数据已发送完毕，并要求释放连接。</li>
+<li><strong>接收窗口</strong>：窗口值作为接收方让发送方设置其发送窗口的依据。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。</li>
+<li><strong>选项字段</strong>：用于发送方和接收方协商最大报文段长度MSS时，或在高速网络环境下用作窗口调节因子使用。</li>
 </ul>
 <h3 id="TCP-的三次握手"><a href="#TCP-的三次握手" class="headerlink" title="TCP 的三次握手"></a>TCP 的三次握手</h3><p><img src="/assets/1553268055581.png" alt="1553268055581"></p>
 <p>假设A为客户端，B为服务器端。</p>
 <ul>
 <li>首先B处于LISTEN（监听）状态，等待客户的连接请求。</li>
-<li>A向B发送连接请求报文，SYN = 1，ACK = 0，选择一个初始的序号seq = x。</li>
-<li>B收到连接请求报文，如果同意建立连接，则向 A 发送连接确认报文，SYN = 1，ACK = 1，确认号为x + 1，同时也选择一个初始的序号y。</li>
-<li>A收到B的连接确认报文后，还要向B发出确认，确认号为y + 1，序号为x + 1。</li>
+<li>A向B发送连接请求报文，SYN = 1，ACK = 0，选择一个初始的序号seq = x。<ul>
+<li>报文段不包含应用层数据，该特殊报文段也被称为SYN报文段。</li>
+<li>随机选择初始序号也有一些出于避免一些安全性攻击的考虑。</li>
+</ul>
+</li>
+<li>B收到连接请求报文，如果同意建立连接，则向A发送连接确认报文，SYN = 1，ACK = 1，确认号为x + 1，同时也选择一个初始的序号y。<ul>
+<li>B此时会为该TCP连接分配TCP缓存和变量。但此设计使得TCP容易受到SYN洪泛的拒绝服务攻击。</li>
+<li>该报文段也不包含应用层数据，有时也被称为SYNACK报文段。</li>
+</ul>
+</li>
+<li>A收到B的连接确认报文后，还要向B发出确认，确认号为y + 1，序号为x + 1。<ul>
+<li>A为该TCP连接分配缓存和变量。</li>
+<li>此次报文段会负载客户到服务器的数据。</li>
+</ul>
+</li>
 <li>B收到A的确认后，连接建立。</li>
 </ul>
 <p><strong>三次握手的原因</strong></p>
 <p>第三次握手是为了防止失效的连接请求到达服务器，让服务器错误打开连接。</p>
 <p>客户端发送的连接请求如果在网络中滞留，那么就会隔很长一段时间才能收到服务器端发回的连接确认。客户端等待一个超时重传时间之后，就会重新请求连接。但是这个滞留的连接请求最后还是会到达服务器，如果不进行三次握手，那么服务器就会打开两个连接。如果有第三次握手，客户端会忽略服务器之后发送的对滞留连接请求的连接确认，不进行第三次握手，因此就不会再次打开连接。</p>
-<p><strong>为什么要传回 SYN</strong></p>
-<p>接收端传回发送端所发送的 SYN 是为了告诉发送端，我接收到的信息确实就是你所发送的信号了。</p>
-<p><strong>传了 SYN,为啥还要传 ACK</strong></p>
-<p>双方通信无误必须是两者互相发送信息都无误。传了 SYN，证明发送方到接收方的通道没有问题，但是接收方到发送方的通道还需要 ACK 信号来进行验证。</p>
+<p><strong>为什么要传回SYN</strong></p>
+<p>接收端传回发送端所发送的SYN是为了告诉发送端，我接收到的信息确实就是你所发送的信号了。</p>
+<p><strong>传了SYN,为啥还要传ACK</strong></p>
+<p>双方通信无误必须是两者互相发送信息都无误。传了SYN，证明发送方到接收方的通道没有问题，但是接收方到发送方的通道还需要ACK信号来进行验证。</p>
 <p><strong>握手的核心目的</strong></p>
 <p>握手的核心目的是告知对方seq，对方回复ack（收到的seq+包的大小），这样发送端就知道有没有丢包了。</p>
-<h3 id="TCP-的四次挥手"><a href="#TCP-的四次挥手" class="headerlink" title="TCP 的四次挥手"></a>TCP 的四次挥手</h3><p><img src="/assets/f87afe72-c2df-4c12-ac03-9b8d581a8af8.jpg" alt="img"></p>
-<p>以下描述不讨论序号和确认号，因为序号和确认号的规则比较简单。并且不讨论 ACK，因为 ACK 在连接建立之后都为 1。</p>
+<p><strong>数据报</strong></p>
+<p>前两个报文段是不承载应用层数据的，而第三个报文段可以承载应用层数据。</p>
+<h3 id="TCP-流程"><a href="#TCP-流程" class="headerlink" title="TCP 流程"></a>TCP 流程</h3><p>当建立了一条TCP连接，两个应用进程间就可以相互发送数据了。考虑客户进程向服务器进程发送数据的情况，客户进程通过套接字传递数据流，数据一旦通过该门，就由客户中运行的TCP控制了。</p>
+<p>TCP将这些数据引导到该连接的发送缓存中，发送缓存是在3此握手初期设置的缓存之一，之后TCP会不时从发送缓存中取出一块数据，RFC规范描述为TCP应该在它方便的时候以报文段的形式发送数据。</p>
+<p>TCP可从缓存中取出并放入报文段中的数据数量受限于<strong>最大报文段长度</strong>（MSS），MSS通常根据最初确定的由本地发送主机发送的最大链路层帧长度（<strong>最大传输单元</strong>，MTU）。设置该MSS要保证一个TCP报文段（当封装在一个IP数据报中）加上TCP/IP首部长度（一般40字节）将适合单个链路层帧。以太网和PPP链路层协议都具有1500字节的MTU，因此典型的MSS=1460。</p>
+<p>TCP为每块客户数据配上一个TCP首部，从而形成多个TCP报文段。TCP连接的每一端都有各自的发送缓存和接收缓存。即在TCP连接的组成包括：</p>
 <ul>
-<li>A 发送连接释放报文，FIN=1。</li>
-<li>B 收到之后发出确认，此时 TCP 属于半关闭状态，B 能向 A 发送数据但是 A 不能向 B 发送数据。</li>
-<li>当 B 不再需要连接时，发送连接释放报文，FIN=1。</li>
-<li>A 收到后发出确认，进入 TIME-WAIT 状态，等待 2 MSL（最大报文存活时间）后释放连接。</li>
-<li>B 收到 A 的确认后释放连接。</li>
+<li>两台主机上各自的缓存、变量和进程连接的套接字。</li>
+</ul>
+<h3 id="TCP-的四次挥手"><a href="#TCP-的四次挥手" class="headerlink" title="TCP 的四次挥手"></a>TCP 的四次挥手</h3><p><img src="/assets/f87afe72-c2df-4c12-ac03-9b8d581a8af8.jpg" alt="img"></p>
+<p>以下描述不讨论序号和确认号，因为序号和确认号的规则比较简单。并且不讨论ACK，因为ACK在连接建立之后都为1。</p>
+<ul>
+<li>A发送连接释放报文，FIN = 1。</li>
+<li>B收到之后发出确认，此时TCP属于半关闭状态，B能向A发送数据但是A不能向B发送数据。</li>
+<li>当B不再需要连接时，发送连接释放报文，FIN = 1。</li>
+<li>A收到后发出确认，进入TIME-WAIT状态，等待2 * MSL（最大报文存活时间）后释放连接。</li>
+<li>B收到A的确认后释放连接。</li>
 </ul>
 <p><strong>四次挥手的原因</strong></p>
-<p>客户端发送了 FIN 连接释放报文之后，服务器收到了这个报文，就进入了 CLOSE-WAIT 状态。这个状态是为了让服务器端发送还未传送完毕的数据，传送完毕之后，服务器会发送 FIN 连接释放报文。</p>
-<p>因此，如果没有还未传送完的数据，syn+fin一起发送，那就三次了</p>
+<p>客户端发送了FIN连接释放报文之后，服务器收到了这个报文，就进入了CLOSE-WAIT状态。这个状态是为了让服务器端发送还未传送完毕的数据，传送完毕之后，服务器会发送FIN连接释放报文。</p>
+<p>因此，如果没有还未传送完的数据SYN + FIN一起发送，那就三次了</p>
 <p><strong>TIME_WAIT</strong></p>
-<p>客户端接收到服务器端的 FIN 报文后进入此状态，此时并不是直接进入 CLOSED 状态，还需要等待一个时间计时器设置的时间 2MSL。这么做有两个理由：</p>
+<p>客户端接收到服务器端的FIN报文后进入此状态，此时并不是直接进入CLOSED状态，还需要等待一个时间计时器设置的时间2 * MSL。这么做有两个理由：</p>
 <ul>
-<li>确保最后一个确认报文能够到达。如果 B 没收到 A 发送来的确认报文，那么就会重新发送连接释放请求报文，A 等待一段时间就是为了处理这种情况的发生。</li>
+<li>确保最后一个确认报文能够到达。如果B没收到A发送来的确认报文，那么就会重新发送连接释放请求报文，A等待一段时间就是为了处理这种情况的发生。</li>
 <li>等待一段时间是为了让本连接持续时间内所产生的所有报文都从网络中消失，使得下一个新的连接不会出现旧的连接请求报文。</li>
 </ul>
-<h3 id="TCP-可靠传输"><a href="#TCP-可靠传输" class="headerlink" title="TCP 可靠传输"></a>TCP 可靠传输</h3><p>包含确认、定时器、重传、序号机制来保证可靠传输</p>
-<p>底层通信是一个不靠谱的点对点通信</p>
-<p>TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文段在超时时间内没有收到确认，那么就重传这个报文段。</p>
-<p>一个报文段从发送再到接收到确认所经过的时间称为往返时间 RTT，加权平均往返时间 RTTs 计算如下：</p>
-<p><img src="/assets/gif.gif" alt="img"></p>
-<p>其中，0 ≤ α ＜ 1，RTTs 随着 α 的增加更容易受到 RTT 的影响。</p>
-<p>超时时间 RTO 应该略大于 RTTs，TCP 使用的超时时间计算如下：</p>
-<p><img src="/assets/gif-1553268291860.gif" alt="img"></p>
-<p>其中 RTTd 为偏差的加权平均值。</p>
-<h4 id="TCP协议如何来保证传输的可靠性"><a href="#TCP协议如何来保证传输的可靠性" class="headerlink" title="TCP协议如何来保证传输的可靠性"></a>TCP协议如何来保证传输的可靠性</h4><p>TCP提供一种面向连接的、可靠的字节流服务。其中，面向连接意味着两个使用TCP的应用（通常是一个客户和一个服务器）在彼此交换数据之前必须先建立一个TCP连接。在一个TCP连接中，仅有两方进行彼此通信；而字节流服务意味着两个应用程序通过TCP链接交换8bit字节构成的字节流，TCP不在字节流中插入记录标识符。</p>
+<h3 id="TCP-可靠传输"><a href="#TCP-可靠传输" class="headerlink" title="TCP 可靠传输"></a>TCP 可靠传输</h3><p>可靠数据传输：数据可以通过一条可靠的信道进行传输。借助于可靠信道，传输数据比特就不会受到损坏（由0 -&gt; 1或相反）或丢失，而且所有数据都是按照其发送顺序进行交付。</p>
+<p>底层通信是一个不靠谱的点对点通信，例如IP协议。TCP包含确认、定时器、重传、序号机制来保证可靠传输。</p>
+<p>TCP提供一种面向连接的、可靠的字节流服务。其中，面向连接意味着两个使用TCP的应用（通常是一个客户和一个服务器）在彼此交换数据之前必须先建立一个TCP连接。在一个TCP连接中，仅有两方进行彼此通信；而字节流服务意味着两个应用程序通过TCP链接交换8bit字节构成的字节流，TCP不在字节流中插入记录标识符。</p>
 <p>对于可靠性，TCP通过以下方式进行保证：</p>
-<ul>
-<li>数据包校验：目的是检测数据在传输过程中的任何变化，若校验出包有错，则丢弃报文段并且不给出响应，这时TCP发送数据端超时后会重发数据；</li>
-<li>对失序数据包重排序：既然TCP报文段作为IP数据报来传输，而IP数据报的到达可能会失序，因此TCP报文段的到达也可能会失序。TCP将对失序数据进行重新排序，然后才交给应用层；对于失序且缺失前面序号的数据，TCP将问题交给编程人员，可以保留（对于带宽而言更有效），也可以丢弃</li>
-<li>丢弃重复数据：对于重复数据，能够丢弃重复数据；</li>
-<li>应答机制：当TCP收到发自TCP连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几分之一秒；</li>
-<li>超时重发：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段；</li>
-<li>流量控制：TCP连接的每一方都有固定大小的缓冲空间。TCP的接收端只允许另一端发送接收端缓冲区所能接纳的数据，这可以防止较快主机致使较慢主机的缓冲区溢出，这就是流量控制。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li>
-<li>累积确认：在收到失序的报文段，返回确认号字段为第一个失序号</li>
-</ul>
+<p><strong><em>数据包校验</em></strong>：目的是检测数据在传输过程中的任何变化，若校验出包有错，则丢弃报文段并且不给出响应，这时TCP发送数据端超时后会重发数据。</p>
+<p><strong><em>对失序数据包重排序</em></strong>：既然TCP报文段作为IP数据报来传输，而IP数据报的到达可能会失序，因此TCP报文段的到达也可能会失序。TCP将对失序数据进行重新排序，然后才交给应用层；对于失序且缺失前面序号的数据，TCP将问题交给编程人员，可以保留（对于带宽而言更有效），也可以丢弃。</p>
+<p><strong><em>丢弃重复数据</em></strong>：对于重复数据，能够丢弃重复数据。</p>
+<p><strong><em>应答机制</em></strong>：当TCP收到发自TCP连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几分之一秒。</p>
+<p><strong><em>超时重发</em></strong>：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。</p>
+<p>一个报文段从发送再到接收到确认所经过的时间称为往返时间RTT，大部分的TCP实现仅在某个时刻做一次RTT策略，而不是为每个报文段作一次测量，且仅为传输一次的报文段测量RTT。</p>
+<p>由于RTT是波动的，每次进行一次新的测量后，则TCP会重新计算RTTS，加权平均往返时间RTTs计算如下：</p>
+<p><img src="/assets/gif.gif" alt="img"></p>
+<p>其中，<code>0 ≤ α ＜ 1</code>，其参考值为0.125，RTTs随着α的增加更容易受到RTT的影响。</p>
+<p>超时时间RTO应该略大于RTTs，否则将导致不必要的重传；并且超时间隔也不应该过大，否则当报文段丢失时，不能很快地重传该报文段导致数据传输时延较大。TCP使用的超时时间计算如下：</p>
+<p><img src="/assets/gif-1553268291860.gif" alt="img"></p>
+<p>其中RTTd为偏差的加权平均值。</p>
+<p><strong><em>流量控制</em></strong>：TCP连接的每一方都有固定大小的缓冲空间。TCP的接收端只允许另一端发送接收端缓冲区所能接纳的数据，这可以防止较快主机致使较慢主机的缓冲区溢出，这就是流量控制。TCP使用的流量控制协议是可变大小的滑动窗口协议。</p>
+<p><strong><em>累积确认</em></strong>：在收到失序的报文段，返回确认号字段为第一个失序号。</p>
 <h3 id="TCP-流量控制"><a href="#TCP-流量控制" class="headerlink" title="TCP 流量控制"></a>TCP 流量控制</h3><p>流量控制是为了控制发送方发送速率，保证接收方来得及接收。</p>
-<p>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，提示接受方还有多少可用的缓存空间，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。</p>
-<h3 id="TCP-滑动窗口"><a href="#TCP-滑动窗口" class="headerlink" title="TCP 滑动窗口"></a>TCP 滑动窗口</h3><p>窗口是缓存的一部分，用来暂时存放字节流。发送方和接收方各有一个窗口，接收方通过 TCP 报文段中的窗口字段告诉发送方自己的窗口大小，发送方根据这个值和其它信息设置自己的窗口大小。</p>
-<p>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。 </p>
-<p>接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为 {31, 34, 35}，其中 {31} 按序到达，而 {34, 35} 就不是，因此只对字节 31 进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。</p>
+<p>接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，提示接受方还有多少可用的缓存空间，从而影响发送方的发送速率。将窗口字段设置为0，则发送方不能发送数据。</p>
+<h3 id="TCP-滑动窗口"><a href="#TCP-滑动窗口" class="headerlink" title="TCP 滑动窗口"></a>TCP 滑动窗口</h3><p>窗口是缓存的一部分，用来暂时存放字节流。发送方和接收方各有一个窗口，接收方通过TCP报文段中的窗口字段告诉发送方自己的窗口大小，发送方根据这个值和其它信息设置自己的窗口大小。</p>
+<p>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动窗口类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。 </p>
+<p>接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为{31,34,35}，其中 {31} 按序到达，而 {34,35} 就不是，因此只对字节31进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。</p>
 <p><img src="/assets/a3253deb-8d21-40a1-aae4-7d178e4aa319.jpg" alt="img"></p>
 <h3 id="TCP-拥塞控制"><a href="#TCP-拥塞控制" class="headerlink" title="TCP 拥塞控制"></a>TCP 拥塞控制</h3><p>如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接收，而拥塞控制是为了降低整个网络的拥塞程度。</p>
-<p>拥塞状态：链路容量有限，在较高的拥堵下，排队时延将呈现指数上升，并且可能陷入无限排队，爆掉缓存，吞吐量接近0</p>
-<p>路由器可以向发送方提供关于网络中拥塞状态的显式反馈信息（ATM ABR）</p>
-<p>UDP连接（恒定速率，不会降速）与web的并行TCP连接会使得网络拥塞，对于其他连接不公平</p>
+<p>拥塞状态：链路容量有限，在较高的拥堵下，排队时延将呈现指数上升，并且可能陷入无限排队，爆掉缓存，吞吐量接近0。</p>
+<p>路由器可以向发送方提供关于网络中拥塞状态的显式反馈信息（ATM ABR）。</p>
+<p>UDP连接（恒定速率，不会降速）与web的并行TCP连接会使得网络拥塞，对于其他连接不公平。</p>
 <p><strong>判断拥塞的原则</strong></p>
-<p>一个丢失的报文段意味着拥塞</p>
-<p>一个确认报文段指示网络正在接受，即可增加速率</p>
-<p>带宽探测，给定ACK指示无拥塞，丢包则指示有拥塞</p>
+<p>一个丢失的报文段意味着拥塞。</p>
+<p>一个确认报文段指示网络正在接受，即可增加速率。</p>
+<p>带宽探测，给定ACK指示无拥塞，丢包则指示有拥塞。</p>
 <p><img src="/assets/51e2ed95-65b8-4ae9-8af3-65602d452a25-1553268328299.jpg" alt="img"></p>
 <p>TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、快重传、快恢复。</p>
 <p>发送方需要维护一个叫做拥塞窗口（cwnd，对一个TCP发送方能向网络中发送流量的速率做了限制）的状态变量，注意拥塞窗口与发送方窗口的区别：拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口。</p>
 <p>为了便于讨论，做如下假设：</p>
 <ul>
-<li>接收方有足够大的接收缓存，因此不会发生流量控制；</li>
+<li>接收方有足够大的接收缓存，因此不会发生流量控制。</li>
 <li>虽然 TCP 的窗口基于字节，但是这里设窗口的大小单位为报文段。</li>
 </ul>
 <p><img src="/assets/910f613f-514f-4534-87dd-9b4699d59d31.png" alt="img"></p>
-<h5 id="1-慢开始与拥塞避免（必然）"><a href="#1-慢开始与拥塞避免（必然）" class="headerlink" title="1. 慢开始与拥塞避免（必然）"></a>1. 慢开始与拥塞避免（必然）</h5><p>发送的最初执行慢开始，令 cwnd = 1，发送方只能发送 1 个报文段；当收到确认后，将 cwnd 加倍，因此之后发送方能够发送的报文段数量为：2、4、8 …</p>
-<p>注意到慢开始每个轮次都将 cwnd 加倍，这样会让 cwnd 增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能性也就更高。设置一个慢开始门限 ssthresh，当 cwnd &gt;= ssthresh 时，进入拥塞避免，每个轮次只将 cwnd 加 1。</p>
-<p>如果出现了超时，则令 ssthresh = cwnd / 2，然后重新执行慢开始。</p>
-<p>平均吞吐量：0.75W/RTT</p>
-<h5 id="2-快重传与快恢复（推荐部分）"><a href="#2-快重传与快恢复（推荐部分）" class="headerlink" title="2. 快重传与快恢复（推荐部分）"></a>2. 快重传与快恢复（推荐部分）</h5><p>在接收方，要求每次接收到报文段都应该对最后一个已收到的有序报文段进行确认。例如已经接收到 M1 和 M2，此时收到 M4，应当发送对 M2 的确认。</p>
-<p>在发送方，如果收到三个重复确认，那么可以知道下一个报文段丢失，此时执行快重传，立即重传下一个报文段。例如收到三个 M2，则 M3 丢失，立即重传 M3。</p>
-<p>在这种情况下，只是丢失个别报文段，而不是网络拥塞。因此执行快恢复，令 ssthresh = cwnd / 2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。</p>
-<p>慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。</p>
+<h4 id="1-慢开始与拥塞避免（必然）"><a href="#1-慢开始与拥塞避免（必然）" class="headerlink" title="1. 慢开始与拥塞避免（必然）"></a>1. 慢开始与拥塞避免（必然）</h4><p>发送的最初执行慢开始，令cwnd = 1，发送方只能发送 1 个报文段；当收到确认后，将cwnd加倍，因此之后发送方能够发送的报文段数量为：2、4、8 …。</p>
+<p>注意到慢开始每个轮次都将cwnd加倍，这样会让cwnd增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能性也就更高。设置一个慢开始门限ssthresh，当cwnd &gt;= ssthresh时，进入拥塞避免，每个轮次只将cwnd + 1。</p>
+<p>如果出现了超时，则令ssthresh = cwnd / 2，然后重新执行慢开始。</p>
+<p>平均吞吐量：0.75W / RTT。</p>
+<h4 id="2-快重传与快恢复（推荐部分）"><a href="#2-快重传与快恢复（推荐部分）" class="headerlink" title="2. 快重传与快恢复（推荐部分）"></a>2. 快重传与快恢复（推荐部分）</h4><p>在接收方，要求每次接收到报文段都应该对最后一个已收到的有序报文段进行确认。例如已经接收到M1和M2，此时收到M4，应当发送对M2的确认。</p>
+<p>在发送方，如果收到三个重复确认，那么可以知道下一个报文段丢失，此时执行快重传，立即重传下一个报文段。例如收到三个M2，则M3丢失，立即重传M3。</p>
+<p>在这种情况下，只是丢失个别报文段，而不是网络拥塞。因此执行快恢复，令ssthresh = cwnd / 2，cwnd = ssthresh，注意到此时直接进入拥塞避免。</p>
+<p>慢开始和快恢复的快慢指的是cwnd的设定值，而不是cwnd的增长速率。慢开始cwnd设定为 1，而快恢复cwnd设定为ssthresh。</p>
 <p><img src="/assets/f61b5419-c94a-4df1-8d4d-aed9ae8cc6d5.png" alt="img"></p>
-<p># </p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
@@ -637,7 +698,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">205</span>
+          <span class="site-state-item-count">209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -816,7 +877,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运输层"><span class="nav-number">1.</span> <span class="nav-text">运输层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概述与运输层服务"><span class="nav-number">2.</span> <span class="nav-text">概述与运输层服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务模型"><span class="nav-number">2.1.</span> <span class="nav-text">服务模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多路复用与多路分解"><span class="nav-number">2.1.1.</span> <span class="nav-text">多路复用与多路分解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP"><span class="nav-number">3.</span> <span class="nav-text">UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">3.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用UDP"><span class="nav-number">3.2.</span> <span class="nav-text">为什么使用UDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-首部格式"><span class="nav-number">3.3.</span> <span class="nav-text">UDP 首部格式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP"><span class="nav-number">4.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点-1"><span class="nav-number">4.0.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-首部格式"><span class="nav-number">4.0.2.</span> <span class="nav-text">TCP 首部格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-的三次握手"><span class="nav-number">4.0.3.</span> <span class="nav-text">TCP 的三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-的四次挥手"><span class="nav-number">4.0.4.</span> <span class="nav-text">TCP 的四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-可靠传输"><span class="nav-number">4.0.5.</span> <span class="nav-text">TCP 可靠传输</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP协议如何来保证传输的可靠性"><span class="nav-number">4.0.5.1.</span> <span class="nav-text">TCP协议如何来保证传输的可靠性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-流量控制"><span class="nav-number">4.0.6.</span> <span class="nav-text">TCP 流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-滑动窗口"><span class="nav-number">4.0.7.</span> <span class="nav-text">TCP 滑动窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-拥塞控制"><span class="nav-number">4.0.8.</span> <span class="nav-text">TCP 拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-慢开始与拥塞避免（必然）"><span class="nav-number">4.0.8.0.1.</span> <span class="nav-text">1. 慢开始与拥塞避免（必然）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-快重传与快恢复（推荐部分）"><span class="nav-number">4.0.8.0.2.</span> <span class="nav-text">2. 快重传与快恢复（推荐部分）</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运输层"><span class="nav-number">1.</span> <span class="nav-text">运输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提出问题"><span class="nav-number">1.1.</span> <span class="nav-text">提出问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么"><span class="nav-number">1.2.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用性"><span class="nav-number">1.3.1.</span> <span class="nav-text">适用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺陷"><span class="nav-number">1.3.2.</span> <span class="nav-text">缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.3.3.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.4.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务模型"><span class="nav-number">1.5.</span> <span class="nav-text">服务模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多路复用与多路分解"><span class="nav-number">1.5.1.</span> <span class="nav-text">多路复用与多路分解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可靠数据传输机制"><span class="nav-number">1.6.</span> <span class="nav-text">可靠数据传输机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP"><span class="nav-number">2.</span> <span class="nav-text">UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">2.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用UDP"><span class="nav-number">2.2.</span> <span class="nav-text">为什么使用UDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-首部格式"><span class="nav-number">2.3.</span> <span class="nav-text">UDP 首部格式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP"><span class="nav-number">3.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点-1"><span class="nav-number">3.0.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-首部格式"><span class="nav-number">3.0.2.</span> <span class="nav-text">TCP 首部格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-的三次握手"><span class="nav-number">3.0.3.</span> <span class="nav-text">TCP 的三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-流程"><span class="nav-number">3.0.4.</span> <span class="nav-text">TCP 流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-的四次挥手"><span class="nav-number">3.0.5.</span> <span class="nav-text">TCP 的四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-可靠传输"><span class="nav-number">3.0.6.</span> <span class="nav-text">TCP 可靠传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-流量控制"><span class="nav-number">3.0.7.</span> <span class="nav-text">TCP 流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-滑动窗口"><span class="nav-number">3.0.8.</span> <span class="nav-text">TCP 滑动窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-拥塞控制"><span class="nav-number">3.0.9.</span> <span class="nav-text">TCP 拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-慢开始与拥塞避免（必然）"><span class="nav-number">3.0.9.1.</span> <span class="nav-text">1. 慢开始与拥塞避免（必然）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-快重传与快恢复（推荐部分）"><span class="nav-number">3.0.9.2.</span> <span class="nav-text">2. 快重传与快恢复（推荐部分）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -852,7 +913,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">40:17</span>
+    <span title="站点阅读时长">40:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

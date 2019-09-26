@@ -65,13 +65,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="IOIO硬件原理IO设备IO设备可以大致分为两类：块设备与字符设备。 块设备将信息存储在固定大小的块中，每个块有自己的地址，所有传输以一个或多个完整的块位单位。每个块可以独立于其他块而读写。硬盘、USB等都是块设备。 字符设备以字符位单位发送或接收一个字符流，而不考虑任何块结构。字符设备不可寻址，也没有任何寻道操作，例如打印机、网络接口、鼠标等。 其他类别还有  时钟：按照预先规定好的时间间隔产生">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/1565667435120.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/1565674392424.png">
-<meta property="og:updated_time" content="2019-09-09T04:02:50.944Z">
+<meta property="og:image" content="http://yoursite.com/assets/1565667435120.png">
+<meta property="og:image" content="http://yoursite.com/assets/1565674392424.png">
+<meta property="og:image" content="http://yoursite.com/assets/1569495086862.png">
+<meta property="og:updated_time" content="2019-09-26T11:28:11.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="现代操作系统：I&#x2F;O">
 <meta name="twitter:description" content="IOIO硬件原理IO设备IO设备可以大致分为两类：块设备与字符设备。 块设备将信息存储在固定大小的块中，每个块有自己的地址，所有传输以一个或多个完整的块位单位。每个块可以独立于其他块而读写。硬盘、USB等都是块设备。 字符设备以字符位单位发送或接收一个字符流，而不考虑任何块结构。字符设备不可寻址，也没有任何寻道操作，例如打印机、网络接口、鼠标等。 其他类别还有  时钟：按照预先规定好的时间间隔产生">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/1565667435120.png">
+<meta name="twitter:image" content="http://yoursite.com/assets/1565667435120.png">
   <link rel="canonical" href="http://yoursite.com/2019/07/17/OS/现代操作系统：I-O/">
 
 
@@ -327,7 +328,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-09 12:02:50" itemprop="dateModified" datetime="2019-09-09T12:02:50+08:00">2019-09-09</time>
+                <time title="修改时间：2019-09-26 19:28:11" itemprop="dateModified" datetime="2019-09-26T19:28:11+08:00">2019-09-26</time>
               </span>
             
           
@@ -355,7 +356,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.8k</span>
+              <span title="本文字数">3.2k</span>
             </span>
           
             <span class="post-meta-item">
@@ -365,7 +366,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">3 分钟</span>
+              <span title="阅读时长">6 分钟</span>
             </span>
           
 
@@ -400,7 +401,7 @@
 </ul>
 <p>当CPU想要读入一个字的时候，无论是从IO端口还是内存读入，都要将需要的地址放到总线的地址线上，然后在总线的一条控制线上置起一个READ信号。如果是内存空间，内存将响应请求，内存当中的每个内存模块和IO设备都会将地址线与它所服务的地址范围比较，比较成功则响应请求。</p>
 <h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p>在硬件层面上，中断的工作是当一个IO设备完成交给它的工作时，它就产生一个中断，它是通过在分配给它的一条总线信号线上置起信号而产生中断的。</p>
-<p><img src="1565667435120.png" alt="1565667435120"></p>
+<p><img src="/assets/1565667435120.png" alt="1565667435120"></p>
 <h3 id="处理中断"><a href="#处理中断" class="headerlink" title="处理中断"></a>处理中断</h3><p>设备与中断控制器之间的连接实际上使用的是总线上的中断线。如果有更高优先级或有其他中断正在处理，则暂时不会理会中断。</p>
 <p>为了处理中断，中断控制器在地址线上放置一个数字表明哪个设备需要关注，并置起一个中断CPU的信号。中断信号导致CPU停止当前正在做的工作并且开始做其他的事情，地址线上的数字被用作指向一个被称为<strong>中断向量</strong>的表格索引，以便读取一个新的程序计数器。</p>
 <p>中断服务过程开始运行后，立刻通过将一个确定的值写入中断控制器的某个IO端口来对中断作出应答。</p>
@@ -414,7 +415,7 @@
 </ul>
 <p>不满足这些要求的称为不精确中断。</p>
 <h1 id="IO软件层次"><a href="#IO软件层次" class="headerlink" title="IO软件层次"></a>IO软件层次</h1><p>IO软件通常组织成四个层次，每一层具有一个要执行的定义明确的功能和一个定义明确的与临近层次的接口。</p>
-<p><img src="1565674392424.png" alt="1565674392424"></p>
+<p><img src="/assets/1565674392424.png" alt="1565674392424"></p>
 <h2 id="中断处理程序"><a href="#中断处理程序" class="headerlink" title="中断处理程序"></a>中断处理程序</h2><p>当中断发生时，中断处理程序 215</p>
 <h2 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h2><h2 id="与设备无关的操作系统软件"><a href="#与设备无关的操作系统软件" class="headerlink" title="与设备无关的操作系统软件"></a>与设备无关的操作系统软件</h2><h2 id="用户级IO软件"><a href="#用户级IO软件" class="headerlink" title="用户级IO软件"></a>用户级IO软件</h2><h1 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h1><p>时钟负责维护时间，并且防止一个进程垄断CPU，此外还有其他功能。</p>
 <h2 id="时钟硬件"><a href="#时钟硬件" class="headerlink" title="时钟硬件"></a>时钟硬件</h2><p>通常使用两种类型的时钟，简单的时钟连接到电源线上，每个电压周期产生一个中断，现在非常少。</p>
@@ -424,7 +425,78 @@
 <li>一次完成模式：当时钟启动时，它把存储寄存器的值赋值到计数器中，然后来自晶体的每一个脉冲使计数器-1，当计数器位0产生一个中断，并停止工作，直到软件再一次显式启动它</li>
 <li>方波模式。当计数器变为0并且产生中断后，存储寄存器的值自动复制到计数器中，并且整个过程无限期继续下去。</li>
 </ul>
-<h2 id="时钟软件"><a href="#时钟软件" class="headerlink" title="时钟软件"></a>时钟软件</h2><h2 id="软定时器"><a href="#软定时器" class="headerlink" title="软定时器"></a>软定时器</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<h2 id="时钟软件"><a href="#时钟软件" class="headerlink" title="时钟软件"></a>时钟软件</h2><h2 id="软定时器"><a href="#软定时器" class="headerlink" title="软定时器"></a>软定时器</h2><h1 id="IO复用"><a href="#IO复用" class="headerlink" title="IO复用"></a>IO复用</h1><p>进程需要一种预先告知内核的能力，使得内核一旦发现进程指定的一个或多个IO调节就绪，即输入已准备好被读取，或者描述符已能承载更多的输出，它就停止进程。</p>
+<p>IO复用是使用select和poll这两个函数支持的。IO复用典型使用在以下网络应用场合：</p>
+<ul>
+<li>当客户处理多个描述符时，必须使用IO复用。</li>
+<li>一个客户同时处理多个套接字。</li>
+<li>如果一个TCP服务器既要处理监听套接字，又要处理已连接套接字，一般要使用IO复用。</li>
+<li>如果一个服务器要处理多个服务或多个协议，一般要使用IO复用。</li>
+</ul>
+<h2 id="IO模型"><a href="#IO模型" class="headerlink" title="IO模型"></a>IO模型</h2><p>Unix下可用的5种IO模型：</p>
+<ul>
+<li>阻塞式IO。</li>
+<li>非阻塞式IO。</li>
+<li>IO复用，select和poll。</li>
+<li>信号驱动式IO，SIGIO。</li>
+<li>异步IO，AIO系列。</li>
+</ul>
+<p>而一个输入操作通常包括两个不同的阶段：</p>
+<ul>
+<li>等待数据准备好。</li>
+<li>从内核向进程复制数据。</li>
+</ul>
+<h2 id="IO复用模型"><a href="#IO复用模型" class="headerlink" title="IO复用模型"></a>IO复用模型</h2><p>我们可以调用select或poll，阻塞在这两个系统调用种的某一个之上，而不是阻塞在真正的IO系统调用上：</p>
+<p><img src="/assets/1569495086862.png" alt="1569495086862"></p>
+<h3 id="select"><a href="#select" class="headerlink" title="select()"></a>select()</h3><p>该函数允许进程指示内核等待多个事件中的一个发生，并在只有一个或多个事件发生或经历一段指定的事件后才唤醒它：</p>
+<p>我们可在调用select()时告知内核仅在下列情况发生时才返回，例如：</p>
+<ul>
+<li>集合{1，2，4}中的任何描述符准备好读取。</li>
+<li>集合{2，7}中的任何描述符准备好写入。</li>
+<li>集合{1，4}中的任何描述符有异常条件待处理。</li>
+<li>已经历10.2秒。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//若有就绪描述符则为其数目，若超时则为0，若出错则为-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> maxfdpl, fd_set *readset,fd_set *writeset, fd_set *exceptset,<span class="keyword">const</span> struct timeval *timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>maxfdpl。指定待测试的描述符个数，它的值是待测试的描述符+1，即描述符会从0…maxfdpl-1均将被测试。</p>
+</li>
+<li><p>timeout。告知内核等待所指定描述符中的任何一个就绪可花多长事件。</p>
+<ul>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timeval</span>&#123;</span> <span class="keyword">long</span> tv_sec,<span class="keyword">long</span> tv_usec&#125;;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>该参数有三种可能：</p>
+<ul>
+<li>永远等待下去：仅在有一个描述符准备好IO时才返回，此时设置该参数为空指针。</li>
+<li>等待一段固定时间：在有一个描述符准备好IO时返回，但是不超过由该参数所指定的时间。</li>
+<li>根本不等待：检查描述符后立即返回，称为<strong>轮询</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="描述符就绪条件"><a href="#描述符就绪条件" class="headerlink" title="描述符就绪条件"></a>描述符就绪条件</h3><p>当满足以下条件之一，一个套接字准备好读：</p>
+<ul>
+<li>该套接字接收缓冲区中的数据字节数 &gt;= 套接字接收缓冲区低水位标记的当前大小。</li>
+<li>该连接的读半部关闭，即接收了FIN的TCP连接，对于这样的套接字的读取操作将不阻塞并返回0。</li>
+<li>该套接字是一个监听套接字，且已完成的连接数不为0。对这样的套接字accept通常不会阻塞。</li>
+<li>其上有一个套接字错误待处理。此时对其读取将返回-1，即错误。</li>
+</ul>
+<p>当满足以下条件之一，一个套接字准备好写：</p>
+<ul>
+<li>该套接字发送缓冲区的可用空间字节数 &gt;= 套接字发送缓冲区的低水位标记的当前大小。并且或者该套接字已连接，或该套接字不需要连接如UDP。<ul>
+<li>即如果我们把这样的套接字设置为非阻塞，写操作将不阻塞并返回一个正值。</li>
+</ul>
+</li>
+<li>该连接的写半部关闭。</li>
+<li>使用非阻塞式connect的套接字已建立连接，或connect已经以失败告终。</li>
+<li>其上有一个错误待处理。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li></li>
 </ol>
 
@@ -689,7 +761,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IO"><span class="nav-number">1.</span> <span class="nav-text">IO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO硬件原理"><span class="nav-number">2.</span> <span class="nav-text">IO硬件原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO设备"><span class="nav-number">2.1.</span> <span class="nav-text">IO设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备控制器"><span class="nav-number">2.2.</span> <span class="nav-text">设备控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存映射IO"><span class="nav-number">2.3.</span> <span class="nav-text">内存映射IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU与IO通信"><span class="nav-number">2.3.1.</span> <span class="nav-text">CPU与IO通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断"><span class="nav-number">2.4.</span> <span class="nav-text">中断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理中断"><span class="nav-number">2.4.1.</span> <span class="nav-text">处理中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精确中断和不精确中断"><span class="nav-number">2.4.2.</span> <span class="nav-text">精确中断和不精确中断</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO软件层次"><span class="nav-number">3.</span> <span class="nav-text">IO软件层次</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#中断处理程序"><span class="nav-number">3.1.</span> <span class="nav-text">中断处理程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备驱动程序"><span class="nav-number">3.2.</span> <span class="nav-text">设备驱动程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与设备无关的操作系统软件"><span class="nav-number">3.3.</span> <span class="nav-text">与设备无关的操作系统软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户级IO软件"><span class="nav-number">3.4.</span> <span class="nav-text">用户级IO软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时钟"><span class="nav-number">4.</span> <span class="nav-text">时钟</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟硬件"><span class="nav-number">4.1.</span> <span class="nav-text">时钟硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟软件"><span class="nav-number">4.2.</span> <span class="nav-text">时钟软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软定时器"><span class="nav-number">4.3.</span> <span class="nav-text">软定时器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IO"><span class="nav-number">1.</span> <span class="nav-text">IO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO硬件原理"><span class="nav-number">2.</span> <span class="nav-text">IO硬件原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO设备"><span class="nav-number">2.1.</span> <span class="nav-text">IO设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备控制器"><span class="nav-number">2.2.</span> <span class="nav-text">设备控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存映射IO"><span class="nav-number">2.3.</span> <span class="nav-text">内存映射IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU与IO通信"><span class="nav-number">2.3.1.</span> <span class="nav-text">CPU与IO通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断"><span class="nav-number">2.4.</span> <span class="nav-text">中断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理中断"><span class="nav-number">2.4.1.</span> <span class="nav-text">处理中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精确中断和不精确中断"><span class="nav-number">2.4.2.</span> <span class="nav-text">精确中断和不精确中断</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO软件层次"><span class="nav-number">3.</span> <span class="nav-text">IO软件层次</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#中断处理程序"><span class="nav-number">3.1.</span> <span class="nav-text">中断处理程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备驱动程序"><span class="nav-number">3.2.</span> <span class="nav-text">设备驱动程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与设备无关的操作系统软件"><span class="nav-number">3.3.</span> <span class="nav-text">与设备无关的操作系统软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户级IO软件"><span class="nav-number">3.4.</span> <span class="nav-text">用户级IO软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时钟"><span class="nav-number">4.</span> <span class="nav-text">时钟</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟硬件"><span class="nav-number">4.1.</span> <span class="nav-text">时钟硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟软件"><span class="nav-number">4.2.</span> <span class="nav-text">时钟软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软定时器"><span class="nav-number">4.3.</span> <span class="nav-text">软定时器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO复用"><span class="nav-number">5.</span> <span class="nav-text">IO复用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO模型"><span class="nav-number">5.1.</span> <span class="nav-text">IO模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO复用模型"><span class="nav-number">5.2.</span> <span class="nav-text">IO复用模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-number">5.2.1.</span> <span class="nav-text">select()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#描述符就绪条件"><span class="nav-number">5.2.2.</span> <span class="nav-text">描述符就绪条件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -718,14 +790,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">1.3m</span>
+    <span title="站点总字数">1.4m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">40:45</span>
+    <span title="站点阅读时长">40:56</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
